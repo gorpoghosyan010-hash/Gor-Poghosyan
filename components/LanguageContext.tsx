@@ -17,6 +17,13 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     if (saved === 'hy' || saved === 'en' || saved === 'ru') setLangState(saved);
   }, []);
 
+  // <html lang>-ը համապատասխանեցվում է ընտրված լեզվին, և թաքցնող «langPending» դասը հանվում է
+  useEffect(() => {
+    document.documentElement.lang = lang;
+    const saved = window.localStorage.getItem(STORAGE_KEY);
+    if (saved === lang || !saved || saved === 'hy') document.documentElement.classList.remove('langPending');
+  }, [lang]);
+
   const setLang = (l: Lang) => {
     setLangState(l);
     window.localStorage.setItem(STORAGE_KEY, l);

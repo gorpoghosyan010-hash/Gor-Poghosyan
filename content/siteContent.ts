@@ -31,8 +31,8 @@ export type Project = {
 export const projects: Record<string, Project> = {
   'pool-01': {
     slug: 'pool-01', number: '01', category: 'POOL',
-    heroImage: '/projects/pool-01/06.jpeg',
-    images: ['07','08','01','02','03','04','05','06'].map(n=>`/projects/pool-01/${n}.jpeg`),
+    heroImage: '/projects/pool-01/06.webp',
+    images: ['07','08','01','02','03','04','05','06'].map(n=>`/projects/pool-01/${n}.webp`),
     nextHref: '/projects/pool-02',
     content: {
       hy: {
@@ -63,8 +63,8 @@ export const projects: Record<string, Project> = {
   },
   'pool-02': {
     slug:'pool-02', number:'02', category:'POOL',
-    heroImage:'/projects/pool-02/04.jpeg',
-    images: ['03','01','02','06','05','04'].map(n=>`/projects/pool-02/${n}.jpeg`),
+    heroImage:'/projects/pool-02/04.webp',
+    images: ['03','01','02','06','05','04'].map(n=>`/projects/pool-02/${n}.webp`),
     nextHref:'/projects/house-01',
     content: {
       hy: {
@@ -95,8 +95,8 @@ export const projects: Record<string, Project> = {
   },
   'pool-03': {
     slug:'pool-03', number:'03', category:'POOL',
-    heroImage:'/projects/pool-03/03.jpeg',
-    images: ['01','02','03'].map(n=>`/projects/pool-03/${n}.jpeg`),
+    heroImage:'/projects/pool-03/03.webp',
+    images: ['01','02','03'].map(n=>`/projects/pool-03/${n}.webp`),
     nextHref:'/projects/pool-04',
     content: {
       hy: {
@@ -127,8 +127,8 @@ export const projects: Record<string, Project> = {
   },
   'pool-04': {
     slug:'pool-04', number:'04', category:'POOL',
-    heroImage:'/projects/pool-04/01.jpeg',
-    images: ['01'].map(n=>`/projects/pool-04/${n}.jpeg`),
+    heroImage:'/projects/pool-04/01.webp',
+    images: ['01'].map(n=>`/projects/pool-04/${n}.webp`),
     nextHref:'/projects/pool-05',
     content: {
       hy: {
@@ -159,8 +159,8 @@ export const projects: Record<string, Project> = {
   },
   'pool-05': {
     slug:'pool-05', number:'05', category:'POOL',
-    heroImage:'/projects/pool-05/01.jpeg',
-    images: ['01'].map(n=>`/projects/pool-05/${n}.jpeg`),
+    heroImage:'/projects/pool-05/01.webp',
+    images: ['01'].map(n=>`/projects/pool-05/${n}.webp`),
     nextHref:'/contact',
     content: {
       hy: {
@@ -191,8 +191,8 @@ export const projects: Record<string, Project> = {
   },
   'house-01': {
     slug:'house-01', number:'03', category:'RESIDENTIAL',
-    heroImage:'/projects/house-01/12.jpeg',
-    images: Array.from({length:12},(_,i)=>String(i+1).padStart(2,'0')).map(n=>`/projects/house-01/${n}.jpeg`),
+    heroImage:'/projects/house-01/12.webp',
+    images: Array.from({length:12},(_,i)=>String(i+1).padStart(2,'0')).map(n=>`/projects/house-01/${n}.webp`),
     nextHref:'/contact',
     content: {
       hy: {
@@ -225,24 +225,24 @@ export const projects: Record<string, Project> = {
 
 export const poolCardsByLang: Record<Lang, readonly (readonly [string,string,string,string,string])[]> = {
   hy: [
-    ['pool-01','ԼՈՂԱՎԱԶԱՆ','Լողավազան','Կառուցման ամբողջ ընթացք','/projects/pool-01/06.jpeg'],
-    ['pool-02','ԼՈՂԱՎԱԶԱՆ','Լողավազան','Կառուցման ամբողջ ընթացք','/projects/pool-02/07.jpeg'],
-    ['pool-03','ԼՈՂԱՎԱԶԱՆ','Լողավազան','Կառուցվածք → հարդարում → արդյունք','/projects/pool-03/03.jpeg'],
-    ['pool-04','ԼՈՂԱՎԱԶԱՆ','Լողավազան','Ավարտված նախագիծ','/projects/pool-04/01.jpeg'],
-    ['pool-05','ԼՈՂԱՎԱԶԱՆ','Լողավազան','Ավարտված նախագիծ','/projects/pool-05/01.jpeg']
+    ['pool-01','ԼՈՂԱՎԱԶԱՆ','Լողավազան','Կառուցման ամբողջ ընթացք','/projects/pool-01/06.webp'],
+    ['pool-02','ԼՈՂԱՎԱԶԱՆ','Լողավազան','Կառուցման ամբողջ ընթացք','/projects/pool-02/07.webp'],
+    ['pool-03','ԼՈՂԱՎԱԶԱՆ','Լողավազան','Կառուցվածք → հարդարում → արդյունք','/projects/pool-03/03.webp'],
+    ['pool-04','ԼՈՂԱՎԱԶԱՆ','Լողավազան','Ավարտված նախագիծ','/projects/pool-04/01.webp'],
+    ['pool-05','ԼՈՂԱՎԱԶԱՆ','Լողավազան','Ավարտված նախագիծ','/projects/pool-05/01.webp']
   ],
   en: [
-    ['pool-01','POOL','Swimming Pool','Full Construction Process','/projects/pool-01/06.jpeg'],
-    ['pool-02','POOL','Swimming Pool','Full Construction Process','/projects/pool-02/07.jpeg'],
-    ['pool-03','POOL','Swimming Pool','Structure → Finishing → Result','/projects/pool-03/03.jpeg'],
-    ['pool-04','POOL','Swimming Pool','Completed Project','/projects/pool-04/01.jpeg'],
-    ['pool-05','POOL','Swimming Pool','Completed Project','/projects/pool-05/01.jpeg']
+    ['pool-01','POOL','Swimming Pool','Full Construction Process','/projects/pool-01/06.webp'],
+    ['pool-02','POOL','Swimming Pool','Full Construction Process','/projects/pool-02/07.webp'],
+    ['pool-03','POOL','Swimming Pool','Structure → Finishing → Result','/projects/pool-03/03.webp'],
+    ['pool-04','POOL','Swimming Pool','Completed Project','/projects/pool-04/01.webp'],
+    ['pool-05','POOL','Swimming Pool','Completed Project','/projects/pool-05/01.webp']
   ],
   ru: [
-    ['pool-01','БАССЕЙН','Бассейн','Полный процесс строительства','/projects/pool-01/06.jpeg'],
-    ['pool-02','БАССЕЙН','Бассейн','Полный процесс строительства','/projects/pool-02/07.jpeg'],
-    ['pool-03','БАССЕЙН','Бассейн','Конструкция → отделка → результат','/projects/pool-03/03.jpeg'],
-    ['pool-04','БАССЕЙН','Бассейн','Завершённый проект','/projects/pool-04/01.jpeg'],
-    ['pool-05','БАССЕЙН','Бассейн','Завершённый проект','/projects/pool-05/01.jpeg']
+    ['pool-01','БАССЕЙН','Бассейн','Полный процесс строительства','/projects/pool-01/06.webp'],
+    ['pool-02','БАССЕЙН','Бассейн','Полный процесс строительства','/projects/pool-02/07.webp'],
+    ['pool-03','БАССЕЙН','Бассейн','Конструкция → отделка → результат','/projects/pool-03/03.webp'],
+    ['pool-04','БАССЕЙН','Бассейн','Завершённый проект','/projects/pool-04/01.webp'],
+    ['pool-05','БАССЕЙН','Бассейн','Завершённый проект','/projects/pool-05/01.webp']
   ]
 };

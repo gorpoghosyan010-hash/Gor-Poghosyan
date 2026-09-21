@@ -1,23 +1,34 @@
-# GARON Construction — cinematic multi-page website
+# GARON Construction
 
-This version turns the site into a real multi-page experience:
-- Animated GARON logo intro on page load/refresh
-- Separate pages for About, Services, each service, Projects, each project, and Contact
-- Smooth page-entry animation + scroll reveal animations
-- Real project photos integrated from the supplied images
-- Responsive/mobile-first layout
-- Call and email actions on the Contact page
-- Instagram/Facebook placeholders ready to replace with the final URLs
+Multi-page website (Next.js 14, App Router) in Armenian, English and Russian:
+Home, About, Services (pools, residential, renovation, public buildings), Projects, Cost calculator, Contact.
 
 ## Run
 
 ```bash
 npm install
-npm run dev
+npm run dev      # http://localhost:3000
+npm run build    # production build
 ```
 
-Then open the local address shown by Next.js.
+## Where to edit
 
-## Replace contact/social details
+| What | File |
+| --- | --- |
+| Phone, email, Instagram, Facebook (empty value = hidden on the site) | `content/siteConfig.ts` |
+| All page texts in hy / en / ru | `content/i18n.ts` |
+| Projects (texts and photos) | `content/siteContent.ts`, photos in `public/projects/` |
+| Page titles and descriptions for search engines | `content/seo.ts` |
+| Calculator prices | top of `components/CostCalculator.tsx` |
 
-Edit `components/Footer.tsx` and `app/contact/page.tsx` to add the final phone, email, Instagram and Facebook URLs.
+## Deploy
+
+Import the GitHub repository into Vercel. Optional environment variable
+`NEXT_PUBLIC_SITE_URL=https://your-domain` sets the address used in the sitemap, canonical links and social previews.
+
+## Notes
+
+- The contact form opens the visitor's email app with a ready message (no server needed).
+  To receive messages directly (email/Telegram), replace the submit handler in `components/ContactForm.tsx`.
+- Project photos are WebP; add new photos as `.webp` and register their size in `content/imageSizes.ts`
+  (or leave it out: the image will still work, just without a reserved layout size).

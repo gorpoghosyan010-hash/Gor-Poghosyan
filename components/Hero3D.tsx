@@ -1,7 +1,10 @@
 'use client';
 import { useEffect, useRef } from 'react';
+import { useLanguage } from './LanguageContext';
+import { heroLabel } from '../content/i18n';
 
 export default function Hero3D() {
+  const { lang } = useLanguage();
   const sceneRef = useRef<HTMLDivElement>(null);
   const objectRef = useRef<HTMLDivElement>(null);
 
@@ -16,11 +19,24 @@ export default function Hero3D() {
     let currentX = 0;
     let currentY = 0;
 
+    // Անիմացիան աշխատում է միայն շարժվելիս, և կանգ է առնում, երբ արժեքները հասնում են նպատակին
+    // (նախկինում անվերջ աշխատում էր՝ նաև հեռախոսի վրա, որտեղ մկնիկ չկա)
+    const render = () => {
+      raf = 0;
+      currentX += (targetX - currentX) * 0.06;
+      currentY += (targetY - currentY) * 0.06;
+      object.style.setProperty('--mx', `${currentX}deg`);
+      object.style.setProperty('--my', `${currentY}deg`);
+      if (Math.abs(targetX - currentX) > 0.01 || Math.abs(targetY - currentY) > 0.01) raf = requestAnimationFrame(render);
+    };
+    const kick = () => { if (!raf) raf = requestAnimationFrame(render); };
+
     const move = (e: MouseEvent) => {
       const x = (e.clientX / window.innerWidth - 0.5) * 2;
       const y = (e.clientY / window.innerHeight - 0.5) * 2;
       targetX = x * 7;
       targetY = y * -5;
+      kick();
     };
 
     const scroll = () => {
@@ -30,18 +46,10 @@ export default function Hero3D() {
       object.style.setProperty('--scroll-opacity', `${1 - p * 0.55}`);
     };
 
-    const render = () => {
-      currentX += (targetX - currentX) * 0.06;
-      currentY += (targetY - currentY) * 0.06;
-      object.style.setProperty('--mx', `${currentX}deg`);
-      object.style.setProperty('--my', `${currentY}deg`);
-      raf = requestAnimationFrame(render);
-    };
-
     window.addEventListener('mousemove', move, { passive: true });
     window.addEventListener('scroll', scroll, { passive: true });
     scroll();
-    render();
+    kick();
 
     return () => {
       window.removeEventListener('mousemove', move);
@@ -65,7 +73,7 @@ export default function Hero3D() {
         <div className="buildingRoof" />
         <div className="hero3DLine lineA" />
         <div className="hero3DLine lineB" />
-        <div className="hero3DLabel">GARON / 3D STUDY</div>
+        <div className="hero3DLabel">{heroLabel[lang]}</div>
       </div>
     </div>
   );

@@ -29,7 +29,7 @@ export default function ServiceProjects({ kind }: { kind: 'pool' | 'residential'
       ) : (
         <Reveal>
           <div className="singleFeature">
-            <ProjectCard href="/projects/house-01" image="/projects/house-01/12.jpeg" number={common[lang].residentialTag} title={a.houseCardTitle} meta={a.houseCardMeta} large />
+            <ProjectCard href="/projects/house-01" image="/projects/house-01/12.webp" number={common[lang].residentialTag} title={a.houseCardTitle} meta={a.houseCardMeta} large />
           </div>
         </Reveal>
       )}

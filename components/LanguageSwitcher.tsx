@@ -1,6 +1,7 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
 import { useLanguage, type Lang } from './LanguageContext';
+import { languageNames } from '../content/i18n';
 
 const order: Lang[] = ['hy', 'en', 'ru'];
 
@@ -31,19 +32,21 @@ export default function LanguageSwitcher() {
 
   useEffect(() => {
     const onClick = (e: MouseEvent) => { if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false); };
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setOpen(false); };
     document.addEventListener('mousedown', onClick);
-    return () => document.removeEventListener('mousedown', onClick);
+    document.addEventListener('keydown', onKey);
+    return () => { document.removeEventListener('mousedown', onClick); document.removeEventListener('keydown', onKey); };
   }, []);
 
   const others = order.filter(l => l !== lang);
 
   return (
     <div className="langSwitch" ref={ref}>
-      <button className="langCurrent" onClick={() => setOpen(o => !o)} aria-label="Change language">
+      <button type="button" className="langCurrent" onClick={() => setOpen(o => !o)} aria-label={`Language: ${languageNames[lang]}`} aria-haspopup="true" aria-expanded={open}>
         <Flag lang={lang} /><span>{labels[lang]}</span><i className={open ? 'up' : 'down'} />
       </button>
       {open && <div className="langOptions">
-        {others.map(l => <button key={l} onClick={() => { setLang(l); setOpen(false); }}><Flag lang={l} /><span>{labels[l]}</span></button>)}
+        {others.map(l => <button type="button" key={l} lang={l} aria-label={languageNames[l]} onClick={() => { setLang(l); setOpen(false); }}><Flag lang={l} /><span>{labels[l]}</span></button>)}
       </div>}
     </div>
   );

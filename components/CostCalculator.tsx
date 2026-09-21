@@ -79,6 +79,26 @@ export default function CostCalculator({ modes = ALL_MODES }: { modes?: Mode[] }
   const tiersToShow = mode === 'renovation' ? t.renovationTiers : mode === 'pool' ? t.poolFinishes : t.tiers;
   const ratesToShow = mode === 'renovation' ? RENOVATION_RATES : mode === 'pool' ? POOL_RATES : FULL_RATES;
 
+  // Հաշվարկի համառոտ նկարագրություն՝ կոնտակտի ձևը նախալրացնելու համար
+  const summary = (() => {
+    if (!ready) return '';
+    const parts: string[] = [t.modes[mode]];
+    if (mode === 'pool') {
+      parts.push(`${poolL}×${poolW}×${poolD} ${t.meterUnit}`, tiersToShow[tier].name);
+    } else {
+      parts.push(`${t.areaLabel}: ${numericArea} ${t.areaUnit}`, `${t.floorsLabel}: ${floors === 5 ? '5+' : floors}`);
+      if (mode !== 'monolith') parts.push(tiersToShow[tier].name);
+      if (mode === 'full') {
+        if (basement) parts.push(validBasementArea ? `${t.basement}: ${numericBasementArea} ${t.areaUnit}` : t.basement);
+        if (mansard) parts.push(t.mansard);
+        if (flatRoof) parts.push(t.flatRoof);
+      }
+      if (mode === 'monolith' && validBasementArea) parts.push(`${t.fullBasementAreaLabel}: ${numericBasementArea} ${t.areaUnit}`);
+    }
+    parts.push(`${mode === 'renovation' || mode === 'pool' ? t.startingFrom + ' ' : ''}${total.toLocaleString('en-US')} ֏`);
+    return parts.join(' · ');
+  })();
+
   return (
     <div>
       {modes.length > 1 && (
@@ -214,7 +234,7 @@ export default function CostCalculator({ modes = ALL_MODES }: { modes?: Mode[] }
               <span className="calcResultLabel">{t.resultLabel}</span>
               <strong className="calcResultValue">{(mode === 'renovation' || mode === 'pool') && <em>{t.startingFrom} </em>}{total.toLocaleString('en-US')} ֏</strong>
               <p>{t.disclaimer}</p>
-              <Link className="button gold" href="/contact">{t.cta}</Link>
+              <Link className="button gold" href={`/contact?estimate=${encodeURIComponent(summary)}`}>{t.cta}</Link>
             </>
           ) : (
             <p className="calcEmpty">{mode === 'pool' ? t.enterPoolDims : t.enterArea}</p>

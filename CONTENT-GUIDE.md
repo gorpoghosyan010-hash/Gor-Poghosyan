@@ -1,34 +1,19 @@
-# GARON V5 — Content Guide
+# GARON — Content Guide
 
 ## Where to edit text and project images
 
-All project content is centralized in:
-
-`content/siteContent.ts`
-
-You can change:
-- project title
-- project description
-- project facts
-- intro text
-- hero image
-- gallery images
-- next-project text/link
-- project-card titles and descriptions
+- Page texts (Armenian / English / Russian): `content/i18n.ts`
+- Projects: `content/siteContent.ts` (title, description, facts, intro, hero image, gallery, next-project link)
+- Contact details: `content/siteConfig.ts` (leave a value empty to hide it)
+- Search-engine titles/descriptions: `content/seo.ts`
 
 ## How to replace a photo
 
 1. Open `public/projects/<project-folder>/`.
-2. Replace the image file with your new image.
-3. Keep the same filename if you want the site to update without changing code.
-4. If you use a new filename, change the corresponding path in `content/siteContent.ts`.
+2. Put your new photo there as **.webp** (max ~1920px wide, quality ~80) with the same filename to update the site without changing code.
+3. If you use a new filename, change the path in `content/siteContent.ts`.
 
-Example:
-`public/projects/pool-01/06.jpeg`
-
-## How to change a text
-
-Open `content/siteContent.ts`, find the project (`pool-01`, `pool-02`, etc.) and edit the text between quotes.
+Example: `public/projects/pool-01/06.webp`
 
 ## Important
 

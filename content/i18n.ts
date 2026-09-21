@@ -9,9 +9,9 @@ export const common = {
 };
 
 export const nav = {
-  hy: { about: 'Մեր մասին', services: 'Ծառայություններ', projects: 'Նախագծեր', calculator: 'Հաշվիչ', contact: 'Կապ', cta: 'Սկսել նախագիծը' },
-  en: { about: 'About', services: 'Services', projects: 'Projects', calculator: 'Calculator', contact: 'Contact', cta: 'Start a Project' },
-  ru: { about: 'О нас', services: 'Услуги', projects: 'Проекты', calculator: 'Калькулятор', contact: 'Контакты', cta: 'Начать проект' }
+  hy: { about: 'Մեր մասին', services: 'Ծառայություններ', projects: 'Նախագծեր', calculator: 'Հաշվիչ', contact: 'Կապ', cta: 'Սկսել նախագիծը', menu: 'Բացել մենյուն', close: 'Փակել մենյուն', home: 'Գլխավոր' },
+  en: { about: 'About', services: 'Services', projects: 'Projects', calculator: 'Calculator', contact: 'Contact', cta: 'Start a Project', menu: 'Open menu', close: 'Close menu', home: 'Home' },
+  ru: { about: 'О нас', services: 'Услуги', projects: 'Проекты', calculator: 'Калькулятор', contact: 'Контакты', cta: 'Начать проект', menu: 'Открыть меню', close: 'Закрыть меню', home: 'Главная' }
 };
 
 export const footer = {
@@ -392,35 +392,53 @@ export const contact = {
   hy: {
     eyebrow: 'ԿԱՊ GARON-Ի ՀԵՏ',
     title1: 'Եկեք կառուցենք', title2: 'ձեր գաղափարը։',
-    lead: 'Ուղարկեք ձեր հարցը կամ զանգահարեք մեզ՝ հաջորդ քայլը քննարկելու համար։',
+    lead: 'Ուղարկեք ձեր հարցը, և մենք կկապվենք ձեզ հետ՝ հաջորդ քայլը քննարկելու համար։',
+    leadWithPhone: 'Ուղարկեք ձեր հարցը կամ զանգահարեք մեզ՝ հաջորդ քայլը քննարկելու համար։',
     getInTouch: 'ԿԱՊՎԵՔ ՄԵԶ ՀԵՏ',
     title3: 'Սկսենք', title4: 'զրույցից։',
     phoneLabel: 'ՀԵՌԱԽՈՍ', emailLabel: 'EMAIL', socialLabel: 'ՍՈՑՑԱՆՑԵՐ',
     cardText: 'Պատմեք՝ ինչ եք ուզում կառուցել, ինչ փուլում է նախագիծը և ինչ ժամկետ եք պատկերացնում։',
     send: 'Ուղարկել հարցում ↗',
-    note: 'Կայքում կապի տվյալները հիմա placeholder են և հեշտ կփոխարինենք ձեր իրական համարով, email-ով և սոցցանցերի հղումներով։'
+    formName: 'Անուն', formContact: 'Ձեր հեռախոսը կամ email-ը', formType: 'Նախագծի տեսակը', formMessage: 'Հաղորդագրություն',
+    types: ['Լողավազան', 'Բնակելի տուն', 'Վերանորոգում', 'Հասարակական կառույց', 'Այլ'],
+    required: 'Լրացրեք այս դաշտը',
+    hint: 'Կբացվի ձեր էլ. փոստի ծրագիրը՝ պատրաստի նամակով։',
+    sentNote: 'Եթե նամակը չբացվեց, գրեք ուղղակի՝',
+    estimateLine: 'Հաշվիչի արդյունքը'
   },
   en: {
     eyebrow: 'CONTACT GARON',
     title1: "Let's Build", title2: 'your idea.',
-    lead: 'Send us your inquiry or call us to discuss the next step.',
+    lead: 'Send us your inquiry and we will get back to you to discuss the next step.',
+    leadWithPhone: 'Send us your inquiry or call us to discuss the next step.',
     getInTouch: 'GET IN TOUCH',
     title3: "Let's Start", title4: 'the Conversation.',
     phoneLabel: 'PHONE', emailLabel: 'EMAIL', socialLabel: 'SOCIAL',
     cardText: 'Tell us what you want to build, what stage the project is at, and what timeline you have in mind.',
     send: 'Send Inquiry ↗',
-    note: "The contact details on the site are currently placeholders and will be easily replaced with your real phone number, email and social links."
+    formName: 'Name', formContact: 'Your phone or email', formType: 'Project type', formMessage: 'Message',
+    types: ['Swimming pool', 'Residential house', 'Renovation', 'Public building', 'Other'],
+    required: 'Please fill in this field',
+    hint: 'Your email app will open with a ready-to-send message.',
+    sentNote: 'If nothing opened, write to us directly:',
+    estimateLine: 'Calculator estimate'
   },
   ru: {
     eyebrow: 'СВЯЗАТЬСЯ С GARON',
     title1: 'Давайте построим', title2: 'вашу идею.',
-    lead: 'Отправьте нам запрос или позвоните нам, чтобы обсудить следующий шаг.',
+    lead: 'Отправьте нам запрос, и мы свяжемся с вами, чтобы обсудить следующий шаг.',
+    leadWithPhone: 'Отправьте нам запрос или позвоните нам, чтобы обсудить следующий шаг.',
     getInTouch: 'СВЯЖИТЕСЬ С НАМИ',
     title3: 'Начнём', title4: 'разговор.',
     phoneLabel: 'ТЕЛЕФОН', emailLabel: 'EMAIL', socialLabel: 'СОЦСЕТИ',
     cardText: 'Расскажите, что вы хотите построить, на каком этапе находится проект и какие сроки вы предполагаете.',
     send: 'Отправить запрос ↗',
-    note: 'Контактные данные на сайте сейчас являются заглушкой и будут легко заменены вашим реальным номером, email и ссылками на соцсети.'
+    formName: 'Имя', formContact: 'Ваш телефон или email', formType: 'Тип проекта', formMessage: 'Сообщение',
+    types: ['Бассейн', 'Жилой дом', 'Ремонт', 'Общественное здание', 'Другое'],
+    required: 'Заполните это поле',
+    hint: 'Откроется ваша почтовая программа с готовым письмом.',
+    sentNote: 'Если письмо не открылось, напишите нам напрямую:',
+    estimateLine: 'Расчёт из калькулятора'
   }
 };
 
@@ -617,4 +635,22 @@ export const projectsArchive = {
     openHouse: 'Открыть дом →', houseCardTitle: 'Дом', houseCardMeta: 'Жилой дом · завершён',
     nextEyebrow: 'ДАЛЕЕ', nextTitle1: 'Ваш проект', nextTitle2: 'может быть здесь.', nextCta: 'Начать проект ↗'
   }
+};
+
+export const splash = {
+  hy: { est: 'ՀԻՄՆ. 2000', trade: 'ՇԻՆԱՐԱՐՈՒԹՅՈՒՆ', welcome: 'ԲԱՐԻ ԳԱԼՈՒՍՏ' },
+  en: { est: 'EST. 2000', trade: 'CONSTRUCTION', welcome: 'WELCOME' },
+  ru: { est: 'ОСН. 2000', trade: 'СТРОИТЕЛЬСТВО', welcome: 'ДОБРО ПОЖАЛОВАТЬ' }
+};
+
+export const heroLabel = {
+  hy: 'GARON / 3D ՆԱԽԱԳԻԾ',
+  en: 'GARON / 3D STUDY',
+  ru: 'GARON / 3D-ЭТЮД'
+};
+
+export const notFound = {
+  hy: { eyebrow: '404', title: 'Էջը չի գտնվել', text: 'Հնարավոր է՝ հղումը հնացել է կամ էջը տեղափոխվել է։', home: 'Վերադառնալ գլխավոր էջ ↗', projects: 'Դիտել նախագծերը ↗' },
+  en: { eyebrow: '404', title: 'Page not found', text: 'The link may be outdated or the page may have moved.', home: 'Back to Home ↗', projects: 'View Projects ↗' },
+  ru: { eyebrow: '404', title: 'Страница не найдена', text: 'Возможно, ссылка устарела или страница была перемещена.', home: 'На главную ↗', projects: 'Смотреть проекты ↗' }
 };
