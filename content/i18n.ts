@@ -192,16 +192,7 @@ export const serviceDetailShared = {
   hy: {
     eyebrow: 'GARON / ԾԱՌԱՅՈՒԹՅՈՒՆՆԵՐ',
     approachEyebrow: 'ՄԵՐ ՄՈՏԵՑՈՒՄԸ',
-    approachTitle1: 'Մեկ գործընկեր՝', approachTitle2: 'ամբողջ գործընթացի համար։',
-    approachText1: 'Մենք աշխատում ենք փուլային և հասկանալի գործընթացով՝ նախապատրաստում, կազմակերպում, իրականացում և վերջնական արդյունք։ Նախագծի բնույթից կախված՝ յուրաքանչյուր փուլը հարմարեցվում է պատվիրատուի պահանջներին։',
-    approachText2: 'Մեր նպատակը ոչ միայն կառուցելն է, այլ կառուցել այնպես, որ արդյունքը լինի ամուր, գործնական և տեսքով ամբողջական։',
     processEyebrow: 'ԳՈՐԾԸՆԹԱՑ',
-    steps: [
-      { t: 'ՊԼԱՆԱՎՈՐՈՒՄ', d: 'Խնդիրների և պահանջների հստակեցում։' },
-      { t: 'ՆԱԽԱՊԱՏՐԱՍՏՈՒՄ', d: 'Կազմակերպում և աշխատանքի փուլավորում։' },
-      { t: 'ԻՐԱԿԱՆԱՑՈՒՄ', d: 'Շինարարական աշխատանքների կատարում և վերահսկում։' },
-      { t: 'ԱՐԴՅՈՒՆՔ', d: 'Վերջնական հանձնում և մանրուքների ավարտում։' }
-    ],
     ctaEyebrow: 'ՏԵՍԵՔ ԱՇԽԱՏԱՆՔԸ',
     ctaTitle1: 'Իրական նախագծերը', ctaTitle2: 'ավելի լավ են պատմում։',
     ctaButton: 'Դիտել նախագծերը ↗'
@@ -209,16 +200,7 @@ export const serviceDetailShared = {
   en: {
     eyebrow: 'GARON / SERVICES',
     approachEyebrow: 'OUR APPROACH',
-    approachTitle1: 'One partner', approachTitle2: 'for the entire process.',
-    approachText1: "We work through a staged, transparent process — preparation, organization, execution and final result. Depending on the nature of the project, every stage is adapted to the client's requirements.",
-    approachText2: 'Our goal is not just to build, but to build so the result is solid, practical and visually complete.',
     processEyebrow: 'PROCESS',
-    steps: [
-      { t: 'PLANNING', d: 'Clarifying tasks and requirements.' },
-      { t: 'PREPARATION', d: 'Organization and staging of the work.' },
-      { t: 'EXECUTION', d: 'Carrying out and supervising construction works.' },
-      { t: 'RESULT', d: 'Final handover and completion of details.' }
-    ],
     ctaEyebrow: 'SEE THE WORK',
     ctaTitle1: 'Real projects', ctaTitle2: 'tell a better story.',
     ctaButton: 'View Projects ↗'
@@ -226,16 +208,7 @@ export const serviceDetailShared = {
   ru: {
     eyebrow: 'GARON / УСЛУГИ',
     approachEyebrow: 'НАШ ПОДХОД',
-    approachTitle1: 'Один партнёр', approachTitle2: 'для всего процесса.',
-    approachText1: 'Мы работаем по поэтапному и понятному процессу — подготовка, организация, реализация и итоговый результат. В зависимости от характера проекта каждый этап адаптируется под требования заказчика.',
-    approachText2: 'Наша цель — не просто строить, а строить так, чтобы результат был прочным, практичным и завершённым внешне.',
     processEyebrow: 'ПРОЦЕСС',
-    steps: [
-      { t: 'ПЛАНИРОВАНИЕ', d: 'Уточнение задач и требований.' },
-      { t: 'ПОДГОТОВКА', d: 'Организация и разбивка работ на этапы.' },
-      { t: 'РЕАЛИЗАЦИЯ', d: 'Выполнение и контроль строительных работ.' },
-      { t: 'РЕЗУЛЬТАТ', d: 'Финальная сдача и завершение деталей.' }
-    ],
     ctaEyebrow: 'СМОТРЕТЬ РАБОТЫ',
     ctaTitle1: 'Реальные проекты', ctaTitle2: 'рассказывают лучше.',
     ctaButton: 'Смотреть проекты ↗'
@@ -244,24 +217,174 @@ export const serviceDetailShared = {
 
 export const serviceDetailPages = {
   pools: {
-    hy: { title: 'Լողավազանների կառուցում', lead: 'Լողավազաններ՝ գաղափարից մինչև պատրաստ արդյունք։' },
-    en: { title: 'Swimming Pool Construction', lead: 'Pools — from concept to finished result.' },
-    ru: { title: 'Строительство бассейнов', lead: 'Бассейны — от идеи до готового результата.' }
+    hy: {
+      title: 'Լողավազանների կառուցում', lead: 'Լողավազաններ՝ գաղափարից մինչև պատրաստ արդյունք։',
+      approachTitle1: 'Ջուրը փոխում է', approachTitle2: 'տարածքի բնավորությունը։',
+      approachText1: 'Մենք ստեղծում ենք լողավազաններ, որոնք դառնում են տան և ամբողջ բակի գլխավոր շեշտադրումը՝ համադրելով ճարտարապետությունը, ժամանակակից դիզայնը և շինարարական բարձր որակը։',
+      approachText2: 'Յուրաքանչյուր նախագիծ անհատական է․ մենք հաշվի ենք առնում տարածքի առանձնահատկությունները, տան ոճը և պատվիրատուի նախասիրությունները՝ ստեղծելով լուծում, որը գեղեցիկ է այսօր և արդիական է տարիներ անց։',
+      approachText3: 'Մտածված դիզայն։ Ճշգրիտ իրականացում։ Լողավազան, որը դառնում է ձեր տան մի մասը։',
+      steps: [
+        { t: 'ԳԱՂԱՓԱՐ ԵՎ ԴԻԶԱՅՆ', d: 'Հասկանում ենք ձեր նախասիրությունները և տարածքի առանձնահատկությունները՝ ձևավորելով լողավազանի անհատական լուծումը։' },
+        { t: 'ՆԱԽԱՊԱՏՐԱՍՏՈՒՄ', d: 'Հստակեցնում ենք չափերը, կառուցվածքը, նյութերը, ինժեներական և ջրի մաքրման համակարգերը։' },
+        { t: 'ԿԱՌՈՒՑՈՒՄ', d: 'Իրականացնում ենք կառուցվածքային աշխատանքները, ջրամեկուսացումը, ինժեներական համակարգերի տեղադրումն ու հարդարումը։' },
+        { t: 'ՎԵՐՋՆԱԿԱՆ ԱՐԴՅՈՒՆՔ', d: 'Ստուգում ենք բոլոր համակարգերն ու մանրուքները և հանձնում պատրաստ լողավազան՝ լիարժեք օգտագործման համար։' }
+      ]
+    },
+    en: {
+      title: 'Swimming Pool Construction', lead: 'Pools — from concept to finished result.',
+      approachTitle1: 'Water changes', approachTitle2: 'the character of a space.',
+      approachText1: 'We create pools that become the main accent of the house and the entire yard — combining architecture, modern design and high construction quality.',
+      approachText2: "Every project is individual; we take into account the features of the site, the style of the house and the client's preferences, creating a solution that is beautiful today and still relevant years from now.",
+      approachText3: 'Thoughtful design. Precise execution. A pool that becomes part of your home.',
+      steps: [
+        { t: 'IDEA & DESIGN', d: 'We understand your preferences and the features of the site, shaping an individual pool solution.' },
+        { t: 'PREPARATION', d: 'We define the dimensions, the structure, the materials, and the engineering and water purification systems.' },
+        { t: 'CONSTRUCTION', d: 'We carry out the structural works, waterproofing, installation of the engineering systems and finishing.' },
+        { t: 'FINAL RESULT', d: 'We check all systems and details and hand over a ready pool for full use.' }
+      ]
+    },
+    ru: {
+      title: 'Строительство бассейнов', lead: 'Бассейны — от идеи до готового результата.',
+      approachTitle1: 'Вода меняет', approachTitle2: 'характер пространства.',
+      approachText1: 'Мы создаём бассейны, которые становятся главным акцентом дома и всего двора, сочетая архитектуру, современный дизайн и высокое качество строительства.',
+      approachText2: 'Каждый проект индивидуален: мы учитываем особенности участка, стиль дома и предпочтения заказчика, создавая решение, которое красиво сегодня и остаётся актуальным спустя годы.',
+      approachText3: 'Продуманный дизайн. Точное исполнение. Бассейн, который становится частью вашего дома.',
+      steps: [
+        { t: 'ИДЕЯ И ДИЗАЙН', d: 'Понимаем ваши предпочтения и особенности участка, формируя индивидуальное решение для бассейна.' },
+        { t: 'ПОДГОТОВКА', d: 'Определяем размеры, конструкцию, материалы, инженерные системы и системы очистки воды.' },
+        { t: 'СТРОИТЕЛЬСТВО', d: 'Выполняем конструкционные работы, гидроизоляцию, монтаж инженерных систем и отделку.' },
+        { t: 'ИТОГОВЫЙ РЕЗУЛЬТАТ', d: 'Проверяем все системы и детали и сдаём готовый бассейн для полноценного использования.' }
+      ]
+    }
   },
   residential: {
-    hy: { title: 'Բնակելի տների կառուցում', lead: 'Անհատական բնակելի տներ՝ կառուցված հստակ պլանավորմամբ և վերահսկմամբ։' },
-    en: { title: 'Residential Construction', lead: 'Custom homes built with precise planning and supervision.' },
-    ru: { title: 'Строительство жилых домов', lead: 'Индивидуальные жилые дома, построенные с чётким планированием и контролем.' }
+    hy: {
+      title: 'Բնակելի տների կառուցում', lead: 'Անհատական բնակելի տներ՝ կառուցված հստակ պլանավորմամբ և վերահսկմամբ։',
+      approachTitle1: 'Լավ տունը սկսվում է', approachTitle2: 'ճիշտ մտածված գաղափարից։',
+      approachText1: 'Մենք յուրաքանչյուր բնակելի տուն դիտարկում ենք որպես ամբողջական նախագիծ՝ որտեղ ճարտարապետությունը, կառուցվածքը, ինժեներական լուծումները և հարդարումը պետք է աշխատեն մեկ ամբողջության մեջ։',
+      approachText2: 'Մեր թիմը կառավարում է շինարարության ամբողջ ընթացքը՝ առաջին գծագրից մինչև պատրաստի տան հանձնում։ Մենք ուշադրություն ենք դարձնում ոչ միայն արտաքին տեսքին, այլև այն ամենին, ինչը ձևավորում է տան իրական որակը՝ ամրություն, հարմարավետություն, ֆունկցիոնալություն և մանրուքների նկատմամբ ճշգրտություն։',
+      approachText3: 'Ձեր գաղափարը՝ մեր փորձը, մեկ ամբողջական արդյունք։',
+      steps: [
+        { t: 'ԳԱՂԱՓԱՐ ԵՎ ՆԱԽԱԳԻԾ', d: 'Ուսումնասիրում ենք տարածքը, հասկանում ձեր պատկերացումները և ձևավորում տան ճարտարապետական ու ֆունկցիոնալ լուծումը։' },
+        { t: 'ՊԼԱՆԱՎՈՐՈՒՄ', d: 'Հստակեցնում ենք աշխատանքների փուլերը, նյութերը, տեխնիկական լուծումները և շինարարության ամբողջ ընթացքը։' },
+        { t: 'ԿԱՌՈՒՑՈՒՄ', d: 'Իրականացնում ենք շինարարական աշխատանքները՝ հիմքից մինչև հարդարում՝ վերահսկելով յուրաքանչյուր փուլի որակն ու ճշգրտությունը։' },
+        { t: 'ՁԵՐ ՏՈՒՆԸ ՊԱՏՐԱՍՏ Է', d: 'Վերջնական ստուգումներից հետո հանձնում ենք ամբողջական և պատրաստ տուն՝ նախատեսված է ձեր հարմարավետ կյանքի համար։' }
+      ]
+    },
+    en: {
+      title: 'Residential Construction', lead: 'Custom homes built with precise planning and supervision.',
+      approachTitle1: 'A good home starts', approachTitle2: 'with a well-thought-out idea.',
+      approachText1: 'We see every residential house as one complete project — where architecture, structure, engineering solutions and finishing must work together as a whole.',
+      approachText2: 'Our team manages the entire construction process — from the first drawing to the handover of the finished home. We pay attention not only to the exterior, but to everything that shapes the true quality of a home: durability, comfort, functionality and precision in the details.',
+      approachText3: 'Your idea, our experience, one complete result.',
+      steps: [
+        { t: 'IDEA & DESIGN', d: 'We study the site, understand your vision and shape the architectural and functional solution of the house.' },
+        { t: 'PLANNING', d: 'We define the stages of work, the materials, the technical solutions and the entire course of construction.' },
+        { t: 'CONSTRUCTION', d: 'We carry out the construction works — from the foundation to finishing — controlling the quality and precision of every stage.' },
+        { t: 'YOUR HOME IS READY', d: 'After the final inspections, we hand over a complete, ready home designed for your comfortable life.' }
+      ]
+    },
+    ru: {
+      title: 'Строительство жилых домов', lead: 'Индивидуальные жилые дома, построенные с чётким планированием и контролем.',
+      approachTitle1: 'Хороший дом начинается', approachTitle2: 'с продуманной идеи.',
+      approachText1: 'Мы рассматриваем каждый жилой дом как целостный проект, где архитектура, конструкция, инженерные решения и отделка должны работать как единое целое.',
+      approachText2: 'Наша команда управляет всем ходом строительства — от первого чертежа до сдачи готового дома. Мы уделяем внимание не только внешнему виду, но и всему, что формирует настоящее качество дома: прочности, комфорту, функциональности и точности в деталях.',
+      approachText3: 'Ваша идея, наш опыт — один целостный результат.',
+      steps: [
+        { t: 'ИДЕЯ И ПРОЕКТ', d: 'Изучаем участок, понимаем ваши представления и формируем архитектурное и функциональное решение дома.' },
+        { t: 'ПЛАНИРОВАНИЕ', d: 'Определяем этапы работ, материалы, технические решения и весь ход строительства.' },
+        { t: 'СТРОИТЕЛЬСТВО', d: 'Выполняем строительные работы — от фундамента до отделки — контролируя качество и точность каждого этапа.' },
+        { t: 'ВАШ ДОМ ГОТОВ', d: 'После финальных проверок сдаём цельный, готовый дом, созданный для вашей комфортной жизни.' }
+      ]
+    }
   },
   renovation: {
-    hy: { title: 'Վերանորոգում և վերակառուցում', lead: 'Գոյություն ունեցող տարածքների վերափոխում, ամրացում և արդիականացում։' },
-    en: { title: 'Renovation & Reconstruction', lead: 'Transformation, reinforcement and modernization of existing spaces.' },
-    ru: { title: 'Ремонт и реконструкция', lead: 'Преобразование, укрепление и модернизация существующих пространств.' }
+    hy: {
+      title: 'Վերանորոգում և վերակառուցում', lead: 'Գոյություն ունեցող տարածքների վերափոխում, ամրացում և արդիականացում։',
+      approachTitle1: 'Յուրաքանչյուր տարածք', approachTitle2: 'ունի իր ներուժը։',
+      approachText1: 'Մենք օգնում ենք այն բացահայտել և վերածել ժամանակակից, հարմարավետ ու ամբողջական միջավայրի։',
+      approachText2: 'Վերանորոգման և վերակառուցման ընթացքում համադրում ենք ճարտարապետական, ինժեներական և ինտերիերի լուծումները՝ սկսած տարածքի վերափոխումից մինչև վերջին դետալը։',
+      approachText3: 'Փոխում ենք տարածքը՝ պահպանելով դրա լավագույնը և ստեղծելով նորը։',
+      steps: [
+        { t: 'ԳՆԱՀԱՏՈՒՄ ԵՎ ԳԱՂԱՓԱՐ', d: 'Ուսումնասիրում ենք տարածքը, հասկանում ձեր պահանջներն ու որոշում, թե ինչպես կարելի է առավել արդյունավետ օգտագործել դրա ներուժը։' },
+        { t: 'ՆԱԽԱԳԾՈՒՄ', d: 'Ձևավորում ենք նոր հատակագծային, ճարտարապետական և ինտերիերի լուծումները՝ տարածքը համապատասխանեցնելով ձեր ապրելակերպին։' },
+        { t: 'ՎԵՐԱՓՈԽՈՒՄ', d: 'Իրականացնում ենք վերակառուցման, ինժեներական, շինարարական և հարդարման աշխատանքները՝ վերահսկելով ամբողջ գործընթացը։' },
+        { t: 'ՆՈՐ ՏԱՐԱԾՔ', d: 'Վերջնական ստուգումներից հետո հանձնում ենք ամբողջությամբ վերափոխված տարածք՝ պատրաստ օգտագործման և նոր կյանքին համապատասխան։' }
+      ]
+    },
+    en: {
+      title: 'Renovation & Reconstruction', lead: 'Transformation, reinforcement and modernization of existing spaces.',
+      approachTitle1: 'Every space', approachTitle2: 'has its potential.',
+      approachText1: 'We help reveal it and turn it into a modern, comfortable and complete environment.',
+      approachText2: 'During renovation and reconstruction, we combine architectural, engineering and interior solutions — from the transformation of the space to the very last detail.',
+      approachText3: 'We change the space — keeping the best of it and creating something new.',
+      steps: [
+        { t: 'ASSESSMENT & IDEA', d: 'We study the space, understand your requirements and decide how its potential can be used most effectively.' },
+        { t: 'DESIGN', d: 'We develop new layout, architectural and interior solutions, adapting the space to your way of life.' },
+        { t: 'TRANSFORMATION', d: 'We carry out the reconstruction, engineering, construction and finishing works, supervising the entire process.' },
+        { t: 'A NEW SPACE', d: 'After the final inspections, we hand over a fully transformed space — ready for use and suited to its new life.' }
+      ]
+    },
+    ru: {
+      title: 'Ремонт и реконструкция', lead: 'Преобразование, укрепление и модернизация существующих пространств.',
+      approachTitle1: 'У каждого пространства', approachTitle2: 'есть свой потенциал.',
+      approachText1: 'Мы помогаем раскрыть его и превратить в современную, комфортную и целостную среду.',
+      approachText2: 'В ходе ремонта и реконструкции мы сочетаем архитектурные, инженерные и интерьерные решения — от преобразования пространства до мельчайшей детали.',
+      approachText3: 'Мы меняем пространство, сохраняя в нём лучшее и создавая новое.',
+      steps: [
+        { t: 'ОЦЕНКА И ИДЕЯ', d: 'Изучаем пространство, понимаем ваши требования и определяем, как наиболее эффективно использовать его потенциал.' },
+        { t: 'ПРОЕКТИРОВАНИЕ', d: 'Формируем новые планировочные, архитектурные и интерьерные решения, приводя пространство в соответствие с вашим образом жизни.' },
+        { t: 'ПРЕОБРАЗОВАНИЕ', d: 'Выполняем работы по реконструкции, инженерные, строительные и отделочные работы, контролируя весь процесс.' },
+        { t: 'НОВОЕ ПРОСТРАНСТВО', d: 'После финальных проверок сдаём полностью преобразованное пространство — готовое к использованию и отвечающее новой жизни.' }
+      ]
+    }
   },
   'public-works': {
-    hy: { title: 'Հասարակական կառույցներ', lead: 'Կազմակերպված շինարարական գործընթացներ՝ տարբեր նշանակության օբյեկտների համար։' },
-    en: { title: 'Public Buildings', lead: 'Organized construction processes for facilities of various purposes.' },
-    ru: { title: 'Общественные здания', lead: 'Организованные строительные процессы для объектов различного назначения.' }
+    hy: {
+      title: 'Հասարակական կառույցներ', lead: 'Կազմակերպված շինարարական գործընթացներ՝ տարբեր նշանակության օբյեկտների համար։',
+      approachTitle1: 'Մեծ նախագծերը պահանջում են', approachTitle2: 'մեծ պատասխանատվություն։',
+      approachText1: 'Հասարակական օբյեկտների կառուցումը պահանջում է ոչ միայն բարձր որակ, այլև հստակ կազմակերպված աշխատանք, պատասխանատվություն և մեծածավալ նախագծերի կառավարման փորձ։',
+      approachText2: 'Մենք իրականացնում ենք հասարակական և կոմերցիոն նշանակության օբյեկտների կառուցում՝ նախագծային լուծումների իրականացումից մինչև վերջնական հանձնում։ Յուրաքանչյուր փուլ կազմակերպվում է միասնական համակարգով՝ հաշվի առնելով օբյեկտի նշանակությունը, ֆունկցիոնալ պահանջները և պատվիրատուի նպատակները։',
+      approachText3: 'Մեր թիմը համակարգում է շինարարական, ինժեներական և հարդարման աշխատանքները՝ վերահսկելով որակը, աշխատանքների հաջորդականությունն ու նախագծային լուծումների ճիշտ իրականացումը։',
+      approachText4: 'Մեր նպատակն է յուրաքանչյուր օբյեկտ հանձնել պատրաստ, ամբողջական և իր գործառույթին համապատասխան՝ պահպանելով աշխատանքի նկատմամբ նույն բարձր չափանիշը՝ անկախ նախագծի մասշտաբից։',
+      approachText5: 'Մենք պատրաստ ենք ստանձնել այն ամբողջությամբ։',
+      steps: [
+        { t: 'ՆԱԽԱԳԻԾ ԵՎ ՊԼԱՆԱՎՈՐՈՒՄ', d: 'Ուսումնասիրում ենք օբյեկտի առանձնահատկությունները, հստակեցնում նախագծային և տեխնիկական պահանջները և ձևավորում աշխատանքների ամբողջական պլանը։' },
+        { t: 'ԿԱԶՄԱԿԵՐՊՈՒՄ', d: 'Համակարգում ենք մասնագետների, նյութերի և աշխատանքների փուլերը՝ ապահովելով շինարարության սահուն և վերահսկելի ընթացքը։' },
+        { t: 'ՇԻՆԱՐԱՐՈՒԹՅՈՒՆ', d: 'Իրականացնում ենք շինարարական, ինժեներական և հարդարման աշխատանքները՝ պահպանելով նախագծային լուծումները, որակի չափանիշներն ու համաձայնեցված ժամկետները։' },
+        { t: 'ՀԱՆՁՆՈՒՄ', d: 'Կատարում ենք վերջնական ստուգումները, ապահովում անհրաժեշտ աշխատանքների ավարտը և օբյեկտը հանձնում պատվիրատուին՝ պատրաստ շահագործման։' }
+      ]
+    },
+    en: {
+      title: 'Public Buildings', lead: 'Organized construction processes for facilities of various purposes.',
+      approachTitle1: 'Big projects require', approachTitle2: 'great responsibility.',
+      approachText1: 'Building public facilities requires not only high quality, but also clearly organized work, responsibility and experience in managing large-scale projects.',
+      approachText2: "We carry out the construction of public and commercial facilities — from implementing the design solutions to final handover. Every stage is organized within a unified system, taking into account the purpose of the facility, its functional requirements and the client's goals.",
+      approachText3: 'Our team coordinates the construction, engineering and finishing works, controlling quality, the sequence of works and the correct implementation of the design solutions.',
+      approachText4: 'Our goal is to hand over every facility ready, complete and suited to its function — maintaining the same high standard of work regardless of the scale of the project.',
+      approachText5: 'We are ready to take it on in full.',
+      steps: [
+        { t: 'DESIGN & PLANNING', d: 'We study the features of the facility, define the design and technical requirements and shape a complete plan of works.' },
+        { t: 'ORGANIZATION', d: 'We coordinate the specialists, materials and stages of work, ensuring a smooth and controllable course of construction.' },
+        { t: 'CONSTRUCTION', d: 'We carry out the construction, engineering and finishing works, adhering to the design solutions, the quality standards and the agreed deadlines.' },
+        { t: 'HANDOVER', d: 'We perform the final inspections, ensure the completion of all necessary works and hand the facility over to the client, ready for operation.' }
+      ]
+    },
+    ru: {
+      title: 'Общественные здания', lead: 'Организованные строительные процессы для объектов различного назначения.',
+      approachTitle1: 'Большие проекты требуют', approachTitle2: 'большой ответственности.',
+      approachText1: 'Строительство общественных объектов требует не только высокого качества, но и чётко организованной работы, ответственности и опыта управления масштабными проектами.',
+      approachText2: 'Мы осуществляем строительство объектов общественного и коммерческого назначения — от реализации проектных решений до финальной сдачи. Каждый этап организуется по единой системе с учётом назначения объекта, функциональных требований и целей заказчика.',
+      approachText3: 'Наша команда координирует строительные, инженерные и отделочные работы, контролируя качество, последовательность работ и правильную реализацию проектных решений.',
+      approachText4: 'Наша цель — сдавать каждый объект готовым, завершённым и соответствующим своему назначению, сохраняя один и тот же высокий стандарт работы независимо от масштаба проекта.',
+      approachText5: 'Мы готовы взять её на себя полностью.',
+      steps: [
+        { t: 'ПРОЕКТ И ПЛАНИРОВАНИЕ', d: 'Изучаем особенности объекта, уточняем проектные и технические требования и формируем полный план работ.' },
+        { t: 'ОРГАНИЗАЦИЯ', d: 'Координируем специалистов, материалы и этапы работ, обеспечивая плавный и управляемый ход строительства.' },
+        { t: 'СТРОИТЕЛЬСТВО', d: 'Выполняем строительные, инженерные и отделочные работы, соблюдая проектные решения, стандарты качества и согласованные сроки.' },
+        { t: 'СДАЧА', d: 'Проводим финальные проверки, обеспечиваем завершение всех необходимых работ и сдаём объект заказчику готовым к эксплуатации.' }
+      ]
+    }
   }
 };
 
@@ -307,8 +430,25 @@ export const calculator = {
     title1: 'Հաշվեք ձեր', title2: 'նախագծի մոտավոր արժեքը։',
     lead: 'Ընտրեք նախագծի տեսակը, նշեք մակերեսը և տեսեք մոտավոր արժեքը։',
     modeLabel: 'Նախագծի տեսակը',
-    modes: { full: 'Ամբողջական կառուցում', monolith: 'Միայն մոնոլիտ', renovation: 'Վերանորոգում' },
+    modes: { full: 'Ամբողջական կառուցում', monolith: 'Միայն մոնոլիտ', renovation: 'Վերանորոգում', pool: 'Լողավազան' },
     areaLabel: 'Մակերեսը', areaUnit: 'մ²', areaPlaceholder: 'օր.՝ 150',
+    poolDims: [
+      { label: 'Երկարություն', placeholder: '8' },
+      { label: 'Լայնություն', placeholder: '4' },
+      { label: 'Խորություն', placeholder: '1.5' }
+    ],
+    meterUnit: 'մ',
+    poolFinishLabel: 'Հարդարման տեսակը',
+    poolFinishes: [
+      { name: 'ՊԼՅՈՆԿԱ', desc: 'Ֆիլտրման համակարգով' },
+      { name: 'ՄՈԶԱԻԿԱ', desc: 'Ֆիլտրման համակարգով' }
+    ],
+    enterPoolDims: 'Մուտքագրեք լողավազանի չափերը՝ հաշվարկը տեսնելու համար',
+    service: {
+      pool: { title1: 'Հաշվեք լողավազանի', title2: 'մոտավոր արժեքը։', lead: 'Նշեք լողավազանի երկարությունը, լայնությունը և խորությունը, ընտրեք հարդարման տեսակը և տեսեք մոտավոր արժեքը։' },
+      residential: { title1: 'Հաշվեք տան', title2: 'մոտավոր արժեքը։', lead: 'Ընտրեք՝ ամբողջական կառուցում է, թե միայն մոնոլիտ, նշեք մակերեսը և հարկերի քանակը։' },
+      renovation: { title1: 'Հաշվեք վերանորոգման', title2: 'մոտավոր արժեքը։', lead: 'Նշեք մակերեսը, ընտրեք վերանորոգման մակարդակը և տեսեք մոտավոր արժեքը։' }
+    },
     tierLabel: 'Հարդարման մակարդակ',
     tiers: [
       { name: 'ՍՏԱՆԴԱՐՏ', desc: 'Հիմնական շինարարություն, կոպիտ հարդարում' },
@@ -323,9 +463,9 @@ export const calculator = {
     optionsLabel: 'Հավելյալ առանձնահատկություններ',
     basement: 'Նկուղային հարկ', mansard: 'Մանսարդ հարկ', flatRoof: 'Հարթ տանիք',
     floorsLabel: 'Հարկերի քանակը',
-    basementAreaLabel: 'Նկուղի մակերեսը (եթե կա)',
+    basementAreaLabel: 'Նկուղի մակերեսը (եթե կա)', fullBasementAreaLabel: 'Նկուղի մակերեսը',
     floorUnit: 'ՀԱՐԿ', floorAdds: 'Այս հարկի արժեքը', floorTotal: 'Ընդամենը',
-    renovationPremiumNote: 'Ընտրելով Պրեմիում փաթեթը՝ տան դիզայնը անվճար է։',
+    renovationPremiumNote: 'Ընտրելով Պրեմիում փաթեթը՝ ինտերիերի դիզայնը ստացեք 50% զեղչով։',
     resultLabel: 'Մոտավոր արժեքը',
     perSqm: '/ մ²',
     startingFrom: 'սկսած',
@@ -338,8 +478,25 @@ export const calculator = {
     title1: 'Estimate Your', title2: "Project's Approximate Cost.",
     lead: 'Choose the project type, enter the area, and see the approximate cost.',
     modeLabel: 'Project Type',
-    modes: { full: 'Full Construction', monolith: 'Monolith Only', renovation: 'Renovation' },
+    modes: { full: 'Full Construction', monolith: 'Monolith Only', renovation: 'Renovation', pool: 'Swimming Pool' },
     areaLabel: 'Area', areaUnit: 'm²', areaPlaceholder: 'e.g. 150',
+    poolDims: [
+      { label: 'Length', placeholder: '8' },
+      { label: 'Width', placeholder: '4' },
+      { label: 'Depth', placeholder: '1.5' }
+    ],
+    meterUnit: 'm',
+    poolFinishLabel: 'Finish Type',
+    poolFinishes: [
+      { name: 'PVC FILM', desc: 'With filtration system' },
+      { name: 'MOSAIC', desc: 'With filtration system' }
+    ],
+    enterPoolDims: 'Enter the pool dimensions to see the calculation',
+    service: {
+      pool: { title1: "Estimate Your Pool's", title2: 'Approximate Cost.', lead: 'Enter the pool length, width and depth, choose the finish type and see the approximate cost.' },
+      residential: { title1: "Estimate Your Home's", title2: 'Approximate Cost.', lead: 'Choose full construction or monolith only, then enter the area and number of floors.' },
+      renovation: { title1: "Estimate Your Renovation's", title2: 'Approximate Cost.', lead: 'Enter the area, choose the renovation level and see the approximate cost.' }
+    },
     tierLabel: 'Finish Level',
     tiers: [
       { name: 'STANDARD', desc: 'Basic construction, rough finishing' },
@@ -354,9 +511,9 @@ export const calculator = {
     optionsLabel: 'Additional Features',
     basement: 'Basement Floor', mansard: 'Mansard Floor', flatRoof: 'Flat Roof',
     floorsLabel: 'Number of Floors',
-    basementAreaLabel: 'Basement Area (if any)',
+    basementAreaLabel: 'Basement Area (if any)', fullBasementAreaLabel: 'Basement Area',
     floorUnit: 'FLOOR', floorAdds: 'This floor adds', floorTotal: 'Total',
-    renovationPremiumNote: 'Choosing the Premium package includes free house design.',
+    renovationPremiumNote: 'Choose the Premium package and get the interior design at 50% off.',
     resultLabel: 'Approximate Cost',
     perSqm: '/ m²',
     startingFrom: 'starting from',
@@ -369,8 +526,25 @@ export const calculator = {
     title1: 'Рассчитайте примерную', title2: 'стоимость вашего проекта.',
     lead: 'Выберите тип проекта, укажите площадь и узнайте примерную стоимость.',
     modeLabel: 'Тип проекта',
-    modes: { full: 'Полное строительство', monolith: 'Только монолит', renovation: 'Ремонт' },
+    modes: { full: 'Полное строительство', monolith: 'Только монолит', renovation: 'Ремонт', pool: 'Бассейн' },
     areaLabel: 'Площадь', areaUnit: 'м²', areaPlaceholder: 'напр. 150',
+    poolDims: [
+      { label: 'Длина', placeholder: '8' },
+      { label: 'Ширина', placeholder: '4' },
+      { label: 'Глубина', placeholder: '1.5' }
+    ],
+    meterUnit: 'м',
+    poolFinishLabel: 'Тип отделки',
+    poolFinishes: [
+      { name: 'ПЛЁНКА ПВХ', desc: 'С системой фильтрации' },
+      { name: 'МОЗАИКА', desc: 'С системой фильтрации' }
+    ],
+    enterPoolDims: 'Введите размеры бассейна, чтобы увидеть расчёт',
+    service: {
+      pool: { title1: 'Рассчитайте примерную', title2: 'стоимость бассейна.', lead: 'Укажите длину, ширину и глубину бассейна, выберите тип отделки и узнайте примерную стоимость.' },
+      residential: { title1: 'Рассчитайте примерную', title2: 'стоимость дома.', lead: 'Выберите полное строительство или только монолит, укажите площадь и количество этажей.' },
+      renovation: { title1: 'Рассчитайте примерную', title2: 'стоимость ремонта.', lead: 'Укажите площадь, выберите уровень ремонта и узнайте примерную стоимость.' }
+    },
     tierLabel: 'Уровень отделки',
     tiers: [
       { name: 'СТАНДАРТ', desc: 'Базовое строительство, черновая отделка' },
@@ -385,15 +559,30 @@ export const calculator = {
     optionsLabel: 'Дополнительные особенности',
     basement: 'Цокольный этаж', mansard: 'Мансардный этаж', flatRoof: 'Плоская крыша',
     floorsLabel: 'Количество этажей',
-    basementAreaLabel: 'Площадь цоколя (если есть)',
+    basementAreaLabel: 'Площадь цоколя (если есть)', fullBasementAreaLabel: 'Площадь цоколя',
     floorUnit: 'ЭТАЖ', floorAdds: 'Этот этаж добавляет', floorTotal: 'Итого',
-    renovationPremiumNote: 'При выборе пакета Премиум дизайн дома — бесплатно.',
+    renovationPremiumNote: 'Выбрав пакет Премиум, получите дизайн интерьера со скидкой 50%.',
     resultLabel: 'Примерная стоимость',
     perSqm: '/ м²',
     startingFrom: 'от',
     disclaimer: 'Это только ориентировочный расчёт. Итоговая цена зависит от участка, проекта, материалов и других факторов. Свяжитесь с нами для точной сметы.',
     cta: 'Получить точную смету ↗',
     enterArea: 'Введите площадь, чтобы увидеть расчёт'
+  }
+};
+
+export const serviceProjects = {
+  hy: {
+    pool: { title1: 'Մեր կառուցած', title2: 'լողավազանները։' },
+    residential: { title1: 'Մեր կառուցած', title2: 'տները։' }
+  },
+  en: {
+    pool: { title1: 'Pools', title2: 'We Have Built.' },
+    residential: { title1: 'Homes', title2: 'We Have Built.' }
+  },
+  ru: {
+    pool: { title1: 'Бассейны,', title2: 'которые мы построили.' },
+    residential: { title1: 'Дома,', title2: 'которые мы построили.' }
   }
 };
 
