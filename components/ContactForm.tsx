@@ -6,14 +6,17 @@ import { siteConfig } from '../content/siteConfig';
 
 // Առանց սերվերի՝ ձևը պատրաստում է նամակ և բացում է այցելուի էլ. փոստի ծրագիրը։
 // Երբ ուզեք ուղիղ ուղարկում (email/Telegram), այս մեկ ֆայլը կփոխարինվի fetch-ով։
+// Անուն/email/հեռախոս դաշտերն առանձին են և ունեն ճիշտ autocomplete տեսակ, որ բրաուզերը
+// (եթե օգտատերն արդեն պահել է այդ տվյալները մեկ այլ կայքում) կարողանա ինքնաշխատ լրացնել դրանք։
 export default function ContactForm() {
   const { lang } = useLanguage();
   const t = contact[lang];
   const [name, setName] = useState('');
-  const [reach, setReach] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
   const [type, setType] = useState(0);
   const [message, setMessage] = useState('');
-  const [errors, setErrors] = useState({ name: false, reach: false, message: false });
+  const [errors, setErrors] = useState({ name: false, contact: false, message: false });
   const [opened, setOpened] = useState(false);
 
   useEffect(() => {
@@ -24,11 +27,12 @@ export default function ContactForm() {
 
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
-    const next = { name: !name.trim(), reach: !reach.trim(), message: !message.trim() };
+    const next = { name: !name.trim(), contact: !email.trim() && !phone.trim(), message: !message.trim() };
     setErrors(next);
-    if (next.name || next.reach || next.message) return;
+    if (next.name || next.contact || next.message) return;
     const subject = `GARON Construction — ${t.types[type]}`;
-    const body = `${t.formName}: ${name.trim()}\n${t.formContact}: ${reach.trim()}\n${t.formType}: ${t.types[type]}\n\n${message.trim()}`;
+    const contactLines = [email.trim() && `${t.formEmail}: ${email.trim()}`, phone.trim() && `${t.formPhone}: ${phone.trim()}`].filter(Boolean).join('\n');
+    const body = `${t.formName}: ${name.trim()}\n${contactLines}\n${t.formType}: ${t.types[type]}\n\n${message.trim()}`;
     window.location.href = `mailto:${siteConfig.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     setOpened(true);
   };
@@ -38,14 +42,20 @@ export default function ContactForm() {
       <p>{t.cardText}</p>
       <label className={errors.name ? 'invalid' : ''}>
         <span>{t.formName}</span>
-        <input value={name} onChange={e => setName(e.target.value)} autoComplete="name" aria-invalid={errors.name} />
+        <input name="name" value={name} onChange={e => setName(e.target.value)} autoComplete="name" aria-invalid={errors.name} />
         {errors.name && <em>{t.required}</em>}
       </label>
-      <label className={errors.reach ? 'invalid' : ''}>
-        <span>{t.formContact}</span>
-        <input value={reach} onChange={e => setReach(e.target.value)} autoComplete="email tel" aria-invalid={errors.reach} />
-        {errors.reach && <em>{t.required}</em>}
-      </label>
+      <div className="contactFormRow">
+        <label className={errors.contact ? 'invalid' : ''}>
+          <span>{t.formEmail}</span>
+          <input type="email" name="email" value={email} onChange={e => setEmail(e.target.value)} autoComplete="email" aria-invalid={errors.contact} />
+        </label>
+        <label className={errors.contact ? 'invalid' : ''}>
+          <span>{t.formPhone}</span>
+          <input type="tel" name="tel" value={phone} onChange={e => setPhone(e.target.value)} autoComplete="tel" aria-invalid={errors.contact} />
+        </label>
+      </div>
+      {errors.contact && <em>{t.contactRequired}</em>}
       <label>
         <span>{t.formType}</span>
         <select value={type} onChange={e => setType(Number(e.target.value))}>

@@ -399,9 +399,10 @@ export const contact = {
     phoneLabel: 'ՀԵՌԱԽՈՍ', emailLabel: 'EMAIL', socialLabel: 'ՍՈՑՑԱՆՑԵՐ',
     cardText: 'Պատմեք՝ ինչ եք ուզում կառուցել, ինչ փուլում է նախագիծը և ինչ ժամկետ եք պատկերացնում։',
     send: 'Ուղարկել հարցում ↗',
-    formName: 'Անուն', formContact: 'Ձեր հեռախոսը կամ email-ը', formType: 'Նախագծի տեսակը', formMessage: 'Հաղորդագրություն',
+    formName: 'Անուն', formEmail: 'Email', formPhone: 'Հեռախոս', formType: 'Նախագծի տեսակը', formMessage: 'Հաղորդագրություն',
     types: ['Լողավազան', 'Բնակելի տուն', 'Վերանորոգում', 'Հասարակական կառույց', 'Այլ'],
     required: 'Լրացրեք այս դաշտը',
+    contactRequired: 'Նշեք առնվազն մեկը՝ email կամ հեռախոս',
     hint: 'Կբացվի ձեր էլ. փոստի ծրագիրը՝ պատրաստի նամակով։',
     sentNote: 'Եթե նամակը չբացվեց, գրեք ուղղակի՝',
     estimateLine: 'Հաշվիչի արդյունքը'
@@ -416,9 +417,10 @@ export const contact = {
     phoneLabel: 'PHONE', emailLabel: 'EMAIL', socialLabel: 'SOCIAL',
     cardText: 'Tell us what you want to build, what stage the project is at, and what timeline you have in mind.',
     send: 'Send Inquiry ↗',
-    formName: 'Name', formContact: 'Your phone or email', formType: 'Project type', formMessage: 'Message',
+    formName: 'Name', formEmail: 'Email', formPhone: 'Phone', formType: 'Project type', formMessage: 'Message',
     types: ['Swimming pool', 'Residential house', 'Renovation', 'Public building', 'Other'],
     required: 'Please fill in this field',
+    contactRequired: 'Enter at least one: email or phone',
     hint: 'Your email app will open with a ready-to-send message.',
     sentNote: 'If nothing opened, write to us directly:',
     estimateLine: 'Calculator estimate'
@@ -433,9 +435,10 @@ export const contact = {
     phoneLabel: 'ТЕЛЕФОН', emailLabel: 'EMAIL', socialLabel: 'СОЦСЕТИ',
     cardText: 'Расскажите, что вы хотите построить, на каком этапе находится проект и какие сроки вы предполагаете.',
     send: 'Отправить запрос ↗',
-    formName: 'Имя', formContact: 'Ваш телефон или email', formType: 'Тип проекта', formMessage: 'Сообщение',
+    formName: 'Имя', formEmail: 'Email', formPhone: 'Телефон', formType: 'Тип проекта', formMessage: 'Сообщение',
     types: ['Бассейн', 'Жилой дом', 'Ремонт', 'Общественное здание', 'Другое'],
     required: 'Заполните это поле',
+    contactRequired: 'Укажите хотя бы одно: email или телефон',
     hint: 'Откроется ваша почтовая программа с готовым письмом.',
     sentNote: 'Если письмо не открылось, напишите нам напрямую:',
     estimateLine: 'Расчёт из калькулятора'
@@ -456,11 +459,7 @@ export const calculator = {
       { label: 'Խորություն', placeholder: '1.5' }
     ],
     meterUnit: 'մ',
-    poolFinishLabel: 'Հարդարման տեսակը',
-    poolFinishes: [
-      { name: 'ՊԼՅՈՆԿԱ', desc: 'Ֆիլտրման համակարգով' },
-      { name: 'ՄՈԶԱԻԿԱ', desc: 'Ֆիլտրման համակարգով' }
-    ],
+    poolIncludesNote: 'Ներառում է կառուցվածքը, հարդարումը և ֆիլտրման համակարգը',
     enterPoolDims: 'Մուտքագրեք լողավազանի չափերը՝ հաշվարկը տեսնելու համար',
     service: {
       pool: { title1: 'Հաշվեք լողավազանի', title2: 'մոտավոր արժեքը։', lead: 'Նշեք լողավազանի երկարությունը, լայնությունը և խորությունը, ընտրեք հարդարման տեսակը և տեսեք մոտավոր արժեքը։' },
@@ -474,10 +473,12 @@ export const calculator = {
       { name: 'ՊՐԵՄԻՈՒՄ', desc: 'Բարձրորակ նյութեր և ամբողջական հարդարում' }
     ],
     renovationTiers: [
-      { name: 'ՍՏԱՆԴԱՐՏ', desc: 'Կոսմետիկ վերանորոգում' },
-      { name: 'ԿՈՄՖՈՐՏ', desc: 'Միջին կարգի վերանորոգում' },
-      { name: 'ՊՐԵՄԻՈՒՄ', desc: 'Կապիտալ վերանորոգում' }
+      { name: 'ԱՇԽԱՏԱՆՔ', desc: 'Միայն աշխատանքի արժեքը, նյութերը՝ պատվիրատուի կողմից', detail: 'Մանրամասն ցանկը (ինչ աշխատանքներ են մտնում այս գնի մեջ) կավելացվի այստեղ։' },
+      { name: 'ՍՏԱՆԴԱՐՏ', desc: 'Կոսմետիկ վերանորոգում', detail: 'Մանրամասն ցանկը (ինչ աշխատանք և նյութեր են մտնում այս գնի մեջ) կավելացվի այստեղ։' },
+      { name: 'ԿՈՄՖՈՐՏ', desc: 'Միջին կարգի վերանորոգում', detail: 'Մանրամասն ցանկը (ինչ աշխատանք և նյութեր են մտնում այս գնի մեջ) կավելացվի այստեղ։' },
+      { name: 'ՊՐԵՄԻՈՒՄ', desc: 'Կապիտալ վերանորոգում', detail: 'Մանրամասն ցանկը (ինչ աշխատանք և նյութեր են մտնում այս գնի մեջ) կավելացվի այստեղ։' }
     ],
+    infoLabel: 'Ինչ է մտնում այս գնի մեջ',
     optionsLabel: 'Հավելյալ առանձնահատկություններ',
     basement: 'Նկուղային հարկ', mansard: 'Մանսարդ հարկ', flatRoof: 'Հարթ տանիք',
     floorsLabel: 'Հարկերի քանակը',
@@ -504,11 +505,7 @@ export const calculator = {
       { label: 'Depth', placeholder: '1.5' }
     ],
     meterUnit: 'm',
-    poolFinishLabel: 'Finish Type',
-    poolFinishes: [
-      { name: 'PVC FILM', desc: 'With filtration system' },
-      { name: 'MOSAIC', desc: 'With filtration system' }
-    ],
+    poolIncludesNote: 'Includes the structure, finishing and filtration system',
     enterPoolDims: 'Enter the pool dimensions to see the calculation',
     service: {
       pool: { title1: "Estimate Your Pool's", title2: 'Approximate Cost.', lead: 'Enter the pool length, width and depth, choose the finish type and see the approximate cost.' },
@@ -522,10 +519,12 @@ export const calculator = {
       { name: 'PREMIUM', desc: 'High-end materials and full finishing' }
     ],
     renovationTiers: [
-      { name: 'STANDARD', desc: 'Cosmetic renovation' },
-      { name: 'COMFORT', desc: 'Mid-range renovation' },
-      { name: 'PREMIUM', desc: 'Capital renovation' }
+      { name: 'LABOR ONLY', desc: 'Labor cost only — materials provided by the client', detail: 'A detailed list of what this price includes will be added here.' },
+      { name: 'STANDARD', desc: 'Cosmetic renovation', detail: 'A detailed list of what this price includes will be added here.' },
+      { name: 'COMFORT', desc: 'Mid-range renovation', detail: 'A detailed list of what this price includes will be added here.' },
+      { name: 'PREMIUM', desc: 'Capital renovation', detail: 'A detailed list of what this price includes will be added here.' }
     ],
+    infoLabel: "What's included in this price",
     optionsLabel: 'Additional Features',
     basement: 'Basement Floor', mansard: 'Mansard Floor', flatRoof: 'Flat Roof',
     floorsLabel: 'Number of Floors',
@@ -552,11 +551,7 @@ export const calculator = {
       { label: 'Глубина', placeholder: '1.5' }
     ],
     meterUnit: 'м',
-    poolFinishLabel: 'Тип отделки',
-    poolFinishes: [
-      { name: 'ПЛЁНКА ПВХ', desc: 'С системой фильтрации' },
-      { name: 'МОЗАИКА', desc: 'С системой фильтрации' }
-    ],
+    poolIncludesNote: 'Включает конструкцию, отделку и систему фильтрации',
     enterPoolDims: 'Введите размеры бассейна, чтобы увидеть расчёт',
     service: {
       pool: { title1: 'Рассчитайте примерную', title2: 'стоимость бассейна.', lead: 'Укажите длину, ширину и глубину бассейна, выберите тип отделки и узнайте примерную стоимость.' },
@@ -570,10 +565,12 @@ export const calculator = {
       { name: 'ПРЕМИУМ', desc: 'Материалы высокого класса и полная отделка' }
     ],
     renovationTiers: [
-      { name: 'СТАНДАРТ', desc: 'Косметический ремонт' },
-      { name: 'КОМФОРТ', desc: 'Ремонт среднего уровня' },
-      { name: 'ПРЕМИУМ', desc: 'Капитальный ремонт' }
+      { name: 'ТОЛЬКО РАБОТА', desc: 'Только стоимость работ — материалы предоставляет заказчик', detail: 'Подробный список того, что входит в эту цену, будет добавлен здесь.' },
+      { name: 'СТАНДАРТ', desc: 'Косметический ремонт', detail: 'Подробный список того, что входит в эту цену, будет добавлен здесь.' },
+      { name: 'КОМФОРТ', desc: 'Ремонт среднего уровня', detail: 'Подробный список того, что входит в эту цену, будет добавлен здесь.' },
+      { name: 'ПРЕМИУМ', desc: 'Капитальный ремонт', detail: 'Подробный список того, что входит в эту цену, будет добавлен здесь.' }
     ],
+    infoLabel: 'Что входит в эту цену',
     optionsLabel: 'Дополнительные особенности',
     basement: 'Цокольный этаж', mansard: 'Мансардный этаж', flatRoof: 'Плоская крыша',
     floorsLabel: 'Количество этажей',

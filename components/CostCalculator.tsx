@@ -1,5 +1,5 @@
 'use client';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import Link from 'next/link';
 import { useLanguage } from './LanguageContext';
 import { calculator } from '../content/i18n';
@@ -27,12 +27,11 @@ function cumulativeRateFor(baseRate: number, floors: number) {
   for (let f = 1; f <= floors; f++) sum += baseRate * (perFloorRate(f) / perFloorRate(1));
   return sum;
 }
-const RENOVATION_RATES = [80000, 120000, 180000];
+const RENOVATION_RATES = [50000, 80000, 120000, 180000];
 // Նկուղի գինը մեկ մ²-ի համար (Մոնոլիտ և Ամբողջական կառուցում). հաշվարկվում է առանձին մակերեսով, գինը դիտավորյալ չի ցուցադրվում UI-ում։
 const BASEMENT_RATE = 100000;
-// Լողավազանի «սկսած» գները (դրամ / մ²)՝ [Պլյոնկա, Մոզաիկա]։
-// Հաշվարկվող մակերես = պարագիծ × խորություն + հատակի մակերես։
-const POOL_RATES = [90000, 120000];
+// Լողավազանի «սկսած» գինը (դրամ / մ²)։ Հաշվարկվող մակերես = պարագիծ × խորություն + հատակի մակերես։
+const POOL_RATE = 90000;
 
 export type Mode = 'full' | 'monolith' | 'renovation' | 'pool';
 const ALL_MODES: Mode[] = ['full', 'monolith', 'renovation'];
@@ -42,7 +41,7 @@ export default function CostCalculator({ modes = ALL_MODES }: { modes?: Mode[] }
   const t = calculator[lang];
   const [mode, setMode] = useState<Mode>(modes[0]);
   const [area, setArea] = useState('');
-  const [tier, setTier] = useState(modes[0] === 'pool' ? 0 : 1);
+  const [tier, setTier] = useState(1);
   const [basement, setBasement] = useState(false);
   const [mansard, setMansard] = useState(false);
   const [flatRoof, setFlatRoof] = useState(false);
@@ -51,6 +50,14 @@ export default function CostCalculator({ modes = ALL_MODES }: { modes?: Mode[] }
   const [poolLength, setPoolLength] = useState('');
   const [poolWidth, setPoolWidth] = useState('');
   const [poolDepth, setPoolDepth] = useState('');
+  const [openInfo, setOpenInfo] = useState<number | null>(null);
+  const tiersRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const onClick = (e: MouseEvent) => { if (tiersRef.current && !tiersRef.current.contains(e.target as Node)) setOpenInfo(null); };
+    document.addEventListener('mousedown', onClick);
+    return () => document.removeEventListener('mousedown', onClick);
+  }, []);
 
   const numericArea = parseFloat(area);
   const validArea = !isNaN(numericArea) && numericArea > 0;
@@ -62,7 +69,7 @@ export default function CostCalculator({ modes = ALL_MODES }: { modes?: Mode[] }
   const ready = mode === 'pool' ? validPool : validArea;
 
   const total = useMemo(() => {
-    if (mode === 'pool') return Math.round(poolSurface * POOL_RATES[tier]);
+    if (mode === 'pool') return Math.round(poolSurface * POOL_RATE);
     if (!validArea) return 0;
     if (mode === 'full') {
       const modifier = 1 + (mansard ? FULL_MODIFIERS.mansard : 0) + (flatRoof ? FULL_MODIFIERS.flatRoof : 0);
@@ -76,15 +83,15 @@ export default function CostCalculator({ modes = ALL_MODES }: { modes?: Mode[] }
     return Math.round(numericArea * cumulativeRateFor(RENOVATION_RATES[tier], floors));
   }, [validArea, numericArea, mode, tier, basement, mansard, flatRoof, floors, validBasementArea, numericBasementArea, poolSurface]);
 
-  const tiersToShow = mode === 'renovation' ? t.renovationTiers : mode === 'pool' ? t.poolFinishes : t.tiers;
-  const ratesToShow = mode === 'renovation' ? RENOVATION_RATES : mode === 'pool' ? POOL_RATES : FULL_RATES;
+  const tiersToShow = (mode === 'renovation' ? t.renovationTiers : t.tiers) as { name: string; desc: string; detail?: string }[];
+  const ratesToShow = mode === 'renovation' ? RENOVATION_RATES : FULL_RATES;
 
   // Հաշվարկի համառոտ նկարագրություն՝ կոնտակտի ձևը նախալրացնելու համար
   const summary = (() => {
     if (!ready) return '';
     const parts: string[] = [t.modes[mode]];
     if (mode === 'pool') {
-      parts.push(`${poolL}×${poolW}×${poolD} ${t.meterUnit}`, tiersToShow[tier].name);
+      parts.push(`${poolL}×${poolW}×${poolD} ${t.meterUnit}`);
     } else {
       parts.push(`${t.areaLabel}: ${numericArea} ${t.areaUnit}`, `${t.floorsLabel}: ${floors === 5 ? '5+' : floors}`);
       if (mode !== 'monolith') parts.push(tiersToShow[tier].name);
@@ -169,7 +176,9 @@ export default function CostCalculator({ modes = ALL_MODES }: { modes?: Mode[] }
             </div>
           )}
 
-          {mode === 'monolith' ? (
+          {mode === 'pool' ? (
+            <p className="calcRateNote">{t.poolIncludesNote}</p>
+          ) : mode === 'monolith' ? (
             <div className="calcField">
               <label>{t.basementAreaLabel}</label>
               <div className="calcInputWrap">
@@ -186,17 +195,29 @@ export default function CostCalculator({ modes = ALL_MODES }: { modes?: Mode[] }
             </div>
           ) : (
             <div className="calcField">
-              <label>{mode === 'pool' ? t.poolFinishLabel : t.tierLabel}</label>
-              <div className="calcTiers">
+              <label>{t.tierLabel}</label>
+              <div className="calcTiers" ref={tiersRef}>
                 {tiersToShow.map((tr, i) => (
-                  <button type="button" key={tr.name + i} className={`calcTier ${i === tier ? 'active' : ''}`} onClick={() => setTier(i)}>
-                    <strong>{tr.name}</strong>
-                    <span>{tr.desc}</span>
-                    <b>{mode === 'pool' && `${t.startingFrom} `}{ratesToShow[i].toLocaleString('en-US')} ֏ {t.perSqm}</b>
-                  </button>
+                  <div className="calcTierWrap" key={tr.name + i}>
+                    <button type="button" className={`calcTier ${i === tier ? 'active' : ''}`} onClick={() => setTier(i)}>
+                      <strong>{tr.name}</strong>
+                      <span>{tr.desc}</span>
+                      <b>{ratesToShow[i].toLocaleString('en-US')} ֏ {t.perSqm}</b>
+                    </button>
+                    {tr.detail && (
+                      <button
+                        type="button"
+                        className={`calcTierInfo ${openInfo === i ? 'active' : ''}`}
+                        aria-label={t.infoLabel}
+                        aria-expanded={openInfo === i}
+                        onClick={() => setOpenInfo(openInfo === i ? null : i)}
+                      >i</button>
+                    )}
+                    {openInfo === i && tr.detail && <div className="calcTierPopover">{tr.detail}</div>}
+                  </div>
                 ))}
               </div>
-              {mode === 'renovation' && tier === 2 && <p className="calcRateNote">{t.renovationPremiumNote}</p>}
+              {mode === 'renovation' && tier === 3 && <p className="calcRateNote">{t.renovationPremiumNote}</p>}
             </div>
           )}
 
