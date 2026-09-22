@@ -76,6 +76,10 @@
 .contactForm .button{justify-self:start;border:0;cursor:pointer}
 .contactForm small{font-size:12px;line-height:1.6;color:#a7aaad}.contactForm small a{color:var(--gold)}
 @media(min-width:851px){.siteFooter.noSocials{grid-template-columns:1.2fr 1fr}}
+/* Between the phone breakpoint (850px) and here, the desktop nav's five links plus the
+   CTA button and language switch no longer fit in one row and start overlapping — so the
+   hamburger menu takes over earlier, up to 1150px, where there is reliably enough room. */
+@media(max-width:1150px){.desktopNav{display:none}.menuToggle{display:block}}
 @media(max-width:850px){
   .menuToggle{display:block}
   .siteHeader{position:fixed}
@@ -90,5 +94,5 @@
   .statement h2{font-size:clamp(32px,9.6vw,55px);overflow-wrap:anywhere}
   .innerHero h1{font-size:clamp(28px,8.8vw,54px);overflow-wrap:anywhere}
 }
-@media(min-width:851px){.mobileMenu{display:none!important}}
+@media(min-width:1151px){.mobileMenu{display:none!important}}
 @media(max-width:560px){.headerCta{display:none}}.splashSeen .splash{display:none}
