@@ -46,9 +46,10 @@
 .vidEl{position:absolute;z-index:1;right:3vw;top:50%;transform:translateY(-50%);width:min(38vw,563px);aspect-ratio:560/752;object-fit:cover;background:#0c0d0e;border:1px solid rgba(255,255,255,.16);box-shadow:0 30px 70px rgba(0,0,0,.45)}
 .vidSpacer{height:90vh}
 .vidWide .vidEl{z-index:auto;inset:0;right:auto;top:0;transform:none;width:100%;height:100%;aspect-ratio:auto;border:0;box-shadow:none}
-.vidWide .vidBackdrop{display:none}
+@media(min-width:851px){.vidWide .vidBackdrop{display:none}}
+@media(max-width:850px){.vidWide .vidEl{object-fit:contain;background:transparent}}
 @media(min-width:851px){.vidHero .serviceDetailContent{max-width:min(900px,52vw)}.vidHero .serviceDetailContent h1{font-size:clamp(46px,5.4vw,80px)}.vidWide.vidHero .serviceDetailContent{max-width:900px}.vidWide.vidHero .serviceDetailContent h1{font-size:clamp(54px,7vw,100px)}}
-@media(max-width:850px){.vidEl{z-index:auto;inset:0;right:auto;top:0;transform:none;width:100%;height:100%;aspect-ratio:auto;border:0;box-shadow:none}.vidBackdrop{display:none}}
+@media(max-width:850px){.vidEl{z-index:auto;inset:0;right:auto;top:0;transform:none;width:100%;height:100%;aspect-ratio:auto;border:0;box-shadow:none}.vidHero:not(.vidWide) .vidBackdrop{display:none}}
 
 /* ===== Cleanup pass: contrast, readability, mobile menu, contact form, focus ===== */
 :root{--gold-dark:#856727}
