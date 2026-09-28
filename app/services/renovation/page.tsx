@@ -3,10 +3,10 @@ import Reveal from '../../../components/Reveal';
 import { useLanguage } from '../../../components/LanguageContext';
 import { serviceDetailShared, serviceDetailPages } from '../../../content/i18n';
 import ServiceCalculator from '../../../components/ServiceCalculator';
-import HeroImage from '../../../components/HeroImage';
+import ScrollVideo from '../../../components/ScrollVideo';
 export default function Page(){
  const { lang } = useLanguage();
  const s = serviceDetailShared[lang];
  const p = serviceDetailPages.renovation[lang];
- return <main className="innerPage"><section className="serviceDetailHero"><HeroImage src="/services/renovation-panorama-2.webp" panorama/><div className="serviceDetailOverlay"/><div className="serviceDetailContent"><p className="eyebrow">{s.eyebrow}</p><h1>{p.title}</h1><p>{p.lead}</p></div></section><section className="sectionLight detailBody"><Reveal className="twoCol"><div><p className="eyebrow dark">{s.approachEyebrow}</p><h2>{p.approachTitle1}<br/><span>{p.approachTitle2}</span></h2></div><div className="copy"><p>{p.approachText1}</p><p>{p.approachText2}</p><p className="approachClosing">{p.approachText3}</p></div></Reveal></section><section className="sectionDark process"><Reveal><p className="eyebrow">{s.processEyebrow}</p><div className="processGrid">{p.steps.map((st,i)=><article key={st.t}><b>{String(i+1).padStart(2,'0')}</b><h3>{st.t}</h3><p>{st.d}</p></article>)}</div></Reveal></section><ServiceCalculator kind="renovation" modes={['renovation']}/></main>;
+ return <main className="innerPage"><ScrollVideo src="/services/renovation-hero.mp4" poster="/services/renovation-hero-poster.webp"><div className="serviceDetailOverlay"/><div className="serviceDetailContent"><p className="eyebrow">{s.eyebrow}</p><h1>{p.title}</h1><p>{p.lead}</p></div></ScrollVideo><section className="sectionLight detailBody"><Reveal className="twoCol"><div><p className="eyebrow dark">{s.approachEyebrow}</p><h2>{p.approachTitle1}<br/><span>{p.approachTitle2}</span></h2></div><div className="copy"><p>{p.approachText1}</p><p>{p.approachText2}</p><p className="approachClosing">{p.approachText3}</p></div></Reveal></section><section className="sectionDark process"><Reveal><p className="eyebrow">{s.processEyebrow}</p><div className="processGrid">{p.steps.map((st,i)=><article key={st.t}><b>{String(i+1).padStart(2,'0')}</b><h3>{st.t}</h3><p>{st.d}</p></article>)}</div></Reveal></section><ServiceCalculator kind="renovation" modes={['renovation']}/></main>;
 }
