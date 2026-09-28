@@ -3,7 +3,7 @@ import { useEffect, useRef } from 'react';
 
 // Հերոսը էջի վերևում «կպչում» է (sticky), և ներքև թերթելիս տեսանյութը նվագում է թերթման հետ համաձայնեցված
 // (թերթում = կադր առաջ, հետ թերթում = կադր հետ)։ Տեսանյութի ավարտից հետո էջը շարունակվում է։
-export default function ScrollVideo({ src, poster, children }: { src: string; poster: string; children: React.ReactNode }) {
+export default function ScrollVideo({ src, poster, wide, children }: { src: string; poster: string; wide?: boolean; children: React.ReactNode }) {
   const wrapRef = useRef<HTMLDivElement>(null);
   const heroRef = useRef<HTMLElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -67,7 +67,7 @@ export default function ScrollVideo({ src, poster, children }: { src: string; po
 
   return (
     <div className="vidWrap" ref={wrapRef}>
-      <section className="serviceDetailHero vidHero" ref={heroRef}>
+      <section className={`serviceDetailHero vidHero${wide ? ' vidWide' : ''}`} ref={heroRef}>
         <div className="vidBackdrop" style={{ backgroundImage: `url(${poster})` }} aria-hidden="true" />
         <video
           ref={videoRef}
