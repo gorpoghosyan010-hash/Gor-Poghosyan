@@ -10,8 +10,7 @@ export default function Contact() {
   const t = contact[lang];
   return (
     <main className="innerPage">
-      <section className="innerHero contactHero" style={{ backgroundImage: "url('/services/renovation-panorama-2.webp')" }}>
-        <div className="innerHeroShade" />
+      <section className="innerHero contactHero">
         <div>
           <p className="eyebrow">{t.eyebrow}</p>
           <h1>{t.title1}<br /><span>{t.title2}</span></h1>
