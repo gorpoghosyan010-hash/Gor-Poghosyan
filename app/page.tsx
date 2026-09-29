@@ -2,7 +2,6 @@
 import Link from 'next/link';
 import Reveal from '../components/Reveal';
 import ProjectCard from '../components/ProjectCard';
-import Hero3D from '../components/Hero3D';
 import { useLanguage } from '../components/LanguageContext';
 import { home, common } from '../content/i18n';
 
@@ -17,9 +16,20 @@ export default function Home(){
  const { lang } = useLanguage();
  const t = home[lang];
  return <main>
- <section className="homeHero"><div className="heroPhoto"/><div className="heroTexture"/><div className="heroGlow"/><Hero3D />
-  <div className="heroContent"><Reveal><p className="eyebrow">{t.heroEyebrow}</p><h1>{t.heroTitle1}<br/><span>{t.heroTitle2}</span></h1><p className="heroLead">{t.heroLead}</p><div className="actions"><Link className="button gold" href="/projects">{t.viewWork}</Link><Link className="quietLink" href="/contact">{t.startProject}</Link></div></Reveal></div>
-  <div className="heroSignature"><span>{t.heroSig1}</span><span>{t.heroSig2}</span></div>
+ <section className="homeHero" style={{ backgroundImage: "url('/services/residential-hero.webp')" }}>
+  <div className="heroGrid" aria-hidden="true" />
+  <div className="heroShade" aria-hidden="true" />
+  <div className="heroTop">
+   <Reveal><p className="eyebrow">{t.heroEyebrow}</p></Reveal>
+   <Reveal delay={100}><p className="heroQuote">{t.heroSig1}</p></Reveal>
+  </div>
+  <div className="heroBottom">
+   <Reveal><div className="heroRule" /></Reveal>
+   <h1 className="heroWord" aria-label={`GARON — ${t.heroTitle1} ${t.heroTitle2}`}>
+    <span className="heroWordRow" aria-hidden="true">{'GARON'.split('').map((l, i) => <span key={i}>{l}</span>)}</span>
+   </h1>
+   <Reveal delay={200}><div className="heroSub"><p className="heroLead">{t.heroLead}</p><div className="actions"><Link className="button gold" href="/projects">{t.viewWork}</Link><Link className="quietLink" href="/contact">{t.startProject}</Link></div></div></Reveal>
+  </div>
  </section>
  <section className="trustStrip"><div><strong>25+</strong><span>{t.trust1Label}</span></div><div><strong>50+</strong><span>{t.trust2Label}</span></div><div><strong>50+</strong><span>{t.trust3Label}</span></div></section>
  <section className="homeIntro sectionLight"><Reveal className="twoCol"><div><p className="eyebrow dark">{t.philosophyEyebrow}</p><h2>{t.philosophyTitle1}<br/><span>{t.philosophyTitle2}</span></h2></div><div className="copy"><p>{t.philosophyText}</p><Link className="lineLink" href="/about">{t.philosophyLink}</Link></div></Reveal></section>
