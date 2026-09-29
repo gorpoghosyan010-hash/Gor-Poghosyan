@@ -4,22 +4,13 @@ import Logo from './Logo';
 import { useLanguage } from './LanguageContext';
 import { splash } from '../content/i18n';
 
-const SEEN_KEY = 'garon-splash-seen';
-
 export default function Splash() {
   const { lang } = useLanguage();
   const [visible, setVisible] = useState(true);
   useEffect(() => {
-    // Ներածական էկրանը ցուցադրվում է սեսիայի ընթացքում մեկ անգամ (ամեն էջի բացման վրա չի կրկնվում)
-    let seen = false;
-    try { seen = window.sessionStorage.getItem(SEEN_KEY) === '1'; } catch {}
-    if (seen) { setVisible(false); return; }
+    // Ներածական էկրանը ցուցադրվում է ամեն էջ թարմացնելիս (ոչ թե սեսիայի ընթացքում մեկ անգամ)
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    // «Տեսել է» նշանը դրվում է ավարտին (ոչ թե սկզբում), որ dev-ի կրկնակի effect-ը չթաքցնի ներածական էկրանը
-    const timer = window.setTimeout(() => {
-      try { window.sessionStorage.setItem(SEEN_KEY, '1'); } catch {}
-      setVisible(false);
-    }, reduce ? 250 : 3200);
+    const timer = window.setTimeout(() => setVisible(false), reduce ? 250 : 3200);
     return () => window.clearTimeout(timer);
   }, []);
   if (!visible) return null;

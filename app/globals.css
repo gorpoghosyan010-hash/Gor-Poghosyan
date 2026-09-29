@@ -114,4 +114,4 @@
   .innerHero h1{font-size:clamp(24px,7.5vw,46px);overflow-wrap:anywhere}
 }
 @media(min-width:1151px){.mobileMenu{display:none!important}}
-@media(max-width:560px){.headerCta{display:none}}.splashSeen .splash{display:none}
+@media(max-width:560px){.headerCta{display:none}}

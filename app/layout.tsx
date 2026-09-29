@@ -40,7 +40,7 @@ const jsonLd = {
 };
 
 // Ընտրված (ոչ հայերեն) լեզվի դեպքում էջը թաքցվում է մինչև լեզվի կիրառումը՝ հայերենի կարճ «առկայծումից» խուսափելու համար
-const langBoot = "(function(){var d=document.documentElement;try{if(sessionStorage.getItem('garon-splash-seen')==='1')d.classList.add('splashSeen')}catch(e){}try{var l=localStorage.getItem('garon-lang');if(l==='en'||l==='ru'){d.lang=l;d.classList.add('langPending');setTimeout(function(){d.classList.remove('langPending')},2500)}}catch(e){}})();";
+const langBoot = "(function(){var d=document.documentElement;try{var l=localStorage.getItem('garon-lang');if(l==='en'||l==='ru'){d.lang=l;d.classList.add('langPending');setTimeout(function(){d.classList.remove('langPending')},2500)}}catch(e){}})();";
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
