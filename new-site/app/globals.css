@@ -1,0 +1,247 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-ink: #0b0a09;
+  --color-graphite: #141311;
+  --color-char: #1c1a17;
+  --color-stone: #e9e3d8;
+  --color-sand: #9c9486;
+  --color-dust: #6d675e;
+  --color-bronze: #c29b62;
+  --color-bronze-soft: #d9c4a0;
+
+  --font-display: var(--font-cormorant), var(--font-serif-hy), 'Times New Roman', serif;
+  --font-sans: var(--font-manrope), var(--font-sans-hy), system-ui, sans-serif;
+  --font-mono: var(--font-plex), var(--font-sans-hy), ui-monospace, monospace;
+
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-soft: cubic-bezier(0.65, 0, 0.35, 1);
+
+  --breakpoint-3xl: 1800px;
+}
+
+:root {
+  --line: rgb(233 227 216 / 0.12);
+  --line-strong: rgb(233 227 216 / 0.24);
+  --gutter: clamp(16px, 4.2vw, 64px);
+  --header-h: 76px;
+  color-scheme: dark;
+}
+
+@layer base {
+  html {
+    background: var(--color-ink);
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+  }
+  body {
+    background: var(--color-ink);
+    color: var(--color-stone);
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: clip;
+  }
+  ::selection {
+    background: var(--color-bronze);
+    color: var(--color-ink);
+  }
+  :focus-visible {
+    outline: 1px solid var(--color-bronze);
+    outline-offset: 4px;
+  }
+  img,
+  video {
+    max-width: 100%;
+  }
+  h1,
+  h2,
+  h3 {
+    font-weight: 300;
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
+}
+
+@layer components {
+  .px-gutter {
+    padding-inline: var(--gutter);
+  }
+  .hairline {
+    border-color: var(--line);
+  }
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--color-bronze);
+  }
+  .label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--color-sand);
+  }
+  .display-xxl {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: calc(var(--fs, 1) * clamp(64px, 12vw, 220px));
+    line-height: 0.88;
+    letter-spacing: -0.035em;
+  }
+  .display-xl {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: calc(var(--fs, 1) * clamp(44px, 7.4vw, 128px));
+    line-height: 0.95;
+    letter-spacing: -0.025em;
+  }
+  .display-lg {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: calc(var(--fs, 1) * clamp(36px, 5vw, 84px));
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .display-md {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: calc(var(--fs, 1) * clamp(28px, 3.2vw, 52px));
+    line-height: 1.08;
+    letter-spacing: -0.015em;
+  }
+  /* Armenian glyphs are wider and taller than Latin at the same size: scale display type down. */
+  :lang(hy) {
+    --fs: 0.8;
+  }
+  :lang(hy) .display-xxl,
+  :lang(hy) .display-xl,
+  :lang(hy) .display-lg {
+    line-height: 1.08;
+    letter-spacing: -0.01em;
+  }
+  :lang(hy) .display-md {
+    line-height: 1.2;
+  }
+  .serif-accent {
+    font-family: var(--font-display);
+    font-style: italic;
+    color: var(--color-bronze-soft);
+  }
+  :lang(hy) .serif-accent {
+    font-style: normal;
+  }
+  .lead {
+    font-size: clamp(17px, 1.35vw, 21px);
+    line-height: 1.6;
+    color: rgb(233 227 216 / 0.78);
+  }
+  .glass {
+    background: rgb(20 19 17 / 0.55);
+    backdrop-filter: blur(18px) saturate(1.2);
+    -webkit-backdrop-filter: blur(18px) saturate(1.2);
+    border: 1px solid var(--line);
+  }
+  .grain::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.06;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    mix-blend-mode: overlay;
+  }
+  .link-line {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-size: 0% 1px;
+    background-repeat: no-repeat;
+    background-position: 100% 100%;
+    transition: background-size 0.6s var(--ease-expo);
+  }
+  .link-line:hover,
+  .link-line:focus-visible,
+  .link-line[aria-current='page'] {
+    background-size: 100% 1px;
+    background-position: 0 100%;
+  }
+  .btn-round {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    padding: 18px 28px;
+    border: 1px solid var(--line-strong);
+    border-radius: 999px;
+    font-size: 14px;
+    letter-spacing: 0.02em;
+    transition:
+      background-color 0.5s var(--ease-expo),
+      color 0.5s var(--ease-expo),
+      border-color 0.5s var(--ease-expo);
+  }
+  .btn-round:hover,
+  .btn-round:focus-visible {
+    background: var(--color-stone);
+    color: var(--color-ink);
+    border-color: var(--color-stone);
+  }
+  .btn-solid {
+    background: var(--color-bronze);
+    color: var(--color-ink);
+    border-color: var(--color-bronze);
+  }
+  .btn-solid:hover,
+  .btn-solid:focus-visible {
+    background: var(--color-stone);
+    border-color: var(--color-stone);
+  }
+  .grid-lines {
+    background-image: linear-gradient(to right, var(--line) 1px, transparent 1px);
+    background-size: calc((100% - 2 * var(--gutter)) / 6) 100%;
+    background-position: var(--gutter) 0;
+  }
+  .outline-text {
+    color: transparent;
+    -webkit-text-stroke: 1px rgb(233 227 216 / 0.35);
+  }
+  .mask-fade-b {
+    mask-image: linear-gradient(to bottom, #000 55%, transparent 100%);
+  }
+}
+
+/* CSS uppercasing turns Armenian "և" into the classical "ԵՒ" (reformed spelling is "ԵՎ"),
+   so Armenian labels keep their written case with slightly wider tracking instead. */
+:lang(hy) .eyebrow,
+:lang(hy) .label,
+:lang(hy) .uppercase {
+  text-transform: none;
+  letter-spacing: 0.06em;
+}
+:lang(hy) .eyebrow,
+:lang(hy) .label {
+  font-size: 12px;
+}
+
+/* First-visit loader: hidden once the session has seen it (set by an inline script before paint). */
+html[data-seen] .loader {
+  display: none;
+}
+html.no-js .loader {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
