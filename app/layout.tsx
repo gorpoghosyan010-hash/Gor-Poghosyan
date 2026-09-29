@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next';
-import { Montserrat, Noto_Sans_Armenian } from 'next/font/google';
+import { Montserrat, Noto_Sans_Armenian, Cormorant_Garamond, Noto_Serif_Armenian } from 'next/font/google';
 import './globals.css';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -12,6 +12,9 @@ import { siteConfig } from '../content/siteConfig';
 // Montserrat-ը հայկական տառեր չունի, ուստի հայերենի համար առանձին (ինքնուրույն հյուրընկալվող) տառատեսակ
 const montserrat = Montserrat({ subsets: ['latin', 'cyrillic'], display: 'swap', variable: '--font-montserrat' });
 const armenian = Noto_Sans_Armenian({ subsets: ['armenian'], display: 'swap', variable: '--font-armenian' });
+// Խոշոր վերնագրերի համար՝ նուրբ, լայն տառաշարով սերիֆ
+const cormorant = Cormorant_Garamond({ subsets: ['latin', 'cyrillic'], weight: ['300', '400', '500'], display: 'swap', variable: '--font-cormorant' });
+const serifArmenian = Noto_Serif_Armenian({ subsets: ['armenian'], weight: ['300', '400', '500'], display: 'swap', variable: '--font-serif-armenian' });
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -44,7 +47,7 @@ const langBoot = "(function(){var d=document.documentElement;try{var l=localStor
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="hy" className={`${montserrat.variable} ${armenian.variable}`} suppressHydrationWarning>
+    <html lang="hy" className={`${montserrat.variable} ${armenian.variable} ${cormorant.variable} ${serifArmenian.variable}`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: langBoot }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
