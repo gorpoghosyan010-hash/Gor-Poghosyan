@@ -25,12 +25,21 @@ function scrubVideo(tl: gsap.core.Timeline, video: HTMLVideoElement | null, from
   );
 }
 
-/** iOS paints seeked frames only after the video has played once. */
+/** Loads the film only as it approaches the viewport. iOS paints seeked frames only after one play(). */
 function primeVideo(v: HTMLVideoElement | null) {
   if (!v) return;
-  v.play()
-    .then(() => v.pause())
-    .catch(() => {});
+  const io = new IntersectionObserver(
+    ([e]) => {
+      if (!e.isIntersecting) return;
+      io.disconnect();
+      v.preload = 'auto';
+      v.play()
+        .then(() => v.pause())
+        .catch(() => {});
+    },
+    { rootMargin: '800px' }
+  );
+  io.observe(v);
 }
 
 /* ARCHITECTURE — the drawing (extracted from the photo) sweeps in, the building rises underneath. */
@@ -109,7 +118,7 @@ export function EngineeringScene({ copy, alt }: { copy: SceneCopy; alt: string }
           poster="/media/frames/city-start.webp"
           muted
           playsInline
-          preload="auto"
+          preload="none"
           aria-hidden
           className="absolute inset-0 h-full w-full object-cover motion-reduce:hidden"
         />
@@ -198,7 +207,7 @@ export function RenovationScene({ copy, alt }: { copy: SceneCopy; alt: string })
         poster="/media/frames/renovation-before.webp"
         muted
         playsInline
-        preload="auto"
+        preload="none"
         aria-hidden
         className="absolute inset-0 h-full w-full object-cover motion-reduce:hidden"
       />

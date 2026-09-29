@@ -23,44 +23,59 @@ export default function BeforeAfter({ video, frames, labels }: { video: string; 
   const stage = value < 0.25 ? 0 : value < 0.75 ? 1 : 2;
 
   // Ease the video towards the requested time for a smooth, weighted scrub.
-  useEffect(() => {
-    let raf = 0;
-    let current = 0;
-    const tick = () => {
-      const v = vid.current;
-      current += (target.current - current) * 0.14;
-      if (v && ready && v.duration) {
-        const t = current * (v.duration - 0.05);
-        if (Math.abs(v.currentTime - t) > 0.01) v.currentTime = t;
-      }
-      raf = requestAnimationFrame(tick);
-    };
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
-  }, [ready]);
-
-  const set = useCallback((v: number) => {
-    const clamped = Math.min(1, Math.max(0, v));
-    target.current = clamped;
-    setValue(clamped);
+  // The loop only runs while the video is catching up, then goes idle.
+  const raf = useRef(0);
+  const current = useRef(0);
+  const tick = useCallback(() => {
+    const v = vid.current;
+    current.current += (target.current - current.current) * 0.14;
+    if (v && v.duration) {
+      const t = current.current * (v.duration - 0.05);
+      if (Math.abs(v.currentTime - t) > 0.01) v.currentTime = t;
+    }
+    raf.current = Math.abs(target.current - current.current) > 0.001 ? requestAnimationFrame(tick) : 0;
   }, []);
+  useEffect(() => () => cancelAnimationFrame(raf.current), []);
+
+  const set = useCallback(
+    (v: number) => {
+      const clamped = Math.min(1, Math.max(0, v));
+      target.current = clamped;
+      setValue(clamped);
+      if (!raf.current) raf.current = requestAnimationFrame(tick);
+    },
+    [tick]
+  );
 
   const fromPointer = (clientX: number) => {
     const r = box.current!.getBoundingClientRect();
     set((clientX - r.left) / r.width);
   };
 
+  // Start loading the film only when the viewer gets close to it.
   useEffect(() => {
     const v = vid.current;
-    if (!v) return;
+    const el = box.current;
+    if (!v || !el) return;
     const onReady = () => setReady(true);
-    if (v.readyState >= 2) onReady();
     v.addEventListener('loadeddata', onReady);
-    // iOS only paints seeked frames after the element has played once.
-    v.play()
-      .then(() => v.pause())
-      .catch(() => {});
-    return () => v.removeEventListener('loadeddata', onReady);
+    const io = new IntersectionObserver(
+      ([e]) => {
+        if (!e.isIntersecting) return;
+        io.disconnect();
+        v.preload = 'auto';
+        // iOS only paints seeked frames after the element has played once.
+        v.play()
+          .then(() => v.pause())
+          .catch(() => {});
+      },
+      { rootMargin: '600px' }
+    );
+    io.observe(el);
+    return () => {
+      io.disconnect();
+      v.removeEventListener('loadeddata', onReady);
+    };
   }, []);
 
   return (
@@ -93,7 +108,7 @@ export default function BeforeAfter({ video, frames, labels }: { video: string; 
           src={video}
           muted
           playsInline
-          preload="auto"
+          preload="none"
           aria-hidden
           className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 motion-reduce:hidden ${ready ? 'opacity-100' : 'opacity-0'}`}
         />

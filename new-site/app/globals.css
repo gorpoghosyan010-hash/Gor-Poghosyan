@@ -214,6 +214,36 @@
   }
 }
 
+/* Page transition (app/[locale]/template.tsx) */
+.page-sheet {
+  animation: sheet-lift 0.9s cubic-bezier(0.76, 0, 0.24, 1) 0.05s both;
+}
+.page-line {
+  animation: line-sweep 0.9s cubic-bezier(0.76, 0, 0.24, 1) both;
+}
+@keyframes sheet-lift {
+  from {
+    transform: scaleY(1);
+  }
+  to {
+    transform: scaleY(0);
+  }
+}
+@keyframes line-sweep {
+  0% {
+    transform: scaleX(0);
+    opacity: 1;
+  }
+  65% {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scaleX(1);
+    opacity: 0;
+  }
+}
+
 /* CSS uppercasing turns Armenian "և" into the classical "ԵՒ" (reformed spelling is "ԵՎ"),
    so Armenian labels keep their written case with slightly wider tracking instead. */
 :lang(hy) .eyebrow,
