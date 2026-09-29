@@ -7,7 +7,7 @@ export default function Projects(){
  const { lang } = useLanguage();
  const t = projectsArchive[lang];
  const poolCards = poolCardsByLang[lang];
- return <main className="innerPage"><section className="innerHero projectsHero"><div><p className="eyebrow">{t.eyebrow}</p><h1>{t.title1}<br/><span>{t.title2}</span></h1><p>{t.lead}</p></div></section>
+ return <main className="innerPage"><section className="innerHero projectsHero" style={{backgroundImage:"url('/projects/pool-01/06.webp')"}}><div className="innerHeroShade"/><div><p className="eyebrow">{t.eyebrow}</p><h1>{t.title1}<br/><span>{t.title2}</span></h1><p>{t.lead}</p></div></section>
 <section className="sectionLight archiveIntro"><Reveal className="twoCol"><div><p className="eyebrow dark">{t.poolsEyebrow}</p><h2>{t.poolsTitle1}<br/><span>{t.poolsTitle2}</span></h2></div><div className="copy"><p>{t.poolsText}</p></div></Reveal></section>
 <section className="sectionDark projectArchive"><div className="archiveGrid poolArchive">{poolCards.map((p,i)=><Reveal key={p[0]} delay={i*50}><ProjectCard href={p[0]} number={p[1]} title={p[2]} meta={p[3]} image={p[4]} large={i===0}/></Reveal>)}</div></section>
 <section className="sectionLight archiveIntro"><Reveal className="twoCol"><div><p className="eyebrow dark">{t.residentialEyebrow}</p><h2>{t.residentialTitle1}<br/><span>{t.residentialTitle2}</span></h2></div><div className="copy"><p>{t.residentialText}</p><Link className="lineLink" href="/projects/house-01">{t.openHouse}</Link></div></Reveal></section>
