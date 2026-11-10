@@ -135,3 +135,44 @@ These were needed because the spec conflicts with itself, or to keep text readab
 - `png2jpg.py`, `contact_sheet.py`: export and QA helpers.
 
 Fonts (@fontsource Montserrat, Noto Sans/Serif Armenian, Cormorant Garamond) are installed under `marketing/instagram/tools/node_modules` (gitignored). Intermediate files are in `2026-11-10-batch-1/.tools/` (gitignored): graded sources, reel layer PNGs, `timeline.json` per reel, and `render_report.json`.
+
+## Round 1 (2026-11-10): fix loop after `06-review.md`
+
+Re-rendered from `04-render-spec.json` **spec_version 2** (`round1_changes`) and the updated `03-copy.json`, with
+`IG_SLIDES="P05:4,5" marketing/instagram/tools/render_batch.sh marketing/instagram/2026-11-10-batch-1 P01 P03 P04 P05 P06B P08B P08`.
+Old files in `05-output/` were overwritten. Nothing else was touched: P02, P06, P07, P07B, P09, P09B and the other P05 slides are byte-identical to round 0, and `2026-11-11-launch/` was not touched. Renderer warnings: 0.
+
+### What changed
+| Item | Files rewritten | Change |
+|---|---|---|
+| P01 | `P01_reel.mp4` (10.8 MB, 15.0 s), `P01_cover.jpg/.png` (334 KB / 1.5 MB, unchanged pixels: cover spec unchanged), `caption.txt`, `alt_hy.txt` | Scene labels from copy Round 1: Հողամաս, Հողամաս, Հիմք, Սյուներ, Պատեր՝ 1-ին հարկ, Ծածկ, Կարկաս, Բետոնի լցում, Պատեր՝ 2-րդ հարկ, Ավարտ. End card: `p01_end_grad` overlay, label 32 px, body and CTA 42 px, block at y 1150–1460. CTA is now «Տուն եք ծրագրում՝ գրեք «ՏՈՒՆ» direct-ում» (2 lines). Gold CTA vs. darkened paving measured on the 14.9 s frame: about 5.4:1 worst case, about 7:1 median. Calculator CTA removed from the caption (hy/ru/en). Scene 5 faces not blurred (owner decision). |
+| P03 | `P03_01…08.jpg/.png` (P03_06 has no corner label, so its pixels are identical) | «Լողավազան 1 / 2» corner labels now use `feed_corner_label`: 26 px on a dark pill (α 0.6, padding 10/16, radius 3), anchored top-right at (1008, 60). Caption and alt unchanged. |
+| P04 | `P04_reel.mp4` (10.3 MB, **13.5 s**), `P04_cover.jpg/.png` (508 KB / 2.3 MB) | Scene 7 runs 10.2–13.5 s. Credit is on screen 10.5–13.5 s (3.0 s), CTA 11.0–13.5 s (2.5 s). Inactive words and arrows at 70% paper with a text shadow. EN label 28 px. `p04_top_plate` on scenes 2–6. Scene 7 foreground 744×700 at (168, 610), now in the spec. Cover uses `p04_cover_grad`. Caption and alt unchanged. |
+| P05 | `P05_04.jpg/.png`, `P05_05.jpg/.png`, `alt_hy.txt` (P05_01–03, 06–09, 09_A and caption.txt untouched) | Slide 4: columns already poured, only starter bars visible. Slide 5: slab after the pour, formwork removed, props holding it. |
+| P06B | `P06B.jpg/.png` (111 KB / 66 KB), `caption.txt`, `alt_hy.txt` | Headline «Ինչո՞ւ» (was «Ինչու՞»), checked at full resolution. Caption CTA «Ուզո՞ւմ եք իմանալ…». |
+| P08B | `P08B.jpg/.png` (269 KB / 1.4 MB), `caption.txt`, `alt_hy.txt` | Body reframed: «Արդեն լցված է, և արմատուրան այլևս չի երևում։ Ահա թե ինչու լուսանկարը պետք է արվի լցումից առաջ։». Caption (hy/ru/en) and alt follow the "already poured" story. |
+| P08 | `P08.jpg/.png` (370 KB / 1.6 MB), `caption.txt` | **Archive only; still BLOCKED (Բ5 + consent).** Logo is back at the top-left (brand.logo.feed), rule y 196, title y 226. RU caption now reads «какие есть проблемы». |
+
+All reels: H.264 High, yuv420p, 1080×1920, 30 fps, silent AAC, +faststart, ≤ 11 MB. Captions are 1,276–1,565 chars with 5 hashtags.
+
+### QA done
+- Viewed every changed still: P03 01–08 plus the corner crops at 1:1, P05 04–05, P06B (plus a 1:1 headline crop), P08B, P08, P01 cover, P04 cover.
+- P01: viewed 11 frames (0.1, 2.0, 4.5, 6.0, 7.2, 8.6, 10.0, 11.2, 12.2, 13.3, 14.9 s; end card at full size).
+- P04: viewed 10 frames (0.5, 2.5, 4.0, 5.8, 7.5, 9.5, 10.6, 11.3, 12.5, 13.4 s; word band at 1:1 on concrete and mosaic).
+- No tofu. ՞ ՝ « » ։ render correctly.
+
+### Tool changes (`marketing/instagram/tools/`, backward compatible)
+- `ig_lib.js`:
+  - overlay type `linear_stops`;
+  - style `box` (text on a padded pill), and autofit ignores the padding;
+  - element overrides `shadow_override` / `text_shadow` / `min_size_override`.
+- `render_batch.js`:
+  - word sequence honours `inactive_color`, `text_shadow`, `en_label.size_override` / `text_shadow`;
+  - box-styled corner labels skip the halo;
+  - env `IG_SLIDES="P05:4,5"` re-exports only the listed carousel slides.
+- `compose_reel.py`: overlay type `linear_stops`.
+
+### Still open / not done
+- Publication gates are unchanged: P01, P03, P04, P05, P08B need Բ2 per `06-review.md`. `owner-decisions.md` now records Բ2 as confirmed; the reviewer must clear it. P08 stays blocked (Բ5, consent).
+- All round-1 items need to go back to editorial review.
+- Music is still to be added in the IG app. P04's track must run 13.5 s.
