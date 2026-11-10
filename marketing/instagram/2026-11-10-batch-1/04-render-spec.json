@@ -1,5 +1,5 @@
 {
-  "spec_version": 1,
+  "spec_version": 2,
   "batch": "marketing/instagram/2026-11-10-batch-1",
   "generated": "2026-11-10",
   "source_files": [
@@ -8,7 +8,8 @@
     "02-plan.md",
     "app/globals.css",
     "components/CostCalculator.tsx",
-    "content/i18n.ts"
+    "content/i18n.ts",
+    "06-review.md / 06-review.json (Round 1 fixes)"
   ],
   "conventions": {
     "units": "Pixels in the OUTPUT frame, origin top-left. Times in seconds from item start (30 fps; 1 frame = 0.0333 s).",
@@ -19,7 +20,8 @@
     "autofit": "If text exceeds max_lines at `size`, reduce size in 2 px steps down to `min_size`. If it still does not fit, STOP and report — do not shorten copy.",
     "strings": "Every `text` value is final copy (verbatim from 03-copy.json or content/i18n.ts). Do not retype — copy-paste. Armenian punctuation ։ ՝ « » ՞ must be preserved.",
     "rendering": "Recommended: render text/graphic layers with HTML+CSS in headless Chromium (exact font stacks below, font-feature-settings normal, -webkit-font-smoothing antialiased) to transparent PNG, then composite with ffmpeg. Do not use editor auto-captions or system fonts.",
-    "placeholders": "Text containing [..._ճշտել] must NOT be published. Producer renders a draft with the placeholder visible in red #ff4d4d for review; the final render requires the resolved value from the caller."
+    "placeholders": "Text containing [..._ճշտել] must NOT be published. Producer renders a draft with the placeholder visible in red #ff4d4d for review; the final render requires the resolved value from the caller.",
+    "overlay_linear_stops": "type 'linear_stops': vertical gradient of `color`; `stops` = [[y_px, alpha], ...] sorted by y, alpha interpolated linearly between stops, constant before the first and after the last stop."
   },
   "brand": {
     "colors": {
@@ -314,6 +316,22 @@
       "size": 92,
       "line_height": 1.0,
       "color": "#c9a96a"
+    },
+    "feed_corner_label": {
+      "font": "text",
+      "weight": 600,
+      "size": 26,
+      "letter_spacing": "0.14em",
+      "color": "#f5f5f3",
+      "opacity": 1.0,
+      "max_lines": 1,
+      "box": {
+        "color": "rgba(12,13,14,0.6)",
+        "pad_y": 10,
+        "pad_x": 16,
+        "radius": 3
+      },
+      "note": "Round 1: site label on a dark pill so it reads over sky/grass/water. Box anchored top-right at (x,y); text is inside the padding."
     }
   },
   "overlays": {
@@ -357,6 +375,67 @@
       "color": "#0c0d0e",
       "alpha0": 0.45,
       "alpha1": 0.0
+    },
+    "p01_end_grad": {
+      "type": "linear_stops",
+      "color": "#0c0d0e",
+      "stops": [
+        [
+          860,
+          0.0
+        ],
+        [
+          1120,
+          0.78
+        ],
+        [
+          1500,
+          0.86
+        ],
+        [
+          1920,
+          0.9
+        ]
+      ],
+      "note": "P01 end card: darkens bright steps/paving under the text block; facade and lit windows above y≈860 stay untouched."
+    },
+    "p04_top_plate": {
+      "type": "linear_stops",
+      "color": "#0c0d0e",
+      "stops": [
+        [
+          0,
+          0.85
+        ],
+        [
+          660,
+          0.8
+        ],
+        [
+          960,
+          0.0
+        ]
+      ],
+      "note": "P04 scenes 2-6: dark plate behind the word sequence (y 400..~560) and EN label (y 570..600)."
+    },
+    "p04_cover_grad": {
+      "type": "linear_stops",
+      "color": "#0c0d0e",
+      "stops": [
+        [
+          0,
+          0.85
+        ],
+        [
+          760,
+          0.78
+        ],
+        [
+          1020,
+          0.0
+        ]
+      ],
+      "note": "P04 cover: hook (y 470..~730) sits on ≥0.78 dark."
     }
   },
   "items": {
@@ -366,7 +445,7 @@
       "asset_status": "ready",
       "duration": 15.0,
       "output": "out/P01/P01_reel.mp4",
-      "order_decision": "Visual chronology: 01,03 plot → 04 foundation → 05 ground-floor columns → 09 ground-floor masonry under slab formwork → 07 slab underside with props → 08 upper-floor frame → 10 pump pouring upper slab → 06 two storeys walled, rebar starters on top → 12 finished. Copywriter's order (…10,08,09) shows ground-floor masonry AFTER the upper-slab pour = visual regression; brief's order put 06 (two storeys) before 07 (first slab). Labels re-mapped using only words already in the copy; copywriter to confirm.",
+      "order_decision": "Order 01,03,04,05,09,07,08,10,06,12 (visual chronology). Round 1: confirmed by the copywriter; labels taken verbatim from 03-copy.json P01.scenes[1..8].text (scene 1 label = 'Հողամաս'). 'Պատեր' no longer repeats: 'Պատեր՝ 1-ին հարկ' (09) / 'Պատեր՝ 2-րդ հարկ' (06).",
       "layers_global": [
         {
           "layer": "logo",
@@ -412,7 +491,7 @@
               "text": "Հողամաս",
               "x": 80,
               "y": 1380,
-              "w": 700,
+              "w": 820,
               "align": "left",
               "in": 0.0,
               "out": 1.5,
@@ -470,7 +549,7 @@
               "text": "Հողամաս",
               "x": 80,
               "y": 1380,
-              "w": 700,
+              "w": 820,
               "align": "left",
               "in": 1.5,
               "out": 2.8,
@@ -513,7 +592,7 @@
               "text": "Հիմք",
               "x": 80,
               "y": 1380,
-              "w": 700,
+              "w": 820,
               "align": "left",
               "in": 2.8,
               "out": 4.1,
@@ -557,7 +636,7 @@
               "text": "Սյուներ",
               "x": 80,
               "y": 1380,
-              "w": 700,
+              "w": 820,
               "align": "left",
               "in": 4.1,
               "out": 5.4,
@@ -597,10 +676,10 @@
           "text": [
             {
               "style": "reel_label",
-              "text": "Պատեր",
+              "text": "Պատեր՝ 1-ին հարկ",
               "x": 80,
               "y": 1380,
-              "w": 700,
+              "w": 820,
               "align": "left",
               "in": 5.4,
               "out": 6.7,
@@ -644,7 +723,7 @@
               "text": "Ծածկ",
               "x": 80,
               "y": 1380,
-              "w": 700,
+              "w": 820,
               "align": "left",
               "in": 6.7,
               "out": 8.0,
@@ -687,7 +766,7 @@
               "text": "Կարկաս",
               "x": 80,
               "y": 1380,
-              "w": 700,
+              "w": 820,
               "align": "left",
               "in": 8.0,
               "out": 9.3,
@@ -730,7 +809,7 @@
               "text": "Բետոնի լցում",
               "x": 80,
               "y": 1380,
-              "w": 700,
+              "w": 820,
               "align": "left",
               "in": 9.3,
               "out": 10.6,
@@ -771,10 +850,10 @@
           "text": [
             {
               "style": "reel_label",
-              "text": "Պատեր",
+              "text": "Պատեր՝ 2-րդ հարկ",
               "x": 80,
               "y": 1380,
-              "w": 700,
+              "w": 820,
               "align": "left",
               "in": 10.6,
               "out": 11.9,
@@ -809,50 +888,57 @@
           },
           "transition_in": "dip to #0c0d0e: 3 frames out + 3 frames in (night reveal)",
           "overlays": [
-            "reel_bottom_grad"
+            "p01_end_grad"
           ],
           "text": [
             {
               "style": "reel_label",
               "text": "Ավարտ",
               "x": 80,
-              "y": 1190,
-              "w": 700,
+              "y": 1150,
+              "w": 820,
               "align": "left",
               "in": 11.9,
               "out": 15.0,
-              "anim_in": "fade 4f + rise 12px"
+              "anim_in": "fade 4f + rise 12px",
+              "size_override": 32
             },
             {
               "style": "reel_body",
               "text": "Մեր թիմի կառուցած տներից մեկը",
               "x": 80,
-              "y": 1250,
+              "y": 1210,
               "w": 820,
               "align": "left",
               "in": 12.3,
               "out": 15.0,
-              "anim_in": "fade 6f"
+              "anim_in": "fade 6f",
+              "size_override": 42,
+              "min_size_override": 40,
+              "color_override": "#f5f5f3"
             },
             {
               "style": "reel_cta",
-              "text": "Մոտավոր գինը՝ հաշվիչում (հղումը բիոյում)",
+              "text": "Տուն եք ծրագրում՝ գրեք «ՏՈՒՆ» direct-ում",
               "x": 80,
-              "y": 1330,
+              "y": 1350,
               "w": 820,
               "align": "left",
               "in": 12.9,
               "out": 15.0,
               "anim_in": "fade 6f",
+              "size_override": 42,
+              "min_size_override": 40,
               "rule_above": {
                 "x": 80,
-                "y": 1312,
+                "y": 1328,
                 "w": 64,
                 "h": 2,
                 "color": "#c9a96a"
               }
             }
-          ]
+          ],
+          "legibility": "Round 1: text block y 1150..≤1460 sits on p01_end_grad (α ≥0.78 from y 1120). Body and CTA ≥40 px. CTA may wrap to 2 lines (42 px × 1.3 = 55 px/line → bottom ≤1460 < 1500 safe line). Check contrast of gold CTA on the darkened paving ≥4.5:1 on the rendered frame."
         }
       ],
       "cover": {
@@ -892,25 +978,25 @@
         "sync": "Cuts on beats: scene boundaries at 1.5, 2.8, 4.1 … 11.9 s ≈ every 1.3 s (≈ 92 BPM half-time or 138 BPM 3-beat). Snap boundaries to the nearest beat of the chosen track (±3 frames) without changing scene order or the 15.0 s total.",
         "sfx": "None required."
       },
-      "texts_source": "03-copy.json P01.scenes (labels remapped), P01.hook"
+      "texts_source": "03-copy.json P01.scenes (Round 1 labels), P01.hook"
     },
     "P04": {
       "type": "reel",
       "publish_date": "2026-11-23",
       "asset_status": "ready",
-      "duration": 12.0,
+      "duration": 13.5,
       "output": "out/P04/P04_reel.mp4",
       "layers_global": [
         {
           "layer": "logo",
           "ref": "brand.logo.reel",
           "in": 0,
-          "out": 12.0
+          "out": 13.5
         },
         {
           "layer": "word_sequence",
           "in": 0.0,
-          "out": 12.0,
+          "out": 13.5,
           "lines": [
             [
               "Կաղապար",
@@ -931,14 +1017,18 @@
           "w": 920,
           "align": "left",
           "line_gap": 6,
-          "behaviour": "All 4 words always visible at reel_word.color (38% paper); the active word (see scene.words_state) is #c9a96a at 100% and gets a 2 px gold underline (offset 10 px). Arrows stay 38% paper. Colour change = 4-frame crossfade at scene start.",
+          "behaviour": "All 4 words always visible at inactive_color (70% paper, Round 1; was 38%); the active word (see scene.words_state) is #c9a96a at 100% and gets a 2 px gold underline (offset 10 px). Arrows also 70% paper. text_shadow on all words. Colour change = 4-frame crossfade at scene start.",
           "en_label": {
             "style": "reel_en",
             "x": 80,
             "y": 570,
             "text": "= scene.words_state.en (changes only when active word changes)",
-            "anim": "fade 4f"
-          }
+            "anim": "fade 4f",
+            "size_override": 28,
+            "text_shadow": "0 2px 12px rgba(0,0,0,0.6)"
+          },
+          "inactive_color": "rgba(245,245,243,0.70)",
+          "text_shadow": "0 2px 18px rgba(0,0,0,0.55)"
         }
       ],
       "scenes": [
@@ -996,7 +1086,7 @@
           "dur": 1.7,
           "transition_in": "crossfade 6f (0.2 s)",
           "overlays": [
-            "reel_top_grad"
+            "p04_top_plate"
           ],
           "motion": {
             "type": "kenburns",
@@ -1031,7 +1121,7 @@
           "dur": 1.7,
           "transition_in": "crossfade 6f (0.2 s)",
           "overlays": [
-            "reel_top_grad"
+            "p04_top_plate"
           ],
           "motion": {
             "type": "kenburns",
@@ -1066,7 +1156,7 @@
           "dur": 1.7,
           "transition_in": "crossfade 6f (0.2 s)",
           "overlays": [
-            "reel_top_grad"
+            "p04_top_plate"
           ],
           "motion": {
             "type": "kenburns",
@@ -1101,7 +1191,7 @@
           "dur": 1.7,
           "transition_in": "crossfade 6f (0.2 s)",
           "overlays": [
-            "reel_top_grad"
+            "p04_top_plate"
           ],
           "motion": {
             "type": "kenburns",
@@ -1136,7 +1226,7 @@
           "dur": 1.7,
           "transition_in": "crossfade 6f (0.2 s)",
           "overlays": [
-            "reel_top_grad"
+            "p04_top_plate"
           ],
           "motion": {
             "type": "kenburns",
@@ -1167,8 +1257,8 @@
             1058
           ],
           "in": 10.2,
-          "out": 12.0,
-          "dur": 1.8,
+          "out": 13.5,
+          "dur": 3.3,
           "transition_in": "crossfade 6f (0.2 s)",
           "overlays": [
             "reel_top_grad",
@@ -1209,8 +1299,8 @@
               "y": 1330,
               "w": 820,
               "align": "left",
-              "in": 10.8,
-              "out": 12.0,
+              "in": 10.5,
+              "out": 13.5,
               "anim_in": "fade 6f"
             },
             {
@@ -1220,8 +1310,8 @@
               "y": 1412,
               "w": 820,
               "align": "left",
-              "in": 11.1,
-              "out": 12.0,
+              "in": 11.0,
+              "out": 13.5,
               "anim_in": "fade 6f",
               "rule_above": {
                 "x": 80,
@@ -1231,7 +1321,8 @@
                 "color": "#c9a96a"
               }
             }
-          ]
+          ],
+          "hold_note": "Round 1: final scene 10.2-13.5 s (3.3 s). Credit line on screen 3.0 s, CTA 2.5 s. contain_blur zoom 1.0→1.06 now spans 3.3 s (slower)."
         }
       ],
       "cover": {
@@ -1246,7 +1337,7 @@
           "h": 1.0
         },
         "overlays": [
-          "reel_top_grad"
+          "p04_cover_grad"
         ],
         "text": [
           {
@@ -1257,14 +1348,16 @@
             "w": 840,
             "align": "left",
             "size_override": 72,
-            "break_after": "բետոն →"
+            "break_after": "բետոն →",
+            "shadow_override": "0 2px 28px rgba(0,0,0,0.6)"
           }
         ]
       },
       "audio": {
         "music_mood": "Calm, airy, 'satisfying' ambient/lo-fi, 85-95 BPM, soft pluck or marimba, no vocals, no drop. Language-neutral (diaspora).",
         "sfx": "Optional subtle, from licensed SFX library: wood knock at 0.0 s, concrete scrape at 1.7 s, tile click at 6.8 s, water splash/ripple at 10.2 s. Max -18 dB under music.",
-        "voice": "None (no speech)."
+        "voice": "None (no speech).",
+        "sync": "Reel is now 13.5 s; music must run to 13.5 s (fade out last 0.5 s). SFX times unchanged."
       },
       "texts_source": "03-copy.json P04.hook, P04.scenes[6].text"
     },
@@ -2374,10 +2467,10 @@
             }
           },
           "corner": {
-            "style": "feed_corner",
+            "style": "feed_corner_label",
             "text": "Լողավազան 1",
             "x": 1008,
-            "y": 74,
+            "y": 60,
             "align": "right",
             "anchor": "top-right"
           },
@@ -2436,10 +2529,10 @@
             }
           },
           "corner": {
-            "style": "feed_corner",
+            "style": "feed_corner_label",
             "text": "Լողավազան 2",
             "x": 1008,
-            "y": 74,
+            "y": 60,
             "align": "right",
             "anchor": "top-right"
           },
@@ -2499,10 +2592,10 @@
             }
           },
           "corner": {
-            "style": "feed_corner",
+            "style": "feed_corner_label",
             "text": "Լողավազան 2",
             "x": 1008,
-            "y": 74,
+            "y": 60,
             "align": "right",
             "anchor": "top-right"
           },
@@ -2540,11 +2633,12 @@
           },
           "photo_border": "1 px rgba(201,169,106,0.45)",
           "corner": {
-            "style": "feed_corner",
+            "style": "feed_corner_label",
             "text": "Լողավազան 1",
             "x": 1008,
-            "y": 74,
-            "anchor": "top-right"
+            "y": 60,
+            "anchor": "top-right",
+            "align": "right"
           },
           "rule": {
             "x": 72,
@@ -2623,10 +2717,10 @@
             }
           },
           "corner": {
-            "style": "feed_corner",
+            "style": "feed_corner_label",
             "text": "Լողավազան 1",
             "x": 1008,
-            "y": 74,
+            "y": 60,
             "align": "right",
             "anchor": "top-right"
           },
@@ -2723,10 +2817,10 @@
             }
           },
           "corner": {
-            "style": "feed_corner",
+            "style": "feed_corner_label",
             "text": "Լողավազան 1",
             "x": 1008,
-            "y": 74,
+            "y": 60,
             "align": "right",
             "anchor": "top-right"
           },
@@ -2785,10 +2879,10 @@
             }
           },
           "corner": {
-            "style": "feed_corner",
+            "style": "feed_corner_label",
             "text": "Լողավազան 1",
             "x": 1008,
-            "y": 74,
+            "y": 60,
             "align": "right",
             "anchor": "top-right"
           },
@@ -2802,7 +2896,7 @@
           }
         }
       ],
-      "notes": "Corner labels 'Լողավազան 1/2' are mandatory (two different sites). pool-01/04: the person at top-right edge (x≈0.93) is outside the crop (crop ends at x=0.85).",
+      "notes": "Corner labels 'Լողավազան 1/2' are mandatory (two different sites). pool-01/04: the person at top-right edge (x≈0.93) is outside the crop (crop ends at x=0.85). Round 1: corner labels use feed_corner_label (26 px on #0c0d0e α0.6 pill, padding 10/16) on every slide that has one.",
       "texts_source": "03-copy.json P03.slides"
     },
     "P05": {
@@ -3029,7 +3123,7 @@
               },
               {
                 "style": "feed_body",
-                "text": "Արմատուրայի լուսանկարը՝ մինչև բետոնը։ Լցումից հետո այն այլևս չի երևա։",
+                "text": "Սյուներն արդեն լցված են. վերևում երևում են միայն արմատուրայի ելուստները։ Ներսի արմատուրան պետք է լուսանկարվի մինչև բետոնը։",
                 "w": 900,
                 "align": "left"
               }
@@ -3088,7 +3182,7 @@
               },
               {
                 "style": "feed_body",
-                "text": "Հենարաններն ու կաղապարը՝ նախքան ծածկի լցումը։",
+                "text": "Սա արդեն լցված ծածկն է. կաղապարը հանված է, հենարանները դեռ պահում են այն։ Լցումից առաջ պահանջեք արմատուրայի լուսանկարը։",
                 "w": 900,
                 "align": "left"
               }
@@ -3334,7 +3428,11 @@
         }
       ],
       "numeral_rule": "Slides 2-8: copy prefix '1.'..'7.' rendered as gold eyebrow '1 / 7'..'7 / 7' above the title; title without prefix.",
-      "texts_source": "03-copy.json P05.slides, P05.slide9_variant_A_after_B5"
+      "texts_source": "03-copy.json P05.slides, P05.slide9_variant_A_after_B5",
+      "round1_rerender": [
+        "P05_04",
+        "P05_05"
+      ]
     },
     "P06": {
       "type": "post",
@@ -3475,7 +3573,7 @@
       },
       "title": {
         "style": "feed_title_xl",
-        "text": "Ինչու՞ «մոտավոր գինը» ամենաթանկ գինն է",
+        "text": "Ինչո՞ւ «մոտավոր գինը» ամենաթանկ գինն է",
         "x": 72,
         "y": 506,
         "w": 936
@@ -3532,19 +3630,10 @@
           "alpha1": 0.7
         }
       ],
-      "logo": {
-        "ref": "brand.logo.feed",
-        "position_override": {
-          "x": 900,
-          "y": 1230,
-          "w": 120,
-          "h": 88
-        },
-        "note": "logo bottom-right because title occupies top-left"
-      },
+      "logo": "brand.logo.feed",
       "rule": {
         "x": 72,
-        "y": 92,
+        "y": 196,
         "w": 64,
         "h": 2,
         "color": "#c9a96a"
@@ -3553,7 +3642,7 @@
         "style": "feed_title",
         "text": "Տուն Հայաստանում, իսկ դուք՝ Լոս Անջելեսում",
         "x": 72,
-        "y": 120,
+        "y": 226,
         "w": 860,
         "size_override": 64
       },
@@ -3622,7 +3711,7 @@
           },
           {
             "style": "feed_body",
-            "text": "Լցումից հետո այս ամենը կփակվի։ Դրա համար լուսանկարը պետք է արվի հիմա։",
+            "text": "Արդեն լցված է, և արմատուրան այլևս չի երևում։ Ահա թե ինչու լուսանկարը պետք է արվի լցումից առաջ։",
             "w": 880
           },
           {
@@ -3920,5 +4009,58 @@
       "props": "Printed A4 sample estimate (fictional, no real client/competitor names), black/gold marker, pen.",
       "deliver": "Original files (AirDrop/cable, not messenger-compressed) into shoot/P07/: A_take01.mov…, B1_01.mov…, B4_screen.mp4"
     }
-  ]
+  ],
+  "round": 1,
+  "round1_changes": {
+    "date": "2026-11-10",
+    "source": "06-review.md, 03-copy.md 'Round 1 changes'",
+    "items": {
+      "P01": [
+        "labels from copy Round 1 (09 'Պատեր՝ 1-ին հարկ', 07 'Ծածկ', 08 'Կարկաս', 10 'Բետոնի լցում', 06 'Պատեր՝ 2-րդ հարկ')",
+        "end card: CTA → direct «ՏՈՒՆ»; overlay p01_end_grad; label 32 px, body/CTA 42 px (min 40); text block moved to y 1150..1460",
+        "caption.txt / alt_hy.txt from updated 03-copy.json"
+      ],
+      "P03": [
+        "corner labels 'Լողավազան 1/2' → feed_corner_label (26 px, dark pill α0.6, padding 10/16), all slides with a corner label"
+      ],
+      "P04": [
+        "duration 12.0 → 13.5 s; scene 7 = 10.2-13.5 s; credit 10.5-13.5, CTA 11.0-13.5 (2.5 s)",
+        "inactive words/arrows 70% + text shadow; EN label 28 px; scenes 2-6 overlay p04_top_plate (α0.85→0.8 to y660, 0 at y960)",
+        "cover overlay p04_cover_grad (α≥0.78 to y760)"
+      ],
+      "P05": [
+        "slide 4 body (house-01/05: columns already poured, only starter bars visible) and slide 5 body (house-01/07: slab after pour) from updated copy",
+        "alt_hy.txt from updated copy; re-export P05_04, P05_05 (other slides unchanged)"
+      ],
+      "P06B": [
+        "headline «Ինչու՞» → «Ինչո՞ւ»; caption.txt / alt_hy.txt from updated copy"
+      ],
+      "P08B": [
+        "image body reframed (slab already poured); caption.txt / alt_hy.txt from updated copy"
+      ],
+      "P08": [
+        "logo back to top-left (brand.logo.feed); rule y 92→196, title y 120→226",
+        "caption_ru fix via copy; still BLOCKED (Բ5, consent) — render for archive only"
+      ]
+    },
+    "rerender": [
+      "P01",
+      "P03",
+      "P04",
+      "P05 (slides 04, 05 + alt)",
+      "P06B",
+      "P08B"
+    ],
+    "rerender_blocked_not_for_publishing": [
+      "P08"
+    ],
+    "unchanged": [
+      "P02",
+      "P06",
+      "P07",
+      "P07B",
+      "P09",
+      "P09B"
+    ]
+  }
 }
