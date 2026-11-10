@@ -73,16 +73,20 @@ function styleCss(st, el = {}) {
   if (st.font === 'display') css.push('font-variant-numeric:lining-nums');
   if (st.letter_spacing) css.push(`letter-spacing:${st.letter_spacing}`);
   if (st.transform) css.push(`text-transform:${st.transform}`);
-  if (st.shadow) css.push(`text-shadow:${st.shadow}`);
+  const shadow = el.shadow_override || el.text_shadow || st.shadow;
+  if (shadow) css.push(`text-shadow:${shadow}`);
   const op = el.opacity != null ? el.opacity : st.opacity;
   if (op != null) css.push(`opacity:${op}`);
+  // style.box: text on a padded rounded plate; (x,y) is the plate's outer corner per anchor
+  if (st.box) css.push(`background:${st.box.color}`, `padding:${st.box.pad_y}px ${st.box.pad_x}px`, `border-radius:${st.box.radius}px`);
   return css.join(';');
 }
 
 function fitAttrs(st, el) {
   if (!st.max_lines) return '';
   const size = el.size_override || st.size;
-  const min = el.size_override ? Math.min(el.size_override, st.min_size || size) : (st.min_size || size);
+  const min = el.min_size_override != null ? el.min_size_override
+    : el.size_override ? Math.min(el.size_override, st.min_size || size) : (st.min_size || size);
   // explicit break_after => exactly 2 rendered lines (spec: "Render as 2 lines"); autofit shrinks to get there
   const maxl = el.break_after ? 2 : (el.max_lines || st.max_lines);
   return ` data-maxl="${maxl}" data-min="${min}"`;
@@ -126,6 +130,11 @@ function overlayEl(ov, W, H) {
   if (ov.type === 'linear') {
     return `<div style="position:absolute;left:0;top:${ov.y0}px;width:${W}px;height:${ov.y1 - ov.y0}px;background:linear-gradient(to bottom,${rgba(ov.color, ov.alpha0)},${rgba(ov.color, ov.alpha1)})"></div>`;
   }
+  if (ov.type === 'linear_stops') {
+    // vertical gradient, alpha linear between [y_px, alpha] stops, constant outside them
+    const st = ov.stops.map(([y, a]) => `${rgba(ov.color, a)} ${y}px`).join(',');
+    return `<div style="position:absolute;left:0;top:0;width:${W}px;height:${H}px;background:linear-gradient(to bottom,${st})"></div>`;
+  }
   if (ov.type === 'radial') {
     return `<div style="position:absolute;left:0;top:0;width:${W}px;height:${H}px;background:radial-gradient(circle ${ov.r}px at ${ov.cx}px ${ov.cy}px,${rgba(ov.color, ov.alpha0)},${rgba(ov.color, ov.alpha1)})"></div>`;
   }
@@ -156,7 +165,7 @@ window.__doFit = () => {
     const max = +el.dataset.maxl, min = +(el.dataset.min || 0);
     const cs = () => getComputedStyle(el);
     let size = parseFloat(cs().fontSize); const size0 = size;
-    const lines = () => Math.round(el.getBoundingClientRect().height / parseFloat(cs().lineHeight));
+    const lines = () => Math.round((el.getBoundingClientRect().height - parseFloat(cs().paddingTop) - parseFloat(cs().paddingBottom)) / parseFloat(cs().lineHeight));
     while (lines() > max && size - 2 >= min) { size -= 2; el.style.fontSize = size + 'px'; }
     rep.push({ kind: 'fit', id: el.dataset.id, text: el.innerText.slice(0, 50), size0, size, lines: lines(), max, ok: lines() <= max });
   });

@@ -60,6 +60,21 @@ def overlay_img(o):
             d.line([(0, y), (W, y)], fill=int(round((o["alpha0"] + (o["alpha1"] - o["alpha0"]) * t) * 255)))
         if y1 < H and o["alpha1"] > 0:
             d.rectangle([0, y1, W, H], fill=int(round(o["alpha1"] * 255)))
+    elif o["type"] == "linear_stops":
+        # [[y_px, alpha], ...] sorted by y; linear between stops, constant outside
+        st = sorted(o["stops"])
+        d = ImageDraw.Draw(a)
+        for y in range(H):
+            if y <= st[0][0]:
+                al = st[0][1]
+            elif y >= st[-1][0]:
+                al = st[-1][1]
+            else:
+                for (y0, a0), (y1, a1) in zip(st, st[1:]):
+                    if y0 <= y <= y1:
+                        al = a0 + (a1 - a0) * (y - y0) / max(1, y1 - y0)
+                        break
+            d.line([(0, y), (W, y)], fill=int(round(al * 255)))
     else:
         raise ValueError(o)
     im = Image.new("RGBA", (W, H), col + (0,))

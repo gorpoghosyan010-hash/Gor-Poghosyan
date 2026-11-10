@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Render an Instagram batch from <batch>/04-render-spec.json + <batch>/03-copy.json.
-// usage: node render_batch.js <repo_root> <batch_dir> [ITEM ...]
+// usage: node render_batch.js <repo_root> <batch_dir> [ITEM ...]   (env IG_SLIDES="P05:4,5" re-exports only those carousel slides)
 // Produces in <batch>/05-output/<ITEM>/:
 //   feed stills (.png master + .jpg upload), reel covers, caption.txt, alt_hy.txt
 //   and for reels: layer PNGs + timeline.json in <batch>/.tools/work/<ITEM>/ (compose with compose_reel.py)
@@ -121,7 +121,7 @@ function buildStill(item, sl, W, H, opts = {}) {
   // full-bleed photos: soft shadow under small corner labels so they hold on bright sky/water
   const sh = sl.src && !sl.photo_box ? '0 1px 10px rgba(12,13,14,0.6)' : null;
   const withShadow = (h) => (sh ? h.replace('style="position', `style="text-shadow:${sh};position`) : h);
-  if (sl.corner) p.push(withShadow(L.textEl(S, { ...sl.corner, id: 'corner' }, W, H)));
+  if (sl.corner) { const c = L.textEl(S, { ...sl.corner, id: 'corner' }, W, H); p.push(S[sl.corner.style].box ? c : withShadow(c)); }
   if (sl.page) p.push(withShadow(pageEl(sl.page, sl.swipe_hint, W, H)));
   if (sl.eyebrow) p.push(L.textEl(S, { ...sl.eyebrow, id: 'eyebrow' }, W, H));
   if (sl.eyebrow_bottom) p.push(L.textEl(S, { ...sl.eyebrow_bottom, id: 'eyebrow_bottom' }, W, H));
@@ -227,8 +227,11 @@ async function buildReel(r, id, item) {
           wi += 1;
           return wi === run.idx ? `<span style="color:${st.active_color};text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:10px;text-decoration-color:${st.active_color}">${L.esc(tok)}</span>` : L.esc(tok);
         }).join('') + '</div>').join('');
-        const block = `<div class="t" data-id="words" style="text-shadow:0 1px 14px rgba(12,13,14,0.7),0 0 3px rgba(12,13,14,0.4);position:absolute;left:${g.x}px;top:${g.y}px;width:${g.w}px;text-align:${g.align};${L.styleCss(st)}">${lines}</div>`
-          + L.textEl(S, { style: g.en_label.style, text: run.en, x: g.en_label.x, y: g.en_label.y, id: 'en' }, REEL.W, REEL.H).replace('style="position', 'style="text-shadow:0 1px 10px rgba(12,13,14,0.7);position');
+        // spec v2: inactive_color / text_shadow on the sequence, size_override / text_shadow on the EN label
+        const wsCss = L.styleCss(st, { color_override: g.inactive_color, text_shadow: g.text_shadow || '0 1px 14px rgba(12,13,14,0.7),0 0 3px rgba(12,13,14,0.4)' });
+        const enEl = { style: g.en_label.style, text: run.en, x: g.en_label.x, y: g.en_label.y, id: 'en', size_override: g.en_label.size_override, text_shadow: g.en_label.text_shadow || '0 1px 10px rgba(12,13,14,0.7)' };
+        const block = `<div class="t" data-id="words" style="position:absolute;left:${g.x}px;top:${g.y}px;width:${g.w}px;text-align:${g.align};${wsCss}">${lines}</div>`
+          + L.textEl(S, enEl, REEL.W, REEL.H);
         const png = await layerPng(r, `g_words_${k}`, block, dir);
         const next = runs[k + 1];
         tl.layers.push({ png, in: run.in, out: next ? next.in + 4 / 30 : item.duration, fade_in: k ? 4 : 0, z: 10 + k });
@@ -397,7 +400,11 @@ async function buildP07(r, id, item) {
       if (item.type === 'reel' && item.asset_status === 'needs_shoot') { report.items[id] = await buildP07(r, id, item); continue; }
       if (item.type === 'reel') { await buildReel(r, id, item); report.items[id] = 'timeline'; continue; }
       if (item.type === 'carousel') {
+        // optional partial re-export: IG_SLIDES="P05:4,5;P03:1,2" (other slides are left untouched)
+        const pick = (process.env.IG_SLIDES || '').split(';').map((x) => x.split(':')).find(([k]) => k === id);
+        const keep = pick ? new Set(pick[1].split(',').map(Number)) : null;
         for (const sl of item.slides) {
+          if (keep && !keep.has(sl.n)) continue;
           const out = path.join(dir, `${id}_${String(sl.n).padStart(2, '0')}.png`);
           const typo = !sl.src;
           await saveStill(r, buildStill(item, sl, FEED.W, FEED.H), FEED.W, FEED.H, out, 'feed', typo ? 95 : 92);
