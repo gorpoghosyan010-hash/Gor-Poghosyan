@@ -11,7 +11,7 @@
 
 | Դաշտ | Արժեք | Ծանոթություն |
 |---|---|---|
-| Username (handle) | **[@handle՝ ճշտել]** | Տարբերակներ՝ `garon.construction`, `garon_construction`, `garonconstruction`։ Ստուգել ազատ լինելը, նույնը վերցնել Facebook-ում։ Գրանցելուց հետո լրացնել `content/siteConfig.ts` → `instagram` (Լ7) |
+| Username (handle) | **@garon__construction** (հաստատված 2026-11-10) | Տարբերակներ՝ `garon.construction`, `garon_construction`, `garonconstruction`։ Ստուգել ազատ լինելը, նույնը վերցնել Facebook-ում։ Գրանցելուց հետո լրացնել `content/siteConfig.ts` → `instagram` (Լ7) |
 | Հաշվի տեսակ | Professional → **Business** | Կոնտակտային կոճակների, կատեգորիայի, Insights-ի համար |
 | Կատեգորիա | **Construction Company** (այլընտրանք՝ Contractor) | Ցուցադրել պրոֆիլում |
 | Name (որոնելի դաշտ, ≤30 նիշ) | **`GARON | Շինարարություն Երևան`** (28) | Name-ը որոնման մեջ է մտնում, ուստի բանալի բառ. այլընտրանք՝ `GARON Construction · Երևան` (26)։ Name-ը կարելի է փոխել 14 օրում 2 անգամ. ընտրել մեկ անգամ |
@@ -76,9 +76,9 @@ Pools · Houses · Renovation | Бассейны · Дома · Ремонт
 
 | # | Վերնագիր | Հասցե | Երբ |
 |---|---|---|---|
-| 1 | Կայք | `[կայքի հասցե՝ ճշտել]/?utm_source=instagram&utm_medium=bio` | 2026-11-15, 19:55 |
-| 2 | Մոտավոր գին | `[կայքի հասցե՝ ճշտել]/calculator?utm_source=instagram&utm_medium=bio` | 2026-11-15, 19:55 |
-| 3 | Կապ | `[կայքի հասցե՝ ճշտել]/contact?utm_source=instagram&utm_medium=bio` | 2026-11-15, 19:55 |
+| 1 | Կայք | `https://garon.am/?utm_source=instagram&utm_medium=bio` | 2026-11-15, 19:55 |
+| 2 | Մոտավոր գին | `https://garon.am/calculator?utm_source=instagram&utm_medium=bio` | **Պահել**, մինչև հաշվիչի իրական գները հաստատվեն (հիմա ցուցադրական են) |
+| 3 | Կապ | `https://garon.am/contact?utm_source=instagram&utm_medium=bio` | 2026-11-15, 19:55 |
 
 - Կայքի հասցեն ռեպոյում չկա (`content/seo.ts`՝ միջավայրի փոփոխական `NEXT_PUBLIC_SITE_URL` / Vercel). `garon.am`-ը միայն email-ի դոմենն է, կայքի հասցեն լինելը չի հաստատված (Լ2)։
 - Մինչև 11-15-ը հղում չդնել (մեկնարկի «Շուտով» տրամաբանությունը)։ Direct-ը բաց է։
