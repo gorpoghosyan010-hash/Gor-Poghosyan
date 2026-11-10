@@ -96,7 +96,7 @@ Screenshots use the Playwright `iPhone 13` profile on Chromium: 390×664 @3x = 1
 
 Every item was re-rendered from `04-render-spec.json` (spec_version 2, `revision` round 1) and the updated `03-copy.json`. The renders use the **final owner-approved logo** (commit 0d9562a, "remove the gold rule under CONSTRUCTION"; `public/brand/garon-logo-dark.svg` md5 `ded01abb…`). The md5 was checked before and after the run, and on the logo the local server returned. The home hero is the real photo `/projects/house-01/12.webp` (commit 672d5c8).
 - **Site build:** the site was built fresh from a copy of the working tree in a scratch directory and served there on port 3123. I did not rebuild the repo's own `.next`, because another `next-server` (pid 9942) was serving from the repo root. The server was stopped afterwards.
-- **Command:** `IG_SITE_URL=http://localhost:3123 IG_ALLOW_PARTIAL=1 marketing/instagram/tools/render_batch.sh marketing/instagram/2026-11-11-launch`. No tool changes were needed.
+- **Command:** `IG_SITE_URL=http://localhost:3123 IG_ALLOW_PARTIAL=1 marketing/instagram/tools/render_batch.sh marketing/instagram/2026-11-11-launch`. No tool changes were needed. *(Corrected in Round 2: this was true for the run, but it meant that `phone.mask` was never implemented. See Round 2.)*
 - **Automatic checks:** 121 of 121 passed (`.tools/work/launch_report.json`). This includes all L04_shot2 checks: no /stock/ or /services/ media at scrollY 642, lang hy, no 25+/50+/ՀԻՄՆ/2000, and no price in the crop.
 - **Earlier renders:** the logo changed twice and the hero changed once while I was rendering. Every render made before those changes has been overwritten.
 
@@ -114,7 +114,7 @@ Every item was re-rendered from `04-render-spec.json` (spec_version 2, `revision
 | L04/L04_01.jpg / .png | 268 / 749 KB | /projects, scrollY 0 |
 | **L04/L04_02.jpg / .png** | 178 / 173 KB | **now rendered**: home trust strip at scrollY 642. The render condition passes after the hero was replaced (variant a), and the carousel stays 6 slides |
 | L04/L04_03.jpg / .png | 150 / 135 KB | /services |
-| L04/L04_04.jpg / .png | 144 / 98 KB | /calculator; phone moved up (frame_top 490) and the phone group fades out below the crop |
+| L04/L04_04.jpg / .png | 144 / 98 KB | /calculator; phone moved up (frame_top 490). *Corrected in Round 2: the claim that the phone group "fades out below the crop" was wrong. No mask was applied, so the screenshot ended with a hard edge at y 1192 above an empty dark screen. Fixed in Round 2.* |
 | L04/L04_05.jpg / .png | 254 / 618 KB | /projects scrollY 1560 |
 | L04/L04_06.jpg / .png | 99 / 59 KB | end slide, final logo |
 | captions / alt_hy.txt (all items) | — | regenerated from 03-copy.json |
@@ -124,3 +124,43 @@ Every item was re-rendered from `04-render-spec.json` (spec_version 2, `revision
 **Still open:**
 - Publishing condition Լ3: before posting L04, check the live garon.am on a phone against these screenshots. The live site must have the new hero and the final logo deployed.
 - No music was mixed into L02.
+
+## Round 2 (2026-11-10, final fix) — L04_04 + L04 caption only
+
+Scope follows `06-review.md` → Round 2, L04 fix 1 and fix 2 (copy). Nothing else was re-rendered. L01, L03 and L04 slides 1/2/3/5/6 are byte-identical to Round 1 (md5 checked before and after).
+
+**L02: not done, by owner decision.** I began work on L02 v2 but stopped it partway when the coordinator relayed the owner's change of plan: L02 is to be redesigned again, with a light background and different footage. No L02 v2 frames were rendered or encoded. `05-output/L02/` still holds the **Round 1 (v1) files** (`L02_reel.mp4`, `L02_cover.*`, `caption.txt`, `alt_hy.txt`, all 11:24). The v1 caption text predates the v2 copy in `03-copy.json`. **Do not publish L02 from these files.** It needs a new design and a new render. I had placed a partial copy of `04-L02v2-reference.js` in `tools/`, and I deleted it. `render_batch.sh` has no L02 v2 dispatch. Note: the current spec `items.L02` is v2 (no `overlay_text`/`capture`), so running `render_launch.js` with item `L02` will fail until L02 is re-specified.
+
+### Tool changes (`marketing/instagram/tools/`)
+- `render_launch.js`
+  - **`phone.mask` implemented.** On a phone slide that has `phone.mask` (`type: linear`, `y0`, `y1` in slide px), the whole phone group goes in one full-slide wrapper (`.phoneGroup`): shadow, frame, gold border, screen and screenshot. The wrapper gets `mask-image: linear-gradient(to bottom, #000 y0px, transparent y1px)` (and the `-webkit-` form too). Slides without `mask` render the same as before.
+  - **Mask pixel check.** The tool renders a background-only reference (grid6 + page number) to `.tools/work/L04/L04_0N_bgref.png` and runs `mask_check.py`. STOP if any row at y ≥ y1 differs from the reference by more than 2. STOP if the row-to-row step of the phone-column mean in y0−20…y1+5 is more than 40, because that means a hard edge.
+  - **Text from `03-copy.json`.** On phone slides, the `feed_title`/`feed_body` text now comes from `03-copy.json` → `L04.slides[n-1].title/body` when it differs from the spec, and each override is logged. The spec `slides[3]` still has the old title. For slides 1/2/3/5 copy and spec are identical, so nothing changes there.
+  - **Text-bottom limit for slides with a mask** is now `frame_top − 24` (= 466 for slide 4, per the spec check). It used to be a stale hard-coded 690.
+  - **`IG_SLIDES=4[,…]` env:** renders only those L04 slides and captures only their screenshots. The report then goes to `.tools/work/launch_report_L04_04.json`, so the full-run `launch_report.json` is not overwritten.
+- `mask_check.py` (new): computes the mask pixel stats described above and prints them as JSON.
+- `render_batch.sh`: unchanged.
+
+### Command
+`IG_SKIP_BUILD=1 IG_SLIDES=4 marketing/instagram/tools/render_batch.sh marketing/instagram/2026-11-11-launch L04`
+- **Site:** I did not rebuild. The repo `.next` (BUILD_ID 11:22) is newer than the final logo (11:19, md5 `ded01abb…`, matches Round 1) and the hero commit 672d5c8. No site source changed since then. `render_batch.sh` started `next start -p 3123` and stopped it afterwards. I checked that nothing is listening on 3123 and that no `next start` process is left.
+
+### Checks (all passed, `.tools/work/launch_report_L04_04.json`)
+- L04_shot4 re-captured: `/calculator`, scrollY 652, lang hy, no /stock/ or /services/ media, no 25+/50+/ՀԻՄՆ/2000, no price or currency in the crop (viewport y 0..453).
+- **«֏» check [2] re-run:** every «֏» element has top ≥ 453 (tops 580 / 688 / 814 = page y 1232+). The area input is empty and no result block is in the crop.
+- Crop unchanged: h 0.6822 → dest 592×688 at (244, 504).
+- Text from copy: title «Կողմնորոշիչ հաշվարկ՝ մակերեսով» (2 lines, y 199–342), body «Ընտրեք նախագծի տեսակը, նշեք մակերեսը և տեսեք կողմնորոշիչ արժեքը։» (2 lines). Text block ends at 451 ≤ 466. Everything is in the safe area, autofit did not shrink anything, and the Armenian fonts loaded.
+- **Mask:** rows y ≥ 1192 match the background-only render exactly (max abs diff 0). Pixels at y 1192/1300/1430 are #0c0d0e, or a grid6 line on x 450. The phone-column mean falls smoothly: 202.8 (y 1106) → 170 (1122) → 131 (1138) → 93 (1154) → 57 (1170) → 14 (1186) → 0 (1194). The largest row step, 33, is the top edge of the floor-button row at y ≈ 1098, which is screenshot content above y0, not a mask edge.
+
+### Round 2 files
+| File | Size | Notes |
+|---|---|---|
+| L04/L04_04.jpg / .png | 144 KB / 108 KB | 1080×1440 RGB; new slide-4 title/body, phone group fades out y 1110 → 1192, grid lines continue below |
+| L04/caption.txt | 2271 B | regenerated from 03-copy.json (hy list line 3 + paragraph 4, ru, en softened to «կողմնորոշիչ հաշվարկ» / «ориентировочный расчёт» / «indicative estimate») |
+| L04/alt_hy.txt | 697 B | regenerated; content unchanged |
+| .tools/work/L04/L04_shot4.png, L04_shot4_592x688.png, L04_04_bgref.png | — | QA / intermediates, not for upload |
+
+**Viewed:** L04_04.jpg in full, plus a 2× zoom of y 1040–1260. The fade is smooth, nothing is visible below y 1192 except the grid lines, there is no tofu, and the header shows the final vector logo with no gold rule.
+
+**Still open:** L02 (see above). Publishing condition Լ3 for L04 (check live garon.am on a phone) is unchanged.
+
