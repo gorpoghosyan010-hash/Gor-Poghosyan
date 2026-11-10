@@ -1,0 +1,40 @@
+{
+  "P01": {"verdict": "fix", "owner": "ig-3-copywriter", "then": "ig-5-producer", "gate": ["Բ2"], "fixes": [
+    "End card + caption (hy/ru/en): replace calculator CTA with DM CTA «Տուն եք ծրագրում՝ գրեք «ՏՈՒՆ» direct-ում» — calculator prices are demo (CostCalculator.tsx l.7-8)",
+    "ig-5: end card 11.8-15 s text over bright facade/steps unreadable (gold on white stone) — add bottom gradient y1000-1920 α0→0.75 or move to dark paving zone; body ≥40 px",
+    "Copywriter to confirm label remap (order_decision), duplicate «Պատեր» label",
+    "Publish only after Բ2 written confirmation incl. house-01/12 being the same house"]},
+  "P02": {"verdict": "approved", "owner": "", "fixes": []},
+  "P03": {"verdict": "fix", "owner": "ig-5-producer", "gate": ["Բ2"], "fixes": [
+    "Corner labels «Լողավազան 1/2» (~22 px) unreadable on sky/grass/water (slides 2,3,8): add dark pill #0c0d0e α0.6, padding 10/16, size ≥26 px",
+    "Publish only after Բ2"]},
+  "P04": {"verdict": "fix", "owner": "ig-4-visual-director", "then": "ig-5-producer", "gate": ["Բ2"], "fixes": [
+    "CTA on screen only 0.9 s (11.1-12.0), credit line 0.2 s: hold final scene ≥2.5 s, CTA ≥2 s (shorten scenes 2-6 to 1.45 s or extend reel to 13.5 s)",
+    "Scenes 2-6: inactive words (38% opacity) and EN sub-labels illegible over light concrete/mosaic: inactive ≥65%, top gradient 0-900 px α0.8 or dark plate, EN label ≥26 px",
+    "ig-5: P04_cover hook white over light paving — strengthen top gradient α≥0.75 to y700 or darker crop",
+    "Publish only after Բ2"]},
+  "P05": {"verdict": "fix", "owner": "ig-3-copywriter", "then": "ig-5-producer", "gate": ["Բ2", "Բ6"], "fixes": [
+    "Slide 5 is factually wrong: house-01/07 shows the slab AFTER the pour (stripped formwork, back-props under cured concrete), not «նախքան ծածկի լցումը». Rewrite e.g. «Լցումից հետո. կաղապարը հանված է, հենարանները դեռ պահում են ծածկը։ Լցումից առաջ պահանջեք արմատուրայի լուսանկարը»; re-check alt",
+    "Use P05_09 (default) only"]},
+  "P05_09_A": {"verdict": "fix", "owner": "ig-3-copywriter", "gate": ["Բ5"], "fixes": [
+    "Blocked: weekly-report promise not approved (Բ5). Do not publish; no file change needed"]},
+  "P06": {"verdict": "fix", "owner": "ig-3-copywriter", "then": "ig-5-producer", "gate": ["calculator prices (demo)", "Բ3", "Բ4", "validity date"], "fixes": [
+    "Blocked: 50/80/120/180k ֏/m² are demo prices per CostCalculator.tsx; red placeholders VAT/date in image and all caption languages. Publish P06B instead on 11-27; after owner confirms real prices/VAT/date, update numbers and re-render without red text"]},
+  "P06B": {"verdict": "fix", "owner": "ig-3-copywriter", "then": "ig-5-producer", "fixes": [
+    "Spelling: «Ինչու՞» → «Ինչո՞ւ» in image headline, caption line 1 and alt_hy",
+    "Caption CTA: «Կուզեք իմանալ՝ ինչպես ենք մենք կազմում…» → «Ուզո՞ւմ եք իմանալ, թե ինչպես ենք կազմում նախահաշիվը. գրեք «ԳԻՆ» direct-ում»",
+    "Re-render P06B after copy fix"]},
+  "P07": {"verdict": "fix", "owner": "ig-5-producer", "gate": ["founder shoot", "DM responder for «ՍՏՈՒԳԵԼ»"], "fixes": [
+    "Reel not produced (no A-roll). Templates approved as templates. After shoot: re-time SRT to real speech, use seg5_cta only if a DM responder (≤24 h) is assigned, else seg5_cta_fallback; resubmit for review. If no shoot by 11-27 publish P07B"]},
+  "P07B": {"verdict": "approved", "owner": "", "fixes": []},
+  "P08": {"verdict": "fix", "owner": "ig-3-copywriter", "then": "ig-5-producer", "gate": ["Բ5", "consent of man in house-01/10", "Բ2"], "fixes": [
+    "Blocked: «ամեն ուրբաթ… հաշվետվություն» unapproved promise (Բ5). Publish P08B instead",
+    "RU: «какая есть проблема» → «какие есть проблемы»",
+    "ig-5: logo bottom-right breaks series (top-left elsewhere)"]},
+  "P08B": {"verdict": "fix", "owner": "ig-3-copywriter", "then": "ig-5-producer", "gate": ["Բ2"], "fixes": [
+    "Factual error: photo shows slab AFTER pour (formwork stripped), but image text, hy/ru/en caption and alt say «նախքան բետոնի լցումը / կաղապարի վրա արմատուրան է / կփակվի». Reframe: «Սա արդեն լցված ծածկն է՝ ներսից։ Արմատուրան այլևս չի երևում։ Ահա թե ինչու լուսանկարը պետք է արվի լցումից առաջ»; keep CTA; re-render"]},
+  "P09": {"verdict": "fix", "owner": "ig-3-copywriter", "then": "ig-5-producer", "gate": ["calculator prices (demo)", "Բ3", "validity date", "Բ2"], "fixes": [
+    "Blocked: 90,000 ֏/m² is demo; red VAT/date placeholders. Publish P09B instead on 12-04",
+    "When unblocked: POOL_RATE is a «from» price — write «սկսած ≈ 6.1 մլն ֏»"]},
+  "P09B": {"verdict": "approved", "owner": "", "gate": ["Բ2"], "fixes": []}
+}
