@@ -35,7 +35,7 @@ def svg(theme, wordmark=True, tagline=False):
     g1,g2=('#d4b57a','#b8955c') if theme!='mono' else ('#6b6b6b','#6b6b6b')
     if wordmark:
         vb='0 0 425 %d'%(352 if tagline else 310)
-        w=f'<path fill="{txt}" d="{garon}"/><rect x="61" y="228.8" width="24.4" height="9.6" fill="{txt}"/><path fill="{txt}" d="{cons}"/><rect x="183" y="303" width="59" height="2.2" fill="{rule}"/>'
+        w=f'<path fill="{txt}" d="{garon}"/><rect x="67.5" y="228.8" width="17.9" height="9.6" fill="{txt}"/><path fill="{txt}" d="{cons}"/><rect x="183" y="303" width="59" height="2.2" fill="{rule}"/>'
         if tagline: w+=f'<path fill="{txt}" d="{tag}"/>'
         tf=' transform="translate(0,1.5)"'
     else:
