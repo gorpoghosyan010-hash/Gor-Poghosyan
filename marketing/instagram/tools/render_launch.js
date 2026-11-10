@@ -4,6 +4,8 @@
 // usage: node render_launch.js <repo_root> <batch_dir> [ITEM ...]     ITEM = L01 | L02 | L03 | L04
 // env:   IG_ALLOW_PARTIAL=1 — a failed L04 site check blocks only that slide (default: STOP the run)
 //        IG_SITE_URL (default http://localhost:3123) — the LOCAL production build (render_batch.sh starts it)
+//        IG_SLIDES=4[,5] — L04: render only these slide numbers (and capture only their screenshots);
+//                          the report then goes to launch_report_L04_<n..>.json (full-run report kept)
 // Writes <batch>/05-output/<ITEM>/..., L02 frames + layers + timeline.json in <batch>/.tools/work/L02/
 // (compose with compose_reel.py), and <batch>/.tools/work/launch_report.json (fit/box/site checks).
 // Any failed check (autofit, forbidden asset, forbidden text, price in crop) throws = STOP.
@@ -24,6 +26,9 @@ const SITE = process.env.IG_SITE_URL || 'http://localhost:3123';
 const S = spec.styles;
 const IT = spec.items;
 const want = (id) => !only.length || only.includes(id);
+const SLIDES = (process.env.IG_SLIDES || '').split(',').filter(Boolean).map(Number);
+const wantSlide = (n) => !SLIDES.length || SLIDES.includes(n);
+const REPORT = SLIDES.length ? `launch_report_L04_${SLIDES.map((n) => String(n).padStart(2, '0')).join('_')}.json` : 'launch_report.json';
 const report = { site: SITE, items: {}, checks: [] };
 const py = (script, ...args) => execFileSync('python3', [path.join(__dirname, script), ...args.map(String)]).toString().trim();
 const mk = (d) => { fs.mkdirSync(d, { recursive: true }); return d; };
@@ -164,7 +169,8 @@ async function captureShots(browser, dir) {
   const ctx = await browser.newContext({ ...dev, reducedMotion: 'reduce' });
   await ctx.addInitScript(() => localStorage.setItem('garon-lang', 'hy'));
   const res = {};
-  for (const shot of sc.shots) {
+  const needed = new Set(IT.L04.slides.filter((s) => s.phone && wantSlide(s.n)).map((s) => s.phone.screenshot));
+  for (const shot of sc.shots.filter((x) => needed.has(x.id))) {
     try { res[shot.id] = await captureShot(ctx, dev, shot, dir); } catch (e) {
       // IG_ALLOW_PARTIAL=1: a failed site check blocks only this shot's slide (reported), other slides still render
       if (process.env.IG_ALLOW_PARTIAL !== '1') throw e;
@@ -384,7 +390,16 @@ async function buildL04(r, shots) {
   const it = IT.L04; const [W, H] = it.size;
   const dir = mk(path.join(OUT, 'L04'));
   const pt = it.phone_template;
-  for (const sl of it.slides) {
+  const cs = (copy.L04 && copy.L04.slides) || [];
+  for (const sl0 of it.slides) {
+    if (!wantSlide(sl0.n)) continue;
+    // 03-copy.json is the text source of record: phone-slide feed_title / feed_body follow copy.L04.slides[n-1]
+    const sl = JSON.parse(JSON.stringify(sl0));
+    const c = cs[sl.n - 1];
+    if (sl.layout === 'phone' && c) for (const t of sl.text_stack.items) {
+      const v = t.style === 'feed_title' ? c.title : t.style === 'feed_body' ? c.body : null;
+      if (v && v !== t.text) { console.log(`  copy  L04_${sl.n} ${t.style}: «${t.text}» -> «${v}» (03-copy.json)`); t.text = v; }
+    }
     const p = [grid6(H)];
     if (sl.layout === 'phone') {
       const ph = sl.phone; const shot = shots[ph.screenshot];
@@ -392,8 +407,15 @@ async function buildL04(r, shots) {
       const scr = path.join(WORK, 'L04', `${ph.screenshot}_${ph.dest.w}x${ph.dest.h}.png`);
       py('fit_photo.py', shot.file, scr, ph.dest.w, ph.dest.h, ph.crop.x, ph.crop.y, ph.crop.w, ph.crop.h);
       const f = pt.frame;
+      // phone group (shadow + frame + gold border + screen + screenshot). phone.mask (linear y0 -> y1, slide px)
+      // fades the WHOLE group to transparent: opaque above y0, fully transparent from y1 down.
+      const mk = ph.mask;
+      if (mk) check(mk.type === 'linear' && mk.y1 > mk.y0, `L04_${sl.n} phone.mask linear y0 ${mk.y0} -> y1 ${mk.y1}`);
+      const mcss = mk ? `-webkit-mask-image:linear-gradient(to bottom,#000 ${mk.y0}px,transparent ${mk.y1}px);mask-image:linear-gradient(to bottom,#000 ${mk.y0}px,transparent ${mk.y1}px);` : '';
+      p.push(`<div class="phoneGroup" style="position:absolute;left:0;top:0;width:${W}px;height:${H}px;${mcss}">`);
       p.push(`<div style="position:absolute;left:${f.x}px;top:${ph.frame_top}px;width:${f.w}px;height:${H - ph.frame_top + 200}px;box-sizing:border-box;background:${f.fill};border:${f.border};border-radius:${f.radius_outer}px;box-shadow:${f.shadow}"></div>`);
       p.push(`<div style="position:absolute;left:${ph.dest.x}px;top:${ph.dest.y}px;width:${ph.dest.w}px;height:${ph.dest.h}px;overflow:hidden;border-radius:${pt.frame.radius_screen}px ${pt.frame.radius_screen}px 0 0"><img src="file://${scr}" style="display:block;width:${ph.dest.w}px;height:${ph.dest.h}px"></div>`);
+      p.push('</div>');
       p.push(stackEl(sl.text_stack, W, H));
     } else {
       p.push(L.ruleEl(sl.horizon));
@@ -406,8 +428,18 @@ async function buildL04(r, shots) {
     for (const b of Object.values(bx)) check(b.x0 >= 90 && b.x1 <= 996 && b.y0 >= 60, `L04_${sl.n} «${b.text.slice(0, 30)}» in safe area (${b.x0},${b.y0})-(${b.x1},${b.y1})`);
     if (sl.layout === 'phone') {
       const bottom = Math.max(...Object.values(bx).filter((b) => b.id.startsWith('stack')).map((b) => b.y1));
-      const limit = sl.n === 4 ? 690 : sl.phone.frame_top - 30;
+      const limit = sl.phone.mask ? sl.phone.frame_top - 24 : sl.phone.frame_top - 30;
       check(bottom <= limit, `L04_${sl.n} text block ends at ${bottom} <= ${limit}`);
+      if (sl.phone.mask) {
+        // pixel check: below y1 the slide must equal the background-only render (grid6 + page number);
+        // between y0 and y1 the phone must fade without a hard edge.
+        const ref = png.replace(/\.png$/, '_bgref.png').replace(dir, path.join(WORK, 'L04'));
+        await r.render(L.page(W, H, [grid6(H), pageEl(sl.page, W, H)].join('\n'), sl.background), W, H, ref, false);
+        const m = JSON.parse(py('mask_check.py', png, ref, sl.phone.mask.y0, sl.phone.mask.y1));
+        report.items[`L04_${sl.n}_mask`] = m;
+        check(m.below_max <= 2, `L04_${sl.n} mask: rows y >= ${sl.phone.mask.y1} == background-only render (max abs diff ${m.below_max}, mean ${m.below_mean})`);
+        check(m.max_row_step <= 40, `L04_${sl.n} mask: no hard edge in y ${sl.phone.mask.y0 - 20}..${sl.phone.mask.y1 + 5} (max row-to-row step of phone-column mean ${m.max_row_step}, profile ${JSON.stringify(m.profile)})`);
+      }
     } else {
       check(bx.body1.y1 < 1079 && bx.abs2.y0 > 1081, `L04_${sl.n} url/body above horizon (${bx.body1.y1}), email below (${bx.abs2.y0})`);
     }
@@ -435,7 +467,7 @@ async function buildL04(r, shots) {
     if (want('L04')) await buildL04(r, shots);
   } finally {
     await r.close();
-    fs.writeFileSync(path.join(WORK, 'launch_report.json'), JSON.stringify(report, null, 1));
+    fs.writeFileSync(path.join(WORK, REPORT), JSON.stringify(report, null, 1));
   }
-  console.log('done; report:', path.join(WORK, 'launch_report.json'));
-})().catch((e) => { fs.writeFileSync(path.join(WORK, 'launch_report.json'), JSON.stringify({ ...report, error: String(e) }, null, 1)); console.error(e); process.exit(1); });
+  console.log('done; report:', path.join(WORK, REPORT));
+})().catch((e) => { fs.writeFileSync(path.join(WORK, REPORT), JSON.stringify({ ...report, error: String(e) }, null, 1)); console.error(e); process.exit(1); });
