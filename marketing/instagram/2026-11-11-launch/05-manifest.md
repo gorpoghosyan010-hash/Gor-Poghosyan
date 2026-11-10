@@ -91,3 +91,36 @@ Screenshots use the Playwright `iPhone 13` profile on Chromium: 390×664 @3x = 1
 - `compose_reel.py`: adds a `motion.type: "frames"` scene (pre-rendered frame sequence) and a layer `wipe_in` option. Both are optional keys, so existing timelines behave as before.
 - `ig_lib.js`: adds an optional `extra_css` per text element. It is unused by batch-1.
 - `fit_photo.py` (new): exact crop and Lanczos resize. `slice_canvas.py` (new): slices tiles and writes the seam previews.
+
+## Round 1 (2026-11-10, fix loop) — supersedes the sections above where they differ
+
+Every item was re-rendered from `04-render-spec.json` (spec_version 2, `revision` round 1) and the updated `03-copy.json`. The renders use the **final owner-approved logo** (commit 0d9562a, "remove the gold rule under CONSTRUCTION"; `public/brand/garon-logo-dark.svg` md5 `ded01abb…`). The md5 was checked before and after the run, and on the logo the local server returned. The home hero is the real photo `/projects/house-01/12.webp` (commit 672d5c8).
+- **Site build:** the site was built fresh from a copy of the working tree in a scratch directory and served there on port 3123. I did not rebuild the repo's own `.next`, because another `next-server` (pid 9942) was serving from the repo root. The server was stopped afterwards.
+- **Command:** `IG_SITE_URL=http://localhost:3123 IG_ALLOW_PARTIAL=1 marketing/instagram/tools/render_batch.sh marketing/instagram/2026-11-11-launch`. No tool changes were needed.
+- **Automatic checks:** 121 of 121 passed (`.tools/work/launch_report.json`). This includes all L04_shot2 checks: no /stock/ or /services/ media at scrollY 642, lang hy, no 25+/50+/ՀԻՄՆ/2000, and no price in the crop.
+- **Earlier renders:** the logo changed twice and the hero changed once while I was rendering. Every render made before those changes has been overwritten.
+
+### Round 1 files
+| File | Size | Notes |
+|---|---|---|
+| L01/L01a.jpg / .png | 73 KB / 45 KB | re-sliced from the new canvas |
+| L01/L01b.jpg / .png | 82 KB / 411 KB | re-sliced |
+| L01/L01c.jpg / .png | 70 KB / 49 KB | final logo + ՇԻՆԱՐԱՐՈՒԹՅՈՒՆ |
+| L01/L01_canvas.png, _seams_0gap.png, _seams_4gap.png | 587 / 588 / 592 KB | QA only. The seams were rechecked: the horizon and glow are continuous at 0 and 4 px gaps |
+| L02/L02_reel.mp4 | 623 KB, 9.0 s | splash re-captured from the fresh build (final logo); 1080×1920, H.264 yuv420p, 30 fps, silent AAC, faststart |
+| L02/L02_cover.jpg / .png | 92 KB / 273 KB | t = 2.4 s splash state, final logo |
+| L03/L03_01…06.jpg | 302 / 246 / 327 / 225 / 83 / 104 KB | s1 title now breaks «Լողավազաններ · Տներ» / «Վերանորոգում»; s2 has the top gradient (logo and «2 / 6» readable on the sky), and its body is from copy round 1 |
+| L03/L03_01…06.png | 1322 / 1111 / 1650 / 877 / 42 / 57 KB | masters |
+| L04/L04_01.jpg / .png | 268 / 749 KB | /projects, scrollY 0 |
+| **L04/L04_02.jpg / .png** | 178 / 173 KB | **now rendered**: home trust strip at scrollY 642. The render condition passes after the hero was replaced (variant a), and the carousel stays 6 slides |
+| L04/L04_03.jpg / .png | 150 / 135 KB | /services |
+| L04/L04_04.jpg / .png | 144 / 98 KB | /calculator; phone moved up (frame_top 490) and the phone group fades out below the crop |
+| L04/L04_05.jpg / .png | 254 / 618 KB | /projects scrollY 1560 |
+| L04/L04_06.jpg / .png | 99 / 59 KB | end slide, final logo |
+| captions / alt_hy.txt (all items) | — | regenerated from 03-copy.json |
+
+**Viewed:** every still, the L02 cover and 8 L02 frames (t = 0.3, 1.5, 2.4, 3.2, 4.95, 5.45, 6.2, 8.9 s). The logo has no gold rule under CONSTRUCTION in any item, including the site header in all L04 screenshots, the L03 corner logo and the L02 splash. Armenian renders correctly, with no tofu.
+
+**Still open:**
+- Publishing condition Լ3: before posting L04, check the live garon.am on a phone against these screenshots. The live site must have the new hero and the final logo deployed.
+- No music was mixed into L02.
