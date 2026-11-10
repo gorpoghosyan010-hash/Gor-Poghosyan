@@ -16,7 +16,7 @@ export default function Home(){
  const { lang } = useLanguage();
  const t = home[lang];
  return <main>
- <section className="homeHero" style={{ backgroundImage: "url('/services/residential-hero.webp')" }}>
+ <section className="homeHero" style={{ backgroundImage: "url('/projects/house-01/12.webp')" }}>
   <div className="heroGrid" aria-hidden="true" />
   <div className="heroShade" aria-hidden="true" />
   <div className="heroTop">
