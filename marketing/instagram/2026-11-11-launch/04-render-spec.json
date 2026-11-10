@@ -745,7 +745,7 @@
     "init_script": "localStorage.setItem('garon-lang','hy'); const st=window.setTimeout; window.setTimeout=function(f,d,...a){ if(d===3200||d===250) return 0; return st.call(window,f,d,...a); };  // freezes the 3.2 s unmount timer: splash never unmounts",
     "after_load": [
      "page.goto(url,{waitUntil:'networkidle'})",
-     "addStyleTag: html,body{background:#0c0d0e!important;overflow:hidden!important} body>:not(.splash){visibility:hidden!important}  // page behind the splash is hidden, so splashLift reveals plain #0c0d0e (home hero is a stock/AI image and must not appear)",
+     "addStyleTag: html,body{background:#0c0d0e linear-gradient(90deg,rgba(201,169,106,.035) 1px,transparent 1px) 0 0/60px 100%!important;overflow:hidden!important} body>:not(.splash){visibility:hidden!important}  // page behind the splash is hidden, so splashLift reveals plain #0c0d0e (home hero is a stock/AI image and must not appear)",
      "await document.fonts.ready; wait until .splashLogo img complete",
      "for (a of document.getAnimations()) a.pause()"
     ],
@@ -874,7 +874,8 @@
       "w": 3,
       "color": "rgba(201,169,106,0.035)",
       "in": 4.6,
-      "note": "Matches the splash's own column lines exactly (60 CSS px × 3; 1 CSS px = 3 px; .07 × opacity .5), so the lines continue seamlessly as the curtain lifts. Layer sits UNDER the captured frames during 4.6–5.5 (composite frames with the lifted area showing these lines: render the vlines into the page via the injected style `html{background:#0c0d0e linear-gradient(90deg,rgba(201,169,106,.035) 1px,transparent 1px) 0 0/60px 100%}` — preferred, then they are in the capture)."
+      "source": "IN THE CAPTURE (injected html/body background, see capture.after_load) — not a compositing layer",
+      "note": "Matches the splash's own column lines (every 60 CSS px = 180 px, 1 CSS px = 3 px wide, .07 × opacity .5 = .035), so the lines continue seamlessly under the lifting curtain."
      },
      {
       "layer": "text",
