@@ -9,7 +9,8 @@
     "app/globals.css",
     "components/CostCalculator.tsx",
     "content/i18n.ts",
-    "06-review.md / 06-review.json (Round 1 fixes)"
+    "06-review.md / 06-review.json (Round 1 fixes)",
+    "../owner-decisions.md"
   ],
   "conventions": {
     "units": "Pixels in the OUTPUT frame, origin top-left. Times in seconds from item start (30 fps; 1 frame = 0.0333 s).",
@@ -599,7 +600,7 @@
               "anim_in": "fade 4f + rise 12px"
             }
           ],
-          "privacy": "Workers at top-right (x>0.66) and far right are outside the crop path (crop x stays <=0.63). If Բ2 consent arrives, wider pan allowed. Verify on the rendered frames."
+          "privacy": "Workers at top-right (x>0.66) and far right stay outside the crop path (crop x <=0.63) — framing choice, unchanged. Owner's no-blur decision covers house-01/09 only."
         },
         {
           "n": 4,
@@ -686,7 +687,7 @@
               "anim_in": "fade 4f + rise 12px"
             }
           ],
-          "privacy": "3-4 workers mid-frame (y≈0.55, x 0.40-0.65), faces small. Without written consent: Gaussian blur r=18 px on each face, tracked (still image)."
+          "privacy": "Owner decision 2026-11-10: faces stay visible, no blur."
         },
         {
           "n": 6,
@@ -1267,13 +1268,14 @@
           "motion": {
             "type": "contain_blur",
             "foreground": {
-              "w": 1080,
-              "h": 1016,
-              "x": 0,
-              "y": 452,
+              "w": 744,
+              "h": 700,
+              "x": 168,
+              "y": 610,
               "zoom_from": 1.0,
               "zoom_to": 1.06,
-              "zoom_origin": "center"
+              "zoom_origin": "center",
+              "note": "Round 1: adopted producer's layout from 05-manifest.md (photo between word sequence y≤600 and credit/CTA y≥1330); aspect kept, never stretched."
             },
             "background": {
               "fill": "cover 1080x1920 from the same source",
@@ -3315,7 +3317,7 @@
             }
           },
           "title_source_full": "6. Պատեր",
-          "privacy": "Workers mid-frame: blur faces (r=18 px) unless written consent (Բ2).",
+          "privacy": "Owner decision 2026-11-10: faces stay visible, no blur (already rendered this way in round 0; no re-export needed).",
           "page": {
             "style": "feed_corner",
             "text": "7 / 9",
@@ -4018,7 +4020,8 @@
       "P01": [
         "labels from copy Round 1 (09 'Պատեր՝ 1-ին հարկ', 07 'Ծածկ', 08 'Կարկաս', 10 'Բետոնի լցում', 06 'Պատեր՝ 2-րդ հարկ')",
         "end card: CTA → direct «ՏՈՒՆ»; overlay p01_end_grad; label 32 px, body/CTA 42 px (min 40); text block moved to y 1150..1460",
-        "caption.txt / alt_hy.txt from updated 03-copy.json"
+        "caption.txt / alt_hy.txt from updated 03-copy.json",
+        "scene 5 (house-01/09): no face blur (owner decision)"
       ],
       "P03": [
         "corner labels 'Լողավազան 1/2' → feed_corner_label (26 px, dark pill α0.6, padding 10/16), all slides with a corner label"
@@ -4026,11 +4029,13 @@
       "P04": [
         "duration 12.0 → 13.5 s; scene 7 = 10.2-13.5 s; credit 10.5-13.5, CTA 11.0-13.5 (2.5 s)",
         "inactive words/arrows 70% + text shadow; EN label 28 px; scenes 2-6 overlay p04_top_plate (α0.85→0.8 to y660, 0 at y960)",
-        "cover overlay p04_cover_grad (α≥0.78 to y760)"
+        "cover overlay p04_cover_grad (α≥0.78 to y760)",
+        "scene 7 foreground fixed at 744x700 @ (168,610) — producer's round-0 layout adopted into the spec"
       ],
       "P05": [
         "slide 4 body (house-01/05: columns already poured, only starter bars visible) and slide 5 body (house-01/07: slab after pour) from updated copy",
-        "alt_hy.txt from updated copy; re-export P05_04, P05_05 (other slides unchanged)"
+        "alt_hy.txt from updated copy; re-export P05_04, P05_05 (other slides unchanged)",
+        "slide 7: faces stay visible (owner decision) — already so in round 0, no re-export"
       ],
       "P06B": [
         "headline «Ինչու՞» → «Ինչո՞ւ»; caption.txt / alt_hy.txt from updated copy"
@@ -4047,7 +4052,7 @@
       "P01",
       "P03",
       "P04",
-      "P05 (slides 04, 05 + alt)",
+      "P05 (slides 04, 05 + alt_hy.txt)",
       "P06B",
       "P08B"
     ],
@@ -4061,6 +4066,16 @@
       "P07B",
       "P09",
       "P09B"
+    ]
+  },
+  "owner_decisions_applied": {
+    "faces_house-01/09": "Owner approved: workers' faces in house-01/09 stay visible — NO blur (P01 scene 5, P05 slide 7).",
+    "Բ2": "Resolved: house-01, pool-01, pool-02, pool-05 confirmed built by the GARON team. «Մեր թիմի…» wording allowed (no years/counts/addresses). Not a publishing gate any more.",
+    "site": "garon.am (https://garon.am) — replaces [կայքի հասցե՝ ճշտել] wherever it appears (none in this batch's image texts).",
+    "instagram": "@garon__construction",
+    "still_open": [
+      "Բ3 VAT, Բ4, calculator prices (demo) → P06, P09 not published",
+      "Բ5 weekly report → P08, P05_09_A not published"
     ]
   }
 }
