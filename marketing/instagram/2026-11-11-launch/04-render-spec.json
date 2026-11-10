@@ -1,0 +1,1763 @@
+{
+ "spec_version": 1,
+ "batch": "marketing/instagram/2026-11-11-launch",
+ "generated": "2026-11-10",
+ "source_files": [
+  "02-briefs.json",
+  "02-plan.md",
+  "03-copy.json",
+  "03-copy.md",
+  "00-profile-setup.md",
+  "../owner-decisions.md",
+  "../2026-11-10-batch-1/04-render-spec.json (brand, styles, overlays reused)",
+  "components/Splash.tsx",
+  "app/globals.css",
+  "app/page.tsx",
+  "local production build (probe 2026-11-10)"
+ ],
+ "conventions": {
+  "units": "Pixels in the OUTPUT frame, origin top-left. Times in seconds from item start (30 fps; 1 frame = 0.0333 s). L01 uses CANVAS coordinates (3240x1440) where stated, otherwise tile-local.",
+  "crop": "Fractions of the SOURCE image {x,y,w,h} (0..1, origin top-left). The crop rect already has the output aspect ratio; scale it to fill the frame. Never stretch.",
+  "kenburns": "Linear interpolation of the crop rect from `from` to `to` over the scene duration with ease 'inOutSine' unless stated.",
+  "text_box": "x,y = top-left of the text box; w = max width (wrap inside); align inside the box. `anchor: bottom` means y is the BOTTOM edge of the box (box grows upwards).",
+  "stack": "Elements in a `stack` are laid out top-to-bottom (or bottom-up when anchor=bottom) with `gap` px between boxes.",
+  "autofit": "If text exceeds max_lines at `size`, reduce size in 2 px steps down to `min_size`. If it still does not fit, STOP and report — do not shorten copy.",
+  "strings": "Every `text` value is final copy (verbatim from 03-copy.json or content/i18n.ts). Do not retype — copy-paste. Armenian punctuation ։ ՝ « » ՞ must be preserved.",
+  "rendering": "Recommended: render text/graphic layers with HTML+CSS in headless Chromium (exact font stacks below, font-feature-settings normal, -webkit-font-smoothing antialiased) to transparent PNG, then composite with ffmpeg. Do not use editor auto-captions or system fonts.",
+  "placeholders": "Text containing [..._ճշտել] must NOT be published. Producer renders a draft with the placeholder visible in red #ff4d4d for review; the final render requires the resolved value from the caller.",
+  "overlay_linear_stops": "type 'linear_stops': vertical gradient of `color`; `stops` = [[y_px, alpha], ...] sorted by y, alpha interpolated linearly between stops, constant before the first and after the last stop.",
+  "letter_spacing_centering": "Centred text with letter-spacing: add padding-left equal to the letter-spacing (CSS adds tracking after the last glyph) so the visible glyphs are optically centred.",
+  "default_texts": "This spec uses the DEFAULT (undated) copy everywhere: no '15.11 · 20:00' on L02, L03 s6 = «Շուտով՝ մեր կայքը». Dated variants in 03-copy.md are NOT rendered.",
+  "verbatim": "All `text` values are copied programmatically from 03-copy.json (slides[].title/body, scenes[].text) except: eyebrow URLs on L04 (factual page addresses) and site-native strings captured from the site itself."
+ },
+ "brand": {
+  "colors": {
+   "gold": "#c9a96a",
+   "gold_dark_on_light": "#856727",
+   "ink": "#17191c",
+   "dark": "#0c0d0e",
+   "dark2": "#151719",
+   "paper": "#f5f5f3",
+   "gray": "#70757b",
+   "rule_gold": "rgba(201,169,106,0.55)",
+   "rule_light": "rgba(255,255,255,0.15)"
+  },
+  "fonts": {
+   "display": {
+    "stack": "'Cormorant Garamond','Noto Serif Armenian',Georgia,serif",
+    "note": "Cormorant has no Armenian glyphs: Armenian falls back to Noto Serif Armenian (intended). Latin/digits render in Cormorant.",
+    "weights": [
+     300,
+     400,
+     500
+    ],
+    "source": "Google Fonts"
+   },
+   "text": {
+    "stack": "'Montserrat','Noto Sans Armenian',Arial,sans-serif",
+    "weights": [
+     400,
+     500,
+     600
+    ],
+    "source": "Google Fonts"
+   }
+  },
+  "logo": {
+   "on_dark": "public/brand/garon-logo-dark.png",
+   "on_light": "public/brand/garon-logo-light.png",
+   "note": "File names are inverted vs. intuition: garon-logo-dark.png is the WHITE logo (for dark backgrounds), as used by components/Logo.tsx with light=true. Source 425x310 RGBA with transparent padding; sizes below refer to the full PNG canvas.",
+   "reel": {
+    "file": "public/brand/garon-logo-dark.png",
+    "x": 70,
+    "y": 262,
+    "w": 132,
+    "h": 96,
+    "opacity": 0.92
+   },
+   "feed": {
+    "file": "public/brand/garon-logo-dark.png",
+    "x": 60,
+    "y": 52,
+    "w": 120,
+    "h": 88,
+    "opacity": 0.92
+   },
+   "large_on_dark": {
+    "file": "public/brand/garon-logo-dark.png",
+    "note": "Source 425x310, visible content bbox x 29..392, y 21..291. Max rendered width 425 (1:1) on L01c; 340 on end slides. Never above 425 (jagged edges)."
+   }
+  },
+  "photo_grade": "Authentic look: exposure/white-balance match between frames only; saturation -8%; contrast +5%; no LUT 'looks', no sky replacement, no AI upscaling/generative fill. Blue tarps stay (real site).",
+  "forbidden_assets": [
+   "public/services/* (AI/stock) — incl. public/services/residential-hero.webp, which is the HOME PAGE HERO background (see L04)",
+   "public/stock/*",
+   "public/projects/house-01/11.webp",
+   "public/projects/pool-02/04.webp",
+   "public/projects/pool-01/08.webp (not used in launch per brief)",
+   "any AI video / frame generation / upscaling"
+  ]
+ },
+ "formats": {
+  "reel": {
+   "w": 1080,
+   "h": 1920,
+   "fps": 30,
+   "container": "mp4",
+   "video": "H.264 High, yuv420p, CRF 18 (or 14-16 Mbps VBR), BT.709",
+   "audio": "AAC-LC 48 kHz stereo 320 kbps, integrated loudness -14 LUFS, true peak -1 dBTP",
+   "safe_area": {
+    "x": 70,
+    "y": 250,
+    "w": 940,
+    "h": 1250,
+    "note": "Keep ALL text/logo inside x 70..1010, y 250..1500 (250 px top / 420 px bottom clear). Right 140 px of the bottom half also carries IG buttons: no text right of x=900 below y=1100."
+   },
+   "grid_cover_zone": {
+    "x": 0,
+    "y": 240,
+    "w": 1080,
+    "h": 1440,
+    "note": "Profile grid (3:4) shows y 240..1680 of the reel cover."
+   }
+  },
+  "feed_3x4": {
+   "w": 1080,
+   "h": 1440,
+   "format": "JPG sRGB, quality 92, 4:4:4 chroma (typographic/graphic slides and L01 tiles: PNG-24 master, JPG q95)",
+   "safe_area": {
+    "x": 90,
+    "y": 60,
+    "w": 900,
+    "h": 1320,
+    "note": "Grid shows the full 3:4 frame. Keep text/logo inside x 90..990. Triptych: important elements >= 90 px from tile edges (grid gaps)."
+   }
+  }
+ },
+ "styles": {
+  "reel_hook": {
+   "font": "display",
+   "weight": 500,
+   "size": 84,
+   "min_size": 68,
+   "line_height": 1.12,
+   "color": "#f5f5f3",
+   "max_lines": 3,
+   "shadow": "0 2px 24px rgba(0,0,0,0.45)"
+  },
+  "reel_word": {
+   "font": "display",
+   "weight": 500,
+   "size": 64,
+   "min_size": 56,
+   "line_height": 1.15,
+   "color": "rgba(245,245,243,0.38)",
+   "active_color": "#c9a96a",
+   "max_lines": 2
+  },
+  "reel_label": {
+   "font": "text",
+   "weight": 600,
+   "size": 30,
+   "letter_spacing": "0.16em",
+   "color": "#f5f5f3",
+   "rule": {
+    "w": 64,
+    "h": 2,
+    "color": "#c9a96a",
+    "offset_y": -22
+   },
+   "max_lines": 1
+  },
+  "reel_en": {
+   "font": "text",
+   "weight": 500,
+   "size": 24,
+   "letter_spacing": "0.22em",
+   "transform": "uppercase",
+   "color": "#c9a96a",
+   "max_lines": 1
+  },
+  "reel_body": {
+   "font": "text",
+   "weight": 500,
+   "size": 34,
+   "min_size": 30,
+   "line_height": 1.35,
+   "color": "rgba(245,245,243,0.9)",
+   "max_lines": 2
+  },
+  "reel_cta": {
+   "font": "text",
+   "weight": 600,
+   "size": 36,
+   "min_size": 30,
+   "line_height": 1.3,
+   "color": "#c9a96a",
+   "max_lines": 2
+  },
+  "reel_point_num": {
+   "font": "display",
+   "weight": 300,
+   "size": 200,
+   "line_height": 1.0,
+   "color": "#c9a96a"
+  },
+  "reel_point_title": {
+   "font": "display",
+   "weight": 500,
+   "size": 64,
+   "min_size": 52,
+   "line_height": 1.15,
+   "color": "#f5f5f3",
+   "max_lines": 3
+  },
+  "reel_subtitle": {
+   "font": "text",
+   "weight": 600,
+   "size": 44,
+   "min_size": 40,
+   "line_height": 1.25,
+   "color": "#f5f5f3",
+   "box": {
+    "color": "rgba(12,13,14,0.62)",
+    "pad_x": 22,
+    "pad_y": 12,
+    "radius": 4
+   },
+   "max_lines": 2,
+   "max_chars_per_line": 30
+  },
+  "feed_eyebrow": {
+   "font": "text",
+   "weight": 600,
+   "size": 22,
+   "letter_spacing": "0.18em",
+   "color": "#c9a96a",
+   "max_lines": 1
+  },
+  "feed_title_xl": {
+   "font": "display",
+   "weight": 500,
+   "size": 80,
+   "min_size": 64,
+   "line_height": 1.08,
+   "color": "#f5f5f3",
+   "max_lines": 4
+  },
+  "feed_title": {
+   "font": "display",
+   "weight": 500,
+   "size": 62,
+   "min_size": 50,
+   "line_height": 1.1,
+   "color": "#f5f5f3",
+   "max_lines": 3
+  },
+  "feed_body": {
+   "font": "text",
+   "weight": 400,
+   "size": 32,
+   "min_size": 28,
+   "line_height": 1.45,
+   "color": "rgba(245,245,243,0.86)",
+   "max_lines": 5
+  },
+  "feed_numeral": {
+   "font": "display",
+   "weight": 300,
+   "size": 190,
+   "line_height": 0.9,
+   "color": "#c9a96a"
+  },
+  "feed_footer": {
+   "font": "text",
+   "weight": 400,
+   "size": 21,
+   "min_size": 19,
+   "line_height": 1.45,
+   "color": "rgba(245,245,243,0.62)",
+   "max_lines": 6
+  },
+  "feed_corner": {
+   "font": "text",
+   "weight": 600,
+   "size": 20,
+   "letter_spacing": "0.18em",
+   "color": "#f5f5f3",
+   "opacity": 0.85,
+   "max_lines": 1
+  },
+  "price_total": {
+   "font": "display",
+   "weight": 500,
+   "size": 66,
+   "line_height": 1.0,
+   "color": "#c9a96a"
+  },
+  "price_name": {
+   "font": "text",
+   "weight": 600,
+   "size": 24,
+   "letter_spacing": "0.16em",
+   "color": "#f5f5f3"
+  },
+  "price_desc": {
+   "font": "text",
+   "weight": 400,
+   "size": 24,
+   "color": "rgba(245,245,243,0.62)"
+  },
+  "price_rate": {
+   "font": "text",
+   "weight": 500,
+   "size": 26,
+   "color": "rgba(245,245,243,0.86)"
+  },
+  "formula": {
+   "font": "text",
+   "weight": 500,
+   "size": 32,
+   "line_height": 1.4,
+   "color": "#f5f5f3",
+   "max_lines": 2
+  },
+  "formula_result": {
+   "font": "display",
+   "weight": 500,
+   "size": 92,
+   "line_height": 1.0,
+   "color": "#c9a96a"
+  },
+  "feed_corner_label": {
+   "font": "text",
+   "weight": 600,
+   "size": 26,
+   "letter_spacing": "0.14em",
+   "color": "#f5f5f3",
+   "opacity": 1.0,
+   "max_lines": 1,
+   "box": {
+    "color": "rgba(12,13,14,0.6)",
+    "pad_y": 10,
+    "pad_x": 16,
+    "radius": 3
+   },
+   "note": "Round 1: site label on a dark pill so it reads over sky/grass/water. Box anchored top-right at (x,y); text is inside the padding."
+  },
+  "triptych_display": {
+   "font": "display",
+   "weight": 300,
+   "size": 150,
+   "min_size": 130,
+   "line_height": 1.0,
+   "color": "#f5f5f3",
+   "max_lines": 1,
+   "note": "Armenian glyphs fall back to Noto Serif Armenian 300 (load weight 300 explicitly)."
+  },
+  "triptych_label": {
+   "font": "text",
+   "weight": 500,
+   "size": 24,
+   "min_size": 20,
+   "letter_spacing": "0.3em",
+   "color": "#c9a96a",
+   "max_lines": 1
+  },
+  "triptych_corner": {
+   "font": "text",
+   "weight": 500,
+   "size": 20,
+   "letter_spacing": "0.28em",
+   "color": "#8d9095",
+   "max_lines": 1
+  },
+  "splash_tag_xl": {
+   "font": "text",
+   "weight": 400,
+   "size": 26,
+   "letter_spacing": "0.38em",
+   "color": "#d6bd8c",
+   "max_lines": 1,
+   "note": "Same colour/tracking as the site's .splashTag (globals.css), scaled for a 1080 px tile."
+  },
+  "panel_label": {
+   "font": "text",
+   "weight": 600,
+   "size": 30,
+   "min_size": 26,
+   "letter_spacing": "0.16em",
+   "color": "#c9a96a",
+   "max_lines": 1
+  },
+  "url_gold": {
+   "font": "display",
+   "weight": 500,
+   "size": 56,
+   "line_height": 1.0,
+   "color": "#c9a96a",
+   "max_lines": 1
+  },
+  "page_3x4": {
+   "font": "text",
+   "weight": 600,
+   "size": 20,
+   "letter_spacing": "0.18em",
+   "color": "#f5f5f3",
+   "opacity": 0.6,
+   "max_lines": 1
+  },
+  "_launch_note": "Styles copied verbatim from batch-1 04-render-spec.json; launch-only styles: triptych_*, splash_tag_xl, panel_label, url_gold, page_3x4."
+ },
+ "overlays": {
+  "reel_top_grad": {
+   "type": "linear",
+   "y0": 0,
+   "y1": 760,
+   "color": "#0c0d0e",
+   "alpha0": 0.72,
+   "alpha1": 0.0
+  },
+  "reel_bottom_grad": {
+   "type": "linear",
+   "y0": 1050,
+   "y1": 1920,
+   "color": "#0c0d0e",
+   "alpha0": 0.0,
+   "alpha1": 0.82
+  },
+  "feed_bottom_grad": {
+   "type": "linear",
+   "y0": 620,
+   "y1": 1350,
+   "color": "#0c0d0e",
+   "alpha0": 0.0,
+   "alpha1": 0.88
+  },
+  "feed_top_grad": {
+   "type": "linear",
+   "y0": 0,
+   "y1": 640,
+   "color": "#0c0d0e",
+   "alpha0": 0.78,
+   "alpha1": 0.0
+  },
+  "feed_logo_vignette": {
+   "type": "radial",
+   "cx": 120,
+   "cy": 96,
+   "r": 260,
+   "color": "#0c0d0e",
+   "alpha0": 0.45,
+   "alpha1": 0.0
+  },
+  "p01_end_grad": {
+   "type": "linear_stops",
+   "color": "#0c0d0e",
+   "stops": [
+    [
+     860,
+     0.0
+    ],
+    [
+     1120,
+     0.78
+    ],
+    [
+     1500,
+     0.86
+    ],
+    [
+     1920,
+     0.9
+    ]
+   ],
+   "note": "P01 end card: darkens bright steps/paving under the text block; facade and lit windows above y≈860 stay untouched."
+  },
+  "p04_top_plate": {
+   "type": "linear_stops",
+   "color": "#0c0d0e",
+   "stops": [
+    [
+     0,
+     0.85
+    ],
+    [
+     660,
+     0.8
+    ],
+    [
+     960,
+     0.0
+    ]
+   ],
+   "note": "P04 scenes 2-6: dark plate behind the word sequence (y 400..~560) and EN label (y 570..600)."
+  },
+  "p04_cover_grad": {
+   "type": "linear_stops",
+   "color": "#0c0d0e",
+   "stops": [
+    [
+     0,
+     0.85
+    ],
+    [
+     760,
+     0.78
+    ],
+    [
+     1020,
+     0.0
+    ]
+   ],
+   "note": "P04 cover: hook (y 470..~730) sits on ≥0.78 dark."
+  },
+  "feed34_bottom_grad": {
+   "type": "linear",
+   "y0": 760,
+   "y1": 1440,
+   "color": "#0c0d0e",
+   "alpha0": 0.0,
+   "alpha1": 0.88
+  },
+  "feed34_top_grad": {
+   "type": "linear_stops",
+   "color": "#0c0d0e",
+   "stops": [
+    [
+     0,
+     0.82
+    ],
+    [
+     520,
+     0.7
+    ],
+    [
+     760,
+     0.0
+    ]
+   ],
+   "note": "L03 s3: title/body block y 190..~560 sits on >=0.7 dark."
+  },
+  "grid6_tile": {
+   "type": "vlines",
+   "xs": [
+    90,
+    270,
+    450,
+    630,
+    810,
+    990
+   ],
+   "w": 2,
+   "color": "rgba(201,169,106,0.07)",
+   "y0": 0,
+   "y1": 1440,
+   "note": "Splash column grid (6 columns), offset 90 px so no line falls on a tile seam. Same xs on every 1080-wide tile/slide."
+  },
+  "triptych_glow": {
+   "type": "radial",
+   "cx": 1620,
+   "cy": 880,
+   "r": 640,
+   "color": "#c9a96a",
+   "alpha0": 0.13,
+   "alpha1": 0.0,
+   "note": "Canvas coordinates (3240x1440). Centre tile centre; leaks ~100 px into both neighbours (intended: ties the 3 tiles)."
+  }
+ },
+ "site_capture": {
+  "build": "From repo root: `npm run build && npx next start -p 3123` (LOCAL production build of the current working tree, NOT the live site). Verified 2026-11-10: build OK, 21 routes.",
+  "browser": "Playwright (chromium). Fonts come from the site (next/font), wait for document.fonts.ready.",
+  "lang": "addInitScript: localStorage.setItem('garon-lang','hy') — Armenian UI.",
+  "teardown": "Stop the next server after capture."
+ },
+ "items": {
+  "L01": {
+   "type": "triptych",
+   "ids": [
+    "L01a",
+    "L01b",
+    "L01c"
+   ],
+   "asset_status": "ready",
+   "canvas": {
+    "w": 3240,
+    "h": 1440,
+    "background": "#0c0d0e"
+   },
+   "render": "Build ONE 3240x1440 canvas (HTML/CSS in Chromium, transparent-free), then slice into three 1080x1440 tiles. Never render tiles separately (glow and lines must be continuous).",
+   "slices": [
+    {
+     "id": "L01c",
+     "x": 0,
+     "grid_position": "left",
+     "publish": "2026-11-12 20:00 (3rd)",
+     "output": "out/L01/L01c.jpg"
+    },
+    {
+     "id": "L01b",
+     "x": 1080,
+     "grid_position": "centre",
+     "publish": "2026-11-12 19:55 (2nd)",
+     "output": "out/L01/L01b.jpg"
+    },
+    {
+     "id": "L01a",
+     "x": 2160,
+     "grid_position": "right",
+     "publish": "2026-11-12 19:50 (1st)",
+     "output": "out/L01/L01a.jpg"
+    }
+   ],
+   "canvas_layers": [
+    {
+     "layer": "background",
+     "color": "#0c0d0e"
+    },
+    {
+     "layer": "glow",
+     "ref": "triptych_glow"
+    },
+    {
+     "layer": "vlines",
+     "note": "grid6_tile repeated per tile: canvas xs = 90+180k, k=0..17 (90, 270, ..., 3150). 2 px wide (x..x+1), rgba(201,169,106,0.07), full height."
+    },
+    {
+     "layer": "horizon",
+     "x": 0,
+     "y": 1079,
+     "w": 3240,
+     "h": 2,
+     "color": "#c9a96a",
+     "note": "Centred on y=1080. One unbroken line across all 3 tiles."
+    }
+   ],
+   "tiles": {
+    "L01a": {
+     "elements": [
+      {
+       "kind": "text",
+       "style": "triptych_display",
+       "text": "Շուտով",
+       "x": 90,
+       "y": 670,
+       "w": 900,
+       "align": "center"
+      },
+      {
+       "kind": "text",
+       "style": "triptych_label",
+       "text": "ԼՈՂԱՎԱԶԱՆՆԵՐ · ՏՆԵՐ · ՎԵՐԱՆՈՐՈԳՈՒՄ",
+       "x": 90,
+       "y": 900,
+       "w": 900,
+       "align": "center",
+       "source": "03-copy.json L01a.slides[0].body (part before ' | ')"
+      },
+      {
+       "kind": "text",
+       "style": "triptych_corner",
+       "text": "ԵՐԵՎԱՆ",
+       "x": 990,
+       "y": 1150,
+       "anchor": "top-right",
+       "align": "right",
+       "source": "03-copy.json L01a.slides[0].body ('անկյունում՝ ԵՐԵՎԱՆ'); = site splash.est"
+      }
+     ],
+     "logo": "none (triptych has one logo: L01c)",
+     "alt_hy": "Մուգ ֆոնի վրա մեծ բաց գույնի տառերով՝ «Շուտով», տակը փոքր ոսկեգույն տառերով՝ «Լողավազաններ · Տներ · Վերանորոգում», ներքևի աջ անկյունում՝ «Երևան»։ Ֆոնին՝ բարակ ոսկեգույն ուղղահայաց գծեր և մեկ հորիզոնական ոսկեգույն գիծ։"
+    },
+    "L01b": {
+     "elements": [
+      {
+       "kind": "svg",
+       "source": "components/Splash.tsx <svg className='splashVilla'> (viewBox 0 0 600 300)",
+       "method": "Open the local build (360x640, reducedMotion no-preference, see L02 capture), copy document.querySelector('.splashVilla').outerHTML, render it in a standalone page with: width 900px; height 450px; color #c9a96a; CSS `.draw{stroke-dasharray:none!important;stroke-dashoffset:0!important;animation:none!important} path{vector-effect:non-scaling-stroke;stroke-width:2px}`. Keep the group opacities from the SVG (0.55 / 0.4). Transparent background. Do NOT redraw by hand.",
+       "x": 90,
+       "y": 702,
+       "w": 900,
+       "h": 450,
+       "registration": "SVG ground line y=252 → tile y = 702 + 252*1.5 = 1080 = horizon. Its own ground line (x 114..966) overlays the horizon exactly."
+      }
+     ],
+     "text": "none",
+     "logo": "none",
+     "alt_hy": "GARON-ի ոսկեգույն ճարտարապետական գծանկար մուգ ֆոնի վրա՝ հարթ տանիքով երկհարկանի ժամանակակից տուն՝ մեծ պատուհաններով, վերևում՝ չափային գիծ։ Գծանկարի հետևում՝ թույլ ոսկեգույն լույս, ներքևում՝ հորիզոնական ոսկեգույն գիծ։"
+    },
+    "L01c": {
+     "elements": [
+      {
+       "kind": "image",
+       "src": "public/brand/garon-logo-dark.png",
+       "x": 328,
+       "y": 560,
+       "w": 425,
+       "h": 310,
+       "scale": "1:1 (no resampling)",
+       "note": "Visible logo content lands at y 581..851, x 357..720 (optically centred)."
+      },
+      {
+       "kind": "text",
+       "style": "splash_tag_xl",
+       "text": "ՇԻՆԱՐԱՐՈՒԹՅՈՒՆ",
+       "x": 90,
+       "y": 900,
+       "w": 900,
+       "align": "center"
+      }
+     ],
+     "alt_hy": "Մուգ ֆոնի վրա՝ GARON Construction-ի սպիտակ և ոսկեգույն լոգոն, տակը ոսկեգույն տառերով՝ «Շինարարություն»։ Ներքևում՝ հորիզոնական ոսկեգույն գիծ։"
+    }
+   },
+   "alignment_rules": "Shared rows across tiles: labels/tag top y=900 on L01a and L01c; display word (670..820) and logo content (581..851) share a vertical centre ≈ 715–745; horizon y=1080.",
+   "checks": [
+    "Seams: put the three JPGs side by side with 0 gap and with 4 px gaps (profile grid) — horizon and glow continuous, no element within 90 px of x=1080/2160.",
+    "No date, number, or claim on any tile.",
+    "Each tile also reads alone in feed (L01b = drawing only is intended)."
+   ],
+   "posting": "Publish order L01a 19:50 → L01b 19:55 → L01c 20:00. Do not pin, archive or delete."
+  },
+  "L02": {
+   "type": "reel",
+   "publish_date": "2026-11-13 20:00",
+   "asset_status": "ready",
+   "duration": 9.0,
+   "fps": 30,
+   "frames": 270,
+   "output": "out/L02/L02_reel.mp4",
+   "cover_output": "out/L02/L02_cover.jpg",
+   "capture": {
+    "what": "The site's own Splash component (components/Splash.tsx + .splash rules in app/globals.css), frame-stepped in headless Chromium. NO screen recording, NO upscaling.",
+    "server": "local production build (see site_capture), URL http://localhost:3123/",
+    "context": {
+     "viewport": {
+      "width": 360,
+      "height": 640
+     },
+     "deviceScaleFactor": 3,
+     "isMobile": true,
+     "hasTouch": true,
+     "reducedMotion": "no-preference",
+     "note": "Output frames are exactly 1080x1920. reducedMotion MUST be no-preference (globals.css hides .splash under reduce)."
+    },
+    "init_script": "localStorage.setItem('garon-lang','hy'); const st=window.setTimeout; window.setTimeout=function(f,d,...a){ if(d===3200||d===250) return 0; return st.call(window,f,d,...a); };  // freezes the 3.2 s unmount timer: splash never unmounts",
+    "after_load": [
+     "page.goto(url,{waitUntil:'networkidle'})",
+     "addStyleTag: html,body{background:#0c0d0e!important;overflow:hidden!important} body>:not(.splash){visibility:hidden!important}  // page behind the splash is hidden, so splashLift reveals plain #0c0d0e (home hero is a stock/AI image and must not appear)",
+     "await document.fonts.ready; wait until .splashLogo img complete",
+     "for (a of document.getAnimations()) a.pause()"
+    ],
+    "per_frame": "f = 0..269, t = f/30. Set every animation's currentTime (ms) and the .splash `scale` CSS property (independent transform property, composes with splashLift's transform) per the table below, then page.screenshot() → frames/L02_%03d.png (1080x1920).",
+    "frame_table": [
+     {
+      "out": "0.000–2.400 (f 0–71)",
+      "anims_ms": "t*1000 for all animations",
+      "splashLift_ms": 0,
+      "scale": "1.0 until 2.2 s, then zoom curve"
+     },
+     {
+      "out": "2.400–4.600 (f 72–137)",
+      "anims_ms": 2400,
+      "splashLift_ms": 0,
+      "scale": "zoom curve"
+     },
+     {
+      "out": "4.600–5.500 (f 138–164)",
+      "anims_ms": 2400,
+      "splashLift_ms": "2300 + (t-4.6)*1000  (2300→3200)",
+      "scale": 1.03
+     },
+     {
+      "out": "5.500–9.000 (f 165–269)",
+      "anims_ms": 2400,
+      "splashLift_ms": 3200,
+      "scale": 1.03,
+      "note": "splash fully lifted → plain #0c0d0e; capture once and reuse as end-card base."
+     }
+    ],
+    "zoom_curve": "scale = 1 + 0.03*easeInOutSine((t-2.2)/2.4) for 2.2 ≤ t ≤ 4.6; transform-origin 50% 50% (default). In-browser (vector-sharp), not ffmpeg scale.",
+    "measured_layout_px": {
+     "villa_svg": [
+      162,
+      478,
+      756,
+      378
+     ],
+     "logo_img": [
+      255,
+      916,
+      570,
+      416
+     ],
+     "tag": [
+      382,
+      1409,
+      317,
+      33
+     ],
+     "corner_ԵՐԵՎԱՆ": [
+      54,
+      1788,
+      107,
+      24
+     ],
+     "counter": [
+      959,
+      1788,
+      67,
+      24
+     ],
+     "note": "x,y,w,h at scale 1.0, measured on the local build 2026-11-10. Splash bg #080909. Counter reaches 100% at 2.1 s; tag finishes fading in at 2.4 s."
+    },
+    "timing_source": "globals.css: splashDraw 1.1 s (delays .05–.9 s), logoBuild .85–1.95 s, fadeUp corner 1.5–2.2 s, tag 1.7–2.4 s, splashCount 0–2.1 s, splashLift .9 s @ 2.3 s cubic-bezier(.76,0,.24,1).",
+    "fallback": "If frame stepping fails: real phone screen recording of a page refresh (4K not available → record at device max, crop status bar, scale to 1080x1920). Mark the result as fallback in the manifest."
+   },
+   "overlay_text": [
+    {
+     "style": "reel_hook",
+     "text": "Մեկ գիծ։",
+     "x": 70,
+     "y": 300,
+     "w": 940,
+     "align": "center",
+     "in": 0.0,
+     "out": 1.2,
+     "max_lines": 1,
+     "anim_in": "fade 4f",
+     "anim_out": "fade 4f"
+    },
+    {
+     "style": "reel_hook",
+     "text": "Հետո՝ տուն։",
+     "x": 70,
+     "y": 300,
+     "w": 940,
+     "align": "center",
+     "in": 1.2,
+     "out": 2.2,
+     "max_lines": 1,
+     "anim_in": "fade 4f",
+     "anim_out": "fade 4f"
+    },
+    {
+     "style": "reel_hook",
+     "text": "Հետո՝ GARON։",
+     "x": 70,
+     "y": 300,
+     "w": 940,
+     "align": "center",
+     "in": 2.2,
+     "out": 4.6,
+     "max_lines": 1,
+     "anim_in": "fade 4f",
+     "anim_out": "fade 4f"
+    }
+   ],
+   "overlay_text_note": "Hooks sit above the drawing (villa top y≈478; at scale 1.03 ≈ 465): box y 300..~395, inside safe area. Single line each, no shadow needed on #080909 (keep style shadow). Cut between hooks = out-fade 4f of the old + in-fade 4f of the new, overlapping on the boundary frame. Hook 3 fades out f 134–137 (before the lift).",
+   "end_card": {
+    "in": 5.5,
+    "out": 9.0,
+    "base": "captured frame with splash fully lifted (#0c0d0e)",
+    "layers": [
+     {
+      "layer": "vlines",
+      "xs": [
+       0,
+       180,
+       360,
+       540,
+       720,
+       900
+      ],
+      "w": 3,
+      "color": "rgba(201,169,106,0.035)",
+      "in": 4.6,
+      "note": "Matches the splash's own column lines exactly (60 CSS px × 3; 1 CSS px = 3 px; .07 × opacity .5), so the lines continue seamlessly as the curtain lifts. Layer sits UNDER the captured frames during 4.6–5.5 (composite frames with the lifted area showing these lines: render the vlines into the page via the injected style `html{background:#0c0d0e linear-gradient(90deg,rgba(201,169,106,.035) 1px,transparent 1px) 0 0/60px 100%}` — preferred, then they are in the capture)."
+     },
+     {
+      "layer": "text",
+      "style": "triptych_display",
+      "text": "Շուտով",
+      "x": 70,
+      "y": 820,
+      "w": 940,
+      "align": "center",
+      "in": 5.35,
+      "out": 9.0,
+      "anim_in": "fade 8f + rise 16px"
+     },
+     {
+      "layer": "text",
+      "style": "triptych_label",
+      "text": "ԼՈՂԱՎԱԶԱՆՆԵՐ · ՏՆԵՐ · ՎԵՐԱՆՈՐՈԳՈՒՄ",
+      "x": 70,
+      "y": 1060,
+      "w": 940,
+      "align": "center",
+      "in": 5.6,
+      "out": 9.0,
+      "anim_in": "fade 6f",
+      "note": "Copy is «Լողավազաններ · Տներ · Վերանորոգում»; rendered in capitals = same as L01a label (Armenian uppercase via CSS text-transform is fine)."
+     },
+     {
+      "layer": "horizon",
+      "x": 0,
+      "y": 1179,
+      "w": 1080,
+      "h": 2,
+      "color": "#c9a96a",
+      "in": 5.6,
+      "anim_in": "draw left→right 0.7 s easeInOutSine (scaleX 0→1, origin left)"
+     }
+    ],
+    "no_date": "Default copy: NO '15.11 · 20:00 · garon.am' line.",
+    "loop": "No fade-out; the loop restarts on the dark splash frame (seamless)."
+   },
+   "logo": "No corner logo: the splash itself carries the full logo (2.2–5.5 s).",
+   "cover": {
+    "source": "frame at t=2.4 s state with scale 1.0 and no hook text (re-capture: anims 2400, splashLift 0, scale 1)",
+    "size": [
+     1080,
+     1920
+    ],
+    "grid_check": "3:4 crop y 240..1680 contains drawing + logo + tag (478..1442).",
+    "upload": "Set as Reel cover; 'Show in profile grid' ON; not a Trial Reel."
+   },
+   "audio": {
+    "mood": "calm ambient pad / soft felt piano, 70–80 BPM, no vocals, no drums; gentle swell into the lift at 4.6 s, settles at 5.5 s",
+    "source": "Instagram in-app Meta Sound Collection (licensed for business accounts) chosen at upload; export the MP4 with a silent AAC track (formats.reel.audio). Alternative: no music + soft pencil/line 'draw' SFX 0–1.9 s from a royalty-free library.",
+    "loudness": "-14 LUFS integrated, -1 dBTP if mixed offline"
+   },
+   "alt_hy": "Կարճ անիմացիա մուգ ֆոնի վրա. ոսկեգույն գիծը քայլ առ քայլ գծում է հարթ տանիքով երկհարկանի ժամանակակից տուն, հայտնվում է GARON լոգոն և «Շինարարություն» բառը, անկյունում՝ «Երևան» և 0-ից 100% հաշվիչ։ Վերջում՝ «Շուտով» և «Լողավազաններ · Տներ · Վերանորոգում»։"
+  },
+  "L03": {
+   "type": "carousel",
+   "publish_date": "2026-11-14 20:00",
+   "asset_status": "ready",
+   "size": [
+    1080,
+    1440
+   ],
+   "output_pattern": "out/L03/L03_{n:02d}.jpg",
+   "slides": [
+    {
+     "n": 1,
+     "layout": "full_photo",
+     "src": "public/projects/house-01/12.webp",
+     "src_px": [
+      1152,
+      1536
+     ],
+     "crop": {
+      "x": 0.0,
+      "y": 0.0,
+      "w": 1.0,
+      "h": 1.0
+     },
+     "scale_note": "native 3:4, downscale 0.9375",
+     "overlays": [
+      "feed34_bottom_grad",
+      "feed_logo_vignette"
+     ],
+     "logo": "brand.logo.feed",
+     "text_stack": {
+      "anchor": "bottom",
+      "x": 90,
+      "y": 1340,
+      "gap": 24,
+      "rule": {
+       "position": "above first item",
+       "w": 64,
+       "h": 2,
+       "color": "#c9a96a",
+       "gap": 26
+      },
+      "items": [
+       {
+        "style": "feed_title_xl",
+        "text": "Լողավազաններ · Տներ · Վերանորոգում",
+        "w": 900,
+        "align": "left"
+       },
+       {
+        "style": "feed_eyebrow",
+        "text": "GARON · ինչով ենք զբաղվում →",
+        "w": 900,
+        "align": "left"
+       }
+      ]
+     },
+     "page": {
+      "style": "page_3x4",
+      "text": "1 / 6",
+      "x": 990,
+      "y": 60,
+      "anchor": "top-right"
+     },
+     "grid_cover": true
+    },
+    {
+     "n": 2,
+     "layout": "chapter",
+     "background": "#0c0d0e",
+     "photo": {
+      "src": "public/projects/pool-05/01.webp",
+      "src_px": [
+       1280,
+       960
+      ],
+      "crop": {
+       "x": 0.0,
+       "y": 0.0,
+       "w": 1.0,
+       "h": 1.0
+      },
+      "dest": {
+       "x": 0,
+       "y": 0,
+       "w": 1080,
+       "h": 810
+      }
+     },
+     "rule_full": {
+      "x": 0,
+      "y": 809,
+      "w": 1080,
+      "h": 2,
+      "color": "#c9a96a",
+      "note": "horizon line between photo and panel (echo of L01)"
+     },
+     "text_stack": {
+      "anchor": "top",
+      "x": 90,
+      "y": 880,
+      "gap": 30,
+      "items": [
+       {
+        "style": "panel_label",
+        "text": "01 · ԼՈՂԱՎԱԶԱՆՆԵՐ",
+        "w": 900,
+        "align": "left"
+       },
+       {
+        "style": "feed_body",
+        "text": "Նախագծում և կառուցում։ Լողավազան՝ մեր թիմի աշխատանքից։",
+        "w": 900,
+        "align": "left",
+        "max_lines": 5
+       }
+      ]
+     },
+     "logo": "brand.logo.feed",
+     "page": {
+      "style": "page_3x4",
+      "text": "2 / 6",
+      "x": 990,
+      "y": 60,
+      "anchor": "top-right"
+     },
+     "overlays": [
+      {
+       "ref": "feed_logo_vignette"
+      }
+     ]
+    },
+    {
+     "n": 3,
+     "layout": "full_photo",
+     "src": "public/projects/pool-02/07.webp",
+     "src_px": [
+      960,
+      1280
+     ],
+     "crop": {
+      "x": 0.0,
+      "y": 0.0,
+      "w": 1.0,
+      "h": 1.0
+     },
+     "scale_note": "native 3:4, upscale 1.125 (Lanczos, no AI)",
+     "overlays": [
+      "feed34_top_grad",
+      "feed_logo_vignette"
+     ],
+     "logo": "brand.logo.feed",
+     "text_stack": {
+      "anchor": "top",
+      "x": 90,
+      "y": 190,
+      "gap": 26,
+      "rule": {
+       "position": "above first item",
+       "w": 64,
+       "h": 2,
+       "color": "#c9a96a",
+       "gap": 26
+      },
+      "items": [
+       {
+        "style": "feed_title",
+        "text": "Լողավազան՝ մեր թիմի աշխատանքից",
+        "w": 900,
+        "align": "left"
+       },
+       {
+        "style": "feed_body",
+        "text": "Ուղղանկյուն ավազան՝ աստիճաններով, մետաղե սանդուղքով և կլոր բարձրացված ավազանով։",
+        "w": 860,
+        "align": "left"
+       }
+      ]
+     },
+     "page": {
+      "style": "page_3x4",
+      "text": "3 / 6",
+      "x": 990,
+      "y": 60,
+      "anchor": "top-right"
+     },
+     "note": "Text at the TOP (forest), not bottom: the yellow inflatable (x≈0.55–0.75, y≈0.68–0.85) and deck stay clear. Keep the toy, do not retouch."
+    },
+    {
+     "n": 4,
+     "layout": "chapter",
+     "background": "#0c0d0e",
+     "photo": {
+      "src": "public/projects/house-01/06.webp",
+      "src_px": [
+       1536,
+       1152
+      ],
+      "crop": {
+       "x": 0.0,
+       "y": 0.0,
+       "w": 1.0,
+       "h": 1.0
+      },
+      "dest": {
+       "x": 0,
+       "y": 0,
+       "w": 1080,
+       "h": 810
+      }
+     },
+     "rule_full": {
+      "x": 0,
+      "y": 809,
+      "w": 1080,
+      "h": 2,
+      "color": "#c9a96a",
+      "note": "horizon line between photo and panel (echo of L01)"
+     },
+     "text_stack": {
+      "anchor": "top",
+      "x": 90,
+      "y": 880,
+      "gap": 30,
+      "items": [
+       {
+        "style": "panel_label",
+        "text": "02 · ՏՆԵՐ",
+        "w": 900,
+        "align": "left"
+       },
+       {
+        "style": "feed_body",
+        "text": "Կառուցում՝ հիմքից մինչև բանալի։ Լուսանկարում՝ կարկասի փուլը, մեր թիմի աշխատանքից։",
+        "w": 900,
+        "align": "left",
+        "max_lines": 5
+       }
+      ]
+     },
+     "logo": "brand.logo.feed",
+     "page": {
+      "style": "page_3x4",
+      "text": "4 / 6",
+      "x": 990,
+      "y": 60,
+      "anchor": "top-right"
+     },
+     "overlays": [
+      {
+       "ref": "feed_logo_vignette"
+      }
+     ]
+    },
+    {
+     "n": 5,
+     "layout": "chapter",
+     "background": "#151719",
+     "photo": null,
+     "rule_full": {
+      "x": 0,
+      "y": 809,
+      "w": 1080,
+      "h": 2,
+      "color": "#c9a96a",
+      "note": "horizon line between photo and panel (echo of L01)"
+     },
+     "text_stack": {
+      "anchor": "top",
+      "x": 90,
+      "y": 880,
+      "gap": 30,
+      "items": [
+       {
+        "style": "panel_label",
+        "text": "03 · ՎԵՐԱՆՈՐՈԳՈՒՄ",
+        "w": 900,
+        "align": "left"
+       },
+       {
+        "style": "feed_body",
+        "text": "Բնակարաններ և տներ։ Մեր աշխատանքները կտեսնեք այստեղ՝ փուլ առ փուլ։ Ոչ մի օտար «առաջ/հետո» նկար։",
+        "w": 900,
+        "align": "left",
+        "max_lines": 5
+       }
+      ]
+     },
+     "logo": "brand.logo.feed",
+     "page": {
+      "style": "page_3x4",
+      "text": "5 / 6",
+      "x": 990,
+      "y": 60,
+      "anchor": "top-right"
+     },
+     "empty_frame": {
+      "x": 90,
+      "y": 190,
+      "w": 900,
+      "h": 540,
+      "stroke": "1px dashed rgba(201,169,106,0.35)",
+      "dash": [
+       10,
+       10
+      ],
+      "corner_ticks": {
+       "len": 28,
+       "w": 2,
+       "color": "#c9a96a"
+      },
+      "note": "Empty frame = 'our renovation photos will go here'. No photo, no stock, no AI, no icon inside."
+     }
+    },
+    {
+     "n": 6,
+     "layout": "end",
+     "background": "#0c0d0e",
+     "overlays": [
+      "grid6_tile"
+     ],
+     "horizon": {
+      "x": 0,
+      "y": 1079,
+      "w": 1080,
+      "h": 2,
+      "color": "#c9a96a"
+     },
+     "logo_center": {
+      "src": "public/brand/garon-logo-dark.png",
+      "x": 370,
+      "y": 300,
+      "w": 340,
+      "h": 248
+     },
+     "title": {
+      "style": "feed_title_xl",
+      "text": "Շուտով՝ մեր կայքը",
+      "x": 90,
+      "y": 620,
+      "w": 900,
+      "align": "center"
+     },
+     "body": {
+      "style": "feed_body",
+      "text": "Ո՞ր ուղղությունն է ձեզ պետք։ Գրեք direct-ում՝ «ԼՈՂԱՎԱԶԱՆ», «ՏՈՒՆ» կամ «ՎԵՐԱՆՈՐՈԳՈՒՄ»։",
+      "x": 110,
+      "y": "title.bottom + 34",
+      "w": 860,
+      "align": "center",
+      "max_lines": 4
+     },
+     "page": {
+      "style": "page_3x4",
+      "text": "6 / 6",
+      "x": 990,
+      "y": 60,
+      "anchor": "top-right"
+     },
+     "logo": "none (centre logo)"
+    }
+   ],
+   "grade": "brand.photo_grade; match house-01/12 (night) only for exposure — do not brighten the sky.",
+   "alt_hy": "Վեց սլայդ։ 1՝ երկհարկանի ժամանակակից տուն գիշերը՝ լուսավորված եզրագծերով և պատուհաններով, պատշգամբը զարդարված է սպիտակ կտորով և կանաչով, մուտքի մոտ՝ սպիտակ ծաղիկներ, առջևում՝ մեծ սալիկներով բակ։ 2՝ կապույտ խճանկարով լողավազան՝ կլորացված ծայրով, շուրջը՝ սալիկապատ եզր, խոտածածկ և քարերով զարդարված պատ։ 3՝ ուղղանկյուն կապույտ լողավազան՝ մետաղե սանդուղքով, աստիճաններով և կլոր բարձրացված ավազանով, կողքին՝ փայտե տախտակամած, ջրում՝ դեղին փչովի խաղալիք, հետևում՝ անտառով բլուր։ 4՝ կառուցվող երկհարկանի տուն՝ բետոնե սյուներ և ծածկեր, բլոկե պատեր, վերևում՝ արմատուրա, կողքին՝ բետոնե արտաքին սանդուղք։ 5՝ տիպոգրաֆիկ սլայդ՝ «Վերանորոգում. բնակարաններ և տներ»։ 6՝ GARON լոգոն և «Շուտով՝ մեր կայքը»։",
+   "checks": [
+    "Body on s2/s4/s5 must fit 5 lines at >=28 px (autofit), else STOP.",
+    "No date/address/quantity anywhere.",
+    "Default copy on s6: «Շուտով՝ մեր կայքը»."
+   ]
+  },
+  "L04": {
+   "type": "carousel",
+   "publish_date": "2026-11-15 20:00",
+   "asset_status": "capture_local",
+   "asset_status_note": "Brief said needs_shoot (real phone). Replaced by Playwright capture from the LOCAL production build (caller instruction): no physical shoot. Condition Լ3 still applies to PUBLISHING: before 20:00 open garon.am on a phone and confirm it matches these screenshots (no «25+», «50+», «ՀԻՄՆ. 2000»).",
+   "size": [
+    1080,
+    1440
+   ],
+   "output_pattern": "out/L04/L04_{n:02d}.jpg",
+   "screenshots": {
+    "server": "site_capture (local build)",
+    "context": "playwright.devices['iPhone 13'] on chromium: viewport 390x664, deviceScaleFactor 3, isMobile, hasTouch, iPhone UA; reducedMotion:'reduce' (site CSS hides the splash and shows .reveal elements in final state — identical to the settled page).",
+    "procedure": "goto(url,{waitUntil:'networkidle'}) → await document.fonts.ready → window.scrollTo(0,scrollY) → wait 800 ms (header gets .scrolled, bg rgba(9,10,11,.88)) → assert window.scrollY===scrollY → page.screenshot() (viewport only) → shots/<id>.png 1170x1992.",
+    "shots": [
+     {
+      "id": "L04_shot1",
+      "url": "/projects",
+      "scrollY": 0,
+      "shows": "Projects hero: real photo pool-01/06, fixed header with GARON logo, «Իրական աշխատանքներ։ Իրական արդյունքներ։»"
+     },
+     {
+      "id": "L04_shot2",
+      "url": "/",
+      "scrollY": 642,
+      "shows": "Home trust strip (Լողավազաններ / Տներ / Վերանորոգում + labels) under the fixed header, top of the light 'philosophy' section. Home hero (stock) is fully scrolled away (hero ends at 720 = 642+78 header)."
+     },
+     {
+      "id": "L04_shot3",
+      "url": "/services",
+      "scrollY": 652,
+      "shows": "Service directory list 01–04 only; stock hero (ends y=650) is above the viewport."
+     },
+     {
+      "id": "L04_shot4",
+      "url": "/calculator",
+      "scrollY": 652,
+      "shows": "Form: project type buttons, area input (empty, placeholder «օր.՝ 150 մ²»), floors 1–5+. Price cards start at page y 1121 → CROPPED (crop h 0.6822 = viewport y 0..453 = page y 652..1105)."
+     },
+     {
+      "id": "L04_shot5",
+      "url": "/projects",
+      "scrollY": 1560,
+      "shows": "Archive: pool-02/07 card (full) + top of pool-05/01 card. pool-01/06 card bottom (1632) stays under the header."
+     }
+    ],
+    "automatic_checks": [
+     "For every shot: no element intersecting the viewport has a background-image or <img>/<video> src containing '/stock/' or '/services/' (fail = STOP).",
+     "Visible text (document.body.innerText of elements in viewport) must not match /25\\+|50\\+|ՀԻՄՆ|2000/.",
+     "L04_shot4: every element whose text contains '֏' must have top >= scrollY + 453 (i.e. outside the crop). Area input must be empty; no result block in crop.",
+     "Language: document.documentElement.lang === 'hy'."
+    ],
+    "verified_2026_11_10": "Probe run on the local build: home hero = /services/residential-hero.webp (stock/AI) → NOT usable; /projects hero = /projects/pool-01/06.webp (real); /services and /calculator heroes = /stock/*.webp (excluded by scroll). Section tops (CSS px): home trustStrip 720; services list 650–1410; calculator labels 740/899/1014/1121(finish, prices from 1232); projects archive cards 1212/1646/2080."
+   },
+   "phone_template": {
+    "frame": {
+     "x": 230,
+     "w": 620,
+     "bezel": 14,
+     "radius_outer": 72,
+     "radius_screen": 58,
+     "fill": "#1a1c1f",
+     "border": "2px solid rgba(201,169,106,0.45)",
+     "shadow": "0 30px 80px rgba(0,0,0,0.55)",
+     "note": "Neutral rounded frame, no notch, no buttons, no Apple/Samsung mockup. The frame bleeds off the slide bottom (cropped by the 1440 edge)."
+    },
+    "screen": {
+     "x": 244,
+     "w": 592,
+     "scale": 0.50598,
+     "full_h": 1008,
+     "note": "1170 px screenshot width → 592 px (scale 592/1170)."
+    }
+   },
+   "slides": [
+    {
+     "n": 1,
+     "layout": "phone",
+     "background": "#0c0d0e",
+     "overlays": [
+      "grid6_tile"
+     ],
+     "text_stack": {
+      "anchor": "top",
+      "x": 90,
+      "y": 150,
+      "gap": 24,
+      "items": [
+       {
+        "style": "feed_title_xl",
+        "text": "Մեր կայքը գործում է",
+        "w": 900,
+        "align": "left"
+       },
+       {
+        "style": "url_gold",
+        "text": "garon.am",
+        "w": 900,
+        "align": "left"
+       }
+      ]
+     },
+     "phone": {
+      "ref": "PHONE",
+      "frame_top": 470,
+      "screen_top": 484,
+      "screenshot": "L04_shot1",
+      "crop": {
+       "x": 0.0,
+       "y": 0.0,
+       "w": 1.0,
+       "h": 0.9488
+      },
+      "dest": {
+       "x": 244,
+       "y": 484,
+       "w": 592,
+       "h": 956
+      }
+     },
+     "logo": "none (the screenshot shows the site header logo)",
+     "page": {
+      "style": "page_3x4",
+      "text": "1 / 6",
+      "x": 990,
+      "y": 60,
+      "anchor": "top-right"
+     },
+     "grid_cover": true,
+     "deviation": "Copy/brief say 'home page hero (house-01/12)'. The current home hero is /services/residential-hero.webp (stock/AI), so slide 1 uses the /projects hero (real pool-01/06). Text unchanged."
+    },
+    {
+     "n": 2,
+     "layout": "phone",
+     "background": "#0c0d0e",
+     "overlays": [
+      "grid6_tile"
+     ],
+     "text_stack": {
+      "anchor": "top",
+      "x": 90,
+      "y": 150,
+      "gap": 24,
+      "items": [
+       {
+        "style": "feed_eyebrow",
+        "text": "garon.am",
+        "w": 900,
+        "align": "left",
+        "source": "page URL (factual)"
+       },
+       {
+        "style": "feed_title",
+        "text": "Երեք ուղղություն",
+        "w": 900,
+        "align": "left"
+       },
+       {
+        "style": "feed_body",
+        "text": "Լողավազաններ · Տներ · Վերանորոգում",
+        "w": 900,
+        "align": "left"
+       }
+      ]
+     },
+     "phone": {
+      "ref": "PHONE",
+      "frame_top": 470,
+      "screen_top": 484,
+      "screenshot": "L04_shot2",
+      "crop": {
+       "x": 0.0,
+       "y": 0.0,
+       "w": 1.0,
+       "h": 0.9488
+      },
+      "dest": {
+       "x": 244,
+       "y": 484,
+       "w": 592,
+       "h": 956
+      }
+     },
+     "logo": "none (the screenshot shows the site header logo)",
+     "page": {
+      "style": "page_3x4",
+      "text": "2 / 6",
+      "x": 990,
+      "y": 60,
+      "anchor": "top-right"
+     }
+    },
+    {
+     "n": 3,
+     "layout": "phone",
+     "background": "#0c0d0e",
+     "overlays": [
+      "grid6_tile"
+     ],
+     "text_stack": {
+      "anchor": "top",
+      "x": 90,
+      "y": 150,
+      "gap": 24,
+      "items": [
+       {
+        "style": "feed_eyebrow",
+        "text": "garon.am/services",
+        "w": 900,
+        "align": "left",
+        "source": "page URL (factual)"
+       },
+       {
+        "style": "feed_title",
+        "text": "Ծառայություններ",
+        "w": 900,
+        "align": "left"
+       },
+       {
+        "style": "feed_body",
+        "text": "Ինչ ենք կառուցում և վերանորոգում՝ մեկ էջում։",
+        "w": 900,
+        "align": "left"
+       }
+      ]
+     },
+     "phone": {
+      "ref": "PHONE",
+      "frame_top": 470,
+      "screen_top": 484,
+      "screenshot": "L04_shot3",
+      "crop": {
+       "x": 0.0,
+       "y": 0.0,
+       "w": 1.0,
+       "h": 0.9488
+      },
+      "dest": {
+       "x": 244,
+       "y": 484,
+       "w": 592,
+       "h": 956
+      }
+     },
+     "logo": "none (the screenshot shows the site header logo)",
+     "page": {
+      "style": "page_3x4",
+      "text": "3 / 6",
+      "x": 990,
+      "y": 60,
+      "anchor": "top-right"
+     }
+    },
+    {
+     "n": 4,
+     "layout": "phone",
+     "background": "#0c0d0e",
+     "overlays": [
+      "grid6_tile"
+     ],
+     "text_stack": {
+      "anchor": "top",
+      "x": 90,
+      "y": 150,
+      "gap": 24,
+      "items": [
+       {
+        "style": "feed_eyebrow",
+        "text": "garon.am/calculator",
+        "w": 900,
+        "align": "left",
+        "source": "page URL (factual)"
+       },
+       {
+        "style": "feed_title",
+        "text": "Մոտավոր գինը՝ մակերեսով, նախապես",
+        "w": 900,
+        "align": "left"
+       },
+       {
+        "style": "feed_body",
+        "text": "Ընտրեք նախագծի տեսակը, նշեք մակերեսը կամ լողավազանի չափերը և տեսեք մոտավոր արժեքը։",
+        "w": 900,
+        "align": "left",
+        "max_lines": 4
+       }
+      ]
+     },
+     "phone": {
+      "ref": "PHONE",
+      "frame_top": 738,
+      "screen_top": 752,
+      "screenshot": "L04_shot4",
+      "crop": {
+       "x": 0.0,
+       "y": 0.0,
+       "w": 1.0,
+       "h": 0.6822
+      },
+      "dest": {
+       "x": 244,
+       "y": 752,
+       "w": 592,
+       "h": 688
+      }
+     },
+     "logo": "none (the screenshot shows the site header logo)",
+     "page": {
+      "style": "page_3x4",
+      "text": "4 / 6",
+      "x": 990,
+      "y": 60,
+      "anchor": "top-right"
+     },
+     "note": "Phone sits lower: the cropped screen (688 px) ends exactly at the slide bottom (752+688=1440), so the price cards can never appear. Text block must end above y 690 (autofit; else STOP)."
+    },
+    {
+     "n": 5,
+     "layout": "phone",
+     "background": "#0c0d0e",
+     "overlays": [
+      "grid6_tile"
+     ],
+     "text_stack": {
+      "anchor": "top",
+      "x": 90,
+      "y": 150,
+      "gap": 24,
+      "items": [
+       {
+        "style": "feed_eyebrow",
+        "text": "garon.am/projects",
+        "w": 900,
+        "align": "left",
+        "source": "page URL (factual)"
+       },
+       {
+        "style": "feed_title",
+        "text": "Մեր նախագծերը",
+        "w": 900,
+        "align": "left"
+       },
+       {
+        "style": "feed_body",
+        "text": "Միայն մեր թիմի աշխատանքի իրական լուսանկարներ։",
+        "w": 900,
+        "align": "left"
+       }
+      ]
+     },
+     "phone": {
+      "ref": "PHONE",
+      "frame_top": 470,
+      "screen_top": 484,
+      "screenshot": "L04_shot5",
+      "crop": {
+       "x": 0.0,
+       "y": 0.0,
+       "w": 1.0,
+       "h": 0.9488
+      },
+      "dest": {
+       "x": 244,
+       "y": 484,
+       "w": 592,
+       "h": 956
+      }
+     },
+     "logo": "none (the screenshot shows the site header logo)",
+     "page": {
+      "style": "page_3x4",
+      "text": "5 / 6",
+      "x": 990,
+      "y": 60,
+      "anchor": "top-right"
+     }
+    },
+    {
+     "n": 6,
+     "layout": "end",
+     "background": "#0c0d0e",
+     "overlays": [
+      "grid6_tile"
+     ],
+     "horizon": {
+      "x": 0,
+      "y": 1079,
+      "w": 1080,
+      "h": 2,
+      "color": "#c9a96a"
+     },
+     "logo_center": {
+      "src": "public/brand/garon-logo-dark.png",
+      "x": 370,
+      "y": 260,
+      "w": 340,
+      "h": 248
+     },
+     "title": {
+      "style": "feed_title",
+      "text": "Հայերեն · English · Русский",
+      "x": 90,
+      "y": 580,
+      "w": 900,
+      "align": "center"
+     },
+     "body_lines": [
+      {
+       "style": "url_gold",
+       "text": "garon.am",
+       "x": 90,
+       "y": "title.bottom + 40",
+       "w": 900,
+       "align": "center"
+      },
+      {
+       "style": "feed_body",
+       "text": "Հարցեր ունե՞ք՝ գրեք «ԳԻՆ» direct-ում։",
+       "x": 110,
+       "y": "prev.bottom + 30",
+       "w": 860,
+       "align": "center",
+       "max_lines": 2
+      },
+      {
+       "style": "feed_eyebrow",
+       "text": "info@garon.am",
+       "x": 90,
+       "y": 1130,
+       "w": 900,
+       "align": "center",
+       "size_override": 26,
+       "note": "email below the horizon line"
+      }
+     ],
+     "page": {
+      "style": "page_3x4",
+      "text": "6 / 6",
+      "x": 990,
+      "y": 60,
+      "anchor": "top-right"
+     },
+     "logo": "none (centre logo)",
+     "phone_note": "No phone/WhatsApp (Լ5). If added before 11-15, the copywriter supplies the line; do not invent."
+    }
+   ],
+   "alt_hy": "Վեց սլայդ մուգ ֆոնի վրա՝ GARON-ի կայքի հեռախոսային screenshot-ներով կլորացված շրջանակներում։ 1՝ գլխավոր էջը՝ տան լուսանկարով, «Մեր կայքը գործում է» վերնագրով և garon.am հասցեով։ 2՝ «Լողավազաններ · Տներ · Վերանորոգում» շերտը։ 3՝ ծառայությունների ցանկը։ 4՝ հաշվիչի ձևը՝ նախագծի տեսակի ընտրությամբ և մակերեսի դաշտով։ 5՝ նախագծերի էջը։ 6՝ GARON լոգոն, «Հայերեն · English · Русский» և info@garon.am։",
+   "alt_note": "Finalise alt after capture; slide 1 alt must say the PROJECTS page hero (pool photo), not 'home page with house photo' — flag to copywriter.",
+   "posting": "Bio link at 19:55; pin after publishing (L04 only)."
+  }
+ },
+ "shoot_list": [],
+ "shoot_list_note": "No on-site shoot needed for the launch. L04 screenshots = local Playwright capture (see items.L04.screenshots). Stories photos (11-14) reuse pool-05/01, pool-02/07, house-01/12 at 1080x1920 with blurred-fill background — optional, outside this spec.",
+ "flags_for_caller": [
+  "Home page hero is public/services/residential-hero.webp (stock/AI), not house-01/12 as stated in 02-plan.md / 02-briefs.json / 03-copy.json L04 s1. L04 s1 moved to /projects hero. Copy text unaffected; L04 alt_hy slide 1 should be updated.",
+  "Calculator shows per-m² rates (250,000 / 350,000 / 480,000 ֏) directly under the form; L04 s4 crop stops at page y 1105 to exclude them.",
+  "Site footer shows '© 2026' — not in any crop."
+ ]
+}
