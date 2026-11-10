@@ -762,7 +762,7 @@
   },
   "L02": {
    "type": "reel",
-   "version": "v2 (2026-11-10, replaces the site-splash capture after owner feedback «the video is not good, it's not original»)",
+   "version": "v3 (2026-11-10, replaces v2 after owner feedback «it turned out good, but the photos were too poor — take photos/videos from other sources; make the background light»)",
    "publish_date": "2026-11-13 20:00",
    "asset_status": "ready",
    "needs_shoot": false,
@@ -772,10 +772,10 @@
    "frames": 420,
    "output": "out/L02/L02_reel.mp4",
    "cover_output": "out/L02/L02_cover.jpg",
-   "supersedes": "v1 (site splash capture, items.L02.capture). v1 frames/cover must NOT be reused or mixed. Top-level `site_capture` stays (still used by L01b/L04).",
-   "concept": "The GARON mark is BUILT like a construction on a blueprint grid (ground line, stems rise, roof bands extrude along their slope, gold piece drops and settles), a light glint, wordmark tracks in; then four REAL GARON photos revealed through brand shapes (roof band, sliding frame, the gold piece, roof band → full bleed); end card with logo, «Շուտով», DM CTA, garon.am, @garon__construction.",
+   "supersedes": "v2 (dark theme + 4 GARON photos) and v1 (site splash capture). v1/v2 frames/cover must NOT be reused or mixed. Top-level `site_capture` stays (still used by L01b/L04).",
+   "concept": "LIGHT version. The GARON mark (garon-logo-light.svg geometry and colours) is BUILT like a construction on a dark-grey blueprint grid on paper (dark-gold ground line, stems rise, roof bands extrude along their slope, gold piece drops and settles), a light glint, wordmark tracks in; then four high-quality FREE-LICENSED STOCK stills (Unsplash) as MOOD/ATMOSPHERE ONLY, revealed through brand shapes (roof band, sliding frame, the gold piece, roof band → full bleed) with a slow push; a fixed services line «Տներ · Լողավազաններ · Վերանորոգում» describes what GARON does in general — no on-screen text presents the stock images as GARON projects; end card (content unchanged) on paper: logo, «Շուտով», DM CTA, garon.am, @garon__construction.",
    "render": {
-    "engine": "ONE html page in headless Chromium (Playwright), viewport 1080x1920, deviceScaleFactor 1, background #0c0d0e. Fonts: same @fontsource files as ig_lib.js (Cormorant Garamond 300/400/500, Noto Serif Armenian 300/400/500, Montserrat 400/500/600, Noto Sans Armenian 400/500/600). await document.fonts.ready and every <img>.decode() before frame 0.",
+    "engine": "ONE html page in headless Chromium (Playwright), viewport 1080x1920, deviceScaleFactor 1, background #f5f5f3 (theme.bg). Fonts: same @fontsource files as ig_lib.js (Cormorant Garamond 300/400/500, Noto Serif Armenian 300/400/500, Montserrat 400/500/600, Noto Sans Armenian 400/500/600). await document.fonts.ready and every <img>.decode() before frame 0.",
     "frame_loop": "for f = 0..419: page.evaluate(setFrame, f) (a pure function of f, no CSS animations/transitions, no timers, no Date/random) → page.screenshot({clip:{x:0,y:0,width:1080,height:1920}}) → frames/L02_%03d.png. Render order of frames is irrelevant (deterministic).",
     "keyframes": "Every animated property is a list of keys [frame, value, easing]. Before the first key: first value; after the last key: last value. Between key k and k+1: v = v_k + (v_k+1 − v_k) · E((f − f_k)/(f_k+1 − f_k)), E = easing NAMED IN KEY k (see `easings`). \"hold\" = keep v_k until f_k+1 then jump. Vector values ([x,y] or {x,y,w,h}) interpolate component-wise.",
     "easings": {
@@ -842,7 +842,7 @@
      "note": "CSS cubic-bezier(x1,y1,x2,y2) control points; evaluate exactly like CSS (solve x(t)=p by Newton/bisection, return y(t))."
     },
     "encode": "ffmpeg -framerate 30 -i frames/L02_%03d.png -f lavfi -i anullsrc=r=48000:cl=stereo -map 0:v -map 1:a -c:v libx264 -profile:v high -pix_fmt yuv420p -crf 18 -colorspace bt709 -color_primaries bt709 -color_trc bt709 -c:a aac -b:a 320k -shortest -movflags +faststart L02_reel.mp4  (silent AAC track; music is added in the Instagram app, see `audio`). Check: ffprobe → 1080x1920, 30 fps, 420 frames, 14.000 s.",
-    "reference_prototype": "marketing/instagram/2026-11-11-launch/04-L02v2-reference.js — art-director prototype that implements THIS spec (reads it from 04-render-spec.json) and renders frames with Playwright. The producer may use it as-is or as a reference; if code and spec disagree, the spec wins.",
+    "reference_prototype": "marketing/instagram/2026-11-11-launch/04-L02v2-reference.js — art-director prototype (file name kept from v2; it now renders v3 and reads everything incl. `theme` from items.L02). The producer may use it as-is or as a reference; if code and spec disagree, the spec wins.",
     "fonts_check": "Armenian glyphs must come from Noto Serif Armenian / Noto Sans Armenian (check document.fonts / computed font in a test frame). STOP if a fallback system font is used."
    },
    "timebase": {
@@ -868,10 +868,10 @@
      "what": "camera pulls back to the final lockup, light glint across the mark, GARON + CONSTRUCTION track in"
     },
     {
-     "act": "D work",
+     "act": "D mood",
      "frames": "180–299",
      "s": "6.0–10.0",
-     "what": "4 real photos, one every 2 beats, each revealed through a brand shape, subtle push"
+     "what": "4 stock stills (atmosphere only), one every 2 beats, each revealed through a brand shape, slow push; fixed services line top-right"
     },
     {
      "act": "E end card",
@@ -881,7 +881,7 @@
     }
    ],
    "z_order": [
-    "bg (#0c0d0e)",
+    "bg (theme.bg #f5f5f3)",
     "blueprint",
     "vlines",
     "ground_line + impact_glow",
@@ -896,7 +896,7 @@
     "end_card"
    ],
    "stage": {
-    "what": "Inline <svg> with viewBox \"0 0 425 310\" (= garon-logo-dark.svg) inside a camera wrapper div. 1 unit = 1.6 px at camera scale 1.",
+    "what": "Inline <svg> with viewBox \"0 0 425 310\" (= garon-logo-light.svg) inside a camera wrapper div. 1 unit = 1.6 px at camera scale 1.",
     "box_px": {
      "x": 200,
      "y": 700,
@@ -904,7 +904,7 @@
      "h": 496
     },
     "svg_attrs": "width=680 height=496 viewBox=\"0 0 425 310\" overflow=\"visible\" shape-rendering=\"geometricPrecision\"",
-    "defs": "Copy the two <linearGradient>s (ids gmdark, ggdark) verbatim from public/brand/garon-logo-dark.svg.",
+    "defs": "Copy the two <linearGradient>s (ids gmlight, gglight) verbatim from public/brand/garon-logo-light.svg.",
     "groups": {
      "mark": "g transform=\"translate(0,9.25)\" — mark-unit coordinates below are inside this group",
      "wordmark": "g transform=\"translate(0,-12.75)\" — wordmark coordinates below are inside this group"
@@ -913,9 +913,9 @@
      "BIG": "M250 24 L250 54 L81 128 L81 155 L76 155 L76 111 Z",
      "MID": "M250 66 L250 155 L206 155 L206 118 L100 148 L100 155 L95 155 L95 134 Z",
      "GOLD": "M264 66 L352 110 L352 155 L308 155 L308 118 L264 96 Z",
-     "BIG_fill": "#ffffff",
-     "MID_fill": "url(#gmdark)",
-     "GOLD_fill": "url(#ggdark)",
+     "BIG_fill": "#1e1e1e",
+     "MID_fill": "url(#gmlight)",
+     "GOLD_fill": "url(#gglight)",
      "GARON": "path #4 of garon-logo-dark.svg (fill #ffffff) + <rect x=67.5 y=228.8 width=17.9 height=9.6 fill=#ffffff> (G crossbar) — read from the file, never retype",
      "CONSTRUCTION": "path #5 of garon-logo-dark.svg (fill #ffffff)"
     },
@@ -1001,13 +1001,14 @@
        0.0
       ]
      ],
-     "check": "f0: mark spans x 233–852, top y 813, ground y 1107.0; f148+: final lockup, mark x 321.6–763.2, y 753.2–962.8, GARON y 1001–1092, CONSTRUCTION y 1123–1143 (= garon-logo-dark.svg at 680x496, x200 y700).",
+     "check": "f0: mark spans x 233–852, top y 813, ground y 1107.0; f148+: final lockup, mark x 321.6–763.2, y 753.2–962.8, GARON y 1001–1092, CONSTRUCTION y 1123–1143 (= garon-logo-light.svg at 680x496, x200 y700).",
      "exit_note": "exit_scale_mul multiplies s (same origin); the photo wipes cover the lockup while it pushes in; hidden after f198."
     },
-    "ground_y_formula": "groundY(f) = 858 + ty(f) + shake(f) + 104.8 · s(f)   (screen px; mark-unit y 155 → 164.25 in svg → 262.8 px in the box)"
+    "ground_y_formula": "groundY(f) = 858 + ty(f) + shake(f) + 104.8 · s(f)   (screen px; mark-unit y 155 → 164.25 in svg → 262.8 px in the box)",
+    "logo_file": "public/brand/garon-logo-light.svg"
    },
    "build": {
-    "principle": "Each shape is the ORIGINAL path revealed by clipPaths (stem/pier clips overlap the band windows by 1 unit so no hairline seam shows between pieces) (clipPathUnits=userSpaceOnUse, mark units). Slides use TWO clips: an inner clip on the path (moves with the piece) and an outer fixed window clip (does not move). No new geometry is drawn; at f118 the pieces are replaced by the three unclipped paths (identical pixels) and at f167 the whole stage by <img src=public/brand/garon-logo-dark.svg> (680x496 at the same box) so the final lockup IS the file.",
+    "principle": "Each shape is the ORIGINAL path revealed by clipPaths (stem/pier clips overlap the band windows by 1 unit so no hairline seam shows between pieces) (clipPathUnits=userSpaceOnUse, mark units). Slides use TWO clips: an inner clip on the path (moves with the piece) and an outer fixed window clip (does not move). No new geometry is drawn; at f118 the pieces are replaced by the three unclipped paths (identical pixels) and at f167 the whole stage by <img src=public/brand/garon-logo-light.svg> (680x496 at the same box) so the final lockup IS the file.",
     "pieces": [
      {
       "id": "big_stem",
@@ -1199,11 +1200,11 @@
      }
     ],
     "swap_1": "f ≥ 118: hide the 6 pieces, show the 3 unclipped paths (same fills) — all pieces are static since f117.",
-    "swap_2": "f ≥ 167: hide the inline svg, show <img src=file://…/public/brand/garon-logo-dark.svg width=680 height=496> in the same camera wrapper (camera is at s=1, ty=0 since f148). Verify: diff of frames 166/167 < 1/255 mean."
+    "swap_2": "f ≥ 167: hide the inline svg, show <img src=file://…/public/brand/garon-logo-light.svg width=680 height=496> in the same camera wrapper (camera is at s=1, ty=0 since f148). Verify: diff of frames 166/167 < 1/255 mean."
    },
    "blueprint": {
     "layer": "div 0,0,1080,1920 in screen space",
-    "css": "background-image: linear-gradient(to right, rgba(201,169,106,.13) 1px, transparent 1px), linear-gradient(to bottom, rgba(201,169,106,.13) 1px, transparent 1px), linear-gradient(to right, rgba(201,169,106,.055) 1px, transparent 1px), linear-gradient(to bottom, rgba(201,169,106,.055) 1px, transparent 1px); background-size: 180px 180px, 180px 180px, 36px 36px, 36px 36px; background-position: 0 27px, 0 27px, 0 27px, 0 27px; -webkit-mask-image: radial-gradient(620px 760px at 540px 980px, #000 35%, transparent 100%)",
+    "css": "background-image: linear-gradient(to right, rgba(23,25,28,.11) 1px, transparent 1px), linear-gradient(to bottom, rgba(23,25,28,.11) 1px, transparent 1px), linear-gradient(to right, rgba(23,25,28,.045) 1px, transparent 1px), linear-gradient(to bottom, rgba(23,25,28,.045) 1px, transparent 1px); background-size: 180px 180px, 180px 180px, 36px 36px, 36px 36px; background-position: 0 27px, 0 27px, 0 27px, 0 27px; -webkit-mask-image: radial-gradient(620px 760px at 540px 980px, #000 35%, transparent 100%)",
     "align_note": "Major lines every 180 px (x 0,180,…, = the site splash column rhythm); a major horizontal sits on the ground line y 1107.",
     "opacity": [
      [
@@ -1236,10 +1237,11 @@
       130,
       -12
      ]
-    ]
+    ],
+    "colour_note": "v3: dark-grey (ink #17191c at 11% major / 4.5% minor) on paper, same geometry as v2."
    },
    "ground_line": {
-    "layer": "div x 0, w 1080, h 2, top = groundY(f) − 1, background #c9a96a, transform-origin center, transform scaleX(sx)",
+    "layer": "div x 0, w 1080, h 2, top = groundY(f) − 1, background #856727 (theme.ground_line), transform-origin center, transform scaleX(sx)",
     "sx": [
      [
       6,
@@ -1279,7 +1281,7 @@
     ],
     "note": "draws from the centre outwards (= «Մեկ գիծ։»), at the end retracts to the mark width (441.6 px) and fades. Hidden when sx = 0.",
     "impact_glow": {
-     "css": "div 520x80 centred at (gold_cx, groundY), background radial-gradient(closest-side, rgba(232,207,152,.55), rgba(232,207,152,0))",
+     "css": "div 520x80 centred at (gold_cx, groundY), background radial-gradient(closest-side, rgba(201,169,106,.42), rgba(201,169,106,0))",
      "gold_cx": "gold_cx = 542.4 + 185.6·s(f)  (mark x 330)",
      "opacity": [
       [
@@ -1300,7 +1302,7 @@
     }
    },
    "dimensions": {
-    "what": "Architectural dimension lines drawn IN the stage svg (mark units, inside translate(0,9.25)), so they scale with the camera. stroke rgba(201,169,106,0.75), stroke-width 1.5, vector-effect non-scaling-stroke, stroke-linecap butt, fill none. NO numbers/text (purely graphic).",
+    "what": "Architectural dimension lines drawn IN the stage svg (mark units, inside translate(0,9.25)), so they scale with the camera. stroke rgba(133,103,39,0.8) (theme.dims_stroke), stroke-width 1.5, vector-effect non-scaling-stroke, stroke-linecap butt, fill none. NO numbers/text (purely graphic).",
     "group_opacity": [
      [
       105,
@@ -1597,7 +1599,7 @@
     ]
    },
    "glint": {
-    "what": "Light sweep across the three mark paths only.",
+    "what": "Light sweep across the three mark paths only. v3: unchanged (screen blend lifts the dark #1e1e1e/grey paths to a warm highlight on paper).",
     "svg": "In the mark group: <clipPath id=markClip> with BIG, MID, GOLD paths. <g clip-path=url(#markClip)><rect x=0 y=−30 width=60 height=240 fill=url(#sweep) transform=\"translate(gx,0) skewX(-22)\"/></g>. #sweep = linearGradient x1=0 x2=1 (objectBoundingBox), stops 0: rgba(255,244,222,0), 0.5: rgba(255,244,222,0.85), 1: rgba(255,244,222,0). mix-blend-mode: screen on the g.",
     "gx": [
      [
@@ -1747,9 +1749,9 @@
      "w": 940,
      "h": 1253
     },
-    "note": "3:4 «architectural frame» (aspect 0.7502) for P1–P3: 3:4 sources need NO upscale (pool-02/07 ×0.98), 4:3 sources ×1.09. Top of the window leaves room for the corner logo (y262–358); below y1500 it is photo only (IG UI zone, no text).",
+    "note": "3:4 «architectural frame» (aspect 0.7502) for P1–P3. All stock sources are ≥ 2133 px on the short side → every shot is DOWN-scaled (×0.55–0.63), never upscaled. Top of the window leaves room for the corner logo (y262–358) and the services line; below y1500 it is image only (IG UI zone, no text).",
     "frame_line": {
-     "css": "border 1px rgba(201,169,106,0.5) on the window rect (follows P4 rect when it expands), no fill",
+     "css": "border 1px rgba(133,103,39,0.55) (theme.frame_line) on the window rect (follows P4 rect when it expands), no fill",
      "opacity": [
       [
        196,
@@ -1783,7 +1785,7 @@
      990
     ],
     "w": 2,
-    "color": "rgba(201,169,106,0.07)",
+    "color": "rgba(23,25,28,0.06)",
     "y": [
      0,
      1920
@@ -1802,36 +1804,38 @@
     "note": "same column lines as L01/L03/L04 (overlays.grid6_tile xs); behind the photos"
    },
    "photo_rules": {
-    "sources": "ONLY public/projects/house-01/06.webp, pool-05/01.webp, pool-02/07.webp, house-01/12.webp. NO public/services, NO public/stock, NO AI/upscaling.",
+    "sources": "ONLY the four files in marketing/instagram/assets/stock/ listed in `photos` (Unsplash License, see CREDITS.md). NO public/projects (GARON photos are not mixed with stock in this reel), NO public/services, NO public/stock, NO AI/upscaling.",
+    "honesty": "see items.L02.honesty — atmosphere only, never labelled as GARON work.",
     "grade": "CSS filter on each <img>: saturate(0.92) contrast(1.05) (= brand.photo_grade). No other look.",
     "crop_impl": "crop {x,y,w,h} (fractions of the SOURCE) → target box (BW,BH): scale = BW/(w·SW); <img> width SW·scale, height SH·scale, left = box.x − x·SW·scale, top = box.y − y·SH·scale, inside an overflow:hidden container = the box. Crop rects already have the box aspect; never stretch. image-rendering auto (Chromium high-quality resample).",
     "push": "crop interpolates from → to over the photo's `life` frames with easing linear (constant camera push).",
-    "clip_impl": "Reveal masks = CSS clip-path: polygon(…) in SCREEN px on a full-frame layer (left 0 top 0 1080x1920) that contains the photo box; computed per frame from the formulas below."
+    "clip_impl": "Reveal masks = CSS clip-path: polygon(…) in SCREEN px on a full-frame layer (left 0 top 0 1080x1920) that contains the photo box; computed per frame from the formulas below.",
+    "video_note": "No stock video clips: the sandbox had no search access to find Pexels video IDs. If the producer later adds clips, they replace these stills 1:1 (same box, same life, same reveal; trim 1.5 s from a ≥ 4K or 1080x1920 30 fps clip, no speed ramps), must also be atmosphere-only and must be logged in CREDITS.md."
    },
    "photos": [
     {
      "id": "P1",
-     "src": "public/projects/house-01/06.webp",
+     "src": "marketing/instagram/assets/stock/unsplash-1600585154340-be6161a56a0c_villa-dusk.jpg",
      "src_px": [
-      1536,
-      1152
+      3200,
+      2133
      ],
-     "what": "house-01 frame stage (concrete/block carcass, rebar) — continues the «building» idea",
+     "what": "STOCK, mood: modern house at dusk, lit interior, big tree",
      "box": "window",
      "life": [
       180,
       226
      ],
      "crop_from": {
-      "x": 0.2588,
+      "x": 0.22,
       "y": 0.0,
-      "w": 0.5625,
+      "w": 0.5,
       "h": 1.0
      },
      "crop_to": {
-      "x": 0.2797,
-      "y": 0.0083,
-      "w": 0.5307,
+      "x": 0.2465,
+      "y": 0.03,
+      "w": 0.4717,
       "h": 0.9434
      },
      "reveal": {
@@ -1853,7 +1857,7 @@
        ]
       ],
       "edges": {
-       "css": "two 2px #c9a96a lines on the band edges (polygon edges 1→2 and 4→3), clipped to the window",
+       "css": "two 2px #c9a96a (theme.wipe_edge, on the image) lines on the band edges (polygon edges 1→2 and 4→3), clipped to the window",
        "opacity": [
         [
          180,
@@ -1872,31 +1876,32 @@
        ]
       }
      },
-     "exit": "covered by P2; while P2 wipes (210–224) P1 shifts left: offset_x = −0.12·(1010 − xe)"
+     "exit": "covered by P2; while P2 wipes (210–224) P1 shifts left: offset_x = −0.12·(1010 − xe)",
+     "source": "Unsplash, Unsplash License (CREDITS.md)"
     },
     {
      "id": "P2",
-     "src": "public/projects/pool-05/01.webp",
+     "src": "marketing/instagram/assets/stock/unsplash-1613490493576-7fde63acd811_villa-pool.jpg",
      "src_px": [
-      1280,
-      960
+      3200,
+      2133
      ],
-     "what": "pool-05 finished pool, stone wall, palm (right half of the frame)",
+     "what": "STOCK, mood: white villa, pool with dark stripes",
      "box": "window",
      "life": [
       210,
       256
      ],
      "crop_from": {
-      "x": 0.3387,
+      "x": 0.26,
       "y": 0.0,
-      "w": 0.5625,
+      "w": 0.5,
       "h": 1.0
      },
      "crop_to": {
-      "x": 0.3647,
-      "y": 0.0483,
-      "w": 0.5307,
+      "x": 0.2865,
+      "y": 0.04,
+      "w": 0.4717,
       "h": 0.9434
      },
      "reveal": {
@@ -1918,7 +1923,7 @@
       ],
       "formula": "clip rect x xe..1010, y 390..1643; photo offset_x = +0.25·(xe − 70) (parallax, slides in with the frame edge)",
       "edges": {
-       "css": "vertical 2px #c9a96a line at x = xe − 1, y 390..1643",
+       "css": "vertical 2px #c9a96a (theme.wipe_edge, on the image) line at x = xe − 1, y 390..1643",
        "opacity": [
         [
          210,
@@ -1937,31 +1942,31 @@
        ]
       }
      },
-     "note": "source is an older 1280x960 photo: it is shown at ×1.31 max in the window (never full-bleed) — acceptable softness for 1.5 s"
+     "source": "Unsplash, Unsplash License (CREDITS.md)"
     },
     {
      "id": "P3",
-     "src": "public/projects/pool-02/07.webp",
+     "src": "marketing/instagram/assets/stock/unsplash-1600607687939-ce8a6c25118c_interior-living.jpg",
      "src_px": [
-      960,
-      1280
+      3200,
+      2176
      ],
-     "what": "pool-02 finished pool with spa, travertine coping, deck",
+     "what": "STOCK, mood: bright living room, timber wall (stands for interior/renovation work in general)",
      "box": "window",
      "life": [
       240,
       286
      ],
      "crop_from": {
-      "x": 0.0,
+      "x": 0.3,
       "y": 0.0,
-      "w": 1.0,
+      "w": 0.5101,
       "h": 1.0
      },
      "crop_to": {
-      "x": 0.0283,
-      "y": 0.0483,
-      "w": 0.9434,
+      "x": 0.3289,
+      "y": 0.03,
+      "w": 0.4812,
       "h": 0.9434
      },
      "reveal": {
@@ -2028,32 +2033,33 @@
        ],
        "note": "f236–239: a small solid gold piece (141 px wide = the logo gold at lockup size) appears over P2 at the window centre; from f240 (beat) it grows and opens into P3 (P3 is not drawn before f240)"
       }
-     }
+     },
+     "source": "Unsplash, Unsplash License (CREDITS.md)"
     },
     {
      "id": "P4",
-     "src": "public/projects/house-01/12.webp",
+     "src": "marketing/instagram/assets/stock/unsplash-1600585154526-990dced4db0d_facade-dusk-vertical.jpg",
      "src_px": [
-      1152,
-      1536
+      2133,
+      3200
      ],
-     "what": "house-01 finished, night, lit façade — hero shot, ends full-bleed and becomes the end-card background",
+     "what": "STOCK, mood: vertical, dark-clad façade with timber battens, lit entrance at dusk — ends full-bleed and becomes the (paper-veiled) end-card background",
      "box": "full frame 0,0,1080,1920 (cover), shown through rect R(f)",
      "life": [
       270,
       419
      ],
      "crop_from": {
-      "x": 0.0875,
+      "x": 0.08,
       "y": 0.0,
-      "w": 0.75,
+      "w": 0.8439,
       "h": 1.0
      },
      "crop_to": {
-      "x": 0.1128,
-      "y": 0.007,
-      "w": 0.6944,
-      "h": 0.9259
+      "x": 0.1112,
+      "y": 0.03,
+      "w": 0.7812,
+      "h": 0.9257
      },
      "crop_note": "push over life 270–419 (8% total, linear)",
      "reveal": {
@@ -2096,7 +2102,7 @@
        ]
       ],
       "edges": {
-       "css": "two 2px #c9a96a band-edge lines, clipped to R",
+       "css": "two 2px #c9a96a (theme.wipe_edge, on the image) band-edge lines, clipped to R",
        "opacity": [
         [
          270,
@@ -2116,7 +2122,7 @@
       }
      },
      "end_overlay": {
-      "css": "div 0,0,1080,1920 background #0c0d0e above P4",
+      "css": "div 0,0,1080,1920 background #f5f5f3 (theme.end_overlay) above P4",
       "opacity": [
        [
         296,
@@ -2125,12 +2131,12 @@
        ],
        [
         318,
-        0.8,
+        0.9,
         "linear"
        ],
        [
         404,
-        0.86,
+        0.94,
         "inOutSine"
        ],
        [
@@ -2147,22 +2153,23 @@
       ],
       [
        320,
-       6
+       8
       ]
      ],
-     "end_note": "P4 stays as a dim, slightly blurred night house behind the end card; at f419 the frame is pure #0c0d0e except the end-card graphics, so the loop back to f0 is clean."
+     "end_note": "P4 stays as a pale, blurred ghost of the façade behind the end card; at f419 the frame is pure paper #f5f5f3 except the end-card graphics, so the loop back to f0 (paper) is clean.",
+     "source": "Unsplash, Unsplash License (CREDITS.md)"
     }
    ],
    "styles_local": {
-    "reel_hook": "styles.reel_hook (display 500, 84 px, lh 1.12, #f5f5f3, shadow 0 2px 24px rgba(0,0,0,.45))",
+    "reel_hook": "styles.reel_hook with hook_style_override (display 500, 84 px, lh 1.12, colour #17191c, NO text-shadow)",
     "photo_label": {
      "font": "text",
      "weight": 500,
-     "size": 24,
-     "letter_spacing": "0.22em",
+     "size": 22,
+     "letter_spacing": "0.2em",
      "transform": "uppercase",
-     "color": "#c9a96a",
-     "note": "right-aligned: add margin-right −0.22em so the last glyph, not the tracking, touches x 1010"
+     "color": "#856727",
+     "note": "services line, right-aligned to x 1010: add margin-right −0.2em so the last glyph, not the tracking, touches x 1010. Must stay right of x 240 (corner logo ends at x 202) — STOP if wider; then use size 20."
     },
     "end_display": {
      "font": "display",
@@ -2170,7 +2177,7 @@
      "size": 140,
      "min_size": 120,
      "line_height": 1.05,
-     "color": "#f5f5f3",
+     "color": "#17191c",
      "max_lines": 1
     },
     "end_cats": {
@@ -2179,7 +2186,7 @@
      "size": 24,
      "letter_spacing": "0.22em",
      "transform": "uppercase",
-     "color": "#c9a96a",
+     "color": "#856727",
      "max_lines": 1,
      "min_size": 20,
      "note": "centre with padding-left = letter-spacing (conventions.letter_spacing_centering)"
@@ -2190,16 +2197,17 @@
      "size": 36,
      "min_size": 30,
      "line_height": 1.3,
-     "color": "#f5f5f3",
+     "color": "#17191c",
      "max_lines": 1,
-     "note": "the word «ՇՈՒՏՈՎ» incl. its «» in #c9a96a (wrap the substring «ՇՈՒՏՈՎ» in a span), rest #f5f5f3"
+     "note": "the word «ՇՈՒՏՈՎ» incl. its «» in #856727 (wrap the substring «ՇՈՒՏՈՎ» in a span), rest #17191c",
+     "accent_color": "#856727"
     },
     "end_url": {
      "font": "text",
      "weight": 500,
      "size": 30,
      "letter_spacing": "0.08em",
-     "color": "#f5f5f3",
+     "color": "#17191c",
      "max_lines": 1
     },
     "end_handle": {
@@ -2207,7 +2215,7 @@
      "weight": 500,
      "size": 26,
      "letter_spacing": "0.04em",
-     "color": "rgba(245,245,243,0.72)",
+     "color": "rgba(23,25,28,0.68)",
      "max_lines": 1
     }
    },
@@ -2338,7 +2346,7 @@
    ],
    "hooks_note": "Box y 300–395, above the mark at every camera state (mark top ≥ 753). Hook 1 = the ground line, hook 2 = the build, hook 3 = the wordmark. One line each — STOP if a hook wraps.",
    "corner_logo": {
-    "file": "public/brand/garon-logo-dark.svg",
+    "file": "public/brand/garon-logo-light.svg",
     "x": 70,
     "y": 262,
     "w": 132,
@@ -2355,24 +2363,24 @@
       "hold"
      ],
      [
-      296,
+      280,
       0.92,
       "inOutSine"
      ],
      [
-      304,
+      288,
       0
      ]
     ],
-    "note": "brand.logo.reel; only during the photos (the lockup itself is the logo in acts A–C and E)"
+    "note": "brand.logo.reel (light file); only during act D; v3 fades out 280–288 before the P4 rect starts to expand (284), so the dark logo never sits on the image"
    },
    "labels": [
     {
      "style": "photo_label",
-     "text": "Տներ",
-     "x": 560,
-     "y": 296,
-     "w": 450,
+     "text": "Տներ · Լողավազաններ · Վերանորոգում",
+     "x": 240,
+     "y": 297,
+     "w": 770,
      "align": "right",
      "opacity": [
       [
@@ -2386,76 +2394,18 @@
        "hold"
       ],
       [
-       210,
-       1,
-       "inOutSine"
-      ],
-      [
-       216,
-       0
-      ]
-     ]
-    },
-    {
-     "style": "photo_label",
-     "text": "Լողավազաններ",
-     "x": 560,
-     "y": 296,
-     "w": 450,
-     "align": "right",
-     "opacity": [
-      [
-       216,
-       0,
-       "outSine"
-      ],
-      [
-       224,
-       1,
-       "hold"
-      ],
-      [
-       266,
-       1,
-       "inOutSine"
-      ],
-      [
-       272,
-       0
-      ]
-     ]
-    },
-    {
-     "style": "photo_label",
-     "text": "Տներ",
-     "x": 560,
-     "y": 296,
-     "w": 450,
-     "align": "right",
-     "opacity": [
-      [
-       272,
-       0,
-       "outSine"
-      ],
-      [
        280,
        1,
-       "hold"
-      ],
-      [
-       294,
-       1,
        "inOutSine"
       ],
       [
-       302,
+       288,
        0
       ]
      ]
     }
    ],
-   "labels_note": "Top-right, vertically centred on the corner logo (box y 296–326). «ՏՆԵՐ» on P1, «ԼՈՂԱՎԱԶԱՆՆԵՐ» on P2+P3 (stays through the P2→P3 cut), «ՏՆԵՐ» on P4. Strings = 03-copy.json L02 scenes 4–7 (uppercase via CSS).",
+   "labels_note": "ONE fixed services line (top-right, vertically centred on the corner logo, box y 297–324) for the whole act D. It does NOT change at the cuts, so it never reads as a caption of a specific image. String = 03-copy.json L02 scene 4 text. Replaces v2's per-photo labels «ՏՆԵՐ»/«ԼՈՂԱՎԱԶԱՆՆԵՐ» (honesty rule).",
    "end_card": {
     "frames": [
      300,
@@ -2467,7 +2417,7 @@
     "layers": [
      {
       "layer": "logo",
-      "file": "public/brand/garon-logo-dark.svg",
+      "file": "public/brand/garon-logo-light.svg",
       "x": 340,
       "y": 330,
       "w": 400,
@@ -2502,7 +2452,7 @@
       "y": 652,
       "w": 64,
       "h": 2,
-      "color": "#c9a96a",
+      "color": "#856727",
       "scale_x": [
        [
         314,
@@ -2604,7 +2554,7 @@
       "y": 1106,
       "w": 1080,
       "h": 2,
-      "color": "#c9a96a",
+      "color": "#856727",
       "scale_x": [
        [
         300,
@@ -2661,10 +2611,11 @@
      }
     ],
     "safe_area_check": "All end-card glyphs y 353–1225 (inside 250–1500). Below y 1100 only garon.am and the handle: measured right edge must be ≤ 900 (expected ≈ 610 / 720) — STOP if not.",
-    "no_date": "Default copy: no «15.11 · 20:00»."
+    "no_date": "Default copy: no «15.11 · 20:00».",
+    "theme_note": "v3: content, positions and timing identical to v2; only colours (paper background, ink text, dark gold accents) and the logo file (garon-logo-light.svg) changed."
    },
    "cover": {
-    "what": "Separate still (not a timeline frame): final lockup on the blueprint — the most recognisable, grid-safe image of the reel.",
+    "what": "Separate still (not a timeline frame): final light lockup on the paper blueprint — the most recognisable, grid-safe image of the reel.",
     "state": "setFrame(167) and then override: hooks opacity 0; blueprint opacity 0.55, translate_y 0; dimensions group opacity 1 with dimA/dimB fully drawn and their ext/ticks/datum at 1, guides 0; ground line sx 0.409 opacity 0.9 at groundY = 962.8; glint off.",
     "size": [
      1080,
@@ -2724,25 +2675,25 @@
       "f": 180,
       "s": 6.0,
       "bar_beat": "4.1",
-      "event": "CUT P1 (roof band) — groove/beat starts here"
+      "event": "CUT S1 (stock) (roof band) — groove/beat starts here"
      },
      {
       "f": 210,
       "s": 7.0,
       "bar_beat": "4.3",
-      "event": "CUT P2 (sliding frame)"
+      "event": "CUT S2 (sliding frame)"
      },
      {
       "f": 240,
       "s": 8.0,
       "bar_beat": "5.1",
-      "event": "CUT P3 (gold piece opens)"
+      "event": "CUT S3 (gold piece opens)"
      },
      {
       "f": 270,
       "s": 9.0,
       "bar_beat": "5.3",
-      "event": "CUT P4 (roof band → full bleed at 300)"
+      "event": "CUT S4 (roof band → full bleed at 300)"
      },
      {
       "f": 300,
@@ -2766,16 +2717,48 @@
     "source": "Pick a track in the Instagram app (Meta Sound Collection / licensed library for business accounts) by MOOD + ~120 BPM, not by name. In the app, slide the track start so its first strong downbeat lands at 6.0 s (P1 cut) and check that 3.5 s and 10.0 s fall on beats. Export the MP4 with a silent AAC track. If the music is mixed offline instead: licensed track only, -14 LUFS, -1 dBTP, fade out 13.5–14.0 s.",
     "fallback": "No music: subtle SFX only (ticks at 45/50/55, whoosh 60/68, low thud 105, shimmer 124–150, soft hits on 180/210/240/270) from a royalty-free library."
    },
-   "alt_hy": "Կարճ տեսանյութ մուգ ֆոնի վրա. ճարտարապետական ցանցի վրա գծվում է ոսկեգույն գիծ, դրանից բարձրանում են GARON նշանի սյուները, տեղ են նստում տանիքի շերտերը, վերջում իջնում է ոսկեգույն մասը։ Հայտնվում են GARON և CONSTRUCTION բառերը։ Հետո՝ GARON-ի չորս իրական լուսանկար՝ կառուցվող տուն կարկասի փուլում, երկու լողավազան և լուսավորված տուն գիշերով։ Վերջում՝ լոգոն, «Շուտով», «Լողավազաններ · Տներ · Վերանորոգում», «Գրեք «ՇՈՒՏՈՎ» direct-ում», garon.am և @garon__construction։",
+   "alt_hy": "Կարճ տեսանյութ բաց ֆոնի վրա. մոխրագույն ճարտարապետական ցանցի վրա գծվում է մուգ ոսկեգույն գիծ, դրանից բարձրանում են GARON նշանի սյուները, տեղ են նստում տանիքի շերտերը, վերջում իջնում է ոսկեգույն մասը։ Հայտնվում են GARON և CONSTRUCTION բառերը։ Հետո՝ չորս պատկերազարդ stock լուսանկար (ոչ GARON-ի նախագծեր)՝ ժամանակակից տուն մթնշաղին, լողավազանով վիլլա, լուսավոր հյուրասենյակ և ճակատ մթնշաղին, վերևում՝ «Տներ · Լողավազաններ · Վերանորոգում»։ Վերջում՝ լոգոն, «Շուտով», «Լողավազաններ · Տներ · Վերանորոգում», «Գրեք «ՇՈՒՏՈՎ» direct-ում», garon.am և @garon__construction։",
    "checks": [
     "ffprobe: 1080x1920, 30 fps, 420 frames, 14.000 s, yuv420p, AAC track present (silent).",
     "Frame 117 vs 118 and 166 vs 167 (swaps): mean abs diff < 1/255, no hairline seams visible at 300% zoom on the mark.",
-    "Frame 166 (no hooks layer): mark + wordmark pixel-match a reference render of garon-logo-dark.svg at 680x496, x200 y700.",
-    "Hooks: one line each, inside y 250–1500; end-card text inside safe area, nothing right of x 900 below y 1100.",
-    "Only the 4 listed photos appear; no public/services, no public/stock (grep the HTML for those paths).",
+    "Frame 166 (no hooks layer): mark + wordmark pixel-match a reference render of garon-logo-light.svg at 680x496, x200 y700 on #f5f5f3.",
+    "Hooks: one line each, inside y 250–1500; services line inside x 240–1010; end-card text inside safe area, nothing right of x 900 below y 1100.",
+    "Only the 4 listed stock files appear (grep the HTML: no public/projects, public/services, public/stock); CREDITS.md lists all four.",
+    "Honesty: no per-image category labels, no «մեր աշխատանքը»/«իրական» on screen; caption/alt state the images are stock.",
+    "Frames 0 and 419 are both plain paper (+ end-card graphics at 419): clean loop.",
     "Contact sheet of frames 0, 30, 50, 75, 105, 140, 166, 190, 217, 244, 275, 300, 345, 419 for review."
    ],
-   "caption_note": "caption.txt / alt_hy.txt in 05-output/L02 must be regenerated from 03-copy.json (caption paragraph 3 and alt_hy changed for v2: the reel is no longer the site splash)."
+   "caption_note": "caption.txt / alt_hy.txt in 05-output/L02 must be regenerated from 03-copy.json (v3: caption paragraph 4 (hy/ru/en) and alt_hy changed — the reel images are stock, the caption says so).",
+   "honesty": {
+    "rule": "Stock images are atmosphere only. FORBIDDEN on screen, in caption and alt text: «մեր աշխատանքը», «մեր նախագծերը», «իրական», project names, locations, per-image category labels («ՏՆԵՐ» on a house shot, «ԼՈՂԱՎԱԶԱՆՆԵՐ» on a pool shot) or anything that reads as «this is a GARON project».",
+    "allowed": "One fixed services line during act D (same string on all four shots, it does not change at the cuts) + the end card. The caption says explicitly that the reel images are illustrative stock and that real work will be shown later as photos.",
+    "source_of_truth": "marketing/instagram/assets/stock/CREDITS.md (licence, CDN URL, date)."
+   },
+   "theme": {
+    "bg": "#f5f5f3",
+    "note": "brand paper #f5f5f3 (owner said «#f5f5f5 / white»: 1/255 difference, the brand value is used). Ink/dark-grey for the grid, dark gold #856727 for every thin line and small text on paper, light gold #c9a96a only on photos (wipe edges) and in the gold piece/glow.",
+    "ink": "#17191c",
+    "gold_on_light": "#856727",
+    "gold_on_photo": "#c9a96a",
+    "logo_file": "public/brand/garon-logo-light.svg",
+    "logo_note": "garon-logo-light.svg = DARK logo for LIGHT backgrounds (fills #1e1e1e, gradients gmlight #a3a3a3→#4f4f4f and gglight #d4b57a→#b8955c). Path data and the <rect> are byte-identical to garon-logo-dark.svg, so every geometry number of v2 (clips, pieces, wordmark glyph bounds, box) is unchanged.",
+    "mark_fills": {
+     "BIG": "#1e1e1e",
+     "MID": "url(#gmlight)",
+     "GOLD": "url(#gglight)"
+    },
+    "wordmark_fill": "#1e1e1e",
+    "dims_stroke": "rgba(133,103,39,0.8)",
+    "ground_line": "#856727",
+    "impact_glow": "radial-gradient(closest-side, rgba(201,169,106,.42), rgba(201,169,106,0))",
+    "wipe_edge": "#c9a96a",
+    "frame_line": "1px solid rgba(133,103,39,0.55)",
+    "end_overlay": "#f5f5f3"
+   },
+   "hook_style_override": {
+    "color": "#17191c",
+    "shadow": null
+   }
   },
   "L03": {
    "type": "carousel",

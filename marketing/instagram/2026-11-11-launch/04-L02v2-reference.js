@@ -1,4 +1,5 @@
-// L02 v2 reference prototype (art director). Implements items.L02 of 04-render-spec.json literally.
+// L02 reference prototype (art director) — renders v3 (light theme + stock mood stills). File name kept from v2.
+// Implements items.L02 of 04-render-spec.json literally; all colours come from items.L02.theme.
 // The SPEC is authoritative; this file only proves it is executable and gives the producer a starting point.
 // usage: node 04-L02v2-reference.js <repo_root> <out_dir> [frames=all|cover|0,30,105,...]
 //   writes <out_dir>/L02_%03d.png (and L02_cover.png for "cover"). Encode with items.L02.render.encode.
@@ -12,7 +13,8 @@ const WHICH = process.argv[4] || 'all';
 const BATCH = path.join(ROOT, 'marketing/instagram/2026-11-11-launch');
 const SPEC = JSON.parse(fs.readFileSync(path.join(BATCH, '04-render-spec.json'), 'utf8'));
 const IT = SPEC.items.L02;
-const LOGO = path.join(ROOT, 'public/brand/garon-logo-dark.svg');
+const TH = IT.theme;
+const LOGO = path.join(ROOT, IT.stage.logo_file || TH.logo_file);
 const LOGO_SVG = fs.readFileSync(LOGO, 'utf8');
 const FONTSRC = path.join(ROOT, 'marketing/instagram/tools/node_modules/@fontsource');
 
@@ -25,7 +27,7 @@ const ST = SPEC.styles;
 
 const html = `<!doctype html><html><head><meta charset="utf-8">${fontLinks()}
 <style>
-html,body{margin:0;width:1080px;height:1920px;overflow:hidden;background:#0c0d0e;-webkit-font-smoothing:antialiased}
+html,body{margin:0;width:1080px;height:1920px;overflow:hidden;background:${TH.bg};-webkit-font-smoothing:antialiased}
 .abs{position:absolute;left:0;top:0}
 .full{position:absolute;left:0;top:0;width:1080px;height:1920px}
 .txt{position:absolute;white-space:nowrap;font-feature-settings:normal}
@@ -41,7 +43,7 @@ async function main() {
   const tmp = path.join(OUT, '_l02v2.html');
   fs.writeFileSync(tmp, html);
   await page.goto('file://' + tmp);
-  await page.evaluate(setup, { IT, LOGO_SVG, ROOT, STACK: { display: STACK.display.stack, text: STACK.text.stack }, hook: ST.reel_hook });
+  await page.evaluate(setup, { IT, LOGO_SVG, ROOT, STACK: { display: STACK.display.stack, text: STACK.text.stack }, hook: { ...ST.reel_hook, ...(IT.hook_style_override || {}) } });
   await page.evaluate(() => document.fonts.ready);
   await page.evaluate(async () => { for (const i of document.images) await i.decode(); });
   const fams = await page.evaluate(() => [...document.fonts].filter((f) => f.status === 'loaded').map((f) => f.family));
@@ -105,12 +107,13 @@ function setup({ IT, LOGO_SVG, ROOT, STACK, hook }) {
   const rectEl = doc.querySelector('rect');
 
   // ---- layers
-  const bg = div('position:absolute;left:0;top:0;width:1080px;height:1920px;background:#0c0d0e');
+  const TH = IT.theme;
+  const bg = div('position:absolute;left:0;top:0;width:1080px;height:1920px;background:' + TH.bg);
   const bp = div('position:absolute;left:0;top:0;width:1080px;height:1920px;' + IT.blueprint.css.replace(/; /g, ';'));
   const vl = div('position:absolute;left:0;top:0;width:1080px;height:1920px');
   for (const x of IT.vlines.xs) div(`position:absolute;left:${x - IT.vlines.w / 2}px;top:0;width:${IT.vlines.w}px;height:1920px;background:${IT.vlines.color}`, vl);
-  const ground = div('position:absolute;left:0;width:1080px;height:2px;background:#c9a96a;transform-origin:50% 50%');
-  const glow = div('position:absolute;width:520px;height:80px;background:radial-gradient(closest-side, rgba(232,207,152,.55), rgba(232,207,152,0))');
+  const ground = div('position:absolute;left:0;width:1080px;height:2px;background:' + TH.ground_line + ';transform-origin:50% 50%');
+  const glow = div('position:absolute;width:520px;height:80px;background:' + TH.impact_glow);
 
   const SB = IT.stage.box_px;
   const cam = div(`position:absolute;left:${SB.x}px;top:${SB.y}px;width:${SB.w}px;height:${SB.h}px;transform-origin:342.4px 158px`);
@@ -128,8 +131,8 @@ function setup({ IT, LOGO_SVG, ROOT, STACK, hook }) {
 
   // dimensions (below the mark)
   const dims = sv('g', {}, mark);
-  const DS = 'stroke:rgba(201,169,106,0.75);stroke-width:1.5;fill:none;vector-effect:non-scaling-stroke';
-  const GS = 'stroke:rgba(201,169,106,0.75);stroke-width:0.65;fill:none;stroke-dasharray:2.5 2.5';
+  const DS = 'stroke:' + TH.dims_stroke + ';stroke-width:1.5;fill:none;vector-effect:non-scaling-stroke';
+  const GS = 'stroke:' + TH.dims_stroke + ';stroke-width:0.65;fill:none;stroke-dasharray:2.5 2.5';
   const dimEls = {};
   for (const d of IT.dimensions.elements) {
     const g = sv('g', {}, dims); dimEls[d.id] = { g, d };
@@ -159,8 +162,8 @@ function setup({ IT, LOGO_SVG, ROOT, STACK, hook }) {
   const glintG = sv('g', { 'clip-path': 'url(#markClip)', style: 'mix-blend-mode:screen' }, mark);
   const glint = sv('rect', { x: 0, y: -30, width: 60, height: 240, fill: 'url(#sweep)' }, glintG);
   // wordmark glyphs
-  const wmSrc = sv('g', { id: 'wmG' }, defs); sv('path', { d: GARON_D, fill: '#ffffff' }, wmSrc); sv('rect', { x: rectEl.getAttribute('x'), y: rectEl.getAttribute('y'), width: rectEl.getAttribute('width'), height: rectEl.getAttribute('height'), fill: '#ffffff' }, wmSrc);
-  const wmC = sv('g', { id: 'wmC' }, defs); sv('path', { d: CONS_D, fill: '#ffffff' }, wmC);
+  const wmSrc = sv('g', { id: 'wmG' }, defs); sv('path', { d: GARON_D, fill: TH.wordmark_fill }, wmSrc); sv('rect', { x: rectEl.getAttribute('x'), y: rectEl.getAttribute('y'), width: rectEl.getAttribute('width'), height: rectEl.getAttribute('height'), fill: TH.wordmark_fill }, wmSrc);
+  const wmC = sv('g', { id: 'wmC' }, defs); sv('path', { d: CONS_D, fill: TH.wordmark_fill }, wmC);
   function glyphs(spec, ref, filt) {
     const grp = sv('g', { filter: `url(#${filt})` }, wm); const out = [];
     for (let i = 0; i < spec.glyph_cx.length; i++) {
@@ -189,10 +192,10 @@ function setup({ IT, LOGO_SVG, ROOT, STACK, hook }) {
   const edges = sv('svg', { width: 1080, height: 1920, style: 'position:absolute;left:0;top:0' }, app);
   const edgeClip = sv('clipPath', { id: 'edgeClip' }, edges); const edgeClipR = sv('rect', {}, edgeClip);
   const eg = sv('g', { 'clip-path': 'url(#edgeClip)' }, edges);
-  const e1 = sv('line', { stroke: '#c9a96a', 'stroke-width': 2 }, eg), e2 = sv('line', { stroke: '#c9a96a', 'stroke-width': 2 }, eg);
-  const vEdge = div('position:absolute;width:2px;background:#c9a96a');
-  const endOv = div('position:absolute;left:0;top:0;width:1080px;height:1920px;background:#0c0d0e');
-  const frameLine = div('position:absolute;box-sizing:border-box;border:1px solid rgba(201,169,106,0.5)');
+  const e1 = sv('line', { stroke: TH.wipe_edge, 'stroke-width': 2 }, eg), e2 = sv('line', { stroke: TH.wipe_edge, 'stroke-width': 2 }, eg);
+  const vEdge = div('position:absolute;width:2px;background:' + TH.wipe_edge);
+  const endOv = div('position:absolute;left:0;top:0;width:1080px;height:1920px;background:' + TH.end_overlay);
+  const frameLine = div('position:absolute;box-sizing:border-box;border:' + TH.frame_line);
   const corner = document.createElement('img'); corner.src = file(IT.corner_logo.file);
   corner.style.cssText = `position:absolute;left:${IT.corner_logo.x}px;top:${IT.corner_logo.y}px;width:${IT.corner_logo.w}px;height:${IT.corner_logo.h}px`; app.appendChild(corner);
 
@@ -206,7 +209,7 @@ function setup({ IT, LOGO_SVG, ROOT, STACK, hook }) {
     const d = div(`position:absolute;left:${t.x}px;top:${t.y}px;width:${t.w}px;text-align:${t.align};white-space:nowrap;${styleCss(s)}`);
     const ls = s.letter_spacing || '0';
     let h = t.text.replace(/&/g, '&amp;').replace(/</g, '&lt;');
-    if (s === SL.end_cta) h = h.replace('«ՇՈՒՏՈՎ»', '<span style="color:#c9a96a">«ՇՈՒՏՈՎ»</span>');
+    if (s === SL.end_cta) h = h.replace('«ՇՈՒՏՈՎ»', `<span style="color:${SL.end_cta.accent_color}">«ՇՈՒՏՈՎ»</span>`);
     const span = `<span class="in" style="${t.align === 'center' ? `padding-left:${ls}` : t.align === 'right' ? `margin-right:-${ls}` : ''}">${h}</span>`;
     d.innerHTML = span; texts.push({ t, d, s }); return d;
   }
