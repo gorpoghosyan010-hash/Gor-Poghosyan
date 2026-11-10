@@ -107,7 +107,7 @@ function textEl(styles, el, W, H, extra = {}) {
   if (el.w) pos.push(`width:${el.w}px`); else pos.push('white-space:nowrap');
   if (el.align && anchor.indexOf('right') < 0) pos.push(`text-align:${el.align}`);
   const id = el.id || el.style;
-  return `<div class="t" data-id="${esc(id)}"${fitAttrs(st, el)} style="${pos.join(';')};${styleCss(st, el)}">${extra.before || ''}${el.html || richText(el.text, el)}${extra.after || ''}</div>`;
+  return `<div class="t" data-id="${esc(id)}"${fitAttrs(st, el)} style="${pos.join(';')};${styleCss(st, el)}${el.extra_css ? ';' + el.extra_css : ''}">${extra.before || ''}${el.html || richText(el.text, el)}${extra.after || ''}</div>`;
 }
 
 // Flow (static) text block for stacks / chained layouts.
@@ -118,7 +118,7 @@ function flowEl(styles, el, extraCss = '') {
   if (el.w) css.push(`width:${el.w}px`); else css.push('white-space:nowrap');
   if (el.align) css.push(`text-align:${el.align}`);
   const id = el.id || el.style;
-  return `<div class="t" data-id="${esc(id)}"${fitAttrs(st, el)} style="${css.join(';')};${styleCss(st, el)};${extraCss}">${el.html || richText(el.text, el)}</div>`;
+  return `<div class="t" data-id="${esc(id)}"${fitAttrs(st, el)} style="${css.join(';')};${styleCss(st, el)};${extraCss}${el.extra_css ? ';' + el.extra_css : ''}">${el.html || richText(el.text, el)}</div>`;
 }
 
 function ruleEl(r, extra = '') {

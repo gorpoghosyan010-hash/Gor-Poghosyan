@@ -3,10 +3,10 @@
 
 usage: compose_reel.py <timeline.json> <out.mp4>
 
-Per frame (30 fps): scene picture (Ken Burns with sub-pixel affine sampling, or blurred
-'contain' layout, or solid background) + scene gradient overlays, transitions (cut /
+Per frame (30 fps): scene picture (Ken Burns with sub-pixel affine sampling, blurred
+'contain' layout, solid background, or a pre-rendered frame sequence: motion.type "frames") + scene gradient overlays, transitions (cut /
 crossfade Nf / dip to colour), then timed transparent text/logo PNG layers with
-fade/rise animations. Frames are piped as raw RGB into ffmpeg: H.264 High yuv420p BT.709,
+fade/rise animations (optional wipe_in seconds: left-to-right reveal). Frames are piped as raw RGB into ffmpeg: H.264 High yuv420p BT.709,
 CRF 18, silent AAC 48 kHz stereo track, +faststart.
 """
 import json
@@ -42,6 +42,8 @@ _src_cache = {}
 
 def src(path):
     if path not in _src_cache:
+        if len(_src_cache) > 24:
+            _src_cache.clear()
         _src_cache[path] = Image.open(path).convert("RGB")
     return _src_cache[path]
 
@@ -138,6 +140,12 @@ class Scene:
             ec = (201, 169, 106, int(0.35 * 255))
             d.line([(fg["x"], fg["y"]), (fg["x"] + fg["w"], fg["y"])], fill=ec)
             d.line([(fg["x"], fg["y"] + fg["h"] - 1), (fg["x"] + fg["w"], fg["y"] + fg["h"] - 1)], fill=ec)
+        elif self.kind == "frames":
+            files = m["files"]
+            k = min(len(files) - 1, max(0, int(round((t - sc["in"]) * FPS))))
+            im = src(files[k])
+            if im.size != (W, H):
+                raise ValueError("frame %s is %sx%s, expected %sx%s" % (files[k], im.size[0], im.size[1], W, H))
         elif self.kind == "solid":
             im = Image.new("RGB", (W, H), hex2rgb(sc["background"]))
         else:
@@ -206,6 +214,7 @@ class Layer:
         self.fo = L.get("fade_out", 0) or 0
         self.rise = L.get("rise", 0) or 0
         self.z = L.get("z", 0)
+        self.wipe = round((L.get("wipe_in", 0) or 0) * FPS)
         self._cache = {}
 
     def draw(self, frame, i):
@@ -223,6 +232,13 @@ class Layer:
             left = self.i1 - i
             alpha *= min(1.0, (left - 1) / self.fo) if left <= self.fo else 1.0
         if alpha <= 0:
+            return
+        if self.wipe and k < self.wipe:
+            # bbox-relative: reveal from the layer's left edge (x of the bbox)
+            wv = int(round(self.im.width * in_out_sine((k + 1) / self.wipe)))
+            if wv <= 0:
+                return
+            frame.alpha_composite(self.im.crop((0, 0, wv, self.im.height)), (self.x, self.y + dy))
             return
         q = round(alpha, 3)
         if q >= 0.999:
