@@ -8,6 +8,12 @@ const securityHeaders = [
 
 module.exports = {
   poweredByHeader: false,
+  async redirects() {
+    return [
+      { source: '/projects/pool-03', destination: '/projects', permanent: true },
+      { source: '/projects/pool-04', destination: '/projects', permanent: true }
+    ];
+  },
   async headers() {
     return [
       { source: '/:path*', headers: securityHeaders },
