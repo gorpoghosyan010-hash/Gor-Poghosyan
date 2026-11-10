@@ -35,15 +35,15 @@ def svg(theme, wordmark=True, tagline=False):
     g1,g2=('#d4b57a','#b8955c') if theme!='mono' else ('#6b6b6b','#6b6b6b')
     if wordmark:
         vb='0 0 425 %d'%(352 if tagline else 310)
-        w=f'<path fill="{txt}" d="{garon}"/><rect x="67.5" y="228.8" width="17.9" height="9.6" fill="{txt}"/><path fill="{txt}" d="{cons}"/><rect x="183" y="303" width="59" height="2.2" fill="{rule}"/>'
+        w=f'<path fill="{txt}" d="{garon}"/><rect x="67.5" y="228.8" width="17.9" height="9.6" fill="{txt}"/><path fill="{txt}" d="{cons}"/>'
         if tagline: w+=f'<path fill="{txt}" d="{tag}"/>'
-        tf=' transform="translate(0,1.5)"'
+        tf=' transform="translate(0,9.25)"'
     else:
         vb='66 14 296 151'; w=''; tf=''
     return f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="{vb}" role="img" aria-label="GARON Construction">
 <defs><linearGradient id="gm{theme}" x1="95" y1="165" x2="250" y2="90" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="{m1}"/><stop offset="1" stop-color="{m2}"/></linearGradient>
 <linearGradient id="gg{theme}" x1="264" y1="66" x2="352" y2="177" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="{g1}"/><stop offset="1" stop-color="{g2}"/></linearGradient></defs>
-<g{tf}><path fill="{ink}" d="{BIG}"/><path fill="url(#gm{theme})" d="{MID}"/><path fill="url(#gg{theme})" d="{GOLD}"/></g><g transform="translate(0,-20.5)">{w}</g></svg>
+<g{tf}><path fill="{ink}" d="{BIG}"/><path fill="url(#gm{theme})" d="{MID}"/><path fill="url(#gg{theme})" d="{GOLD}"/></g><g transform="translate(0,-12.75)">{w}</g></svg>
 '''
 tag=glyph_paths('montserrat-latin-500-normal.woff2','PEOPLE. PROJECTS. PROGRESS.',10.5,52,373,342,'spread')
 os.makedirs('/home/user/Gor-Poghosyan/public/brand',exist_ok=True)

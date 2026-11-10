@@ -1,4 +1,4 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="66 14 296 151" role="img" aria-label="GARON Construction">
 <defs><linearGradient id="gmdark" x1="95" y1="165" x2="250" y2="90" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#f2f2f2"/><stop offset="1" stop-color="#a8a8a8"/></linearGradient>
 <linearGradient id="ggdark" x1="264" y1="66" x2="352" y2="177" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#d4b57a"/><stop offset="1" stop-color="#b8955c"/></linearGradient></defs>
-<g><path fill="#ffffff" d="M250 24 L250 54 L81 128 L81 155 L76 155 L76 111 Z"/><path fill="url(#gmdark)" d="M250 66 L250 155 L206 155 L206 118 L100 148 L100 155 L95 155 L95 134 Z"/><path fill="url(#ggdark)" d="M264 66 L352 110 L352 155 L308 155 L308 118 L264 96 Z"/></g><g transform="translate(0,-20.5)"></g></svg>
+<g><path fill="#ffffff" d="M250 24 L250 54 L81 128 L81 155 L76 155 L76 111 Z"/><path fill="url(#gmdark)" d="M250 66 L250 155 L206 155 L206 118 L100 148 L100 155 L95 155 L95 134 Z"/><path fill="url(#ggdark)" d="M264 66 L352 110 L352 155 L308 155 L308 118 L264 96 Z"/></g><g transform="translate(0,-12.75)"></g></svg>
