@@ -1,0 +1,204 @@
+<title>GARON գործակալների վահանակ</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Montserrat:wght@400;500;600&family=Noto+Sans+Armenian:wght@400;500;600&family=Noto+Serif+Armenian:wght@500;600&display=swap">
+<style>
+/* Layout: one reading column; each agent pipeline is a band of steps, results follow its steps */
+:root{
+  --bg:#f5f5f3; --surface:#ffffff; --ink:#17191c; --muted:#5f6368; --line:#dcdad4;
+  --gold:#856727; --gold-soft:#f3ecdc;
+  --ok:#2f7a4b; --ok-soft:#e3f1e8; --run:#8a5a00; --run-soft:#fbefd6; --wait:#6b6f75; --wait-soft:#ececea; --bad:#a3392f; --bad-soft:#f7e3e0;
+  --display:"Cormorant Garamond","Noto Serif Armenian",Georgia,serif;
+  --text:"Montserrat","Noto Sans Armenian",Arial,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0c0d0e; --surface:#151719; --ink:#eceae6; --muted:#a3a7ab; --line:#2a2d31;
+  --gold:#c9a96a; --gold-soft:#231e14;
+  --ok:#7fc79a; --ok-soft:#14261b; --run:#e2b45e; --run-soft:#2a2112; --wait:#9a9ea3; --wait-soft:#1d1f22; --bad:#e58a80; --bad-soft:#2c1715; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0c0d0e; --surface:#151719; --ink:#eceae6; --muted:#a3a7ab; --line:#2a2d31;
+  --gold:#c9a96a; --gold-soft:#231e14;
+  --ok:#7fc79a; --ok-soft:#14261b; --run:#e2b45e; --run-soft:#2a2112; --wait:#9a9ea3; --wait-soft:#1d1f22; --bad:#e58a80; --bad-soft:#2c1715; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--text);font-size:15px;line-height:1.6}
+.wrap{max-width:1080px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:40px 64px;display:grid;gap:56px}
+h1,h2,h3{font-family:var(--display);font-weight:600;text-wrap:balance;margin:0}
+h1{font-size:clamp(34px,5vw,54px);line-height:1.05}
+h2{font-size:clamp(26px,3.4vw,36px);line-height:1.1}
+h3{font-size:20px;line-height:1.2}
+p{margin:0}
+.eyebrow{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:600}
+.muted{color:var(--muted)}
+header{display:grid;gap:14px;border-bottom:1px solid var(--line);padding-bottom:28px}
+header p.lead{max-width:62ch;color:var(--muted)}
+.stats{display:flex;flex-wrap:wrap;gap:28px;margin-top:8px}
+.stats div{display:grid}
+.stats b{font-family:var(--display);font-size:34px;color:var(--gold);line-height:1;font-variant-numeric:tabular-nums}
+.stats span{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+section{display:grid;gap:22px}
+.sechead{display:grid;gap:8px}
+.sechead p{max-width:70ch;color:var(--muted)}
+.flow{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;counter-reset:step}
+.agent{background:var(--surface);border:1px solid var(--line);padding:16px 16px 14px;display:grid;gap:8px;align-content:start;min-width:0;position:relative}
+.agent .top{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.agent code{font-size:12px;color:var(--muted);word-break:break-all}
+.agent p{font-size:13.5px}
+.agent .out{font-size:12px;color:var(--muted);border-top:1px dashed var(--line);padding-top:8px}
+.flow.seq .agent:not(:last-child)::after{content:"→";position:absolute;right:-11px;top:18px;color:var(--gold);font-size:14px;background:var(--bg);line-height:1;padding:2px 0}
+.pill{font-size:11px;font-weight:600;letter-spacing:.04em;padding:3px 9px;border-radius:999px;white-space:nowrap}
+.ok{background:var(--ok-soft);color:var(--ok)} .run{background:var(--run-soft);color:var(--run)} .wait{background:var(--wait-soft);color:var(--wait)} .bad{background:var(--bad-soft);color:var(--bad)}
+.findings{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px}
+.finding{border-left:2px solid var(--gold);padding:4px 0 4px 16px;display:grid;gap:4px;min-width:0}
+.finding b{font-weight:600}
+.tablebox{overflow-x:auto;border:1px solid var(--line);background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:13.5px;font-variant-numeric:tabular-nums}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600}
+tr:last-child td{border-bottom:0}
+td.num{text-align:right;white-space:nowrap}
+.heat-high{color:var(--bad);font-weight:600} .heat-mid{color:var(--run);font-weight:600} .heat-low{color:var(--ok);font-weight:600}
+.note{font-size:13px;color:var(--muted);background:var(--gold-soft);padding:12px 16px;border-left:2px solid var(--gold)}
+.todo{display:grid;gap:10px;list-style:none;padding:0;margin:0}
+.todo li{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:baseline;background:var(--surface);border:1px solid var(--line);padding:12px 14px}
+.todo li span.d{font-size:12px;font-weight:600;color:var(--gold);white-space:nowrap;font-variant-numeric:tabular-nums}
+footer{font-size:12px;color:var(--muted);border-top:1px solid var(--line);padding-top:18px}
+@media (max-width:640px){.flow.seq .agent::after{display:none}}
+</style>
+
+<div class="wrap">
+
+<header>
+  <span class="eyebrow">GARON Construction · Երևան</span>
+  <h1>Գործակալների վահանակ</h1>
+  <p class="lead">Ինչ են արել GARON-ի երեք թիմերը. շուկայի վերլուծություն, ռիսկեր ու ֆինանսական մոդել, Instagram-ի բովանդակություն։ Վիճակը՝ 10.11.2026։</p>
+  <div class="stats">
+    <div><b>14</b><span>գործակալ</span></div>
+    <div><b>3</b><span>թիմ</span></div>
+    <div><b>27</b><span>ուսումնասիրված ընկերություն</span></div>
+    <div><b>30</b><span>գնահատված ռիսկ</span></div>
+    <div><b>10 000</b><span>սիմուլյացիա</span></div>
+    <div><b>9</b><span>Instagram նյութ</span></div>
+  </div>
+</header>
+
+<section>
+  <div class="sechead">
+    <span class="eyebrow">Թիմ 1 · /construction-market-analysis</span>
+    <h2>Շուկա և մրցակիցներ</h2>
+    <p>Երեք հետազոտող զուգահեռ ուսումնասիրեցին միջին չափի ընկերությունները, հետո համեմատողն ու ռազմավարը եզրակացություններ արեցին։</p>
+  </div>
+  <div class="flow seq">
+    <div class="agent"><div class="top"><h3>Հետազոտող ×3</h3><span class="pill ok">Ավարտված</span></div><code>construction-market-researcher</code><p>Տներ (9 ընկ.), վերանորոգում (8), հանրային շենքեր (10)՝ գներ, նախագծեր, լիցենզիաներ, աղբյուրներ։</p><div class="out">research-residential.md · research-renovation.md · research-public.md</div></div>
+    <div class="agent"><div class="top"><h3>Համեմատող</h3><span class="pill ok">Ավարտված</span></div><code>competitor-comparator</code><p>10 չափանիշով աղյուսակներ, 13 լավագույն պրակտիկա, 11 բաց տեղ, 7 սպառնալիք։</p><div class="out">comparison.md</div></div>
+    <div class="agent"><div class="top"><h3>Ռազմավար</h3><span class="pill ok">Ավարտված</span></div><code>differentiation-strategist</code><p>Դիրքավորում, առաջարկ, գներ, մարքեթինգ, 90-օրյա պլան։</p><div class="out">strategy.md</div></div>
+  </div>
+  <div class="findings">
+    <div class="finding"><b>Ոչ ոք չի հրապարակում գին և երաշխիք</b><span class="muted">Տներ կառուցողներից ոչ մեկը, վերանորոգման մեջ՝ միայն 2-ը։ Սա GARON-ի գլխավոր հնարավորությունն է։</span></div>
+    <div class="finding"><b>Դիրքավորում</b><span class="muted">«Շինարարություն առանց անակնկալների՝ գինը նախապես, երաշխիքը գրավոր, ընթացքը ամեն շաբաթ ձեր հեռախոսում»։</span></div>
+    <div class="finding"><b>Հերթականություն</b><span class="muted">Վերանորոգում → տներ և լողավազաններ → փոքր պետական տենդերներ (2-րդ տարի, սկզբում՝ ենթակապալառու)։</span></div>
+  </div>
+</section>
+
+<section>
+  <div class="sechead">
+    <span class="eyebrow">Թիմ 2 · /construction-risk-outcomes</span>
+    <h2>Ռիսկեր և հավանական արդյունքներ</h2>
+    <p>Ռիսկերի վերլուծաբանը գնահատեց 30 ռիսկ, մոդելավորողը դրանք դրեց 24 ամսվա ֆինանսական մոդելի մեջ և խաղարկեց 10 000 անգամ։</p>
+  </div>
+  <div class="flow seq">
+    <div class="agent"><div class="top"><h3>Ռիսկերի վերլուծաբան</h3><span class="pill ok">Ավարտված</span></div><code>construction-risk-analyst</code><p>Հավանականություն, վնաս ֏-ով, վաղ նշաններ, մեղմացում, ջերմային քարտեզ։</p><div class="out">risks.md · model/risks.json</div></div>
+    <div class="agent"><div class="top"><h3>Արդյունքների մոդելավորող</h3><span class="pill ok">Ավարտված</span></div><code>business-outcome-modeler</code><p>4 ռազմավարություն × 7 կապիտալի մակարդակ, սցենարներ, զգայունություն, ԱԱՀ։</p><div class="out">outcomes.md · model/simulate.py · assumptions.json</div></div>
+  </div>
+
+  <div class="tablebox">
+    <table>
+      <thead><tr><th>Թոփ ռիսկ</th><th class="num">Հավանականություն / տարի</th><th class="num">Սպասվող կորուստ</th></tr></thead>
+      <tbody>
+        <tr><td>Առաջին տարում պետական տենդեր չհաղթել</td><td class="num heat-high">70%</td><td class="num">12,2 մլն ֏</td></tr>
+        <tr><td>Կապիտալը չբավականացնել</td><td class="num heat-mid">50%</td><td class="num">9,4 մլն ֏</td></tr>
+        <tr><td>Ֆիքսված գնով նախահաշվում ծախսերը թերագնահատել</td><td class="num heat-high">60%</td><td class="num">9,0 մլն ֏</td></tr>
+        <tr><td>Քիչ հայտեր՝ առանց պորտֆոլիոյի և կարծիքների</td><td class="num heat-mid">55%</td><td class="num">8,9 մլն ֏</td></tr>
+        <tr><td>Լիցենզիան ուշանալ կամ ոչ ճիշտ դասի լինել</td><td class="num heat-mid">45%</td><td class="num">5,6 մլն ֏</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="tablebox">
+    <table>
+      <thead><tr><th>Մեկնարկային կապիտալ (ռազմ. Բ)</th><th class="num">Փողը վերջանում է 24 ամսում՝ ներկայիս թվերով</th><th class="num">Եթե մարժա +8 կետ, ծախսեր −20%, գործավարձ</th></tr></thead>
+      <tbody>
+        <tr><td>30 մլն ֏</td><td class="num heat-high">100%</td><td class="num heat-high">88%</td></tr>
+        <tr><td>40 մլն ֏</td><td class="num heat-high">100%</td><td class="num heat-mid">58%</td></tr>
+        <tr><td>60 մլն ֏</td><td class="num heat-high">97%</td><td class="num heat-low">10%</td></tr>
+        <tr><td>120 մլն ֏</td><td class="num heat-low">4%</td><td class="num">—</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="findings">
+    <div class="finding"><b>Խնդիրը մարժան է, ոչ թե կապիտալը</b><span class="muted">Ներկայիս ենթադրություններով ոչ մի կապիտալ 24 ամսում շահույթ չի բերում։ Ռիսկերն անջատելիս էլ միջինը −42 մլն ֏ է։</span></div>
+    <div class="finding"><b>Երեք պայմանով՝ կենսունակ</b><span class="muted">60 մլն ֏-ով՝ ~50% հավանականություն շահույթի 24-րդ ամսին, ինքնածածկում՝ ~21-րդ ամիս։</span></div>
+    <div class="finding"><b>Պետական տենդերները՝ ավելի ուշ</b><span class="muted">Առաջին 24 ամսում վատթարացնում են արդյունքը և կապիտալի պահանջը հանում 184 մլն ֏։</span></div>
+  </div>
+  <p class="note">Իրական տվյալներ չկային, բոլոր թվերը գործակալների գնահատականներն են։ Ճշգրտելու համար փոխիր docs/business/model/assumptions.json-ը և վերագործարկիր մոդելը։</p>
+</section>
+
+<section>
+  <div class="sechead">
+    <span class="eyebrow">Թիմ 3 · /instagram-content</span>
+    <h2>Instagram բովանդակություն</h2>
+    <p>Վեց գործակալ, որոնք աշխատանքը փոխանցում են իրար։ Վերջինը ստուգում է որակը և սխալը վերադարձնում պատասխանատու քայլին (առավելագույնը 2 շրջան)։</p>
+  </div>
+  <div class="flow seq">
+    <div class="agent"><div class="top"><h3>1 · Թրենդներ</h3><span class="pill ok">Ավարտված</span></div><code>ig-1-trend-scout</code><p>14 ձևաչափ, 20 hook, հեշթեգեր, մրցակիցների բացեր։</p><div class="out">01-trends.md</div></div>
+    <div class="agent"><div class="top"><h3>2 · Ռազմավար</h3><span class="pill ok">Ավարտված</span></div><code>ig-2-content-strategist</code><p>Պլան և 9 առաջադրանք, իրական նկարների ստուգում։</p><div class="out">02-plan.md · 02-briefs.json</div></div>
+    <div class="agent"><div class="top"><h3>3 · Տեքստագիր</h3><span class="pill run">Աշխատում է</span></div><code>ig-3-copywriter</code><p>Hook-եր, էկրանի տեքստեր, նկարագրություն hy/ru/en։</p><div class="out">03-copy.md · 03-copy.json</div></div>
+    <div class="agent"><div class="top"><h3>4 · Արտ-դիրեկտոր</h3><span class="pill wait">Սպասում է</span></div><code>ig-4-visual-director</code><p>Կադրեր, դասավորություն, նկարահանման ցուցակ։</p><div class="out">04-visual.md · 04-render-spec.json</div></div>
+    <div class="agent"><div class="top"><h3>5 · Պրոդյուսեր</h3><span class="pill wait">Սպասում է</span></div><code>ig-5-producer</code><p>PNG փոստեր 1080×1350, MP4 reel-եր 1080×1920։</p><div class="out">05-output/</div></div>
+    <div class="agent"><div class="top"><h3>6 · Խմբագիր</h3><span class="pill wait">Սպասում է</span></div><code>ig-6-quality-editor</code><p>Ճշմարտացիություն, հայերեն, դիզայն, Instagram-ի պահանջներ։</p><div class="out">06-review.md</div></div>
+  </div>
+
+  <div class="tablebox">
+    <table>
+      <thead><tr><th>ID</th><th>Օր</th><th>Տեսակ</th><th>Թեմա</th><th>Hook</th><th>Նյութ</th></tr></thead>
+      <tbody>
+        <tr><td>P01</td><td>16.11</td><td>Reel</td><td>Տուն</td><td>«Քարքարոտ հողամաս։ 15 վայրկյան հետո՝ սա։»</td><td><span class="pill ok">Կա</span></td></tr>
+        <tr><td>P02</td><td>18.11</td><td>Կարուսել</td><td>Վերանորոգում</td><td>«Մինչև վարպետին կանխավճար տալը՝ ստուգեք այս 7 բանը։»</td><td><span class="pill ok">Կա</span></td></tr>
+        <tr><td>P03</td><td>20.11</td><td>Կարուսել</td><td>Լողավազան</td><td>«Ինչ է մնում սալիկի տակ»</td><td><span class="pill ok">Կա</span></td></tr>
+        <tr><td>P04</td><td>23.11</td><td>Reel</td><td>Լողավազան</td><td>«Կաղապար → բետոն → խճանկար → ջուր։»</td><td><span class="pill ok">Կա</span></td></tr>
+        <tr><td>P05</td><td>25.11</td><td>Կարուսել</td><td>Տուն</td><td>«Տուն եք կառուցում Հայաստանում, իսկ ինքներդ՝ արտասահմանում»</td><td><span class="pill ok">Կա</span></td></tr>
+        <tr><td>P06</td><td>27.11</td><td>Փոստ</td><td>Վերանորոգում</td><td>«70 մ² բնակարան. մոտավոր գինը՝ 4 մակարդակով»</td><td><span class="pill run">Պայմանով</span></td></tr>
+        <tr><td>P07</td><td>30.11</td><td>Reel</td><td>Վերանորոգում</td><td>«Ձեր նախահաշվում կա 3 տող…»</td><td><span class="pill bad">Պետք է նկարել</span></td></tr>
+        <tr><td>P08</td><td>02.12</td><td>Փոստ</td><td>Տուն</td><td>«Տուն Հայաստանում, իսկ դուք՝ արտասահմանում»</td><td><span class="pill run">Պայմանով</span></td></tr>
+        <tr><td>P09</td><td>04.12</td><td>Փոստ</td><td>Լողավազան</td><td>«8×4 մ լողավազան. ինչպես է հաշվվում գինը»</td><td><span class="pill run">Պայմանով</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section>
+  <div class="sechead">
+    <span class="eyebrow">Արված է կայքում</span>
+    <h2>Կայքի մաքրում</h2>
+  </div>
+  <div class="findings">
+    <div class="finding"><b>Հանված է «25+ տարի», «50+», «EST. 2000»</b><span class="muted">Թվերի փոխարեն՝ երեք ծառայությունները, բոլոր լեզուներով։</span></div>
+    <div class="finding"><b>Ջնջված է 2 կեղծ նախագիծ</b><span class="muted">pool-03 (կրկնօրինակներ) և pool-04 (list.am-ի screenshot), հին հղումները տանում են «Նախագծեր»։</span></div>
+    <div class="finding"><b>pool-02-ից հանված է 3 նկար</b><span class="muted">Դրանք house-01-ի կրկնօրինակներ էին։ Կայքում հիմա 4 նախագիծ է։</span></div>
+  </div>
+</section>
+
+<section>
+  <div class="sechead">
+    <span class="eyebrow">Քո որոշումները</span>
+    <h2>Ինչ է պետք քեզանից</h2>
+  </div>
+  <ul class="todo">
+    <li><span class="d">մինչև 16.11</span><span>Հաստատել, որ կայքի 4 նախագիծը (3 լողավազան, 1 տուն) կառուցել է քո թիմը։</span></li>
+    <li><span class="d">մինչև 23.11</span><span>Հաստատել, որ պատվիրատուին ամեն շաբաթ հաշվետվություն է ուղարկվելու։</span></li>
+    <li><span class="d">մինչև 25.11</span><span>Ասել՝ գներում ԱԱՀ-ն ներառված է, թե ոչ, և լրացնել հաշվիչի «ինչ է ներառված» դաշտը։</span></li>
+    <li><span class="d">մինչև 25.11</span><span>Նկարել P07 reel-ը՝ դու խոսում ես տեսախցիկի առջև (սցենարը կտա արտ-դիրեկտորը)։</span></li>
+    <li><span class="d">երբ կարող ես</span><span>Տալ իրական թվեր՝ 2–3 աշխատանքի ինքնարժեք, բրիգադի վճարման ձև, ամսական ծախս, որ մոդելը վերահաշվի։</span></li>
+  </ul>
+</section>
+
+<footer>Բոլոր ֆայլերը GitHub-ում են՝ claude/lucid-hypatia-0lj2ao ճյուղ, docs/business/ և marketing/instagram/ պանակներ։ Գործակալները՝ .claude/agents/։</footer>
+</div>
