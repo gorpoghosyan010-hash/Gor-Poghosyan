@@ -222,8 +222,8 @@
       },
       {
         "asset": "screenshot՝ /calculator, միայն ձևը, առանց գնի արդյունքի",
-        "title": "Մոտավոր գինը՝ մակերեսով, նախապես",
-        "body": "Ընտրեք նախագծի տեսակը, նշեք մակերեսը և տեսեք մոտավոր արժեքը։"
+        "title": "Կողմնորոշիչ հաշվարկ՝ մակերեսով",
+        "body": "Ընտրեք նախագծի տեսակը, նշեք մակերեսը և տեսեք կողմնորոշիչ արժեքը։"
       },
       {
         "asset": "screenshot՝ /projects",
@@ -236,9 +236,9 @@
         "body": "garon.am | Հարցեր ունե՞ք՝ գրեք «ԳԻՆ» direct-ում։ | info@garon.am"
       }
     ],
-    "caption_hy": "Մեր կայքը գործում է։\n\nGARON-ի կայքը բաց է երեք լեզվով՝ հայերեն, English, Русский։ Հասցեն՝ garon.am, հղումը նաև բիոյում է։\n\nԻնչ կգտնեք այնտեղ.\n— ծառայությունների ցանկը՝ լողավազաններից ու տներից մինչև վերանորոգում,\n— մեր նախագծերը՝ միայն մեր թիմի աշխատանքի լուսանկարներով,\n— հաշվիչ. ընտրում եք նախագծի տեսակը, նշում եք մակերեսը և տեսնում մոտավոր արժեքը։\n\nԻնչո՞ւ ենք գինը դնում կայքում։ Որովհետև մոտավոր գինը պետք է իմանալ նախապես՝ մինչև առաջին հանդիպումը։ Վերջնական գինը կախված է ձեր նախագծից։\n\nՀարցեր ունե՞ք ձեր նախագծի մասին։ Գրեք «ԳԻՆ» direct-ում։",
-    "caption_ru": "Наш сайт работает.\n\nСайт GARON на трёх языках: армянском, английском и русском. Адрес: garon.am, ссылка в профиле. Там список услуг (от бассейнов и домов до ремонта), наши проекты (только реальные фото работы нашей команды) и калькулятор: выберите тип проекта, укажите площадь и увидите ориентировочную стоимость. Окончательная цена зависит от вашего проекта.\n\nВопросы по вашему проекту? Напишите «ЦЕНА» в direct.",
-    "caption_en": "Our website is live.\n\nThe GARON website is in three languages: Armenian, English and Russian. Address: garon.am, link in bio. There you’ll find the list of services (from pools and houses to renovation), our projects (only real photos of our team’s work) and a calculator: choose the project type, enter the area and see an approximate cost. The final price depends on your project.\n\nQuestions about your project? DM us “PRICE”.",
+    "caption_hy": "Մեր կայքը գործում է։\n\nGARON-ի կայքը բաց է երեք լեզվով՝ հայերեն, English, Русский։ Հասցեն՝ garon.am, հղումը նաև բիոյում է։\n\nԻնչ կգտնեք այնտեղ.\n— ծառայությունների ցանկը՝ լողավազաններից ու տներից մինչև վերանորոգում,\n— մեր նախագծերը՝ միայն մեր թիմի աշխատանքի լուսանկարներով,\n— հաշվիչ. ընտրում եք նախագծի տեսակը, նշում եք մակերեսը և տեսնում կողմնորոշիչ հաշվարկ։\n\nՀաշվիչը տալիս է կողմնորոշիչ հաշվարկ։ Ճշգրիտ նախահաշիվը կախված է ձեր նախագծից, նյութերից և տեղանքից. գրեք մեզ, և կհաշվարկենք։\n\nՀարցեր ունե՞ք ձեր նախագծի մասին։ Գրեք «ԳԻՆ» direct-ում։",
+    "caption_ru": "Наш сайт работает.\n\nСайт GARON на трёх языках: армянском, английском и русском. Адрес: garon.am, ссылка в профиле. Там список услуг (от бассейнов и домов до ремонта), наши проекты (только реальные фото работы нашей команды) и калькулятор: выберите тип проекта, укажите площадь и увидите ориентировочный расчёт. Точная смета зависит от вашего проекта, материалов и участка.\n\nВопросы по вашему проекту? Напишите «ЦЕНА» в direct.",
+    "caption_en": "Our website is live.\n\nThe GARON website is in three languages: Armenian, English and Russian. Address: garon.am, link in bio. There you’ll find the list of services (from pools and houses to renovation), our projects (only real photos of our team’s work) and a calculator: choose the project type, enter the area and see an indicative estimate. The exact quote depends on your project, materials and site.\n\nQuestions about your project? DM us “PRICE”.",
     "hashtags": [
       "#GARONconstruction",
       "#շինարարություն",
