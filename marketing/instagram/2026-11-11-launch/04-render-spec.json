@@ -1,5 +1,5 @@
 {
- "spec_version": 1,
+ "spec_version": 2,
  "batch": "marketing/instagram/2026-11-11-launch",
  "generated": "2026-11-10",
  "source_files": [
@@ -13,7 +13,10 @@
   "components/Splash.tsx",
   "app/globals.css",
   "app/page.tsx",
-  "local production build (probe 2026-11-10)"
+  "local production build (probe 2026-11-10)",
+  "06-review.md",
+  "06-review.json",
+  "public/brand/garon-logo-dark.svg (vector logo, commit 5958932)"
  ],
  "conventions": {
   "units": "Pixels in the OUTPUT frame, origin top-left. Times in seconds from item start (30 fps; 1 frame = 0.0333 s). L01 uses CANVAS coordinates (3240x1440) where stated, otherwise tile-local.",
@@ -28,7 +31,10 @@
   "overlay_linear_stops": "type 'linear_stops': vertical gradient of `color`; `stops` = [[y_px, alpha], ...] sorted by y, alpha interpolated linearly between stops, constant before the first and after the last stop.",
   "letter_spacing_centering": "Centred text with letter-spacing: add padding-left equal to the letter-spacing (CSS adds tracking after the last glyph) so the visible glyphs are optically centred.",
   "default_texts": "This spec uses the DEFAULT (undated) copy everywhere: no '15.11 · 20:00' on L02, L03 s6 = «Շուտով՝ մեր կայքը». Dated variants in 03-copy.md are NOT rendered.",
-  "verbatim": "All `text` values are copied programmatically from 03-copy.json (slides[].title/body, scenes[].text) except: eyebrow URLs on L04 (factual page addresses) and site-native strings captured from the site itself."
+  "verbatim": "All `text` values are copied programmatically from 03-copy.json (slides[].title/body, scenes[].text) except: eyebrow URLs on L04 (factual page addresses) and site-native strings captured from the site itself. Round 1 exception: L03 s1 title uses an explicit line break instead of the middle « · » (see items.L03.slides[0]); the words are verbatim.",
+  "line_breaks": "A text value containing '\\n' is an EXPLICIT line break: render with CSS white-space: pre-line (or split into <br>). Do not let the browser re-wrap such a line; if a single explicit line does not fit `w` at `size`, autofit the whole box (2 px steps to min_size), else STOP.",
+  "logo_files": "Logos are SVG (vector). Render via <img src=file://...svg> (or inline SVG) in headless Chromium at the given w/h — any size is sharp, no 1:1 limit. Fallback only if a renderer cannot read SVG: the PNG of the same name (now 1700x1240, 4x of the 425x310 viewBox) downscaled with Lanczos. Never mix old (pre-2026-11-10 11:03) logo renders with new ones in one item.",
+  "mask": "`mask: {type:'linear', y0, y1}` on a group = CSS mask-image linear-gradient(to bottom, #000 at y0, transparent at y1) in SLIDE pixels; the group is fully invisible below y1."
  },
  "brand": {
   "colors": {
@@ -64,11 +70,11 @@
    }
   },
   "logo": {
-   "on_dark": "public/brand/garon-logo-dark.png",
-   "on_light": "public/brand/garon-logo-light.png",
-   "note": "File names are inverted vs. intuition: garon-logo-dark.png is the WHITE logo (for dark backgrounds), as used by components/Logo.tsx with light=true. Source 425x310 RGBA with transparent padding; sizes below refer to the full PNG canvas.",
+   "on_dark": "public/brand/garon-logo-dark.svg",
+   "on_light": "public/brand/garon-logo-light.svg",
+   "note": "File names are inverted vs. intuition: garon-logo-dark.* is the WHITE/gold logo (for dark backgrounds), as used by components/Logo.tsx with light=true. Round 1: vector logo, viewBox 0 0 425 310 (same box as the old 425x310 PNG, so all x/y/w/h below are unchanged). The mark was REDRAWN (commit 5958932), visible content bbox in viewBox units x 32.5..388.5, y 24..290 (old raster: 29..392, 21..291). garon-mark-*.svg = mark only, viewBox 70 16 288 168 (not used in this batch).",
    "reel": {
-    "file": "public/brand/garon-logo-dark.png",
+    "file": "public/brand/garon-logo-dark.svg",
     "x": 70,
     "y": 262,
     "w": 132,
@@ -76,7 +82,7 @@
     "opacity": 0.92
    },
    "feed": {
-    "file": "public/brand/garon-logo-dark.png",
+    "file": "public/brand/garon-logo-dark.svg",
     "x": 60,
     "y": 52,
     "w": 120,
@@ -84,8 +90,18 @@
     "opacity": 0.92
    },
    "large_on_dark": {
-    "file": "public/brand/garon-logo-dark.png",
-    "note": "Source 425x310, visible content bbox x 29..392, y 21..291. Max rendered width 425 (1:1) on L01c; 340 on end slides. Never above 425 (jagged edges)."
+    "file": "public/brand/garon-logo-dark.svg",
+    "note": "Vector: no size limit (the old 'never above 425 px' rule is void). L01c renders at 425x310, end slides at 340x248."
+   },
+   "mark_on_dark": "public/brand/garon-mark-dark.svg",
+   "mark_on_light": "public/brand/garon-mark-light.svg",
+   "png_fallback": {
+    "on_dark": "public/brand/garon-logo-dark.png",
+    "on_light": "public/brand/garon-logo-light.png",
+    "px": [
+     1700,
+     1240
+    ]
    }
   },
   "photo_grade": "Authentic look: exposure/white-balance match between frames only; saturation -8%; contrast +5%; no LUT 'looks', no sky replacement, no AI upscaling/generative fill. Blue tarps stay (real site).",
@@ -564,6 +580,31 @@
    "alpha0": 0.13,
    "alpha1": 0.0,
    "note": "Canvas coordinates (3240x1440). Centre tile centre; leaks ~100 px into both neighbours (intended: ties the 3 tiles)."
+  },
+  "feed34_top_grad_s2": {
+   "type": "linear_stops",
+   "color": "#0c0d0e",
+   "stops": [
+    [
+     0,
+     0.62
+    ],
+    [
+     110,
+     0.55
+    ],
+    [
+     260,
+     0.18
+    ],
+    [
+     420,
+     0.0
+    ]
+   ],
+   "x": 0,
+   "w": 1080,
+   "note": "Round 1, L03 s2 only: short variant of feed34_top_grad (that one darkens to y 760 and would bury the 810 px chapter photo). Darkens the white sky under the page number (y 60..84) and the logo (y 52..140); fades out before the pool (y > 420)."
   }
  },
  "site_capture": {
@@ -690,13 +731,13 @@
      "elements": [
       {
        "kind": "image",
-       "src": "public/brand/garon-logo-dark.png",
+       "src": "public/brand/garon-logo-dark.svg",
        "x": 328,
        "y": 560,
        "w": 425,
        "h": 310,
-       "scale": "1:1 (no resampling)",
-       "note": "Visible logo content lands at y 581..851, x 357..720 (optically centred)."
+       "scale": "425x310 (vector, sharp at any size)",
+       "note": "Round 1 (new vector logo): visible content lands at x 360..717, y 584..850 (was 357..720 / 581..851) — optical centre unchanged within 3 px; alignment_rules still hold."
       },
       {
        "kind": "text",
@@ -931,7 +972,8 @@
     "source": "Instagram in-app Meta Sound Collection (licensed for business accounts) chosen at upload; export the MP4 with a silent AAC track (formats.reel.audio). Alternative: no music + soft pencil/line 'draw' SFX 0–1.9 s from a royalty-free library.",
     "loudness": "-14 LUFS integrated, -1 dBTP if mixed offline"
    },
-   "alt_hy": "Կարճ անիմացիա մուգ ֆոնի վրա. ոսկեգույն գիծը քայլ առ քայլ գծում է հարթ տանիքով երկհարկանի ժամանակակից տուն, հայտնվում է GARON լոգոն և «Շինարարություն» բառը, անկյունում՝ «Երևան» և 0-ից 100% հաշվիչ։ Վերջում՝ «Շուտով» և «Լողավազաններ · Տներ · Վերանորոգում»։"
+   "alt_hy": "Կարճ անիմացիա մուգ ֆոնի վրա. ոսկեգույն գիծը քայլ առ քայլ գծում է հարթ տանիքով երկհարկանի ժամանակակից տուն, հայտնվում է GARON լոգոն և «Շինարարություն» բառը, անկյունում՝ «Երևան» և 0-ից 100% հաշվիչ։ Վերջում՝ «Շուտով» և «Լողավազաններ · Տներ · Վերանորոգում»։",
+   "round1_logo_note": "Approved as rendered (old raster logo in the splash, 570 px wide = upscaled). The site splash now shows the NEW vector logo; if the caller decides to re-render for brand consistency: re-capture the frames from the current local build with the same procedure/timing (logo_img box 255,916,570,416 unchanged — Logo.tsx keeps width 425/height 310), re-export cover, re-review hook frame 1.0 s and end frame only."
   },
   "L03": {
    "type": "carousel",
@@ -978,9 +1020,14 @@
       "items": [
        {
         "style": "feed_title_xl",
-        "text": "Լողավազաններ · Տներ · Վերանորոգում",
+        "text": "Լողավազաններ · Տներ\nՎերանորոգում",
         "w": 900,
-        "align": "left"
+        "align": "left",
+        "line_break": "explicit",
+        "white_space": "pre-line",
+        "max_lines": 2,
+        "size": 80,
+        "note": "Round 1: copy title is «Լողավազաններ · Տներ · Վերանորոգում»; the middle « · » is replaced by a line break so no line ends with «·». Line 1 «Լողավազաններ · Տներ» must fit 900 px at 80 px (it already did in round 0); if not, autofit both lines together (min 64), never re-wrap."
        },
        {
         "style": "feed_eyebrow",
@@ -997,7 +1044,8 @@
       "y": 60,
       "anchor": "top-right"
      },
-     "grid_cover": true
+     "grid_cover": true,
+     "text_stack_check": "Stack is bottom-anchored at y 1340: two title lines (2 x 86.4 px) + gap 24 + eyebrow — eyebrow bottom = 1340, rule top ≈ 1340-29-24-173-26-2 ≈ 1086. Same height as round 0 (the title was already 2 lines), so nothing moves vertically; all inside y 60..1380."
     },
     {
      "n": 2,
@@ -1044,7 +1092,7 @@
        },
        {
         "style": "feed_body",
-        "text": "Նախագծում և կառուցում։ Լողավազան՝ մեր թիմի աշխատանքից։",
+        "text": "Նախագծում և կառուցում։",
         "w": 900,
         "align": "left",
         "max_lines": 5
@@ -1061,9 +1109,13 @@
      },
      "overlays": [
       {
+       "ref": "feed34_top_grad_s2"
+      },
+      {
        "ref": "feed_logo_vignette"
       }
-     ]
+     ],
+     "round1_note": "«2 / 6» was invisible on the near-white sky (pool-05/01 rows 0..80 ≈ 252/255 at x 780..1000). The short top gradient (feed34_top_grad family, limited to the photo's sky so the pool stays untouched) brings the background under the page number to ≈ 100/255 → page text (#f5f5f3 @ 0.6) ≈ 3:1. Order: photo → feed34_top_grad_s2 → feed_logo_vignette → logo/page/text. Check: crop 300x120 at top-right, page number must be readable at 100%."
     },
     {
      "n": 3,
@@ -1262,7 +1314,7 @@
       "color": "#c9a96a"
      },
      "logo_center": {
-      "src": "public/brand/garon-logo-dark.png",
+      "src": "public/brand/garon-logo-dark.svg",
       "x": 370,
       "y": 300,
       "w": 340,
@@ -1340,7 +1392,7 @@
       "id": "L04_shot4",
       "url": "/calculator",
       "scrollY": 652,
-      "shows": "Form: project type buttons, area input (empty, placeholder «օր.՝ 150 մ²»), floors 1–5+. Price cards start at page y 1121 → CROPPED (crop h 0.6822 = viewport y 0..453 = page y 652..1105)."
+      "shows": "Form: project type buttons, area input (empty, placeholder «օր.՝ 150 մ²»), floors 1–5+. Price cards start at page y 1121 → CROPPED (crop h 0.6822 = viewport y 0..453 = page y 652..1105). Round 1: crop unchanged; placed at dest y 504 with a fade mask (see slides[3])."
      },
      {
       "id": "L04_shot5",
@@ -1355,7 +1407,8 @@
      "L04_shot4: every element whose text contains '֏' must have top >= scrollY + 453 (i.e. outside the crop). Area input must be empty; no result block in crop.",
      "Language: document.documentElement.lang === 'hy'."
     ],
-    "verified_2026_11_10": "Probe run on the local build: home hero = /services/residential-hero.webp (stock/AI) → NOT usable; /projects hero = /projects/pool-01/06.webp (real); /services and /calculator heroes = /stock/*.webp (excluded by scroll). Section tops (CSS px): home trustStrip 720; services list 650–1410; calculator labels 740/899/1014/1121(finish, prices from 1232); projects archive cards 1212/1646/2080."
+    "verified_2026_11_10": "Probe run on the local build: home hero = /services/residential-hero.webp (stock/AI) → NOT usable; /projects hero = /projects/pool-01/06.webp (real); /services and /calculator heroes = /stock/*.webp (excluded by scroll). Section tops (CSS px): home trustStrip 720; services list 650–1410; calculator labels 740/899/1014/1121(finish, prices from 1232); projects archive cards 1212/1646/2080.",
+    "round1_recapture": "Re-capture ALL shots from the current working tree (npm run build && next start): commit ed83d07/5958932 changed the site header logo to the vector SVG (components/Logo.tsx, same 425x310 box → section tops should be unchanged; re-verify them, the automatic checks are the gate). L04_shot2 only if items.L04.slides[1].render_condition passes."
    },
    "phone_template": {
     "frame": {
@@ -1456,13 +1509,13 @@
        },
        {
         "style": "feed_title",
-        "text": "Երեք ուղղություն",
+        "text": "Մեր ուղղությունները",
         "w": 900,
         "align": "left"
        },
        {
         "style": "feed_body",
-        "text": "Լողավազաններ · Տներ · Վերանորոգում",
+        "text": "Ծառայությունների ամբողջական ցանկը՝ հաջորդ սլայդում →",
         "w": 900,
         "align": "left"
        }
@@ -1493,6 +1546,14 @@
       "x": 990,
       "y": 60,
       "anchor": "top-right"
+     },
+     "render_condition": {
+      "status": "conditional — owner decision due 2026-11-14 12:00 (replace the home stock hero or not)",
+      "render_only_if": "items.L04.screenshots.automatic_checks[0] (no '/stock/' or '/services/' media in the viewport) PASSES for L04_shot2 at scrollY 642, together with checks [1] and [3]. On fail: do NOT render, do NOT crop the leak away by hand, do NOT move scrollY to ≥ 720 (cuts the strip) — report and wait.",
+      "variant_a_hero_replaced": "Site home hero replaced with a real GARON photo → re-capture L04_shot2 at scrollY 642 and render this slide as specified (page «2 / 6»).",
+      "variant_b_slide_removed": "Owner drops the slide → carousel = 5 slides: skip n=2, render n=3..6 with page texts «2 / 5», «3 / 5», «4 / 5», «5 / 5» and n=1 as «1 / 5»; output files renumbered L04_01..L04_05 in the new order; copywriter updates alt_hy.",
+      "variant_c_other_section": "Not specified — needs a new visual spec round if chosen.",
+      "round0_evidence": ".tools/work/L04/REVIEW_shot2_scroll642_stock_leak.png, REVIEW_shot2_scroll720_strip_cut.png"
      }
     },
     {
@@ -1584,7 +1645,7 @@
        },
        {
         "style": "feed_body",
-        "text": "Ընտրեք նախագծի տեսակը, նշեք մակերեսը կամ լողավազանի չափերը և տեսեք մոտավոր արժեքը։",
+        "text": "Ընտրեք նախագծի տեսակը, նշեք մակերեսը և տեսեք մոտավոր արժեքը։",
         "w": 900,
         "align": "left",
         "max_lines": 4
@@ -1593,8 +1654,8 @@
      },
      "phone": {
       "ref": "PHONE",
-      "frame_top": 738,
-      "screen_top": 752,
+      "frame_top": 490,
+      "screen_top": 504,
       "screenshot": "L04_shot4",
       "crop": {
        "x": 0.0,
@@ -1604,9 +1665,17 @@
       },
       "dest": {
        "x": 244,
-       "y": 752,
+       "y": 504,
        "w": 592,
        "h": 688
+      },
+      "screen_window_h": 936,
+      "screen_fill_below_crop": "none — nothing is drawn in the screen below y 1192; the mask makes the phone vanish there",
+      "mask": {
+       "type": "linear",
+       "y0": 1110,
+       "y1": 1192,
+       "applies_to": "whole phone group (shadow + frame + gold border + screen + screenshot)"
       }
      },
      "logo": "none (the screenshot shows the site header logo)",
@@ -1617,7 +1686,14 @@
       "y": 60,
       "anchor": "top-right"
      },
-     "note": "Phone sits lower: the cropped screen (688 px) ends exactly at the slide bottom (752+688=1440), so the price cards can never appear. Text block must end above y 690 (autofit; else STOP)."
+     "note": "Round 1: phone raised from frame_top 738 to 490 (others 470; +20 px because this is the only slide with a 2-line title — text block ends at ≈ 456). The screenshot crop is UNCHANGED (h 0.6822 = viewport y 0..453 CSS px = page y 652..1105, scrollY 652), so every «֏» (first at page y ≈ 1232, finish label 1121) stays outside. Scrolling higher is not possible (stock hero above page y 650), and a taller crop would show the finish/price cards — so the phone group fades to the background between y 1110 and 1192 (mask) instead of bleeding off the slide edge. Nothing is invented on the screen below the crop.",
+     "checks": [
+      "Text stack bottom (body) ≤ 466 (≥ 24 px above frame_top 490). Body max 2 lines at 32 px (autofit to 28); if still 3 lines → STOP.",
+      "Crop h stays 0.6822 of the re-captured L04_shot4 (1170x1992 → 1359 px rows). Re-run automatic check [2]: every element containing '֏' has top ≥ scrollY + 453.",
+      "Visual: at y 1192 the phone is fully transparent; grid6_tile lines remain visible below it; no hard edge of the screenshot is visible.",
+      "Top of the screen (y 504) shows the site header with the NEW vector logo."
+     ],
+     "round1_mockup": "Art-director check render (not for publishing): /tmp scratch mockup verified text bottom ≈ 452, line 1 of body ends ≈ 935 px; floor buttons row (y ≈ 1098–1158) stays legible, fade over the remaining light page."
     },
     {
      "n": 5,
@@ -1695,7 +1771,7 @@
       "color": "#c9a96a"
      },
      "logo_center": {
-      "src": "public/brand/garon-logo-dark.png",
+      "src": "public/brand/garon-logo-dark.svg",
       "x": 370,
       "y": 260,
       "w": 340,
@@ -1749,8 +1825,8 @@
      "phone_note": "No phone/WhatsApp (Լ5). If added before 11-15, the copywriter supplies the line; do not invent."
     }
    ],
-   "alt_hy": "Վեց սլայդ մուգ ֆոնի վրա՝ GARON-ի կայքի հեռախոսային screenshot-ներով կլորացված շրջանակներում։ 1՝ գլխավոր էջը՝ տան լուսանկարով, «Մեր կայքը գործում է» վերնագրով և garon.am հասցեով։ 2՝ «Լողավազաններ · Տներ · Վերանորոգում» շերտը։ 3՝ ծառայությունների ցանկը։ 4՝ հաշվիչի ձևը՝ նախագծի տեսակի ընտրությամբ և մակերեսի դաշտով։ 5՝ նախագծերի էջը։ 6՝ GARON լոգոն, «Հայերեն · English · Русский» և info@garon.am։",
-   "alt_note": "Finalise alt after capture; slide 1 alt must say the PROJECTS page hero (pool photo), not 'home page with house photo' — flag to copywriter.",
+   "alt_hy": "Վեց սլայդ մուգ ֆոնի վրա՝ GARON-ի կայքի հեռախոսային screenshot-ներով կլորացված շրջանակներում։ 1՝ նախագծերի էջի վերնամասը՝ լողավազանի լուսանկարով, «Մեր կայքը գործում է» վերնագրով և garon.am հասցեով։ 2՝ գլխավոր էջի ուղղությունների շերտը։ 3՝ ծառայությունների ցանկը։ 4՝ հաշվիչի ձևը՝ նախագծի տեսակի ընտրությամբ և մակերեսի դաշտով։ 5՝ նախագծերի էջը։ 6՝ GARON լոգոն, «Հայերեն · English · Русский» և info@garon.am։",
+   "alt_note": "alt_hy synced with 03-copy.json round 1 (slide 1 = projects page hero; slide 2 described generically). If slide 2 is dropped (variant b) the copywriter renumbers the alt to 5 slides.",
    "posting": "Bio link at 19:55; pin after publishing (L04 only)."
   }
  },
@@ -1759,6 +1835,52 @@
  "flags_for_caller": [
   "Home page hero is public/services/residential-hero.webp (stock/AI), not house-01/12 as stated in 02-plan.md / 02-briefs.json / 03-copy.json L04 s1. L04 s1 moved to /projects hero. Copy text unaffected; L04 alt_hy slide 1 should be updated.",
   "Calculator shows per-m² rates (250,000 / 350,000 / 480,000 ֏) directly under the form; L04 s4 crop stops at page y 1105 to exclude them.",
-  "Site footer shows '© 2026' — not in any crop."
- ]
+  "Site footer shows '© 2026' — not in any crop.",
+  "Round 1: the logo mark was redrawn (not only vectorised). L01c and L02 (approved) still show the OLD mark; L03/L04 will show the new one after re-render. Re-rendering L01c and L02 is recommended for a consistent launch grid — caller/owner decision.",
+  "Round 1: L04 s2 remains conditional on the owner's home-hero decision (2026-11-14 12:00)."
+ ],
+ "revision": {
+  "round": 1,
+  "date": "2026-11-10",
+  "source": "06-review.md / 06-review.json + 03-copy.json (Round 1 changes, see 03-copy.md)",
+  "summary": [
+   "All on-screen text re-generated from 03-copy.json (L03 s2 body; L04 s2 title/body, s4 body; L04 alt_hy).",
+   "L03 s1: explicit line break in the title «Լողավազաններ · Տներ» / «Վերանորոգում» (no dangling «·»).",
+   "L03 s2: top gradient overlay feed34_top_grad_s2 so «2 / 6» and the logo read on the white sky.",
+   "L04 s4: phone moved up (frame_top 490, was 738); screenshot crop unchanged (h 0.6822, all «֏» outside); phone group fades out with a mask below the crop.",
+   "L04 s2: kept, but conditional (render only if the stock-leak check passes; owner decision due 2026-11-14 12:00).",
+   "Logo: new vector logo (public/brand/*.svg, same 425x310 viewBox, redrawn mark). All logo refs -> SVG; site screenshots/splash must be re-captured because the site header/splash now show the new logo."
+  ],
+  "rerender": {
+   "required": [
+    "L03_01",
+    "L03_02",
+    "L04_04"
+   ],
+   "required_for_logo_consistency": [
+    "L03_03",
+    "L03_04",
+    "L03_05",
+    "L03_06",
+    "L04_01",
+    "L04_03",
+    "L04_05",
+    "L04_06"
+   ],
+   "conditional": [
+    "L04_02 (only if items.L04.slides[1].render_condition passes)"
+   ],
+   "recommended_caller_decision": [
+    "L01c (approved; old raster logo of a different mark — re-render the L01 canvas, re-slice, seam check)",
+    "L02_reel.mp4 + L02_cover.jpg (approved; splash frames show the old logo — re-capture from the current local build)"
+   ],
+   "recapture_first": [
+    "L04_shot1",
+    "L04_shot3",
+    "L04_shot4",
+    "L04_shot5 (site header logo changed)",
+    "L04_shot2 (only if condition passes)"
+   ]
+  }
+ }
 }
