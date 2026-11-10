@@ -1141,9 +1141,9 @@ def full_analysis(args, model, a_path, r_path):
     NONE, ALL = frozenset(), frozenset(all_ids)
 
     def C(label, strat=strategy, cap=capital, tx=tax, mit=NONE, ron=risks_on, keep=False,
-          shifts=None):
+          shifts=None, scales=None):
         return Config(strategy=strat, capital=cap, tax=tx, mitig=mit, risks_on=ron,
-                      keep_paths=keep, label=label, shifts=shifts)
+                      keep_paths=keep, label=label, shifts=shifts, scales=scales)
 
     def lap(msg):
         print("  [%.0fs] %s" % (time.time() - t0, msg))

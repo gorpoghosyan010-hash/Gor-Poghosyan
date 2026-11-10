@@ -9,1444 +9,173 @@
     "distribution": "Մոնտե Կառլոյում յուրաքանչյուր թիվ նմուշառվում է եռանկյունաձև բաշխումից (low, value, high)։ Որտեղ low = high = value, թիվը ֆիքսված է (քաղաքականություն/կանոն, ոչ թե անորոշություն)։"
   },
   "general": {
-    "start_calendar_month": {
-      "value": 12,
-      "low": 12,
-      "high": 12,
-      "unit": "ամիս (1–12)",
-      "source": "estimate",
-      "note": "Մոդելի 1-ին ամիսը օրացուցային դեկտեմբերն է. անհրաժեշտ է սեզոնայնության և հարկային տարվա համար։"
-    },
-    "horizon_months": {
-      "value": 24,
-      "low": 24,
-      "high": 24,
-      "unit": "ամիս",
-      "source": "estimate",
-      "note": "Մոդելի հորիզոնը։"
-    },
-    "starting_capital_amd": {
-      "value": 30000000,
-      "low": 5000000,
-      "high": 60000000,
-      "unit": "AMD",
-      "source": "estimate",
-      "note": "Սեփական սկզբնական կապիտալ։ Հիմնադիրը թիվ չունի («Չկա») — սա որոշման փոփոխական է. տես կապիտալի «sweep»-ը outcomes.md-ում։ low/high-ը միայն sweep-ի սահմաններն են, scenario-ներում չի փոխվում։"
-    },
-    "amd_per_usd": {
-      "value": 374,
-      "low": 368,
-      "high": 378,
-      "unit": "AMD/USD",
-      "source": "research",
-      "note": "2026 փոխարժեք (armbanks.am. փետր. 377.6, ապր. 374.2, մայիսի վերջ ~368)։ strategy.md-ի 390-ը հնացած է։ Օգտագործվում է միայն USD համարժեքների համար։"
-    },
-    "materials_inflation_pct_per_year": {
-      "value": 6,
-      "low": 3,
-      "high": 10,
-      "unit": "%/տարի",
-      "source": "research",
-      "note": "Armstat. նյութեր +10% 2021–2026; արտադրողների գների ինդեքս +9.2% 2026 Ա եռամսյակ (ընդհանուր արդյունաբերություն)։ Ֆիքսված գնով պայմանագրում ինքնարժեքը աճում է, գինը՝ ոչ։"
-    },
-    "labour_inflation_pct_per_year": {
-      "value": 5,
-      "low": 3,
-      "high": 8,
-      "unit": "%/տարի",
-      "source": "research",
-      "note": "Armstat. վերանորոգման ծառայություններ +23% 2021–2026 (~4%/տարի), գումարած շինարարների պակաս 2026-ին։"
-    },
-    "materials_share_of_direct_cost_pct": {
-      "value": 60,
-      "low": 60,
-      "high": 60,
-      "unit": "%",
-      "source": "estimate",
-      "note": "Ուղղակի ծախսի մեջ նյութերի բաժինը (մնացածը՝ աշխատուժ/ենթակապալառու). օգտագործվում է գնաճը կշռելու համար։"
-    },
-    "price_review_interval_months": {
-      "value": 6,
-      "low": 6,
-      "high": 6,
-      "unit": "ամիս",
-      "source": "research",
-      "note": "Գնացուցակի վերանայում 6 ամիսը մեկ (strategy 4.3). նոր պայմանագրերի գինը ինդեքսավորվում է, ընթացիկները՝ ոչ։"
-    },
-    "warranty_reserve_pct": {
-      "value": 1.5,
-      "low": 1,
-      "high": 2,
-      "unit": "% պայմանագրից",
-      "source": "research",
-      "note": "Երաշխիքային պահուստ (strategy 3.1/6.3՝ 1–2%). ծախսագրվում է հանձնման ամսին և առանձնացվում։"
-    },
-    "credit_line_amd": {
-      "value": 12000000,
-      "low": 12000000,
-      "high": 12000000,
-      "unit": "AMD",
-      "source": "estimate",
-      "note": "Օվերդրաֆտ/վարկային գիծ (R09-ի մեղմացում). հասանելի է միայն --mitigated ռեժիմում, ենթադրաբար՝ հիմնադրի գույքի գրավով։ Ստուգել բանկում։"
-    },
-    "credit_line_from_month": {
-      "value": 3,
-      "low": 3,
-      "high": 3,
-      "unit": "ամիս",
-      "source": "estimate",
-      "note": "Վարկային գիծը բացվում է 3-րդ ամսից (strategy. բանկի հետ բանակցություն 10–11-րդ շաբաթ)։"
-    },
-    "credit_line_rate_pct": {
-      "value": 16,
-      "low": 14,
-      "high": 20,
-      "unit": "%/տարի",
-      "source": "research",
-      "note": "Օվերդրաֆտի տոկոս (risks.md՝ 16%. հիփոթեք 14.5% ֏՝ research-residential 4.6)։"
-    },
-    "emergency_financing_rate_pct": {
-      "value": 24,
-      "low": 20,
-      "high": 30,
-      "unit": "%/տարի",
-      "source": "estimate",
-      "note": "Եթե կանխիկը բացասական է առանց հաստատված գծի՝ թանկ արտակարգ ֆինանսավորում (անձնական վարկ, մասնավոր փոխառություն)։"
-    },
-    "cash_floor_months_of_fixed_costs": {
-      "value": 2,
-      "low": 2,
-      "high": 2,
-      "unit": "ամիս",
-      "source": "research",
-      "note": "Կանոն (risks.md K1). եթե կանխիկը 2 ամսվա ֆիքսված ծախսից ցածր է, նոր նախաֆինանսավորվող օբյեկտ չենք սկսում։ Գործում է միայն --mitigated ռեժիմում։"
-    },
-    "max_parallel_jobs_first_3_months": {
-      "value": 3,
-      "low": 3,
-      "high": 3,
-      "unit": "օբյեկտ",
-      "source": "research",
-      "note": "Կանոն (strategy 7 #5, R10). առաջին 3 ամսում ≤ 3 զուգահեռ օբյեկտ։ Միայն --mitigated։"
-    }
+    "start_calendar_month": {"value": 12, "low": 12, "high": 12, "unit": "ամիս (1–12)", "source": "estimate", "note": "Մոդելի 1-ին ամիսը օրացուցային դեկտեմբերն է. անհրաժեշտ է սեզոնայնության և հարկային տարվա համար։"},
+    "horizon_months": {"value": 24, "low": 24, "high": 24, "unit": "ամիս", "source": "estimate", "note": "Մոդելի հորիզոնը։"},
+    "starting_capital_amd": {"value": 30000000, "low": 5000000, "high": 60000000, "unit": "AMD", "source": "estimate", "note": "Սեփական սկզբնական կապիտալ։ Հիմնադիրը թիվ չունի («Չկա») — սա որոշման փոփոխական է. տես կապիտալի «sweep»-ը outcomes.md-ում։ low/high-ը միայն sweep-ի սահմաններն են, scenario-ներում չի փոխվում։"},
+    "amd_per_usd": {"value": 374, "low": 368, "high": 378, "unit": "AMD/USD", "source": "research", "note": "2026 փոխարժեք (armbanks.am. փետր. 377.6, ապր. 374.2, մայիսի վերջ ~368)։ strategy.md-ի 390-ը հնացած է։ Օգտագործվում է միայն USD համարժեքների համար։"},
+    "materials_inflation_pct_per_year": {"value": 6, "low": 3, "high": 10, "unit": "%/տարի", "source": "research", "note": "Armstat. նյութեր +10% 2021–2026; արտադրողների գների ինդեքս +9.2% 2026 Ա եռամսյակ (ընդհանուր արդյունաբերություն)։ Ֆիքսված գնով պայմանագրում ինքնարժեքը աճում է, գինը՝ ոչ։"},
+    "labour_inflation_pct_per_year": {"value": 5, "low": 3, "high": 8, "unit": "%/տարի", "source": "research", "note": "Armstat. վերանորոգման ծառայություններ +23% 2021–2026 (~4%/տարի), գումարած շինարարների պակաս 2026-ին։"},
+    "materials_share_of_direct_cost_pct": {"value": 60, "low": 60, "high": 60, "unit": "%", "source": "estimate", "note": "Ուղղակի ծախսի մեջ նյութերի բաժինը (մնացածը՝ աշխատուժ/ենթակապալառու). օգտագործվում է գնաճը կշռելու համար։"},
+    "price_review_interval_months": {"value": 6, "low": 6, "high": 6, "unit": "ամիս", "source": "research", "note": "Գնացուցակի վերանայում 6 ամիսը մեկ (strategy 4.3). նոր պայմանագրերի գինը ինդեքսավորվում է, ընթացիկները՝ ոչ։"},
+    "warranty_reserve_pct": {"value": 1.5, "low": 1, "high": 2, "unit": "% պայմանագրից", "source": "research", "note": "Երաշխիքային պահուստ (strategy 3.1/6.3՝ 1–2%). ծախսագրվում է հանձնման ամսին և առանձնացվում։"},
+    "credit_line_amd": {"value": 12000000, "low": 12000000, "high": 12000000, "unit": "AMD", "source": "estimate", "note": "Օվերդրաֆտ/վարկային գիծ (R09-ի մեղմացում). հասանելի է միայն --mitigated ռեժիմում, ենթադրաբար՝ հիմնադրի գույքի գրավով։ Ստուգել բանկում։"},
+    "credit_line_from_month": {"value": 3, "low": 3, "high": 3, "unit": "ամիս", "source": "estimate", "note": "Վարկային գիծը բացվում է 3-րդ ամսից (strategy. բանկի հետ բանակցություն 10–11-րդ շաբաթ)։"},
+    "credit_line_rate_pct": {"value": 16, "low": 14, "high": 20, "unit": "%/տարի", "source": "research", "note": "Օվերդրաֆտի տոկոս (risks.md՝ 16%. հիփոթեք 14.5% ֏՝ research-residential 4.6)։"},
+    "emergency_financing_rate_pct": {"value": 24, "low": 20, "high": 30, "unit": "%/տարի", "source": "estimate", "note": "Եթե կանխիկը բացասական է առանց հաստատված գծի՝ թանկ արտակարգ ֆինանսավորում (անձնական վարկ, մասնավոր փոխառություն)։"},
+    "cash_floor_months_of_fixed_costs": {"value": 2, "low": 2, "high": 2, "unit": "ամիս", "source": "research", "note": "Կանոն (risks.md K1). եթե կանխիկը 2 ամսվա ֆիքսված ծախսից ցածր է, նոր նախաֆինանսավորվող օբյեկտ չենք սկսում։ Գործում է միայն --mitigated ռեժիմում։"},
+    "max_parallel_jobs_first_3_months": {"value": 3, "low": 3, "high": 3, "unit": "օբյեկտ", "source": "research", "note": "Կանոն (strategy 7 #5, R10). առաջին 3 ամսում ≤ 3 զուգահեռ օբյեկտ։ Միայն --mitigated։"}
   },
   "tax": {
-    "regime": {
-      "value": "turnover",
-      "low": "turnover",
-      "high": "turnover",
-      "unit": "turnover | vat",
-      "source": "estimate",
-      "note": "ՀԱՍՏԱՏԵԼ ՀԱՇՎԱՊԱՀԻ ՀԵՏ։ «turnover»՝ սկսում ենք շրջանառության հարկով, շեմը գերազանցելուց հետո ավտոմատ անցնում ենք ԱԱՀ + շահութահարկ; «vat»՝ ԱԱՀ վճարող առաջին ամսից։ CLI՝ --tax turnover|vat։"
-    },
-    "turnover_tax_rate_pct": {
-      "value": 5,
-      "low": 5,
-      "high": 10,
-      "unit": "% մուտքերից",
-      "source": "estimate",
-      "note": "ՀԱՍՏԱՏԵԼ ՀԱՇՎԱՊԱՀԻ ՀԵՏ։ Շրջանառության հարկի դրույքը շինարարական/այլ գործունեության համար (մեր տեղեկությամբ՝ ~5%), high-ը՝ եթե գործունեությունը դասվի այլ խմբի կամ օրենքը փոխվի։"
-    },
-    "turnover_threshold_amd_per_year": {
-      "value": 115000000,
-      "low": 115000000,
-      "high": 115000000,
-      "unit": "AMD/օրացուցային տարի",
-      "source": "estimate",
-      "note": "ՀԱՍՏԱՏԵԼ ՀԱՇՎԱՊԱՀԻ ՀԵՏ։ Շրջանառության հարկի շեմ (~115 մլն ֏, risks.md R07)։ Գերազանցելուց հետո՝ ԱԱՀ 20% + շահութահարկ 18% հաջորդ ամսից։"
-    },
-    "vat_rate_pct": {
-      "value": 20,
-      "low": 20,
-      "high": 20,
-      "unit": "%",
-      "source": "research",
-      "note": "ՀՀ ԱԱՀ դրույք։"
-    },
-    "profit_tax_rate_pct": {
-      "value": 18,
-      "low": 18,
-      "high": 18,
-      "unit": "%",
-      "source": "research",
-      "note": "ՀՀ շահութահարկ (միայն ԱԱՀ/ընդհանուր ռեժիմում). վնասները փոխանցվում են հաջորդ տարի։"
-    },
-    "vatable_share_of_direct_cost_pct": {
-      "value": 55,
-      "low": 40,
-      "high": 70,
-      "unit": "%",
-      "source": "estimate",
-      "note": "Ուղղակի ծախսի այն մասը, որի ԱԱՀ-ն կարելի է հաշվանցել (նյութեր ԱԱՀ վճարող մատակարարներից, ԱԱՀ վճարող ենթակապալառուներ)։ Աշխատավարձը ԱԱՀ չունի։"
-    },
-    "vat_pass_through_private_pct": {
-      "value": 50,
-      "low": 0,
-      "high": 100,
-      "unit": "%",
-      "source": "estimate",
-      "note": "ԱԱՀ վճարող դառնալուց հետո ՆՈՐ մասնավոր պայմանագրերի գնին ԱԱՀ-ի որ մասն է ավելացվում (50 = գինը +10%)։ 0 = հաշվիչի գները վերջնական են, ԱԱՀ-ն «ուտում» է մարժան (R07)։ 100 = գինը +20%։ Պահանջարկի կորուստը գնի բարձրացումից մոդելավորված չէ։ ՈՐՈՇԵԼ ՀԱՇՎԱՊԱՀԻ ՀԵՏ։"
-    },
-    "vat_pass_through_public_pct": {
-      "value": 100,
-      "low": 100,
-      "high": 100,
-      "unit": "%",
-      "source": "estimate",
-      "note": "Հանրային լոտի արժեքը մոդելում առանց ԱԱՀ է. ԱԱՀ վճարողի դեպքում պատվիրատուն վճարում է ԱԱՀ-ն վրան։ ՀԱՍՏԱՏԵԼ՝ ինչպես են համեմատվում ԱԱՀ չվճարողների հայտերը։"
-    }
+    "regime": {"value": "turnover", "low": "turnover", "high": "turnover", "unit": "turnover | vat", "source": "estimate", "note": "ՀԱՍՏԱՏԵԼ ՀԱՇՎԱՊԱՀԻ ՀԵՏ։ «turnover»՝ սկսում ենք շրջանառության հարկով, շեմը գերազանցելուց հետո ավտոմատ անցնում ենք ԱԱՀ + շահութահարկ; «vat»՝ ԱԱՀ վճարող առաջին ամսից։ CLI՝ --tax turnover|vat։"},
+    "turnover_tax_rate_pct": {"value": 5, "low": 5, "high": 10, "unit": "% մուտքերից", "source": "estimate", "note": "ՀԱՍՏԱՏԵԼ ՀԱՇՎԱՊԱՀԻ ՀԵՏ։ Շրջանառության հարկի դրույքը շինարարական/այլ գործունեության համար (մեր տեղեկությամբ՝ ~5%), high-ը՝ եթե գործունեությունը դասվի այլ խմբի կամ օրենքը փոխվի։"},
+    "turnover_threshold_amd_per_year": {"value": 115000000, "low": 115000000, "high": 115000000, "unit": "AMD/օրացուցային տարի", "source": "estimate", "note": "ՀԱՍՏԱՏԵԼ ՀԱՇՎԱՊԱՀԻ ՀԵՏ։ Շրջանառության հարկի շեմ (~115 մլն ֏, risks.md R07)։ Գերազանցելուց հետո՝ ԱԱՀ 20% + շահութահարկ 18% հաջորդ ամսից։"},
+    "vat_rate_pct": {"value": 20, "low": 20, "high": 20, "unit": "%", "source": "research", "note": "ՀՀ ԱԱՀ դրույք։"},
+    "profit_tax_rate_pct": {"value": 18, "low": 18, "high": 18, "unit": "%", "source": "research", "note": "ՀՀ շահութահարկ (միայն ԱԱՀ/ընդհանուր ռեժիմում). վնասները փոխանցվում են հաջորդ տարի։"},
+    "vatable_share_of_direct_cost_pct": {"value": 55, "low": 40, "high": 70, "unit": "%", "source": "estimate", "note": "Ուղղակի ծախսի այն մասը, որի ԱԱՀ-ն կարելի է հաշվանցել (նյութեր ԱԱՀ վճարող մատակարարներից, ԱԱՀ վճարող ենթակապալառուներ)։ Աշխատավարձը ԱԱՀ չունի։"},
+    "vat_pass_through_private_pct": {"value": 50, "low": 0, "high": 100, "unit": "%", "source": "estimate", "note": "ԱԱՀ վճարող դառնալուց հետո ՆՈՐ մասնավոր պայմանագրերի գնին ԱԱՀ-ի որ մասն է ավելացվում (50 = գինը +10%)։ 0 = հաշվիչի գները վերջնական են, ԱԱՀ-ն «ուտում» է մարժան (R07)։ 100 = գինը +20%։ Պահանջարկի կորուստը գնի բարձրացումից մոդելավորված չէ։ ՈՐՈՇԵԼ ՀԱՇՎԱՊԱՀԻ ՀԵՏ։"},
+    "vat_pass_through_public_pct": {"value": 100, "low": 100, "high": 100, "unit": "%", "source": "estimate", "note": "Հանրային լոտի արժեքը մոդելում առանց ԱԱՀ է. ԱԱՀ վճարողի դեպքում պատվիրատուն վճարում է ԱԱՀ-ն վրան։ ՀԱՍՏԱՏԵԼ՝ ինչպես են համեմատվում ԱԱՀ չվճարողների հայտերը։"}
   },
   "licence": {
-    "application_month": {
-      "value": 1,
-      "low": 1,
-      "high": 1,
-      "unit": "ամիս",
-      "source": "research",
-      "note": "Լիցենզիայի դիմում 1-ին ամսում (strategy շաբաթ 1). միայն B, C, D ռազմավարություններում։"
-    },
-    "lead_time_months": {
-      "value": 2.5,
-      "low": 1,
-      "high": 6,
-      "unit": "ամիս",
-      "source": "estimate",
-      "note": "Լիցենզիա ստանալու ժամկետ (R18. սպասվող 1–3 ամիս, 35–60% հավանականությամբ > 3 ամիս)։ Մինչև լիցենզիան տներ/լողավազաններ/հանրային չենք ստորագրում։"
-    },
-    "one_off_cost_amd": {
-      "value": 600000,
-      "low": 400000,
-      "high": 1000000,
-      "unit": "AMD",
-      "source": "research",
-      "note": "Պետտուրք (40–160 հազ., չհաստատված) + իրավաբան/փաստաթղթեր (risks.md 6.2՝ ~0.5 մլն)։"
-    },
-    "pools_require_licence": {
-      "value": 1,
-      "low": 1,
-      "high": 1,
-      "unit": "1 = այո",
-      "source": "estimate",
-      "note": "Լողավազանի համար լիցենզիայի պահանջը ստուգված չէ (R18) — զգուշությամբ ենթադրում ենք՝ պետք է։"
-    }
+    "application_month": {"value": 1, "low": 1, "high": 1, "unit": "ամիս", "source": "research", "note": "Լիցենզիայի դիմում 1-ին ամսում (strategy շաբաթ 1). միայն B, C, D ռազմավարություններում։"},
+    "lead_time_months": {"value": 2.5, "low": 1, "high": 6, "unit": "ամիս", "source": "estimate", "note": "Լիցենզիա ստանալու ժամկետ (R18. սպասվող 1–3 ամիս, 35–60% հավանականությամբ > 3 ամիս)։ Մինչև լիցենզիան տներ/լողավազաններ/հանրային չենք ստորագրում։"},
+    "one_off_cost_amd": {"value": 600000, "low": 400000, "high": 1000000, "unit": "AMD", "source": "research", "note": "Պետտուրք (40–160 հազ., չհաստատված) + իրավաբան/փաստաթղթեր (risks.md 6.2՝ ~0.5 մլն)։"},
+    "pools_require_licence": {"value": 1, "low": 1, "high": 1, "unit": "1 = այո", "source": "estimate", "note": "Լողավազանի համար լիցենզիայի պահանջը ստուգված չէ (R18) — զգուշությամբ ենթադրում ենք՝ պետք է։"}
   },
   "team": {
-    "initial_crews": {
-      "value": 1,
-      "low": 1,
-      "high": 1,
-      "unit": "բրիգադ",
-      "source": "estimate",
-      "note": "Մեկնարկ՝ հիմնադիր + 1 բրիգադ (բրիգադիր + 3 աշխատող)։"
-    },
-    "crew_monthly_cost_amd": {
-      "value": 1600000,
-      "low": 1300000,
-      "high": 2000000,
-      "unit": "AMD/ամիս",
-      "source": "research",
-      "note": "Բրիգադիր + 3 աշխատող (risks.md 6.1)։ Աշխատող բրիգադի աշխատավարձը մտնում է ուղղակի ծախսի (մարժայի) մեջ, պարապ բրիգադինը՝ վերադիր ծախս։"
-    },
-    "crew_throughput_amd_per_month": {
-      "value": 5500000,
-      "low": 4000000,
-      "high": 7000000,
-      "unit": "AMD աշխատանք/ամիս",
-      "source": "estimate",
-      "note": "Մեկ բրիգադը (ենթակապալառուներով) ամսական կատարում է ~5.5 մլն ֏ պայմանագրային աշխատանք (≈ 2 զուգահեռ վերանորոգում)։"
-    },
-    "idle_crew_cost_share_pct": {
-      "value": 30,
-      "low": 10,
-      "high": 70,
-      "unit": "%",
-      "source": "estimate",
-      "note": "Պարապ բրիգադի ծախսի որ մասն ենք վճարում. Հայաստանում բրիգադները հիմնականում գործավարձով են (R16-ի մեղմացում), պարապ ամիսներին՝ միայն պահպանման վճար։ 70% = գրեթե ֆիքսված աշխատավարձ։"
-    },
-    "crew_hiring_lag_months": {
-      "value": 1,
-      "low": 1,
-      "high": 3,
-      "unit": "ամիս",
-      "source": "estimate",
-      "note": "Նոր բրիգադ գտնելու ժամկետ (R16. շինարարների պակաս. ~50% հավանականությամբ ≥ 2 ամիս)։"
-    },
-    "crew_release_after_idle_months": {
-      "value": 2,
-      "low": 2,
-      "high": 2,
-      "unit": "ամիս",
-      "source": "estimate",
-      "note": "Եթե բրիգադը 2 ամիս կիսով չափ պարապ է, ազատում ենք (մնում է առնվազն 1)։"
-    },
-    "max_crews": {
-      "value": 6,
-      "low": 6,
-      "high": 6,
-      "unit": "բրիգադ",
-      "source": "estimate",
-      "note": "Կառավարելի առավելագույնը 24 ամսում։"
-    },
-    "capacity_slack_pct": {
-      "value": 20,
-      "low": 20,
-      "high": 20,
-      "unit": "%",
-      "source": "estimate",
-      "note": "Նոր օբյեկտ սկսում ենք, եթե ծանրաբեռնվածությունը ≤ 120% բրիգադների հզորությունից (ավելին՝ դանդաղում են բոլորը)։"
-    },
+    "initial_crews": {"value": 1, "low": 1, "high": 1, "unit": "բրիգադ", "source": "estimate", "note": "Մեկնարկ՝ հիմնադիր + 1 բրիգադ (բրիգադիր + 3 աշխատող)։"},
+    "crew_monthly_cost_amd": {"value": 1600000, "low": 1300000, "high": 2000000, "unit": "AMD/ամիս", "source": "research", "note": "Բրիգադիր + 3 աշխատող (risks.md 6.1)։ Աշխատող բրիգադի աշխատավարձը մտնում է ուղղակի ծախսի (մարժայի) մեջ, պարապ բրիգադինը՝ վերադիր ծախս։"},
+    "crew_throughput_amd_per_month": {"value": 5500000, "low": 4000000, "high": 7000000, "unit": "AMD աշխատանք/ամիս", "source": "estimate", "note": "Մեկ բրիգադը (ենթակապալառուներով) ամսական կատարում է ~5.5 մլն ֏ պայմանագրային աշխատանք (≈ 2 զուգահեռ վերանորոգում)։"},
+    "idle_crew_cost_share_pct": {"value": 30, "low": 10, "high": 70, "unit": "%", "source": "estimate", "note": "Պարապ բրիգադի ծախսի որ մասն ենք վճարում. Հայաստանում բրիգադները հիմնականում գործավարձով են (R16-ի մեղմացում), պարապ ամիսներին՝ միայն պահպանման վճար։ 70% = գրեթե ֆիքսված աշխատավարձ։"},
+    "crew_hiring_lag_months": {"value": 1, "low": 1, "high": 3, "unit": "ամիս", "source": "estimate", "note": "Նոր բրիգադ գտնելու ժամկետ (R16. շինարարների պակաս. ~50% հավանականությամբ ≥ 2 ամիս)։"},
+    "crew_release_after_idle_months": {"value": 2, "low": 2, "high": 2, "unit": "ամիս", "source": "estimate", "note": "Եթե բրիգադը 2 ամիս կիսով չափ պարապ է, ազատում ենք (մնում է առնվազն 1)։"},
+    "max_crews": {"value": 6, "low": 6, "high": 6, "unit": "բրիգադ", "source": "estimate", "note": "Կառավարելի առավելագույնը 24 ամսում։"},
+    "capacity_slack_pct": {"value": 20, "low": 20, "high": 20, "unit": "%", "source": "estimate", "note": "Նոր օբյեկտ սկսում ենք, եթե ծանրաբեռնվածությունը ≤ 120% բրիգադների հզորությունից (ավելին՝ դանդաղում են բոլորը)։"},
     "roles": {
-      "founder_draw": {
-        "value": 500000,
-        "low": 300000,
-        "high": 800000,
-        "unit": "AMD/ամիս",
-        "source": "research",
-        "note": "Հիմնադրի նվազագույն վճար (owner draw, risks.md 6.1)։",
-        "trigger": {
-          "type": "from_month",
-          "month": 1
-        }
-      },
-      "accountant_external": {
-        "value": 150000,
-        "low": 100000,
-        "high": 200000,
-        "unit": "AMD/ամիս",
-        "source": "research",
-        "note": "Արտաքին հաշվապահ (risks.md 6.1)։",
-        "trigger": {
-          "type": "from_month",
-          "month": 1
-        }
-      },
-      "transport_fuel_comms": {
-        "value": 250000,
-        "low": 200000,
-        "high": 400000,
-        "unit": "AMD/ամիս",
-        "source": "estimate",
-        "note": "Տրանսպորտ, վառելիք, կապ (հիմնադրի մեքենան՝ առանց գնման)։",
-        "trigger": {
-          "type": "from_month",
-          "month": 1
-        }
-      },
-      "software_legal_misc": {
-        "value": 100000,
-        "low": 70000,
-        "high": 150000,
-        "unit": "AMD/ամիս",
-        "source": "estimate",
-        "note": "Ծրագրեր, իրավաբանի ընթացիկ խորհրդատվություն, բանկ, մանր ծախսեր։",
-        "trigger": {
-          "type": "from_month",
-          "month": 1
-        }
-      },
-      "marketing_base": {
-        "value": 200000,
-        "low": 150000,
-        "high": 300000,
-        "unit": "AMD/ամիս",
-        "source": "research",
-        "note": "Instagram/Facebook գովազդ 150–250 հազ./ամիս (strategy 5.1)։",
-        "trigger": {
-          "type": "from_month",
-          "month": 1
-        }
-      },
-      "marketing_build": {
-        "value": 100000,
-        "low": 50000,
-        "high": 200000,
-        "unit": "AMD/ամիս",
-        "source": "estimate",
-        "note": "Լրացուցիչ գովազդ տների/լողավազանների համար (սփյուռք, վաղ ամրագրում)։",
-        "trigger": {
-          "type": "segments_launched",
-          "segments": [
-            "houses",
-            "pools"
-          ]
-        }
-      },
-      "sales_smm": {
-        "value": 350000,
-        "low": 250000,
-        "high": 450000,
-        "unit": "AMD/ամիս",
-        "source": "research",
-        "note": "Վաճառք + SMM (risks.md 6.1)։ Մինչ այդ՝ հիմնադիրը։",
-        "trigger": {
-          "type": "from_month",
-          "month": 3
-        }
-      },
-      "project_manager": {
-        "value": 700000,
-        "low": 550000,
-        "high": 900000,
-        "unit": "AMD/ամիս մեկ հոգու համար",
-        "source": "research",
-        "note": "Նախագծի ղեկավար/տեղամասի ինժեներ. 1-ը՝ ≥ 4 ակտիվ օբյեկտի դեպքում, 2-րդը՝ ≥ 8 (հիմնադիրը վարում է մինչև 3)։",
-        "trigger": {
-          "type": "active_contracts",
-          "thresholds": [
-            4,
-            8
-          ]
-        }
-      },
-      "qs_parttime": {
-        "value": 300000,
-        "low": 200000,
-        "high": 400000,
-        "unit": "AMD/ամիս",
-        "source": "research",
-        "note": "Նախահաշվարկող (կես դրույք)՝ տներ/լողավազաններ/հանրային մեկնարկից կամ ≥ 4 ակտիվ օբյեկտից։",
-        "trigger": {
-          "type": "segments_or_active",
-          "segments": [
-            "houses",
-            "pools",
-            "public"
-          ],
-          "active_contracts": 4
-        }
-      },
-      "certified_engineer": {
-        "value": 200000,
-        "low": 150000,
-        "high": 350000,
-        "unit": "AMD/ամիս",
-        "source": "research",
-        "note": "Հավաստագրված պատասխանատու ինժեներ (պայմանագրային)՝ լիցենզիայի համար, դիմումի ամսից։",
-        "trigger": {
-          "type": "licence_applied"
-        }
-      },
-      "office": {
-        "value": 300000,
-        "low": 200000,
-        "high": 450000,
-        "unit": "AMD/ամիս",
-        "source": "estimate",
-        "note": "Փոքր գրասենյակ/պահեստ՝ ≥ 3 բրիգադի կամ ≥ 6 ակտիվ օբյեկտի դեպքում (մինչ այդ՝ հիմնադրի տարածք)։",
-        "trigger": {
-          "type": "crews_or_active",
-          "crews": 3,
-          "active_contracts": 6
-        }
-      },
-      "insurance_base": {
-        "value": 70000,
-        "low": 50000,
-        "high": 100000,
-        "unit": "AMD/ամիս",
-        "source": "research",
-        "note": "Աշխատողների դժբախտ պատահար + երրորդ անձանց պատասխանատվություն (~0.8 մլն/տարի, risks.md 6.3)։",
-        "trigger": {
-          "type": "from_month",
-          "month": 1
-        }
-      },
-      "insurance_car": {
-        "value": 50000,
-        "low": 30000,
-        "high": 80000,
-        "unit": "AMD/ամիս",
-        "source": "research",
-        "note": "CAR ապահովագրություն՝ երբ կա ակտիվ տուն/լողավազան/հանրային օբյեկտ։",
-        "trigger": {
-          "type": "active_in_segments",
-          "segments": [
-            "houses",
-            "pools",
-            "public"
-          ]
-        }
-      }
+      "founder_draw": {"value": 500000, "low": 300000, "high": 800000, "unit": "AMD/ամիս", "source": "research", "note": "Հիմնադրի նվազագույն վճար (owner draw, risks.md 6.1)։", "trigger": {"type": "from_month", "month": 1}},
+      "accountant_external": {"value": 150000, "low": 100000, "high": 200000, "unit": "AMD/ամիս", "source": "research", "note": "Արտաքին հաշվապահ (risks.md 6.1)։", "trigger": {"type": "from_month", "month": 1}},
+      "transport_fuel_comms": {"value": 250000, "low": 200000, "high": 400000, "unit": "AMD/ամիս", "source": "estimate", "note": "Տրանսպորտ, վառելիք, կապ (հիմնադրի մեքենան՝ առանց գնման)։", "trigger": {"type": "from_month", "month": 1}},
+      "software_legal_misc": {"value": 100000, "low": 70000, "high": 150000, "unit": "AMD/ամիս", "source": "estimate", "note": "Ծրագրեր, իրավաբանի ընթացիկ խորհրդատվություն, բանկ, մանր ծախսեր։", "trigger": {"type": "from_month", "month": 1}},
+      "marketing_base": {"value": 200000, "low": 150000, "high": 300000, "unit": "AMD/ամիս", "source": "research", "note": "Instagram/Facebook գովազդ 150–250 հազ./ամիս (strategy 5.1)։", "trigger": {"type": "from_month", "month": 1}},
+      "marketing_build": {"value": 100000, "low": 50000, "high": 200000, "unit": "AMD/ամիս", "source": "estimate", "note": "Լրացուցիչ գովազդ տների/լողավազանների համար (սփյուռք, վաղ ամրագրում)։", "trigger": {"type": "segments_launched", "segments": ["houses", "pools"]}},
+      "sales_smm": {"value": 350000, "low": 250000, "high": 450000, "unit": "AMD/ամիս", "source": "research", "note": "Վաճառք + SMM (risks.md 6.1)։ Մինչ այդ՝ հիմնադիրը։", "trigger": {"type": "from_month", "month": 3}},
+      "project_manager": {"value": 700000, "low": 550000, "high": 900000, "unit": "AMD/ամիս մեկ հոգու համար", "source": "research", "note": "Նախագծի ղեկավար/տեղամասի ինժեներ. 1-ը՝ ≥ 4 ակտիվ օբյեկտի դեպքում, 2-րդը՝ ≥ 8 (հիմնադիրը վարում է մինչև 3)։", "trigger": {"type": "active_contracts", "thresholds": [4, 8]}},
+      "qs_parttime": {"value": 300000, "low": 200000, "high": 400000, "unit": "AMD/ամիս", "source": "research", "note": "Նախահաշվարկող (կես դրույք)՝ տներ/լողավազաններ/հանրային մեկնարկից կամ ≥ 4 ակտիվ օբյեկտից։", "trigger": {"type": "segments_or_active", "segments": ["houses", "pools", "public"], "active_contracts": 4}},
+      "certified_engineer": {"value": 200000, "low": 150000, "high": 350000, "unit": "AMD/ամիս", "source": "research", "note": "Հավաստագրված պատասխանատու ինժեներ (պայմանագրային)՝ լիցենզիայի համար, դիմումի ամսից։", "trigger": {"type": "licence_applied"}},
+      "office": {"value": 300000, "low": 200000, "high": 450000, "unit": "AMD/ամիս", "source": "estimate", "note": "Փոքր գրասենյակ/պահեստ՝ ≥ 3 բրիգադի կամ ≥ 6 ակտիվ օբյեկտի դեպքում (մինչ այդ՝ հիմնադրի տարածք)։", "trigger": {"type": "crews_or_active", "crews": 3, "active_contracts": 6}},
+      "insurance_base": {"value": 70000, "low": 50000, "high": 100000, "unit": "AMD/ամիս", "source": "research", "note": "Աշխատողների դժբախտ պատահար + երրորդ անձանց պատասխանատվություն (~0.8 մլն/տարի, risks.md 6.3)։", "trigger": {"type": "from_month", "month": 1}},
+      "insurance_car": {"value": 50000, "low": 30000, "high": 80000, "unit": "AMD/ամիս", "source": "research", "note": "CAR ապահովագրություն՝ երբ կա ակտիվ տուն/լողավազան/հանրային օբյեկտ։", "trigger": {"type": "active_in_segments", "segments": ["houses", "pools", "public"]}}
     },
-    "role_keep_months": {
-      "value": 2,
-      "low": 2,
-      "high": 2,
-      "unit": "ամիս",
-      "source": "estimate",
-      "note": "Ծանրաբեռնվածությունն ընկնելուց հետո դերը պահում ենք ևս 2 ամիս (չենք ազատում անմիջապես)։"
-    }
+    "role_keep_months": {"value": 2, "low": 2, "high": 2, "unit": "ամիս", "source": "estimate", "note": "Ծանրաբեռնվածությունն ընկնելուց հետո դերը պահում ենք ևս 2 ամիս (չենք ազատում անմիջապես)։"}
   },
   "one_off": {
-    "tools_equipment_amd": {
-      "value": 1500000,
-      "low": 1000000,
-      "high": 2500000,
-      "unit": "AMD",
-      "source": "research",
-      "note": "Ձեռքի գործիքներ, չափիչներ (risks.md 6.2). ծանր տեխնիկան՝ վարձով։"
-    },
-    "setup_legal_content_amd": {
-      "value": 1700000,
-      "low": 1200000,
-      "high": 2500000,
-      "unit": "AMD",
-      "source": "research",
-      "note": "Պայմանագրի ձևանմուշ (իրավաբան), հաշվապահի կարգավորում, լուսանկար/բովանդակություն, ապահովագրության առաջին վճարներ (risks.md 6.2)։"
-    }
+    "tools_equipment_amd": {"value": 1500000, "low": 1000000, "high": 2500000, "unit": "AMD", "source": "research", "note": "Ձեռքի գործիքներ, չափիչներ (risks.md 6.2). ծանր տեխնիկան՝ վարձով։"},
+    "setup_legal_content_amd": {"value": 1700000, "low": 1200000, "high": 2500000, "unit": "AMD", "source": "research", "note": "Պայմանագրի ձևանմուշ (իրավաբան), հաշվապահի կարգավորում, լուսանկար/բովանդակություն, ապահովագրության առաջին վճարներ (risks.md 6.2)։"}
   },
   "segments": {
     "renovation": {
-      "needs_licence": {
-        "value": 0,
-        "low": 0,
-        "high": 0,
-        "unit": "1 = այո",
-        "source": "research",
-        "note": "Թույլտվություն չպահանջող ներքին հարդարում (research-renovation 3.5)։"
-      },
-      "leads_per_month": {
-        "value": 24,
-        "low": 10,
-        "high": 40,
-        "unit": "որակյալ լիդ/ամիս",
-        "source": "estimate",
-        "note": "Կայուն վիճակում (ramp-ից հետո)։ Չափված է strategy-ի 1-ին տարվա թիրախից (15–20 վերանորոգում). value ≈ պլանի 75–100%, low ≈ 40% (R01. նոր բրենդ՝ առանց կարծիքների)։ strategy KPI. ≥ 40 լիդ/ամիս բոլոր սեգմենտներով 3-րդ ամսում։"
-      },
-      "ramp_months": {
-        "value": 4,
-        "low": 2,
-        "high": 6,
-        "unit": "ամիս",
-        "source": "estimate",
-        "note": "Քանի ամսում է լիդերի հոսքը հասնում կայուն մակարդակի (գծային)։"
-      },
-      "conversion_pct": {
-        "value": 7,
-        "low": 4,
-        "high": 11,
-        "unit": "% լիդ → պայմանագիր",
-        "source": "estimate",
-        "note": "Լիդ → նախահաշիվ (~30–40%) × նախահաշիվ → պայմանագիր (strategy թիրախ ≥ 25%)։"
-      },
-      "job_size_amd": {
-        "value": 6500000,
-        "low": 3500000,
-        "high": 10000000,
-        "unit": "AMD/պայմանագիր",
-        "source": "research",
-        "note": "60–100 մ² × 80–120 հազ. ֏/մ² (CostCalculator.tsx — ՑՈՒՑԱԴՐԱԿԱՆ գներ); strategy՝ միջին չեկ 6–9 մլն; < 2 մլն պատվերներ չենք վերցնում։"
-      },
-      "gross_margin_pct": {
-        "value": 22,
-        "low": 14,
-        "high": 28,
-        "unit": "% պայմանագրի գնից",
-        "source": "estimate",
-        "note": "Մինչև ԱԱՀ/շրջանառության հարկը, ուղղակի ծախսը՝ նյութ + աշխատուժ + ենթակապալառու։ strategy թիրախ ≥ 20%. ինքնարժեքի հաշվարկը դեռ չկա (R03)։"
-      },
-      "duration_months": {
-        "value": 3,
-        "low": 2,
-        "high": 4,
-        "unit": "ամիս",
-        "source": "research",
-        "note": "«Բանալին ձեռքին» բնակարան՝ 2–4 ամիս (research-renovation 3.2)։"
-      },
-      "prepayment_pct": {
-        "value": 15,
-        "low": 10,
-        "high": 30,
-        "unit": "%",
-        "source": "research",
-        "note": "Կանխավճար ≤ 15% (strategy տարբերակիչ #3)։"
-      },
-      "retention_pct": {
-        "value": 10,
-        "low": 5,
-        "high": 10,
-        "unit": "%",
-        "source": "research",
-        "note": "Վերջին 5–10%-ը՝ ընդունումից 14 օր հետո (strategy 3.1)։"
-      },
-      "payment_lag_months": {
-        "value": 1,
-        "low": 1,
-        "high": 2,
-        "unit": "ամիս",
-        "source": "estimate",
-        "note": "Փուլի աշխատանքից մինչև վճարում (ակտ + լուսանկարներ)։"
-      },
-      "delay_probability_pct": {
-        "value": 25,
-        "low": 15,
-        "high": 40,
-        "unit": "% պայմանագրերի",
-        "source": "estimate",
-        "note": "Օբյեկտների որ մասն է ուշանում (նոր թիմ, ենթակապալառուներ)։"
-      },
-      "delay_months": {
-        "value": 1,
-        "low": 1,
-        "high": 2,
-        "unit": "ամիս",
-        "source": "estimate",
-        "note": "Ուշացման տևողություն։"
-      },
-      "delay_cost_pct": {
-        "value": 1.5,
-        "low": 0.5,
-        "high": 4,
-        "unit": "% պայմանագրից",
-        "source": "estimate",
-        "note": "Լրացուցիչ աշխատուժ + տույժ (0.1%/օր, մաքս. 5%՝ միայն մեր մեղքով, strategy 3.1)։"
-      },
-      "max_wait_months": {
-        "value": 1,
-        "low": 1,
-        "high": 1,
-        "unit": "ամիս",
-        "source": "estimate",
-        "note": "Եթե բրիգադ/կանխիկ չկա > 1 ամիս, հաճախորդը գնում է այլ տեղ։"
-      },
-      "throughput_multiplier": {
-        "value": 1,
-        "low": 1,
-        "high": 1,
-        "unit": "×",
-        "source": "estimate",
-        "note": "Բրիգադի արտադրողականության գործակից այս սեգմենտում։"
-      },
-      "lead_seasonality": {
-        "value": [
-          0.7,
-          0.9,
-          1.1,
-          1.2,
-          1.2,
-          1.0,
-          0.9,
-          0.7,
-          1.1,
-          1.2,
-          1.1,
-          0.9
-        ],
-        "low": null,
-        "high": null,
-        "unit": "գործակից, հունվար→դեկտեմբեր",
-        "source": "estimate",
-        "note": "Պահանջարկի սեզոնայնություն (հրապարակային տվյալ չկա. research-renovation 3.6)։"
-      },
-      "work_seasonality": {
-        "value": [
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1
-        ],
-        "low": null,
-        "high": null,
-        "unit": "գործակից",
-        "source": "estimate",
-        "note": "Ներքին աշխատանք՝ առանց եղանակային դադարի։"
-      },
-      "start_allowed_months": {
-        "value": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12
-        ],
-        "low": null,
-        "high": null,
-        "unit": "օրացուցային ամիսներ",
-        "source": "estimate",
-        "note": "Երբ կարելի է սկսել նոր օբյեկտ։"
-      }
+      "needs_licence": {"value": 0, "low": 0, "high": 0, "unit": "1 = այո", "source": "research", "note": "Թույլտվություն չպահանջող ներքին հարդարում (research-renovation 3.5)։"},
+      "leads_per_month": {"value": 24, "low": 10, "high": 40, "unit": "որակյալ լիդ/ամիս", "source": "estimate", "note": "Կայուն վիճակում (ramp-ից հետո)։ Չափված է strategy-ի 1-ին տարվա թիրախից (15–20 վերանորոգում). value ≈ պլանի 75–100%, low ≈ 40% (R01. նոր բրենդ՝ առանց կարծիքների)։ strategy KPI. ≥ 40 լիդ/ամիս բոլոր սեգմենտներով 3-րդ ամսում։"},
+      "ramp_months": {"value": 4, "low": 2, "high": 6, "unit": "ամիս", "source": "estimate", "note": "Քանի ամսում է լիդերի հոսքը հասնում կայուն մակարդակի (գծային)։"},
+      "conversion_pct": {"value": 7, "low": 4, "high": 11, "unit": "% լիդ → պայմանագիր", "source": "estimate", "note": "Լիդ → նախահաշիվ (~30–40%) × նախահաշիվ → պայմանագիր (strategy թիրախ ≥ 25%)։"},
+      "job_size_amd": {"value": 6500000, "low": 3500000, "high": 10000000, "unit": "AMD/պայմանագիր", "source": "research", "note": "60–100 մ² × 80–120 հազ. ֏/մ² (CostCalculator.tsx — ՑՈՒՑԱԴՐԱԿԱՆ գներ); strategy՝ միջին չեկ 6–9 մլն; < 2 մլն պատվերներ չենք վերցնում։"},
+      "gross_margin_pct": {"value": 22, "low": 14, "high": 28, "unit": "% պայմանագրի գնից", "source": "estimate", "note": "Մինչև ԱԱՀ/շրջանառության հարկը, ուղղակի ծախսը՝ նյութ + աշխատուժ + ենթակապալառու։ strategy թիրախ ≥ 20%. ինքնարժեքի հաշվարկը դեռ չկա (R03)։"},
+      "duration_months": {"value": 3, "low": 2, "high": 4, "unit": "ամիս", "source": "research", "note": "«Բանալին ձեռքին» բնակարան՝ 2–4 ամիս (research-renovation 3.2)։"},
+      "prepayment_pct": {"value": 15, "low": 10, "high": 30, "unit": "%", "source": "research", "note": "Կանխավճար ≤ 15% (strategy տարբերակիչ #3)։"},
+      "retention_pct": {"value": 10, "low": 5, "high": 10, "unit": "%", "source": "research", "note": "Վերջին 5–10%-ը՝ ընդունումից 14 օր հետո (strategy 3.1)։"},
+      "payment_lag_months": {"value": 1, "low": 1, "high": 2, "unit": "ամիս", "source": "estimate", "note": "Փուլի աշխատանքից մինչև վճարում (ակտ + լուսանկարներ)։"},
+      "delay_probability_pct": {"value": 25, "low": 15, "high": 40, "unit": "% պայմանագրերի", "source": "estimate", "note": "Օբյեկտների որ մասն է ուշանում (նոր թիմ, ենթակապալառուներ)։"},
+      "delay_months": {"value": 1, "low": 1, "high": 2, "unit": "ամիս", "source": "estimate", "note": "Ուշացման տևողություն։"},
+      "delay_cost_pct": {"value": 1.5, "low": 0.5, "high": 4, "unit": "% պայմանագրից", "source": "estimate", "note": "Լրացուցիչ աշխատուժ + տույժ (0.1%/օր, մաքս. 5%՝ միայն մեր մեղքով, strategy 3.1)։"},
+      "max_wait_months": {"value": 1, "low": 1, "high": 1, "unit": "ամիս", "source": "estimate", "note": "Եթե բրիգադ/կանխիկ չկա > 1 ամիս, հաճախորդը գնում է այլ տեղ։"},
+      "throughput_multiplier": {"value": 1, "low": 1, "high": 1, "unit": "×", "source": "estimate", "note": "Բրիգադի արտադրողականության գործակից այս սեգմենտում։"},
+      "lead_seasonality": {"value": [0.7, 0.9, 1.1, 1.2, 1.2, 1.0, 0.9, 0.7, 1.1, 1.2, 1.1, 0.9], "low": null, "high": null, "unit": "գործակից, հունվար→դեկտեմբեր", "source": "estimate", "note": "Պահանջարկի սեզոնայնություն (հրապարակային տվյալ չկա. research-renovation 3.6)։"},
+      "work_seasonality": {"value": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], "low": null, "high": null, "unit": "գործակից", "source": "estimate", "note": "Ներքին աշխատանք՝ առանց եղանակային դադարի։"},
+      "start_allowed_months": {"value": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], "low": null, "high": null, "unit": "օրացուցային ամիսներ", "source": "estimate", "note": "Երբ կարելի է սկսել նոր օբյեկտ։"}
     },
     "pools": {
-      "needs_licence": {
-        "value": 1,
-        "low": 1,
-        "high": 1,
-        "unit": "1 = այո",
-        "source": "estimate",
-        "note": "Տես licence.pools_require_licence (չստուգված)։"
-      },
-      "leads_per_month": {
-        "value": 6,
-        "low": 3,
-        "high": 10,
-        "unit": "որակյալ լիդ/ամիս",
-        "source": "estimate",
-        "note": "strategy KPI. 10 լողավազանի հարցում վաղ ամրագրման արշավից; թիրախ 8–12 լողավազան/տարի. value ≈ պլանի 90% կայուն վիճակում, low ≈ 35%։"
-      },
-      "ramp_months": {
-        "value": 3,
-        "low": 2,
-        "high": 5,
-        "unit": "ամիս",
-        "source": "estimate",
-        "note": "Լիդերի հոսքի աճի ժամկետ։"
-      },
-      "conversion_pct": {
-        "value": 18,
-        "low": 10,
-        "high": 28,
-        "unit": "% լիդ → պայմանագիր",
-        "source": "estimate",
-        "note": "Բարձր մտադրությամբ հարցումներ, մրցակիցներ գրեթե չկան (strategy 0)։"
-      },
-      "job_size_amd": {
-        "value": 6500000,
-        "low": 4000000,
-        "high": 12000000,
-        "unit": "AMD/պայմանագիր",
-        "source": "research",
-        "note": "8×4×1.5 մ ≈ 68 մ² × 90,000 ֏ = 6.1 մլն (CostCalculator.tsx — ՑՈՒՑԱԴՐԱԿԱՆ գին); կոմպակտից մինչև անհատական։"
-      },
-      "gross_margin_pct": {
-        "value": 28,
-        "low": 20,
-        "high": 35,
-        "unit": "%",
-        "source": "estimate",
-        "note": "Լավագույն մարժա/ռիսկ (risks.md 5). ինքնարժեքի հաշվարկ դեռ չկա։"
-      },
-      "duration_months": {
-        "value": 2,
-        "low": 1.5,
-        "high": 3,
-        "unit": "ամիս",
-        "source": "estimate",
-        "note": "Կառուցում + սարքավորում։"
-      },
-      "prepayment_pct": {
-        "value": 15,
-        "low": 10,
-        "high": 30,
-        "unit": "%",
-        "source": "research",
-        "note": "Կանխավճար ≤ 15% (strategy #3). high՝ եթե սարքավորման համար վերցնենք 30%։"
-      },
-      "retention_pct": {
-        "value": 10,
-        "low": 5,
-        "high": 10,
-        "unit": "%",
-        "source": "research",
-        "note": "Վերջին վճարը ընդունումից հետո։"
-      },
-      "payment_lag_months": {
-        "value": 1,
-        "low": 1,
-        "high": 2,
-        "unit": "ամիս",
-        "source": "estimate",
-        "note": "Փուլ → վճարում։"
-      },
-      "delay_probability_pct": {
-        "value": 25,
-        "low": 15,
-        "high": 40,
-        "unit": "%",
-        "source": "estimate",
-        "note": "Սարքավորման մատակարարում, եղանակ։"
-      },
-      "delay_months": {
-        "value": 1,
-        "low": 1,
-        "high": 2,
-        "unit": "ամիս",
-        "source": "estimate",
-        "note": "Ուշացման տևողություն։"
-      },
-      "delay_cost_pct": {
-        "value": 2,
-        "low": 1,
-        "high": 4,
-        "unit": "%",
-        "source": "estimate",
-        "note": "Լրացուցիչ ծախս + տույժ։"
-      },
-      "max_wait_months": {
-        "value": 5,
-        "low": 5,
-        "high": 5,
-        "unit": "ամիս",
-        "source": "estimate",
-        "note": "Աշնանը/ձմռանը ստորագրված լողավազանը սպասում է մինչև մարտ (վաղ ամրագրում)։"
-      },
-      "throughput_multiplier": {
-        "value": 1,
-        "low": 1,
-        "high": 1,
-        "unit": "×",
-        "source": "estimate",
-        "note": "Բրիգադի արտադրողականության գործակից։"
-      },
-      "lead_seasonality": {
-        "value": [
-          1.3,
-          1.5,
-          1.5,
-          1.4,
-          1.2,
-          0.9,
-          0.7,
-          0.6,
-          0.6,
-          0.6,
-          0.7,
-          1.0
-        ],
-        "low": null,
-        "high": null,
-        "unit": "գործակից, հունվար→դեկտեմբեր",
-        "source": "estimate",
-        "note": "Պատվերները ձևավորվում են ձմռանը՝ գարնան համար (strategy 2)։"
-      },
-      "work_seasonality": {
-        "value": [
-          0,
-          0,
-          0.8,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          0.6,
-          0
-        ],
-        "low": null,
-        "high": null,
-        "unit": "գործակից",
-        "source": "estimate",
-        "note": "Բետոն/ջրամեկուսացում՝ ոչ սառնամանիքին (դեկտ.–փետր. = 0)։ R30-ը մոդելավորված է այստեղ։"
-      },
-      "start_allowed_months": {
-        "value": [
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9
-        ],
-        "low": null,
-        "high": null,
-        "unit": "օրացուցային ամիսներ",
-        "source": "estimate",
-        "note": "Նոր լողավազան սկսում ենք մարտ–սեպտեմբեր։"
-      }
+      "needs_licence": {"value": 1, "low": 1, "high": 1, "unit": "1 = այո", "source": "estimate", "note": "Տես licence.pools_require_licence (չստուգված)։"},
+      "leads_per_month": {"value": 6, "low": 3, "high": 10, "unit": "որակյալ լիդ/ամիս", "source": "estimate", "note": "strategy KPI. 10 լողավազանի հարցում վաղ ամրագրման արշավից; թիրախ 8–12 լողավազան/տարի. value ≈ պլանի 90% կայուն վիճակում, low ≈ 35%։"},
+      "ramp_months": {"value": 3, "low": 2, "high": 5, "unit": "ամիս", "source": "estimate", "note": "Լիդերի հոսքի աճի ժամկետ։"},
+      "conversion_pct": {"value": 18, "low": 10, "high": 28, "unit": "% լիդ → պայմանագիր", "source": "estimate", "note": "Բարձր մտադրությամբ հարցումներ, մրցակիցներ գրեթե չկան (strategy 0)։"},
+      "job_size_amd": {"value": 6500000, "low": 4000000, "high": 12000000, "unit": "AMD/պայմանագիր", "source": "research", "note": "8×4×1.5 մ ≈ 68 մ² × 90,000 ֏ = 6.1 մլն (CostCalculator.tsx — ՑՈՒՑԱԴՐԱԿԱՆ գին); կոմպակտից մինչև անհատական։"},
+      "gross_margin_pct": {"value": 28, "low": 20, "high": 35, "unit": "%", "source": "estimate", "note": "Լավագույն մարժա/ռիսկ (risks.md 5). ինքնարժեքի հաշվարկ դեռ չկա։"},
+      "duration_months": {"value": 2, "low": 1.5, "high": 3, "unit": "ամիս", "source": "estimate", "note": "Կառուցում + սարքավորում։"},
+      "prepayment_pct": {"value": 15, "low": 10, "high": 30, "unit": "%", "source": "research", "note": "Կանխավճար ≤ 15% (strategy #3). high՝ եթե սարքավորման համար վերցնենք 30%։"},
+      "retention_pct": {"value": 10, "low": 5, "high": 10, "unit": "%", "source": "research", "note": "Վերջին վճարը ընդունումից հետո։"},
+      "payment_lag_months": {"value": 1, "low": 1, "high": 2, "unit": "ամիս", "source": "estimate", "note": "Փուլ → վճարում։"},
+      "delay_probability_pct": {"value": 25, "low": 15, "high": 40, "unit": "%", "source": "estimate", "note": "Սարքավորման մատակարարում, եղանակ։"},
+      "delay_months": {"value": 1, "low": 1, "high": 2, "unit": "ամիս", "source": "estimate", "note": "Ուշացման տևողություն։"},
+      "delay_cost_pct": {"value": 2, "low": 1, "high": 4, "unit": "%", "source": "estimate", "note": "Լրացուցիչ ծախս + տույժ։"},
+      "max_wait_months": {"value": 5, "low": 5, "high": 5, "unit": "ամիս", "source": "estimate", "note": "Աշնանը/ձմռանը ստորագրված լողավազանը սպասում է մինչև մարտ (վաղ ամրագրում)։"},
+      "throughput_multiplier": {"value": 1, "low": 1, "high": 1, "unit": "×", "source": "estimate", "note": "Բրիգադի արտադրողականության գործակից։"},
+      "lead_seasonality": {"value": [1.3, 1.5, 1.5, 1.4, 1.2, 0.9, 0.7, 0.6, 0.6, 0.6, 0.7, 1.0], "low": null, "high": null, "unit": "գործակից, հունվար→դեկտեմբեր", "source": "estimate", "note": "Պատվերները ձևավորվում են ձմռանը՝ գարնան համար (strategy 2)։"},
+      "work_seasonality": {"value": [0, 0, 0.8, 1, 1, 1, 1, 1, 1, 1, 0.6, 0], "low": null, "high": null, "unit": "գործակից", "source": "estimate", "note": "Բետոն/ջրամեկուսացում՝ ոչ սառնամանիքին (դեկտ.–փետր. = 0)։ R30-ը մոդելավորված է այստեղ։"},
+      "start_allowed_months": {"value": [3, 4, 5, 6, 7, 8, 9], "low": null, "high": null, "unit": "օրացուցային ամիսներ", "source": "estimate", "note": "Նոր լողավազան սկսում ենք մարտ–սեպտեմբեր։"}
     },
     "houses": {
-      "needs_licence": {
-        "value": 1,
-        "low": 1,
-        "high": 1,
-        "unit": "1 = այո",
-        "source": "research",
-        "note": "Լիցենզիա + 1057-Ն թույլտվություն (research-residential 4.3)։"
-      },
-      "leads_per_month": {
-        "value": 4,
-        "low": 1.5,
-        "high": 7,
-        "unit": "որակյալ լիդ/ամիս",
-        "source": "estimate",
-        "note": "Սփյուռք, ճարտարապետներ, լողավազանի հաճախորդներ։ Թիրախ 2–4 տուն/տարի. value ≈ 2.4/տարի կայուն վիճակում, low ≈ 0.5։"
-      },
-      "ramp_months": {
-        "value": 4,
-        "low": 3,
-        "high": 6,
-        "unit": "ամիս",
-        "source": "estimate",
-        "note": "Վստահությունը/պորտֆոլիոն կառուցվում է դանդաղ։"
-      },
-      "conversion_pct": {
-        "value": 5,
-        "low": 3,
-        "high": 9,
-        "unit": "% լիդ → պայմանագիր",
-        "source": "estimate",
-        "note": "Մեծ չեկ, երկար որոշում, պորտֆոլիո չկա (R01)։"
-      },
-      "job_size_amd": {
-        "value": 45000000,
-        "low": 25000000,
-        "high": 75000000,
-        "unit": "AMD/պայմանագիր",
-        "source": "research",
-        "note": "150 մ² × 250–480 հազ. ֏/մ² (CostCalculator.tsx — ՑՈՒՑԱԴՐԱԿԱՆ). առաջին պայմանագրերը հաճախ «տուփ» փուլ են։"
-      },
-      "gross_margin_pct": {
-        "value": 22,
-        "low": 14,
-        "high": 28,
-        "unit": "%",
-        "source": "estimate",
-        "note": "Պրեմիումը (480 հազ.) կարող է չծածկել ինքնարժեքը (strategy 4.1)։"
-      },
-      "duration_months": {
-        "value": 8,
-        "low": 6,
-        "high": 12,
-        "unit": "ամիս",
-        "source": "research",
-        "note": "Տուն/տուփ փուլ։ Շուկայում 6–12 ամիս ուշացումները հաճախակի են (research-residential 4.2)։"
-      },
-      "prepayment_pct": {
-        "value": 15,
-        "low": 10,
-        "high": 25,
-        "unit": "%",
-        "source": "research",
-        "note": "Կանխավճար ≤ 15% (strategy #3)։"
-      },
-      "retention_pct": {
-        "value": 5,
-        "low": 5,
-        "high": 10,
-        "unit": "%",
-        "source": "research",
-        "note": "Վերջին 5–10%-ը ընդունումից հետո։"
-      },
-      "payment_lag_months": {
-        "value": 1,
-        "low": 1,
-        "high": 2,
-        "unit": "ամիս",
-        "source": "estimate",
-        "note": "Փուլ → վճարում։"
-      },
-      "delay_probability_pct": {
-        "value": 40,
-        "low": 25,
-        "high": 60,
-        "unit": "%",
-        "source": "research",
-        "note": "Ուշացումները հաճախակի են (research-residential 4.2)։"
-      },
-      "delay_months": {
-        "value": 2,
-        "low": 1,
-        "high": 4,
-        "unit": "ամիս",
-        "source": "estimate",
-        "note": "Ուշացման տևողություն։"
-      },
-      "delay_cost_pct": {
-        "value": 2,
-        "low": 1,
-        "high": 5,
-        "unit": "%",
-        "source": "estimate",
-        "note": "Տույժ (մաքս. 5%) + լրացուցիչ ծախս։"
-      },
-      "max_wait_months": {
-        "value": 3,
-        "low": 3,
-        "high": 3,
-        "unit": "ամիս",
-        "source": "estimate",
-        "note": "Հաճախորդը սպասում է մինչև 3 ամիս (թույլտվություն, սեզոն)։"
-      },
-      "throughput_multiplier": {
-        "value": 1.4,
-        "low": 1.4,
-        "high": 1.4,
-        "unit": "×",
-        "source": "estimate",
-        "note": "Տներում ավելի շատ ենթակապալառու/տեխնիկա. մեկ բրիգադը «կրում է» ավելի մեծ ծավալ։"
-      },
-      "lead_seasonality": {
-        "value": [
-          0.8,
-          1.1,
-          1.3,
-          1.3,
-          1.2,
-          1.1,
-          1.0,
-          0.8,
-          1.0,
-          1.0,
-          0.7,
-          0.7
-        ],
-        "low": null,
-        "high": null,
-        "unit": "գործակից, հունվար→դեկտեմբեր",
-        "source": "estimate",
-        "note": "Գարնանային պիկ (research-residential 4.5՝ գնահատական)։"
-      },
-      "work_seasonality": {
-        "value": [
-          0.4,
-          0.6,
-          0.9,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          0.8,
-          0.5
-        ],
-        "low": null,
-        "high": null,
-        "unit": "գործակից",
-        "source": "estimate",
-        "note": "Ձմռանը միայն ներքին աշխատանքներ (R30)։"
-      },
-      "start_allowed_months": {
-        "value": [
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11
-        ],
-        "low": null,
-        "high": null,
-        "unit": "օրացուցային ամիսներ",
-        "source": "estimate",
-        "note": "Հիմքի աշխատանքներ չենք սկսում դեկտեմբեր–հունվար։"
-      }
+      "needs_licence": {"value": 1, "low": 1, "high": 1, "unit": "1 = այո", "source": "research", "note": "Լիցենզիա + 1057-Ն թույլտվություն (research-residential 4.3)։"},
+      "leads_per_month": {"value": 4, "low": 1.5, "high": 7, "unit": "որակյալ լիդ/ամիս", "source": "estimate", "note": "Սփյուռք, ճարտարապետներ, լողավազանի հաճախորդներ։ Թիրախ 2–4 տուն/տարի. value ≈ 2.4/տարի կայուն վիճակում, low ≈ 0.5։"},
+      "ramp_months": {"value": 4, "low": 3, "high": 6, "unit": "ամիս", "source": "estimate", "note": "Վստահությունը/պորտֆոլիոն կառուցվում է դանդաղ։"},
+      "conversion_pct": {"value": 5, "low": 3, "high": 9, "unit": "% լիդ → պայմանագիր", "source": "estimate", "note": "Մեծ չեկ, երկար որոշում, պորտֆոլիո չկա (R01)։"},
+      "job_size_amd": {"value": 45000000, "low": 25000000, "high": 75000000, "unit": "AMD/պայմանագիր", "source": "research", "note": "150 մ² × 250–480 հազ. ֏/մ² (CostCalculator.tsx — ՑՈՒՑԱԴՐԱԿԱՆ). առաջին պայմանագրերը հաճախ «տուփ» փուլ են։"},
+      "gross_margin_pct": {"value": 22, "low": 14, "high": 28, "unit": "%", "source": "estimate", "note": "Պրեմիումը (480 հազ.) կարող է չծածկել ինքնարժեքը (strategy 4.1)։"},
+      "duration_months": {"value": 8, "low": 6, "high": 12, "unit": "ամիս", "source": "research", "note": "Տուն/տուփ փուլ։ Շուկայում 6–12 ամիս ուշացումները հաճախակի են (research-residential 4.2)։"},
+      "prepayment_pct": {"value": 15, "low": 10, "high": 25, "unit": "%", "source": "research", "note": "Կանխավճար ≤ 15% (strategy #3)։"},
+      "retention_pct": {"value": 5, "low": 5, "high": 10, "unit": "%", "source": "research", "note": "Վերջին 5–10%-ը ընդունումից հետո։"},
+      "payment_lag_months": {"value": 1, "low": 1, "high": 2, "unit": "ամիս", "source": "estimate", "note": "Փուլ → վճարում։"},
+      "delay_probability_pct": {"value": 40, "low": 25, "high": 60, "unit": "%", "source": "research", "note": "Ուշացումները հաճախակի են (research-residential 4.2)։"},
+      "delay_months": {"value": 2, "low": 1, "high": 4, "unit": "ամիս", "source": "estimate", "note": "Ուշացման տևողություն։"},
+      "delay_cost_pct": {"value": 2, "low": 1, "high": 5, "unit": "%", "source": "estimate", "note": "Տույժ (մաքս. 5%) + լրացուցիչ ծախս։"},
+      "max_wait_months": {"value": 3, "low": 3, "high": 3, "unit": "ամիս", "source": "estimate", "note": "Հաճախորդը սպասում է մինչև 3 ամիս (թույլտվություն, սեզոն)։"},
+      "throughput_multiplier": {"value": 1.4, "low": 1.4, "high": 1.4, "unit": "×", "source": "estimate", "note": "Տներում ավելի շատ ենթակապալառու/տեխնիկա. մեկ բրիգադը «կրում է» ավելի մեծ ծավալ։"},
+      "lead_seasonality": {"value": [0.8, 1.1, 1.3, 1.3, 1.2, 1.1, 1.0, 0.8, 1.0, 1.0, 0.7, 0.7], "low": null, "high": null, "unit": "գործակից, հունվար→դեկտեմբեր", "source": "estimate", "note": "Գարնանային պիկ (research-residential 4.5՝ գնահատական)։"},
+      "work_seasonality": {"value": [0.4, 0.6, 0.9, 1, 1, 1, 1, 1, 1, 1, 0.8, 0.5], "low": null, "high": null, "unit": "գործակից", "source": "estimate", "note": "Ձմռանը միայն ներքին աշխատանքներ (R30)։"},
+      "start_allowed_months": {"value": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11], "low": null, "high": null, "unit": "օրացուցային ամիսներ", "source": "estimate", "note": "Հիմքի աշխատանքներ չենք սկսում դեկտեմբեր–հունվար։"}
     },
     "public": {
-      "needs_licence": {
-        "value": 1,
-        "low": 1,
-        "high": 1,
-        "unit": "1 = այո",
-        "source": "research",
-        "note": "Լիցենզիա + armeps.am գրանցում (research-public 3.3)։"
-      },
-      "bids_per_month": {
-        "value": 1,
-        "low": 0.5,
-        "high": 2,
-        "unit": "հայտ/ամիս",
-        "source": "research",
-        "note": "strategy. 3–5 սեփական հայտ առաջին տարում; 15–150 մլն ֏ լոտեր։"
-      },
-      "ramp_months": {
-        "value": 2,
-        "low": 1,
-        "high": 3,
-        "unit": "ամիս",
-        "source": "estimate",
-        "note": "Գրանցում, առաջին հայտերի պատրաստում։"
-      },
-      "win_rate_pct": {
-        "value": 12,
-        "low": 5,
-        "high": 22,
-        "unit": "% մեկ հայտից",
-        "source": "estimate",
-        "note": "Փոքր մրցույթներում հաճախ > 8 մասնակից, գնի իջեցում > 25% (strategy, որոշման կետ 1)։"
-      },
-      "no_track_record_factor_pct": {
-        "value": 40,
-        "low": 25,
-        "high": 60,
-        "unit": "% win rate-ից",
-        "source": "estimate",
-        "note": "Մինչև 5 ավարտված օբյեկտ ունենալը (նմանատիպ փորձի պահանջ) win rate × 40%։ R21-ի մեղմացումով (ենթակապալառուի փորձ)՝ ավելի բարձր։"
-      },
-      "track_record_contracts": {
-        "value": 5,
-        "low": 5,
-        "high": 5,
-        "unit": "ավարտված պայմանագիր",
-        "source": "estimate",
-        "note": "Քանի ավարտված օբյեկտից հետո է հանվում «փորձ չկա» տույժը։"
-      },
-      "contract_size_amd": {
-        "value": 45000000,
-        "low": 15000000,
-        "high": 100000000,
-        "unit": "AMD (առանց ԱԱՀ)",
-        "source": "research",
-        "note": "15–150 մլն ֏ վերանորոգման լոտեր (research-public 3.2); կանոն՝ միայն ≤ 100 մլն (risks.md K1/K3)։"
-      },
-      "gross_margin_pct": {
-        "value": 12,
-        "low": 6,
-        "high": 18,
-        "unit": "%",
-        "source": "estimate",
-        "note": "Մրցութային գնի իջեցումից հետո։"
-      },
-      "duration_months": {
-        "value": 8,
-        "low": 6,
-        "high": 10,
-        "unit": "ամիս",
-        "source": "research",
-        "note": "Փոքր վերանորոգումներ՝ 6–10 ամիս (research-public 3.2)։"
-      },
-      "prepayment_pct": {
-        "value": 0,
-        "low": 0,
-        "high": 15,
-        "unit": "%",
-        "source": "estimate",
-        "note": "Կանխավճար սովորաբար չկա կամ պահանջում է երաշխիք։ ՍՏՈՒԳԵԼ։"
-      },
-      "retention_pct": {
-        "value": 5,
-        "low": 0,
-        "high": 10,
-        "unit": "%",
-        "source": "estimate",
-        "note": "Վերջնական ընդունումից հետո վճարվող մաս։"
-      },
-      "payment_lag_months": {
-        "value": 3,
-        "low": 2,
-        "high": 6,
-        "unit": "ամիս",
-        "source": "research",
-        "note": "Ակտ → գանձապետական վճարում. 2–6 ամիս (R12)։"
-      },
-      "performance_guarantee_pct": {
-        "value": 10,
-        "low": 10,
-        "high": 10,
-        "unit": "% պայմանագրից",
-        "source": "research",
-        "note": "«Գնումների մասին» օրենք՝ 10% (research-public 3.3)։"
-      },
-      "guarantee_cash_collateral_pct": {
-        "value": 100,
-        "low": 100,
-        "high": 100,
-        "unit": "% երաշխիքից",
-        "source": "estimate",
-        "note": "Պատմություն չունեցող ընկերությանը բանկը երաշխիք կտա 100% կանխիկ գրավով (R13)։ R13-ի մեղմացումով (գույքի գրավ)՝ 50%։"
-      },
-      "guarantee_release_after_completion_months": {
-        "value": 2,
-        "low": 1,
-        "high": 4,
-        "unit": "ամիս",
-        "source": "estimate",
-        "note": "Երաշխիքը ազատվում է ավարտից 1–4 ամիս հետո։"
-      },
-      "bid_cost_amd": {
-        "value": 200000,
-        "low": 100000,
-        "high": 400000,
-        "unit": "AMD/հայտ",
-        "source": "estimate",
-        "note": "Հայտի պատրաստում, հայտի ապահովման վճար։"
-      },
-      "cash_rule_pct_of_lot": {
-        "value": 35,
-        "low": 35,
-        "high": 35,
-        "unit": "%",
-        "source": "research",
-        "note": "Կանոն (risks.md 6.2). հայտ՝ միայն եթե կանխիկ + չօգտագործված գիծ ≥ 35% լոտից։ Միայն --mitigated։"
-      },
-      "delay_probability_pct": {
-        "value": 40,
-        "low": 25,
-        "high": 60,
-        "unit": "%",
-        "source": "research",
-        "note": "Ուշացումները հաճախակի են (Դովեղ, Գառնահովիտ. research-public 3.4)։"
-      },
-      "delay_months": {
-        "value": 2,
-        "low": 1,
-        "high": 4,
-        "unit": "ամիս",
-        "source": "estimate",
-        "note": "Ուշացման տևողություն։"
-      },
-      "delay_cost_pct": {
-        "value": 3,
-        "low": 1,
-        "high": 5,
-        "unit": "%",
-        "source": "estimate",
-        "note": "Տույժեր և լրացուցիչ ծախս (մեծ տույժերը՝ R22)։"
-      },
-      "max_wait_months": {
-        "value": 0,
-        "low": 0,
-        "high": 0,
-        "unit": "ամիս",
-        "source": "estimate",
-        "note": "Հանրային պայմանագիրը պետք է սկսել անմիջապես (եթե բրիգադ չկա՝ բոլոր օբյեկտները դանդաղում են)։"
-      },
-      "throughput_multiplier": {
-        "value": 2,
-        "low": 2,
-        "high": 2,
-        "unit": "×",
-        "source": "estimate",
-        "note": "Հանրային օբյեկտներում մեծ մասը ենթակապալառուներով։"
-      },
-      "lead_seasonality": {
-        "value": [
-          1.4,
-          1.6,
-          1.6,
-          1.4,
-          1.2,
-          1.0,
-          0.8,
-          0.6,
-          0.7,
-          0.6,
-          0.5,
-          0.6
-        ],
-        "low": null,
-        "high": null,
-        "unit": "հայտերի գործակից, հունվար→դեկտեմբեր",
-        "source": "research",
-        "note": "Մրցույթների մեծ մասը բյուջեի հաստատումից հետո՝ Q1–Q2 (research-public 3.2)։"
-      },
-      "work_seasonality": {
-        "value": [
-          0.5,
-          0.7,
-          0.9,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          0.8,
-          0.6
-        ],
-        "low": null,
-        "high": null,
-        "unit": "գործակից",
-        "source": "estimate",
-        "note": "Ակտիվ փուլը՝ գարուն–աշուն։"
-      },
-      "start_allowed_months": {
-        "value": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12
-        ],
-        "low": null,
-        "high": null,
-        "unit": "օրացուցային ամիսներ",
-        "source": "estimate",
-        "note": "Պայմանագիրը սկսվում է հաղթելուց հետո։"
-      }
+      "needs_licence": {"value": 1, "low": 1, "high": 1, "unit": "1 = այո", "source": "research", "note": "Լիցենզիա + armeps.am գրանցում (research-public 3.3)։"},
+      "bids_per_month": {"value": 1, "low": 0.5, "high": 2, "unit": "հայտ/ամիս", "source": "research", "note": "strategy. 3–5 սեփական հայտ առաջին տարում; 15–150 մլն ֏ լոտեր։"},
+      "ramp_months": {"value": 2, "low": 1, "high": 3, "unit": "ամիս", "source": "estimate", "note": "Գրանցում, առաջին հայտերի պատրաստում։"},
+      "win_rate_pct": {"value": 12, "low": 5, "high": 22, "unit": "% մեկ հայտից", "source": "estimate", "note": "Փոքր մրցույթներում հաճախ > 8 մասնակից, գնի իջեցում > 25% (strategy, որոշման կետ 1)։"},
+      "no_track_record_factor_pct": {"value": 40, "low": 25, "high": 60, "unit": "% win rate-ից", "source": "estimate", "note": "Մինչև 5 ավարտված օբյեկտ ունենալը (նմանատիպ փորձի պահանջ) win rate × 40%։ R21-ի մեղմացումով (ենթակապալառուի փորձ)՝ ավելի բարձր։"},
+      "track_record_contracts": {"value": 5, "low": 5, "high": 5, "unit": "ավարտված պայմանագիր", "source": "estimate", "note": "Քանի ավարտված օբյեկտից հետո է հանվում «փորձ չկա» տույժը։"},
+      "contract_size_amd": {"value": 45000000, "low": 15000000, "high": 100000000, "unit": "AMD (առանց ԱԱՀ)", "source": "research", "note": "15–150 մլն ֏ վերանորոգման լոտեր (research-public 3.2); կանոն՝ միայն ≤ 100 մլն (risks.md K1/K3)։"},
+      "gross_margin_pct": {"value": 12, "low": 6, "high": 18, "unit": "%", "source": "estimate", "note": "Մրցութային գնի իջեցումից հետո։"},
+      "duration_months": {"value": 8, "low": 6, "high": 10, "unit": "ամիս", "source": "research", "note": "Փոքր վերանորոգումներ՝ 6–10 ամիս (research-public 3.2)։"},
+      "prepayment_pct": {"value": 0, "low": 0, "high": 15, "unit": "%", "source": "estimate", "note": "Կանխավճար սովորաբար չկա կամ պահանջում է երաշխիք։ ՍՏՈՒԳԵԼ։"},
+      "retention_pct": {"value": 5, "low": 0, "high": 10, "unit": "%", "source": "estimate", "note": "Վերջնական ընդունումից հետո վճարվող մաս։"},
+      "payment_lag_months": {"value": 3, "low": 2, "high": 6, "unit": "ամիս", "source": "research", "note": "Ակտ → գանձապետական վճարում. 2–6 ամիս (R12)։"},
+      "performance_guarantee_pct": {"value": 10, "low": 10, "high": 10, "unit": "% պայմանագրից", "source": "research", "note": "«Գնումների մասին» օրենք՝ 10% (research-public 3.3)։"},
+      "guarantee_cash_collateral_pct": {"value": 100, "low": 100, "high": 100, "unit": "% երաշխիքից", "source": "estimate", "note": "Պատմություն չունեցող ընկերությանը բանկը երաշխիք կտա 100% կանխիկ գրավով (R13)։ R13-ի մեղմացումով (գույքի գրավ)՝ 50%։"},
+      "guarantee_release_after_completion_months": {"value": 2, "low": 1, "high": 4, "unit": "ամիս", "source": "estimate", "note": "Երաշխիքը ազատվում է ավարտից 1–4 ամիս հետո։"},
+      "bid_cost_amd": {"value": 200000, "low": 100000, "high": 400000, "unit": "AMD/հայտ", "source": "estimate", "note": "Հայտի պատրաստում, հայտի ապահովման վճար։"},
+      "cash_rule_pct_of_lot": {"value": 35, "low": 35, "high": 35, "unit": "%", "source": "research", "note": "Կանոն (risks.md 6.2). հայտ՝ միայն եթե կանխիկ + չօգտագործված գիծ ≥ 35% լոտից։ Միայն --mitigated։"},
+      "delay_probability_pct": {"value": 40, "low": 25, "high": 60, "unit": "%", "source": "research", "note": "Ուշացումները հաճախակի են (Դովեղ, Գառնահովիտ. research-public 3.4)։"},
+      "delay_months": {"value": 2, "low": 1, "high": 4, "unit": "ամիս", "source": "estimate", "note": "Ուշացման տևողություն։"},
+      "delay_cost_pct": {"value": 3, "low": 1, "high": 5, "unit": "%", "source": "estimate", "note": "Տույժեր և լրացուցիչ ծախս (մեծ տույժերը՝ R22)։"},
+      "max_wait_months": {"value": 0, "low": 0, "high": 0, "unit": "ամիս", "source": "estimate", "note": "Հանրային պայմանագիրը պետք է սկսել անմիջապես (եթե բրիգադ չկա՝ բոլոր օբյեկտները դանդաղում են)։"},
+      "throughput_multiplier": {"value": 2, "low": 2, "high": 2, "unit": "×", "source": "estimate", "note": "Հանրային օբյեկտներում մեծ մասը ենթակապալառուներով։"},
+      "lead_seasonality": {"value": [1.4, 1.6, 1.6, 1.4, 1.2, 1.0, 0.8, 0.6, 0.7, 0.6, 0.5, 0.6], "low": null, "high": null, "unit": "հայտերի գործակից, հունվար→դեկտեմբեր", "source": "research", "note": "Մրցույթների մեծ մասը բյուջեի հաստատումից հետո՝ Q1–Q2 (research-public 3.2)։"},
+      "work_seasonality": {"value": [0.5, 0.7, 0.9, 1, 1, 1, 1, 1, 1, 1, 0.8, 0.6], "low": null, "high": null, "unit": "գործակից", "source": "estimate", "note": "Ակտիվ փուլը՝ գարուն–աշուն։"},
+      "start_allowed_months": {"value": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], "low": null, "high": null, "unit": "օրացուցային ամիսներ", "source": "estimate", "note": "Պայմանագիրը սկսվում է հաղթելուց հետո։"}
     }
   },
   "strategies": {
-    "default": {
-      "value": "C",
-      "low": "C",
-      "high": "C",
-      "unit": "A | B | C | D",
-      "source": "research",
-      "note": "C = առաջարկվածը (strategy.md)։ CLI՝ --strategy։"
-    },
-    "A": {
-      "value": {
-        "renovation": 1
-      },
-      "low": null,
-      "high": null,
-      "unit": "սեգմենտ → մեկնարկի ամիս",
-      "source": "estimate",
-      "note": "Միայն վերանորոգում։ Լիցենզիա չենք դիմում։"
-    },
-    "B": {
-      "value": {
-        "renovation": 1,
-        "pools": 4,
-        "houses": 4
-      },
-      "low": null,
-      "high": null,
-      "unit": "սեգմենտ → մեկնարկի ամիս",
-      "source": "research",
-      "note": "Վերանորոգում → տներ և լողավազաններ 4-րդ ամսից (ոչ շուտ, քան լիցենզիան)։"
-    },
-    "C": {
-      "value": {
-        "renovation": 1,
-        "pools": 4,
-        "houses": 4,
-        "public": 13
-      },
-      "low": null,
-      "high": null,
-      "unit": "սեգմենտ → մեկնարկի ամիս",
-      "source": "research",
-      "note": "B + հանրային մրցույթներ 13-րդ ամսից (strategy.md-ի առաջարկը, risks.md՝ «2-րդ տարի»)։"
-    },
-    "D": {
-      "value": {
-        "renovation": 1,
-        "pools": 1,
-        "houses": 1,
-        "public": 1
-      },
-      "low": null,
-      "high": null,
-      "unit": "սեգմենտ → մեկնարկի ամիս",
-      "source": "estimate",
-      "note": "Բոլոր սեգմենտները 1-ին ամսից (լիցենզիայից և սեզոնից կախված)։"
-    }
+    "default": {"value": "C", "low": "C", "high": "C", "unit": "A | B | C | D", "source": "research", "note": "C = առաջարկվածը (strategy.md)։ CLI՝ --strategy։"},
+    "A": {"value": {"renovation": 1}, "low": null, "high": null, "unit": "սեգմենտ → մեկնարկի ամիս", "source": "estimate", "note": "Միայն վերանորոգում։ Լիցենզիա չենք դիմում։"},
+    "B": {"value": {"renovation": 1, "pools": 4, "houses": 4}, "low": null, "high": null, "unit": "սեգմենտ → մեկնարկի ամիս", "source": "research", "note": "Վերանորոգում → տներ և լողավազաններ 4-րդ ամսից (ոչ շուտ, քան լիցենզիան)։"},
+    "C": {"value": {"renovation": 1, "pools": 4, "houses": 4, "public": 13}, "low": null, "high": null, "unit": "սեգմենտ → մեկնարկի ամիս", "source": "research", "note": "B + հանրային մրցույթներ 13-րդ ամսից (strategy.md-ի առաջարկը, risks.md՝ «2-րդ տարի»)։"},
+    "D": {"value": {"renovation": 1, "pools": 1, "houses": 1, "public": 1}, "low": null, "high": null, "unit": "սեգմենտ → մեկնարկի ամիս", "source": "estimate", "note": "Բոլոր սեգմենտները 1-ին ամսից (լիցենզիայից և սեզոնից կախված)։"}
   },
   "risk_model": {
-    "not_sampled": {
-      "value": {
-        "R01": "Լիդերի պակասը արդեն leads_per_month/conversion_pct-ի low-ում է (low ≈ պլանի 40–50%)։",
-        "R07": "Հարկային ռեժիմը մոդելավորված է բացահայտ (--tax turnover|vat, շեմից հետո ԱԱՀ). R07-ը նմուշառելը կկրկնապատկեր ԱԱՀ-ի ազդեցությունը։",
-        "R09": "Կապիտալը մուտքային փոփոխական է (--capital, sweep), կանխիկի սպառումը՝ մոդելի արդյունք։",
-        "R12": "Հանրային վճարման ուշացումը՝ public.payment_lag_months (2–6 ամիս)։",
-        "R13": "10% երաշխիքը մոդելավորված է որպես սառեցված կանխիկ։",
-        "R14": "Ժամկետների խախտումը մոդելավորված է ամեն պայմանագրի մակարդակում (delay_probability_pct, delay_months, delay_cost_pct ըստ սեգմենտի). R14-ը նմուշառելը կկրկնապատկեր ուշացման ծախսը։",
-        "R16": "Բրիգադի հավաքագրումը՝ team.crew_hiring_lag_months (1–3 ամիս) և հզորության սահմանափակում։",
-        "R18": "Լիցենզիայի ուշացումը՝ licence.lead_time_months (1–6 ամիս)։",
-        "R21": "Հանրային մրցույթների ձախողումը՝ win_rate_pct և no_track_record_factor_pct։",
-        "R30": "Սեզոնայնությունը՝ work_seasonality/lead_seasonality։"
-      },
-      "low": null,
-      "high": null,
-      "unit": "ռիսկ → պատճառ",
-      "source": "research",
-      "note": "risks.md բաժին 7. այս ռիսկերը կրկնում են ենթադրությունները, ուստի որպես պատահար չեն նմուշառվում։ R07-ը և R14-ը ավելացված են նույն սկզբունքով (հարկերը և ուշացումները մոդելավորված են բացահայտ)։ Նրանց մեղմացումը (--mitigated) փոխում է համապատասխան ենթադրությունը (տես mitigation_effects)։"
-    },
-    "plan_6m_revenue_amd": {
-      "value": {
-        "renovation": 50000000,
-        "houses": 40000000,
-        "pools": 25000000,
-        "public": 40000000
-      },
-      "low": null,
-      "high": null,
-      "unit": "AMD/6 ամիս",
-      "source": "research",
-      "note": "risks.md բաժին 0. ռիսկերի ազդեցությունները չափված են այս պլանային եկամտի համար. մոդելում ծախսային ազդեցությունը մասշտաբավորվում է փաստացի 6-ամսյա եկամտով (առավելագույնը 1×)։"
-    },
-    "event_window_months": {
-      "value": 6,
-      "low": 6,
-      "high": 6,
-      "unit": "ամիս",
-      "source": "research",
-      "note": "Մարժայի և եկամտի ռիսկերի ազդեցության տևողություն (risks.md 7)։"
-    },
-    "cost_scale_cap": {
-      "value": 1.0,
-      "low": 1.0,
-      "high": 1.0,
-      "unit": "×",
-      "source": "estimate",
-      "note": "Ծախսային ազդեցությունը չի գերազանցում risks.json-ի թիվը, նույնիսկ եթե եկամուտը պլանից մեծ է։"
-    },
-    "cash_delay_months": {
-      "value": {
-        "R10": [
-          1,
-          3
-        ],
-        "R12": [
-          2,
-          6
-        ],
-        "R13": [
-          6,
-          12
-        ],
-        "R19": [
-          2,
-          4
-        ]
-      },
-      "low": null,
-      "high": null,
-      "unit": "ամիս [min, max]",
-      "source": "research",
-      "note": "Կանխիկի ուշացման տևողությունը ռիսկի անվան փակագծից (risks.md 7)։"
-    }
+    "not_sampled": {"value": {"R01": "Լիդերի պակասը արդեն leads_per_month/conversion_pct-ի low-ում է (low ≈ պլանի 40–50%)։", "R07": "Հարկային ռեժիմը մոդելավորված է բացահայտ (--tax turnover|vat, շեմից հետո ԱԱՀ). R07-ը նմուշառելը կկրկնապատկեր ԱԱՀ-ի ազդեցությունը։", "R09": "Կապիտալը մուտքային փոփոխական է (--capital, sweep), կանխիկի սպառումը՝ մոդելի արդյունք։", "R12": "Հանրային վճարման ուշացումը՝ public.payment_lag_months (2–6 ամիս)։", "R13": "10% երաշխիքը մոդելավորված է որպես սառեցված կանխիկ։", "R14": "Ժամկետների խախտումը մոդելավորված է ամեն պայմանագրի մակարդակում (delay_probability_pct, delay_months, delay_cost_pct ըստ սեգմենտի). R14-ը նմուշառելը կկրկնապատկեր ուշացման ծախսը։", "R16": "Բրիգադի հավաքագրումը՝ team.crew_hiring_lag_months (1–3 ամիս) և հզորության սահմանափակում։", "R18": "Լիցենզիայի ուշացումը՝ licence.lead_time_months (1–6 ամիս)։", "R21": "Հանրային մրցույթների ձախողումը՝ win_rate_pct և no_track_record_factor_pct։", "R30": "Սեզոնայնությունը՝ work_seasonality/lead_seasonality։"}, "low": null, "high": null, "unit": "ռիսկ → պատճառ", "source": "research", "note": "risks.md բաժին 7. այս ռիսկերը կրկնում են ենթադրությունները, ուստի որպես պատահար չեն նմուշառվում։ R07-ը և R14-ը ավելացված են նույն սկզբունքով (հարկերը և ուշացումները մոդելավորված են բացահայտ)։ Նրանց մեղմացումը (--mitigated) փոխում է համապատասխան ենթադրությունը (տես mitigation_effects)։"},
+    "plan_6m_revenue_amd": {"value": {"renovation": 50000000, "houses": 40000000, "pools": 25000000, "public": 40000000}, "low": null, "high": null, "unit": "AMD/6 ամիս", "source": "research", "note": "risks.md բաժին 0. ռիսկերի ազդեցությունները չափված են այս պլանային եկամտի համար. մոդելում ծախսային ազդեցությունը մասշտաբավորվում է փաստացի 6-ամսյա եկամտով (առավելագույնը 1×)։"},
+    "event_window_months": {"value": 6, "low": 6, "high": 6, "unit": "ամիս", "source": "research", "note": "Մարժայի և եկամտի ռիսկերի ազդեցության տևողություն (risks.md 7)։"},
+    "cost_scale_cap": {"value": 1.0, "low": 1.0, "high": 1.0, "unit": "×", "source": "estimate", "note": "Ծախսային ազդեցությունը չի գերազանցում risks.json-ի թիվը, նույնիսկ եթե եկամուտը պլանից մեծ է։"},
+    "cash_delay_months": {"value": {"R10": [1, 3], "R12": [2, 6], "R13": [6, 12], "R19": [2, 4]}, "low": null, "high": null, "unit": "ամիս [min, max]", "source": "research", "note": "Կանխիկի ուշացման տևողությունը ռիսկի անվան փակագծից (risks.md 7)։"}
   },
-  "mitigation_effects": {
-    "value": {
-      "R01": "Լիդերի հոսքի «վատ կողմի» շեղումը × mitigated_impact_factor (0.6)։",
-      "R09": "Բացվում է 12 մլն ֏ վարկային գիծ 3-րդ ամսից (16%); կանխիկի շեմ = 2 ամսվա ֆիքսված ծախս; ≤ 3 զուգահեռ օբյեկտ առաջին 3 ամսում։",
-      "R12": "Վճարման ուշացման ավելցուկը 2 ամսից × 0.6; հայտ՝ միայն «35%-ի կանոնով»։",
-      "R13": "Երաշխիքի կանխիկ գրավը 100% → 50%։",
-      "R16": "Բրիգադի հավաքագրման ուշացման ավելցուկը 1 ամսից × 0.6։",
-      "R18": "Լիցենզիայի ժամկետի ավելցուկը low-ից × 0.5։",
-      "R21": "«Փորձ չկա» տույժը. գործակիցը մոտենում է 100%-ին (1 − (1 − 0.40) × 0.6 = 64%)։",
-      "R30": "Ձմեռային կորուստը (1 − work_seasonality) × 0.5 (բացի լողավազանի 0 ամիսներից)։",
-      "R07": "Հաշվապահի եզրակացություն. ծախսը ներառված է, ազդեցությունը՝ --tax դրոշով։",
-      "sampled": "Մնացած ռիսկերի համար՝ հավանականություն = mitigated_probability, ազդեցություն × mitigated_impact_factor։ Ամեն մեղմացման տարեկան արժեքը / 12 ավելանում է ֆիքսված ծախսերին այն ամիսներին, երբ ռիսկի սեգմենտներից որևէ մեկը ակտիվ է։",
-      "R14": "Ուշացման հավանականությունը × mitigated_impact_factor (0.6)՝ բոլոր սեգմենտներում (10% բուֆեր, շաբաթական ժամանակացույց, 2 մատակարար)։"
-    },
-    "low": null,
-    "high": null,
-    "unit": "նկարագրություն",
-    "source": "research",
-    "note": "Գործակիցները վերցվում են risks.json-ից (mitigated_impact_factor, mitigation_cost_amd)։"
-  },
+  "mitigation_effects": {"value": {"R01": "Լիդերի հոսքի «վատ կողմի» շեղումը × mitigated_impact_factor (0.6)։", "R09": "Բացվում է 12 մլն ֏ վարկային գիծ 3-րդ ամսից (16%); կանխիկի շեմ = 2 ամսվա ֆիքսված ծախս; ≤ 3 զուգահեռ օբյեկտ առաջին 3 ամսում։", "R12": "Վճարման ուշացման ավելցուկը 2 ամսից × 0.6; հայտ՝ միայն «35%-ի կանոնով»։", "R13": "Երաշխիքի կանխիկ գրավը 100% → 50%։", "R16": "Բրիգադի հավաքագրման ուշացման ավելցուկը 1 ամսից × 0.6։", "R18": "Լիցենզիայի ժամկետի ավելցուկը low-ից × 0.5։", "R21": "«Փորձ չկա» տույժը. գործակիցը մոտենում է 100%-ին (1 − (1 − 0.40) × 0.6 = 64%)։", "R30": "Ձմեռային կորուստը (1 − work_seasonality) × 0.5 (բացի լողավազանի 0 ամիսներից)։", "R07": "Հաշվապահի եզրակացություն. ծախսը ներառված է, ազդեցությունը՝ --tax դրոշով։", "sampled": "Մնացած ռիսկերի համար՝ հավանականություն = mitigated_probability, ազդեցություն × mitigated_impact_factor։ Ամեն մեղմացման տարեկան արժեքը / 12 ավելանում է ֆիքսված ծախսերին այն ամիսներին, երբ ռիսկի սեգմենտներից որևէ մեկը ակտիվ է։", "R14": "Ուշացման հավանականությունը × mitigated_impact_factor (0.6)՝ բոլոր սեգմենտներում (10% բուֆեր, շաբաթական ժամանակացույց, 2 մատակարար)։"}, "low": null, "high": null, "unit": "նկարագրություն", "source": "research", "note": "Գործակիցները վերցվում են risks.json-ից (mitigated_impact_factor, mitigation_cost_amd)։"},
   "headline": {
-    "mitigation": {
-      "value": "recommended",
-      "low": "recommended",
-      "high": "recommended",
-      "unit": "none | recommended | all",
-      "source": "estimate",
-      "note": "Գլխավոր արդյունքը՝ «առաջարկվող» մեղմացումներով. մոդելը ինքն է ընտրում այն մեղմացումները, որոնք վճարում են իրենց (բարձրացնում են 24-ամսյա սպասվող շահույթը կամ նվազեցնում վատ դեպքում պահանջվող կապիտալը)։ «all» = բոլոր 30-ը, «none» = ոչ մեկը։"
-    }
+    "mitigation": {"value": "recommended", "low": "recommended", "high": "recommended", "unit": "none | recommended | all", "source": "estimate", "note": "Գլխավոր արդյունքը՝ «առաջարկվող» մեղմացումներով. մոդելը ինքն է ընտրում այն մեղմացումները, որոնք վճարում են իրենց (բարձրացնում են 24-ամսյա սպասվող շահույթը կամ նվազեցնում վատ դեպքում պահանջվող կապիտալը)։ «all» = բոլոր 30-ը, «none» = ոչ մեկը։"}
   }
 }
