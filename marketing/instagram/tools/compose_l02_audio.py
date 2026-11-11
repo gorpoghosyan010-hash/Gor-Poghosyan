@@ -1,5 +1,8 @@
 """Original soundtrack for the L02 launch reel (26 s, 120 BPM), synthesized from scratch.
-Timed to items.L02.audio.beat_map in 04-render-spec.json. Usage: python compose_l02_audio.py out.wav"""
+Timed to items.L02.audio.beat_map in 04-render-spec.json. Usage: python compose_l02_audio.py out.wav [--intro-only]
+--r2: intro for the R2 «Առաջ / Հետո» reel (2026-11-12-reel-2, items.R2.audio.beat_map): 24.0 s file, sound 0-4.6 s
+      (outline ticks, pour, gold impact on the 2.0 s downbeat, glint, shutter accent at 4.0 s), digital silence after.
+      The default L02 output is unchanged (the R2 branch runs before any L02 code and uses its own RNG)."""
 import sys, numpy as np, wave
 SR = 48000; DUR = 26.0; N = int(SR * DUR)
 rng = np.random.default_rng(7)
@@ -31,6 +34,64 @@ def hp_fast(x, fc):
     return np.fft.irfft(X * (f / fc) ** 2 / np.sqrt(1 + (f / fc) ** 4), len(x))
 
 def note(m): return 440.0 * 2 ** ((m - 69) / 12)
+
+if "--r2" in sys.argv:  # ---------------- R2 intro (24 s file, 120 BPM, frames/30 = seconds)
+    DUR = 24.0; N = int(SR * DUR); t = np.arange(N) / SR; L = np.zeros(N); R = np.zeros(N)
+    rng = np.random.default_rng(11)
+    def whoosh2(length, f_lo, gain, start, pan=0.0, rise=True):
+        n = int(length * SR); x = np.arange(n) / SR; noise = rng.standard_normal(n)
+        lo = lp_fast(noise, f_lo); hi = lp_fast(noise, 4000)
+        w = (x / length) if rise else (1 - x / length)
+        shape = np.sin(np.pi * np.clip(x / length, 0, 1)) ** 1.5
+        add(((1 - w) * lo + w * hi) * shape * 0.35, start, gain, pan)
+    # pad: Dm9 -> Bbmaj7 (one bar each), slow swell, held into the shutter
+    n = int(4.8 * SR); x = np.arange(n) / SR; pad = np.zeros(n)
+    for ch, s0, s1 in (([50, 57, 60, 64, 65], 0.0, 2.2), ([46, 53, 57, 60, 62], 1.9, 4.8)):
+        g = np.clip((x - s0) / 0.4, 0, 1) * np.clip((s1 - x) / 0.4, 0, 1)
+        for m in ch:
+            for det in (-0.07, 0.0, 0.07):
+                f = note(m) * 2 ** (det / 12); pad += ((x * f + rng.uniform(0, 1)) % 1 * 2 - 1) * 0.1 * g
+    pad = lp_fast(pad, 850) * np.interp(x, [0, 1.6, 3.6, 4.8], [0, 0.6, 0.8, 0.7])
+    add(pad, 0.0, 0.5)
+    # outline ticks (f4/10/18) + dimension tick (f30)
+    for k, s in enumerate((0.133, 0.333, 0.6, 1.0)):
+        n = int(0.06 * SR); x = np.arange(n) / SR
+        add(np.sin(2 * np.pi * (2300 + 280 * k) * x) * env(n, 0.001, 0.02), s, 0.22, -0.35 + 0.23 * k)
+    # pour f34-58: low rising fill
+    whoosh2(0.95, 300, 0.55, 1.1, -0.1)
+    n = int(0.9 * SR); x = np.arange(n) / SR
+    add(np.sin(2 * np.pi * np.cumsum(55 + 25 * x / 0.9) / SR) * np.sin(np.pi * x / 0.9) ** 2, 1.1, 0.25)
+    # gold fill = soft impact on the 2.0 s downbeat (f60)
+    n = int(2.2 * SR); x = np.arange(n) / SR
+    add(np.sin(2 * np.pi * np.cumsum(42 + 60 * np.exp(-x * 9)) / SR) * env(n, 0.003, 1.0, 3)
+        + lp_fast(rng.standard_normal(n), 1400) * env(n, 0.001, 0.18, 5) * 0.4, 2.0, 0.85)
+    # glint shimmer f66
+    for k, m in enumerate((86, 89, 93, 98)):
+        n = int(1.4 * SR); x = np.arange(n) / SR
+        add((np.sin(2 * np.pi * note(m) * x) + 0.3 * np.sin(2 * np.pi * note(m) * 2.76 * x)) * env(n, 0.002, 0.8, 3), 2.2 + 0.07 * k, 0.11, -0.5 + 0.33 * k)
+    # wordmark air f72
+    whoosh2(0.8, 1500, 0.22, 2.35, 0.3, rise=False)
+    # shutter f120: pre-whoosh into a low hit + one felt-piano-like pluck chord
+    whoosh2(0.7, 500, 0.4, 3.35, 0.2)
+    n = int(1.4 * SR); x = np.arange(n) / SR
+    add(np.sin(2 * np.pi * np.cumsum(45 + 40 * np.exp(-x * 12)) / SR) * env(n, 0.002, 0.6, 3), 4.0, 0.6)
+    for k, m in enumerate((62, 69, 74, 77)):
+        n = int(1.2 * SR); x = np.arange(n) / SR; f = note(m)
+        add(sum(np.sin(2 * np.pi * f * h * x) / h ** 1.6 for h in range(1, 6)) * env(n, 0.003, 0.4, 4), 4.0 + 0.05 * k, 0.09, -0.3 + 0.2 * k)
+    def reverb2(x, seed):
+        r = np.random.default_rng(seed); n = int(1.8 * SR)
+        ir = r.standard_normal(n) * np.exp(-np.arange(n) / SR * 3.6); ir = lp_fast(ir, 5000); ir /= np.sqrt((ir ** 2).sum())
+        m = len(x) + n; F = 1 << (m - 1).bit_length()
+        return np.fft.irfft(np.fft.rfft(x, F) * np.fft.rfft(ir, F), F)[: len(x)]
+    L = L + 0.28 * reverb2(L, 3); R = R + 0.28 * reverb2(R, 4)
+    fade = np.interp(t, [0, 0.03, 4.05, 4.6, DUR], [0, 1, 1, 0, 0]); L *= fade; R *= fade
+    mx = max(np.abs(L).max(), np.abs(R).max()); L /= mx; R /= mx
+    L = np.tanh(L * 1.3) / np.tanh(1.3) * 0.89; R = np.tanh(R * 1.3) / np.tanh(1.3) * 0.89
+    L[t >= 4.6] = 0; R[t >= 4.6] = 0
+    out = (np.stack([L, R], 1) * 32767).astype(np.int16)
+    with wave.open([a for a in sys.argv[1:] if not a.startswith('--')][0], 'wb') as w:
+        w.setnchannels(2); w.setsampwidth(2); w.setframerate(SR); w.writeframes(out.tobytes())
+    print('ok (r2)', sys.argv[1]); sys.exit(0)
 
 # --- pad: Dm9 | Bbmaj7 | Fmaj7 | Csus  (2 bars each = 4 s), warm detuned saws
 chords = [[50, 57, 60, 64, 65], [46, 53, 57, 60, 62], [41, 53, 57, 60, 64], [48, 55, 60, 62, 67]]

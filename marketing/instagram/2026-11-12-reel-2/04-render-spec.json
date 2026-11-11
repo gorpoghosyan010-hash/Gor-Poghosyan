@@ -1,0 +1,3079 @@
+{
+ "spec_version": "r2-1",
+ "batch": "2026-11-12-reel-2",
+ "generated": "2026-11-11",
+ "source_files": [
+  "marketing/instagram/owner-preferences.md",
+  "marketing/instagram/owner-decisions.md",
+  "marketing/instagram/2026-11-11-launch/04-render-spec.json (items.L02 v4: logo geometry, wordmark glyph bounds, theme, gold_piece transition, label styles)"
+ ],
+ "brand": {
+  "colors": {
+   "gold": "#c9a96a",
+   "gold_dark_on_light": "#856727",
+   "ink": "#17191c",
+   "dark": "#0c0d0e",
+   "dark2": "#151719",
+   "paper": "#f5f5f3",
+   "gray": "#70757b",
+   "rule_gold": "rgba(201,169,106,0.55)",
+   "rule_light": "rgba(255,255,255,0.15)"
+  },
+  "fonts": {
+   "display": {
+    "stack": "'Cormorant Garamond','Noto Serif Armenian',Georgia,serif",
+    "note": "Cormorant has no Armenian glyphs: Armenian falls back to Noto Serif Armenian (intended). Latin/digits render in Cormorant.",
+    "weights": [
+     300,
+     400,
+     500
+    ],
+    "source": "Google Fonts"
+   },
+   "text": {
+    "stack": "'Montserrat','Noto Sans Armenian',Arial,sans-serif",
+    "weights": [
+     400,
+     500,
+     600
+    ],
+    "source": "Google Fonts"
+   }
+  },
+  "logo": {
+   "on_light": "public/brand/garon-logo-light.svg",
+   "note": "File names are inverted vs. intuition: garon-logo-dark.* is the WHITE/gold logo (for dark backgrounds), as used by components/Logo.tsx with light=true. Round 1: vector logo, viewBox 0 0 425 310 (same box as the old 425x310 PNG, so all x/y/w/h below are unchanged). The mark was REDRAWN (commit 5958932), visible content bbox in viewBox units x 32.5..388.5, y 24..290 (old raster: 29..392, 21..291). garon-mark-*.svg = mark only, viewBox 70 16 288 168 (not used in this batch)."
+  }
+ },
+ "items": {
+  "R2": {
+   "type": "reel",
+   "title": "«Առաջ / Հետո» — before → after slider reel",
+   "version": "r2 v1 (2026-11-12)",
+   "status": "draft for owner approval",
+   "needs_shoot": false,
+   "method": "html_frame_stepped",
+   "duration": 24.0,
+   "fps": 30,
+   "frames": 720,
+   "size": [
+    1080,
+    1920
+   ],
+   "output": "05-output/R2/R2_reel.mp4",
+   "cover_output": "05-output/R2/R2_cover.jpg",
+   "renderer": "marketing/instagram/2026-11-12-reel-2/04-R2-renderer.js — usage: NODE_PATH=$(npm root -g) node 04-R2-renderer.js <repo_root> <out_dir> [all|cover|0,30,...] (writes R2_%03d.png, R2_cover.png, measure.json; ≈ 3–4 min for 720 frames). If code and spec disagree, the spec wins.",
+   "encode": "python3 marketing/instagram/tools/compose_l02_audio.py intro_r2.wav --r2 && ffmpeg -framerate 30 -i R2_%03d.png -i intro_r2.wav -map 0:v -map 1:a -c:v libx264 -profile:v high -pix_fmt yuv420p -crf 18 -colorspace bt709 -color_primaries bt709 -color_trc bt709 -c:a aac -b:a 192k -ar 48000 -t 24 -movflags +faststart R2_reel.mp4 ; cover: png2jpg.py R2_cover.png R2_cover.jpg 92",
+   "timebase": {
+    "fps": 30,
+    "frames": 720,
+    "duration_s": 24.0,
+    "bpm": 120,
+    "frames_per_beat": 15,
+    "frames_per_bar": 60,
+    "note": "every cut/transition/drag starts on a multiple of 15; 12 bars; f720 = bar 13.1 (clean loop)"
+   },
+   "acts": [
+    {
+     "act": "I intro",
+     "frames": "0–119",
+     "what": "blueprint outlines → pour → gold fill → wordmark (no text)"
+    },
+    {
+     "act": "II house (hero, rewind)",
+     "frames": "120–299",
+     "what": "opens on the night RESULT via horizon shutter; 180 rewind sweep to the concrete frame; 225 drag; 255 release to the result"
+    },
+    {
+     "act": "III pool B",
+     "frames": "285–449",
+     "what": "gold piece; concrete → mosaic, same viewpoint (in-place transformation)"
+    },
+    {
+     "act": "IV pool A",
+     "frames": "435–559",
+     "what": "gold piece; rebar → finished pool (shortest)"
+    },
+    {
+     "act": "V triptych",
+     "frames": "540–619",
+     "what": "three panels rise from the horizon (before), ONE sweep turns all three into after"
+    },
+    {
+     "act": "VI end card",
+     "frames": "606–719",
+     "what": "logo, «Առաջ | Հետո» with the slider divider, services line, garon.am"
+    }
+   ],
+   "z_order": [
+    "bg paper",
+    "blueprint",
+    "vlines",
+    "ground line + impact glow",
+    "stage (intro logo)",
+    "pair H",
+    "pair B",
+    "pair A (later pairs above earlier; each = full-frame layer clipped by its entry mask)",
+    "triptych sheet",
+    "triptych panels T1–T3",
+    "gold_fill",
+    "shutter/wipe edges",
+    "divider line + handle",
+    "window frame line",
+    "light leak (screen)",
+    "end veil",
+    "corner logo",
+    "labels + slider indicator",
+    "end card",
+    "grain (overlay, topmost)"
+   ],
+   "theme": {
+    "bg": "#f5f5f3",
+    "note": "brand paper #f5f5f3 (owner said «#f5f5f5 / white»: 1/255 difference, the brand value is used). Ink/dark-grey for the grid, dark gold #856727 for every thin line and small text on paper, light gold #c9a96a only on photos (wipe edges) and in the gold piece/glow.",
+    "ink": "#17191c",
+    "gold_on_light": "#856727",
+    "gold_on_photo": "#c9a96a",
+    "logo_file": "public/brand/garon-logo-light.svg",
+    "logo_note": "garon-logo-light.svg = DARK logo for LIGHT backgrounds (fills #1e1e1e, gradients gmlight #a3a3a3→#4f4f4f and gglight #d4b57a→#b8955c). Path data and the <rect> are byte-identical to garon-logo-dark.svg, so every geometry number of v2 (clips, pieces, wordmark glyph bounds, box) is unchanged.",
+    "mark_fills": {
+     "BIG": "#1e1e1e",
+     "MID": "url(#gmlight)",
+     "GOLD": "url(#gglight)"
+    },
+    "wordmark_fill": "#1e1e1e",
+    "dims_stroke": "rgba(133,103,39,0.8)",
+    "ground_line": "#856727",
+    "impact_glow": "radial-gradient(closest-side, rgba(201,169,106,.42), rgba(201,169,106,0))",
+    "wipe_edge": "#c9a96a",
+    "frame_line": "1px solid rgba(133,103,39,0.55)",
+    "end_overlay": "#f5f5f3",
+    "handle_fill": "rgba(245,245,243,0.94)",
+    "handle_shadow": "0 6px 18px rgba(12,13,14,0.22)",
+    "divider_shadow": "0 0 6px rgba(12,13,14,0.28)",
+    "outline_stroke": "#856727",
+    "pour_edge": "#c9a96a"
+   },
+   "easings": {
+    "linear": [
+     0,
+     0,
+     1,
+     1
+    ],
+    "inSine": [
+     0.12,
+     0,
+     0.39,
+     0
+    ],
+    "outSine": [
+     0.61,
+     1,
+     0.88,
+     1
+    ],
+    "inOutSine": [
+     0.37,
+     0,
+     0.63,
+     1
+    ],
+    "inCubic": [
+     0.32,
+     0,
+     0.67,
+     0
+    ],
+    "outCubic": [
+     0.33,
+     1,
+     0.68,
+     1
+    ],
+    "inOutCubic": [
+     0.65,
+     0,
+     0.35,
+     1
+    ],
+    "outQuart": [
+     0.25,
+     1,
+     0.5,
+     1
+    ],
+    "inOutQuart": [
+     0.76,
+     0,
+     0.24,
+     1
+    ],
+    "outQuint": [
+     0.22,
+     1,
+     0.36,
+     1
+    ],
+    "note": "CSS cubic-bezier(x1,y1,x2,y2) control points; evaluate exactly like CSS (solve x(t)=p by Newton/bisection, return y(t)).",
+    "outBack": [
+     0.34,
+     1.56,
+     0.64,
+     1
+    ]
+   },
+   "keyframes_rule": "Every animated property is a list of keys [frame, value, easing]. Before the first key: first value; after the last key: last value. Between key k and k+1: v = v_k + (v_k+1 − v_k) · E((f − f_k)/(f_k+1 − f_k)), E = easing NAMED IN KEY k (see `easings`). \"hold\" = keep v_k until f_k+1 then jump. Vector values ([x,y] or {x,y,w,h}) interpolate component-wise.",
+   "fonts_check": "Armenian glyphs must come from Noto Serif Armenian / Noto Sans Armenian (check document.fonts / computed font in a test frame). STOP if a fallback system font is used.",
+   "window": {
+    "rect": {
+     "x": 70,
+     "y": 390,
+     "w": 940,
+     "h": 1253
+    },
+    "frame_line": {
+     "css": "1px solid rgba(133,103,39,0.55)",
+     "opacity": [
+      [
+       136,
+       0,
+       "outSine"
+      ],
+      [
+       146,
+       1,
+       "hold"
+      ],
+      [
+       606,
+       1,
+       "inOutSine"
+      ],
+      [
+       624,
+       0
+      ]
+     ]
+    }
+   },
+   "vlines": {
+    "xs": [
+     90,
+     270,
+     450,
+     630,
+     810,
+     990
+    ],
+    "w": 2,
+    "color": "rgba(23,25,28,0.06)",
+    "opacity": [
+     [
+      126,
+      0,
+      "outSine"
+     ],
+     [
+      146,
+      1
+     ]
+    ]
+   },
+   "intro": {
+    "frames": [
+     0,
+     135
+    ],
+    "what": "NEW 'blueprint → solid' build (no text): the three mark shapes are DRAWN as thin dark-gold outline strokes with registration crosses and dimension lines, then 'poured' solid from the ground up (BIG, MID — like concrete filling formwork, a gold level line rides the surface), then the gold piece fills on the beat with a glint; the real wordmark tracks in (as v4). At f120 the ground line opens like a shutter into the first photo.",
+    "stage_box_px": {
+     "x": 200,
+     "y": 700,
+     "w": 680,
+     "h": 496
+    },
+    "svg_attrs": "width=680 height=496 viewBox='0 0 425 310' overflow=visible; mark group translate(0,9.25), wordmark group translate(0,-12.75) (= garon-logo-light.svg)",
+    "paths": {
+     "BIG": "M250 24 L250 54 L81 128 L81 155 L76 155 L76 111 Z",
+     "MID": "M250 66 L250 155 L206 155 L206 118 L100 148 L100 155 L95 155 L95 134 Z",
+     "GOLD": "M264 66 L352 110 L352 155 L308 155 L308 118 L264 96 Z",
+     "BIG_fill": "#1e1e1e",
+     "MID_fill": "url(#gmlight)",
+     "GOLD_fill": "url(#gglight)",
+     "GARON": "path #4 of garon-logo-dark.svg (fill #ffffff) + <rect x=67.5 y=228.8 width=17.9 height=9.6 fill=#ffffff> (G crossbar) — read from the file, never retype",
+     "CONSTRUCTION": "path #5 of garon-logo-dark.svg (fill #ffffff)"
+    },
+    "camera": {
+     "css": "wrapper div at the box, transform-origin 342.4px 158px, transform scale(s·exit_s); opacity exit_o",
+     "s": [
+      [
+       0,
+       1.08,
+       "outSine"
+      ],
+      [
+       104,
+       1.0
+      ]
+     ],
+     "exit_s": [
+      [
+       112,
+       1.0,
+       "inCubic"
+      ],
+      [
+       136,
+       1.04
+      ]
+     ],
+     "exit_o": [
+      [
+       126,
+       1,
+       "linear"
+      ],
+      [
+       136,
+       0
+      ]
+     ],
+     "ground_y": "858 + 104.8·s  (screen px; f0 971.2 → f104 962.8)"
+    },
+    "blueprint": {
+     "css": "background-image: linear-gradient(to right, rgba(23,25,28,.11) 1px, transparent 1px), linear-gradient(to bottom, rgba(23,25,28,.11) 1px, transparent 1px), linear-gradient(to right, rgba(23,25,28,.045) 1px, transparent 1px), linear-gradient(to bottom, rgba(23,25,28,.045) 1px, transparent 1px); background-size: 180px 180px, 180px 180px, 36px 36px, 36px 36px; background-position: 0 27px, 0 27px, 0 27px, 0 27px; -webkit-mask-image: radial-gradient(620px 760px at 540px 980px, #000 35%, transparent 100%)",
+     "opacity": [
+      [
+       0,
+       0,
+       "outSine"
+      ],
+      [
+       18,
+       1,
+       "hold"
+      ],
+      [
+       100,
+       1,
+       "inOutSine"
+      ],
+      [
+       132,
+       0
+      ]
+     ],
+     "translate_y": [
+      [
+       0,
+       0,
+       "linear"
+      ],
+      [
+       132,
+       -10
+      ]
+     ]
+    },
+    "ground_line": {
+     "color": "#856727",
+     "h": 2,
+     "sx": [
+      [
+       2,
+       0,
+       "outCubic"
+      ],
+      [
+       30,
+       1
+      ]
+     ],
+     "opacity": [
+      [
+       2,
+       0.9,
+       "hold"
+      ],
+      [
+       108,
+       0.9,
+       "inOutSine"
+      ],
+      [
+       120,
+       0
+      ]
+     ],
+     "note": "full-width line at ground_y, draws from the centre"
+    },
+    "outlines": {
+     "stroke": "#856727",
+     "stroke_width_units": 0.8,
+     "how": "<path d=… fill=none pathLength=1 stroke-dasharray='1 1' stroke-dashoffset=1−draw> (NO vector-effect, so the dash maps correctly); linejoin miter",
+     "BIG": [
+      [
+       4,
+       0,
+       "inOutSine"
+      ],
+      [
+       30,
+       1
+      ]
+     ],
+     "MID": [
+      [
+       10,
+       0,
+       "inOutSine"
+      ],
+      [
+       36,
+       1
+      ]
+     ],
+     "GOLD": [
+      [
+       18,
+       0,
+       "inOutSine"
+      ],
+      [
+       44,
+       1
+      ]
+     ],
+     "opacity": [
+      [
+       4,
+       1,
+       "hold"
+      ],
+      [
+       62,
+       1,
+       "inOutSine"
+      ],
+      [
+       84,
+       0
+      ]
+     ]
+    },
+    "registration": {
+     "points": [
+      [
+       76,
+       24
+      ],
+      [
+       352,
+       24
+      ],
+      [
+       76,
+       155
+      ],
+      [
+       352,
+       155
+      ]
+     ],
+     "arm_units": 7,
+     "stroke": "rgba(133,103,39,0.8)",
+     "width_units": 0.6,
+     "opacity": [
+      [
+       6,
+       0,
+       "outSine"
+      ],
+      [
+       18,
+       0.9,
+       "hold"
+      ],
+      [
+       76,
+       0.9,
+       "inOutSine"
+      ],
+      [
+       90,
+       0
+      ]
+     ]
+    },
+    "dimensions": {
+     "elements": [
+      {
+       "id": "dimA",
+       "line": [
+        76,
+        6,
+        352,
+        6
+       ],
+       "draw": [
+        [
+         14,
+         0,
+         "inOutCubic"
+        ],
+        [
+         38,
+         1
+        ]
+       ]
+      },
+      {
+       "id": "dimA_ext",
+       "lines": [
+        [
+         76,
+         0,
+         76,
+         14
+        ],
+        [
+         352,
+         0,
+         352,
+         14
+        ]
+       ],
+       "ticks": [
+        [
+         73,
+         9,
+         79,
+         3
+        ],
+        [
+         349,
+         9,
+         355,
+         3
+        ]
+       ],
+       "opacity": [
+        [
+         30,
+         0,
+         "outSine"
+        ],
+        [
+         38,
+         1
+        ]
+       ]
+      },
+      {
+       "id": "dimB",
+       "line": [
+        370,
+        155,
+        370,
+        24
+       ],
+       "draw": [
+        [
+         20,
+         0,
+         "inOutCubic"
+        ],
+        [
+         44,
+         1
+        ]
+       ]
+      },
+      {
+       "id": "dimB_ext",
+       "lines": [
+        [
+         358,
+         24,
+         376,
+         24
+        ],
+        [
+         358,
+         155,
+         376,
+         155
+        ]
+       ],
+       "ticks": [
+        [
+         367,
+         27,
+         373,
+         21
+        ],
+        [
+         367,
+         158,
+         373,
+         152
+        ]
+       ],
+       "opacity": [
+        [
+         36,
+         0,
+         "outSine"
+        ],
+        [
+         44,
+         1
+        ]
+       ]
+      }
+     ],
+     "stroke": "rgba(133,103,39,0.8), 1.5 px, vector-effect non-scaling-stroke",
+     "group_opacity": [
+      [
+       84,
+       1,
+       "inOutSine"
+      ],
+      [
+       100,
+       0
+      ]
+     ]
+    },
+    "pour": {
+     "how": "each solid = original path clipped by rect x 60..370, y 157−h, height h (mark units); level line = 1.1-unit rect #c9a96a at y 157−h clipped by the same path, opacity 0.9 while 0 < h < max",
+     "BIG": [
+      [
+       34,
+       0,
+       "inOutCubic"
+      ],
+      [
+       54,
+       135
+      ]
+     ],
+     "MID": [
+      [
+       39,
+       0,
+       "inOutCubic"
+      ],
+      [
+       58,
+       93
+      ]
+     ],
+     "GOLD": [
+      [
+       60,
+       0,
+       "outCubic"
+      ],
+      [
+       70,
+       93
+      ]
+     ],
+     "fills": {
+      "BIG": "#1e1e1e",
+      "MID": "url(#gmlight)",
+      "GOLD": "url(#gglight)"
+     }
+    },
+    "impact_glow": {
+     "css": "div 520x80 centred at (542.4+185.6·s, ground_y), radial-gradient(closest-side, rgba(201,169,106,.42), rgba(201,169,106,0))",
+     "opacity": [
+      [
+       59,
+       0,
+       "outSine"
+      ],
+      [
+       64,
+       1,
+       "outCubic"
+      ],
+      [
+       86,
+       0
+      ]
+     ]
+    },
+    "glint": {
+     "gx": [
+      [
+       66,
+       20,
+       "inOutSine"
+      ],
+      [
+       88,
+       400
+      ]
+     ],
+     "visible": [
+      66,
+      88
+     ],
+     "svg": "as L02 v4 (rect 60x240 #sweep skewX(−22), screen blend, clipped to the 3 mark paths)"
+    },
+    "wordmark": {
+     "garon": {
+      "clip_x_bounds": [
+       0,
+       95.5,
+       176,
+       244,
+       324.5,
+       425
+      ],
+      "clip_y": [
+       195,
+       265
+      ],
+      "glyph_cx": [
+       59.0,
+       136.0,
+       211.0,
+       283.5,
+       363.0
+      ],
+      "k": 0.55,
+      "p": [
+       [
+        72,
+        0,
+        "outQuart"
+       ],
+       [
+        96,
+        1
+       ]
+      ],
+      "opacity": [
+       [
+        72,
+        0,
+        "outSine"
+       ],
+       [
+        84,
+        1
+       ]
+      ],
+      "blur_std_units": [
+       [
+        72,
+        3,
+        "outCubic"
+       ],
+       [
+        92,
+        0
+       ]
+      ]
+     },
+     "construction": {
+      "clip_x_bounds": [
+       0,
+       60.2,
+       92.5,
+       123.5,
+       152.8,
+       182.8,
+       212.8,
+       242.9,
+       274,
+       304,
+       325.5,
+       358.4,
+       425
+      ],
+      "clip_y": [
+       270,
+       295
+      ],
+      "glyph_cx": [
+       44.7,
+       76.7,
+       108.3,
+       138.2,
+       167.8,
+       197.8,
+       227.9,
+       258.5,
+       289.1,
+       314.8,
+       342.0,
+       373.6
+      ],
+      "k": 1.4,
+      "p": [
+       [
+        78,
+        0,
+        "outQuart"
+       ],
+       [
+        102,
+        1
+       ]
+      ],
+      "opacity": [
+       [
+        78,
+        0,
+        "outSine"
+       ],
+       [
+        90,
+        1
+       ]
+      ],
+      "blur_std_units": [
+       [
+        78,
+        2,
+        "outCubic"
+       ],
+       [
+        96,
+        0
+       ]
+      ]
+     }
+    },
+    "check": "f104–110: the composed lockup equals garon-logo-light.svg at x200 y700 680x496 scaled 1.0 (mark x 321.6–763.2). f0–135: NO text."
+   },
+   "pairs": [
+    {
+     "id": "H",
+     "section": "Տուն",
+     "life": [
+      120,
+      300
+     ],
+     "entry": {
+      "type": "horizon_shutter",
+      "frame": 120,
+      "y_px": 962.8,
+      "hv": [
+       [
+        120,
+        1,
+        "inOutQuart"
+       ],
+       [
+        138,
+        700
+       ]
+      ],
+      "edges_opacity": [
+       [
+        120,
+        1,
+        "hold"
+       ],
+       [
+        134,
+        1,
+        "linear"
+       ],
+       [
+        142,
+        0
+       ]
+      ],
+      "note": "the ground line of the logo opens like a shutter: clip = window ∩ {|y − 962.8| ≤ hv}; two 2 px #c9a96a lines on the opening edges (x 70–1010)"
+     },
+     "before": {
+      "src": "marketing/instagram/assets/owner/house-A/enhanced/02-progress-frame.jpg",
+      "src_px": [
+       1500,
+       2000
+      ],
+      "orig_px": [
+       960,
+       1280
+      ],
+      "crop": {
+       "x": 0.035,
+       "y": 0.04,
+       "w": 0.76,
+       "h": 0.76
+      },
+      "what": "concrete frame + glazing, day (Առաջ)"
+     },
+     "after": {
+      "src": "marketing/instagram/assets/owner/house-A/enhanced/03-final-night.jpg",
+      "src_px": [
+       1512,
+       2016
+      ],
+      "orig_px": [
+       1512,
+       2016
+      ],
+      "crop": {
+       "x": 0.0,
+       "y": 0.04,
+       "w": 0.76,
+       "h": 0.76
+      },
+      "what": "the same house finished, at night, LED lines (Հետո). crop right edge 0.76 keeps the dog at the door (x .78–.82) OUT"
+     },
+     "align_note": "Ground-floor window, door and the first-floor slab line up (before crop = after crop shifted +0.035 in x). Verified with a 50% blend.",
+     "push": {
+      "z": [
+       [
+        120,
+        1.012,
+        "linear"
+       ],
+       [
+        300,
+        1.035
+       ]
+      ],
+      "anchor": [
+       0.5,
+       0.45
+      ]
+     },
+     "parallax": {
+      "mask_y": 0.7,
+      "feather": 0.12,
+      "extra_scale": [
+       [
+        120,
+        1.0,
+        "linear"
+       ],
+       [
+        300,
+        1.012
+       ]
+      ],
+      "origin": [
+       0.5,
+       1.0
+      ]
+     },
+     "p": [
+      [
+       120,
+       0,
+       "hold"
+      ],
+      [
+       180,
+       0,
+       "inOutQuart"
+      ],
+      [
+       195,
+       1,
+       "hold"
+      ],
+      [
+       225,
+       1,
+       "outCubic"
+      ],
+      [
+       240,
+       0.56,
+       "inOutSine"
+      ],
+      [
+       255,
+       0.52,
+       "inOutCubic"
+      ],
+      [
+       270,
+       0
+      ]
+     ],
+     "p_note": "opens on the RESULT (p=0), 180 rewind sweep → before (p=1), 225 drag to the middle, hesitation, 255 release → result",
+     "handle_opacity": [
+      [
+       176,
+       0,
+       "outSine"
+      ],
+      [
+       182,
+       1,
+       "hold"
+      ],
+      [
+       268,
+       1,
+       "inOutSine"
+      ],
+      [
+       278,
+       0
+      ]
+     ],
+     "handle_grab": [
+      [
+       174,
+       1,
+       "outCubic"
+      ],
+      [
+       180,
+       0.88,
+       "hold"
+      ],
+      [
+       195,
+       0.88,
+       "outBack"
+      ],
+      [
+       203,
+       1,
+       "hold"
+      ],
+      [
+       219,
+       1,
+       "outCubic"
+      ],
+      [
+       225,
+       0.88,
+       "hold"
+      ],
+      [
+       268,
+       0.88,
+       "outBack"
+      ],
+      [
+       276,
+       1
+      ]
+     ],
+     "max_scale_vs_original": {
+      "before": 1.349,
+      "after": 0.855
+     }
+    },
+    {
+     "id": "B",
+     "section": "Լողավազան",
+     "life": [
+      285,
+      450
+     ],
+     "entry": {
+      "type": "gold_piece",
+      "frame": 285,
+      "gold_fill_opacity": [
+       [
+        281,
+        0,
+        "outSine"
+       ],
+       [
+        284,
+        1,
+        "hold"
+       ],
+       [
+        288,
+        1,
+        "outSine"
+       ],
+       [
+        295,
+        0
+       ]
+      ]
+     },
+     "before": {
+      "src": "marketing/instagram/assets/owner/pool-B/enhanced/02-progress-concrete.jpg",
+      "src_px": [
+       2016,
+       1512
+      ],
+      "orig_px": [
+       2016,
+       1512
+      ],
+      "crop": {
+       "x": 0.29,
+       "y": 0.0,
+       "w": 0.45,
+       "h": 0.7998
+      },
+      "what": "raw concrete bowl + round jacuzzi. y ≤ 0.80 keeps the dog (x ≥ .72, y ≥ .81) OUT"
+     },
+     "after": {
+      "src": "marketing/instagram/assets/owner/pool-B/enhanced/03-final-mosaic.jpg",
+      "src_px": [
+       2016,
+       1512
+      ],
+      "orig_px": [
+       2016,
+       1512
+      ],
+      "crop": {
+       "x": 0.347,
+       "y": 0.05,
+       "w": 0.45,
+       "h": 0.7998
+      },
+      "what": "same pool in blue mosaic. x ≤ .797 keeps the person at the door (x ≥ .91) OUT"
+     },
+     "align_note": "jacuzzi centre and steps line up (same crops as the approved L02 v4 cover)",
+     "push": {
+      "z": [
+       [
+        285,
+        1.01,
+        "linear"
+       ],
+       [
+        450,
+        1.07
+       ]
+      ],
+      "anchor": [
+       0.5,
+       0.3
+      ]
+     },
+     "parallax": {
+      "mask_y": 0.62,
+      "feather": 0.14,
+      "extra_scale": [
+       [
+        285,
+        1.0,
+        "linear"
+       ],
+       [
+        450,
+        1.02
+       ]
+      ],
+      "origin": [
+       0.5,
+       1.0
+      ]
+     },
+     "p": [
+      [
+       285,
+       1,
+       "hold"
+      ],
+      [
+       330,
+       1,
+       "outCubic"
+      ],
+      [
+       345,
+       0.56,
+       "inOutSine"
+      ],
+      [
+       360,
+       0.6,
+       "inOutSine"
+      ],
+      [
+       375,
+       0.53,
+       "inOutCubic"
+      ],
+      [
+       390,
+       0
+      ]
+     ],
+     "p_note": "interactive feel: grab, drag to the middle, small check back, release on the beat",
+     "handle_opacity": [
+      [
+       312,
+       0,
+       "outSine"
+      ],
+      [
+       320,
+       1,
+       "hold"
+      ],
+      [
+       388,
+       1,
+       "inOutSine"
+      ],
+      [
+       398,
+       0
+      ]
+     ],
+     "handle_grab": [
+      [
+       324,
+       1,
+       "outCubic"
+      ],
+      [
+       330,
+       0.88,
+       "hold"
+      ],
+      [
+       388,
+       0.88,
+       "outBack"
+      ],
+      [
+       396,
+       1
+      ]
+     ],
+     "max_scale_vs_original": {
+      "before": 1.131,
+      "after": 1.131
+     }
+    },
+    {
+     "id": "A",
+     "section": "Լողավազան",
+     "life": [
+      435,
+      560
+     ],
+     "entry": {
+      "type": "gold_piece",
+      "frame": 435,
+      "gold_fill_opacity": [
+       [
+        431,
+        0,
+        "outSine"
+       ],
+       [
+        434,
+        1,
+        "hold"
+       ],
+       [
+        438,
+        1,
+        "outSine"
+       ],
+       [
+        445,
+        0
+       ]
+      ]
+     },
+     "before": {
+      "src": "marketing/instagram/assets/owner/pool-A/enhanced/01-start-rebar.jpg",
+      "src_px": [
+       2016,
+       1512
+      ],
+      "orig_px": [
+       2016,
+       1512
+      ],
+      "crop": {
+       "x": 0.26,
+       "y": 0.02,
+       "w": 0.54,
+       "h": 0.96
+      },
+      "what": "rebar cage of the pool in its excavation"
+     },
+     "after": {
+      "src": "marketing/instagram/assets/owner/pool-A/enhanced/03-final.jpg",
+      "src_px": [
+       1500,
+       2400
+      ],
+      "orig_px": [
+       800,
+       1280
+      ],
+      "crop": {
+       "x": 0.0,
+       "y": 0.09,
+       "w": 1.0,
+       "h": 0.833
+      },
+      "what": "finished pool, stone wall, pergola, lavender. LOW-RES original 800x1280"
+     },
+     "align_note": "different viewpoints (not alignable): the slider reads as a comparison, not an in-place morph — this is why A is the shortest pair",
+     "push": {
+      "z": [
+       [
+        435,
+        1.01,
+        "linear"
+       ],
+       [
+        560,
+        1.06
+       ]
+      ],
+      "anchor": [
+       0.5,
+       0.5
+      ]
+     },
+     "parallax": {
+      "mask_y": 0.68,
+      "feather": 0.14,
+      "extra_scale": [
+       [
+        435,
+        1.0,
+        "linear"
+       ],
+       [
+        560,
+        1.02
+       ]
+      ],
+      "origin": [
+       0.5,
+       1.0
+      ]
+     },
+     "p": [
+      [
+       435,
+       1,
+       "hold"
+      ],
+      [
+       465,
+       1,
+       "outCubic"
+      ],
+      [
+       480,
+       0.55,
+       "hold"
+      ],
+      [
+       495,
+       0.55,
+       "inOutCubic"
+      ],
+      [
+       510,
+       0
+      ]
+     ],
+     "handle_opacity": [
+      [
+       447,
+       0,
+       "outSine"
+      ],
+      [
+       455,
+       1,
+       "hold"
+      ],
+      [
+       508,
+       1,
+       "inOutSine"
+      ],
+      [
+       518,
+       0
+      ]
+     ],
+     "handle_grab": [
+      [
+       459,
+       1,
+       "outCubic"
+      ],
+      [
+       465,
+       0.88,
+       "hold"
+      ],
+      [
+       508,
+       0.88,
+       "outBack"
+      ],
+      [
+       516,
+       1
+      ]
+     ],
+     "max_scale_vs_original": {
+      "before": 0.933,
+      "after": 1.27
+     }
+    }
+   ],
+   "pair_impl": {
+    "divider": "p ∈ [0,1] (keys per pair). Divider x = 70 + 940·p. LEFT of the divider = BEFORE, right = AFTER (p=1: all before, p=0: all after).",
+    "layers": "pair layer (full frame, entry clip) → window box (overflow hidden) → [after wrap] + [before clip box: clip-path inset(0 (940 − (xd − 70))px 0 0) → before wrap]. Both wraps get the SAME transform so the halves stay registered.",
+    "push": "wrap transform = translate(dx,dy) scale(z) with transform-origin = anchor (fractions of the window). Micro camera drift: dx = 2.5·sin(f/41), dy = 2·sin(f/53 + 1) px (deterministic, never exposes an edge because z ≥ 1.01).",
+    "crop": "image placed as in L02: scale = 940/(crop.w·SW); left = −crop.x·SW·scale; top = −crop.y·SH·scale. Crops have the window aspect 0.7502.",
+    "parallax_2_5D": "inside each wrap: base <img> + a FOREGROUND copy of the same <img> in a div with -webkit-mask-image: linear-gradient(to bottom, transparent (mask_y − feather/2)·100%, #000 (mask_y + feather/2)·100%) and transform scale(extra_scale) with transform-origin origin → the ground plane grows faster than the building/sky = depth. Same values on before and after (stays registered).",
+    "grade": "filter saturate(0.92) contrast(1.05) on every <img>",
+    "gold_piece": {
+     "frames": "e … e+12",
+     "shape_units": [
+      [
+       -66,
+       -66.5
+      ],
+      [
+       22,
+       -22.5
+      ],
+      [
+       22,
+       22.5
+      ],
+      [
+       -22,
+       22.5
+      ],
+      [
+       -22,
+       -14.5
+      ],
+      [
+       -66,
+       -36.5
+      ]
+     ],
+     "shape_note": "the GOLD path of the logo relative to its anchor (330, 132.5) in mark units",
+     "anchor_px": [
+      540,
+      1016.5
+     ],
+     "g": "px per unit: g = 1.6 for f ≤ e; g = 1.6·32^E((f−e)/12) for e < f ≤ e+12, E = inOutCubic (→ 51.2: the polygon covers the window from e+12)",
+     "formula": "incoming shot layer clipped to (anchor + g·shape_unit) ∩ window",
+     "gold_fill": {
+      "css": "same clip polygon filled with linear-gradient(135deg,#d4b57a,#b8955c), layer above the shots",
+      "opacity": "relative keys [[e−4,0,outSine],[e−1,1,hold],[e+3,1,outSine],[e+10,0]] — a small solid gold piece (141 px wide) appears in the window centre on the beat before e, then grows and opens into the next shot"
+     }
+    },
+    "handle": "vertical 2 px #c9a96a line over the window height at xd (box-shadow theme.divider_shadow); handle = 72 px circle centred (xd, 1016), fill theme.handle_fill, border 1.5 px #c9a96a, shadow theme.handle_shadow, two chevrons ‹ › (svg polylines, stroke #856727 2 px, drawn in a 64-unit viewBox scaled to the handle, ±12 units from centre). transform scale(handle_grab). Line visible when handle opacity > 0 OR 0 < p < 1.",
+    "indicator": "top-right slider indicator under the stage label: track x 874–1010, y 352, 2 px rgba(23,25,28,0.16); lit part x 874 … 874+136·p in #856727; dot 8 px #856727 at x 874+136·p. Mirrors the active divider. Opacity follows the section labels."
+   },
+   "triptych": {
+    "frames": [
+     540,
+     719
+    ],
+    "sheet_opacity": [
+     [
+      536,
+      0,
+      "inOutSine"
+     ],
+     [
+      546,
+      1
+     ]
+    ],
+    "sheet": "paper #f5f5f3 + blueprint (opacity 0.7) inside the window rect, above pair A, below the panels — the 20 px gutters read as paper",
+    "panels": [
+     {
+      "id": "T1",
+      "rect": {
+       "x": 70,
+       "y": 390,
+       "w": 300,
+       "h": 1253
+      },
+      "of": "B",
+      "before": {
+       "src": "marketing/instagram/assets/owner/pool-B/enhanced/02-progress-concrete.jpg",
+       "src_px": [
+        2016,
+        1512
+       ],
+       "crop": {
+        "x": 0.439,
+        "y": 0.03,
+        "w": 0.1616,
+        "h": 0.9
+       }
+      },
+      "after": {
+       "src": "marketing/instagram/assets/owner/pool-B/enhanced/03-final-mosaic.jpg",
+       "src_px": [
+        2016,
+        1512
+       ],
+       "crop": {
+        "x": 0.489,
+        "y": 0.07,
+        "w": 0.1616,
+        "h": 0.9
+       }
+      },
+      "rise": [
+       [
+        544,
+        0,
+        "inOutQuart"
+       ],
+       [
+        560,
+        640
+       ]
+      ],
+      "ty": [
+       [
+        544,
+        10,
+        "linear"
+       ],
+       [
+        720,
+        -12
+       ]
+      ]
+     },
+     {
+      "id": "T2",
+      "rect": {
+       "x": 390,
+       "y": 390,
+       "w": 300,
+       "h": 1253
+      },
+      "of": "H",
+      "before": {
+       "src": "marketing/instagram/assets/owner/house-A/enhanced/02-progress-frame.jpg",
+       "src_px": [
+        1500,
+        2000
+       ],
+       "crop": {
+        "x": 0.355,
+        "y": 0.04,
+        "w": 0.2554,
+        "h": 0.8
+       }
+      },
+      "after": {
+       "src": "marketing/instagram/assets/owner/house-A/enhanced/03-final-night.jpg",
+       "src_px": [
+        1512,
+        2016
+       ],
+       "crop": {
+        "x": 0.32,
+        "y": 0.04,
+        "w": 0.2554,
+        "h": 0.8
+       }
+      },
+      "rise": [
+       [
+        548,
+        0,
+        "inOutQuart"
+       ],
+       [
+        564,
+        640
+       ]
+      ],
+      "ty": [
+       [
+        548,
+        -8,
+        "linear"
+       ],
+       [
+        720,
+        14
+       ]
+      ]
+     },
+     {
+      "id": "T3",
+      "rect": {
+       "x": 710,
+       "y": 390,
+       "w": 300,
+       "h": 1253
+      },
+      "of": "A",
+      "before": {
+       "src": "marketing/instagram/assets/owner/pool-A/enhanced/01-start-rebar.jpg",
+       "src_px": [
+        2016,
+        1512
+       ],
+       "crop": {
+        "x": 0.42,
+        "y": 0.04,
+        "w": 0.1652,
+        "h": 0.92
+       }
+      },
+      "after": {
+       "src": "marketing/instagram/assets/owner/pool-A/enhanced/03-final.jpg",
+       "src_px": [
+        1500,
+        2400
+       ],
+       "crop": {
+        "x": 0.3,
+        "y": 0.12,
+        "w": 0.314,
+        "h": 0.82
+       }
+      },
+      "rise": [
+       [
+        552,
+        0,
+        "inOutQuart"
+       ],
+       [
+        568,
+        640
+       ]
+      ],
+      "ty": [
+       [
+        552,
+        10,
+        "linear"
+       ],
+       [
+        720,
+        -12
+       ]
+      ]
+     }
+    ],
+    "panel_zoom": [
+     [
+      540,
+      1.02,
+      "linear"
+     ],
+     [
+      720,
+      1.06
+     ]
+    ],
+    "panel_rise_note": "each panel opens from the window's horizontal centre line y 1016.5 (clip |y−1016.5| ≤ hv, keys `rise`), staggered 544/548/552 left→right; ty = vertical micro-drift of the panel content (different direction per panel = depth)",
+    "p": [
+     [
+      540,
+      1,
+      "hold"
+     ],
+     [
+      570,
+      1,
+      "inOutCubic"
+     ],
+     [
+      600,
+      0
+     ]
+    ],
+    "p_note": "ONE divider sweeps right→left across all three panels: every before becomes its after in one gesture",
+    "handle_opacity": [
+     [
+      562,
+      0,
+      "outSine"
+     ],
+     [
+      568,
+      1,
+      "hold"
+     ],
+     [
+      598,
+      1,
+      "inOutSine"
+     ],
+     [
+      606,
+      0
+     ]
+    ],
+    "handle_grab": [
+     [
+      564,
+      1,
+      "outCubic"
+     ],
+     [
+      570,
+      0.88,
+      "hold"
+     ],
+     [
+      598,
+      0.88,
+      "outBack"
+     ],
+     [
+      606,
+      1
+     ]
+    ],
+    "max_scale_vs_original": {
+     "T1": 0.976,
+     "T2_before": 1.297,
+     "T2_after": 0.823,
+     "T3_before": 0.955,
+     "T3_after": 1.266
+    }
+   },
+   "light_leaks": {
+    "css": "div 900x900, radial-gradient(closest-side, rgba(255,214,150,0.9), rgba(201,169,106,0.35) 45%, rgba(201,169,106,0) 100%), mix-blend-mode screen, centred (cx, cy)",
+    "events": [
+     {
+      "frame": 120,
+      "opacity": [
+       [
+        114,
+        0,
+        "outSine"
+       ],
+       [
+        124,
+        0.1,
+        "inOutSine"
+       ],
+       [
+        146,
+        0
+       ]
+      ],
+      "cx": [
+       [
+        114,
+        300,
+        "linear"
+       ],
+       [
+        146,
+        760
+       ]
+      ],
+      "cy": 1016
+     },
+     {
+      "frame": 180,
+      "opacity": [
+       [
+        174,
+        0,
+        "outSine"
+       ],
+       [
+        184,
+        0.1,
+        "inOutSine"
+       ],
+       [
+        206,
+        0
+       ]
+      ],
+      "cx": [
+       [
+        174,
+        880,
+        "linear"
+       ],
+       [
+        206,
+        400
+       ]
+      ],
+      "cy": 1016
+     },
+     {
+      "frame": 285,
+      "opacity": [
+       [
+        279,
+        0,
+        "outSine"
+       ],
+       [
+        289,
+        0.1,
+        "inOutSine"
+       ],
+       [
+        311,
+        0
+       ]
+      ],
+      "cx": [
+       [
+        279,
+        700,
+        "linear"
+       ],
+       [
+        311,
+        380
+       ]
+      ],
+      "cy": 1016
+     },
+     {
+      "frame": 375,
+      "opacity": [
+       [
+        369,
+        0,
+        "outSine"
+       ],
+       [
+        379,
+        0.1,
+        "inOutSine"
+       ],
+       [
+        401,
+        0
+       ]
+      ],
+      "cx": [
+       [
+        369,
+        360,
+        "linear"
+       ],
+       [
+        401,
+        760
+       ]
+      ],
+      "cy": 1016
+     },
+     {
+      "frame": 435,
+      "opacity": [
+       [
+        429,
+        0,
+        "outSine"
+       ],
+       [
+        439,
+        0.1,
+        "inOutSine"
+       ],
+       [
+        461,
+        0
+       ]
+      ],
+      "cx": [
+       [
+        429,
+        760,
+        "linear"
+       ],
+       [
+        461,
+        300
+       ]
+      ],
+      "cy": 1016
+     },
+     {
+      "frame": 570,
+      "opacity": [
+       [
+        564,
+        0,
+        "outSine"
+       ],
+       [
+        574,
+        0.1,
+        "inOutSine"
+       ],
+       [
+        596,
+        0
+       ]
+      ],
+      "cx": [
+       [
+        564,
+        900,
+        "linear"
+       ],
+       [
+        596,
+        180
+       ]
+      ],
+      "cy": 1016
+     }
+    ],
+    "note": "peak opacity 0.10 — barely there"
+   },
+   "grain": {
+    "css": "full-frame div, background = 256x256 grayscale noise tile (deterministic PRNG seed 7, values 128±40), mix-blend-mode overlay, opacity 0.05; background-position shifts every 2 frames by ((37·k) mod 256, (91·k) mod 256), k = floor(f/2)",
+    "note": "paper texture, invisible on a phone at arm's length but kills the 'flat digital' look"
+   },
+   "corner_logo": {
+    "file": "public/brand/garon-logo-light.svg",
+    "x": 70,
+    "y": 262,
+    "w": 132,
+    "h": 96,
+    "opacity": [
+     [
+      132,
+      0,
+      "outSine"
+     ],
+     [
+      144,
+      0.92,
+      "hold"
+     ],
+     [
+      608,
+      0.92,
+      "inOutSine"
+     ],
+     [
+      618,
+      0
+     ]
+    ]
+   },
+   "labels": [
+    {
+     "kind": "section",
+     "style": "section_label",
+     "text": "Տուն",
+     "x": 240,
+     "y": 270,
+     "w": 770,
+     "align": "right",
+     "opacity": [
+      [
+       130,
+       0,
+       "outCubic"
+      ],
+      [
+       140,
+       1,
+       "hold"
+      ],
+      [
+       284,
+       1,
+       "inSine"
+      ],
+      [
+       290,
+       0
+      ]
+     ],
+     "translate_y": [
+      [
+       130,
+       8,
+       "outCubic"
+      ],
+      [
+       140,
+       0
+      ]
+     ]
+    },
+    {
+     "kind": "stage",
+     "style": "stage_label",
+     "text": "Հետո",
+     "x": 240,
+     "y": 294,
+     "w": 770,
+     "align": "right",
+     "opacity": [
+      [
+       130,
+       0,
+       "outCubic"
+      ],
+      [
+       140,
+       1,
+       "hold"
+      ],
+      [
+       182,
+       1,
+       "inSine"
+      ],
+      [
+       188,
+       0
+      ]
+     ],
+     "translate_y": [
+      [
+       130,
+       12,
+       "outCubic"
+      ],
+      [
+       140,
+       0,
+       "hold"
+      ],
+      [
+       182,
+       0,
+       "inSine"
+      ],
+      [
+       188,
+       -8
+      ]
+     ]
+    },
+    {
+     "kind": "stage",
+     "style": "stage_label",
+     "text": "Առաջ",
+     "x": 240,
+     "y": 294,
+     "w": 770,
+     "align": "right",
+     "opacity": [
+      [
+       188,
+       0,
+       "outCubic"
+      ],
+      [
+       198,
+       1,
+       "hold"
+      ],
+      [
+       252,
+       1,
+       "inSine"
+      ],
+      [
+       258,
+       0
+      ]
+     ],
+     "translate_y": [
+      [
+       188,
+       12,
+       "outCubic"
+      ],
+      [
+       198,
+       0,
+       "hold"
+      ],
+      [
+       252,
+       0,
+       "inSine"
+      ],
+      [
+       258,
+       -8
+      ]
+     ]
+    },
+    {
+     "kind": "stage",
+     "style": "stage_label",
+     "text": "Հետո",
+     "x": 240,
+     "y": 294,
+     "w": 770,
+     "align": "right",
+     "opacity": [
+      [
+       257,
+       0,
+       "outCubic"
+      ],
+      [
+       267,
+       1,
+       "hold"
+      ],
+      [
+       284,
+       1,
+       "inSine"
+      ],
+      [
+       290,
+       0
+      ]
+     ],
+     "translate_y": [
+      [
+       257,
+       12,
+       "outCubic"
+      ],
+      [
+       267,
+       0,
+       "hold"
+      ],
+      [
+       284,
+       0,
+       "inSine"
+      ],
+      [
+       290,
+       -8
+      ]
+     ]
+    },
+    {
+     "kind": "section",
+     "style": "section_label",
+     "text": "Լողավազան",
+     "x": 240,
+     "y": 270,
+     "w": 770,
+     "align": "right",
+     "opacity": [
+      [
+       289,
+       0,
+       "outCubic"
+      ],
+      [
+       299,
+       1,
+       "hold"
+      ],
+      [
+       532,
+       1,
+       "inSine"
+      ],
+      [
+       538,
+       0
+      ]
+     ],
+     "translate_y": [
+      [
+       289,
+       8,
+       "outCubic"
+      ],
+      [
+       299,
+       0
+      ]
+     ]
+    },
+    {
+     "kind": "stage",
+     "style": "stage_label",
+     "text": "Առաջ",
+     "x": 240,
+     "y": 294,
+     "w": 770,
+     "align": "right",
+     "opacity": [
+      [
+       289,
+       0,
+       "outCubic"
+      ],
+      [
+       299,
+       1,
+       "hold"
+      ],
+      [
+       372,
+       1,
+       "inSine"
+      ],
+      [
+       378,
+       0
+      ]
+     ],
+     "translate_y": [
+      [
+       289,
+       12,
+       "outCubic"
+      ],
+      [
+       299,
+       0,
+       "hold"
+      ],
+      [
+       372,
+       0,
+       "inSine"
+      ],
+      [
+       378,
+       -8
+      ]
+     ]
+    },
+    {
+     "kind": "stage",
+     "style": "stage_label",
+     "text": "Հետո",
+     "x": 240,
+     "y": 294,
+     "w": 770,
+     "align": "right",
+     "opacity": [
+      [
+       377,
+       0,
+       "outCubic"
+      ],
+      [
+       387,
+       1,
+       "hold"
+      ],
+      [
+       432,
+       1,
+       "inSine"
+      ],
+      [
+       438,
+       0
+      ]
+     ],
+     "translate_y": [
+      [
+       377,
+       12,
+       "outCubic"
+      ],
+      [
+       387,
+       0,
+       "hold"
+      ],
+      [
+       432,
+       0,
+       "inSine"
+      ],
+      [
+       438,
+       -8
+      ]
+     ]
+    },
+    {
+     "kind": "stage",
+     "style": "stage_label",
+     "text": "Առաջ",
+     "x": 240,
+     "y": 294,
+     "w": 770,
+     "align": "right",
+     "opacity": [
+      [
+       437,
+       0,
+       "outCubic"
+      ],
+      [
+       447,
+       1,
+       "hold"
+      ],
+      [
+       492,
+       1,
+       "inSine"
+      ],
+      [
+       498,
+       0
+      ]
+     ],
+     "translate_y": [
+      [
+       437,
+       12,
+       "outCubic"
+      ],
+      [
+       447,
+       0,
+       "hold"
+      ],
+      [
+       492,
+       0,
+       "inSine"
+      ],
+      [
+       498,
+       -8
+      ]
+     ]
+    },
+    {
+     "kind": "stage",
+     "style": "stage_label",
+     "text": "Հետո",
+     "x": 240,
+     "y": 294,
+     "w": 770,
+     "align": "right",
+     "opacity": [
+      [
+       497,
+       0,
+       "outCubic"
+      ],
+      [
+       507,
+       1,
+       "hold"
+      ],
+      [
+       534,
+       1,
+       "inSine"
+      ],
+      [
+       540,
+       0
+      ]
+     ],
+     "translate_y": [
+      [
+       497,
+       12,
+       "outCubic"
+      ],
+      [
+       507,
+       0,
+       "hold"
+      ],
+      [
+       534,
+       0,
+       "inSine"
+      ],
+      [
+       540,
+       -8
+      ]
+     ]
+    },
+    {
+     "kind": "section",
+     "style": "section_label",
+     "text": "Լողավազան · Տուն",
+     "x": 240,
+     "y": 270,
+     "w": 770,
+     "align": "right",
+     "opacity": [
+      [
+       546,
+       0,
+       "outCubic"
+      ],
+      [
+       556,
+       1,
+       "hold"
+      ],
+      [
+       608,
+       1,
+       "inSine"
+      ],
+      [
+       614,
+       0
+      ]
+     ],
+     "translate_y": [
+      [
+       546,
+       8,
+       "outCubic"
+      ],
+      [
+       556,
+       0
+      ]
+     ]
+    },
+    {
+     "kind": "stage",
+     "style": "stage_label",
+     "text": "Առաջ",
+     "x": 240,
+     "y": 294,
+     "w": 770,
+     "align": "right",
+     "opacity": [
+      [
+       548,
+       0,
+       "outCubic"
+      ],
+      [
+       558,
+       1,
+       "hold"
+      ],
+      [
+       581,
+       1,
+       "inSine"
+      ],
+      [
+       587,
+       0
+      ]
+     ],
+     "translate_y": [
+      [
+       548,
+       12,
+       "outCubic"
+      ],
+      [
+       558,
+       0,
+       "hold"
+      ],
+      [
+       581,
+       0,
+       "inSine"
+      ],
+      [
+       587,
+       -8
+      ]
+     ]
+    },
+    {
+     "kind": "stage",
+     "style": "stage_label",
+     "text": "Հետո",
+     "x": 240,
+     "y": 294,
+     "w": 770,
+     "align": "right",
+     "opacity": [
+      [
+       586,
+       0,
+       "outCubic"
+      ],
+      [
+       596,
+       1,
+       "hold"
+      ],
+      [
+       608,
+       1,
+       "inSine"
+      ],
+      [
+       614,
+       0
+      ]
+     ],
+     "translate_y": [
+      [
+       586,
+       12,
+       "outCubic"
+      ],
+      [
+       596,
+       0,
+       "hold"
+      ],
+      [
+       608,
+       0,
+       "inSine"
+      ],
+      [
+       614,
+       -8
+      ]
+     ]
+    }
+   ],
+   "labels_note": "Section label (tiny, tracked, ink 62%) + stage label «Առաջ» / «Հետո» (dark gold display) right-aligned to x 1010, y 262–358 (same slots as L02 v4). The stage word switches exactly when the divider crosses the window centre.",
+   "styles_local": {
+    "section_label": {
+     "font": "text",
+     "weight": 500,
+     "size": 18,
+     "letter_spacing": "0.24em",
+     "transform": "uppercase",
+     "color": "rgba(23,25,28,0.62)",
+     "note": "right-aligned to x 1010 (margin-right −letter-spacing)"
+    },
+    "stage_label": {
+     "font": "display",
+     "weight": 500,
+     "size": 40,
+     "line_height": 1.1,
+     "color": "#856727",
+     "note": "right-aligned to x 1010; box y 294–338"
+    },
+    "chip": {
+     "font": "text",
+     "weight": 500,
+     "size": 20,
+     "letter_spacing": "0.2em",
+     "transform": "uppercase",
+     "color": "#856727",
+     "bg": "rgba(245,245,243,0.94)",
+     "padding": "10px 16px 10px 18px",
+     "note": "cover only"
+    },
+    "end_display": {
+     "font": "display",
+     "weight": 300,
+     "size": 120,
+     "line_height": 1.05,
+     "color": "#17191c",
+     "max_lines": 1
+    },
+    "end_cats": {
+     "font": "text",
+     "weight": 500,
+     "size": 24,
+     "letter_spacing": "0.22em",
+     "transform": "uppercase",
+     "color": "#856727",
+     "max_lines": 1,
+     "min_size": 20,
+     "note": "centre with padding-left = letter-spacing (conventions.letter_spacing_centering)"
+    },
+    "end_url": {
+     "font": "text",
+     "weight": 500,
+     "size": 30,
+     "letter_spacing": "0.08em",
+     "color": "#17191c",
+     "max_lines": 1
+    }
+   },
+   "end_card": {
+    "frames": [
+     606,
+     719
+    ],
+    "composed_from": 658,
+    "hold_s": 2.03,
+    "veil": {
+     "color": "#f5f5f3",
+     "opacity": [
+      [
+       606,
+       0,
+       "inOutSine"
+      ],
+      [
+       630,
+       0.9,
+       "linear"
+      ],
+      [
+       704,
+       0.94,
+       "inOutSine"
+      ],
+      [
+       719,
+       1.0
+      ]
+     ],
+     "blur_px_on_triptych": [
+      [
+       606,
+       0,
+       "inOutSine"
+      ],
+      [
+       632,
+       8
+      ]
+     ]
+    },
+    "layers": [
+     {
+      "layer": "logo",
+      "file": "public/brand/garon-logo-light.svg",
+      "x": 340,
+      "y": 380,
+      "w": 400,
+      "h": 291.76,
+      "opacity": [
+       [
+        616,
+        0,
+        "outCubic"
+       ],
+       [
+        634,
+        1
+       ]
+      ],
+      "translate_y": [
+       [
+        616,
+        14,
+        "outCubic"
+       ],
+       [
+        634,
+        0
+       ]
+      ]
+     },
+     {
+      "layer": "rule",
+      "x": 508,
+      "y": 700,
+      "w": 64,
+      "h": 2,
+      "color": "#856727",
+      "scale_x": [
+       [
+        626,
+        0,
+        "outCubic"
+       ],
+       [
+        638,
+        1
+       ]
+      ],
+      "origin": "center"
+     },
+     {
+      "layer": "text",
+      "style": "end_display",
+      "text": "Առաջ",
+      "x": 70,
+      "y": 742,
+      "w": 420,
+      "align": "right",
+      "opacity": [
+       [
+        630,
+        0,
+        "outCubic"
+       ],
+       [
+        644,
+        1
+       ]
+      ],
+      "translate_y": [
+       [
+        630,
+        16,
+        "outCubic"
+       ],
+       [
+        644,
+        0
+       ]
+      ]
+     },
+     {
+      "layer": "text",
+      "style": "end_display",
+      "text": "Հետո",
+      "x": 590,
+      "y": 742,
+      "w": 420,
+      "align": "left",
+      "opacity": [
+       [
+        634,
+        0,
+        "outCubic"
+       ],
+       [
+        648,
+        1
+       ]
+      ],
+      "translate_y": [
+       [
+        634,
+        16,
+        "outCubic"
+       ],
+       [
+        648,
+        0
+       ]
+      ]
+     },
+     {
+      "layer": "divider",
+      "x": 539,
+      "y": 746,
+      "w": 2,
+      "h": 132,
+      "color": "#856727",
+      "scale_y": [
+       [
+        632,
+        0,
+        "outCubic"
+       ],
+       [
+        646,
+        1
+       ]
+      ],
+      "note": "the slider divider closes the reel: vertical dark-gold line between the two words"
+     },
+     {
+      "layer": "handle_small",
+      "cx": 540,
+      "cy": 812,
+      "d": 34,
+      "opacity": [
+       [
+        642,
+        0,
+        "outBack"
+       ],
+       [
+        652,
+        1
+       ]
+      ],
+      "scale": [
+       [
+        642,
+        0.6,
+        "outBack"
+       ],
+       [
+        652,
+        1
+       ]
+      ],
+      "note": "miniature of the slider handle (paper fill, 1.5 px #856727 ring, chevrons #856727)"
+     },
+     {
+      "layer": "text",
+      "style": "end_cats",
+      "text": "Լողավազաններ · Տներ · Վերանորոգում",
+      "x": 70,
+      "y": 930,
+      "w": 940,
+      "align": "center",
+      "opacity": [
+       [
+        642,
+        0,
+        "outSine"
+       ],
+       [
+        652,
+        1
+       ]
+      ]
+     },
+     {
+      "layer": "horizon",
+      "x": 0,
+      "y": 1106,
+      "w": 1080,
+      "h": 2,
+      "color": "#856727",
+      "scale_x": [
+       [
+        612,
+        0,
+        "inOutSine"
+       ],
+       [
+        634,
+        1
+       ]
+      ],
+      "origin": "left"
+     },
+     {
+      "layer": "text",
+      "style": "end_url",
+      "text": "garon.am",
+      "x": 70,
+      "y": 1146,
+      "w": 940,
+      "align": "center",
+      "opacity": [
+       [
+        648,
+        0,
+        "outSine"
+       ],
+       [
+        658,
+        1
+       ]
+      ]
+     }
+    ],
+    "rules": "NO CTA, NO @handle, NO date. Only: logo, «Առաջ | Հետո», services line, garon.am (owner-preferences.md)."
+   },
+   "cover": {
+    "what": "House day|night split at p = 0.5 with the slider handle in the middle — the reel's idea in one still. Paper, blueprint 0.55, vlines, window frame, corner logo, section «Տուն», stage «Առաջ | Հետո», chips «Առաջ» (left) / «Հետո» (right) in the image top corners.",
+    "base_frame": "pair H state at f246 with p forced to 0.5, handle scale 1, no light leak, no grain shift (k=0)",
+    "chips": [
+     {
+      "text": "Առաջ",
+      "x": 94,
+      "y": 414,
+      "align": "left"
+     },
+     {
+      "text": "Հետո",
+      "x_right": 986,
+      "y": 414,
+      "align": "right"
+     }
+    ],
+    "stage_text": "Առաջ | Հետո",
+    "grid_check": "profile grid 3:4 (y 240–1680) contains logo, labels and the whole window",
+    "output": "R2_cover.png → R2_cover.jpg (q92)"
+   },
+   "audio": {
+    "tempo": "120 BPM, 4/4; 1 beat = 15 frames, 1 bar = 60 frames",
+    "file_rule": "Owner preference: ONLY the intro has sound, then silence (music is added in the Instagram app). Generate with `python3 marketing/instagram/tools/compose_l02_audio.py intro_r2.wav --r2` (24.0 s WAV: sound 0–4.6 s, digital silence after 4.6 s; ticks/pour/impact/glint/shutter timed to this item). The default L02 output of the script is unchanged.",
+    "beat_map": [
+     {
+      "f": 0,
+      "s": 0.0,
+      "bar_beat": "1.1",
+      "event": "pad fades in with the grid; ground line draws"
+     },
+     {
+      "f": 4,
+      "s": 0.13,
+      "bar_beat": "1.1+",
+      "event": "tick: BIG outline starts drawing"
+     },
+     {
+      "f": 10,
+      "s": 0.33,
+      "bar_beat": "1.1+",
+      "event": "tick: MID outline"
+     },
+     {
+      "f": 18,
+      "s": 0.6,
+      "bar_beat": "1.2",
+      "event": "tick: GOLD outline; dimension lines draw"
+     },
+     {
+      "f": 34,
+      "s": 1.13,
+      "bar_beat": "1.3",
+      "event": "POUR: BIG/MID fill rise from the ground (low rising noise 1.1–2.0 s)"
+     },
+     {
+      "f": 60,
+      "s": 2.0,
+      "bar_beat": "2.1",
+      "event": "IMPACT (soft, downbeat): gold piece fills"
+     },
+     {
+      "f": 66,
+      "s": 2.2,
+      "bar_beat": "2.1+",
+      "event": "glint shimmer"
+     },
+     {
+      "f": 72,
+      "s": 2.4,
+      "bar_beat": "2.1+",
+      "event": "wordmark tracks in (air)"
+     },
+     {
+      "f": 96,
+      "s": 3.2,
+      "bar_beat": "2.3+",
+      "event": "lockup holds (pad sustain)"
+     },
+     {
+      "f": 120,
+      "s": 4.0,
+      "bar_beat": "3.1",
+      "event": "DOWNBEAT: horizon shutter opens on the night house (open whoosh + low hit) — the in-app track should start its first strong downbeat HERE; intro sound fades out 4.0–4.6 s"
+     },
+     {
+      "f": 180,
+      "s": 6.0,
+      "bar_beat": "4.1",
+      "event": "rewind sweep → «Առաջ»"
+     },
+     {
+      "f": 225,
+      "s": 7.5,
+      "bar_beat": "4.4",
+      "event": "grab + drag"
+     },
+     {
+      "f": 255,
+      "s": 8.5,
+      "bar_beat": "5.2",
+      "event": "release → «Հետո»"
+     },
+     {
+      "f": 285,
+      "s": 9.5,
+      "bar_beat": "5.4",
+      "event": "gold piece → pool B «Առաջ»"
+     },
+     {
+      "f": 330,
+      "s": 11.0,
+      "bar_beat": "6.3",
+      "event": "grab + drag"
+     },
+     {
+      "f": 375,
+      "s": 12.5,
+      "bar_beat": "7.2",
+      "event": "release → mosaic «Հետո» (accent)"
+     },
+     {
+      "f": 435,
+      "s": 14.5,
+      "bar_beat": "8.2",
+      "event": "gold piece → pool A «Առաջ»"
+     },
+     {
+      "f": 465,
+      "s": 15.5,
+      "bar_beat": "8.4",
+      "event": "drag"
+     },
+     {
+      "f": 495,
+      "s": 16.5,
+      "bar_beat": "9.2",
+      "event": "release → «Հետո»"
+     },
+     {
+      "f": 540,
+      "s": 18.0,
+      "bar_beat": "10.1",
+      "event": "triptych panels rise (3 soft ticks 540/545/550)"
+     },
+     {
+      "f": 570,
+      "s": 19.0,
+      "bar_beat": "10.3",
+      "event": "one sweep: all three become «Հետո» (biggest accent)"
+     },
+     {
+      "f": 606,
+      "s": 20.2,
+      "bar_beat": "11.1+",
+      "event": "end card: groove drops out, resolve"
+     },
+     {
+      "f": 660,
+      "s": 22.0,
+      "bar_beat": "12.1",
+      "event": "hold / tail"
+     },
+     {
+      "f": 720,
+      "s": 24.0,
+      "bar_beat": "13.1",
+      "event": "loop point = downbeat"
+     }
+    ],
+    "mood": "In-app track by MOOD, not by name: modern minimal / architectural, warm, ~120 BPM, felt piano or soft pluck, deep sub, no vocals, no EDM drop. Slide the track so its first strong downbeat lands at 4.0 s."
+   },
+   "photo_rules": {
+    "sources": "ONLY the owner's GARON projects: pool-A, pool-B, house-A from enhanced/ (owner-approved), no stock, no AI. (house-B-wood originals are NOT used in R2 — no 'before' exists for it; it stays the hero of L02.)",
+    "resolution": "scale vs ORIGINAL pixels ≤ 1.35 (see pairs[].max_scale_vs_original, triptych.max_scale_vs_original). Tightest: house-A/02 (960x1280) 1.349.",
+    "privacy": "crops exclude the dog (pool-B/02 bottom right, house-A/03 at the door) and the person (pool-B/03 door). house-A/02 keeps a tiny unidentifiable silhouette behind the upper glass (as approved in L02). No retouching — crop only."
+   },
+   "checks": [
+    "ffprobe: 1080x1920, 30 fps, 720 frames, 24.000 s, yuv420p, AAC (intro 0–4.6 s, then silence)",
+    "No text in f0–135; no hook text, no CTA, no @handle anywhere",
+    "Labels inside x 240–1010, y 262–360; end-card text y 380–1190, nothing right of x 900 below y 1100",
+    "Stage label matches the divider side at all times (switch at p = 0.5)",
+    "No dog/person in any frame (check H at 120/299, B at 285/449, A at 435/559, T at 560/719)",
+    "Scale ≤ 1.35 of original pixels",
+    "f719 = paper + end card (clean loop to f0)",
+    "Contact sheet: 0, 30, 60, 78, 100, 126, 160, 190, 232, 246, 280, 292, 340, 352, 400, 470, 488, 520, 548, 585, 610, 660, 719 + cover"
+   ],
+   "alt_hy": "Կարճ տեսանյութ բաց ֆոնի վրա։ Ճարտարապետական ցանցի վրա GARON նշանը նախ գծվում է բարակ ոսկեգույն ուրվագծերով, հետո լցվում է ներքևից վերև, ոսկեգույն մասը լցվում է վերջինը, հայտնվում է GARON CONSTRUCTION գրությունը։ Հետո՝ «Առաջ / Հետո» համեմատություններ ոսկեգույն սահիչով. պատրաստի տունը գիշերը՝ լուսավոր գծերով, հետո նույն տունը բետոնե կմախքի փուլում, և նորից պատրաստի տեսքը։ Լողավազան. բետոնե ավազան ջակուզիով, հետո նույնը՝ կապույտ խճանկարով։ Մեկ այլ լողավազան. ամրանավորում, հետո պատրաստի լողավազան քարե պատի մոտ։ Վերջում երեք նախագծերը կողք կողքի, մեկ շարժումով դառնում են պատրաստի։ Վերջին կադրում՝ լոգոն, «Առաջ | Հետո», «Լողավազաններ · Տներ · Վերանորոգում» և garon.am։"
+  }
+ }
+}
