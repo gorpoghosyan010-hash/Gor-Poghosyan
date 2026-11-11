@@ -762,21 +762,21 @@
   },
   "L02": {
    "type": "reel",
-   "version": "v3b (2026-11-11, owner feedback on v3: no hook texts during the logo build; end card without the DM CTA and without the @handle). Base: v3 (2026-11-10, light theme + stock mood stills).",
+   "version": "v4 (2026-11-11, owner sent REAL project photos: three start→progress→result stories + a finished wooden house). Base: v3b (light theme, logo build without hook texts, end card without CTA/handle).",
    "publish_date": "2026-11-13 20:00",
    "asset_status": "ready",
    "needs_shoot": false,
    "method": "html_frame_stepped",
-   "duration": 14.0,
+   "duration": 26.0,
    "fps": 30,
-   "frames": 420,
+   "frames": 780,
    "output": "out/L02/L02_reel.mp4",
    "cover_output": "out/L02/L02_cover.jpg",
-   "supersedes": "v2 (dark theme + 4 GARON photos) and v1 (site splash capture). v1/v2 frames/cover must NOT be reused or mixed. Top-level `site_capture` stays (still used by L01b/L04).",
-   "concept": "LIGHT version. The GARON mark (garon-logo-light.svg geometry and colours) is BUILT like a construction on a dark-grey blueprint grid on paper (dark-gold ground line, stems rise, roof bands extrude along their slope, gold piece drops and settles), a light glint, wordmark tracks in; then four high-quality FREE-LICENSED STOCK stills (Unsplash) as MOOD/ATMOSPHERE ONLY, revealed through brand shapes (roof band, sliding frame, the gold piece, roof band → full bleed) with a slow push; a fixed services line «Տներ · Լողավազաններ · Վերանորոգում» describes what GARON does in general — no on-screen text presents the stock images as GARON projects; end card on paper: logo, «Շուտով», services line, garon.am (v3b: no DM CTA, no handle; no text during the build).",
+   "supersedes": "v3/v3b (stock mood stills), v2 (dark + 4 GARON photos), v1 (splash capture). Earlier frames/covers must NOT be reused or mixed. The stock files stay untouched in marketing/instagram/assets/stock/ but are NOT used by L02 any more.",
+   "concept": "LIGHT version. Acts A–C unchanged from v3b: the GARON mark is BUILT on a dark-grey blueprint grid on paper, glint, wordmark tracks in — no text. Act D (6.0–22.5 s): the gold piece of the finished logo grows into a 3:4 architectural window and opens the first of three REAL GARON project stories — Pool A, Pool B, House — each start → progress → result. Inside a story the stages change with a gold vertical wipe (start→progress) and the roof-band mask (progress→result); every new story opens with the gold piece. A small section label («Լողավազան» / «Տուն») and a stage label («Սկիզբ» / «Ընթացք» / «Արդյունք», dark gold) with a 3-segment progress bar sit top-right next to the corner logo, inside the safe zone. Then a finished wooden house («Փայտե տուն» · «Արդյունք») as a two-plate gallery on the drawing sheet (horizontal photos stay horizontal). Act E: v3b end card on paper — logo, «Շուտով», services line, garon.am (no CTA, no handle).",
    "render": {
     "engine": "ONE html page in headless Chromium (Playwright), viewport 1080x1920, deviceScaleFactor 1, background #f5f5f3 (theme.bg). Fonts: same @fontsource files as ig_lib.js (Cormorant Garamond 300/400/500, Noto Serif Armenian 300/400/500, Montserrat 400/500/600, Noto Sans Armenian 400/500/600). await document.fonts.ready and every <img>.decode() before frame 0.",
-    "frame_loop": "for f = 0..419: page.evaluate(setFrame, f) (a pure function of f, no CSS animations/transitions, no timers, no Date/random) → page.screenshot({clip:{x:0,y:0,width:1080,height:1920}}) → frames/L02_%03d.png. Render order of frames is irrelevant (deterministic).",
+    "frame_loop": "for f = 0..779: page.evaluate(setFrame, f) (a pure function of f, no CSS animations/transitions, no timers, no Date/random) → page.screenshot({clip:{x:0,y:0,width:1080,height:1920}}) → frames/L02_%03d.png. Render order of frames is irrelevant (deterministic).",
     "keyframes": "Every animated property is a list of keys [frame, value, easing]. Before the first key: first value; after the last key: last value. Between key k and k+1: v = v_k + (v_k+1 − v_k) · E((f − f_k)/(f_k+1 − f_k)), E = easing NAMED IN KEY k (see `easings`). \"hold\" = keep v_k until f_k+1 then jump. Vector values ([x,y] or {x,y,w,h}) interpolate component-wise.",
     "easings": {
      "linear": [
@@ -841,57 +841,77 @@
      ],
      "note": "CSS cubic-bezier(x1,y1,x2,y2) control points; evaluate exactly like CSS (solve x(t)=p by Newton/bisection, return y(t))."
     },
-    "encode": "ffmpeg -framerate 30 -i frames/L02_%03d.png -f lavfi -i anullsrc=r=48000:cl=stereo -map 0:v -map 1:a -c:v libx264 -profile:v high -pix_fmt yuv420p -crf 18 -colorspace bt709 -color_primaries bt709 -color_trc bt709 -c:a aac -b:a 320k -shortest -movflags +faststart L02_reel.mp4  (silent AAC track; music is added in the Instagram app, see `audio`). Check: ffprobe → 1080x1920, 30 fps, 420 frames, 14.000 s.",
-    "reference_prototype": "marketing/instagram/2026-11-11-launch/04-L02v2-reference.js — art-director prototype (file name kept from v2; it now renders v3 and reads everything incl. `theme` from items.L02). The producer may use it as-is or as a reference; if code and spec disagree, the spec wins.",
+    "encode": "ffmpeg -framerate 30 -i frames/L02_%03d.png -f lavfi -i anullsrc=r=48000:cl=stereo -map 0:v -map 1:a -c:v libx264 -profile:v high -pix_fmt yuv420p -crf 18 -colorspace bt709 -color_primaries bt709 -color_trc bt709 -c:a aac -b:a 320k -shortest -movflags +faststart L02_reel.mp4  (silent AAC track; music is added in the Instagram app, see `audio`). Check: ffprobe → 1080x1920, 30 fps, 780 frames, 26.000 s.",
+    "reference_prototype": "marketing/instagram/2026-11-11-launch/04-L02v2-reference.js — art-director prototype (file name kept from v2; it now renders v4 and reads everything from items.L02). Run: NODE_PATH=$(npm root -g) node 04-L02v2-reference.js <repo> <out> all  (≈ 3 min for 780 frames). If code and spec disagree, the spec wins.",
     "fonts_check": "Armenian glyphs must come from Noto Serif Armenian / Noto Sans Armenian (check document.fonts / computed font in a test frame). STOP if a fallback system font is used."
    },
    "timebase": {
     "fps": 30,
-    "frames": 420,
-    "duration_s": 14.0,
+    "frames": 780,
+    "duration_s": 26.0,
     "bpm": 120,
     "frames_per_beat": 15,
     "frames_per_bar": 60,
-    "note": "Bar n starts at frame 60·(n−1). All cuts sit on beats (multiples of 15). The reel is exactly 7 bars; the loop restarts on a downbeat."
+    "note": "Bar n starts at frame 60·(n−1). Every cut/transition start is on a beat (multiple of 15). The reel is exactly 13 bars; the loop restarts on a downbeat (f780 = bar 14.1)."
    },
    "acts": [
     {
      "act": "A+B build",
      "frames": "0–119",
      "s": "0.0–4.0",
-     "what": "blueprint grid + ground line, dimension lines, stems rise, roof bands extrude, gold piece drops & settles — no on-screen text (v3b)"
+     "what": "unchanged from v3b — no on-screen text"
     },
     {
      "act": "C reveal",
      "frames": "120–179",
      "s": "4.0–6.0",
-     "what": "camera pulls back to the final lockup, light glint across the mark, GARON + CONSTRUCTION track in — no on-screen text (v3b)"
+     "what": "unchanged from v3b — no on-screen text"
     },
     {
-     "act": "D mood",
-     "frames": "180–299",
-     "s": "6.0–10.0",
-     "what": "4 stock stills (atmosphere only), one every 2 beats, each revealed through a brand shape, slow push; fixed services line top-right"
+     "act": "D1 Pool A",
+     "frames": "180–314",
+     "s": "6.0–10.5",
+     "what": "A1 start 180 (gold piece grows out of the logo), A2 progress 210 (gold wipe), A3 result 255 (roof band), 2 s hold"
+    },
+    {
+     "act": "D2 Pool B",
+     "frames": "315–449",
+     "s": "10.5–15.0",
+     "what": "B1 start 315 (gold piece; framed plate — low-res), B2 progress 345, B3 result 390 (aligned with B2 → transformation in place)"
+    },
+    {
+     "act": "D3 House",
+     "frames": "450–584",
+     "s": "15.0–19.5",
+     "what": "H1 start 450, H2 progress 480, H3 result 525 (night)"
+    },
+    {
+     "act": "D4 Wooden house",
+     "frames": "585–674",
+     "s": "19.5–22.5",
+     "what": "gold piece opens the drawing sheet with two horizontal plates (04 A-frame over 05 terrace view); slot wipes: upper → 01 facade at 615, lower → 06 terrace side at 645"
     },
     {
      "act": "E end card",
-     "frames": "300–419",
-     "s": "10.0–14.0",
-     "what": "logo, «Շուտով», services line, horizon, garon.am; fully composed at f340, held 2.6 s+"
+     "frames": "675–779",
+     "s": "22.5–26.0",
+     "what": "v3b end card (timing shifted +375): composed at f715, held 2.2 s"
     }
    ],
    "z_order": [
-    "bg (theme.bg #f5f5f3)",
+    "bg (theme.bg)",
     "blueprint",
     "vlines",
     "ground_line + impact_glow",
     "stage (camera wrapper: mark build / dims / glint / wordmark / final img)",
-    "photos P1..P4 (P4 above P3 above P2 above P1)",
+    "window shots in entry order A1 < A2 < A3 < B1 < … < H3 < W (later on top); each shot = full-frame layer clipped by its entry mask ∩ window",
+    "wood slot plates W05 < W01 < W06 (above the W sheet)",
+    "gold_fill (gold piece colour during gold_piece entries)",
     "wipe_edges (gold lines)",
-    "p4_end_overlay",
-    "window_frame",
+    "window frame line",
+    "end_overlay (paper veil)",
     "corner_logo",
-    "labels",
+    "labels + progress ticks",
     "end_card"
    ],
    "stage": {
@@ -1748,9 +1768,9 @@
      "w": 940,
      "h": 1253
     },
-    "note": "3:4 «architectural frame» (aspect 0.7502) for P1–P3. All stock sources are ≥ 2133 px on the short side → every shot is DOWN-scaled (×0.55–0.63), never upscaled. Top of the window leaves room for the corner logo (y262–358) and the services line; below y1500 it is image only (IG UI zone, no text).",
+    "note": "3:4 architectural frame (aspect 0.7502) for every shot. Top of the window (y 390) leaves the band y 262–358 for the corner logo + labels; below y 1500 image only (IG UI zone).",
     "frame_line": {
-     "css": "border 1px rgba(133,103,39,0.55) (theme.frame_line) on the window rect (follows P4 rect when it expands), no fill",
+     "css": "border 1px rgba(133,103,39,0.55) (theme.frame_line) on the window rect, no fill",
      "opacity": [
       [
        196,
@@ -1763,12 +1783,12 @@
        "hold"
       ],
       [
-       284,
+       667,
        1,
        "inOutSine"
       ],
       [
-       300,
+       683,
        0
       ]
      ]
@@ -1803,371 +1823,726 @@
     "note": "same column lines as L01/L03/L04 (overlays.grid6_tile xs); behind the photos"
    },
    "photo_rules": {
-    "sources": "ONLY the four files in marketing/instagram/assets/stock/ listed in `photos` (Unsplash License, see CREDITS.md). NO public/projects (GARON photos are not mixed with stock in this reel), NO public/services, NO public/stock, NO AI/upscaling.",
-    "honesty": "see items.L02.honesty — atmosphere only, never labelled as GARON work.",
-    "grade": "CSS filter on each <img>: saturate(0.92) contrast(1.05) (= brand.photo_grade). No other look.",
+    "sources": "ONLY GARON's own project photos listed in `shots` / `sheets` (owner-confirmed as GARON work): pool-A, pool-B, house-A from the enhanced/ folders (owner-approved processing, tools/enhance_photos.py) and house-B-wood ORIGINAL files (owner: keep as is). NO stock (assets/stock is not used any more), NO public/stock, NO AI generation.",
+    "grade": "CSS filter on each <img>: saturate(0.92) contrast(1.05) (= brand.photo_grade) on top of the enhanced files. No other look.",
+    "resolution": "Scale is judged against the ORIGINAL phone pixels: never more than ×1.35. Low-res originals: pool-A/03 (800x1280) slow push max ×1.277; pool-B/01 (1280x724) framed plate ×0.64–0.667; house-A/02 (960x1280) max ×1.224; house-B-wood (1290x~756) plates ×0.775–0.78.",
     "crop_impl": "crop {x,y,w,h} (fractions of the SOURCE) → target box (BW,BH): scale = BW/(w·SW); <img> width SW·scale, height SH·scale, left = box.x − x·SW·scale, top = box.y − y·SH·scale, inside an overflow:hidden container = the box. Crop rects already have the box aspect; never stretch. image-rendering auto (Chromium high-quality resample).",
-    "push": "crop interpolates from → to over the photo's `life` frames with easing linear (constant camera push).",
+    "push": "crop interpolates crop_from → crop_to linearly over the shot life (constant slow push/pan).",
     "clip_impl": "Reveal masks = CSS clip-path: polygon(…) in SCREEN px on a full-frame layer (left 0 top 0 1080x1920) that contains the photo box; computed per frame from the formulas below.",
-    "video_note": "No stock video clips: the sandbox had no search access to find Pexels video IDs. If the producer later adds clips, they replace these stills 1:1 (same box, same life, same reveal; trim 1.5 s from a ≥ 4K or 1080x1920 30 fps clip, no speed ramps), must also be atmosphere-only and must be logged in CREDITS.md."
+    "privacy": "No people, no animals, no plates/addresses in frame: the crops exclude the dog (pool-B/02, house-A/03) and the person (pool-B/03). house-A/02: a tiny silhouette may remain behind the upper window glass (unidentifiable at 1080 px). No captions with places/dates/counts."
    },
-   "photos": [
+   "transitions": {
+    "gold_piece": {
+     "frames": "e … e+12",
+     "shape_units": [
+      [
+       -66,
+       -66.5
+      ],
+      [
+       22,
+       -22.5
+      ],
+      [
+       22,
+       22.5
+      ],
+      [
+       -22,
+       22.5
+      ],
+      [
+       -22,
+       -14.5
+      ],
+      [
+       -66,
+       -36.5
+      ]
+     ],
+     "shape_note": "the GOLD path of the logo relative to its anchor (330, 132.5) in mark units",
+     "anchor_px": [
+      540,
+      1016.5
+     ],
+     "g": "px per unit: g = 1.6 for f ≤ e; g = 1.6·32^E((f−e)/12) for e < f ≤ e+12, E = inOutCubic (→ 51.2: the polygon covers the window from e+12)",
+     "formula": "incoming shot layer clipped to (anchor + g·shape_unit) ∩ window",
+     "gold_fill": {
+      "css": "same clip polygon filled with linear-gradient(135deg,#d4b57a,#b8955c), layer above the shots",
+      "opacity": "relative keys [[e−4,0,outSine],[e−1,1,hold],[e+3,1,outSine],[e+10,0]] — a small solid gold piece (141 px wide) appears in the window centre on the beat before e, then grows and opens into the next shot"
+     }
+    },
+    "gold_piece_from_logo": {
+     "frames": "180 … 192",
+     "what": "A1 only: as gold_piece, but the anchor starts ON the logo's own gold piece (728, 926.8) = lockup at f180 and moves to (540, 1016.5) with inOutCubic over 180–192, so the gold piece of the logo becomes the window. gold_fill opacity [[180,1,hold],[183,1,outSine],[190,0]]. The lockup pushes in and fades under it (stage.camera.exit_* unchanged)."
+    },
+    "wipe_v": {
+     "frames": "e … e+14",
+     "xe": "relative keys [[e,1010,inOutQuart],[e+14,70]]",
+     "formula": "incoming clip rect x xe..1010 × window y; incoming content translateX(+0.25·(xe − 70)); outgoing shot content translateX(−0.12·(1010 − xe))",
+     "edge": "vertical 2 px #c9a96a (theme.wipe_edge) at x = xe − 1 over the window height, opacity relative [[e,1,hold],[e+14,1,linear],[e+18,0]]"
+    },
+    "wipe_v_slot": {
+     "what": "wood plates: wipe_v restricted to the slot rect (no outgoing parallax: the sheet does not move); edge line over the slot height."
+    },
+    "roof_band": {
+     "frames": "e … e+16",
+     "formula": "band between two lines of slope −0.5 (the logo roof slope) around y = 1016.5 − 0.5·(x − 540), polygon (−10, yc(−10) − hv), (1090, yc(1090) − hv), (1090, yc(1090) + hv), (−10, yc(−10) + hv) ∩ window",
+     "hv": "relative keys [[e,18,inOutQuart],[e+16,1400]]",
+     "edges": "two 2 px #c9a96a lines on the band edges, clipped to the window, opacity relative [[e,1,hold],[e+10,1,linear],[e+18,0]]"
+    }
+   },
+   "shots": [
     {
-     "id": "P1",
-     "src": "marketing/instagram/assets/stock/unsplash-1600585154340-be6161a56a0c_villa-dusk.jpg",
+     "id": "A1",
+     "story": "A",
+     "stage": "start",
+     "src": "marketing/instagram/assets/owner/pool-A/enhanced/01-start-rebar.jpg",
      "src_px": [
-      3200,
-      2133
+      2016,
+      1512
      ],
-     "what": "STOCK, mood: modern house at dusk, lit interior, big tree",
+     "what": "rebar cage of a rectangular pool in its excavation; crop on the far corner + the rebar floor, measuring tape/stone pile bottom-right kept small",
      "box": "window",
-     "life": [
-      180,
-      226
-     ],
-     "crop_from": {
-      "x": 0.22,
-      "y": 0.0,
-      "w": 0.5,
-      "h": 1.0
-     },
-     "crop_to": {
-      "x": 0.2465,
-      "y": 0.03,
-      "w": 0.4717,
-      "h": 0.9434
-     },
-     "reveal": {
-      "type": "roof_band",
+     "entry": {
+      "type": "gold_piece_from_logo",
+      "frame": 180,
       "frames": [
        180,
-       196
-      ],
-      "formula": "band between two lines of slope −0.5 (the BIG roof slope, rising to the right) around the centre line y = 846 − 0.5·(x − 460.8) (= the BIG roof band of the lockup on screen); polygon (−10, yc(−10) − hv), (1090, yc(1090) − hv), (1090, yc(1090) + hv), (−10, yc(−10) + hv), intersected with the window (layer container overflow hidden at the window rect).",
-      "hv": [
-       [
-        180,
-        18,
-        "inOutQuart"
-       ],
-       [
-        196,
-        1400
-       ]
-      ],
-      "edges": {
-       "css": "two 2px #c9a96a (theme.wipe_edge, on the image) lines on the band edges (polygon edges 1→2 and 4→3), clipped to the window",
-       "opacity": [
-        [
-         180,
-         1,
-         "hold"
-        ],
-        [
-         190,
-         1,
-         "linear"
-        ],
-        [
-         198,
-         0
-        ]
-       ]
-      }
+       192
+      ]
      },
-     "exit": "covered by P2; while P2 wipes (210–224) P1 shifts left: offset_x = −0.12·(1010 − xe)",
-     "source": "Unsplash, Unsplash License (CREDITS.md)"
-    },
-    {
-     "id": "P2",
-     "src": "marketing/instagram/assets/stock/unsplash-1613490493576-7fde63acd811_villa-pool.jpg",
-     "src_px": [
-      3200,
-      2133
-     ],
-     "what": "STOCK, mood: white villa, pool with dark stripes",
-     "box": "window",
-     "life": [
-      210,
-      256
-     ],
+     "content": "photo",
      "crop_from": {
       "x": 0.26,
-      "y": 0.0,
-      "w": 0.5,
-      "h": 1.0
+      "y": 0.02,
+      "w": 0.5401,
+      "h": 0.9599
      },
      "crop_to": {
-      "x": 0.2865,
-      "y": 0.04,
-      "w": 0.4717,
-      "h": 0.9434
+      "x": 0.3,
+      "y": 0.05,
+      "w": 0.5064,
+      "h": 0.9
      },
-     "reveal": {
-      "type": "sliding_frame",
+     "life": [
+      180,
+      224
+     ],
+     "exit": {
+      "type": "parallax_left",
       "frames": [
        210,
        224
       ],
-      "xe": [
-       [
-        210,
-        1010,
-        "inOutQuart"
-       ],
-       [
-        224,
-        70
-       ]
-      ],
-      "formula": "clip rect x xe..1010, y 390..1643; photo offset_x = +0.25·(xe − 70) (parallax, slides in with the frame edge)",
-      "edges": {
-       "css": "vertical 2px #c9a96a (theme.wipe_edge, on the image) line at x = xe − 1, y 390..1643",
-       "opacity": [
-        [
-         210,
-         1,
-         "hold"
-        ],
-        [
-         224,
-         1,
-         "linear"
-        ],
-        [
-         228,
-         0
-        ]
-       ]
-      }
-     },
-     "source": "Unsplash, Unsplash License (CREDITS.md)"
+      "formula": "inner content translateX(−0.12·(1010 − xe_next))"
+     }
     },
     {
-     "id": "P3",
-     "src": "marketing/instagram/assets/stock/unsplash-1600607687939-ce8a6c25118c_interior-living.jpg",
+     "id": "A2",
+     "story": "A",
+     "stage": "progress",
+     "src": "marketing/instagram/assets/owner/pool-A/enhanced/02-progress-concrete.jpg",
      "src_px": [
-      3200,
-      2176
+      1512,
+      2016
      ],
-     "what": "STOCK, mood: bright living room, timber wall (stands for interior/renovation work in general)",
+     "what": "concrete shell cast, formwork boards in the foreground; x ≥ 0.04 keeps the plastic bottle (left edge, y .44–.49) out",
      "box": "window",
-     "life": [
-      240,
-      286
-     ],
+     "entry": {
+      "type": "wipe_v",
+      "frame": 210,
+      "frames": [
+       210,
+       224
+      ]
+     },
+     "content": "photo",
      "crop_from": {
-      "x": 0.3,
-      "y": 0.0,
-      "w": 0.5101,
-      "h": 1.0
+      "x": 0.04,
+      "y": 0.03,
+      "w": 0.92,
+      "h": 0.9198
      },
      "crop_to": {
-      "x": 0.3289,
-      "y": 0.03,
-      "w": 0.4812,
-      "h": 0.9434
+      "x": 0.07,
+      "y": 0.08,
+      "w": 0.86,
+      "h": 0.8598
      },
-     "reveal": {
-      "type": "gold_piece",
-      "frames": [
-       236,
-       252
-      ],
-      "shape_units": [
-       [
-        -66,
-        -66.5
-       ],
-       [
-        22,
-        -22.5
-       ],
-       [
-        22,
-        22.5
-       ],
-       [
-        -22,
-        22.5
-       ],
-       [
-        -22,
-        -14.5
-       ],
-       [
-        -66,
-        -36.5
-       ]
-      ],
-      "shape_note": "the GOLD path relative to its anchor (330, 132.5) in mark units",
-      "anchor_px": [
-       540,
-       1016.5
-      ],
-      "g": "px per unit: g = 1.6 for f ≤ 240; g = 1.6 · 32^E((f−240)/12) for 240 < f ≤ 252 with E = inOutCubic (→ 51.2, covers the window from f252)",
-      "formula": "polygon point = anchor + g·shape_unit; P3 layer clipped to that polygon (and the window)",
-      "gold_fill": {
-       "css": "same clip polygon, filled with linear-gradient(135deg, #d4b57a, #b8955c), layer ABOVE P3",
-       "opacity": [
-        [
-         236,
-         0,
-         "outSine"
-        ],
-        [
-         239,
-         1,
-         "hold"
-        ],
-        [
-         242,
-         1,
-         "outSine"
-        ],
-        [
-         247,
-         0
-        ]
-       ],
-       "note": "f236–239: a small solid gold piece (141 px wide = the logo gold at lockup size) appears over P2 at the window centre; from f240 (beat) it grows and opens into P3 (P3 is not drawn before f240)"
-      }
-     },
-     "source": "Unsplash, Unsplash License (CREDITS.md)"
+     "life": [
+      210,
+      271
+     ]
     },
     {
-     "id": "P4",
-     "src": "marketing/instagram/assets/stock/unsplash-1600585154526-990dced4db0d_facade-dusk-vertical.jpg",
+     "id": "A3",
+     "story": "A",
+     "stage": "result",
+     "src": "marketing/instagram/assets/owner/pool-A/enhanced/03-final.jpg",
      "src_px": [
-      2133,
-      3200
+      1500,
+      2400
      ],
-     "what": "STOCK, mood: vertical, dark-clad façade with timber battens, lit entrance at dusk — ends full-bleed and becomes the (paper-veiled) end-card background",
-     "box": "full frame 0,0,1080,1920 (cover), shown through rect R(f)",
-     "life": [
-      270,
-      419
-     ],
+     "what": "finished pool, stone wall + pergola, lavender; LOW-RES original (800x1280): slow push to max ×1.277 of the ORIGINAL pixels (≤ 1.35)",
+     "box": "window",
+     "entry": {
+      "type": "roof_band",
+      "frame": 255,
+      "frames": [
+       255,
+       271
+      ]
+     },
+     "content": "photo",
      "crop_from": {
-      "x": 0.08,
-      "y": 0.0,
-      "w": 0.8439,
-      "h": 1.0
+      "x": 0.0,
+      "y": 0.09,
+      "w": 1.0,
+      "h": 0.8331
      },
      "crop_to": {
-      "x": 0.1112,
-      "y": 0.03,
-      "w": 0.7812,
-      "h": 0.9257
+      "x": 0.05,
+      "y": 0.14,
+      "w": 0.92,
+      "h": 0.7665
      },
-     "crop_note": "push over life 270–419 (8% total, linear)",
-     "reveal": {
-      "type": "roof_band → full bleed",
-      "frames": [
-       270,
-       300
-      ],
-      "formula": "clip = band(slope −0.5, centre line y = 1016.5 − 0.5·(x − 540), half-height hv) ∩ rect R(f)",
-      "hv": [
-       [
-        270,
-        0,
-        "inOutQuart"
-       ],
-       [
-        284,
-        1400
-       ]
-      ],
-      "R": [
-       [
-        284,
-        {
-         "x": 70,
-         "y": 390,
-         "w": 940,
-         "h": 1253
-        },
-        "inOutCubic"
-       ],
-       [
-        300,
-        {
-         "x": 0,
-         "y": 0,
-         "w": 1080,
-         "h": 1920
-        }
-       ]
-      ],
-      "edges": {
-       "css": "two 2px #c9a96a (theme.wipe_edge, on the image) band-edge lines, clipped to R",
-       "opacity": [
-        [
-         270,
-         1,
-         "hold"
-        ],
-        [
-         280,
-         1,
-         "linear"
-        ],
-        [
-         288,
-         0
-        ]
-       ]
-      }
-     },
-     "end_overlay": {
-      "css": "div 0,0,1080,1920 background #f5f5f3 (theme.end_overlay) above P4",
-      "opacity": [
-       [
-        296,
-        0,
-        "inOutSine"
-       ],
-       [
-        318,
-        0.9,
-        "linear"
-       ],
-       [
-        404,
-        0.94,
-        "inOutSine"
-       ],
-       [
-        419,
-        1.0
-       ]
-      ]
-     },
-     "end_blur_px": [
-      [
-       296,
-       0,
-       "inOutSine"
-      ],
-      [
-       320,
-       8
-      ]
+     "life": [
+      255,
+      327
+     ]
+    },
+    {
+     "id": "B1",
+     "story": "B",
+     "stage": "start",
+     "src": "marketing/instagram/assets/owner/pool-B/enhanced/01-start-formwork.jpg",
+     "src_px": [
+      2652,
+      1500
      ],
-     "end_note": "P4 stays as a pale, blurred ghost of the façade behind the end card; at f419 the frame is pure paper #f5f5f3 except the end-card graphics, so the loop back to f0 (paper) is clean.",
-     "source": "Unsplash, Unsplash License (CREDITS.md)"
+     "what": "round formwork of a pool + jacuzzi; LOW-RES original (1280x724): shown as a FRAMED PLATE on the drawing sheet (no upscale), see `sheets.B1`",
+     "box": "window",
+     "entry": {
+      "type": "gold_piece",
+      "frame": 315,
+      "frames": [
+       315,
+       327
+      ]
+     },
+     "content": "sheet",
+     "life": [
+      315,
+      359
+     ],
+     "exit": {
+      "type": "parallax_left",
+      "frames": [
+       345,
+       359
+      ],
+      "formula": "inner content translateX(−0.12·(1010 − xe_next))"
+     }
+    },
+    {
+     "id": "B2",
+     "story": "B",
+     "stage": "progress",
+     "src": "marketing/instagram/assets/owner/pool-B/enhanced/02-progress-concrete.jpg",
+     "src_px": [
+      2016,
+      1512
+     ],
+     "what": "raw concrete bowl + round jacuzzi; crop keeps the dog (x ≥ .72, y ≥ .81) OUT; ends aligned with B3 so the roof-band cut reads as a transformation in place",
+     "box": "window",
+     "entry": {
+      "type": "wipe_v",
+      "frame": 345,
+      "frames": [
+       345,
+       359
+      ]
+     },
+     "content": "photo",
+     "crop_from": {
+      "x": 0.24,
+      "y": 0.0,
+      "w": 0.47,
+      "h": 0.8353
+     },
+     "crop_to": {
+      "x": 0.29,
+      "y": 0.0,
+      "w": 0.45,
+      "h": 0.7998
+     },
+     "life": [
+      345,
+      406
+     ]
+    },
+    {
+     "id": "B3",
+     "story": "B",
+     "stage": "result",
+     "src": "marketing/instagram/assets/owner/pool-B/enhanced/03-final-mosaic.jpg",
+     "src_px": [
+      2016,
+      1512
+     ],
+     "what": "same pool finished in blue mosaic, marble crazy paving; crop keeps the person at the door (x ≥ .91, top right) OUT",
+     "box": "window",
+     "entry": {
+      "type": "roof_band",
+      "frame": 390,
+      "frames": [
+       390,
+       406
+      ]
+     },
+     "content": "photo",
+     "crop_from": {
+      "x": 0.347,
+      "y": 0.05,
+      "w": 0.45,
+      "h": 0.7998
+     },
+     "crop_to": {
+      "x": 0.37,
+      "y": 0.08,
+      "w": 0.41,
+      "h": 0.7287
+     },
+     "life": [
+      390,
+      462
+     ]
+    },
+    {
+     "id": "H1",
+     "story": "H",
+     "stage": "start",
+     "src": "marketing/instagram/assets/owner/house-A/enhanced/01-start-foundation.jpg",
+     "src_px": [
+      1512,
+      2016
+     ],
+     "what": "foundation formwork on a bare plot; crop on the formwork + block wall, most of the empty sky/dirt cut",
+     "box": "window",
+     "entry": {
+      "type": "gold_piece",
+      "frame": 450,
+      "frames": [
+       450,
+       462
+      ]
+     },
+     "content": "photo",
+     "crop_from": {
+      "x": 0.24,
+      "y": 0.2,
+      "w": 0.6,
+      "h": 0.5998
+     },
+     "crop_to": {
+      "x": 0.28,
+      "y": 0.25,
+      "w": 0.54,
+      "h": 0.5399
+     },
+     "life": [
+      450,
+      494
+     ],
+     "exit": {
+      "type": "parallax_left",
+      "frames": [
+       480,
+       494
+      ],
+      "formula": "inner content translateX(−0.12·(1010 − xe_next))"
+     }
+    },
+    {
+     "id": "H2",
+     "story": "H",
+     "stage": "progress",
+     "src": "marketing/instagram/assets/owner/house-A/enhanced/02-progress-frame.jpg",
+     "src_px": [
+      1500,
+      2000
+     ],
+     "what": "concrete frame + glazing; sand pile and striped tarp stay in the lower third (cannot be cropped out at ≤ ×1.35); push towards the facade. Original 960x1280: max ×1.224",
+     "box": "window",
+     "entry": {
+      "type": "wipe_v",
+      "frame": 480,
+      "frames": [
+       480,
+       494
+      ]
+     },
+     "content": "photo",
+     "crop_from": {
+      "x": 0.07,
+      "y": 0.02,
+      "w": 0.86,
+      "h": 0.8598
+     },
+     "crop_to": {
+      "x": 0.1,
+      "y": 0.03,
+      "w": 0.8,
+      "h": 0.7998
+     },
+     "life": [
+      480,
+      541
+     ]
+    },
+    {
+     "id": "H3",
+     "story": "H",
+     "stage": "result",
+     "src": "marketing/instagram/assets/owner/house-A/enhanced/03-final-night.jpg",
+     "src_px": [
+      1512,
+      2016
+     ],
+     "what": "finished house at night, LED lines; crop right edge ≤ .77 keeps the dog at the door (x .78–.82, y .64) OUT",
+     "box": "window",
+     "entry": {
+      "type": "roof_band",
+      "frame": 525,
+      "frames": [
+       525,
+       541
+      ]
+     },
+     "content": "photo",
+     "crop_from": {
+      "x": 0.01,
+      "y": 0.04,
+      "w": 0.758,
+      "h": 0.7578
+     },
+     "crop_to": {
+      "x": 0.025,
+      "y": 0.07,
+      "w": 0.72,
+      "h": 0.7198
+     },
+     "life": [
+      525,
+      597
+     ]
+    },
+    {
+     "id": "W",
+     "story": "W",
+     "stage": "result",
+     "src": null,
+     "what": "drawing-sheet layer (paper + blueprint grid inside the window) carrying the wooden-house plates; enters with the gold piece",
+     "box": "window",
+     "content": "sheet",
+     "entry": {
+      "type": "gold_piece",
+      "frame": 585,
+      "frames": [
+       585,
+       597
+      ]
+     },
+     "life": [
+      585,
+      779
+     ]
     }
    ],
+   "sheets": {
+    "B1": {
+     "bg": "theme.bg #f5f5f3 + blueprint pattern (same css as items.L02.blueprint, unmasked, opacity 0.7) inside the window",
+     "plates": [
+      {
+       "src": "marketing/instagram/assets/owner/pool-B/enhanced/01-start-formwork.jpg",
+       "src_px": [
+        2652,
+        1500
+       ],
+       "rect": {
+        "x": 130,
+        "y": 784.6,
+        "w": 820,
+        "h": 463.8
+       },
+       "crop_from": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+       },
+       "crop_to": {
+        "x": 0.02,
+        "y": 0.02,
+        "w": 0.96,
+        "h": 0.96
+       },
+       "push_frames": [
+        315,
+        359
+       ],
+       "frame_line": "outline 1px rgba(133,103,39,0.55) at 14 px outside the plate (passe-partout line), plus 1 px rgba(23,25,28,0.18) on the plate edge",
+       "scale_note": "plate 820 px wide = ×0.64–0.667 of the ORIGINAL 1280 px (downscale), centred on the window centre y 1016.5"
+      }
+     ]
+    },
+    "W": {
+     "bg": "as B1",
+     "plates": [
+      {
+       "id": "W04",
+       "src": "marketing/instagram/assets/owner/house-B-wood/04-result.jpg",
+       "src_px": [
+        1290,
+        757
+       ],
+       "what": "A-frame front with terrace (hero) — slow pan right; whole A-frame stays in the plate",
+       "slot": "top",
+       "rect": {
+        "x": 70,
+        "y": 454,
+        "w": 940,
+        "h": 551
+       },
+       "life": [
+        585,
+        629
+       ],
+       "crop_from": {
+        "x": 0.0,
+        "y": 0.03,
+        "w": 0.94,
+        "h": 0.939
+       },
+       "crop_to": {
+        "x": 0.06,
+        "y": 0.03,
+        "w": 0.94,
+        "h": 0.939
+       },
+       "push_frames": [
+        585,
+        629
+       ],
+       "entry": {
+        "type": "with_sheet",
+        "frames": [
+         585,
+         597
+        ]
+       },
+       "scale_note": "plate 940 px = ×0.775 of the 1290 px original at crop w 0.94 (downscale)"
+      },
+      {
+       "id": "W05",
+       "src": "marketing/instagram/assets/owner/house-B-wood/05-result.jpg",
+       "src_px": [
+        1290,
+        756
+       ],
+       "what": "terrace with mountain view — slow pan left",
+       "slot": "bottom",
+       "rect": {
+        "x": 70,
+        "y": 1029,
+        "w": 940,
+        "h": 551
+       },
+       "life": [
+        585,
+        659
+       ],
+       "crop_from": {
+        "x": 0.06,
+        "y": 0.0,
+        "w": 0.94,
+        "h": 0.9402
+       },
+       "crop_to": {
+        "x": 0.0,
+        "y": 0.03,
+        "w": 0.94,
+        "h": 0.9402
+       },
+       "push_frames": [
+        585,
+        659
+       ],
+       "entry": {
+        "type": "with_sheet",
+        "frames": [
+         585,
+         597
+        ]
+       },
+       "scale_note": "plate 940 px = ×0.775 of the 1290 px original at crop w 0.94 (downscale)"
+      },
+      {
+       "id": "W01",
+       "src": "marketing/instagram/assets/owner/house-B-wood/01-result.jpg",
+       "src_px": [
+        1290,
+        756
+       ],
+       "what": "garden facade, balustrades — slow tilt down",
+       "slot": "top",
+       "rect": {
+        "x": 70,
+        "y": 454,
+        "w": 940,
+        "h": 551
+       },
+       "life": [
+        615,
+        779
+       ],
+       "crop_from": {
+        "x": 0.03,
+        "y": 0.0,
+        "w": 0.94,
+        "h": 0.9402
+       },
+       "crop_to": {
+        "x": 0.03,
+        "y": 0.05,
+        "w": 0.94,
+        "h": 0.9402
+       },
+       "push_frames": [
+        615,
+        779
+       ],
+       "entry": {
+        "type": "wipe_v_slot",
+        "frames": [
+         615,
+         629
+        ]
+       },
+       "scale_note": "plate 940 px = ×0.775 of the 1290 px original at crop w 0.94 (downscale)"
+      },
+      {
+       "id": "W06",
+       "src": "marketing/instagram/assets/owner/house-B-wood/06-result.jpg",
+       "src_px": [
+        1290,
+        755
+       ],
+       "what": "terrace side, mountains — slow pan right",
+       "slot": "bottom",
+       "rect": {
+        "x": 70,
+        "y": 1029,
+        "w": 940,
+        "h": 551
+       },
+       "life": [
+        645,
+        779
+       ],
+       "crop_from": {
+        "x": 0.0,
+        "y": 0.05,
+        "w": 0.94,
+        "h": 0.9414
+       },
+       "crop_to": {
+        "x": 0.06,
+        "y": 0.02,
+        "w": 0.94,
+        "h": 0.9414
+       },
+       "push_frames": [
+        645,
+        779
+       ],
+       "entry": {
+        "type": "wipe_v_slot",
+        "frames": [
+         645,
+         659
+        ]
+       },
+       "scale_note": "plate 940 px = ×0.775 of the 1290 px original at crop w 0.94 (downscale)"
+      }
+     ]
+    }
+   },
+   "end_overlay": {
+    "css": "div 0,0,1080,1920 background #f5f5f3 (theme.end_overlay) above the shots, below logo/labels/end card",
+    "opacity": [
+     [
+      667,
+      0,
+      "inOutSine"
+     ],
+     [
+      689,
+      0.9,
+      "linear"
+     ],
+     [
+      764,
+      0.94,
+      "inOutSine"
+     ],
+     [
+      779,
+      1.0
+     ]
+    ],
+    "blur_px_on_W": [
+     [
+      667,
+      0,
+      "inOutSine"
+     ],
+     [
+      691,
+      8
+     ]
+    ],
+    "note": "the wooden-house sheet stays as a pale blurred ghost behind the end card; f779 is pure paper + end-card graphics → clean loop to f0."
+   },
    "styles_local": {
-    "photo_label": {
+    "section_label": {
      "font": "text",
      "weight": 500,
-     "size": 22,
+     "size": 18,
+     "letter_spacing": "0.24em",
+     "transform": "uppercase",
+     "color": "rgba(23,25,28,0.62)",
+     "note": "right-aligned to x 1010 (margin-right −letter-spacing)"
+    },
+    "stage_label": {
+     "font": "display",
+     "weight": 500,
+     "size": 40,
+     "line_height": 1.1,
+     "color": "#856727",
+     "note": "right-aligned to x 1010; box y 294–338"
+    },
+    "chip": {
+     "font": "text",
+     "weight": 500,
+     "size": 20,
      "letter_spacing": "0.2em",
      "transform": "uppercase",
      "color": "#856727",
-     "note": "services line, right-aligned to x 1010: add margin-right −0.2em so the last glyph, not the tracking, touches x 1010. Must stay right of x 240 (corner logo ends at x 202) — STOP if wider; then use size 20."
+     "bg": "rgba(245,245,243,0.94)",
+     "padding": "10px 16px 10px 18px",
+     "note": "cover only"
     },
     "end_display": {
      "font": "display",
@@ -2218,30 +2593,31 @@
       "hold"
      ],
      [
-      280,
+      667,
       0.92,
       "inOutSine"
      ],
      [
-      288,
+      675,
       0
      ]
     ],
-    "note": "brand.logo.reel (light file); only during act D; v3 fades out 280–288 before the P4 rect starts to expand (284), so the dark logo never sits on the image"
+    "note": "brand.logo.reel (light file); act D only; fades before the end card (which has its own big logo)"
    },
    "labels": [
     {
-     "style": "photo_label",
-     "text": "Տներ · Լողավազաններ · Վերանորոգում",
+     "kind": "section",
+     "style": "section_label",
+     "text": "Լողավազան",
      "x": 240,
-     "y": 297,
+     "y": 270,
      "w": 770,
      "align": "right",
      "opacity": [
       [
        186,
        0,
-       "outSine"
+       "outCubic"
       ],
       [
        196,
@@ -2249,25 +2625,862 @@
        "hold"
       ],
       [
-       280,
+       446,
        1,
-       "inOutSine"
+       "inSine"
       ],
       [
-       288,
+       452,
        0
+      ]
+     ],
+     "translate_y": [
+      [
+       186,
+       8,
+       "outCubic"
+      ],
+      [
+       196,
+       0
+      ]
+     ]
+    },
+    {
+     "kind": "section",
+     "style": "section_label",
+     "text": "Տուն",
+     "x": 240,
+     "y": 270,
+     "w": 770,
+     "align": "right",
+     "opacity": [
+      [
+       454,
+       0,
+       "outCubic"
+      ],
+      [
+       464,
+       1,
+       "hold"
+      ],
+      [
+       581,
+       1,
+       "inSine"
+      ],
+      [
+       587,
+       0
+      ]
+     ],
+     "translate_y": [
+      [
+       454,
+       8,
+       "outCubic"
+      ],
+      [
+       464,
+       0
+      ]
+     ]
+    },
+    {
+     "kind": "section",
+     "style": "section_label",
+     "text": "Փայտե տուն",
+     "x": 240,
+     "y": 270,
+     "w": 770,
+     "align": "right",
+     "opacity": [
+      [
+       589,
+       0,
+       "outCubic"
+      ],
+      [
+       599,
+       1,
+       "hold"
+      ],
+      [
+       667,
+       1,
+       "inSine"
+      ],
+      [
+       675,
+       0
+      ]
+     ],
+     "translate_y": [
+      [
+       589,
+       8,
+       "outCubic"
+      ],
+      [
+       599,
+       0
+      ]
+     ]
+    },
+    {
+     "kind": "stage",
+     "style": "stage_label",
+     "text": "Սկիզբ",
+     "x": 240,
+     "y": 294,
+     "w": 770,
+     "align": "right",
+     "opacity": [
+      [
+       186,
+       0,
+       "outCubic"
+      ],
+      [
+       196,
+       1,
+       "hold"
+      ],
+      [
+       207,
+       1,
+       "inSine"
+      ],
+      [
+       211,
+       0
+      ]
+     ],
+     "translate_y": [
+      [
+       186,
+       12,
+       "outCubic"
+      ],
+      [
+       196,
+       0,
+       "hold"
+      ],
+      [
+       207,
+       0,
+       "inSine"
+      ],
+      [
+       211,
+       -8
+      ]
+     ]
+    },
+    {
+     "kind": "stage",
+     "style": "stage_label",
+     "text": "Ընթացք",
+     "x": 240,
+     "y": 294,
+     "w": 770,
+     "align": "right",
+     "opacity": [
+      [
+       212,
+       0,
+       "outCubic"
+      ],
+      [
+       220,
+       1,
+       "hold"
+      ],
+      [
+       252,
+       1,
+       "inSine"
+      ],
+      [
+       256,
+       0
+      ]
+     ],
+     "translate_y": [
+      [
+       212,
+       12,
+       "outCubic"
+      ],
+      [
+       220,
+       0,
+       "hold"
+      ],
+      [
+       252,
+       0,
+       "inSine"
+      ],
+      [
+       256,
+       -8
+      ]
+     ]
+    },
+    {
+     "kind": "stage",
+     "style": "stage_label",
+     "text": "Արդյունք",
+     "x": 240,
+     "y": 294,
+     "w": 770,
+     "align": "right",
+     "opacity": [
+      [
+       257,
+       0,
+       "outCubic"
+      ],
+      [
+       265,
+       1,
+       "hold"
+      ],
+      [
+       312,
+       1,
+       "inSine"
+      ],
+      [
+       316,
+       0
+      ]
+     ],
+     "translate_y": [
+      [
+       257,
+       12,
+       "outCubic"
+      ],
+      [
+       265,
+       0,
+       "hold"
+      ],
+      [
+       312,
+       0,
+       "inSine"
+      ],
+      [
+       316,
+       -8
+      ]
+     ]
+    },
+    {
+     "kind": "stage",
+     "style": "stage_label",
+     "text": "Սկիզբ",
+     "x": 240,
+     "y": 294,
+     "w": 770,
+     "align": "right",
+     "opacity": [
+      [
+       317,
+       0,
+       "outCubic"
+      ],
+      [
+       325,
+       1,
+       "hold"
+      ],
+      [
+       342,
+       1,
+       "inSine"
+      ],
+      [
+       346,
+       0
+      ]
+     ],
+     "translate_y": [
+      [
+       317,
+       12,
+       "outCubic"
+      ],
+      [
+       325,
+       0,
+       "hold"
+      ],
+      [
+       342,
+       0,
+       "inSine"
+      ],
+      [
+       346,
+       -8
+      ]
+     ]
+    },
+    {
+     "kind": "stage",
+     "style": "stage_label",
+     "text": "Ընթացք",
+     "x": 240,
+     "y": 294,
+     "w": 770,
+     "align": "right",
+     "opacity": [
+      [
+       347,
+       0,
+       "outCubic"
+      ],
+      [
+       355,
+       1,
+       "hold"
+      ],
+      [
+       387,
+       1,
+       "inSine"
+      ],
+      [
+       391,
+       0
+      ]
+     ],
+     "translate_y": [
+      [
+       347,
+       12,
+       "outCubic"
+      ],
+      [
+       355,
+       0,
+       "hold"
+      ],
+      [
+       387,
+       0,
+       "inSine"
+      ],
+      [
+       391,
+       -8
+      ]
+     ]
+    },
+    {
+     "kind": "stage",
+     "style": "stage_label",
+     "text": "Արդյունք",
+     "x": 240,
+     "y": 294,
+     "w": 770,
+     "align": "right",
+     "opacity": [
+      [
+       392,
+       0,
+       "outCubic"
+      ],
+      [
+       400,
+       1,
+       "hold"
+      ],
+      [
+       447,
+       1,
+       "inSine"
+      ],
+      [
+       451,
+       0
+      ]
+     ],
+     "translate_y": [
+      [
+       392,
+       12,
+       "outCubic"
+      ],
+      [
+       400,
+       0,
+       "hold"
+      ],
+      [
+       447,
+       0,
+       "inSine"
+      ],
+      [
+       451,
+       -8
+      ]
+     ]
+    },
+    {
+     "kind": "stage",
+     "style": "stage_label",
+     "text": "Սկիզբ",
+     "x": 240,
+     "y": 294,
+     "w": 770,
+     "align": "right",
+     "opacity": [
+      [
+       452,
+       0,
+       "outCubic"
+      ],
+      [
+       460,
+       1,
+       "hold"
+      ],
+      [
+       477,
+       1,
+       "inSine"
+      ],
+      [
+       481,
+       0
+      ]
+     ],
+     "translate_y": [
+      [
+       452,
+       12,
+       "outCubic"
+      ],
+      [
+       460,
+       0,
+       "hold"
+      ],
+      [
+       477,
+       0,
+       "inSine"
+      ],
+      [
+       481,
+       -8
+      ]
+     ]
+    },
+    {
+     "kind": "stage",
+     "style": "stage_label",
+     "text": "Ընթացք",
+     "x": 240,
+     "y": 294,
+     "w": 770,
+     "align": "right",
+     "opacity": [
+      [
+       482,
+       0,
+       "outCubic"
+      ],
+      [
+       490,
+       1,
+       "hold"
+      ],
+      [
+       522,
+       1,
+       "inSine"
+      ],
+      [
+       526,
+       0
+      ]
+     ],
+     "translate_y": [
+      [
+       482,
+       12,
+       "outCubic"
+      ],
+      [
+       490,
+       0,
+       "hold"
+      ],
+      [
+       522,
+       0,
+       "inSine"
+      ],
+      [
+       526,
+       -8
+      ]
+     ]
+    },
+    {
+     "kind": "stage",
+     "style": "stage_label",
+     "text": "Արդյունք",
+     "x": 240,
+     "y": 294,
+     "w": 770,
+     "align": "right",
+     "opacity": [
+      [
+       527,
+       0,
+       "outCubic"
+      ],
+      [
+       535,
+       1,
+       "hold"
+      ],
+      [
+       582,
+       1,
+       "inSine"
+      ],
+      [
+       586,
+       0
+      ]
+     ],
+     "translate_y": [
+      [
+       527,
+       12,
+       "outCubic"
+      ],
+      [
+       535,
+       0,
+       "hold"
+      ],
+      [
+       582,
+       0,
+       "inSine"
+      ],
+      [
+       586,
+       -8
+      ]
+     ]
+    },
+    {
+     "kind": "stage",
+     "style": "stage_label",
+     "text": "Արդյունք",
+     "x": 240,
+     "y": 294,
+     "w": 770,
+     "align": "right",
+     "opacity": [
+      [
+       587,
+       0,
+       "outCubic"
+      ],
+      [
+       595,
+       1,
+       "hold"
+      ],
+      [
+       667,
+       1,
+       "inSine"
+      ],
+      [
+       675,
+       0
+      ]
+     ],
+     "translate_y": [
+      [
+       587,
+       12,
+       "outCubic"
+      ],
+      [
+       595,
+       0,
+       "hold"
+      ],
+      [
+       667,
+       0,
+       "inSine"
+      ],
+      [
+       675,
+       -8
       ]
      ]
     }
    ],
-   "labels_note": "ONE fixed services line (top-right, vertically centred on the corner logo, box y 297–324) for the whole act D. It does NOT change at the cuts, so it never reads as a caption of a specific image. String = 03-copy.json L02 scene 4 text. Replaces v2's per-photo labels «ՏՆԵՐ»/«ԼՈՂԱՎԱԶԱՆՆԵՐ» (honesty rule).",
+   "labels_note": "Section label (tiny, tracked, ink 62%) + stage label (dark gold display) right-aligned to x 1010, vertically matched to the corner logo (y 262–358). Stage label changes on each stage entry (out −3..+1, in +2..+10 frames around the beat). Pool A → Pool B keeps «Լողավազան» (no blink); the progress bar resets to 1 segment and signals the new project. Strings = 03-copy.json L02 scenes.",
+   "progress_ticks": {
+    "what": "stage progress: three 40x2 px segments, gap 8, right edge x 1010, y 352 (x 874–914, 922–962, 970–1010). Base colour rgba(23,25,28,0.16); a #856727 overlay per segment with the opacity keys below (cumulative: start = 1 lit, progress = 2, result = 3). Group fades with the corner logo; hidden for the wooden house (no stages).",
+    "rects": [
+     {
+      "x": 874,
+      "y": 352,
+      "w": 40,
+      "h": 2
+     },
+     {
+      "x": 922,
+      "y": 352,
+      "w": 40,
+      "h": 2
+     },
+     {
+      "x": 970,
+      "y": 352,
+      "w": 40,
+      "h": 2
+     }
+    ],
+    "base_color": "rgba(23,25,28,0.16)",
+    "lit_color": "#856727",
+    "group_opacity": [
+     [
+      186,
+      0,
+      "outSine"
+     ],
+     [
+      196,
+      1,
+      "hold"
+     ],
+     [
+      579,
+      1,
+      "inSine"
+     ],
+     [
+      587,
+      0
+     ]
+    ],
+    "lit": [
+     [
+      [
+       182,
+       0,
+       "outCubic"
+      ],
+      [
+       190,
+       1,
+       "hold"
+      ],
+      [
+       312,
+       1,
+       "inSine"
+      ],
+      [
+       316,
+       0,
+       "hold"
+      ],
+      [
+       317,
+       0,
+       "outCubic"
+      ],
+      [
+       325,
+       1,
+       "hold"
+      ],
+      [
+       447,
+       1,
+       "inSine"
+      ],
+      [
+       451,
+       0,
+       "hold"
+      ],
+      [
+       452,
+       0,
+       "outCubic"
+      ],
+      [
+       460,
+       1,
+       "hold"
+      ],
+      [
+       582,
+       1,
+       "inSine"
+      ],
+      [
+       586,
+       0,
+       "hold"
+      ]
+     ],
+     [
+      [
+       212,
+       0,
+       "outCubic"
+      ],
+      [
+       220,
+       1,
+       "hold"
+      ],
+      [
+       312,
+       1,
+       "inSine"
+      ],
+      [
+       316,
+       0,
+       "hold"
+      ],
+      [
+       347,
+       0,
+       "outCubic"
+      ],
+      [
+       355,
+       1,
+       "hold"
+      ],
+      [
+       447,
+       1,
+       "inSine"
+      ],
+      [
+       451,
+       0,
+       "hold"
+      ],
+      [
+       482,
+       0,
+       "outCubic"
+      ],
+      [
+       490,
+       1,
+       "hold"
+      ],
+      [
+       582,
+       1,
+       "inSine"
+      ],
+      [
+       586,
+       0,
+       "hold"
+      ]
+     ],
+     [
+      [
+       257,
+       0,
+       "outCubic"
+      ],
+      [
+       265,
+       1,
+       "hold"
+      ],
+      [
+       312,
+       1,
+       "inSine"
+      ],
+      [
+       316,
+       0,
+       "hold"
+      ],
+      [
+       392,
+       0,
+       "outCubic"
+      ],
+      [
+       400,
+       1,
+       "hold"
+      ],
+      [
+       447,
+       1,
+       "inSine"
+      ],
+      [
+       451,
+       0,
+       "hold"
+      ],
+      [
+       527,
+       0,
+       "outCubic"
+      ],
+      [
+       535,
+       1,
+       "hold"
+      ],
+      [
+       582,
+       1,
+       "inSine"
+      ],
+      [
+       586,
+       0,
+       "hold"
+      ]
+     ]
+    ]
+   },
    "end_card": {
     "frames": [
-     300,
-     419
+     675,
+     779
     ],
-    "fully_composed_from": 340,
-    "hold_s": 2.67,
+    "fully_composed_from": 715,
+    "hold_s": 2.17,
     "layers": [
      {
       "layer": "logo",
@@ -2278,23 +3491,23 @@
       "h": 291.76,
       "opacity": [
        [
-        304,
+        679,
         0,
         "outCubic"
        ],
        [
-        322,
+        697,
         1
        ]
       ],
       "translate_y": [
        [
-        304,
+        679,
         14,
         "outCubic"
        ],
        [
-        322,
+        697,
         0
        ]
       ],
@@ -2309,12 +3522,12 @@
       "color": "#856727",
       "scale_x": [
        [
-        314,
+        689,
         0,
         "outCubic"
        ],
        [
-        326,
+        701,
         1
        ]
       ],
@@ -2330,23 +3543,23 @@
       "align": "center",
       "opacity": [
        [
-        316,
+        691,
         0,
         "outCubic"
        ],
        [
-        330,
+        705,
         1
        ]
       ],
       "translate_y": [
        [
-        316,
+        691,
         16,
         "outCubic"
        ],
        [
-        330,
+        705,
         0
        ]
       ]
@@ -2361,12 +3574,12 @@
       "align": "center",
       "opacity": [
        [
-        322,
+        697,
         0,
         "outSine"
        ],
        [
-        332,
+        707,
         1
        ]
       ]
@@ -2380,12 +3593,12 @@
       "color": "#856727",
       "scale_x": [
        [
-        300,
+        675,
         0,
         "inOutSine"
        ],
        [
-        321,
+        696,
         1
        ]
       ],
@@ -2402,12 +3615,12 @@
       "align": "center",
       "opacity": [
        [
-        330,
+        705,
         0,
         "outSine"
        ],
        [
-        340,
+        715,
         1
        ]
       ]
@@ -2415,20 +3628,135 @@
     ],
     "safe_area_check": "All end-card glyphs y 433–≈1186 (inside 250–1500). Below y 1100 only garon.am: measured right edge must be ≤ 900 (expected ≈ 610) — STOP if not.",
     "no_date": "Default copy: no «15.11 · 20:00».",
-    "theme_note": "v3b: v3 colours/timing kept; the upper group (logo, rule, «Շուտով», services line) moved down 80 px to balance the space freed by the removed CTA; horizon stays at y 1106 (= frame-0 ground line, loop echo); garon.am at y 1146.",
+    "theme_note": "v4: v3b end card unchanged (content, positions, colours); every key shifted by +375 frames (v3b f300 → v4 f675). Background = paper veil over the blurred wooden-house sheet.",
     "content_v3b": "Logo, rule, «Շուտով», services line, horizon, garon.am — nothing else. Removed in v3b: «Գրեք «ՇՈՒՏՈՎ» direct-ում։» and @garon__construction."
    },
    "cover": {
-    "what": "Separate still (not a timeline frame): final light lockup on the paper blueprint — the most recognisable, grid-safe image of the reel.",
-    "state": "setFrame(167) and then override: blueprint opacity 0.55, translate_y 0; dimensions group opacity 1 with dimA/dimB fully drawn and their ext/ticks/datum at 1, guides 0; ground line sx 0.409 opacity 0.9 at groundY = 962.8; glint off.",
+    "what": "Separate still (not a timeline frame): BEFORE/AFTER SPLIT of Pool B — the same pool from the same viewpoint, concrete (left) | finished mosaic (right), split on the jacuzzi centre with a 2 px #c9a96a vertical line, inside the 3:4 window on the paper blueprint; corner logo + section label «Լողավազան» top; two paper chips «Ընթացք» / «Արդյունք» inside the image top corners.",
+    "layers": [
+     {
+      "layer": "bg",
+      "color": "#f5f5f3"
+     },
+     {
+      "layer": "blueprint",
+      "opacity": 0.55,
+      "note": "items.L02.blueprint css, translate 0"
+     },
+     {
+      "layer": "vlines",
+      "opacity": 1
+     },
+     {
+      "layer": "photo_half",
+      "src": "marketing/instagram/assets/owner/pool-B/enhanced/02-progress-concrete.jpg",
+      "box": {
+       "x": 70,
+       "y": 390,
+       "w": 940,
+       "h": 1253
+      },
+      "crop": {
+       "x": 0.29,
+       "y": 0.0,
+       "w": 0.45,
+       "h": 0.7998
+      },
+      "clip_screen": {
+       "x": 70,
+       "y": 390,
+       "w": 470,
+       "h": 1253
+      }
+     },
+     {
+      "layer": "photo_half",
+      "src": "marketing/instagram/assets/owner/pool-B/enhanced/03-final-mosaic.jpg",
+      "box": {
+       "x": 70,
+       "y": 390,
+       "w": 940,
+       "h": 1253
+      },
+      "crop": {
+       "x": 0.347,
+       "y": 0.05,
+       "w": 0.45,
+       "h": 0.7998
+      },
+      "clip_screen": {
+       "x": 540,
+       "y": 390,
+       "w": 470,
+       "h": 1253
+      }
+     },
+     {
+      "layer": "split_line",
+      "x": 539,
+      "y": 390,
+      "w": 2,
+      "h": 1253,
+      "color": "#c9a96a"
+     },
+     {
+      "layer": "frame_line",
+      "rect": {
+       "x": 70,
+       "y": 390,
+       "w": 940,
+       "h": 1253
+      },
+      "css": "theme.frame_line"
+     },
+     {
+      "layer": "corner_logo",
+      "as": "items.L02.corner_logo",
+      "opacity": 0.92
+     },
+     {
+      "layer": "text",
+      "style": "section_label",
+      "text": "Լողավազան",
+      "x": 240,
+      "y": 270,
+      "w": 770,
+      "align": "right"
+     },
+     {
+      "layer": "text",
+      "style": "stage_label",
+      "text": "Ընթացք → Արդյունք",
+      "x": 240,
+      "y": 294,
+      "w": 770,
+      "align": "right"
+     },
+     {
+      "layer": "chip",
+      "style": "chip",
+      "text": "Ընթացք",
+      "x": 94,
+      "y": 414,
+      "align": "left"
+     },
+     {
+      "layer": "chip",
+      "style": "chip",
+      "text": "Արդյունք",
+      "x_right": 986,
+      "y": 414,
+      "align": "right"
+     }
+    ],
     "size": [
      1080,
      1920
     ],
     "output": "L02_cover.png → L02_cover.jpg (q 92, png2jpg.py)",
-    "grid_check": "Profile grid 3:4 (y 240–1680) contains the whole lockup (y 724–1143 incl. dimension lines).",
+    "grid_check": "Profile grid 3:4 (y 240–1680) contains logo, labels and the whole window (y 262–1643).",
     "upload": "Set as Reel cover; «Show in profile grid» ON; not a Trial Reel.",
-    "text_note": "v3b: the cover carries NO text other than the logo lockup itself (no hooks, no CTA, no handle)."
+    "text_note": "No removed texts (no hooks, CTA, handle). Only the stage words + section label from the reel."
    },
    "audio": {
     "mood": "Modern cinematic minimal / architectural: deep sub pulse, felt piano or soft synth pluck, clock-like hi ticks, one low impact; no vocals, no EDM drop, no epic trailer braams. Warm, confident, quiet luxury.",
@@ -2444,100 +3772,135 @@
       "f": 45,
       "s": 1.5,
       "bar_beat": "1.4",
-      "event": "first stem rises (+ stems at 50, 55): light tick/click on each"
+      "event": "stems rise (ticks at 45/50/55)"
      },
      {
       "f": 60,
       "s": 2.0,
       "bar_beat": "2.1",
-      "event": "roof band 1 extrudes (soft whoosh), band 2 at 68"
-     },
-     {
-      "f": 90,
-      "s": 3.0,
-      "bar_beat": "2.3",
-      "event": "gold piece starts to fall (riser / reverse swell)"
+      "event": "roof bands extrude (soft whoosh)"
      },
      {
       "f": 105,
       "s": 3.5,
       "bar_beat": "2.4",
-      "event": "IMPACT: gold lands — low hit, the strongest accent of acts A–C"
+      "event": "IMPACT: gold piece lands"
      },
      {
       "f": 120,
       "s": 4.0,
       "bar_beat": "3.1",
-      "event": "camera pull-back; glint 124–150 (shimmer)"
-     },
-     {
-      "f": 135,
-      "s": 4.5,
-      "bar_beat": "3.2",
-      "event": "GARON tracks in (132–160)"
+      "event": "camera pull-back, glint, wordmark"
      },
      {
       "f": 180,
       "s": 6.0,
       "bar_beat": "4.1",
-      "event": "CUT S1 (stock) (roof band) — groove/beat starts here"
+      "event": "DOWNBEAT — groove starts: logo gold piece opens Pool A «Սկիզբ»"
      },
      {
       "f": 210,
       "s": 7.0,
       "bar_beat": "4.3",
-      "event": "CUT S2 (sliding frame)"
+      "event": "gold wipe → «Ընթացք»"
      },
      {
-      "f": 240,
-      "s": 8.0,
-      "bar_beat": "5.1",
-      "event": "CUT S3 (gold piece opens)"
+      "f": 255,
+      "s": 8.5,
+      "bar_beat": "5.2",
+      "event": "roof band → «Արդյունք» (accent)"
      },
      {
-      "f": 270,
-      "s": 9.0,
-      "bar_beat": "5.3",
-      "event": "CUT S4 (roof band → full bleed at 300)"
+      "f": 315,
+      "s": 10.5,
+      "bar_beat": "6.2",
+      "event": "gold piece → Pool B «Սկիզբ» (gold flash on 311)"
      },
      {
-      "f": 300,
-      "s": 10.0,
-      "bar_beat": "6.1",
-      "event": "END CARD: resolve chord, groove drops out"
+      "f": 345,
+      "s": 11.5,
+      "bar_beat": "6.4",
+      "event": "gold wipe → «Ընթացք»"
      },
      {
-      "f": 360,
-      "s": 12.0,
-      "bar_beat": "7.1",
+      "f": 390,
+      "s": 13.0,
+      "bar_beat": "7.3",
+      "event": "roof band → «Արդյունք» (accent)"
+     },
+     {
+      "f": 450,
+      "s": 15.0,
+      "bar_beat": "8.4",
+      "event": "gold piece → House «Սկիզբ»"
+     },
+     {
+      "f": 480,
+      "s": 16.0,
+      "bar_beat": "9.1",
+      "event": "gold wipe → «Ընթացք»"
+     },
+     {
+      "f": 525,
+      "s": 17.5,
+      "bar_beat": "9.4",
+      "event": "roof band → «Արդյունք» (night house, strongest accent)"
+     },
+     {
+      "f": 585,
+      "s": 19.5,
+      "bar_beat": "10.4",
+      "event": "gold piece → wooden house sheet"
+     },
+     {
+      "f": 615,
+      "s": 20.5,
+      "bar_beat": "11.2",
+      "event": "slot wipe (upper plate → facade)"
+     },
+     {
+      "f": 645,
+      "s": 21.5,
+      "bar_beat": "11.4",
+      "event": "slot wipe (lower plate → terrace side)"
+     },
+     {
+      "f": 675,
+      "s": 22.5,
+      "bar_beat": "12.2",
+      "event": "END CARD: groove drops out, resolve"
+     },
+     {
+      "f": 720,
+      "s": 24.0,
+      "bar_beat": "13.1",
       "event": "hold (sustain / tail)"
      },
      {
-      "f": 420,
-      "s": 14.0,
-      "bar_beat": "8.1",
+      "f": 780,
+      "s": 26.0,
+      "bar_beat": "14.1",
       "event": "loop point = downbeat"
      }
     ],
-    "source": "Pick a track in the Instagram app (Meta Sound Collection / licensed library for business accounts) by MOOD + ~120 BPM, not by name. In the app, slide the track start so its first strong downbeat lands at 6.0 s (P1 cut) and check that 3.5 s and 10.0 s fall on beats. Export the MP4 with a silent AAC track. If the music is mixed offline instead: licensed track only, -14 LUFS, -1 dBTP, fade out 13.5–14.0 s.",
-    "fallback": "No music: subtle SFX only (ticks at 45/50/55, whoosh 60/68, low thud 105, shimmer 124–150, soft hits on 180/210/240/270) from a royalty-free library."
+    "source": "Pick a track in the Instagram app (Meta Sound Collection / licensed library for business accounts) by MOOD + ~120 BPM, not by name. In the app, slide the track start so its first strong downbeat lands at 6.0 s (first story) and check that 3.5 s and 22.5 s fall on beats. Export the MP4 with a silent AAC track. If the music is mixed offline instead: licensed track only, -14 LUFS, -1 dBTP, fade out 25.5–26.0 s.",
+    "fallback": "No music: subtle SFX only (build SFX as v3b; soft hit on every transition beat listed above, low thud at 255/390/525)."
    },
-   "alt_hy": "Կարճ տեսանյութ բաց ֆոնի վրա. մոխրագույն ճարտարապետական ցանցի վրա գծվում է մուգ ոսկեգույն գիծ, դրանից բարձրանում են GARON նշանի սյուները, տեղ են նստում տանիքի շերտերը, վերջում իջնում է ոսկեգույն մասը։ Հայտնվում են GARON և CONSTRUCTION բառերը։ Հետո՝ չորս պատկերազարդ stock լուսանկար (ոչ GARON-ի նախագծեր)՝ ժամանակակից տուն մթնշաղին, լողավազանով վիլլա, լուսավոր հյուրասենյակ և ճակատ մթնշաղին, վերևում՝ «Տներ · Լողավազաններ · Վերանորոգում»։ Վերջում՝ լոգոն, «Շուտով», «Լողավազաններ · Տներ · Վերանորոգում» և garon.am։",
+   "alt_hy": "Կարճ տեսանյութ բաց ֆոնի վրա. մոխրագույն ճարտարապետական ցանցի վրա կառուցվում է GARON նշանը՝ գիծ, սյուներ, տանիքի շերտեր, ոսկեգույն մաս, հետո հայտնվում են GARON և CONSTRUCTION բառերը։ Նշանի ոսկեգույն մասը մեծանում է և բացում GARON-ի նախագծերի լուսանկարները՝ փուլ առ փուլ, «Սկիզբ», «Ընթացք», «Արդյունք» պիտակներով։ Լողավազան. ամրանավորված փոս, հետո բետոնե ավազան, հետո պատրաստի կապույտ լողավազան քարե պատի և նարդոսի մոտ։ Մեկ այլ լողավազան. կլոր կաղապարամած, հետո բետոնե ավազան ջակուզիով, հետո կապույտ խճանկարով երեսպատված լողավազան։ Տուն. հիմքի կաղապարամած, հետո բետոնե կմախք ապակիներով, հետո պատրաստի տունը գիշերը՝ լուսավոր գծերով։ Հետո՝ պատրաստի փայտե տուն լեռներում. A-աձև ճակատ, տեռաս լեռների տեսարանով, այգու կողմի ճակատ։ Վերջում՝ լոգոն, «Շուտով», «Լողավազաններ · Տներ · Վերանորոգում» և garon.am։",
    "checks": [
-    "ffprobe: 1080x1920, 30 fps, 420 frames, 14.000 s, yuv420p, AAC track present (silent).",
-    "Frame 117 vs 118 and 166 vs 167 (swaps): mean abs diff < 1/255, no hairline seams visible at 300% zoom on the mark.",
-    "Frame 166: mark + wordmark pixel-match a reference render of garon-logo-light.svg at 680x496, x200 y700 on #f5f5f3.",
-    "No text at all in f0–179 (v3b); services line inside x 240–1010; end-card text inside safe area, nothing right of x 900 below y 1100; end card contains no «ՇՈՒՏՈՎ»/direct CTA and no @handle.",
-    "Only the 4 listed stock files appear (grep the HTML: no public/projects, public/services, public/stock); CREDITS.md lists all four.",
-    "Honesty: no per-image category labels, no «մեր աշխատանքը»/«իրական» on screen; caption/alt state the images are stock.",
-    "Frames 0 and 419 are both plain paper (+ end-card graphics at 419): clean loop.",
-    "Contact sheet of frames 0, 30, 50, 75, 105, 140, 166, 190, 217, 244, 275, 300, 345, 419 for review."
+    "ffprobe: 1080x1920, 30 fps, 780 frames, 26.000 s, yuv420p, AAC track present (silent).",
+    "Frames 117/118 and 166/167 (swaps): mean abs diff < 1/255.",
+    "No text at all in f0–179; labels inside x 240–1010, y 262–360; end-card text inside the safe area, nothing right of x 900 below y 1100; no «ՇՈՒՏՈՎ»/direct CTA, no @handle.",
+    "Only the files in shots/sheets appear (grep the HTML: no assets/stock, public/projects, public/services, public/stock).",
+    "No dog / person visible in A1–H3 (check frames at each shot's crop_from and crop_to).",
+    "Scale vs ORIGINAL pixels ≤ ×1.35 for every shot (see photo_rules.resolution).",
+    "Frames 0 and 779: plain paper (+ end-card graphics at 779): clean loop.",
+    "Contact sheet: frames 0, 105, 166, 186, 200, 230, 280, 320, 360, 420, 470, 500, 560, 595, 640, 700, 779."
    ],
-   "caption_note": "caption.txt / alt_hy.txt in 05-output/L02 must be regenerated from 03-copy.json (v3b: hook first line and «ՇՈՒՏՈՎ» DM CTA removed from caption hy/ru/en; alt_hy updated).",
+   "caption_note": "caption.txt / alt_hy.txt in 05-output/L02 must be regenerated from 03-copy.json (v4: stock paragraph removed, caption now introduces the real project stages; alt_hy rewritten).",
    "honesty": {
-    "rule": "Stock images are atmosphere only. FORBIDDEN on screen, in caption and alt text: «մեր աշխատանքը», «մեր նախագծերը», «իրական», project names, locations, per-image category labels («ՏՆԵՐ» on a house shot, «ԼՈՂԱՎԱԶԱՆՆԵՐ» on a pool shot) or anything that reads as «this is a GARON project».",
-    "allowed": "One fixed services line during act D (same string on all four shots, it does not change at the cuts) + the end card. The caption says explicitly that the reel images are illustrative stock and that real work will be shown later as photos.",
-    "source_of_truth": "marketing/instagram/assets/stock/CREDITS.md (licence, CDN URL, date)."
+    "rule": "All photos are GARON's own projects (owner confirmed 2026-11-11 for pool-A, pool-B, house-A, house-B-wood). On screen only generic labels (type of object + stage); no project names, places, dates, client info or counts.",
+    "processing": "pool-A/pool-B/house-A use owner-approved enhanced/ versions (white balance, contrast, denoise, sharpen; documented in tools/enhance_photos.py). No AI generation, no object removal — unwanted elements are cropped out, never retouched."
    },
    "theme": {
     "bg": "#f5f5f3",

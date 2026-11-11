@@ -1,8 +1,9 @@
-// L02 reference prototype (art director) — renders v3 (light theme + stock mood stills). File name kept from v2.
+// L02 reference prototype (art director) — renders v4 (light theme, logo build, real GARON project stories, wooden-house gallery, v3b end card). File name kept from v2.
 // Implements items.L02 of 04-render-spec.json literally; all colours come from items.L02.theme.
 // The SPEC is authoritative; this file only proves it is executable and gives the producer a starting point.
 // usage: node 04-L02v2-reference.js <repo_root> <out_dir> [frames=all|cover|0,30,105,...]
 //   writes <out_dir>/L02_%03d.png (and L02_cover.png for "cover"). Encode with items.L02.render.encode.
+//   playwright is installed globally: NODE_PATH=$(npm root -g) node 04-L02v2-reference.js ...
 const fs = require('fs');
 const path = require('path');
 const { chromium } = require('playwright');
@@ -176,17 +177,41 @@ function setup({ IT, LOGO_SVG, ROOT, STACK, hook }) {
   const GW = glyphs(IT.wordmark.garon, 'wmG', 'blurG'), CW = glyphs(IT.wordmark.construction, 'wmC', 'blurC');
   const logoImg = document.createElement('img'); logoImg.src = window.__LOGO_URL; logoImg.style.cssText = `position:absolute;left:0;top:0;width:${SB.w}px;height:${SB.h}px`; cam.appendChild(logoImg);
 
-  // photos
+  // ---- v4: real project shots in the 3:4 window (items.L02.shots / sheets / transitions)
   const W = IT.window.rect;
   const grade = 'saturate(0.92) contrast(1.05)';
-  const photos = {};
-  for (const ph of IT.photos) {
+  const bpCss = IT.blueprint.css.replace(/-webkit-mask-image:[^;]*;?/, '').replace(/; /g, ';');
+  const mkImg = (src, parent) => { const i = document.createElement('img'); i.src = file(src); i.style.cssText = `position:absolute;left:0;top:0;filter:${grade}`; parent.appendChild(i); return i; };
+  function sheetBg(parent, ox, oy) {
+    parent.style.background = TH.bg;
+    div(`position:absolute;left:${-ox}px;top:${-oy}px;width:1080px;height:1920px;opacity:0.7;${bpCss}`, parent);
+  }
+  const shots = [];
+  for (const sh of IT.shots) {
     const layer = div('position:absolute;left:0;top:0;width:1080px;height:1920px');
-    const isFull = ph.id === 'P4';
-    const box = isFull ? { x: 0, y: 0, w: 1080, h: 1920 } : W;
-    const inner = div(`position:absolute;left:${isFull ? 0 : W.x}px;top:${isFull ? 0 : W.y}px;width:${box.w}px;height:${box.h}px;overflow:hidden`, layer);
-    const img = document.createElement('img'); img.src = file(ph.src); img.style.cssText = `position:absolute;filter:${grade};transform-origin:0 0`; inner.appendChild(img);
-    photos[ph.id] = { ph, layer, inner, img, box };
+    const win = div(`position:absolute;left:${W.x}px;top:${W.y}px;width:${W.w}px;height:${W.h}px;overflow:hidden`, layer);
+    const inner = div(`position:absolute;left:0;top:0;width:${W.w}px;height:${W.h}px`, win);
+    const o = { sh, layer, inner, plates: [] };
+    if (sh.content === 'photo') {
+      o.plates.push({ p: { src_px: sh.src_px, rect: { w: W.w, h: W.h }, crop_from: sh.crop_from, crop_to: sh.crop_to, push_frames: sh.life }, img: mkImg(sh.src, inner) });
+    } else {
+      sheetBg(inner, W.x, W.y);
+      for (const p of IT.sheets[sh.id].plates.filter((p) => !p.entry || p.entry.type === 'with_sheet')) {
+        if (p.frame_line) div(`position:absolute;left:${p.rect.x - W.x - 14}px;top:${p.rect.y - W.y - 14}px;width:${p.rect.w + 28}px;height:${p.rect.h + 28}px;box-sizing:border-box;border:1px solid rgba(133,103,39,0.55)`, inner);
+        const box = div(`position:absolute;left:${p.rect.x - W.x}px;top:${p.rect.y - W.y}px;width:${p.rect.w}px;height:${p.rect.h}px;overflow:hidden;${p.frame_line ? 'outline:1px solid rgba(23,25,28,0.18)' : ''}`, inner);
+        o.plates.push({ p, img: mkImg(p.src, box) });
+      }
+    }
+    shots.push(o);
+  }
+  // slot plates (wood gallery) above the W sheet
+  const slots = [];
+  for (const sh of IT.shots) if (sh.content === 'sheet') for (const p of IT.sheets[sh.id].plates.filter((p) => p.entry && p.entry.type === 'wipe_v_slot')) {
+    const layer = div('position:absolute;left:0;top:0;width:1080px;height:1920px');
+    const box = div(`position:absolute;left:${p.rect.x}px;top:${p.rect.y}px;width:${p.rect.w}px;height:${p.rect.h}px;overflow:hidden`, layer);
+    const inner = div(`position:absolute;left:0;top:0;width:${p.rect.w}px;height:${p.rect.h}px`, box);
+    const edge = div('position:absolute;width:2px;background:' + TH.wipe_edge);
+    slots.push({ p, layer, inner, img: mkImg(p.src, inner), edge });
   }
   const goldFill = div('position:absolute;left:0;top:0;width:1080px;height:1920px;background:linear-gradient(135deg,#d4b57a,#b8955c)');
   const edges = sv('svg', { width: 1080, height: 1920, style: 'position:absolute;left:0;top:0' }, app);
@@ -194,10 +219,14 @@ function setup({ IT, LOGO_SVG, ROOT, STACK, hook }) {
   const eg = sv('g', { 'clip-path': 'url(#edgeClip)' }, edges);
   const e1 = sv('line', { stroke: TH.wipe_edge, 'stroke-width': 2 }, eg), e2 = sv('line', { stroke: TH.wipe_edge, 'stroke-width': 2 }, eg);
   const vEdge = div('position:absolute;width:2px;background:' + TH.wipe_edge);
+  for (const s of slots) app.appendChild(s.edge);
+  const frameLine = div(`position:absolute;box-sizing:border-box;left:${W.x}px;top:${W.y}px;width:${W.w}px;height:${W.h}px;border:${TH.frame_line}`);
   const endOv = div('position:absolute;left:0;top:0;width:1080px;height:1920px;background:' + TH.end_overlay);
-  const frameLine = div('position:absolute;box-sizing:border-box;border:' + TH.frame_line);
   const corner = document.createElement('img'); corner.src = file(IT.corner_logo.file);
   corner.style.cssText = `position:absolute;left:${IT.corner_logo.x}px;top:${IT.corner_logo.y}px;width:${IT.corner_logo.w}px;height:${IT.corner_logo.h}px`; app.appendChild(corner);
+  const PT = IT.progress_ticks;
+  const tickG = div('position:absolute;left:0;top:0;width:1080px;height:1920px');
+  const tickLit = PT.rects.map((r) => { div(`position:absolute;left:${r.x}px;top:${r.y}px;width:${r.w}px;height:${r.h}px;background:${PT.base_color}`, tickG); return div(`position:absolute;left:${r.x}px;top:${r.y}px;width:${r.w}px;height:${r.h}px;background:${PT.lit_color}`, tickG); });
 
   // text
   const fontOf = (k) => STACK[k];
@@ -214,20 +243,39 @@ function setup({ IT, LOGO_SVG, ROOT, STACK, hook }) {
     d.innerHTML = span; texts.push({ t, d, s }); return d;
   }
   const hooks = IT.hooks.map((h) => textEl(h, { ...hook, font: 'display' }));
-  const labels = IT.labels.map((l) => textEl(l, SL.photo_label));
+  const labels = IT.labels.map((l) => textEl(l, SL[l.style]));
   const endEls = IT.end_card.layers.map((L) => {
     if (L.layer === 'text') return { L, d: textEl(L, SL[L.style]) };
     if (L.layer === 'logo') { const i = document.createElement('img'); i.src = file(L.file); i.style.cssText = `position:absolute;left:${L.x}px;top:${L.y}px;width:${L.w}px;height:${L.h}px`; app.appendChild(i); return { L, d: i }; }
     return { L, d: div(`position:absolute;left:${L.x}px;top:${L.y}px;width:${L.w}px;height:${L.h}px;background:${L.color};transform-origin:${L.origin === 'left' ? '0 50%' : '50% 50%'}`) };
   });
 
+  // cover elements (hidden unless setCover)
+  const CV = IT.cover;
+  const coverG = div('position:absolute;left:0;top:0;width:1080px;height:1920px');
+  for (const L of CV.layers) {
+    if (L.layer === 'photo_half') {
+      const c = L.clip_screen;
+      const lay = div(`position:absolute;left:${c.x}px;top:${c.y}px;width:${c.w}px;height:${c.h}px;overflow:hidden`, coverG);
+      const img = document.createElement('img'); img.src = file(L.src); lay.appendChild(img);
+      const [SW, SH] = [0, 0];
+      img.dataset.crop = JSON.stringify(L.crop); img.dataset.box = JSON.stringify(L.box); img.dataset.clip = JSON.stringify(c);
+      img.style.cssText = `position:absolute;filter:${grade}`;
+    } else if (L.layer === 'split_line') div(`position:absolute;left:${L.x}px;top:${L.y}px;width:${L.w}px;height:${L.h}px;background:${L.color}`, coverG);
+    else if (L.layer === 'frame_line') div(`position:absolute;box-sizing:border-box;left:${L.rect.x}px;top:${L.rect.y}px;width:${L.rect.w}px;height:${L.rect.h}px;border:${TH.frame_line}`, coverG);
+    else if (L.layer === 'corner_logo') { const i = document.createElement('img'); i.src = file(IT.corner_logo.file); i.style.cssText = `position:absolute;left:${IT.corner_logo.x}px;top:${IT.corner_logo.y}px;width:${IT.corner_logo.w}px;height:${IT.corner_logo.h}px;opacity:${L.opacity}`; coverG.appendChild(i); }
+    else if (L.layer === 'text') coverG.appendChild(textEl(L, SL[L.style]));
+    else if (L.layer === 'chip') {
+      const s = SL[L.style];
+      const d = div(`position:absolute;top:${L.y}px;${L.align === 'right' ? `right:${1080 - L.x_right}px` : `left:${L.x}px`};background:${s.bg};padding:${s.padding};white-space:nowrap;${styleCss(s)}`, coverG);
+      d.textContent = L.text;
+    }
+  }
+  coverG.style.visibility = "hidden";
+
   // ---- helpers
   const vis = (el, o) => { el.style.opacity = o; el.style.visibility = o <= 0 ? 'hidden' : 'visible'; };
-  function placeCrop(p, crop) {
-    const [SW, SH] = p.ph.src_px; const sc = p.box.w / (crop.w * SW);
-    p.img.style.width = SW * sc + 'px'; p.img.style.height = SH * sc + 'px';
-    p.img.style.left = -crop.x * SW * sc + 'px'; p.img.style.top = -crop.y * SH * sc + 'px';
-  }
+
   function band(xc, yc, hv) { const y = (x) => yc - 0.5 * (x - xc); return [[-10, y(-10) - hv], [1090, y(1090) - hv], [1090, y(1090) + hv], [-10, y(-10) + hv]]; }
   const poly = (pts) => `polygon(${pts.map(([x, y]) => `${x.toFixed(2)}px ${y.toFixed(2)}px`).join(',')})`;
   function clipPoly(subject, rect) { // Sutherland–Hodgman against axis-aligned rect
@@ -292,65 +340,89 @@ function setup({ IT, LOGO_SVG, ROOT, STACK, hook }) {
     }
     const useImg = f >= 167 && !coverMode;
     svg.style.visibility = useImg ? 'hidden' : 'visible'; logoImg.style.visibility = useImg ? 'visible' : 'hidden';
-    // vlines, window frame
+    // vlines
     vis(vl, kf(IT.vlines.opacity, f));
-    // photos
-    const [p1, p2, p3, p4] = ['P1', 'P2', 'P3', 'P4'].map((k) => photos[k]);
+    // ---- v4 shots
+    const clamp01 = (x) => Math.max(0, Math.min(1, x));
+    const placeCrop2 = (img, [SW, SH], box, c) => { const sc = box.w / (c.w * SW); img.style.width = SW * sc + 'px'; img.style.height = SH * sc + 'px'; img.style.left = -c.x * SW * sc + 'px'; img.style.top = -c.y * SH * sc + 'px'; };
+    const pushCrop = (p) => lerp(p.crop_from, p.crop_to, clamp01((f - p.push_frames[0]) / (p.push_frames[1] - p.push_frames[0])));
+    const goldPts = (sh) => {
+      const e = sh.entry.frame, r = IT.transitions.gold_piece, u = clamp01((f - e) / 12);
+      const g = f <= e ? 1.6 : 1.6 * Math.pow(32, EZ.inOutCubic(u));
+      const an = sh.entry.type === 'gold_piece_from_logo' ? [728 + (540 - 728) * EZ.inOutCubic(u), 926.8 + (1016.5 - 926.8) * EZ.inOutCubic(u)] : r.anchor_px;
+      return r.shape_units.map(([x, y]) => [an[0] + g * x, an[1] + g * y]);
+    };
+    const wipeX = (e) => kf([[e, 1010, 'inOutQuart'], [e + 14, 70]], f);
     let edgeSet = false; vis(vEdge, 0); vis(goldFill, 0);
-    for (const p of [p1, p2, p3, p4]) {
-      const [a, b] = p.ph.life; const on = f >= a && f <= b && !coverMode; vis(p.layer, on ? 1 : 0); if (!on) continue;
-      const t = (f - a) / (b - a); placeCrop(p, lerp(p.ph.crop_from, p.ph.crop_to, t)); p.img.style.transform = '';
+    const endBlur = kf(IT.end_overlay.blur_px_on_W, f);
+    for (const o of shots) {
+      const sh = o.sh, [a, b] = sh.life, e = sh.entry.frame, tr = sh.entry.type;
+      // gold fill (may start before the shot's life)
+      if (!coverMode && /^gold_piece/.test(tr) && f >= e - 4 && f <= e + 11) {
+        const go = tr === 'gold_piece_from_logo' ? kf([[180, 1, 'hold'], [183, 1, 'outSine'], [190, 0]], f) : kf([[e - 4, 0, 'outSine'], [e - 1, 1, 'hold'], [e + 3, 1, 'outSine'], [e + 10, 0]], f);
+        if (go > 0) { const cp = clipPoly(goldPts(sh), W); goldFill.style.clipPath = cp.length ? poly(cp) : 'polygon(0 0,0 0,0 0)'; vis(goldFill, go); }
+      }
+      const on = f >= a && f <= b && !coverMode; vis(o.layer, on ? 1 : 0); if (!on) continue;
+      for (const pl of o.plates) placeCrop2(pl.img, pl.p.src_px, pl.p.rect, pushCrop(pl.p));
+      let clip = 'none', tx = 0;
+      if (/^gold_piece/.test(tr) && f < e + 12) { const cp = clipPoly(goldPts(sh), W); clip = cp.length ? poly(cp) : 'polygon(0 0,0 0,0 0)'; }
+      if (tr === 'wipe_v') {
+        if (f < e + 14) { const xe = wipeX(e); clip = poly([[xe, W.y], [W.x + W.w, W.y], [W.x + W.w, W.y + W.h], [xe, W.y + W.h]]); tx += 0.25 * (xe - 70); }
+        const eo = kf([[e, 1, 'hold'], [e + 14, 1, 'linear'], [e + 18, 0]], f);
+        if (eo > 0 && f <= e + 18) { const xe = wipeX(e); vEdge.style.left = xe - 1 + 'px'; vEdge.style.top = W.y + 'px'; vEdge.style.height = W.h + 'px'; vis(vEdge, eo); }
+      }
+      if (tr === 'roof_band') {
+        const pts = band(540, 1016.5, kf([[e, 18, 'inOutQuart'], [e + 16, 1400]], f));
+        if (f < e + 16) clip = poly(clipPoly(pts, W));
+        const eo = kf([[e, 1, 'hold'], [e + 10, 1, 'linear'], [e + 18, 0]], f);
+        if (eo > 0 && f <= e + 18) { setEdges(pts, W, eo); edgeSet = true; }
+      }
+      if (sh.exit && f >= sh.exit.frames[0]) tx += -0.12 * (1010 - wipeX(sh.exit.frames[0]));
+      o.inner.style.transform = tx ? `translateX(${tx}px)` : '';
+      o.layer.style.clipPath = clip;
+      o.layer.style.filter = sh.id === 'W' && endBlur > 0 ? `blur(${endBlur}px)` : '';
     }
-    if (f >= 180 && f <= 226) { // P1 roof band
-      const hv = kf(p1.ph.reveal.hv, f); const pts = band(460.8, 846, hv);
-      p1.layer.style.clipPath = poly(clipPoly(pts, W));
-      if (f >= 210) p1.img.style.transform = `translateX(${-0.12 * (1010 - kf(p2.ph.reveal.xe, f))}px)`;
-      const eo = kf(p1.ph.reveal.edges.opacity, f); if (eo > 0) { setEdges(pts, W, eo); edgeSet = true; }
+    for (const s of slots) {
+      const p = s.p, [a, b] = p.life, e = p.entry.frames[0], R = p.rect;
+      vis(s.edge, 0);
+      const on = f >= a && f <= b && !coverMode; vis(s.layer, on ? 1 : 0); if (!on) continue;
+      placeCrop2(s.img, p.src_px, R, pushCrop(p));
+      let clip = 'none', tx = 0;
+      if (f < e + 14) { const xe = wipeX(e); clip = poly([[xe, R.y], [R.x + R.w, R.y], [R.x + R.w, R.y + R.h], [xe, R.y + R.h]]); tx = 0.25 * (xe - 70); }
+      const eo = kf([[e, 1, 'hold'], [e + 14, 1, 'linear'], [e + 18, 0]], f);
+      if (eo > 0 && f <= e + 18) { s.edge.style.left = wipeX(e) - 1 + 'px'; s.edge.style.top = R.y + 'px'; s.edge.style.height = R.h + 'px'; vis(s.edge, eo); }
+      s.inner.style.transform = tx ? `translateX(${tx}px)` : '';
+      s.layer.style.clipPath = clip;
+      s.layer.style.filter = endBlur > 0 ? `blur(${endBlur}px)` : '';
     }
-    if (f >= 210 && f <= 256) { // P2 sliding frame
-      const xe = kf(p2.ph.reveal.xe, f);
-      p2.layer.style.clipPath = poly([[xe, W.y], [W.x + W.w, W.y], [W.x + W.w, W.y + W.h], [xe, W.y + W.h]]);
-      p2.img.style.transform = `translateX(${0.25 * (xe - 70)}px)`;
-      const eo = kf(p2.ph.reveal.edges.opacity, f);
-      if (eo > 0) { vEdge.style.left = xe - 1 + 'px'; vEdge.style.top = W.y + 'px'; vEdge.style.height = W.h + 'px'; vis(vEdge, eo); }
-    }
-    if (f >= 236 && f <= 286) { // P3 gold piece
-      const r = p3.ph.reveal; const g = f <= 240 ? 1.6 : 1.6 * Math.pow(32, EZ.inOutCubic(Math.min(1, (f - 240) / 12)));
-      const pts = r.shape_units.map(([x, y]) => [r.anchor_px[0] + g * x, r.anchor_px[1] + g * y]);
-      const cp = clipPoly(pts, W);
-      p3.layer.style.clipPath = cp.length ? poly(cp) : 'polygon(0 0,0 0,0 0)';
-      const go = kf(r.gold_fill.opacity, f);
-      if (go > 0) { goldFill.style.clipPath = p3.layer.style.clipPath; vis(goldFill, go); }
-    }
-    if (f >= 270) { // P4 roof band -> full bleed
-      const r = p4.ph.reveal; const R = kf(r.R, f); const pts = band(540, 1016.5, kf(r.hv, f));
-      p4.layer.style.clipPath = poly(clipPoly(pts, R));
-      const eo = kf(r.edges.opacity, f); if (eo > 0) { setEdges(pts, R, eo); edgeSet = true; }
-      p4.img.style.filter = `${grade} blur(${kf(p4.ph.end_blur_px, f)}px)`;
-      frameLine.style.left = R.x + 'px'; frameLine.style.top = R.y + 'px'; frameLine.style.width = R.w + 'px'; frameLine.style.height = R.h + 'px';
-    } else { frameLine.style.left = W.x + 'px'; frameLine.style.top = W.y + 'px'; frameLine.style.width = W.w + 'px'; frameLine.style.height = W.h + 'px'; }
     if (!edgeSet) vis(edges, 0);
-    vis(endOv, kf(p4.ph.end_overlay.opacity, f) * (f >= 270 ? 1 : 0));
     vis(frameLine, coverMode ? 0 : kf(IT.window.frame_line.opacity, f));
+    vis(endOv, coverMode ? 0 : kf(IT.end_overlay.opacity, f));
     vis(corner, coverMode ? 0 : kf(IT.corner_logo.opacity, f));
+    vis(tickG, coverMode ? 0 : kf(PT.group_opacity, f));
+    PT.lit.forEach((k, j) => vis(tickLit[j], kf(k, f)));
     // text
     IT.hooks.forEach((h, i) => { vis(hooks[i], coverMode ? 0 : kf(h.opacity, f)); hooks[i].style.transform = `translateY(${kf(h.translate_y, f)}px)`; });
-    IT.labels.forEach((l, i) => vis(labels[i], coverMode ? 0 : kf(l.opacity, f)));
+    IT.labels.forEach((l, i) => { vis(labels[i], coverMode ? 0 : kf(l.opacity, f)); labels[i].style.transform = l.translate_y ? `translateY(${kf(l.translate_y, f)}px)` : ''; });
     for (const { L, d } of endEls) {
       vis(d, coverMode ? 0 : (L.opacity ? kf(L.opacity, f) : (f >= L.scale_x[0][0] ? 1 : 0)));
       const tf = []; if (L.translate_y) tf.push(`translateY(${kf(L.translate_y, f)}px)`); if (L.scale_x) tf.push(`scaleX(${kf(L.scale_x, f)})`); d.style.transform = tf.join(' ');
     }
   };
   window.setCover = function () {
-    coverMode = false; window.setFrame(167); coverMode = true; window.setFrame(167);
-    vis(bp, 0.55); bp.style.transform = 'none';
-    dims.setAttribute('opacity', 1);
-    for (const { g, d, l } of Object.values(dimEls)) { const guide = /^guide|^plumb/.test(d.id); g.setAttribute('opacity', guide ? 0 : 1); if (l) { l.setAttribute('x2', d.line[2]); l.setAttribute('y2', d.line[3]); l.setAttribute('visibility', 'visible'); } }
-    ground.style.top = 962.8 - 1 + 'px'; ground.style.transform = 'scaleX(0.409)'; vis(ground, 0.9); vis(glow, 0);
-    svg.style.visibility = 'visible'; logoImg.style.visibility = 'hidden';
+    coverMode = true; window.setFrame(0);
+    vis(cam, 0); vis(ground, 0); vis(glow, 0);
+    vis(bp, 0.55); bp.style.transform = 'none'; vis(vl, 1);
+    for (const img of coverG.querySelectorAll('img[data-crop]')) {
+      const c = JSON.parse(img.dataset.crop), box = JSON.parse(img.dataset.box), cl = JSON.parse(img.dataset.clip);
+      const SW = img.naturalWidth, SH = img.naturalHeight, sc = box.w / (c.w * SW);
+      img.style.width = SW * sc + 'px'; img.style.height = SH * sc + 'px';
+      img.style.left = box.x - c.x * SW * sc - cl.x + 'px'; img.style.top = box.y - c.y * SH * sc - cl.y + 'px';
+    }
+    vis(coverG, 1);
   };
   window.measure = function () {
-    window.setFrame(380);
+    window.setFrame(700);
     return texts.map(({ t, d }) => { const r = d.querySelector('.in').getBoundingClientRect(); return { text: t.text, x0: Math.round(r.left), x1: Math.round(r.right), y0: Math.round(r.top), y1: Math.round(r.bottom), font: getComputedStyle(d).fontFamily }; });
   };
 }
