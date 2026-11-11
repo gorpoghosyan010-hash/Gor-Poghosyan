@@ -762,7 +762,7 @@
   },
   "L02": {
    "type": "reel",
-   "version": "v3 (2026-11-10, replaces v2 after owner feedback «it turned out good, but the photos were too poor — take photos/videos from other sources; make the background light»)",
+   "version": "v3b (2026-11-11, owner feedback on v3: no hook texts during the logo build; end card without the DM CTA and without the @handle). Base: v3 (2026-11-10, light theme + stock mood stills).",
    "publish_date": "2026-11-13 20:00",
    "asset_status": "ready",
    "needs_shoot": false,
@@ -859,13 +859,13 @@
      "act": "A+B build",
      "frames": "0–119",
      "s": "0.0–4.0",
-     "what": "blueprint grid + ground line, dimension lines, stems rise, roof bands extrude, gold piece drops & settles"
+     "what": "blueprint grid + ground line, dimension lines, stems rise, roof bands extrude, gold piece drops & settles — no on-screen text (v3b)"
     },
     {
      "act": "C reveal",
      "frames": "120–179",
      "s": "4.0–6.0",
-     "what": "camera pulls back to the final lockup, light glint across the mark, GARON + CONSTRUCTION track in"
+     "what": "camera pulls back to the final lockup, light glint across the mark, GARON + CONSTRUCTION track in — no on-screen text (v3b)"
     },
     {
      "act": "D mood",
@@ -877,7 +877,7 @@
      "act": "E end card",
      "frames": "300–419",
      "s": "10.0–14.0",
-     "what": "logo, «Շուտով», categories, DM CTA, garon.am, @garon__construction; fully composed at f344, held 2.5 s+"
+     "what": "logo, «Շուտով», services line, horizon, garon.am; fully composed at f340, held 2.6 s+"
     }
    ],
    "z_order": [
@@ -892,7 +892,6 @@
     "window_frame",
     "corner_logo",
     "labels",
-    "hooks",
     "end_card"
    ],
    "stage": {
@@ -2161,7 +2160,6 @@
     }
    ],
    "styles_local": {
-    "reel_hook": "styles.reel_hook with hook_style_override (display 500, 84 px, lh 1.12, colour #17191c, NO text-shadow)",
     "photo_label": {
      "font": "text",
      "weight": 500,
@@ -2191,17 +2189,6 @@
      "min_size": 20,
      "note": "centre with padding-left = letter-spacing (conventions.letter_spacing_centering)"
     },
-    "end_cta": {
-     "font": "text",
-     "weight": 600,
-     "size": 36,
-     "min_size": 30,
-     "line_height": 1.3,
-     "color": "#17191c",
-     "max_lines": 1,
-     "note": "the word «ՇՈՒՏՈՎ» incl. its «» in #856727 (wrap the substring «ՇՈՒՏՈՎ» in a span), rest #17191c",
-     "accent_color": "#856727"
-    },
     "end_url": {
      "font": "text",
      "weight": 500,
@@ -2209,142 +2196,10 @@
      "letter_spacing": "0.08em",
      "color": "#17191c",
      "max_lines": 1
-    },
-    "end_handle": {
-     "font": "text",
-     "weight": 500,
-     "size": 26,
-     "letter_spacing": "0.04em",
-     "color": "rgba(23,25,28,0.68)",
-     "max_lines": 1
     }
    },
-   "hooks": [
-    {
-     "style": "reel_hook",
-     "text": "Մեկ գիծ։",
-     "x": 70,
-     "y": 300,
-     "w": 940,
-     "align": "center",
-     "max_lines": 1,
-     "opacity": [
-      [
-       4,
-       0,
-       "outSine"
-      ],
-      [
-       12,
-       1,
-       "hold"
-      ],
-      [
-       40,
-       1,
-       "inSine"
-      ],
-      [
-       45,
-       0
-      ]
-     ],
-     "translate_y": [
-      [
-       4,
-       12,
-       "outCubic"
-      ],
-      [
-       16,
-       0
-      ]
-     ]
-    },
-    {
-     "style": "reel_hook",
-     "text": "Հետո՝ տուն։",
-     "x": 70,
-     "y": 300,
-     "w": 940,
-     "align": "center",
-     "max_lines": 1,
-     "opacity": [
-      [
-       45,
-       0,
-       "outSine"
-      ],
-      [
-       53,
-       1,
-       "hold"
-      ],
-      [
-       110,
-       1,
-       "inSine"
-      ],
-      [
-       116,
-       0
-      ]
-     ],
-     "translate_y": [
-      [
-       45,
-       12,
-       "outCubic"
-      ],
-      [
-       57,
-       0
-      ]
-     ]
-    },
-    {
-     "style": "reel_hook",
-     "text": "Հետո՝ GARON։",
-     "x": 70,
-     "y": 300,
-     "w": 940,
-     "align": "center",
-     "max_lines": 1,
-     "opacity": [
-      [
-       124,
-       0,
-       "outSine"
-      ],
-      [
-       132,
-       1,
-       "hold"
-      ],
-      [
-       172,
-       1,
-       "inSine"
-      ],
-      [
-       178,
-       0
-      ]
-     ],
-     "translate_y": [
-      [
-       124,
-       12,
-       "outCubic"
-      ],
-      [
-       136,
-       0
-      ]
-     ]
-    }
-   ],
-   "hooks_note": "Box y 300–395, above the mark at every camera state (mark top ≥ 753). Hook 1 = the ground line, hook 2 = the build, hook 3 = the wordmark. One line each — STOP if a hook wraps.",
+   "hooks": [],
+   "hooks_note": "v3b: NO on-screen text during the logo build (f0–179) — owner request. The animation, camera and timing are unchanged from v3; the mark is already centred vertically (f0 mark y 813–1107, final lockup y 753–1143 around screen centre 960), so nothing was moved. Do not add hooks back.",
    "corner_logo": {
     "file": "public/brand/garon-logo-light.svg",
     "x": 70,
@@ -2411,15 +2266,14 @@
      300,
      419
     ],
-    "fully_composed_from": 344,
-    "hold_s": 2.53,
-    "cta_visible_s": 2.73,
+    "fully_composed_from": 340,
+    "hold_s": 2.67,
     "layers": [
      {
       "layer": "logo",
       "file": "public/brand/garon-logo-light.svg",
       "x": 340,
-      "y": 330,
+      "y": 410,
       "w": 400,
       "h": 291.76,
       "opacity": [
@@ -2444,12 +2298,12 @@
         0
        ]
       ],
-      "note": "visible logo y ≈ 353–603"
+      "note": "visible logo y ≈ 433–683"
      },
      {
       "layer": "rule",
       "x": 508,
-      "y": 652,
+      "y": 732,
       "w": 64,
       "h": 2,
       "color": "#856727",
@@ -2471,7 +2325,7 @@
       "style": "end_display",
       "text": "Շուտով",
       "x": 70,
-      "y": 690,
+      "y": 770,
       "w": 940,
       "align": "center",
       "opacity": [
@@ -2502,7 +2356,7 @@
       "style": "end_cats",
       "text": "Լողավազաններ · Տներ · Վերանորոգում",
       "x": 70,
-      "y": 868,
+      "y": 948,
       "w": 940,
       "align": "center",
       "opacity": [
@@ -2514,37 +2368,6 @@
        [
         332,
         1
-       ]
-      ]
-     },
-     {
-      "layer": "text",
-      "style": "end_cta",
-      "text": "Գրեք «ՇՈՒՏՈՎ» direct-ում։",
-      "x": 70,
-      "y": 950,
-      "w": 940,
-      "align": "center",
-      "opacity": [
-       [
-        328,
-        0,
-        "outCubic"
-       ],
-       [
-        338,
-        1
-       ]
-      ],
-      "translate_y": [
-       [
-        328,
-        10,
-        "outCubic"
-       ],
-       [
-        338,
-        0
        ]
       ]
      },
@@ -2574,7 +2397,7 @@
       "style": "end_url",
       "text": "garon.am",
       "x": 70,
-      "y": 1140,
+      "y": 1146,
       "w": 940,
       "align": "center",
       "opacity": [
@@ -2588,42 +2411,24 @@
         1
        ]
       ]
-     },
-     {
-      "layer": "text",
-      "style": "end_handle",
-      "text": "@garon__construction",
-      "x": 70,
-      "y": 1190,
-      "w": 940,
-      "align": "center",
-      "opacity": [
-       [
-        334,
-        0,
-        "outSine"
-       ],
-       [
-        344,
-        1
-       ]
-      ]
      }
     ],
-    "safe_area_check": "All end-card glyphs y 353–1225 (inside 250–1500). Below y 1100 only garon.am and the handle: measured right edge must be ≤ 900 (expected ≈ 610 / 720) — STOP if not.",
+    "safe_area_check": "All end-card glyphs y 433–≈1186 (inside 250–1500). Below y 1100 only garon.am: measured right edge must be ≤ 900 (expected ≈ 610) — STOP if not.",
     "no_date": "Default copy: no «15.11 · 20:00».",
-    "theme_note": "v3: content, positions and timing identical to v2; only colours (paper background, ink text, dark gold accents) and the logo file (garon-logo-light.svg) changed."
+    "theme_note": "v3b: v3 colours/timing kept; the upper group (logo, rule, «Շուտով», services line) moved down 80 px to balance the space freed by the removed CTA; horizon stays at y 1106 (= frame-0 ground line, loop echo); garon.am at y 1146.",
+    "content_v3b": "Logo, rule, «Շուտով», services line, horizon, garon.am — nothing else. Removed in v3b: «Գրեք «ՇՈՒՏՈՎ» direct-ում։» and @garon__construction."
    },
    "cover": {
     "what": "Separate still (not a timeline frame): final light lockup on the paper blueprint — the most recognisable, grid-safe image of the reel.",
-    "state": "setFrame(167) and then override: hooks opacity 0; blueprint opacity 0.55, translate_y 0; dimensions group opacity 1 with dimA/dimB fully drawn and their ext/ticks/datum at 1, guides 0; ground line sx 0.409 opacity 0.9 at groundY = 962.8; glint off.",
+    "state": "setFrame(167) and then override: blueprint opacity 0.55, translate_y 0; dimensions group opacity 1 with dimA/dimB fully drawn and their ext/ticks/datum at 1, guides 0; ground line sx 0.409 opacity 0.9 at groundY = 962.8; glint off.",
     "size": [
      1080,
      1920
     ],
     "output": "L02_cover.png → L02_cover.jpg (q 92, png2jpg.py)",
     "grid_check": "Profile grid 3:4 (y 240–1680) contains the whole lockup (y 724–1143 incl. dimension lines).",
-    "upload": "Set as Reel cover; «Show in profile grid» ON; not a Trial Reel."
+    "upload": "Set as Reel cover; «Show in profile grid» ON; not a Trial Reel.",
+    "text_note": "v3b: the cover carries NO text other than the logo lockup itself (no hooks, no CTA, no handle)."
    },
    "audio": {
     "mood": "Modern cinematic minimal / architectural: deep sub pulse, felt piano or soft synth pluck, clock-like hi ticks, one low impact; no vocals, no EDM drop, no epic trailer braams. Warm, confident, quiet luxury.",
@@ -2717,18 +2522,18 @@
     "source": "Pick a track in the Instagram app (Meta Sound Collection / licensed library for business accounts) by MOOD + ~120 BPM, not by name. In the app, slide the track start so its first strong downbeat lands at 6.0 s (P1 cut) and check that 3.5 s and 10.0 s fall on beats. Export the MP4 with a silent AAC track. If the music is mixed offline instead: licensed track only, -14 LUFS, -1 dBTP, fade out 13.5–14.0 s.",
     "fallback": "No music: subtle SFX only (ticks at 45/50/55, whoosh 60/68, low thud 105, shimmer 124–150, soft hits on 180/210/240/270) from a royalty-free library."
    },
-   "alt_hy": "Կարճ տեսանյութ բաց ֆոնի վրա. մոխրագույն ճարտարապետական ցանցի վրա գծվում է մուգ ոսկեգույն գիծ, դրանից բարձրանում են GARON նշանի սյուները, տեղ են նստում տանիքի շերտերը, վերջում իջնում է ոսկեգույն մասը։ Հայտնվում են GARON և CONSTRUCTION բառերը։ Հետո՝ չորս պատկերազարդ stock լուսանկար (ոչ GARON-ի նախագծեր)՝ ժամանակակից տուն մթնշաղին, լողավազանով վիլլա, լուսավոր հյուրասենյակ և ճակատ մթնշաղին, վերևում՝ «Տներ · Լողավազաններ · Վերանորոգում»։ Վերջում՝ լոգոն, «Շուտով», «Լողավազաններ · Տներ · Վերանորոգում», «Գրեք «ՇՈՒՏՈՎ» direct-ում», garon.am և @garon__construction։",
+   "alt_hy": "Կարճ տեսանյութ բաց ֆոնի վրա. մոխրագույն ճարտարապետական ցանցի վրա գծվում է մուգ ոսկեգույն գիծ, դրանից բարձրանում են GARON նշանի սյուները, տեղ են նստում տանիքի շերտերը, վերջում իջնում է ոսկեգույն մասը։ Հայտնվում են GARON և CONSTRUCTION բառերը։ Հետո՝ չորս պատկերազարդ stock լուսանկար (ոչ GARON-ի նախագծեր)՝ ժամանակակից տուն մթնշաղին, լողավազանով վիլլա, լուսավոր հյուրասենյակ և ճակատ մթնշաղին, վերևում՝ «Տներ · Լողավազաններ · Վերանորոգում»։ Վերջում՝ լոգոն, «Շուտով», «Լողավազաններ · Տներ · Վերանորոգում» և garon.am։",
    "checks": [
     "ffprobe: 1080x1920, 30 fps, 420 frames, 14.000 s, yuv420p, AAC track present (silent).",
     "Frame 117 vs 118 and 166 vs 167 (swaps): mean abs diff < 1/255, no hairline seams visible at 300% zoom on the mark.",
-    "Frame 166 (no hooks layer): mark + wordmark pixel-match a reference render of garon-logo-light.svg at 680x496, x200 y700 on #f5f5f3.",
-    "Hooks: one line each, inside y 250–1500; services line inside x 240–1010; end-card text inside safe area, nothing right of x 900 below y 1100.",
+    "Frame 166: mark + wordmark pixel-match a reference render of garon-logo-light.svg at 680x496, x200 y700 on #f5f5f3.",
+    "No text at all in f0–179 (v3b); services line inside x 240–1010; end-card text inside safe area, nothing right of x 900 below y 1100; end card contains no «ՇՈՒՏՈՎ»/direct CTA and no @handle.",
     "Only the 4 listed stock files appear (grep the HTML: no public/projects, public/services, public/stock); CREDITS.md lists all four.",
     "Honesty: no per-image category labels, no «մեր աշխատանքը»/«իրական» on screen; caption/alt state the images are stock.",
     "Frames 0 and 419 are both plain paper (+ end-card graphics at 419): clean loop.",
     "Contact sheet of frames 0, 30, 50, 75, 105, 140, 166, 190, 217, 244, 275, 300, 345, 419 for review."
    ],
-   "caption_note": "caption.txt / alt_hy.txt in 05-output/L02 must be regenerated from 03-copy.json (v3: caption paragraph 4 (hy/ru/en) and alt_hy changed — the reel images are stock, the caption says so).",
+   "caption_note": "caption.txt / alt_hy.txt in 05-output/L02 must be regenerated from 03-copy.json (v3b: hook first line and «ՇՈՒՏՈՎ» DM CTA removed from caption hy/ru/en; alt_hy updated).",
    "honesty": {
     "rule": "Stock images are atmosphere only. FORBIDDEN on screen, in caption and alt text: «մեր աշխատանքը», «մեր նախագծերը», «իրական», project names, locations, per-image category labels («ՏՆԵՐ» on a house shot, «ԼՈՂԱՎԱԶԱՆՆԵՐ» on a pool shot) or anything that reads as «this is a GARON project».",
     "allowed": "One fixed services line during act D (same string on all four shots, it does not change at the cuts) + the end card. The caption says explicitly that the reel images are illustrative stock and that real work will be shown later as photos.",
@@ -2754,10 +2559,6 @@
     "wipe_edge": "#c9a96a",
     "frame_line": "1px solid rgba(133,103,39,0.55)",
     "end_overlay": "#f5f5f3"
-   },
-   "hook_style_override": {
-    "color": "#17191c",
-    "shadow": null
    }
   },
   "L03": {
