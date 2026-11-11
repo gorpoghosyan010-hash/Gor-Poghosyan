@@ -773,7 +773,7 @@
    "output": "out/L02/L02_reel.mp4",
    "cover_output": "out/L02/L02_cover.jpg",
    "supersedes": "v2 (dark theme + 4 GARON photos) and v1 (site splash capture). v1/v2 frames/cover must NOT be reused or mixed. Top-level `site_capture` stays (still used by L01b/L04).",
-   "concept": "LIGHT version. The GARON mark (garon-logo-light.svg geometry and colours) is BUILT like a construction on a dark-grey blueprint grid on paper (dark-gold ground line, stems rise, roof bands extrude along their slope, gold piece drops and settles), a light glint, wordmark tracks in; then four high-quality FREE-LICENSED STOCK stills (Unsplash) as MOOD/ATMOSPHERE ONLY, revealed through brand shapes (roof band, sliding frame, the gold piece, roof band → full bleed) with a slow push; a fixed services line «Տներ · Լողավազաններ · Վերանորոգում» describes what GARON does in general — no on-screen text presents the stock images as GARON projects; end card (content unchanged) on paper: logo, «Շուտով», DM CTA, garon.am, @garon__construction.",
+   "concept": "LIGHT version. The GARON mark (garon-logo-light.svg geometry and colours) is BUILT like a construction on a dark-grey blueprint grid on paper (dark-gold ground line, stems rise, roof bands extrude along their slope, gold piece drops and settles), a light glint, wordmark tracks in; then four high-quality FREE-LICENSED STOCK stills (Unsplash) as MOOD/ATMOSPHERE ONLY, revealed through brand shapes (roof band, sliding frame, the gold piece, roof band → full bleed) with a slow push; a fixed services line «Տներ · Լողավազաններ · Վերանորոգում» describes what GARON does in general — no on-screen text presents the stock images as GARON projects; end card on paper: logo, «Շուտով», services line, garon.am (v3b: no DM CTA, no handle; no text during the build).",
    "render": {
     "engine": "ONE html page in headless Chromium (Playwright), viewport 1080x1920, deviceScaleFactor 1, background #f5f5f3 (theme.bg). Fonts: same @fontsource files as ig_lib.js (Cormorant Garamond 300/400/500, Noto Serif Armenian 300/400/500, Montserrat 400/500/600, Noto Sans Armenian 400/500/600). await document.fonts.ready and every <img>.decode() before frame 0.",
     "frame_loop": "for f = 0..419: page.evaluate(setFrame, f) (a pure function of f, no CSS animations/transitions, no timers, no Date/random) → page.screenshot({clip:{x:0,y:0,width:1080,height:1920}}) → frames/L02_%03d.png. Render order of frames is irrelevant (deterministic).",
@@ -1278,7 +1278,7 @@
       0
      ]
     ],
-    "note": "draws from the centre outwards (= «Մեկ գիծ։»), at the end retracts to the mark width (441.6 px) and fades. Hidden when sx = 0.",
+    "note": "draws from the centre outwards (the «one line» idea; no on-screen text in v3b), at the end retracts to the mark width (441.6 px) and fades. Hidden when sx = 0.",
     "impact_glow": {
      "css": "div 520x80 centred at (gold_cx, groundY), background radial-gradient(closest-side, rgba(201,169,106,.42), rgba(201,169,106,0))",
      "gold_cx": "gold_cx = 542.4 + 185.6·s(f)  (mark x 330)",
