@@ -11,28 +11,30 @@ import cv2, numpy as np
 def white_balance(img):
     lab = cv2.cvtColor(img, cv2.COLOR_BGR2LAB).astype(np.float32)
     a, b = lab[..., 1].mean(), lab[..., 2].mean()
-    lab[..., 1] -= (a - 128) * 0.7
-    lab[..., 2] -= (b - 128) * 0.7
+    lab[..., 1] -= (a - 128) * 0.3
+    lab[..., 2] -= (b - 128) * 0.3
     return cv2.cvtColor(np.clip(lab, 0, 255).astype(np.uint8), cv2.COLOR_LAB2BGR)
 
 def local_contrast(img):
     lab = cv2.cvtColor(img, cv2.COLOR_BGR2LAB)
     l, a, b = cv2.split(lab)
-    l = cv2.createCLAHE(clipLimit=1.8, tileGridSize=(8, 8)).apply(l)
+    l = cv2.createCLAHE(clipLimit=1.3, tileGridSize=(8, 8)).apply(l)
     return cv2.cvtColor(cv2.merge([l, a, b]), cv2.COLOR_LAB2BGR)
 
 def exposure(img):
     l = cv2.cvtColor(img, cv2.COLOR_BGR2LAB)[..., 0].mean() / 255.0
-    gamma = 1.0
-    if l < 0.42: gamma = 0.85      # lift dark photos
-    elif l > 0.68: gamma = 1.1     # tame washed-out ones
+    gamma = 0.88                   # brighter overall
+    if l < 0.42: gamma = 0.75      # lift dark photos more
+    elif l > 0.68: gamma = 0.97    # bright photos: only a touch
     lut = np.array([((i / 255.0) ** gamma) * 255 for i in range(256)]).astype(np.uint8)
     return cv2.LUT(img, lut)
 
-def vibrance(img, amount=0.18):
+def vibrance(img, amount=0.45):
     hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV).astype(np.float32)
     s = hsv[..., 1] / 255.0
-    hsv[..., 1] = np.clip((s + amount * (1 - s) * s) * 255, 0, 255)
+    s = s * 1.28 + amount * (1 - s) * s          # saturation + vibrance
+    hsv[..., 1] = np.clip(s * 255, 0, 255)
+    hsv[..., 2] = np.clip(hsv[..., 2] * 1.05 + 4, 0, 255)  # a little more light
     return cv2.cvtColor(hsv.astype(np.uint8), cv2.COLOR_HSV2BGR)
 
 def sharpen(img, amount=0.6, radius=1.2):
@@ -50,6 +52,7 @@ def enhance(path, out):
     img = exposure(img)
     img = local_contrast(img)
     img = vibrance(img)
+    img = cv2.convertScaleAbs(img, alpha=1.06, beta=6)   # extra brightness/pop
     img = sharpen(img)
     cv2.imwrite(out, img, [cv2.IMWRITE_JPEG_QUALITY, 94])
 
