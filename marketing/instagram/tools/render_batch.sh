@@ -15,6 +15,21 @@ BATCH="$1"; shift || true
 [ -d "$TOOLS/node_modules/@fontsource/noto-sans-armenian" ] || npm i --prefix "$TOOLS" --no-save --no-package-lock \
   @fontsource/noto-sans-armenian @fontsource/noto-serif-armenian @fontsource/cormorant-garamond @fontsource/montserrat
 
+# L02 frame-stepped reel (items.L02.method == "html_frame_stepped", launch batch v4): rendered by build_l02.sh
+# (render_l02_frames.js + compose_l02_audio.py --intro-only + ffmpeg), without the site server. The other
+# items keep going through render_launch.js below.
+if python3 -c 'import json,sys; sys.exit(0 if json.load(open(sys.argv[1]))["items"].get("L02",{}).get("method")=="html_frame_stepped" else 1)' \
+     "$ROOT/$BATCH/04-render-spec.json" 2>/dev/null && { [ $# -eq 0 ] || [[ " $* " =~ " L02 " ]]; }; then
+  if [ $# -eq 0 ]; then
+    set -- $(python3 -c 'import json,sys; print(" ".join(k for k in json.load(open(sys.argv[1]))["items"] if k != "L02"))' "$ROOT/$BATCH/04-render-spec.json")
+  else
+    rest=(); for a in "$@"; do [ "$a" = L02 ] || rest+=("$a"); done; set -- ${rest[@]+"${rest[@]}"}
+  fi
+  "$TOOLS/build_l02.sh" "$BATCH"
+  [ $# -gt 0 ] || exit 0
+  L02_DONE=1
+fi
+
 if grep -q '"site_capture"' "$ROOT/$BATCH/04-render-spec.json"; then
   SERVER_PID=""
   stop_server() { if [ -n "$SERVER_PID" ]; then kill -- "-$SERVER_PID" 2>/dev/null || kill "$SERVER_PID" 2>/dev/null || true; wait "$SERVER_PID" 2>/dev/null || true; echo "next server stopped"; fi; }
@@ -28,7 +43,7 @@ if grep -q '"site_capture"' "$ROOT/$BATCH/04-render-spec.json"; then
   fi
   node "$TOOLS/render_launch.js" "$ROOT" "$BATCH" "$@"
   tl="$ROOT/$BATCH/.tools/work/L02/timeline.json"
-  if [ -f "$tl" ] && { [ $# -eq 0 ] || [[ " $* " =~ " L02 " ]]; }; then
+  if [ -z "${L02_DONE:-}" ] && [ -f "$tl" ] && { [ $# -eq 0 ] || [[ " $* " =~ " L02 " ]]; }; then
     python3 "$TOOLS/compose_reel.py" "$tl" "$ROOT/$BATCH/05-output/L02/L02_reel.mp4"
   fi
   exit 0

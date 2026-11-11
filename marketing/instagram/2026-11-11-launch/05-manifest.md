@@ -164,3 +164,47 @@ Scope follows `06-review.md` → Round 2, L04 fix 1 and fix 2 (copy). Nothing el
 
 **Still open:** L02 (see above). Publishing condition Լ3 for L04 (check live garon.am on a phone) is unchanged.
 
+
+## L02 v4 final (2026-11-11, owner-approved v4) — supersedes every earlier L02 section
+
+`05-output/L02/` was deleted and rebuilt from `items.L02` (v4, `method: html_frame_stepped`) of `04-render-spec.json` and `03-copy.json` → `L02`. No v1, v2 or v3 file is left. That includes the v1 splash-capture frames, hook/end layers and `timeline.json` in `.tools/work/L02/`.
+
+**Command:** `marketing/instagram/tools/render_batch.sh marketing/instagram/2026-11-11-launch L02` (about 4 min; L02 needs no site build or server)
+
+### Files
+| File | Size | Notes |
+|---|---|---|
+| L02/L02_reel.mp4 | 27,293,998 B (26.0 MB, ≤ 30 MB) | 1080×1920, H.264 High, yuv420p, BT.709, 30 fps, **780 frames, 26.000 s**, CRF 18, about 8.3 Mbit/s, moov before mdat (faststart). Audio: AAC-LC 48 kHz stereo, 192k target |
+| L02/L02_cover.jpg / .png | 723 KB / 2.48 MB | the spec's `cover` (`setCover()`): Pool B before/after split, «Ընթացք → Արդյունք», chips «ԸՆԹԱՑՔ» / «ԱՐԴՅՈՒՆՔ»; JPG q92 4:4:4 |
+| L02/caption.txt | 2000 B | regenerated from 03-copy.json: hy, ru, en, hashtags |
+| L02/alt_hy.txt | 1430 B | regenerated from 03-copy.json (identical to spec `items.L02.alt_hy`) |
+
+### Audio
+- Made with `compose_l02_audio.py <wav> --intro-only` and muxed as AAC 192k. The intro sound plays 0–6 s. After that the track is silent, and the owner adds music in Instagram.
+- **Measured on the decoded MP4 audio:** the last non-zero sample is at **5.987 s**. Peak after 6.000 s is **0** (digital silence). volumedetect for 6.0–26 s gives max −91 dB, which is the silence floor. For 0–5.4 s it gives max −1.0 dB and mean −17.2 dB.
+
+### Checks
+- ffprobe: 1080×1920, 30/1, 780 frames, 26.000 s, yuv420p, AAC present.
+- Logo swaps, mean abs diff per channel: frames 117/118 = 0.060 and 166/167 = 0.024 (spec limit < 1).
+- The tools renderer was compared with the reference prototype. Frames 186 and 420 and the cover are byte-identical. Frame 700 differs by at most 1 level on 838 px, which is blur rasterisation.
+- Armenian fonts were loaded: the renderer stops if they are not. Labels were measured in `.tools/work/L02/frames/measure.json`.
+- **Viewed:** the cover plus 18 frames extracted from the encoded MP4 (0, 60, 105, 166, 186, 200, 230, 280, 320, 360, 420, 470, 500, 560, 595, 640, 700, 779). This covers the logo build, the gold-piece opening, all three stories (pool A, pool B, house), the wooden-house gallery and the end card. There is no tofu.
+  - No person or dog is visible in the frames I viewed. Frame 360 (pool B progress) shows an empty dog house at the back.
+  - Frames 0 and 779 are plain paper, with end-card graphics at 779.
+  - The end card has no CTA and no @handle.
+
+### Tool changes (`marketing/instagram/tools/`)
+- `render_l02_frames.js` (new): a copy of `04-L02v2-reference.js` with two changes. The batch dir is now an optional 4th argument, and the fonts are loaded from `tools/node_modules`.
+- `build_l02.sh` (new) runs these steps in order:
+  1. Renders the frames into `.tools/work/L02/frames`.
+  2. Runs `compose_l02_audio.py --intro-only`.
+  3. Encodes with ffmpeg (spec encode line, but AAC 192k with the intro audio instead of the silent 320k track).
+  4. Writes the cover PNG→JPG and caption/alt from 03-copy.json.
+  5. Runs the ffprobe check and the 30 MB check.
+
+  `IG_L02_FRAMES=keep` reuses rendered frames.
+- `render_batch.sh`: when `items.L02.method == "html_frame_stepped"` and L02 is requested (explicitly or by giving no items), L02 goes to `build_l02.sh`. The remaining items still go through `render_launch.js` as before. If only L02 is requested, no site build or server is started. The old v1 `timeline.json` → `compose_reel.py` step is skipped after a v4 build. Behaviour for L01/L03/L04 and for batch-1 specs is unchanged.
+
+### Notes
+- `.tools/work/L02/frames` (about 1 GB of PNGs, gitignored) is kept so the reel can be re-encoded quickly. Delete it if you need the space.
+- Before 6 s, the reel's own audio is the original synthesized intro (no licensed music). From 6.0 s on, the owner adds a track in the Instagram app (see `items.L02.audio.source`: first strong downbeat at 6.0 s).
