@@ -135,11 +135,14 @@ def reverb(x, seconds=2.2, seed=1):
 L = L + 0.28 * reverb(L, seed=1); R = R + 0.28 * reverb(R, seed=2)
 
 # master: fade, soft clip, normalise to -1 dBFS
+INTRO_ONLY = "--intro-only" in sys.argv
 fade = np.interp(t, [0, 0.05, 25.0, 26.0], [0, 1, 1, 0])
+if INTRO_ONLY:  # owner keeps only the 0-6 s intro; music after 6 s is added in Instagram
+    fade *= np.interp(t, [0, 5.4, 5.98, 26.0], [1, 1, 0, 0])
 L *= fade; R *= fade
 mx = max(np.abs(L).max(), np.abs(R).max()); L /= mx; R /= mx
 L = np.tanh(L * 1.3) / np.tanh(1.3) * 0.89; R = np.tanh(R * 1.3) / np.tanh(1.3) * 0.89
 out = (np.stack([L, R], 1) * 32767).astype(np.int16)
-with wave.open(sys.argv[1], 'wb') as w:
+with wave.open([a for a in sys.argv[1:] if not a.startswith('--')][0], 'wb') as w:
     w.setnchannels(2); w.setsampwidth(2); w.setframerate(SR); w.writeframes(out.tobytes())
 print('ok', sys.argv[1])
