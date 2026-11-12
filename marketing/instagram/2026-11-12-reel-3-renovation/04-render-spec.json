@@ -1,0 +1,2034 @@
+{
+ "spec_version": "r3-1",
+ "batch": "2026-11-12-reel-3-renovation",
+ "generated": "2026-11-12",
+ "source_files": [
+  "marketing/instagram/owner-preferences.md",
+  "marketing/instagram/owner-decisions.md",
+  "marketing/instagram/2026-11-12-reel-2/04-render-spec.json (items.R2 v2: intro, gold piece, labels, end card, styles)"
+ ],
+ "brand": {
+  "colors": {
+   "gold": "#c9a96a",
+   "gold_dark_on_light": "#856727",
+   "ink": "#17191c",
+   "dark": "#0c0d0e",
+   "dark2": "#151719",
+   "paper": "#f5f5f3",
+   "gray": "#70757b",
+   "rule_gold": "rgba(201,169,106,0.55)",
+   "rule_light": "rgba(255,255,255,0.15)"
+  },
+  "fonts": {
+   "display": {
+    "stack": "'Cormorant Garamond','Noto Serif Armenian',Georgia,serif",
+    "note": "Cormorant has no Armenian glyphs: Armenian falls back to Noto Serif Armenian (intended). Latin/digits render in Cormorant.",
+    "weights": [
+     300,
+     400,
+     500
+    ],
+    "source": "Google Fonts"
+   },
+   "text": {
+    "stack": "'Montserrat','Noto Sans Armenian',Arial,sans-serif",
+    "weights": [
+     400,
+     500,
+     600
+    ],
+    "source": "Google Fonts"
+   }
+  },
+  "logo": {
+   "on_light": "public/brand/garon-logo-light.svg",
+   "note": "File names are inverted vs. intuition: garon-logo-dark.* is the WHITE/gold logo (for dark backgrounds), as used by components/Logo.tsx with light=true. Round 1: vector logo, viewBox 0 0 425 310 (same box as the old 425x310 PNG, so all x/y/w/h below are unchanged). The mark was REDRAWN (commit 5958932), visible content bbox in viewBox units x 32.5..388.5, y 24..290 (old raster: 29..392, 21..291). garon-mark-*.svg = mark only, viewBox 70 16 288 168 (not used in this batch)."
+  }
+ },
+ "items": {
+  "R3": {
+   "type": "reel",
+   "title": "«Գծագիր → Իրականություն» — animated renovation (blueprint room → finished room)",
+   "version": "v1",
+   "status": "draft for owner review",
+   "needs_shoot": false,
+   "honesty": "NO photos at all after the intro. The room is drawn procedurally (SVG) inside the renderer: no stock, no AI images, no GARON project is shown or implied. It is a visualization of how a renovation comes together, step by step. Caption says so (03-copy.json R3).",
+   "method": "html_frame_stepped",
+   "duration": 26.0,
+   "fps": 30,
+   "frames": 780,
+   "size": [
+    1080,
+    1920
+   ],
+   "output": "05-output/R3/R3_reel.mp4",
+   "cover_output": "05-output/R3/R3_cover.jpg",
+   "renderer": "marketing/instagram/2026-11-12-reel-3-renovation/04-R3-renderer.js — usage: NODE_PATH=$(npm root -g) node 04-R3-renderer.js <repo_root> <out_dir> [all|cover|0,30,...] (writes R3_%03d.png, R3_cover.png, measure.json; f0–179 are delegated to tools/render_l02_frames.js). If code and spec disagree, the spec wins.",
+   "encode": "python3 marketing/instagram/tools/compose_l02_audio.py intro_r3.wav --intro-only && ffmpeg -framerate 30 -i R3_%03d.png -i intro_r3.wav -map 0:v -map 1:a -c:v libx264 -profile:v high -pix_fmt yuv420p -crf 18 -colorspace bt709 -color_primaries bt709 -color_trc bt709 -c:a aac -b:a 192k -ar 48000 -t 26 -movflags +faststart R3_reel.mp4 ; cover: python3 marketing/instagram/tools/png2jpg.py R3_cover.png R3_cover.jpg 92",
+   "timebase": {
+    "fps": 30,
+    "frames": 780,
+    "duration_s": 26.0,
+    "bpm": 120,
+    "frames_per_beat": 15,
+    "frames_per_bar": 60,
+    "note": "intro 0–179 (= L02 v4, 3 bars); every stage change on a beat (multiples of 15 frames); f780 = bar 14.1 (clean loop)"
+   },
+   "acts": [
+    {
+     "act": "I intro (= L02 v4)",
+     "frames": "0–179",
+     "what": "identical L02 v4 logo build (no text)"
+    },
+    {
+     "act": "II Նախագիծ",
+     "frames": "180–269",
+     "what": "gold piece of the logo grows into the 3:4 window and opens on the blueprint sheet; the room is drawn in thin dark lines (back wall, corners, window, doorway, LED channels, floor perspective lines), gold dimension lines + figures, dashed furniture outlines"
+    },
+    {
+     "act": "III Պատեր",
+     "frames": "270–329",
+     "what": "warm-white plaster wipes onto back wall (270), left wall (285), right wall (300), ceiling (315) — soft trowel edge"
+    },
+    {
+     "act": "IV Հատակ",
+     "frames": "330–389",
+     "what": "oak boards (running to the vanishing point) are laid from the back wall forward, row by row"
+    },
+    {
+     "act": "V Լույս",
+     "frames": "390–449",
+     "what": "room 'switches on': linear LED channels light up (390, 405), cove light on the back wall (420), window fills with warm daylight + light patch on the floor (420–440)"
+    },
+    {
+     "act": "VI Կահավորում",
+     "frames": "450–539",
+     "what": "rug 450, sofa 465, coffee table 480, olive tree 495, art 510, floor lamp 525 — each rises 14 px and fades in on its beat"
+    },
+    {
+     "act": "VII Գծագիր | Արդյունք",
+     "frames": "540–665",
+     "what": "finished room; 555 handle appears, 570 sweep back to the drawing, 600 drag to the middle (split), 645 release → finished room"
+    },
+    {
+     "act": "VIII end card",
+     "frames": "666–779",
+     "what": "= R2 v2 end card: logo, services line, horizon, garon.am"
+    }
+   ],
+   "z_order": [
+    "f0–179: L02 v4 renderer output (unchanged)",
+    "bg paper",
+    "vlines",
+    "stage (finished lockup <img>, exit 180–198)",
+    "scene window: [result SVG] + [plan SVG in a clip box (left of the divider)], both inside one camera wrapper",
+    "gold_fill (entry)",
+    "divider + handle",
+    "chips",
+    "window frame line",
+    "end veil",
+    "corner logo",
+    "labels + indicator",
+    "end card",
+    "grain"
+   ],
+   "theme": {
+    "bg": "#f5f5f3",
+    "note": "= R2 v2 theme (paper #f5f5f3, dark gold #856727 for thin lines/small text on paper, light gold #c9a96a for the divider/handle ring and the gold piece). The room uses its own muted warm palette (room.palette).",
+    "ink": "#17191c",
+    "gold_on_light": "#856727",
+    "gold_on_photo": "#c9a96a",
+    "logo_file": "public/brand/garon-logo-light.svg",
+    "logo_note": "garon-logo-light.svg = DARK logo for LIGHT backgrounds (fills #1e1e1e, gradients gmlight #a3a3a3→#4f4f4f and gglight #d4b57a→#b8955c). Path data and the <rect> are byte-identical to garon-logo-dark.svg, so every geometry number of v2 (clips, pieces, wordmark glyph bounds, box) is unchanged.",
+    "mark_fills": {
+     "BIG": "#1e1e1e",
+     "MID": "url(#gmlight)",
+     "GOLD": "url(#gglight)"
+    },
+    "wordmark_fill": "#1e1e1e",
+    "dims_stroke": "rgba(133,103,39,0.8)",
+    "ground_line": "#856727",
+    "impact_glow": "radial-gradient(closest-side, rgba(201,169,106,.42), rgba(201,169,106,0))",
+    "wipe_edge": "#c9a96a",
+    "frame_line": "1px solid rgba(133,103,39,0.55)",
+    "end_overlay": "#f5f5f3",
+    "handle_fill": "rgba(245,245,243,0.94)",
+    "handle_shadow": "0 6px 18px rgba(12,13,14,0.22)",
+    "divider_shadow": "0 0 6px rgba(12,13,14,0.28)"
+   },
+   "easings": {
+    "linear": [
+     0,
+     0,
+     1,
+     1
+    ],
+    "inSine": [
+     0.12,
+     0,
+     0.39,
+     0
+    ],
+    "outSine": [
+     0.61,
+     1,
+     0.88,
+     1
+    ],
+    "inOutSine": [
+     0.37,
+     0,
+     0.63,
+     1
+    ],
+    "inCubic": [
+     0.32,
+     0,
+     0.67,
+     0
+    ],
+    "outCubic": [
+     0.33,
+     1,
+     0.68,
+     1
+    ],
+    "inOutCubic": [
+     0.65,
+     0,
+     0.35,
+     1
+    ],
+    "outQuart": [
+     0.25,
+     1,
+     0.5,
+     1
+    ],
+    "inOutQuart": [
+     0.76,
+     0,
+     0.24,
+     1
+    ],
+    "outQuint": [
+     0.22,
+     1,
+     0.36,
+     1
+    ],
+    "note": "CSS cubic-bezier(x1,y1,x2,y2) control points; evaluate exactly like CSS (solve x(t)=p by Newton/bisection, return y(t)).",
+    "outBack": [
+     0.34,
+     1.56,
+     0.64,
+     1
+    ]
+   },
+   "keyframes_rule": "Every animated property is a list of keys [frame, value, easing]. Before the first key: first value; after the last key: last value. Between key k and k+1: v = v_k + (v_k+1 − v_k) · E((f − f_k)/(f_k+1 − f_k)), E = easing NAMED IN KEY k (see `easings`). \"hold\" = keep v_k until f_k+1 then jump. Vector values ([x,y] or {x,y,w,h}) interpolate component-wise.",
+   "fonts_check": "Armenian glyphs must come from Noto Serif Armenian / Noto Sans Armenian (check document.fonts / computed font in a test frame). STOP if a fallback system font is used.",
+   "window": {
+    "rect": {
+     "x": 70,
+     "y": 390,
+     "w": 940,
+     "h": 1253
+    },
+    "frame_line": {
+     "css": "1px solid rgba(133,103,39,0.55)",
+     "opacity": [
+      [
+       196,
+       0,
+       "outSine"
+      ],
+      [
+       206,
+       1,
+       "hold"
+      ],
+      [
+       666,
+       1,
+       "inOutSine"
+      ],
+      [
+       684,
+       0
+      ]
+     ]
+    },
+    "note": "= R2 window. All room geometry below is in WINDOW-LOCAL px (0,0 = window top-left, 940×1253)."
+   },
+   "vlines": {
+    "xs": [
+     90,
+     270,
+     450,
+     630,
+     810,
+     990
+    ],
+    "w": 2,
+    "color": "rgba(23,25,28,0.06)",
+    "opacity": [
+     [
+      176,
+      0,
+      "outSine"
+     ],
+     [
+      196,
+      1
+     ]
+    ],
+    "note": "v2: = L02 v4 keys (fade-in 176–196 starts inside the borrowed intro; continuous across f179→f180)"
+   },
+   "blueprint": {
+    "css": "background-image: linear-gradient(to right, rgba(23,25,28,.11) 1px, transparent 1px), linear-gradient(to bottom, rgba(23,25,28,.11) 1px, transparent 1px), linear-gradient(to right, rgba(23,25,28,.045) 1px, transparent 1px), linear-gradient(to bottom, rgba(23,25,28,.045) 1px, transparent 1px); background-size: 180px 180px, 180px 180px, 36px 36px, 36px 36px; background-position: 0 27px, 0 27px, 0 27px, 0 27px; -webkit-mask-image: radial-gradient(620px 760px at 540px 980px, #000 35%, transparent 100%)",
+    "window_grid": {
+     "major_px": 180,
+     "minor_px": 36,
+     "major": "rgba(23,25,28,0.11)",
+     "minor": "rgba(23,25,28,0.045)",
+     "offset_px": [
+      -70,
+      -363
+     ],
+     "note": "drawn inside the window SVG, aligned to the full-frame L02 grid (global origin 0,27)"
+    },
+    "used_by": "window background of both plan and result SVG; cover"
+   },
+   "intro": {
+    "frames": [
+     0,
+     179
+    ],
+    "source": "IDENTICAL to L02 v4 frames 0–179: items.L02 of marketing/instagram/2026-11-11-launch/04-render-spec.json (stage, build, blueprint, ground_line, dimensions, glint, wordmark, vlines, theme, easings), rendered by marketing/instagram/tools/render_l02_frames.js. Do NOT copy or edit those keys here — the R2 renderer runs the L02 renderer for f0–179 and renames L02_%03d.png → R2_%03d.png (pixel-identical by construction; verified by pixel diff).",
+    "what": "L02 v4 logo build-up: blueprint grid, ground line draws from the centre (6–36), stems rise (45/50/55), roof bands slide (60–), gold piece lands with shake + impact glow at f105 (3.5 s), camera pull-back 120–148, glint 124–150 + wordmark tracks in, finished lockup = garon-logo-light.svg at 200,700 680×496 from f148; real logo <img> from f167. No text, no grain, no corner logo, no labels in f0–179.",
+    "camera_exit": {
+     "what": "f180+: the finished lockup (logo <img> 680×496 at 200,700, transform-origin 342.4px 158px) continues exactly as in L02: scale = exit_scale_mul, opacity = exit_opacity; hidden after f198",
+     "exit_scale_mul": [
+      [
+       180,
+       1.0,
+       "inCubic"
+      ],
+      [
+       198,
+       1.15
+      ]
+     ],
+     "exit_opacity": [
+      [
+       186,
+       1.0,
+       "linear"
+      ],
+      [
+       198,
+       0.0
+      ]
+     ]
+    },
+    "replaced_v1": "v1 outline → pour intro (f0–135, horizon shutter at f120) removed on owner feedback 2026-11-12 (L02 intro was better).",
+    "l02_batch": "marketing/instagram/2026-11-11-launch",
+    "l02_renderer": "marketing/instagram/tools/render_l02_frames.js",
+    "l02_command": "node marketing/instagram/tools/render_l02_frames.js <repo_root> <tmp_dir> 0,1,…,179 marketing/instagram/2026-11-11-launch  → rename L02_%03d.png → R2_%03d.png",
+    "stage_box_px": {
+     "x": 200,
+     "y": 700,
+     "w": 680,
+     "h": 496
+    },
+    "logo_file": "public/brand/garon-logo-light.svg",
+    "transform_origin_px": [
+     342.4,
+     158
+    ]
+   },
+   "entry": {
+    "type": "gold_piece_from_logo",
+    "frame": 180,
+    "frames": [
+     180,
+     192
+    ],
+    "anchor_from_px": [
+     728,
+     926.8
+    ],
+    "anchor_to_px": [
+     540,
+     1016.5
+    ],
+    "anchor_ease": "inOutCubic",
+    "gold_fill_opacity": [
+     [
+      180,
+      1,
+      "hold"
+     ],
+     [
+      183,
+      1,
+      "outSine"
+     ],
+     [
+      190,
+      0
+     ]
+    ],
+    "note": "= R2 v2 pair H entry: the gold piece of the finished L02 lockup grows into the window (g = 1.6·32^inOutCubic((f−180)/12)) and opens on the blueprint sheet; the lockup pushes in and fades under it (intro.camera_exit). The scene window div sits at (70,390): its clip polygon = (gold polygon ∩ window) − (70,390)."
+   },
+   "gold_piece": {
+    "frames": "e … e+12",
+    "shape_units": [
+     [
+      -66,
+      -66.5
+     ],
+     [
+      22,
+      -22.5
+     ],
+     [
+      22,
+      22.5
+     ],
+     [
+      -22,
+      22.5
+     ],
+     [
+      -22,
+      -14.5
+     ],
+     [
+      -66,
+      -36.5
+     ]
+    ],
+    "shape_note": "the GOLD path of the logo relative to its anchor (330, 132.5) in mark units",
+    "anchor_px": [
+     540,
+     1016.5
+    ],
+    "g": "px per unit: g = 1.6 for f ≤ e; g = 1.6·32^E((f−e)/12) for e < f ≤ e+12, E = inOutCubic (→ 51.2: the polygon covers the window from e+12)",
+    "formula": "incoming shot layer clipped to (anchor + g·shape_unit) ∩ window",
+    "gold_fill": {
+     "css": "same clip polygon filled with linear-gradient(135deg,#d4b57a,#b8955c), layer above the shots",
+     "opacity": "relative keys [[e−4,0,outSine],[e−1,1,hold],[e+3,1,outSine],[e+10,0]] — a small solid gold piece (141 px wide) appears in the window centre on the beat before e, then grows and opens into the next shot"
+    }
+   },
+   "room": {
+    "projection": "one-point perspective. World metres: x right, y up (floor 0), z depth from the camera. Screen (window-local px): sx = vp.x + f·(x − cam.x)/z ; sy = vp.y − f·(y − cam.y)/z.",
+    "f": 640,
+    "vp": [
+     470,
+     500
+    ],
+    "cam": {
+     "x": -0.2,
+     "y": 1.5
+    },
+    "x": [
+     -2.8,
+     2.8
+    ],
+    "h": 2.9,
+    "z_back": 5.6,
+    "z_near": 0.9,
+    "camera": {
+     "what": "whole scene wrapper (result + plan together): translate(drift) scale(z), transform-origin = vp",
+     "z": [
+      [
+       180,
+       1.0,
+       "linear"
+      ],
+      [
+       666,
+       1.1
+      ]
+     ],
+     "drift": "dx = 2.0·sin(f/41), dy = 1.6·sin(f/53 + 1) px"
+    },
+    "palette": {
+     "wall_back": "#eee8de",
+     "wall_left": "#e3dbcf",
+     "wall_right": "#e9e2d7",
+     "ceiling": "#f2eee8",
+     "plaster_tile": "256 px soft value noise (seed 11), multiply, opacity 0.06",
+     "oak": [
+      "#c7a479",
+      "#bf9a6d",
+      "#cdab81",
+      "#b8916a",
+      "#c3a074",
+      "#d0b089"
+     ],
+     "oak_seam": "rgba(92,62,34,0.42)",
+     "oak_grain": "rgba(110,76,44,0.16)",
+     "charcoal": "#2a2a2b",
+     "charcoal_top": "#3a3937",
+     "stone": "#cbc2b4",
+     "stone_top": "#d9d1c4",
+     "stone_side": "#bcb2a3",
+     "rug": "#e4ddd0",
+     "rug_border": "#c9bba3",
+     "brass": "#b8955c",
+     "brass_light": "#d4b57a",
+     "olive": [
+      "#6b7457",
+      "#5c6549",
+      "#7b8466",
+      "#525a41"
+     ],
+     "glass_off": "#dcdedb",
+     "sky_on": [
+      "#fffaf0",
+      "#f3e2bf"
+     ],
+     "door_inside": [
+      "#7a7167",
+      "#4f4943"
+     ],
+     "line_main": "rgba(23,25,28,0.82)",
+     "line_sub": "rgba(23,25,28,0.30)",
+     "line_furniture": "rgba(23,25,28,0.45)",
+     "dims": "#856727",
+     "led_off": "#c9c2b6",
+     "led_core": "#fffaf0",
+     "led_glow": "rgba(255,212,150,0.95)",
+     "light_warm": "#ffe9c4"
+    },
+    "line_widths": {
+     "main": 1.6,
+     "sub": 1.0,
+     "furniture_dashed": 1.2,
+     "dash": "7 6",
+     "dims": 1.2
+    },
+    "openings": {
+     "window_left_wall": {
+      "z": [
+       3.75,
+       5.05
+      ],
+      "y": [
+       0.3,
+       2.55
+      ],
+      "mullions": 1,
+      "frame": "charcoal 4 px",
+      "sun_dir": [
+       1.0,
+       -0.8,
+       -0.35
+      ]
+     },
+     "door_right_wall": {
+      "z": [
+       4.3,
+       5.1
+      ],
+      "y": [
+       0,
+       2.2
+      ],
+      "frame": "charcoal 3 px"
+     }
+    },
+    "led": {
+     "channels_x": [
+      -1.1,
+      1.1
+     ],
+     "z": [
+      0.9,
+      5.6
+     ],
+     "cove_y": 2.84,
+     "note": "two recessed linear channels in depth + cove line along the top of the back wall"
+    },
+    "floor": {
+     "strip_w": 0.2,
+     "board_len": [
+      1.1,
+      2.1
+     ],
+     "seed": 5,
+     "grain_lines_per_board": 2,
+     "laying": "board appears (opacity 0→1 + 6 px drop, 8 frames, outCubic) at f = 332 + 44·(z_back − z_far)/(z_back − z_near) + 6·rand → row by row, back wall first"
+    },
+    "furniture": [
+     {
+      "id": "rug",
+      "frame": 450,
+      "what": "flat oat rug x −1.75..1.75, z 3.25..5.45, inner border 0.12 m"
+     },
+     {
+      "id": "sofa",
+      "frame": 465,
+      "what": "stone-greige 3-seat sofa against the back wall: base x −1.35..1.35 z 4.75..5.5 y 0.1..0.42, back z 5.3..5.55 y ..0.84, arms 0.23 m (y ..0.6), 2 seat cushions, brass + charcoal pillows, charcoal plinth"
+     },
+     {
+      "id": "table",
+      "frame": 480,
+      "what": "low charcoal coffee table x −0.6..0.6 z 3.75..4.3, slab y 0.31..0.38, recessed base x ±0.36 z 3.92..4.14; books + small brass bowl"
+     },
+     {
+      "id": "tree",
+      "frame": 495,
+      "what": "olive tree in a charcoal pot, back-left corner (x −2.55..−2.1, z 4.95..5.4): trunk + 3 branches + ~90 small muted-olive leaves (seed 3)"
+     },
+     {
+      "id": "art",
+      "frame": 510,
+      "what": "framed art on the back wall above the sofa x −0.7..0.7 y 1.3..2.15: charcoal frame, paper mat, gold arch + thin charcoal horizon"
+     },
+     {
+      "id": "lamp",
+      "frame": 525,
+      "what": "brass floor lamp x 1.85 z 5.0: base, pole to 1.55 m, linen shade, warm glow (radial, screen 0.55)"
+     }
+    ],
+    "furniture_anim": "group opacity [[F,0,outCubic],[F+10,1]] and translateY [[F,14,outCubic],[F+12,0]] (px)"
+   },
+   "plan_lines": {
+    "what": "one line set used twice: (a) drawn-in on the result SVG during Նախագիծ, (b) static full-strength on the plan SVG for the slider. Draw-in = stroke-dasharray with pathLength 1, dashoffset 1 − E((f − s)/(e − s)), E = outCubic.",
+    "groups": [
+     {
+      "id": "back_wall",
+      "draw": [
+       186,
+       206
+      ],
+      "w": "main",
+      "what": "back wall rectangle"
+     },
+     {
+      "id": "corners",
+      "draw": [
+       194,
+       218
+      ],
+      "w": "main",
+      "what": "4 room edges from the back-wall corners to the window edges"
+     },
+     {
+      "id": "window",
+      "draw": [
+       206,
+       228
+      ],
+      "w": "main",
+      "what": "window on the left wall (frame + mullion)"
+     },
+     {
+      "id": "door",
+      "draw": [
+       212,
+       234
+      ],
+      "w": "main",
+      "what": "doorway on the right wall"
+     },
+     {
+      "id": "floor_lines",
+      "draw": [
+       214,
+       246
+      ],
+      "w": "sub",
+      "what": "floor perspective lines every 0.8 m + 3 cross lines"
+     },
+     {
+      "id": "led",
+      "draw": [
+       224,
+       246
+      ],
+      "w": "sub",
+      "what": "LED channels (thin double lines) on the ceiling"
+     },
+     {
+      "id": "dims",
+      "draw": [
+       232,
+       254
+      ],
+      "w": "dims",
+      "what": "dimension lines with 45° ticks: width «5 600» above the back wall, height «2 900» left of it (Montserrat 500 15 px #856727, opacity fades in 244–256)"
+     },
+     {
+      "id": "furniture_outline",
+      "fade": [
+       [
+        238,
+        0,
+        "outSine"
+       ],
+       [
+        258,
+        1,
+        "hold"
+       ],
+       [
+        450,
+        1,
+        "inOutSine"
+       ],
+       [
+        540,
+        0
+       ]
+      ],
+      "w": "furniture_dashed",
+      "what": "dashed outlines of rug, sofa, table, pot, art, lamp (design intent)"
+     }
+    ],
+    "result_opacity": [
+     [
+      180,
+      1,
+      "hold"
+     ],
+     [
+      270,
+      1,
+      "inOutSine"
+     ],
+     [
+      330,
+      0.32,
+      "inOutSine"
+     ],
+     [
+      450,
+      0.14
+     ]
+    ],
+    "dims_result_opacity": [
+     [
+      180,
+      1,
+      "hold"
+     ],
+     [
+      270,
+      1,
+      "inOutSine"
+     ],
+     [
+      300,
+      0
+     ]
+    ],
+    "result_opacity_note": "the drawing stays under the finishes as faint architectural edges (lines are drawn ABOVE the fills)"
+   },
+   "stages": {
+    "walls": {
+     "back": [
+      270,
+      292
+     ],
+     "left": [
+      285,
+      305
+     ],
+     "right": [
+      300,
+      320
+     ],
+     "ceiling": [
+      312,
+      330
+     ],
+     "soft_edge_px": 90,
+     "ease": "inOutSine",
+     "what": "SVG mask, linear gradient wipe: back wall left→right, side walls from the back corner outwards, ceiling from the back wall to the front"
+    },
+    "floor": {
+     "frames": [
+      330,
+      389
+     ]
+    },
+    "light": {
+     "dim_overlay": {
+      "color": "#3a332b",
+      "opacity": [
+       [
+        180,
+        0.16,
+        "hold"
+       ],
+       [
+        390,
+        0.16,
+        "inOutSine"
+       ],
+       [
+        425,
+        0
+       ]
+      ],
+      "impl": "applied ONLY to the finishes (walls, ceiling, floor) as an SVG feComponentTransfer: channel slope = 1 − o·(1 − dim_c/255) (= multiply by the dim colour at opacity o); paper, grid and lines stay clean"
+     },
+     "led_1": [
+      [
+       390,
+       0,
+       "outCubic"
+      ],
+      [
+       398,
+       1
+      ]
+     ],
+     "led_2": [
+      [
+       405,
+       0,
+       "outCubic"
+      ],
+      [
+       413,
+       1
+      ]
+     ],
+     "cove": [
+      [
+       420,
+       0,
+       "outCubic"
+      ],
+      [
+       432,
+       1
+      ]
+     ],
+     "window_sky": [
+      [
+       420,
+       0,
+       "inOutSine"
+      ],
+      [
+       440,
+       1
+      ]
+     ],
+     "floor_light_patch": [
+      [
+       422,
+       0,
+       "inOutSine"
+      ],
+      [
+       446,
+       0.55
+      ]
+     ],
+     "warm_wash": [
+      [
+       390,
+       0,
+       "inOutSine"
+      ],
+      [
+       446,
+       1
+      ]
+     ],
+     "flash": "LED channel pulse: glow opacity overshoots 1.25 at +4 frames, settles to 1 by +14"
+    },
+    "slider": {
+     "p_note": "p ∈ [0,1], divider x (window-local) = 940·p. LEFT of the divider = Գծագիր (plan SVG), right = Արդյունք. p = 0: finished room.",
+     "p": [
+      [
+       540,
+       0,
+       "hold"
+      ],
+      [
+       570,
+       0,
+       "inOutQuart"
+      ],
+      [
+       590,
+       1,
+       "hold"
+      ],
+      [
+       600,
+       1,
+       "outCubic"
+      ],
+      [
+       620,
+       0.5,
+       "inOutSine"
+      ],
+      [
+       636,
+       0.53,
+       "inOutSine"
+      ],
+      [
+       645,
+       0.52,
+       "inOutCubic"
+      ],
+      [
+       660,
+       0
+      ]
+     ],
+     "handle_opacity": [
+      [
+       552,
+       0,
+       "outSine"
+      ],
+      [
+       560,
+       1,
+       "hold"
+      ],
+      [
+       656,
+       1,
+       "inOutSine"
+      ],
+      [
+       664,
+       0
+      ]
+     ],
+     "handle_grab": [
+      [
+       564,
+       1,
+       "outCubic"
+      ],
+      [
+       570,
+       0.88,
+       "hold"
+      ],
+      [
+       590,
+       0.88,
+       "outBack"
+      ],
+      [
+       596,
+       1,
+       "outCubic"
+      ],
+      [
+       602,
+       0.88,
+       "hold"
+      ],
+      [
+       645,
+       0.88,
+       "outBack"
+      ],
+      [
+       653,
+       1
+      ]
+     ],
+     "handle_y": 1016,
+     "chips": {
+      "opacity": [
+       [
+        612,
+        0,
+        "outCubic"
+       ],
+       [
+        622,
+        1,
+        "hold"
+       ],
+       [
+        642,
+        1,
+        "inSine"
+       ],
+       [
+        648,
+        0
+       ]
+      ],
+      "items": [
+       {
+        "text": "Գծագիր",
+        "x": 94,
+        "y": 414,
+        "align": "left"
+       },
+       {
+        "text": "Արդյունք",
+        "x_right": 986,
+        "y": 414,
+        "align": "right"
+       }
+      ]
+     }
+    }
+   },
+   "light_leaks": {
+    "css": "div 900x900, radial-gradient(closest-side, rgba(255,214,150,0.9), rgba(201,169,106,0.35) 45%, rgba(201,169,106,0) 100%), mix-blend-mode screen, centred (cx, cy)",
+    "events": [
+     {
+      "frame": 180,
+      "opacity": [
+       [
+        180,
+        0,
+        "outSine"
+       ],
+       [
+        188,
+        0.1,
+        "inOutSine"
+       ],
+       [
+        210,
+        0
+       ]
+      ],
+      "cx": [
+       [
+        180,
+        300,
+        "linear"
+       ],
+       [
+        210,
+        760
+       ]
+      ],
+      "cy": 1016
+     },
+     {
+      "frame": 420,
+      "opacity": [
+       [
+        414,
+        0,
+        "outSine"
+       ],
+       [
+        426,
+        0.12,
+        "inOutSine"
+       ],
+       [
+        452,
+        0
+       ]
+      ],
+      "cx": [
+       [
+        414,
+        200,
+        "linear"
+       ],
+       [
+        452,
+        640
+       ]
+      ],
+      "cy": 1000
+     },
+     {
+      "frame": 570,
+      "opacity": [
+       [
+        566,
+        0,
+        "outSine"
+       ],
+       [
+        574,
+        0.08,
+        "inOutSine"
+       ],
+       [
+        596,
+        0
+       ]
+      ],
+      "cx": [
+       [
+        566,
+        300,
+        "linear"
+       ],
+       [
+        596,
+        880
+       ]
+      ],
+      "cy": 1016
+     },
+     {
+      "frame": 645,
+      "opacity": [
+       [
+        641,
+        0,
+        "outSine"
+       ],
+       [
+        649,
+        0.1,
+        "inOutSine"
+       ],
+       [
+        668,
+        0
+       ]
+      ],
+      "cx": [
+       [
+        641,
+        600,
+        "linear"
+       ],
+       [
+        668,
+        200
+       ]
+      ],
+      "cy": 1016
+     }
+    ],
+    "note": "peak ≤ 0.12, only on transitions"
+   },
+   "grain": {
+    "css": "full-frame div, background = 256x256 grayscale noise tile (deterministic PRNG seed 7, values 128±40), mix-blend-mode overlay, opacity 0.05; background-position shifts every 2 frames by ((37·k) mod 256, (91·k) mod 256), k = floor(f/2)",
+    "note": "paper texture, invisible on a phone at arm's length but kills the 'flat digital' look; v2: OFF in f0–179 (the borrowed L02 intro has no grain, frames must stay identical), fades in 180–196 (keys `opacity`)",
+    "active_from": 180,
+    "opacity": [
+     [
+      180,
+      0,
+      "linear"
+     ],
+     [
+      196,
+      0.05
+     ]
+    ]
+   },
+   "corner_logo": {
+    "file": "public/brand/garon-logo-light.svg",
+    "x": 70,
+    "y": 262,
+    "w": 132,
+    "h": 96,
+    "opacity": [
+     [
+      192,
+      0,
+      "outSine"
+     ],
+     [
+      204,
+      0.92,
+      "hold"
+     ],
+     [
+      668,
+      0.92,
+      "inOutSine"
+     ],
+     [
+      678,
+      0
+     ]
+    ]
+   },
+   "labels": [
+    {
+     "kind": "section",
+     "style": "section_label",
+     "text": "Վերանորոգում",
+     "x": 240,
+     "y": 270,
+     "w": 770,
+     "align": "right",
+     "opacity": [
+      [
+       190,
+       0,
+       "outCubic"
+      ],
+      [
+       200,
+       1,
+       "hold"
+      ],
+      [
+       666,
+       1,
+       "inSine"
+      ],
+      [
+       672,
+       0
+      ]
+     ],
+     "translate_y": [
+      [
+       190,
+       8,
+       "outCubic"
+      ],
+      [
+       200,
+       0
+      ]
+     ]
+    },
+    {
+     "kind": "stage",
+     "style": "stage_label",
+     "text": "Նախագիծ",
+     "x": 240,
+     "y": 294,
+     "w": 770,
+     "align": "right",
+     "opacity": [
+      [
+       190,
+       0,
+       "outCubic"
+      ],
+      [
+       200,
+       1,
+       "hold"
+      ],
+      [
+       264,
+       1,
+       "inSine"
+      ],
+      [
+       270,
+       0
+      ]
+     ],
+     "translate_y": [
+      [
+       190,
+       12,
+       "outCubic"
+      ],
+      [
+       200,
+       0,
+       "hold"
+      ],
+      [
+       264,
+       0,
+       "inSine"
+      ],
+      [
+       270,
+       -8
+      ]
+     ]
+    },
+    {
+     "kind": "stage",
+     "style": "stage_label",
+     "text": "Պատեր",
+     "x": 240,
+     "y": 294,
+     "w": 770,
+     "align": "right",
+     "opacity": [
+      [
+       269,
+       0,
+       "outCubic"
+      ],
+      [
+       279,
+       1,
+       "hold"
+      ],
+      [
+       324,
+       1,
+       "inSine"
+      ],
+      [
+       330,
+       0
+      ]
+     ],
+     "translate_y": [
+      [
+       269,
+       12,
+       "outCubic"
+      ],
+      [
+       279,
+       0,
+       "hold"
+      ],
+      [
+       324,
+       0,
+       "inSine"
+      ],
+      [
+       330,
+       -8
+      ]
+     ]
+    },
+    {
+     "kind": "stage",
+     "style": "stage_label",
+     "text": "Հատակ",
+     "x": 240,
+     "y": 294,
+     "w": 770,
+     "align": "right",
+     "opacity": [
+      [
+       329,
+       0,
+       "outCubic"
+      ],
+      [
+       339,
+       1,
+       "hold"
+      ],
+      [
+       384,
+       1,
+       "inSine"
+      ],
+      [
+       390,
+       0
+      ]
+     ],
+     "translate_y": [
+      [
+       329,
+       12,
+       "outCubic"
+      ],
+      [
+       339,
+       0,
+       "hold"
+      ],
+      [
+       384,
+       0,
+       "inSine"
+      ],
+      [
+       390,
+       -8
+      ]
+     ]
+    },
+    {
+     "kind": "stage",
+     "style": "stage_label",
+     "text": "Լույս",
+     "x": 240,
+     "y": 294,
+     "w": 770,
+     "align": "right",
+     "opacity": [
+      [
+       389,
+       0,
+       "outCubic"
+      ],
+      [
+       399,
+       1,
+       "hold"
+      ],
+      [
+       444,
+       1,
+       "inSine"
+      ],
+      [
+       450,
+       0
+      ]
+     ],
+     "translate_y": [
+      [
+       389,
+       12,
+       "outCubic"
+      ],
+      [
+       399,
+       0,
+       "hold"
+      ],
+      [
+       444,
+       0,
+       "inSine"
+      ],
+      [
+       450,
+       -8
+      ]
+     ]
+    },
+    {
+     "kind": "stage",
+     "style": "stage_label",
+     "text": "Կահավորում",
+     "x": 240,
+     "y": 294,
+     "w": 770,
+     "align": "right",
+     "opacity": [
+      [
+       449,
+       0,
+       "outCubic"
+      ],
+      [
+       459,
+       1,
+       "hold"
+      ],
+      [
+       534,
+       1,
+       "inSine"
+      ],
+      [
+       540,
+       0
+      ]
+     ],
+     "translate_y": [
+      [
+       449,
+       12,
+       "outCubic"
+      ],
+      [
+       459,
+       0,
+       "hold"
+      ],
+      [
+       534,
+       0,
+       "inSine"
+      ],
+      [
+       540,
+       -8
+      ]
+     ]
+    },
+    {
+     "kind": "stage",
+     "style": "stage_label",
+     "text": "Արդյունք",
+     "x": 240,
+     "y": 294,
+     "w": 770,
+     "align": "right",
+     "opacity": [
+      [
+       539,
+       0,
+       "outCubic"
+      ],
+      [
+       549,
+       1,
+       "hold"
+      ],
+      [
+       575,
+       1,
+       "inSine"
+      ],
+      [
+       581,
+       0
+      ]
+     ],
+     "translate_y": [
+      [
+       539,
+       12,
+       "outCubic"
+      ],
+      [
+       549,
+       0,
+       "hold"
+      ],
+      [
+       575,
+       0,
+       "inSine"
+      ],
+      [
+       581,
+       -8
+      ]
+     ]
+    },
+    {
+     "kind": "stage",
+     "style": "stage_label",
+     "text": "Գծագիր",
+     "x": 240,
+     "y": 294,
+     "w": 770,
+     "align": "right",
+     "opacity": [
+      [
+       580,
+       0,
+       "outCubic"
+      ],
+      [
+       590,
+       1,
+       "hold"
+      ],
+      [
+       600,
+       1,
+       "inSine"
+      ],
+      [
+       606,
+       0
+      ]
+     ],
+     "translate_y": [
+      [
+       580,
+       12,
+       "outCubic"
+      ],
+      [
+       590,
+       0,
+       "hold"
+      ],
+      [
+       600,
+       0,
+       "inSine"
+      ],
+      [
+       606,
+       -8
+      ]
+     ]
+    },
+    {
+     "kind": "stage",
+     "style": "stage_label",
+     "text": "Գծագիր | Արդյունք",
+     "x": 240,
+     "y": 294,
+     "w": 770,
+     "align": "right",
+     "opacity": [
+      [
+       605,
+       0,
+       "outCubic"
+      ],
+      [
+       615,
+       1,
+       "hold"
+      ],
+      [
+       646,
+       1,
+       "inSine"
+      ],
+      [
+       652,
+       0
+      ]
+     ],
+     "translate_y": [
+      [
+       605,
+       12,
+       "outCubic"
+      ],
+      [
+       615,
+       0,
+       "hold"
+      ],
+      [
+       646,
+       0,
+       "inSine"
+      ],
+      [
+       652,
+       -8
+      ]
+     ]
+    },
+    {
+     "kind": "stage",
+     "style": "stage_label",
+     "text": "Արդյունք",
+     "x": 240,
+     "y": 294,
+     "w": 770,
+     "align": "right",
+     "opacity": [
+      [
+       651,
+       0,
+       "outCubic"
+      ],
+      [
+       661,
+       1,
+       "hold"
+      ],
+      [
+       666,
+       1,
+       "inSine"
+      ],
+      [
+       672,
+       0
+      ]
+     ],
+     "translate_y": [
+      [
+       651,
+       12,
+       "outCubic"
+      ],
+      [
+       661,
+       0,
+       "hold"
+      ],
+      [
+       666,
+       0,
+       "inSine"
+      ],
+      [
+       672,
+       -8
+      ]
+     ]
+    }
+   ],
+   "labels_note": "section «ՎԵՐԱՆՈՐՈԳՈՒՄ» (Montserrat 500 18 px, 0.24em, uppercase) + stage word (Noto Serif Armenian 500 40 px #856727), right-aligned to x 1010, y 270/294 — same slots as R2. Stage word switches when the divider crosses the middle (≈580, ≈651).",
+   "indicator": {
+    "what": "= R2 indicator (x 874–1010, y 352): grey 2 px line, dark-gold fill + 8 px dot. Build stages: fill = stage/5; slider: fill = 1 − p (drawing = 0, result = full).",
+    "steps": [
+     [
+      190,
+      0,
+      "outCubic"
+     ],
+     [
+      200,
+      0.2,
+      "hold"
+     ],
+     [
+      270,
+      0.2,
+      "outCubic"
+     ],
+     [
+      280,
+      0.4,
+      "hold"
+     ],
+     [
+      330,
+      0.4,
+      "outCubic"
+     ],
+     [
+      340,
+      0.6,
+      "hold"
+     ],
+     [
+      390,
+      0.6,
+      "outCubic"
+     ],
+     [
+      400,
+      0.8,
+      "hold"
+     ],
+     [
+      450,
+      0.8,
+      "outCubic"
+     ],
+     [
+      460,
+      1.0
+     ]
+    ],
+    "slider_from": 552
+   },
+   "styles_local": {
+    "section_label": {
+     "font": "text",
+     "weight": 500,
+     "size": 18,
+     "letter_spacing": "0.24em",
+     "transform": "uppercase",
+     "color": "rgba(23,25,28,0.62)",
+     "note": "right-aligned to x 1010 (margin-right −letter-spacing)"
+    },
+    "stage_label": {
+     "font": "display",
+     "weight": 500,
+     "size": 40,
+     "line_height": 1.1,
+     "color": "#856727",
+     "note": "right-aligned to x 1010; box y 294–338"
+    },
+    "chip": {
+     "font": "text",
+     "weight": 500,
+     "size": 20,
+     "letter_spacing": "0.2em",
+     "transform": "uppercase",
+     "color": "#856727",
+     "bg": "rgba(245,245,243,0.94)",
+     "padding": "10px 16px 10px 18px",
+     "note": "cover only"
+    },
+    "end_display": {
+     "font": "display",
+     "weight": 300,
+     "size": 120,
+     "line_height": 1.05,
+     "color": "#17191c",
+     "max_lines": 1
+    },
+    "end_cats": {
+     "font": "text",
+     "weight": 500,
+     "size": 24,
+     "letter_spacing": "0.22em",
+     "transform": "uppercase",
+     "color": "#856727",
+     "max_lines": 1,
+     "min_size": 20,
+     "note": "centre with padding-left = letter-spacing (conventions.letter_spacing_centering)"
+    },
+    "end_url": {
+     "font": "text",
+     "weight": 500,
+     "size": 30,
+     "letter_spacing": "0.08em",
+     "color": "#17191c",
+     "max_lines": 1
+    }
+   },
+   "end_card": {
+    "frames": [
+     666,
+     779
+    ],
+    "composed_from": 712,
+    "hold_s": 2.23,
+    "veil": {
+     "color": "#f5f5f3",
+     "opacity": [
+      [
+       666,
+       0,
+       "inOutSine"
+      ],
+      [
+       690,
+       0.9,
+       "linear"
+      ],
+      [
+       764,
+       0.94,
+       "inOutSine"
+      ],
+      [
+       779,
+       1.0
+      ]
+     ],
+     "blur_px_on_triptych": [
+      [
+       666,
+       0,
+       "inOutSine"
+      ],
+      [
+       692,
+       8
+      ]
+     ]
+    },
+    "layers": [
+     {
+      "layer": "logo",
+      "file": "public/brand/garon-logo-light.svg",
+      "x": 340,
+      "y": 560,
+      "w": 400,
+      "h": 291.76,
+      "opacity": [
+       [
+        676,
+        0,
+        "outCubic"
+       ],
+       [
+        694,
+        1
+       ]
+      ],
+      "translate_y": [
+       [
+        676,
+        14,
+        "outCubic"
+       ],
+       [
+        694,
+        0
+       ]
+      ],
+      "note": "visible logo y ≈ 583–833"
+     },
+     {
+      "layer": "rule",
+      "x": 508,
+      "y": 882,
+      "w": 64,
+      "h": 2,
+      "color": "#856727",
+      "scale_x": [
+       [
+        686,
+        0,
+        "outCubic"
+       ],
+       [
+        698,
+        1
+       ]
+      ],
+      "origin": "center"
+     },
+     {
+      "layer": "text",
+      "style": "end_cats",
+      "text": "Լողավազաններ · Տներ · Վերանորոգում",
+      "x": 70,
+      "y": 920,
+      "w": 940,
+      "align": "center",
+      "opacity": [
+       [
+        692,
+        0,
+        "outSine"
+       ],
+       [
+        704,
+        1
+       ]
+      ],
+      "translate_y": [
+       [
+        692,
+        10,
+        "outCubic"
+       ],
+       [
+        704,
+        0
+       ]
+      ]
+     },
+     {
+      "layer": "horizon",
+      "x": 0,
+      "y": 1106,
+      "w": 1080,
+      "h": 2,
+      "color": "#856727",
+      "scale_x": [
+       [
+        672,
+        0,
+        "inOutSine"
+       ],
+       [
+        694,
+        1
+       ]
+      ],
+      "origin": "left",
+      "note": "same y as the L02 intro ground line (1107 ± 1) → the line that closes the reel opens it again on loop"
+     },
+     {
+      "layer": "text",
+      "style": "end_url",
+      "text": "garon.am",
+      "x": 70,
+      "y": 1146,
+      "w": 940,
+      "align": "center",
+      "opacity": [
+       [
+        702,
+        0,
+        "outSine"
+       ],
+       [
+        712,
+        1
+       ]
+      ]
+     }
+    ],
+    "rules": "NO CTA, NO @handle, NO date. Only: logo, services line, garon.am (owner-preferences.md). v2 (owner feedback): the «Առաջ | Հետո» line with its divider + small handle is REMOVED from the end card (the top-right stage labels during the photo sections stay).",
+    "spacing_note": "v2 re-balance in the rhythm of the L02 v4 end card (logo → 49 px → rule → 38 px → line, then air → horizon → garon.am): logo visible 583–833, rule 882, services 920–≈950, horizon 1106 (≈156 px below the services line; L02: 129), garon.am 1146–≈1183. Block 583–1183 sits around the optical centre; below y 1100 only garon.am (x ≈ 470–610, < 900)."
+   },
+   "cover": {
+    "what": "the idea in one still: the room split at p = 0.5 — left the blueprint drawing, right the finished room, gold divider + handle in the middle; chips «ԳԾԱԳԻՐ» / «ԱՐԴՅՈՒՆՔ», section «ՎԵՐԱՆՈՐՈԳՈՒՄ», stage «Գծագիր | Արդյունք», corner logo, blueprint around the window",
+    "base_frame_index": 625,
+    "stage_text": "Գծագիր | Արդյունք",
+    "output": "R3_cover.png → R3_cover.jpg (q92)",
+    "grid_check": "profile grid 3:4 (y 240–1680) contains logo, labels and the whole window"
+   },
+   "audio": {
+    "tempo": "120 BPM, 4/4; 1 beat = 15 frames, 1 bar = 60 frames",
+    "file_rule": "Owner preference: ONLY the intro has sound, then silence. `python3 marketing/instagram/tools/compose_l02_audio.py intro_r3.wav --intro-only` (26.0 s WAV = reel length; sound 0–6.0 s, digital silence after).",
+    "beat_map": [
+     {
+      "f": 0,
+      "s": 0.0,
+      "event": "L02 intro"
+     },
+     {
+      "f": 105,
+      "s": 3.5,
+      "event": "IMPACT: gold piece lands"
+     },
+     {
+      "f": 180,
+      "s": 6.0,
+      "event": "DOWNBEAT — music starts: the logo's gold piece opens the blueprint, lines draw"
+     },
+     {
+      "f": 270,
+      "s": 9.0,
+      "event": "Պատեր — plaster wipes (270/285/300/315)"
+     },
+     {
+      "f": 330,
+      "s": 11.0,
+      "event": "Հատակ — boards laid row by row"
+     },
+     {
+      "f": 390,
+      "s": 13.0,
+      "event": "Լույս — LED 390, 405, cove + window 420 (accent)"
+     },
+     {
+      "f": 450,
+      "s": 15.0,
+      "event": "Կահավորում — one object per beat 450…525"
+     },
+     {
+      "f": 570,
+      "s": 19.0,
+      "event": "sweep back to the drawing"
+     },
+     {
+      "f": 600,
+      "s": 20.0,
+      "event": "drag to the middle (split)"
+     },
+     {
+      "f": 645,
+      "s": 21.5,
+      "event": "release → finished room (biggest accent)"
+     },
+     {
+      "f": 666,
+      "s": 22.2,
+      "event": "end card"
+     },
+     {
+      "f": 780,
+      "s": 26.0,
+      "event": "loop point"
+     }
+    ],
+    "mood": "In-app track by MOOD, not by name: modern minimal / architectural, warm, ~120 BPM, felt piano or soft pluck, no vocals, no EDM drop. Start at 6.0 s.",
+    "music_start_s": 6.0
+   },
+   "checks": [
+    "ffprobe: 1080x1920, 30 fps, 780 frames, 26.000 s, yuv420p, AAC (intro sound 0–6.0 s, then silence)",
+    "f0–179 = L02 v4 frames (rendered by render_l02_frames.js)",
+    "No text in f0–189; no hook, no CTA, no @handle; end card = logo, services line, garon.am",
+    "Labels inside x 240–1010, y 262–360; nothing important in y > 1500 (only floor boards)",
+    "No photo, no stock, no AI image after f179 — everything is SVG drawn by the renderer",
+    "Stage label matches the divider side (switch at p = 0.5)",
+    "f779 = paper + end card (clean loop)"
+   ],
+   "alt_hy": "Կարճ անիմացիա բաց ֆոնի վրա։ Ճարտարապետական ցանցի վրա կառուցվում է GARON նշանը, և նրա ոսկեգույն մասը բացում է գծագրի թերթը։ Բարակ մուգ գծերով գծվում է սենյակ՝ պատեր, պատուհան, դուռ, առաստաղ, չափային գծեր։ Հետո փուլ առ փուլ. պատերը ծեփվում են տաք սպիտակով, հատակին շարք առ շարք դրվում են կաղնու տախտակներ, վառվում են առաստաղի գծային լույսերը և պատուհանից ընկնում է արևի լույսը, հայտնվում են գորգ, բազմոց, սուրճի սեղան, ձիթենի, նկար և հատակի լամպ։ Ոսկեգույն սահիչը ցույց է տալիս գծագիրը և պատրաստի սենյակը կողք կողքի։ Վերջին կադրում՝ լոգոն, «Լողավազաններ · Տներ · Վերանորոգում» և garon.am։"
+  }
+ }
+}
