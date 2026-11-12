@@ -1,14 +1,16 @@
-// R2 «Առաջ / Հետո» reel — art-director renderer (frame-stepped HTML, light theme).
-// Extended from 2026-11-11-launch/04-L02v2-reference.js (owner-approved L02 v4): same fonts, keyframe/easing
-// engine, logo geometry, wordmark letter-spacing, gold-piece transition, label styles and end-card system.
-// New: blueprint-outline → pour logo intro, horizon-shutter opening, before/after slider pairs with a handle,
-// 2.5D foreground parallax, micro camera drift, triptych finale, light leaks, paper grain.
+// R2 «Առաջ / Հետո» reel — art-director renderer (frame-stepped HTML, light theme). v2 (owner feedback 2026-11-12).
+// f0–179: the L02 v4 logo intro, IDENTICAL frames — delegated to marketing/instagram/tools/render_l02_frames.js
+//   (items.L02 of 2026-11-11-launch/04-render-spec.json) and renamed L02_%03d.png → R2_%03d.png.
+// f180–779: this page. The finished L02 lockup (logo <img>) pushes in/fades (L02 camera exit keys) while its gold piece
+//   grows into the 3:4 window and opens on the night house (= L02 gold_piece_from_logo); then before/after slider pairs
+//   with a handle, 2.5D foreground parallax, micro camera drift, triptych finale, light leaks, paper grain, end card.
 // Reads EVERYTHING from items.R2 of 04-render-spec.json next to this file. If code and spec disagree, the spec wins.
 // usage: NODE_PATH=$(npm root -g) node 04-R2-renderer.js <repo_root> <out_dir> [all|cover|0,30,105,...]
 //   writes <out_dir>/R2_%03d.png, R2_cover.png (for all|cover) and measure.json.
 const fs = require('fs');
 const path = require('path');
 const { chromium } = require('playwright');
+const { execFileSync } = require('child_process');
 
 const ROOT = path.resolve(process.argv[2] || '.');
 const OUT = path.resolve(process.argv[3] || 'R2_frames');
@@ -16,8 +18,8 @@ const WHICH = process.argv[4] || 'all';
 const SPEC = JSON.parse(fs.readFileSync(path.join(__dirname, '04-render-spec.json'), 'utf8'));
 const IT = SPEC.items.R2;
 const TH = IT.theme;
-const LOGO = path.join(ROOT, TH.logo_file);
-const LOGO_SVG = fs.readFileSync(LOGO, 'utf8');
+const IN = IT.intro;
+const INTRO_END = IN.frames[1];
 const FONTSRC = path.join(ROOT, 'marketing/instagram/tools/node_modules/@fontsource');
 
 function fontLinks() {
@@ -40,7 +42,7 @@ async function main() {
   const tmp = path.join(OUT, '_r2.html');
   fs.writeFileSync(tmp, html);
   await page.goto('file://' + tmp);
-  await page.evaluate(setup, { IT, LOGO_SVG, ROOT, LOGO_URL: 'file://' + LOGO, STACK: { display: STACK.display.stack, text: STACK.text.stack } });
+  await page.evaluate(setup, { IT, ROOT, STACK: { display: STACK.display.stack, text: STACK.text.stack } });
   await page.evaluate(() => document.fonts.ready);
   await page.evaluate(async () => { for (const i of document.images) await i.decode(); });
   const fams = await page.evaluate(() => [...document.fonts].filter((f) => f.status === 'loaded').map((f) => f.family));
@@ -49,7 +51,16 @@ async function main() {
   if (WHICH === 'all') frames = [...Array(IT.frames).keys()];
   else if (WHICH === 'cover') frames = [];
   else frames = WHICH.split(',').map(Number);
-  for (const f of frames) {
+  // f0–INTRO_END: the L02 v4 intro, rendered by the L02 renderer itself (pixel-identical by construction)
+  const intro = frames.filter((f) => f <= INTRO_END);
+  if (intro.length) {
+    const tmpd = path.join(OUT, '_l02');
+    fs.rmSync(tmpd, { recursive: true, force: true });
+    execFileSync('node', [path.join(ROOT, IN.l02_renderer), ROOT, tmpd, intro.join(','), IN.l02_batch], { stdio: 'inherit' });
+    for (const f of intro) { const n = String(f).padStart(3, '0'); fs.renameSync(path.join(tmpd, `L02_${n}.png`), path.join(OUT, `R2_${n}.png`)); }
+    fs.rmSync(tmpd, { recursive: true, force: true });
+  }
+  for (const f of frames.filter((f) => f > INTRO_END)) {
     await page.evaluate((f) => window.setFrame(f), f);
     await page.screenshot({ path: path.join(OUT, `R2_${String(f).padStart(3, '0')}.png`), clip: { x: 0, y: 0, width: 1080, height: 1920 } });
   }
@@ -63,7 +74,7 @@ async function main() {
 }
 
 // ------------------------------------------------------------------ in-page code
-function setup({ IT, LOGO_SVG, ROOT, LOGO_URL, STACK }) {
+function setup({ IT, ROOT, STACK }) {
   const NS = 'http://www.w3.org/2000/svg';
   const TH = IT.theme;
   function bez([x1, y1, x2, y2]) {
@@ -79,7 +90,7 @@ function setup({ IT, LOGO_SVG, ROOT, LOGO_URL, STACK }) {
     };
   }
   const EZ = {}; for (const k in IT.easings) if (Array.isArray(IT.easings[k])) EZ[k] = bez(IT.easings[k]);
-  const lerp = (a, b, t) => (typeof a === 'number' ? a + (b - a) * t : Object.fromEntries(Object.keys(a).map((k) => [k, a[k] + (b[k] - a[k]) * t])));
+  const lerp = (a, b, t) => (typeof a === 'number' ? a + (b - a) * t : Array.isArray(a) ? a.map((v, i) => v + (b[i] - v) * t) : Object.fromEntries(Object.keys(a).map((k) => [k, a[k] + (b[k] - a[k]) * t])));
   function kf(keys, f) {
     if (!keys) return 1;
     if (typeof keys === 'number') return keys;
@@ -101,78 +112,19 @@ function setup({ IT, LOGO_SVG, ROOT, LOGO_URL, STACK }) {
   const W = IT.window.rect;
   const grade = IT.pair_impl.grade.match(/saturate\([^)]*\) contrast\([^)]*\)/)[0];
 
-  // ---- logo geometry from the file
-  const doc = new DOMParser().parseFromString(LOGO_SVG, 'image/svg+xml');
-  const lp = [...doc.querySelectorAll('path')];
-  const grads = [...doc.querySelectorAll('linearGradient')].map((g) => g.outerHTML).join('');
-  const GARON_D = lp[3].getAttribute('d'), CONS_D = lp[4].getAttribute('d');
-  const rectEl = doc.querySelector('rect');
-  const IN = IT.intro, G = IN.paths;
+  const IN = IT.intro;
 
-  // ---- background layers
+  // ---- background layers (f180+; the L02 intro's grid, ground line and glow have all faded out by f160)
   div(`left:0;top:0;width:1080px;height:1920px;background:${TH.bg}`);
-  const bpCss = IN.blueprint.css.replace(/; /g, ';');
-  const bp = div('left:0;top:0;width:1080px;height:1920px;' + bpCss);
+  const bpCss = IT.blueprint.css.replace(/; /g, ';');
+  const bp = div('left:0;top:0;width:1080px;height:1920px;' + bpCss); // cover only
   const vl = div('left:0;top:0;width:1080px;height:1920px');
   for (const x of IT.vlines.xs) div(`left:${x - IT.vlines.w / 2}px;top:0;width:${IT.vlines.w}px;height:1920px;background:${IT.vlines.color}`, vl);
-  const ground = div(`left:0;width:1080px;height:${IN.ground_line.h}px;background:${IN.ground_line.color};transform-origin:50% 50%`);
-  const glow = div('width:520px;height:80px;background:' + TH.impact_glow);
 
-  // ---- intro stage
-  const SB = IN.stage_box_px;
-  const cam = div(`left:${SB.x}px;top:${SB.y}px;width:${SB.w}px;height:${SB.h}px;transform-origin:342.4px 158px`);
-  const svg = sv('svg', { width: SB.w, height: SB.h, viewBox: '0 0 425 310', overflow: 'visible', 'shape-rendering': 'geometricPrecision', style: 'position:absolute;left:0;top:0;overflow:visible' }, cam);
-  const defs = sv('defs', {}, svg);
-  defs.innerHTML = grads +
-    `<linearGradient id="sweep" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="rgb(255,244,222)" stop-opacity="0"/><stop offset="0.5" stop-color="rgb(255,244,222)" stop-opacity="0.85"/><stop offset="1" stop-color="rgb(255,244,222)" stop-opacity="0"/></linearGradient>` +
-    `<filter id="blurG" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur id="blurGs" stdDeviation="0"/></filter>` +
-    `<filter id="blurC" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur id="blurCs" stdDeviation="0"/></filter>` +
-    `<clipPath id="markClip" clipPathUnits="userSpaceOnUse"><path d="${G.BIG}"/><path d="${G.MID}"/><path d="${G.GOLD}"/></clipPath>`;
-  for (const k of ['BIG', 'MID', 'GOLD']) defs.insertAdjacentHTML('beforeend', `<clipPath id="pc${k}" clipPathUnits="userSpaceOnUse"><path d="${G[k]}"/></clipPath>`);
-  const mark = sv('g', { transform: 'translate(0,9.25)' }, svg);
-  const wm = sv('g', { transform: 'translate(0,-12.75)' }, svg);
-  let cid = 0;
-  const clipRect = (x, y, w, h) => { const id = 'c' + (cid++); const cp = sv('clipPath', { id, clipPathUnits: 'userSpaceOnUse' }, defs); const r = sv('rect', { x, y, width: w, height: h }, cp); return { id, r }; };
-  // registration crosses
-  const RG = IN.registration; const reg = sv('g', {}, mark);
-  for (const [x, y] of RG.points) { const a = RG.arm_units; for (const L of [[x - a, y, x + a, y], [x, y - a, x, y + a]]) sv('line', { x1: L[0], y1: L[1], x2: L[2], y2: L[3], stroke: RG.stroke, 'stroke-width': RG.width_units }, reg); }
-  // dimensions
-  const dims = sv('g', {}, mark);
-  const DS = 'stroke:rgba(133,103,39,0.8);stroke-width:1.5;fill:none;vector-effect:non-scaling-stroke';
-  const dimEls = [];
-  for (const d of IN.dimensions.elements) {
-    const g = sv('g', {}, dims); const o = { g, d };
-    if (d.line) { const [x1, y1, x2, y2] = d.line; o.l = sv('line', { x1, y1, x2, y2, style: DS }, g); }
-    for (const L of (d.lines || []).concat(d.ticks || [])) sv('line', { x1: L[0], y1: L[1], x2: L[2], y2: L[3], style: DS }, g);
-    dimEls.push(o);
-  }
-  // poured solids + level lines
-  const PO = IN.pour; const pour = {};
-  for (const k of ['BIG', 'MID', 'GOLD']) {
-    const c = clipRect(60, 157, 310, 0);
-    const g = sv('g', { 'clip-path': `url(#${c.id})` }, mark); sv('path', { d: G[k], fill: PO.fills[k] }, g);
-    const lvG = sv('g', { 'clip-path': `url(#pc${k})` }, mark);
-    const lv = sv('rect', { x: 60, y: 157, width: 310, height: 1.1, fill: TH.pour_edge, opacity: 0.9 }, lvG);
-    pour[k] = { r: c.r, lv };
-  }
-  // outlines
-  const OL = IN.outlines; const outl = {}; const olG = sv('g', {}, mark);
-  for (const k of ['BIG', 'MID', 'GOLD']) outl[k] = sv('path', { d: G[k], fill: 'none', stroke: OL.stroke, 'stroke-width': OL.stroke_width_units, 'stroke-linejoin': 'miter', pathLength: 1, 'stroke-dasharray': '1 1', 'stroke-dashoffset': 1 }, olG);
-  const glintG = sv('g', { 'clip-path': 'url(#markClip)', style: 'mix-blend-mode:screen' }, mark);
-  const glint = sv('rect', { x: 0, y: -30, width: 60, height: 240, fill: 'url(#sweep)' }, glintG);
-  // wordmark glyphs (as L02)
-  const wmSrc = sv('g', { id: 'wmG' }, defs); sv('path', { d: GARON_D, fill: TH.wordmark_fill }, wmSrc); sv('rect', { x: rectEl.getAttribute('x'), y: rectEl.getAttribute('y'), width: rectEl.getAttribute('width'), height: rectEl.getAttribute('height'), fill: TH.wordmark_fill }, wmSrc);
-  const wmC = sv('g', { id: 'wmC' }, defs); sv('path', { d: CONS_D, fill: TH.wordmark_fill }, wmC);
-  function glyphs(spec, ref, filt) {
-    const grp = sv('g', { filter: `url(#${filt})` }, wm); const out = [];
-    for (let i = 0; i < spec.glyph_cx.length; i++) {
-      const b0 = spec.clip_x_bounds[i], b1 = spec.clip_x_bounds[i + 1];
-      const c = clipRect(b0, spec.clip_y[0], b1 - b0, spec.clip_y[1] - spec.clip_y[0]);
-      const g = sv('g', {}, grp); sv('use', { href: '#' + ref, 'clip-path': `url(#${c.id})` }, g); out.push({ g, cx: spec.glyph_cx[i] });
-    }
-    return { grp, out };
-  }
-  const GW = glyphs(IN.wordmark.garon, 'wmG', 'blurG'), CW = glyphs(IN.wordmark.construction, 'wmC', 'blurC');
+  // ---- finished L02 lockup (= L02 logoImg in its camera wrapper from f167), exits 180–198 under the gold piece
+  const SB = IN.stage_box_px, TO = IN.transform_origin_px;
+  const cam = div(`left:${SB.x}px;top:${SB.y}px;width:${SB.w}px;height:${SB.h}px;transform-origin:${TO[0]}px ${TO[1]}px`);
+  const logoImg = document.createElement('img'); logoImg.src = file(IN.logo_file); logoImg.style.cssText = `position:absolute;left:0;top:0;width:${SB.w}px;height:${SB.h}px`; cam.appendChild(logoImg);
 
   // ---- photo helpers
   const mkImg = (src, parent) => { const i = document.createElement('img'); i.src = file(src); i.style.cssText = `position:absolute;left:0;top:0;filter:${grade}`; parent.appendChild(i); return i; };
@@ -287,41 +239,19 @@ function setup({ IT, LOGO_SVG, ROOT, LOGO_URL, STACK }) {
     }
     return out;
   }
-  const goldPts = (e, f) => { const u = clamp01((f - e) / 12); const g = f <= e ? 1.6 : 1.6 * Math.pow(32, EZ.inOutCubic(u)); return GP.shape_units.map(([x, y]) => [GP.anchor_px[0] + g * x, GP.anchor_px[1] + g * y]); };
+  const goldPts = (en, f) => {
+    const e = en.frame, u = clamp01((f - e) / 12), g = f <= e ? 1.6 : 1.6 * Math.pow(32, EZ.inOutCubic(u));
+    const an = en.type === 'gold_piece_from_logo' ? lerp(en.anchor_from_px, en.anchor_to_px, EZ[en.anchor_ease](u)) : GP.anchor_px;
+    return GP.shape_units.map(([x, y]) => [an[0] + g * x, an[1] + g * y]);
+  };
   const bandRect = (yc, hv, R) => { const y0 = Math.max(R.y, yc - hv), y1 = Math.min(R.y + R.h, yc + hv); return y1 <= y0 ? NONE : poly([[R.x, y0], [R.x + R.w, y0], [R.x + R.w, y1], [R.x, y1]]); };
 
   let coverMode = false;
   window.setFrame = function (f) {
-    // ---- intro
-    const C = IN.camera; const s = kf(C.s, f);
-    cam.style.transform = `scale(${s * kf(C.exit_s, f)})`; vis(cam, coverMode ? 0 : kf(C.exit_o, f));
-    const gy = 858 + 104.8 * s;
-    vis(bp, coverMode ? 0.55 : kf(IN.blueprint.opacity, f)); bp.style.transform = coverMode ? 'none' : `translateY(${kf(IN.blueprint.translate_y, f)}px)`;
-    const gsx = kf(IN.ground_line.sx, f); ground.style.top = gy - 1 + 'px'; ground.style.transform = `scaleX(${gsx})`; vis(ground, coverMode || gsx <= 0 ? 0 : kf(IN.ground_line.opacity, f));
-    glow.style.left = 542.4 + 185.6 * s - 260 + 'px'; glow.style.top = gy - 40 + 'px'; vis(glow, coverMode ? 0 : kf(IN.impact_glow.opacity, f));
-    reg.setAttribute('opacity', kf(RG.opacity, f));
-    dims.setAttribute('opacity', kf(IN.dimensions.group_opacity, f));
-    for (const { g, d, l } of dimEls) {
-      if (d.opacity) g.setAttribute('opacity', kf(d.opacity, f));
-      if (l) { const k = kf(d.draw, f), [x1, y1, x2, y2] = d.line; l.setAttribute('x2', x1 + (x2 - x1) * k); l.setAttribute('y2', y1 + (y2 - y1) * k); l.setAttribute('visibility', k > 0 ? 'visible' : 'hidden'); }
-    }
-    for (const k of ['BIG', 'MID', 'GOLD']) {
-      const h = kf(PO[k], f), hmax = PO[k][PO[k].length - 1][1];
-      pour[k].r.setAttribute('y', 157 - h); pour[k].r.setAttribute('height', h);
-      pour[k].lv.setAttribute('y', 157 - h - 0.55); pour[k].lv.setAttribute('visibility', h > 0.5 && h < hmax - 0.5 ? 'visible' : 'hidden');
-      outl[k].setAttribute('stroke-dashoffset', 1 - kf(OL[k], f));
-      outl[k].setAttribute('visibility', kf(OL[k], f) > 0 ? 'visible' : 'hidden');
-    }
-    olG.setAttribute('opacity', kf(OL.opacity, f));
-    const gOn = f >= IN.glint.visible[0] && f <= IN.glint.visible[1]; glintG.setAttribute('visibility', gOn ? 'visible' : 'hidden');
-    glint.setAttribute('transform', `translate(${kf(IN.glint.gx, f)},0) skewX(-22)`);
-    for (const [spec, Wd, idb, idf] of [[IN.wordmark.garon, GW, 'blurGs', 'blurG'], [IN.wordmark.construction, CW, 'blurCs', 'blurC']]) {
-      const p = kf(spec.p, f);
-      for (const g of Wd.out) g.g.setAttribute('transform', `translate(${(g.cx - 210.5) * spec.k * (1 - p)},0)`);
-      Wd.grp.setAttribute('opacity', kf(spec.opacity, f));
-      const b = kf(spec.blur_std_units, f); document.getElementById(idb).setAttribute('stdDeviation', b);
-      Wd.grp.setAttribute('filter', b > 0.001 ? `url(#${idf})` : 'none');
-    }
+    // ---- lockup exit (L02 stage.camera at f ≥ 180: s = 1, ty = 0, shake = 0)
+    const CX = IN.camera_exit;
+    cam.style.transform = `translate(0px, 0px) scale(${kf(CX.exit_scale_mul, f)})`; vis(cam, coverMode ? 0 : kf(CX.exit_opacity, f));
+    vis(bp, coverMode ? 0.55 : 0); bp.style.transform = 'none';
     vis(vl, coverMode ? 1 : kf(IT.vlines.opacity, f));
 
     // ---- pairs
@@ -330,19 +260,19 @@ function setup({ IT, LOGO_SVG, ROOT, LOGO_URL, STACK }) {
     vis(goldFill, 0); vis(shutE1, 0); vis(shutE2, 0);
     for (const o of pairs) {
       const P = o.P, [a, b] = P.life, en = P.entry, e = en.frame;
-      if (en.type === 'gold_piece' && !coverMode && f >= e - 4 && f <= e + 11) {
+      if (/^gold_piece/.test(en.type) && !coverMode && f >= e - 4 && f <= e + 11) {
         const go = kf(en.gold_fill_opacity, f);
-        if (go > 0) { const cp = clipPoly(goldPts(e, f), W); goldFill.style.clipPath = cp.length ? poly(cp) : NONE; vis(goldFill, go); }
+        if (go > 0) { const cp = clipPoly(goldPts(en, f), W); goldFill.style.clipPath = cp.length ? poly(cp) : NONE; vis(goldFill, go); }
       }
       const on = coverMode ? P.id === 'H' : f >= a && f <= b; vis(o.layer, on ? 1 : 0); if (!on) continue;
-      const ff = coverMode ? 246 : f;
+      const ff = coverMode ? IT.cover.base_frame_index : f;
       const z = kf(P.push.z, ff), ex = kf(P.parallax.extra_scale, ff);
       const tf = `translate(${drift[0]}px,${drift[1]}px) scale(${z})`;
       for (const pl of [o.after, o.before]) { pl.wrap.style.transform = tf; pl.fg.style.transform = `scale(${ex})`; }
       const p = coverMode ? 0.5 : kf(P.p, f);
       o.bclip.style.clipPath = `inset(0px ${(W.w * (1 - p)).toFixed(2)}px 0px 0px)`;
       let clip = 'none';
-      if (!coverMode && en.type === 'gold_piece' && f < e + 12) { const cp = clipPoly(goldPts(e, f), W); clip = cp.length ? poly(cp) : NONE; }
+      if (!coverMode && /^gold_piece/.test(en.type) && f < e + 12) { const cp = clipPoly(goldPts(en, f), W); clip = cp.length ? poly(cp) : NONE; }
       if (!coverMode && en.type === 'horizon_shutter') {
         const hv = kf(en.hv, f);
         if (f < en.hv[en.hv.length - 1][0]) clip = bandRect(en.y_px, hv, W);
@@ -373,7 +303,7 @@ function setup({ IT, LOGO_SVG, ROOT, LOGO_URL, STACK }) {
       o.layer.style.clipPath = f < o.Q.rise[o.Q.rise.length - 1][0] ? bandRect(1016.5, hv, R) : 'none';
     }
     for (const el of tripBlurTargets) el.style.filter = blur > 0.01 ? `blur(${blur}px)` : '';
-    if (tOn && f >= 556) { const ho = kf(T.handle_opacity, f); if (ho > 0 || (tp > 0.001 && tp < 0.999)) { activeP = tp; handleO = ho; grab = kf(T.handle_grab, f); } }
+    if (tOn && f >= T.handle_visible_from) { const ho = kf(T.handle_opacity, f); if (ho > 0 || (tp > 0.001 && tp < 0.999)) { activeP = tp; handleO = ho; grab = kf(T.handle_grab, f); } }
     if (activeP !== null) {
       const xd = W.x + W.w * activeP;
       divLine.style.left = xd - 1 + 'px'; vis(divLine, Math.max(handleO, activeP > 0.001 && activeP < 0.999 ? 1 : 0));
@@ -403,13 +333,14 @@ function setup({ IT, LOGO_SVG, ROOT, LOGO_URL, STACK }) {
       d.style.transform = tf.join(' ');
     }
     vis(coverG, coverMode ? 1 : 0);
+    vis(grain, coverMode ? 0.05 : f < IT.grain.active_from ? 0 : kf(IT.grain.opacity, f));
     const k = Math.floor((coverMode ? 0 : f) / 2); grain.style.backgroundPosition = `${(37 * k) % 256}px ${(91 * k) % 256}px`;
   };
-  window.setCover = function () { coverMode = true; window.setFrame(246); };
+  window.setCover = function () { coverMode = true; window.setFrame(IT.cover.base_frame_index); };
   window.measure = function () {
     coverMode = false;
     const out = [];
-    for (const fr of [160, 230, 300, 400, 560, 600, 700]) {
+    for (const fr of [220, 290, 360, 460, 620, 660, 760]) {
       window.setFrame(fr);
       for (const { t, d } of texts) { if (getComputedStyle(d).visibility === 'hidden' || +d.style.opacity < 0.5) continue; const r = d.querySelector('.in').getBoundingClientRect(); out.push({ f: fr, text: t.text, x0: Math.round(r.left), x1: Math.round(r.right), y0: Math.round(r.top), y1: Math.round(r.bottom), font: getComputedStyle(d).fontFamily }); }
     }

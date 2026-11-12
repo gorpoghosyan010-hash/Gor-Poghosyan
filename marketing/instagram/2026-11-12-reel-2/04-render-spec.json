@@ -1,7 +1,7 @@
 {
- "spec_version": "r2-1",
+ "spec_version": "r2-2",
  "batch": "2026-11-12-reel-2",
- "generated": "2026-11-11",
+ "generated": "2026-11-12",
  "source_files": [
   "marketing/instagram/owner-preferences.md",
   "marketing/instagram/owner-decisions.md",
@@ -49,68 +49,67 @@
   "R2": {
    "type": "reel",
    "title": "«Առաջ / Հետո» — before → after slider reel",
-   "version": "r2 v1 (2026-11-12)",
-   "status": "draft for owner approval",
+   "version": "r2 v2 (2026-11-12): L02 v4 intro (0–179) + content shifted +60, end card without «Առաջ | Հետո»",
+   "status": "draft v2 for owner approval",
    "needs_shoot": false,
    "method": "html_frame_stepped",
-   "duration": 24.0,
+   "duration": 26.0,
    "fps": 30,
-   "frames": 720,
+   "frames": 780,
    "size": [
     1080,
     1920
    ],
    "output": "05-output/R2/R2_reel.mp4",
    "cover_output": "05-output/R2/R2_cover.jpg",
-   "renderer": "marketing/instagram/2026-11-12-reel-2/04-R2-renderer.js — usage: NODE_PATH=$(npm root -g) node 04-R2-renderer.js <repo_root> <out_dir> [all|cover|0,30,...] (writes R2_%03d.png, R2_cover.png, measure.json; ≈ 3–4 min for 720 frames). If code and spec disagree, the spec wins.",
-   "encode": "python3 marketing/instagram/tools/compose_l02_audio.py intro_r2.wav --r2 && ffmpeg -framerate 30 -i R2_%03d.png -i intro_r2.wav -map 0:v -map 1:a -c:v libx264 -profile:v high -pix_fmt yuv420p -crf 18 -colorspace bt709 -color_primaries bt709 -color_trc bt709 -c:a aac -b:a 192k -ar 48000 -t 24 -movflags +faststart R2_reel.mp4 ; cover: png2jpg.py R2_cover.png R2_cover.jpg 92",
+   "renderer": "marketing/instagram/2026-11-12-reel-2/04-R2-renderer.js — usage: NODE_PATH=$(npm root -g) node 04-R2-renderer.js <repo_root> <out_dir> [all|cover|0,30,...] (writes R2_%03d.png, R2_cover.png, measure.json; ≈ 4–5 min for 780 frames; f0–179 are delegated to tools/render_l02_frames.js). If code and spec disagree, the spec wins.",
+   "encode": "python3 marketing/instagram/tools/compose_l02_audio.py intro_r2.wav --intro-only && ffmpeg -framerate 30 -i R2_%03d.png -i intro_r2.wav -map 0:v -map 1:a -c:v libx264 -profile:v high -pix_fmt yuv420p -crf 18 -colorspace bt709 -color_primaries bt709 -color_trc bt709 -c:a aac -b:a 192k -ar 48000 -t 26 -movflags +faststart R2_reel.mp4 ; cover: png2jpg.py R2_cover.png R2_cover.jpg 92",
    "timebase": {
     "fps": 30,
-    "frames": 720,
-    "duration_s": 24.0,
+    "frames": 780,
+    "duration_s": 26.0,
     "bpm": 120,
     "frames_per_beat": 15,
     "frames_per_bar": 60,
-    "note": "every cut/transition/drag starts on a multiple of 15; 12 bars; f720 = bar 13.1 (clean loop)"
+    "note": "v2: intro 0–179 (= L02 v4, 3 bars), everything after shifted +60 frames (+2 s) vs v1, so every v1 beat-grid event stays on the grid; f180 = bar 4.1 downbeat (first photo); 13 bars; f780 = bar 14.1 (clean loop)"
    },
    "acts": [
     {
-     "act": "I intro",
-     "frames": "0–119",
-     "what": "blueprint outlines → pour → gold fill → wordmark (no text)"
+     "act": "I intro (= L02 v4)",
+     "frames": "0–179",
+     "what": "blueprint grid, ground line, stems, roof bands, gold piece lands 3.5 s, glint + wordmark 4–6 s (no text)"
     },
     {
      "act": "II house (hero, rewind)",
-     "frames": "120–299",
-     "what": "opens on the night RESULT via horizon shutter; 180 rewind sweep to the concrete frame; 225 drag; 255 release to the result"
+     "frames": "180–359",
+     "what": "the logo's gold piece grows into the window and opens on the night RESULT; 240 rewind sweep to the concrete frame; 285 drag; 315 release to the result"
     },
     {
      "act": "III pool B",
-     "frames": "285–449",
+     "frames": "345–509",
      "what": "gold piece; concrete → mosaic, same viewpoint (in-place transformation)"
     },
     {
      "act": "IV pool A",
-     "frames": "435–559",
+     "frames": "495–619",
      "what": "gold piece; rebar → finished pool (shortest)"
     },
     {
      "act": "V triptych",
-     "frames": "540–619",
+     "frames": "600–679",
      "what": "three panels rise from the horizon (before), ONE sweep turns all three into after"
     },
     {
      "act": "VI end card",
-     "frames": "606–719",
-     "what": "logo, «Առաջ | Հետո» with the slider divider, services line, garon.am"
+     "frames": "666–779",
+     "what": "logo, services line, garon.am (v2: no «Առաջ | Հետո» line)"
     }
    ],
    "z_order": [
+    "f0–179: L02 v4 renderer output (unchanged)",
     "bg paper",
-    "blueprint",
     "vlines",
-    "ground line + impact glow",
-    "stage (intro logo)",
+    "stage (finished lockup <img>, exit push/fade 180–198)",
     "pair H",
     "pair B",
     "pair A (later pairs above earlier; each = full-frame layer clipped by its entry mask)",
@@ -235,25 +234,26 @@
      "css": "1px solid rgba(133,103,39,0.55)",
      "opacity": [
       [
-       136,
+       196,
        0,
        "outSine"
       ],
       [
-       146,
+       206,
        1,
        "hold"
       ],
       [
-       606,
+       666,
        1,
        "inOutSine"
       ],
       [
-       624,
+       684,
        0
       ]
-     ]
+     ],
+     "note": "v2: keys +60"
     }
    },
    "vlines": {
@@ -269,627 +269,110 @@
     "color": "rgba(23,25,28,0.06)",
     "opacity": [
      [
-      126,
+      176,
       0,
       "outSine"
      ],
      [
-      146,
+      196,
       1
      ]
-    ]
+    ],
+    "note": "v2: = L02 v4 keys (fade-in 176–196 starts inside the borrowed intro; continuous across f179→f180)"
+   },
+   "blueprint": {
+    "css": "background-image: linear-gradient(to right, rgba(23,25,28,.11) 1px, transparent 1px), linear-gradient(to bottom, rgba(23,25,28,.11) 1px, transparent 1px), linear-gradient(to right, rgba(23,25,28,.045) 1px, transparent 1px), linear-gradient(to bottom, rgba(23,25,28,.045) 1px, transparent 1px); background-size: 180px 180px, 180px 180px, 36px 36px, 36px 36px; background-position: 0 27px, 0 27px, 0 27px, 0 27px; -webkit-mask-image: radial-gradient(620px 760px at 540px 980px, #000 35%, transparent 100%)",
+    "used_by": "cover (opacity 0.55, no mask change) and the triptych sheet (opacity 0.7, mask removed). = L02 v4 blueprint.css. Not shown in f180+ otherwise (the L02 intro's grid has faded by f130)."
    },
    "intro": {
     "frames": [
      0,
-     135
+     179
     ],
-    "what": "NEW 'blueprint → solid' build (no text): the three mark shapes are DRAWN as thin dark-gold outline strokes with registration crosses and dimension lines, then 'poured' solid from the ground up (BIG, MID — like concrete filling formwork, a gold level line rides the surface), then the gold piece fills on the beat with a glint; the real wordmark tracks in (as v4). At f120 the ground line opens like a shutter into the first photo.",
+    "source": "IDENTICAL to L02 v4 frames 0–179: items.L02 of marketing/instagram/2026-11-11-launch/04-render-spec.json (stage, build, blueprint, ground_line, dimensions, glint, wordmark, vlines, theme, easings), rendered by marketing/instagram/tools/render_l02_frames.js. Do NOT copy or edit those keys here — the R2 renderer runs the L02 renderer for f0–179 and renames L02_%03d.png → R2_%03d.png (pixel-identical by construction; verified by pixel diff).",
+    "what": "L02 v4 logo build-up: blueprint grid, ground line draws from the centre (6–36), stems rise (45/50/55), roof bands slide (60–), gold piece lands with shake + impact glow at f105 (3.5 s), camera pull-back 120–148, glint 124–150 + wordmark tracks in, finished lockup = garon-logo-light.svg at 200,700 680×496 from f148; real logo <img> from f167. No text, no grain, no corner logo, no labels in f0–179.",
+    "camera_exit": {
+     "what": "f180+: the finished lockup (logo <img> 680×496 at 200,700, transform-origin 342.4px 158px) continues exactly as in L02: scale = exit_scale_mul, opacity = exit_opacity; hidden after f198",
+     "exit_scale_mul": [
+      [
+       180,
+       1.0,
+       "inCubic"
+      ],
+      [
+       198,
+       1.15
+      ]
+     ],
+     "exit_opacity": [
+      [
+       186,
+       1.0,
+       "linear"
+      ],
+      [
+       198,
+       0.0
+      ]
+     ]
+    },
+    "replaced_v1": "v1 outline → pour intro (f0–135, horizon shutter at f120) removed on owner feedback 2026-11-12 (L02 intro was better).",
+    "l02_batch": "marketing/instagram/2026-11-11-launch",
+    "l02_renderer": "marketing/instagram/tools/render_l02_frames.js",
+    "l02_command": "node marketing/instagram/tools/render_l02_frames.js <repo_root> <tmp_dir> 0,1,…,179 marketing/instagram/2026-11-11-launch  → rename L02_%03d.png → R2_%03d.png",
     "stage_box_px": {
      "x": 200,
      "y": 700,
      "w": 680,
      "h": 496
     },
-    "svg_attrs": "width=680 height=496 viewBox='0 0 425 310' overflow=visible; mark group translate(0,9.25), wordmark group translate(0,-12.75) (= garon-logo-light.svg)",
-    "paths": {
-     "BIG": "M250 24 L250 54 L81 128 L81 155 L76 155 L76 111 Z",
-     "MID": "M250 66 L250 155 L206 155 L206 118 L100 148 L100 155 L95 155 L95 134 Z",
-     "GOLD": "M264 66 L352 110 L352 155 L308 155 L308 118 L264 96 Z",
-     "BIG_fill": "#1e1e1e",
-     "MID_fill": "url(#gmlight)",
-     "GOLD_fill": "url(#gglight)",
-     "GARON": "path #4 of garon-logo-dark.svg (fill #ffffff) + <rect x=67.5 y=228.8 width=17.9 height=9.6 fill=#ffffff> (G crossbar) — read from the file, never retype",
-     "CONSTRUCTION": "path #5 of garon-logo-dark.svg (fill #ffffff)"
-    },
-    "camera": {
-     "css": "wrapper div at the box, transform-origin 342.4px 158px, transform scale(s·exit_s); opacity exit_o",
-     "s": [
-      [
-       0,
-       1.08,
-       "outSine"
-      ],
-      [
-       104,
-       1.0
-      ]
-     ],
-     "exit_s": [
-      [
-       112,
-       1.0,
-       "inCubic"
-      ],
-      [
-       136,
-       1.04
-      ]
-     ],
-     "exit_o": [
-      [
-       126,
-       1,
-       "linear"
-      ],
-      [
-       136,
-       0
-      ]
-     ],
-     "ground_y": "858 + 104.8·s  (screen px; f0 971.2 → f104 962.8)"
-    },
-    "blueprint": {
-     "css": "background-image: linear-gradient(to right, rgba(23,25,28,.11) 1px, transparent 1px), linear-gradient(to bottom, rgba(23,25,28,.11) 1px, transparent 1px), linear-gradient(to right, rgba(23,25,28,.045) 1px, transparent 1px), linear-gradient(to bottom, rgba(23,25,28,.045) 1px, transparent 1px); background-size: 180px 180px, 180px 180px, 36px 36px, 36px 36px; background-position: 0 27px, 0 27px, 0 27px, 0 27px; -webkit-mask-image: radial-gradient(620px 760px at 540px 980px, #000 35%, transparent 100%)",
-     "opacity": [
-      [
-       0,
-       0,
-       "outSine"
-      ],
-      [
-       18,
-       1,
-       "hold"
-      ],
-      [
-       100,
-       1,
-       "inOutSine"
-      ],
-      [
-       132,
-       0
-      ]
-     ],
-     "translate_y": [
-      [
-       0,
-       0,
-       "linear"
-      ],
-      [
-       132,
-       -10
-      ]
-     ]
-    },
-    "ground_line": {
-     "color": "#856727",
-     "h": 2,
-     "sx": [
-      [
-       2,
-       0,
-       "outCubic"
-      ],
-      [
-       30,
-       1
-      ]
-     ],
-     "opacity": [
-      [
-       2,
-       0.9,
-       "hold"
-      ],
-      [
-       108,
-       0.9,
-       "inOutSine"
-      ],
-      [
-       120,
-       0
-      ]
-     ],
-     "note": "full-width line at ground_y, draws from the centre"
-    },
-    "outlines": {
-     "stroke": "#856727",
-     "stroke_width_units": 0.8,
-     "how": "<path d=… fill=none pathLength=1 stroke-dasharray='1 1' stroke-dashoffset=1−draw> (NO vector-effect, so the dash maps correctly); linejoin miter",
-     "BIG": [
-      [
-       4,
-       0,
-       "inOutSine"
-      ],
-      [
-       30,
-       1
-      ]
-     ],
-     "MID": [
-      [
-       10,
-       0,
-       "inOutSine"
-      ],
-      [
-       36,
-       1
-      ]
-     ],
-     "GOLD": [
-      [
-       18,
-       0,
-       "inOutSine"
-      ],
-      [
-       44,
-       1
-      ]
-     ],
-     "opacity": [
-      [
-       4,
-       1,
-       "hold"
-      ],
-      [
-       62,
-       1,
-       "inOutSine"
-      ],
-      [
-       84,
-       0
-      ]
-     ]
-    },
-    "registration": {
-     "points": [
-      [
-       76,
-       24
-      ],
-      [
-       352,
-       24
-      ],
-      [
-       76,
-       155
-      ],
-      [
-       352,
-       155
-      ]
-     ],
-     "arm_units": 7,
-     "stroke": "rgba(133,103,39,0.8)",
-     "width_units": 0.6,
-     "opacity": [
-      [
-       6,
-       0,
-       "outSine"
-      ],
-      [
-       18,
-       0.9,
-       "hold"
-      ],
-      [
-       76,
-       0.9,
-       "inOutSine"
-      ],
-      [
-       90,
-       0
-      ]
-     ]
-    },
-    "dimensions": {
-     "elements": [
-      {
-       "id": "dimA",
-       "line": [
-        76,
-        6,
-        352,
-        6
-       ],
-       "draw": [
-        [
-         14,
-         0,
-         "inOutCubic"
-        ],
-        [
-         38,
-         1
-        ]
-       ]
-      },
-      {
-       "id": "dimA_ext",
-       "lines": [
-        [
-         76,
-         0,
-         76,
-         14
-        ],
-        [
-         352,
-         0,
-         352,
-         14
-        ]
-       ],
-       "ticks": [
-        [
-         73,
-         9,
-         79,
-         3
-        ],
-        [
-         349,
-         9,
-         355,
-         3
-        ]
-       ],
-       "opacity": [
-        [
-         30,
-         0,
-         "outSine"
-        ],
-        [
-         38,
-         1
-        ]
-       ]
-      },
-      {
-       "id": "dimB",
-       "line": [
-        370,
-        155,
-        370,
-        24
-       ],
-       "draw": [
-        [
-         20,
-         0,
-         "inOutCubic"
-        ],
-        [
-         44,
-         1
-        ]
-       ]
-      },
-      {
-       "id": "dimB_ext",
-       "lines": [
-        [
-         358,
-         24,
-         376,
-         24
-        ],
-        [
-         358,
-         155,
-         376,
-         155
-        ]
-       ],
-       "ticks": [
-        [
-         367,
-         27,
-         373,
-         21
-        ],
-        [
-         367,
-         158,
-         373,
-         152
-        ]
-       ],
-       "opacity": [
-        [
-         36,
-         0,
-         "outSine"
-        ],
-        [
-         44,
-         1
-        ]
-       ]
-      }
-     ],
-     "stroke": "rgba(133,103,39,0.8), 1.5 px, vector-effect non-scaling-stroke",
-     "group_opacity": [
-      [
-       84,
-       1,
-       "inOutSine"
-      ],
-      [
-       100,
-       0
-      ]
-     ]
-    },
-    "pour": {
-     "how": "each solid = original path clipped by rect x 60..370, y 157−h, height h (mark units); level line = 1.1-unit rect #c9a96a at y 157−h clipped by the same path, opacity 0.9 while 0 < h < max",
-     "BIG": [
-      [
-       34,
-       0,
-       "inOutCubic"
-      ],
-      [
-       54,
-       135
-      ]
-     ],
-     "MID": [
-      [
-       39,
-       0,
-       "inOutCubic"
-      ],
-      [
-       58,
-       93
-      ]
-     ],
-     "GOLD": [
-      [
-       60,
-       0,
-       "outCubic"
-      ],
-      [
-       70,
-       93
-      ]
-     ],
-     "fills": {
-      "BIG": "#1e1e1e",
-      "MID": "url(#gmlight)",
-      "GOLD": "url(#gglight)"
-     }
-    },
-    "impact_glow": {
-     "css": "div 520x80 centred at (542.4+185.6·s, ground_y), radial-gradient(closest-side, rgba(201,169,106,.42), rgba(201,169,106,0))",
-     "opacity": [
-      [
-       59,
-       0,
-       "outSine"
-      ],
-      [
-       64,
-       1,
-       "outCubic"
-      ],
-      [
-       86,
-       0
-      ]
-     ]
-    },
-    "glint": {
-     "gx": [
-      [
-       66,
-       20,
-       "inOutSine"
-      ],
-      [
-       88,
-       400
-      ]
-     ],
-     "visible": [
-      66,
-      88
-     ],
-     "svg": "as L02 v4 (rect 60x240 #sweep skewX(−22), screen blend, clipped to the 3 mark paths)"
-    },
-    "wordmark": {
-     "garon": {
-      "clip_x_bounds": [
-       0,
-       95.5,
-       176,
-       244,
-       324.5,
-       425
-      ],
-      "clip_y": [
-       195,
-       265
-      ],
-      "glyph_cx": [
-       59.0,
-       136.0,
-       211.0,
-       283.5,
-       363.0
-      ],
-      "k": 0.55,
-      "p": [
-       [
-        72,
-        0,
-        "outQuart"
-       ],
-       [
-        96,
-        1
-       ]
-      ],
-      "opacity": [
-       [
-        72,
-        0,
-        "outSine"
-       ],
-       [
-        84,
-        1
-       ]
-      ],
-      "blur_std_units": [
-       [
-        72,
-        3,
-        "outCubic"
-       ],
-       [
-        92,
-        0
-       ]
-      ]
-     },
-     "construction": {
-      "clip_x_bounds": [
-       0,
-       60.2,
-       92.5,
-       123.5,
-       152.8,
-       182.8,
-       212.8,
-       242.9,
-       274,
-       304,
-       325.5,
-       358.4,
-       425
-      ],
-      "clip_y": [
-       270,
-       295
-      ],
-      "glyph_cx": [
-       44.7,
-       76.7,
-       108.3,
-       138.2,
-       167.8,
-       197.8,
-       227.9,
-       258.5,
-       289.1,
-       314.8,
-       342.0,
-       373.6
-      ],
-      "k": 1.4,
-      "p": [
-       [
-        78,
-        0,
-        "outQuart"
-       ],
-       [
-        102,
-        1
-       ]
-      ],
-      "opacity": [
-       [
-        78,
-        0,
-        "outSine"
-       ],
-       [
-        90,
-        1
-       ]
-      ],
-      "blur_std_units": [
-       [
-        78,
-        2,
-        "outCubic"
-       ],
-       [
-        96,
-        0
-       ]
-      ]
-     }
-    },
-    "check": "f104–110: the composed lockup equals garon-logo-light.svg at x200 y700 680x496 scaled 1.0 (mark x 321.6–763.2). f0–135: NO text."
+    "logo_file": "public/brand/garon-logo-light.svg",
+    "transform_origin_px": [
+     342.4,
+     158
+    ]
    },
    "pairs": [
     {
      "id": "H",
      "section": "Տուն",
      "life": [
-      120,
-      300
+      180,
+      360
      ],
      "entry": {
-      "type": "horizon_shutter",
-      "frame": 120,
-      "y_px": 962.8,
-      "hv": [
-       [
-        120,
-        1,
-        "inOutQuart"
-       ],
-       [
-        138,
-        700
-       ]
+      "type": "gold_piece_from_logo",
+      "frame": 180,
+      "frames": [
+       180,
+       192
       ],
-      "edges_opacity": [
+      "anchor_from_px": [
+       728,
+       926.8
+      ],
+      "anchor_to_px": [
+       540,
+       1016.5
+      ],
+      "anchor_ease": "inOutCubic",
+      "gold_fill_opacity": [
        [
-        120,
+        180,
         1,
         "hold"
        ],
        [
-        134,
+        183,
         1,
-        "linear"
+        "outSine"
        ],
        [
-        142,
+        190,
         0
        ]
       ],
-      "note": "the ground line of the logo opens like a shutter: clip = window ∩ {|y − 962.8| ≤ hv}; two 2 px #c9a96a lines on the opening edges (x 70–1010)"
+      "note": "v2: identical to L02 v4 A1 (transitions.gold_piece_from_logo): the gold piece of the finished L02 lockup (f179) grows into the 3:4 window and opens on the night house; anchor moves (728, 926.8) → (540, 1016.5) with inOutCubic over 180–192; g = 1.6·32^inOutCubic((f−180)/12); the lockup pushes in and fades under it (intro.camera_exit). Replaces the v1 horizon shutter."
      },
      "before": {
       "src": "marketing/instagram/assets/owner/house-A/enhanced/02-progress-frame.jpg",
@@ -931,12 +414,12 @@
      "push": {
       "z": [
        [
-        120,
+        180,
         1.012,
         "linear"
        ],
        [
-        300,
+        360,
         1.035
        ]
       ],
@@ -950,12 +433,12 @@
       "feather": 0.12,
       "extra_scale": [
        [
-        120,
+        180,
         1.0,
         "linear"
        ],
        [
-        300,
+        360,
         1.012
        ]
       ],
@@ -966,100 +449,100 @@
      },
      "p": [
       [
-       120,
+       180,
        0,
        "hold"
       ],
       [
-       180,
+       240,
        0,
        "inOutQuart"
       ],
       [
-       195,
+       255,
        1,
        "hold"
       ],
       [
-       225,
+       285,
        1,
        "outCubic"
       ],
       [
-       240,
+       300,
        0.56,
        "inOutSine"
       ],
       [
-       255,
+       315,
        0.52,
        "inOutCubic"
       ],
       [
-       270,
+       330,
        0
       ]
      ],
-     "p_note": "opens on the RESULT (p=0), 180 rewind sweep → before (p=1), 225 drag to the middle, hesitation, 255 release → result",
+     "p_note": "opens on the RESULT (p=0), 240 rewind sweep → before (p=1), 285 drag to the middle, hesitation, 315 release to the result",
      "handle_opacity": [
       [
-       176,
+       236,
        0,
        "outSine"
       ],
       [
-       182,
+       242,
        1,
        "hold"
       ],
       [
-       268,
+       328,
        1,
        "inOutSine"
       ],
       [
-       278,
+       338,
        0
       ]
      ],
      "handle_grab": [
       [
-       174,
+       234,
        1,
        "outCubic"
       ],
       [
-       180,
+       240,
        0.88,
        "hold"
       ],
       [
-       195,
+       255,
        0.88,
        "outBack"
       ],
       [
-       203,
+       263,
        1,
        "hold"
       ],
       [
-       219,
+       279,
        1,
        "outCubic"
       ],
       [
-       225,
+       285,
        0.88,
        "hold"
       ],
       [
-       268,
+       328,
        0.88,
        "outBack"
       ],
       [
-       276,
+       336,
        1
       ]
      ],
@@ -1072,30 +555,30 @@
      "id": "B",
      "section": "Լողավազան",
      "life": [
-      285,
-      450
+      345,
+      510
      ],
      "entry": {
       "type": "gold_piece",
-      "frame": 285,
+      "frame": 345,
       "gold_fill_opacity": [
        [
-        281,
+        341,
         0,
         "outSine"
        ],
        [
-        284,
+        344,
         1,
         "hold"
        ],
        [
-        288,
+        348,
         1,
         "outSine"
        ],
        [
-        295,
+        355,
         0
        ]
       ]
@@ -1140,12 +623,12 @@
      "push": {
       "z": [
        [
-        285,
+        345,
         1.01,
         "linear"
        ],
        [
-        450,
+        510,
         1.07
        ]
       ],
@@ -1159,12 +642,12 @@
       "feather": 0.14,
       "extra_scale": [
        [
-        285,
+        345,
         1.0,
         "linear"
        ],
        [
-        450,
+        510,
         1.02
        ]
       ],
@@ -1175,75 +658,75 @@
      },
      "p": [
       [
-       285,
+       345,
        1,
        "hold"
       ],
       [
-       330,
+       390,
        1,
        "outCubic"
       ],
       [
-       345,
+       405,
        0.56,
        "inOutSine"
       ],
       [
-       360,
+       420,
        0.6,
        "inOutSine"
       ],
       [
-       375,
+       435,
        0.53,
        "inOutCubic"
       ],
       [
-       390,
+       450,
        0
       ]
      ],
      "p_note": "interactive feel: grab, drag to the middle, small check back, release on the beat",
      "handle_opacity": [
       [
-       312,
+       372,
        0,
        "outSine"
       ],
       [
-       320,
+       380,
        1,
        "hold"
       ],
       [
-       388,
+       448,
        1,
        "inOutSine"
       ],
       [
-       398,
+       458,
        0
       ]
      ],
      "handle_grab": [
       [
-       324,
+       384,
        1,
        "outCubic"
       ],
       [
-       330,
+       390,
        0.88,
        "hold"
       ],
       [
-       388,
+       448,
        0.88,
        "outBack"
       ],
       [
-       396,
+       456,
        1
       ]
      ],
@@ -1256,30 +739,30 @@
      "id": "A",
      "section": "Լողավազան",
      "life": [
-      435,
-      560
+      495,
+      620
      ],
      "entry": {
       "type": "gold_piece",
-      "frame": 435,
+      "frame": 495,
       "gold_fill_opacity": [
        [
-        431,
+        491,
         0,
         "outSine"
        ],
        [
-        434,
+        494,
         1,
         "hold"
        ],
        [
-        438,
+        498,
         1,
         "outSine"
        ],
        [
-        445,
+        505,
         0
        ]
       ]
@@ -1324,12 +807,12 @@
      "push": {
       "z": [
        [
-        435,
+        495,
         1.01,
         "linear"
        ],
        [
-        560,
+        620,
         1.06
        ]
       ],
@@ -1343,12 +826,12 @@
       "feather": 0.14,
       "extra_scale": [
        [
-        435,
+        495,
         1.0,
         "linear"
        ],
        [
-        560,
+        620,
         1.02
        ]
       ],
@@ -1359,69 +842,69 @@
      },
      "p": [
       [
-       435,
+       495,
        1,
        "hold"
       ],
       [
-       465,
+       525,
        1,
        "outCubic"
       ],
       [
-       480,
+       540,
        0.55,
        "hold"
       ],
       [
-       495,
+       555,
        0.55,
        "inOutCubic"
       ],
       [
-       510,
+       570,
        0
       ]
      ],
      "handle_opacity": [
       [
-       447,
+       507,
        0,
        "outSine"
       ],
       [
-       455,
+       515,
        1,
        "hold"
       ],
       [
-       508,
+       568,
        1,
        "inOutSine"
       ],
       [
-       518,
+       578,
        0
       ]
      ],
      "handle_grab": [
       [
-       459,
+       519,
        1,
        "outCubic"
       ],
       [
-       465,
+       525,
        0.88,
        "hold"
       ],
       [
-       508,
+       568,
        0.88,
        "outBack"
       ],
       [
-       516,
+       576,
        1
       ]
      ],
@@ -1483,17 +966,17 @@
    },
    "triptych": {
     "frames": [
-     540,
-     719
+     600,
+     779
     ],
     "sheet_opacity": [
      [
-      536,
+      596,
       0,
       "inOutSine"
      ],
      [
-      546,
+      606,
       1
      ]
     ],
@@ -1536,23 +1019,23 @@
       },
       "rise": [
        [
-        544,
+        604,
         0,
         "inOutQuart"
        ],
        [
-        560,
+        620,
         640
        ]
       ],
       "ty": [
        [
-        544,
+        604,
         10,
         "linear"
        ],
        [
-        720,
+        780,
         -12
        ]
       ]
@@ -1594,23 +1077,23 @@
       },
       "rise": [
        [
-        548,
+        608,
         0,
         "inOutQuart"
        ],
        [
-        564,
+        624,
         640
        ]
       ],
       "ty": [
        [
-        548,
+        608,
         -8,
         "linear"
        ],
        [
-        720,
+        780,
         14
        ]
       ]
@@ -1652,23 +1135,23 @@
       },
       "rise": [
        [
-        552,
+        612,
         0,
         "inOutQuart"
        ],
        [
-        568,
+        628,
         640
        ]
       ],
       "ty": [
        [
-        552,
+        612,
         10,
         "linear"
        ],
        [
-        720,
+        780,
         -12
        ]
       ]
@@ -1676,72 +1159,72 @@
     ],
     "panel_zoom": [
      [
-      540,
+      600,
       1.02,
       "linear"
      ],
      [
-      720,
+      780,
       1.06
      ]
     ],
-    "panel_rise_note": "each panel opens from the window's horizontal centre line y 1016.5 (clip |y−1016.5| ≤ hv, keys `rise`), staggered 544/548/552 left→right; ty = vertical micro-drift of the panel content (different direction per panel = depth)",
+    "panel_rise_note": "each panel opens from the window's horizontal centre line y 1016.5 (clip |y−1016.5| ≤ hv, keys `rise`), staggered 604/608/612 left→right; ty = vertical micro-drift of the panel content (different direction per panel = depth)",
     "p": [
      [
-      540,
+      600,
       1,
       "hold"
      ],
      [
-      570,
+      630,
       1,
       "inOutCubic"
      ],
      [
-      600,
+      660,
       0
      ]
     ],
     "p_note": "ONE divider sweeps right→left across all three panels: every before becomes its after in one gesture",
     "handle_opacity": [
      [
-      562,
+      622,
       0,
       "outSine"
      ],
      [
-      568,
+      628,
       1,
       "hold"
      ],
      [
-      598,
+      658,
       1,
       "inOutSine"
      ],
      [
-      606,
+      666,
       0
      ]
     ],
     "handle_grab": [
      [
-      564,
+      624,
       1,
       "outCubic"
      ],
      [
-      570,
+      630,
       0.88,
       "hold"
      ],
      [
-      598,
+      658,
       0.88,
       "outBack"
      ],
      [
-      606,
+      666,
       1
      ]
     ],
@@ -1751,131 +1234,101 @@
      "T2_after": 0.823,
      "T3_before": 0.955,
      "T3_after": 1.266
-    }
+    },
+    "handle_visible_from": 616
    },
    "light_leaks": {
     "css": "div 900x900, radial-gradient(closest-side, rgba(255,214,150,0.9), rgba(201,169,106,0.35) 45%, rgba(201,169,106,0) 100%), mix-blend-mode screen, centred (cx, cy)",
     "events": [
      {
-      "frame": 120,
+      "frame": 180,
       "opacity": [
        [
-        114,
+        180,
         0,
         "outSine"
        ],
        [
-        124,
+        188,
         0.1,
         "inOutSine"
        ],
        [
-        146,
+        210,
         0
        ]
       ],
       "cx": [
        [
-        114,
+        180,
         300,
         "linear"
        ],
        [
-        146,
+        210,
         760
        ]
       ],
       "cy": 1016
      },
      {
-      "frame": 180,
+      "frame": 240,
       "opacity": [
        [
-        174,
+        234,
         0,
         "outSine"
        ],
        [
-        184,
+        244,
         0.1,
         "inOutSine"
        ],
        [
-        206,
+        266,
         0
        ]
       ],
       "cx": [
        [
-        174,
+        234,
         880,
         "linear"
        ],
        [
-        206,
+        266,
         400
        ]
       ],
       "cy": 1016
      },
      {
-      "frame": 285,
+      "frame": 345,
       "opacity": [
        [
-        279,
+        339,
         0,
         "outSine"
        ],
        [
-        289,
+        349,
         0.1,
         "inOutSine"
        ],
        [
-        311,
+        371,
         0
        ]
       ],
       "cx": [
        [
-        279,
+        339,
         700,
         "linear"
        ],
        [
-        311,
+        371,
         380
-       ]
-      ],
-      "cy": 1016
-     },
-     {
-      "frame": 375,
-      "opacity": [
-       [
-        369,
-        0,
-        "outSine"
-       ],
-       [
-        379,
-        0.1,
-        "inOutSine"
-       ],
-       [
-        401,
-        0
-       ]
-      ],
-      "cx": [
-       [
-        369,
-        360,
-        "linear"
-       ],
-       [
-        401,
-        760
        ]
       ],
       "cy": 1016
@@ -1901,53 +1354,96 @@
       "cx": [
        [
         429,
-        760,
+        360,
         "linear"
        ],
        [
         461,
+        760
+       ]
+      ],
+      "cy": 1016
+     },
+     {
+      "frame": 495,
+      "opacity": [
+       [
+        489,
+        0,
+        "outSine"
+       ],
+       [
+        499,
+        0.1,
+        "inOutSine"
+       ],
+       [
+        521,
+        0
+       ]
+      ],
+      "cx": [
+       [
+        489,
+        760,
+        "linear"
+       ],
+       [
+        521,
         300
        ]
       ],
       "cy": 1016
      },
      {
-      "frame": 570,
+      "frame": 630,
       "opacity": [
        [
-        564,
+        624,
         0,
         "outSine"
        ],
        [
-        574,
+        634,
         0.1,
         "inOutSine"
        ],
        [
-        596,
+        656,
         0
        ]
       ],
       "cx": [
        [
-        564,
+        624,
         900,
         "linear"
        ],
        [
-        596,
+        656,
         180
        ]
       ],
       "cy": 1016
      }
     ],
-    "note": "peak opacity 0.10 — barely there"
+    "note": "peak opacity 0.10 — barely there; v2: nothing before f180"
    },
    "grain": {
     "css": "full-frame div, background = 256x256 grayscale noise tile (deterministic PRNG seed 7, values 128±40), mix-blend-mode overlay, opacity 0.05; background-position shifts every 2 frames by ((37·k) mod 256, (91·k) mod 256), k = floor(f/2)",
-    "note": "paper texture, invisible on a phone at arm's length but kills the 'flat digital' look"
+    "note": "paper texture, invisible on a phone at arm's length but kills the 'flat digital' look; v2: OFF in f0–179 (the borrowed L02 intro has no grain, frames must stay identical), fades in 180–196 (keys `opacity`)",
+    "active_from": 180,
+    "opacity": [
+     [
+      180,
+      0,
+      "linear"
+     ],
+     [
+      196,
+      0.05
+     ]
+    ]
    },
    "corner_logo": {
     "file": "public/brand/garon-logo-light.svg",
@@ -1957,22 +1453,22 @@
     "h": 96,
     "opacity": [
      [
-      132,
+      192,
       0,
       "outSine"
      ],
      [
-      144,
+      204,
       0.92,
       "hold"
      ],
      [
-      608,
+      668,
       0.92,
       "inOutSine"
      ],
      [
-      618,
+      678,
       0
      ]
     ]
@@ -1988,33 +1484,33 @@
      "align": "right",
      "opacity": [
       [
-       130,
+       190,
        0,
        "outCubic"
       ],
       [
-       140,
+       200,
        1,
        "hold"
       ],
       [
-       284,
+       344,
        1,
        "inSine"
       ],
       [
-       290,
+       350,
        0
       ]
      ],
      "translate_y": [
       [
-       130,
+       190,
        8,
        "outCubic"
       ],
       [
-       140,
+       200,
        0
       ]
      ]
@@ -2029,43 +1525,43 @@
      "align": "right",
      "opacity": [
       [
-       130,
+       190,
        0,
        "outCubic"
       ],
       [
-       140,
+       200,
        1,
        "hold"
       ],
       [
-       182,
+       242,
        1,
        "inSine"
       ],
       [
-       188,
+       248,
        0
       ]
      ],
      "translate_y": [
       [
-       130,
+       190,
        12,
        "outCubic"
       ],
       [
-       140,
+       200,
        0,
        "hold"
       ],
       [
-       182,
+       242,
        0,
        "inSine"
       ],
       [
-       188,
+       248,
        -8
       ]
      ]
@@ -2080,43 +1576,43 @@
      "align": "right",
      "opacity": [
       [
-       188,
+       248,
        0,
        "outCubic"
       ],
       [
-       198,
+       258,
        1,
        "hold"
       ],
       [
-       252,
+       312,
        1,
        "inSine"
       ],
       [
-       258,
+       318,
        0
       ]
      ],
      "translate_y": [
       [
-       188,
+       248,
        12,
        "outCubic"
       ],
       [
-       198,
+       258,
        0,
        "hold"
       ],
       [
-       252,
+       312,
        0,
        "inSine"
       ],
       [
-       258,
+       318,
        -8
       ]
      ]
@@ -2131,43 +1627,43 @@
      "align": "right",
      "opacity": [
       [
-       257,
+       317,
        0,
        "outCubic"
       ],
       [
-       267,
+       327,
        1,
        "hold"
       ],
       [
-       284,
+       344,
        1,
        "inSine"
       ],
       [
-       290,
+       350,
        0
       ]
      ],
      "translate_y": [
       [
-       257,
+       317,
        12,
        "outCubic"
       ],
       [
-       267,
+       327,
        0,
        "hold"
       ],
       [
-       284,
+       344,
        0,
        "inSine"
       ],
       [
-       290,
+       350,
        -8
       ]
      ]
@@ -2182,33 +1678,33 @@
      "align": "right",
      "opacity": [
       [
-       289,
+       349,
        0,
        "outCubic"
       ],
       [
-       299,
+       359,
        1,
        "hold"
       ],
       [
-       532,
+       592,
        1,
        "inSine"
       ],
       [
-       538,
+       598,
        0
       ]
      ],
      "translate_y": [
       [
-       289,
+       349,
        8,
        "outCubic"
       ],
       [
-       299,
+       359,
        0
       ]
      ]
@@ -2223,43 +1719,43 @@
      "align": "right",
      "opacity": [
       [
-       289,
+       349,
        0,
        "outCubic"
       ],
       [
-       299,
+       359,
        1,
        "hold"
       ],
       [
-       372,
+       432,
        1,
        "inSine"
       ],
       [
-       378,
+       438,
        0
       ]
      ],
      "translate_y": [
       [
-       289,
+       349,
        12,
        "outCubic"
       ],
       [
-       299,
+       359,
        0,
        "hold"
       ],
       [
-       372,
+       432,
        0,
        "inSine"
       ],
       [
-       378,
+       438,
        -8
       ]
      ]
@@ -2268,57 +1764,6 @@
      "kind": "stage",
      "style": "stage_label",
      "text": "Հետո",
-     "x": 240,
-     "y": 294,
-     "w": 770,
-     "align": "right",
-     "opacity": [
-      [
-       377,
-       0,
-       "outCubic"
-      ],
-      [
-       387,
-       1,
-       "hold"
-      ],
-      [
-       432,
-       1,
-       "inSine"
-      ],
-      [
-       438,
-       0
-      ]
-     ],
-     "translate_y": [
-      [
-       377,
-       12,
-       "outCubic"
-      ],
-      [
-       387,
-       0,
-       "hold"
-      ],
-      [
-       432,
-       0,
-       "inSine"
-      ],
-      [
-       438,
-       -8
-      ]
-     ]
-    },
-    {
-     "kind": "stage",
-     "style": "stage_label",
-     "text": "Առաջ",
      "x": 240,
      "y": 294,
      "w": 770,
@@ -2369,7 +1814,7 @@
     {
      "kind": "stage",
      "style": "stage_label",
-     "text": "Հետո",
+     "text": "Առաջ",
      "x": 240,
      "y": 294,
      "w": 770,
@@ -2386,12 +1831,12 @@
        "hold"
       ],
       [
-       534,
+       552,
        1,
        "inSine"
       ],
       [
-       540,
+       558,
        0
       ]
      ],
@@ -2407,12 +1852,63 @@
        "hold"
       ],
       [
-       534,
+       552,
        0,
        "inSine"
       ],
       [
-       540,
+       558,
+       -8
+      ]
+     ]
+    },
+    {
+     "kind": "stage",
+     "style": "stage_label",
+     "text": "Հետո",
+     "x": 240,
+     "y": 294,
+     "w": 770,
+     "align": "right",
+     "opacity": [
+      [
+       557,
+       0,
+       "outCubic"
+      ],
+      [
+       567,
+       1,
+       "hold"
+      ],
+      [
+       594,
+       1,
+       "inSine"
+      ],
+      [
+       600,
+       0
+      ]
+     ],
+     "translate_y": [
+      [
+       557,
+       12,
+       "outCubic"
+      ],
+      [
+       567,
+       0,
+       "hold"
+      ],
+      [
+       594,
+       0,
+       "inSine"
+      ],
+      [
+       600,
        -8
       ]
      ]
@@ -2427,33 +1923,33 @@
      "align": "right",
      "opacity": [
       [
-       546,
+       606,
        0,
        "outCubic"
       ],
       [
-       556,
+       616,
        1,
        "hold"
       ],
       [
-       608,
+       668,
        1,
        "inSine"
       ],
       [
-       614,
+       674,
        0
       ]
      ],
      "translate_y": [
       [
-       546,
+       606,
        8,
        "outCubic"
       ],
       [
-       556,
+       616,
        0
       ]
      ]
@@ -2468,43 +1964,43 @@
      "align": "right",
      "opacity": [
       [
-       548,
+       608,
        0,
        "outCubic"
       ],
       [
-       558,
+       618,
        1,
        "hold"
       ],
       [
-       581,
+       641,
        1,
        "inSine"
       ],
       [
-       587,
+       647,
        0
       ]
      ],
      "translate_y": [
       [
-       548,
+       608,
        12,
        "outCubic"
       ],
       [
-       558,
+       618,
        0,
        "hold"
       ],
       [
-       581,
+       641,
        0,
        "inSine"
       ],
       [
-       587,
+       647,
        -8
       ]
      ]
@@ -2519,43 +2015,43 @@
      "align": "right",
      "opacity": [
       [
-       586,
+       646,
        0,
        "outCubic"
       ],
       [
-       596,
+       656,
        1,
        "hold"
       ],
       [
-       608,
+       668,
        1,
        "inSine"
       ],
       [
-       614,
+       674,
        0
       ]
      ],
      "translate_y": [
       [
-       586,
+       646,
        12,
        "outCubic"
       ],
       [
-       596,
+       656,
        0,
        "hold"
       ],
       [
-       608,
+       668,
        0,
        "inSine"
       ],
       [
-       614,
+       674,
        -8
       ]
      ]
@@ -2621,42 +2117,42 @@
    },
    "end_card": {
     "frames": [
-     606,
-     719
+     666,
+     779
     ],
-    "composed_from": 658,
-    "hold_s": 2.03,
+    "composed_from": 712,
+    "hold_s": 2.23,
     "veil": {
      "color": "#f5f5f3",
      "opacity": [
       [
-       606,
+       666,
        0,
        "inOutSine"
       ],
       [
-       630,
+       690,
        0.9,
        "linear"
       ],
       [
-       704,
+       764,
        0.94,
        "inOutSine"
       ],
       [
-       719,
+       779,
        1.0
       ]
      ],
      "blur_px_on_triptych": [
       [
-       606,
+       666,
        0,
        "inOutSine"
       ],
       [
-       632,
+       692,
        8
       ]
      ]
@@ -2666,47 +2162,48 @@
       "layer": "logo",
       "file": "public/brand/garon-logo-light.svg",
       "x": 340,
-      "y": 380,
+      "y": 560,
       "w": 400,
       "h": 291.76,
       "opacity": [
        [
-        616,
+        676,
         0,
         "outCubic"
        ],
        [
-        634,
+        694,
         1
        ]
       ],
       "translate_y": [
        [
-        616,
+        676,
         14,
         "outCubic"
        ],
        [
-        634,
+        694,
         0
        ]
-      ]
+      ],
+      "note": "visible logo y ≈ 583–833"
      },
      {
       "layer": "rule",
       "x": 508,
-      "y": 700,
+      "y": 882,
       "w": 64,
       "h": 2,
       "color": "#856727",
       "scale_x": [
        [
-        626,
+        686,
         0,
         "outCubic"
        ],
        [
-        638,
+        698,
         1
        ]
       ],
@@ -2714,132 +2211,32 @@
      },
      {
       "layer": "text",
-      "style": "end_display",
-      "text": "Առաջ",
-      "x": 70,
-      "y": 742,
-      "w": 420,
-      "align": "right",
-      "opacity": [
-       [
-        630,
-        0,
-        "outCubic"
-       ],
-       [
-        644,
-        1
-       ]
-      ],
-      "translate_y": [
-       [
-        630,
-        16,
-        "outCubic"
-       ],
-       [
-        644,
-        0
-       ]
-      ]
-     },
-     {
-      "layer": "text",
-      "style": "end_display",
-      "text": "Հետո",
-      "x": 590,
-      "y": 742,
-      "w": 420,
-      "align": "left",
-      "opacity": [
-       [
-        634,
-        0,
-        "outCubic"
-       ],
-       [
-        648,
-        1
-       ]
-      ],
-      "translate_y": [
-       [
-        634,
-        16,
-        "outCubic"
-       ],
-       [
-        648,
-        0
-       ]
-      ]
-     },
-     {
-      "layer": "divider",
-      "x": 539,
-      "y": 746,
-      "w": 2,
-      "h": 132,
-      "color": "#856727",
-      "scale_y": [
-       [
-        632,
-        0,
-        "outCubic"
-       ],
-       [
-        646,
-        1
-       ]
-      ],
-      "note": "the slider divider closes the reel: vertical dark-gold line between the two words"
-     },
-     {
-      "layer": "handle_small",
-      "cx": 540,
-      "cy": 812,
-      "d": 34,
-      "opacity": [
-       [
-        642,
-        0,
-        "outBack"
-       ],
-       [
-        652,
-        1
-       ]
-      ],
-      "scale": [
-       [
-        642,
-        0.6,
-        "outBack"
-       ],
-       [
-        652,
-        1
-       ]
-      ],
-      "note": "miniature of the slider handle (paper fill, 1.5 px #856727 ring, chevrons #856727)"
-     },
-     {
-      "layer": "text",
       "style": "end_cats",
       "text": "Լողավազաններ · Տներ · Վերանորոգում",
       "x": 70,
-      "y": 930,
+      "y": 920,
       "w": 940,
       "align": "center",
       "opacity": [
        [
-        642,
+        692,
         0,
         "outSine"
        ],
        [
-        652,
+        704,
         1
+       ]
+      ],
+      "translate_y": [
+       [
+        692,
+        10,
+        "outCubic"
+       ],
+       [
+        704,
+        0
        ]
       ]
      },
@@ -2852,16 +2249,17 @@
       "color": "#856727",
       "scale_x": [
        [
-        612,
+        672,
         0,
         "inOutSine"
        ],
        [
-        634,
+        694,
         1
        ]
       ],
-      "origin": "left"
+      "origin": "left",
+      "note": "same y as the L02 intro ground line (1107 ± 1) → the line that closes the reel opens it again on loop"
      },
      {
       "layer": "text",
@@ -2873,22 +2271,23 @@
       "align": "center",
       "opacity": [
        [
-        648,
+        702,
         0,
         "outSine"
        ],
        [
-        658,
+        712,
         1
        ]
       ]
      }
     ],
-    "rules": "NO CTA, NO @handle, NO date. Only: logo, «Առաջ | Հետո», services line, garon.am (owner-preferences.md)."
+    "rules": "NO CTA, NO @handle, NO date. Only: logo, services line, garon.am (owner-preferences.md). v2 (owner feedback): the «Առաջ | Հետո» line with its divider + small handle is REMOVED from the end card (the top-right stage labels during the photo sections stay).",
+    "spacing_note": "v2 re-balance in the rhythm of the L02 v4 end card (logo → 49 px → rule → 38 px → line, then air → horizon → garon.am): logo visible 583–833, rule 882, services 920–≈950, horizon 1106 (≈156 px below the services line; L02: 129), garon.am 1146–≈1183. Block 583–1183 sits around the optical centre; below y 1100 only garon.am (x ≈ 470–610, < 900)."
    },
    "cover": {
     "what": "House day|night split at p = 0.5 with the slider handle in the middle — the reel's idea in one still. Paper, blueprint 0.55, vlines, window frame, corner logo, section «Տուն», stage «Առաջ | Հետո», chips «Առաջ» (left) / «Հետո» (right) in the image top corners.",
-    "base_frame": "pair H state at f246 with p forced to 0.5, handle scale 1, no light leak, no grain shift (k=0)",
+    "base_frame": "pair H state at f306 (v1 f246 + 60) with p forced to 0.5, handle scale 1, no light leak, no grain shift (k=0)",
     "chips": [
      {
       "text": "Առաջ",
@@ -2905,158 +2304,137 @@
     ],
     "stage_text": "Առաջ | Հետո",
     "grid_check": "profile grid 3:4 (y 240–1680) contains logo, labels and the whole window",
-    "output": "R2_cover.png → R2_cover.jpg (q92)"
+    "output": "R2_cover.png → R2_cover.jpg (q92)",
+    "base_frame_index": 306
    },
    "audio": {
     "tempo": "120 BPM, 4/4; 1 beat = 15 frames, 1 bar = 60 frames",
-    "file_rule": "Owner preference: ONLY the intro has sound, then silence (music is added in the Instagram app). Generate with `python3 marketing/instagram/tools/compose_l02_audio.py intro_r2.wav --r2` (24.0 s WAV: sound 0–4.6 s, digital silence after 4.6 s; ticks/pour/impact/glint/shutter timed to this item). The default L02 output of the script is unchanged.",
+    "file_rule": "Owner preference: ONLY the intro has sound, then silence (music is added in the Instagram app). v2: the L02 v4 intro sound — `python3 marketing/instagram/tools/compose_l02_audio.py intro_r2.wav --intro-only` (26.0 s WAV = the new reel length exactly: sound 0–6.0 s, digital silence after; no trim/pad needed). The `--r2` branch of the script (v1 outline/pour intro) is no longer used.",
     "beat_map": [
      {
       "f": 0,
       "s": 0.0,
       "bar_beat": "1.1",
-      "event": "pad fades in with the grid; ground line draws"
+      "event": "L02 intro: pad/sub fades in with the grid"
      },
      {
-      "f": 4,
-      "s": 0.13,
-      "bar_beat": "1.1+",
-      "event": "tick: BIG outline starts drawing"
-     },
-     {
-      "f": 10,
-      "s": 0.33,
-      "bar_beat": "1.1+",
-      "event": "tick: MID outline"
-     },
-     {
-      "f": 18,
-      "s": 0.6,
-      "bar_beat": "1.2",
-      "event": "tick: GOLD outline; dimension lines draw"
-     },
-     {
-      "f": 34,
-      "s": 1.13,
-      "bar_beat": "1.3",
-      "event": "POUR: BIG/MID fill rise from the ground (low rising noise 1.1–2.0 s)"
+      "f": 45,
+      "s": 1.5,
+      "bar_beat": "1.4",
+      "event": "stems rise (ticks 45/50/55)"
      },
      {
       "f": 60,
       "s": 2.0,
       "bar_beat": "2.1",
-      "event": "IMPACT (soft, downbeat): gold piece fills"
+      "event": "roof bands extrude (soft whoosh)"
      },
      {
-      "f": 66,
-      "s": 2.2,
-      "bar_beat": "2.1+",
-      "event": "glint shimmer"
-     },
-     {
-      "f": 72,
-      "s": 2.4,
-      "bar_beat": "2.1+",
-      "event": "wordmark tracks in (air)"
-     },
-     {
-      "f": 96,
-      "s": 3.2,
-      "bar_beat": "2.3+",
-      "event": "lockup holds (pad sustain)"
+      "f": 105,
+      "s": 3.5,
+      "bar_beat": "2.4",
+      "event": "IMPACT: gold piece lands"
      },
      {
       "f": 120,
       "s": 4.0,
       "bar_beat": "3.1",
-      "event": "DOWNBEAT: horizon shutter opens on the night house (open whoosh + low hit) — the in-app track should start its first strong downbeat HERE; intro sound fades out 4.0–4.6 s"
+      "event": "camera pull-back, glint, wordmark"
      },
      {
       "f": 180,
       "s": 6.0,
       "bar_beat": "4.1",
+      "event": "DOWNBEAT — MUSIC STARTS HERE: the logo's gold piece opens the night house «Հետո» (end of intro sound)"
+     },
+     {
+      "f": 240,
+      "s": 8.0,
+      "bar_beat": "5.1",
       "event": "rewind sweep → «Առաջ»"
-     },
-     {
-      "f": 225,
-      "s": 7.5,
-      "bar_beat": "4.4",
-      "event": "grab + drag"
-     },
-     {
-      "f": 255,
-      "s": 8.5,
-      "bar_beat": "5.2",
-      "event": "release → «Հետո»"
      },
      {
       "f": 285,
       "s": 9.5,
       "bar_beat": "5.4",
-      "event": "gold piece → pool B «Առաջ»"
-     },
-     {
-      "f": 330,
-      "s": 11.0,
-      "bar_beat": "6.3",
       "event": "grab + drag"
      },
      {
-      "f": 375,
-      "s": 12.5,
-      "bar_beat": "7.2",
-      "event": "release → mosaic «Հետո» (accent)"
+      "f": 315,
+      "s": 10.5,
+      "bar_beat": "6.2",
+      "event": "release → «Հետո»"
+     },
+     {
+      "f": 345,
+      "s": 11.5,
+      "bar_beat": "6.4",
+      "event": "gold piece → pool B «Առաջ»"
+     },
+     {
+      "f": 390,
+      "s": 13.0,
+      "bar_beat": "7.3",
+      "event": "grab + drag"
      },
      {
       "f": 435,
       "s": 14.5,
       "bar_beat": "8.2",
-      "event": "gold piece → pool A «Առաջ»"
-     },
-     {
-      "f": 465,
-      "s": 15.5,
-      "bar_beat": "8.4",
-      "event": "drag"
+      "event": "release → mosaic «Հետո» (accent)"
      },
      {
       "f": 495,
       "s": 16.5,
       "bar_beat": "9.2",
+      "event": "gold piece → pool A «Առաջ»"
+     },
+     {
+      "f": 525,
+      "s": 17.5,
+      "bar_beat": "9.4",
+      "event": "drag"
+     },
+     {
+      "f": 555,
+      "s": 18.5,
+      "bar_beat": "10.2",
       "event": "release → «Հետո»"
      },
      {
-      "f": 540,
-      "s": 18.0,
-      "bar_beat": "10.1",
+      "f": 600,
+      "s": 20.0,
+      "bar_beat": "11.1",
       "event": "triptych panels rise (3 soft ticks 540/545/550)"
      },
      {
-      "f": 570,
-      "s": 19.0,
-      "bar_beat": "10.3",
+      "f": 630,
+      "s": 21.0,
+      "bar_beat": "11.3",
       "event": "one sweep: all three become «Հետո» (biggest accent)"
      },
      {
-      "f": 606,
-      "s": 20.2,
-      "bar_beat": "11.1+",
+      "f": 666,
+      "s": 22.2,
+      "bar_beat": "12.1+",
       "event": "end card: groove drops out, resolve"
-     },
-     {
-      "f": 660,
-      "s": 22.0,
-      "bar_beat": "12.1",
-      "event": "hold / tail"
      },
      {
       "f": 720,
       "s": 24.0,
       "bar_beat": "13.1",
+      "event": "hold / tail"
+     },
+     {
+      "f": 780,
+      "s": 26.0,
+      "bar_beat": "14.1",
       "event": "loop point = downbeat"
      }
     ],
-    "mood": "In-app track by MOOD, not by name: modern minimal / architectural, warm, ~120 BPM, felt piano or soft pluck, deep sub, no vocals, no EDM drop. Slide the track so its first strong downbeat lands at 4.0 s."
+    "mood": "In-app track by MOOD, not by name: modern minimal / architectural, warm, ~120 BPM, felt piano or soft pluck, deep sub, no vocals, no EDM drop. Music starts at 6.0 s (f180); slide the track so its first strong downbeat lands there.",
+    "music_start_s": 6.0,
+    "owner_note": "In Instagram, start the in-app music at 6.0 s (f180 = the first photo, bar 4.1 downbeat)."
    },
    "photo_rules": {
     "sources": "ONLY the owner's GARON projects: pool-A, pool-B, house-A from enhanced/ (owner-approved), no stock, no AI. (house-B-wood originals are NOT used in R2 — no 'before' exists for it; it stays the hero of L02.)",
@@ -3064,16 +2442,17 @@
     "privacy": "crops exclude the dog (pool-B/02 bottom right, house-A/03 at the door) and the person (pool-B/03 door). house-A/02 keeps a tiny unidentifiable silhouette behind the upper glass (as approved in L02). No retouching — crop only."
    },
    "checks": [
-    "ffprobe: 1080x1920, 30 fps, 720 frames, 24.000 s, yuv420p, AAC (intro 0–4.6 s, then silence)",
-    "No text in f0–135; no hook text, no CTA, no @handle anywhere",
-    "Labels inside x 240–1010, y 262–360; end-card text y 380–1190, nothing right of x 900 below y 1100",
+    "ffprobe: 1080x1920, 30 fps, 780 frames, 26.000 s, yuv420p, AAC (L02 intro sound 0–6.0 s, then silence)",
+    "f0–179 pixel-identical to L02 v4 f0–179 (render_l02_frames.js) — max abs diff 0",
+    "No text in f0–189; no hook text, no CTA, no @handle anywhere",
+    "Labels inside x 240–1010, y 262–360; end-card text y 490–1190, nothing right of x 900 below y 1100",
     "Stage label matches the divider side at all times (switch at p = 0.5)",
-    "No dog/person in any frame (check H at 120/299, B at 285/449, A at 435/559, T at 560/719)",
+    "No dog/person in any frame (check H at 180/359, B at 345/509, A at 495/619, T at 620/779)",
     "Scale ≤ 1.35 of original pixels",
-    "f719 = paper + end card (clean loop to f0)",
-    "Contact sheet: 0, 30, 60, 78, 100, 126, 160, 190, 232, 246, 280, 292, 340, 352, 400, 470, 488, 520, 548, 585, 610, 660, 719 + cover"
+    "f779 = paper + end card (clean loop to f0)",
+    "Contact sheet: 0, 45, 105, 150, 179, 183, 186, 192, 220, 250, 306, 340, 352, 400, 460, 530, 580, 608, 645, 670, 712, 779 + cover"
    ],
-   "alt_hy": "Կարճ տեսանյութ բաց ֆոնի վրա։ Ճարտարապետական ցանցի վրա GARON նշանը նախ գծվում է բարակ ոսկեգույն ուրվագծերով, հետո լցվում է ներքևից վերև, ոսկեգույն մասը լցվում է վերջինը, հայտնվում է GARON CONSTRUCTION գրությունը։ Հետո՝ «Առաջ / Հետո» համեմատություններ ոսկեգույն սահիչով. պատրաստի տունը գիշերը՝ լուսավոր գծերով, հետո նույն տունը բետոնե կմախքի փուլում, և նորից պատրաստի տեսքը։ Լողավազան. բետոնե ավազան ջակուզիով, հետո նույնը՝ կապույտ խճանկարով։ Մեկ այլ լողավազան. ամրանավորում, հետո պատրաստի լողավազան քարե պատի մոտ։ Վերջում երեք նախագծերը կողք կողքի, մեկ շարժումով դառնում են պատրաստի։ Վերջին կադրում՝ լոգոն, «Առաջ | Հետո», «Լողավազաններ · Տներ · Վերանորոգում» և garon.am։"
+   "alt_hy": "Կարճ տեսանյութ բաց ֆոնի վրա։ Ճարտարապետական ցանցի վրա գծվում է հողի գիծը, բարձրանում են GARON նշանի մասերը, ոսկեգույն մասը իջնում է իր տեղը, հայտնվում է GARON CONSTRUCTION գրությունը։ Լոգոյի ոսկեգույն մասը մեծանում և բացվում է լուսանկարի մեջ։ Հետո՝ «Առաջ / Հետո» համեմատություններ ոսկեգույն սահիչով. պատրաստի տունը գիշերը՝ լուսավոր գծերով, հետո նույն տունը բետոնե կմախքի փուլում, և նորից պատրաստի տեսքը։ Լողավազան. բետոնե ավազան ջակուզիով, հետո նույնը՝ կապույտ խճանկարով։ Մեկ այլ լողավազան. ամրանավորում, հետո պատրաստի լողավազան քարե պատի մոտ։ Վերջում երեք նախագծերը կողք կողքի, մեկ շարժումով դառնում են պատրաստի։ Վերջին կադրում՝ լոգոն, «Լողավազաններ · Տներ · Վերանորոգում» և garon.am։"
   }
  }
 }
