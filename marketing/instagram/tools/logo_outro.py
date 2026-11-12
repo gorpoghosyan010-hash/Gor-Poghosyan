@@ -60,15 +60,42 @@ def warp(img, s, c_from, c_to, bg):
                           borderMode=cv2.BORDER_CONSTANT, borderValue=bg)
 
 
+def beat_track(path, bpm, dur, stop_at, sr=44100):
+    """Simple synthetic four-on-the-floor loop, only so the owner can SEE the cuts land on the beat.
+    It is not for publishing: the real song is added in Instagram."""
+    import wave
+    n = int(dur * sr); y = np.zeros(n, np.float32); spb = 60.0 / bpm
+    t = np.arange(int(0.25 * sr)) / sr
+    kick = np.sin(2 * np.pi * (45 + 90 * np.exp(-t * 30)) * t) * np.exp(-t * 9)
+    rng = np.random.default_rng(1)
+    hat = rng.standard_normal(int(0.05 * sr)) * np.exp(-np.arange(int(0.05 * sr)) / sr * 90) * 0.25
+    clap = rng.standard_normal(int(0.12 * sr)) * np.exp(-np.arange(int(0.12 * sr)) / sr * 35) * 0.35
+    b = 0
+    while b * spb < stop_at - 0.05:
+        i = int(b * spb * sr)
+        for snd, at in ((kick, i), (hat, i + int(spb / 2 * sr))) + (((clap, i),) if b % 2 else ()):
+            e = min(n, at + len(snd)); y[at:e] += snd[:e - at] * 0.6
+        b += 1
+    fade = int(0.4 * sr); s = int(stop_at * sr)
+    y[max(0, s - fade):s] *= np.linspace(1, 0, s - max(0, s - fade)); y[s:] = 0
+    pcm = (np.clip(y, -1, 1) * 32000).astype(np.int16)
+    with wave.open(path, 'wb') as w:
+        w.setnchannels(1); w.setsampwidth(2); w.setframerate(sr); w.writeframes(pcm.tobytes())
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('src'); ap.add_argument('out')
     ap.add_argument('--content', nargs=2, type=float, required=True)
+    ap.add_argument('--end-src', help='take the end-card text from this reel instead (e.g. L02 has «Շուտով»)')
+    ap.add_argument('--speed', type=float, default=1.0,
+                    help='content speed factor, e.g. 123/120 to move a 120 BPM cut grid onto a 123 BPM song')
+    ap.add_argument('--beat-preview', help='also write OUT with a synthetic beat at this BPM (preview only)')
     a = ap.parse_args()
     c0, c1 = a.content
 
     intro = list(frames(a.src, 0.0, INTRO))
-    end = last_frame(a.src)
+    end = last_frame(a.end_src or a.src)
     paper = intro[-1].copy()
     bg = tuple(int(v) for v in np.median(paper.reshape(-1, 3), 0))
     clean = np.full_like(paper, bg, dtype=np.uint8)
@@ -87,6 +114,9 @@ def main():
     put = lambda f: proc.stdin.write(np.ascontiguousarray(f, dtype=np.uint8).tobytes())
 
     content = list(frames(a.src, c0, c1))
+    if a.speed != 1.0:   # resample on the 30 fps grid (nearest frame): 2-3 % change is invisible
+        n = int(round(len(content) / a.speed))
+        content = [content[min(int(i * a.speed + 0.5), len(content) - 1)] for i in range(n)]
     nx = int(XFADE * FPS)
     for f in content[:-nx]:
         put(f)
@@ -122,6 +152,13 @@ def main():
                     '-filter_complex', f'[1:a]atrim=0:{INTRO},adelay={int(intro_at*1000)}:all=1,apad,atrim=0:{dur}[a]',
                     '-map', '0:v', '-map', '[a]', '-c:v', 'copy', '-c:a', 'aac', '-b:a', '192k',
                     '-movflags', '+faststart', '-t', str(dur), a.out], check=True)
+    if a.beat_preview:
+        beat_track(a.out + '.beat.wav', float(a.beat_preview), dur, intro_at)
+        subprocess.run(['ffmpeg', '-v', 'error', '-y', '-i', a.out, '-i', a.out + '.beat.wav',
+                        '-filter_complex', '[0:a][1:a]amix=inputs=2:normalize=0[a]', '-map', '0:v', '-map', '[a]',
+                        '-c:v', 'copy', '-c:a', 'aac', '-b:a', '192k', '-shortest',
+                        a.out.replace('.mp4', '_beat-preview.mp4')], check=True)
+        subprocess.run(['rm', '-f', a.out + '.beat.wav'])
     subprocess.run(['rm', '-f', a.out + '.v.mp4'])
     print(json.dumps({'out': a.out, 'dur': round(dur, 2), 'logo_starts': round(intro_at, 2)}))
 
