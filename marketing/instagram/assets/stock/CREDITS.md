@@ -31,3 +31,12 @@ No video clips are in this folder: without search access no Pexels video IDs cou
 | interiors/unsplash-1600607687644-c7171b42498f_bedroom.jpg | https://images.unsplash.com/photo-1600607687644-c7171b42498f |
 | interiors/unsplash-1631679706909-1844bbd07221_living-beige.jpg | https://images.unsplash.com/photo-1631679706909-1844bbd07221 |
 Used only as illustrative visualization; never presented as GARON projects.
+
+## Renovation stages for R3 v3 — downloaded 2026-11-12, Pexels License (free commercial use, no attribution required)
+Source pages: https://www.pexels.com/photo/<id>/ — files renovation/pexels-<id>.jpg
+| Stage | IDs |
+|---|---|
+| Unrenovated / demolition (old apartment, brick, debris) | 15798780, 15798784, 15798785, 15798786, 804392 |
+| In progress (plaster, pipes, supplies) | 3615721, 9908376, 8469938, 5691486 |
+| Finished (clean room, window, wood floor; finished interiors) | 5691493, 5691495, 5691504, 7031403, 6908500 |
+Illustrative only — different rooms/projects, never presented as GARON work.
