@@ -6,53 +6,49 @@
   "scenes": [
    {
     "t": "0-6",
-    "asset": "L02 լոգոյի ինտրո",
+    "asset": "L02 լոգոյի ինտրո (իր ձայնով)",
     "text": ""
    },
    {
-    "t": "6-10",
-    "asset": "Հյուրասենյակ՝ գծագիր → իրական լուսանկար (+2 արագ դետալ)",
-    "text": "Վերանորոգում · Հյուրասենյակ | Գծագիր → Իրականություն"
+    "t": "6-9.5",
+    "asset": "S1 «պատուհան»՝ աղյուսե պատ + նոր պատուհան → սվաղված անկյուն, կաղնե հատակ → ննջասենյակ (ոսկեգույն սահիչ, լույսի միջով անցում) + դետալ՝ պատուհան",
+    "text": "Վերանորոգում | Առաջ → Ընթացք → Հետո"
    },
    {
-    "t": "10-12.5",
-    "asset": "Խոհանոց՝ գծագիր → իրականություն + դետալ",
-    "text": "Վերանորոգում · Խոհանոց | Գծագիր → Իրականություն"
+    "t": "9.5-13",
+    "asset": "S2 «բացվածք»՝ աղյուսե բացվածք → սպիտակ սվաղված բացվածք (ծեփի փոշի) → քարե պատ և պորտալ (պատերը վերևից, հատակը ներքևից) + դետալ՝ բույս լույսի մեջ",
+    "text": "Վերանորոգում | Առաջ → Ընթացք → Հետո"
    },
    {
-    "t": "12.5-15",
-    "asset": "Լոգարան՝ գծագիր → իրականություն + դետալ",
-    "text": "Վերանորոգում · Լոգարան | Գծագիր → Իրականություն"
+    "t": "13-17",
+    "asset": "S3 «պատ + հատակ»՝ հին պատ խողովակների մնացորդներով → նոր պատ, նոր խողովակներ → կաղնե հատակը բացվում է ներքևից, տեսախցիկը հետ է գնում դեպի պատուհան + դետալ՝ հատակ",
+    "text": "Վերանորոգում | Առաջ → Ընթացք"
    },
    {
-    "t": "15-16.5",
-    "asset": "Ննջասենյակ՝ արագ մոնտաժ (գծագիր, իրականություն, դետալ)",
-    "text": "Վերանորոգում · Ննջասենյակ | Գծագիր → Իրականություն"
+    "t": "17-22.2",
+    "asset": "Պատրաստի տաք հյուրասենյակ (pan դեպի ապակեպատը) → R2 ոսկեգույն սահիչ՝ նույն տեղում պատուհանով չվերանորոգված սենյակ | պատրաստի սենյակ",
+    "text": "Վերանորոգում | Հետո · Առաջ | Հետո"
    },
    {
-    "t": "16.5-22",
-    "asset": "Հյուրասենյակ՝ գծագիր → իրականություն, ոսկեգույն սահիչ",
-    "text": "Գծագիր | Իրականություն"
-   },
-   {
-    "t": "22-26",
-    "asset": "վերջնական կադր",
-    "text": "Լողավազաններ · Տներ · Վերանորոգում | garon.am"
+    "t": "22.2-26",
+    "asset": "Վերջնական կադր",
+    "text": "GARON · Լողավազաններ · Տներ · Վերանորոգում · garon.am"
    }
   ],
-  "caption_hy": "Գծագրից՝ իրականություն։\n\nԼավ վերանորոգումը սկսվում է ճշգրիտ գծագրից. ամեն պատ, պատուհան, լույս և կահույք նախ գծվում է թղթի վրա, հետո դառնում իրական սենյակ։ Հյուրասենյակ, խոհանոց, լոգարան, ննջասենյակ՝ նույն սկզբունքով։\n\nՍա վիզուալիզացիա է՝ ինչպես է գծագիրը դառնում իրականություն։ Ինտերիերները նկարազարդող են (Unsplash), ոչ թե GARON-ի կոնկրետ օբյեկտներ։\n\nԲնակարանների և տների վերանորոգում՝ GARON Construction. garon.am",
-  "caption_ru": "От чертежа — к реальности.\n\nХороший ремонт начинается с точного чертежа: каждая стена, окно, свет и мебель сначала появляются на бумаге, а потом становятся настоящей комнатой. Гостиная, кухня, ванная, спальня — по одному принципу.\n\nЭто визуализация того, как чертёж превращается в реальность. Интерьеры иллюстративные (Unsplash), это не конкретные объекты GARON.\n\nРемонт квартир и домов — GARON Construction. garon.am",
-  "caption_en": "From drawing to reality.\n\nA good renovation starts with a precise drawing: every wall, window, light and piece of furniture is drawn on paper first, then becomes a real room. Living room, kitchen, bathroom, bedroom — the same principle.\n\nThis is a visualization of how a drawing becomes reality. The interiors are illustrative (Unsplash), not specific GARON projects.\n\nApartment and house renovation by GARON Construction. garon.am",
+  "caption_hy": "Առաջ → Ընթացք → Հետո։\n\nՎերանորոգումը մի քանի փուլ է՝ քանդում, պատեր և խողովակներ, սվաղ, հատակ, վերջնական հարդարում։ Այս տեսանյութում նույն տեսանկյունից համադրված լուսանկարներով ցույց ենք տալիս, թե ինչպես է չվերանորոգված տարածքը քայլ առ քայլ դառնում պատրաստի սենյակ։\n\nԼուսանկարները նկարազարդող են (stock՝ Pexels, Unsplash) և տարբեր իրական սենյակներից են. սա վերանորոգման փուլերի օրինակ է, ոչ թե GARON-ի կոնկրետ օբյեկտ։\n\nԲնակարանների և տների վերանորոգում՝ GARON Construction. garon.am",
+  "caption_ru": "До → В процессе → После.\n\nРемонт — это этапы: демонтаж, стены и трубы, штукатурка, пол, чистовая отделка. В этом видео фотографии, совмещённые по ракурсу, показывают, как неотремонтированное пространство шаг за шагом становится готовой комнатой.\n\nФото иллюстративные (стоковые: Pexels, Unsplash) и сняты в разных реальных помещениях: это пример этапов ремонта, а не конкретный объект GARON.\n\nРемонт квартир и домов — GARON Construction. garon.am",
+  "caption_en": "Before → In progress → After.\n\nA renovation happens in stages: strip-out, walls and plumbing, plaster, floor, finishing. In this video, photos matched to the same viewpoint show how an unrenovated space becomes a finished room, step by step.\n\nThe footage is illustrative stock (Pexels, Unsplash) from different real rooms. It shows the stages of a renovation, not a specific GARON project.\n\nApartment and house renovation by GARON Construction. garon.am",
   "hashtags": [
    "#GARONconstruction",
    "#վերանորոգում",
-   "#interiordesign",
+   "#ремонт",
+   "#renovation",
    "#Երևան",
    "#Armenia"
   ],
-  "honesty_note": "Caption must NOT say «մեր նախագիծը/մեր աշխատանքը/our project». v2 uses 5 licensed Unsplash interiors (assets/stock/CREDITS.md) as ILLUSTRATIVE rooms; the line drawings are generated from those photos. The caption states this in all three languages.",
-  "alt_hy": "Կարճ տեսանյութ բաց ֆոնի վրա։ Ճարտարապետական ցանցի վրա կառուցվում է GARON նշանը, և նրա ոսկեգույն մասը բացում է թղթի թերթը։ Բարակ մատիտային գծերով գծվում է հյուրասենյակի ճարտարապետական գծագիրը, հետո լամպի լույսից «նյութականանում» է իրական սենյակը՝ նախ մոխրագույն, հետո գունավոր։ Արագ կադրեր՝ նույն սկզբունքով խոհանոց, լոգարան, ննջասենյակ և մեկ այլ հյուրասենյակ, դետալներ՝ լամպ, մարմարե սեղան, լվացարան, բարձեր։ Ոսկեգույն սահիչը ցույց է տալիս գծագիրը և իրական սենյակը կողք կողքի։ Ինտերիերները նկարազարդող են (Unsplash), ոչ GARON-ի նախագծեր։ Վերջին կադրում՝ լոգոն, «Լողավազաններ · Տներ · Վերանորոգում» և garon.am։",
-  "version": "v2",
-  "credits_note": "Unsplash License: attribution not required; optional first comment: «Ինտերիերների լուսանկարներ՝ Unsplash»"
+  "honesty_note": "Caption must NOT say «մեր նախագիծը / մեր աշխատանքը / our project / наш объект». v3 uses licensed stock (Pexels + Unsplash, assets/stock/CREDITS.md): each sequence combines DIFFERENT real rooms aligned to the same viewpoint to ILLUSTRATE renovation stages. The caption says so in all three languages (paragraph 3). Do not tag a location, do not reply to comments as if these were GARON sites.",
+  "alt_hy": "Կարճ տեսանյութ բաց ֆոնի վրա։ Ճարտարապետական ցանցի վրա կառուցվում է GARON նշանը, և նրա ոսկեգույն մասը բացում է պատուհանը։ Երեք արագ պատմություն՝ «Առաջ → Ընթացք → Հետո». աղյուսե պատով և նոր պատուհանով քանդված սենյակը դառնում է սվաղված սենյակ՝ կաղնե հատակով, հետո՝ լուսավոր ննջասենյակ. աղյուսե պատերի միջև բացվածքը ծեփի փոշու միջով դառնում է սպիտակ դռան բացվածք, հետո՝ քարե պատ բազմոցով. հին աղյուսե պատը խողովակների մնացորդներով դառնում է նոր պատ նոր խողովակներով, ներքևից բացվում է կաղնե հատակը։ Արագ դետալներ՝ պատուհան, բույս, հատակ։ Վերջում տաք հյուրասենյակ, և ոսկեգույն սահիչը համեմատում է այն չվերանորոգված սենյակի հետ։ Լուսանկարները նկարազարդող stock են (Pexels, Unsplash), ոչ GARON-ի նախագծեր։ Վերջին կադրում՝ լոգոն, «Լողավազաններ · Տներ · Վերանորոգում» և garon.am։",
+  "version": "v3",
+  "credits_note": "Pexels License + Unsplash License: attribution not required; optional first comment: «Լուսանկարներ՝ Pexels, Unsplash (նկարազարդող)»"
  }
 }

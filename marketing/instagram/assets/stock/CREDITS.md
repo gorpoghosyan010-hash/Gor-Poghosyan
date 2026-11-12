@@ -40,3 +40,4 @@ Source pages: https://www.pexels.com/photo/<id>/ — files renovation/pexels-<id
 | In progress (plaster, pipes, supplies) | 3615721, 9908376, 8469938, 5691486 |
 | Finished (clean room, window, wood floor; finished interiors) | 5691493, 5691495, 5691504, 7031403, 6908500 |
 Illustrative only — different rooms/projects, never presented as GARON work.
+Used in R3 v3 (2026-11-12-reel-3-renovation): 15798786, 15798785, 804392, 15798784 (RAW); 5691493, 8469938 (mirrored), 5691486, 5691495 (in progress); 5691504, 6908500 (finished); plus interiors bedroom + living-warm. Checked one by one: no people, logos, watermarks or readable brands in the used crops (804392: paper notice in the window blurred).

@@ -1,11 +1,12 @@
-// R3 v2 «Գծագիր → Իրականություն» renovation reel — art-director renderer (frame-stepped HTML/SVG, light theme).
+// R3 v3 «Վերանորոգում · Առաջ → Հետո» renovation reel — art-director renderer (frame-stepped HTML, light theme).
 // f0–179: the L02 v4 logo intro, IDENTICAL frames — delegated to marketing/instagram/tools/render_l02_frames.js
-//   and renamed L02_%03d.png → R3_%03d.png (same mechanism as R2 v2).
-// f180–779: this page. The gold piece of the finished L02 lockup grows into the 3:4 window and opens on paper; then fast
-//   beat-cut shots of 5 REAL (licensed, illustrative) interiors: for every room an architect line drawing generated from
-//   the photo itself (04-R3-prep.py) draws itself on the paper, then the photo materializes under it (grey structure →
-//   colour → warm bloom), lines fade; 1-beat detail inserts; the last room ends with the R2 gold slider
-//   «Գծագիր | Իրականություն»; end card = R2 v2.
+//   and renamed L02_%03d.png → R3_%03d.png (same mechanism as R2 v2 / R3 v2).
+// f180–779: this page. The gold piece of the finished L02 lockup grows into the 3:4 window and opens on the first RAW
+//   room; then 3 fast geometry-matched sequences RAW → PROGRESS → FINISHED (stock photos of different real rooms,
+//   aligned by 04-R3-prep.py so windows / openings / floor lines stay in place), transformed with R2 gold slider wipes,
+//   dissolves through light with dust / light motes, and masked material wipes (floor from the bottom, walls from the
+//   top, gold level lines); 1-beat detail inserts; hero living room + final R2 slider over a matched RAW|FINISHED pair;
+//   end card = R2 v2. No line art.
 // Reads items.R3 of 04-render-spec.json next to this file. If code and spec disagree, the spec wins.
 // usage: NODE_PATH=$(npm root -g) node 04-R3-renderer.js <repo_root> <out_dir> [all|cover|0,30,105,...]
 //   (runs `python3 04-R3-prep.py <repo_root> <out_dir>/_prep` first if <out_dir>/_prep/manifest.json is missing)
@@ -41,14 +42,18 @@ async function main() {
   fs.mkdirSync(OUT, { recursive: true });
   const PREP = path.join(OUT, '_prep');
   if (!fs.existsSync(path.join(PREP, 'manifest.json'))) execFileSync('python3', [path.join(__dirname, '04-R3-prep.py'), ROOT, PREP], { stdio: 'inherit' });
-  const LINES = {};
-  for (const s of IT.shots) if (s.sketch) LINES[s.id] = JSON.parse(fs.readFileSync(path.join(PREP, s.id + '_lines.json'), 'utf8'));
+  const MAN = JSON.parse(fs.readFileSync(path.join(PREP, 'manifest.json'), 'utf8'));
+  for (const s of IT.shots) {
+    const m = MAN[s.id];
+    if (!m) throw new Error('prep manifest lacks ' + s.id);
+    if (m.coverage < 0.9999 || m.max_screen_upscale > 1.35) throw new Error(`${s.id}: coverage ${m.coverage} upscale ${m.max_screen_upscale}`);
+  }
   const browser = await chromium.launch();
   const page = await browser.newPage({ viewport: { width: 1080, height: 1920 }, deviceScaleFactor: 1 });
   const tmp = path.join(OUT, '_r3.html');
   fs.writeFileSync(tmp, html);
   await page.goto('file://' + tmp);
-  await page.evaluate(setup, { IT, ROOT, PREP, LINES, STACK: { display: STACK.display.stack, text: STACK.text.stack } });
+  await page.evaluate(setup, { IT, ROOT, PREP, STACK: { display: STACK.display.stack, text: STACK.text.stack } });
   await page.evaluate(() => document.fonts.ready);
   await page.evaluate(async () => { for (const i of document.images) await i.decode(); });
   const fams = await page.evaluate(() => [...document.fonts].filter((f) => f.status === 'loaded').map((f) => f.family));
@@ -79,8 +84,7 @@ async function main() {
 }
 
 // ------------------------------------------------------------------ in-page code
-function setup({ IT, ROOT, PREP, LINES, STACK }) {
-  const NS = 'http://www.w3.org/2000/svg';
+function setup({ IT, ROOT, PREP, STACK }) {
   const TH = IT.theme;
   function bez([x1, y1, x2, y2]) {
     const cx = 3 * x1, bx = 3 * (x2 - x1) - cx, ax = 1 - cx - bx, cy = 3 * y1, by = 3 * (y2 - y1) - cy, ay = 1 - cy - by;
@@ -110,10 +114,8 @@ function setup({ IT, ROOT, PREP, LINES, STACK }) {
   const ramp = (f, s, e, ez = 'outCubic') => EZ[ez](clamp01((f - s) / (e - s)));
   const app = document.getElementById('app');
   const div = (css, parent = app) => { const d = document.createElement('div'); d.style.cssText = 'position:absolute;' + css; parent.appendChild(d); return d; };
-  const sv = (tag, attrs, parent) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); if (parent) parent.appendChild(e); return e; };
   const file = (rel) => 'file://' + ROOT + '/' + rel;
   const vis = (el, o) => { el.style.opacity = o; el.style.visibility = o <= 0.0005 ? 'hidden' : 'visible'; };
-  const svis = (el, o) => { el.setAttribute('opacity', o.toFixed(4)); el.setAttribute('visibility', o <= 0.0005 ? 'hidden' : 'visible'); };
   const poly = (pts) => `polygon(${pts.map(([x, y]) => `${x.toFixed(2)}px ${y.toFixed(2)}px`).join(',')})`;
   const NONE = 'polygon(0 0,0 0,0 0)';
   const W = IT.window.rect;
@@ -122,8 +124,7 @@ function setup({ IT, ROOT, PREP, LINES, STACK }) {
 
   // ---- background (paper + vlines), finished lockup (exit 180–198) — = R2 v2
   div(`left:0;top:0;width:1080px;height:1920px;background:${TH.bg}`);
-  const bpCss = IT.blueprint.css.replace(/; /g, ';');
-  const bp = div('left:0;top:0;width:1080px;height:1920px;' + bpCss); // cover only
+  const bp = div('left:0;top:0;width:1080px;height:1920px;' + IT.blueprint.css.replace(/; /g, ';')); // cover only
   const vl = div('left:0;top:0;width:1080px;height:1920px');
   for (const x of IT.vlines.xs) div(`left:${x - IT.vlines.w / 2}px;top:0;width:${IT.vlines.w}px;height:1920px;background:${IT.vlines.color}`, vl);
   const SB = IN.stage_box_px, TO = IN.transform_origin_px;
@@ -131,66 +132,64 @@ function setup({ IT, ROOT, PREP, LINES, STACK }) {
   const logoImg = document.createElement('img'); logoImg.src = file(IN.logo_file); logoImg.style.cssText = `position:absolute;left:0;top:0;width:${SB.w}px;height:${SB.h}px`; cam.appendChild(logoImg);
 
   // ================================================================ SHOTS (window-local, 940×1253)
-  const LA = IT.line_art, WG = IT.blueprint.window_grid;
   const win = div(`left:${W.x}px;top:${W.y}px;width:${W.w}px;height:${W.h}px;overflow:hidden;background:${TH.bg}`);
-  const gridCss = `background-color:${TH.bg};background-image:linear-gradient(to right, ${WG.major} 1px, transparent 1px),linear-gradient(to bottom, ${WG.major} 1px, transparent 1px),` +
-    `linear-gradient(to right, ${WG.minor} 1px, transparent 1px),linear-gradient(to bottom, ${WG.minor} 1px, transparent 1px);` +
-    `background-size:180px 180px,180px 180px,36px 36px,36px 36px;background-position:${WG.offset_px[0]}px ${WG.offset_px[1]}px`;
-  const PADP = 80; // paper overdraw so the camera never exposes an edge
-  function paper(parent) { return div(`left:${-PADP}px;top:${-PADP}px;width:${W.w + 2 * PADP}px;height:${W.h + 2 * PADP}px;${gridCss.replace(/background-position:[^;]+/, `background-position:${WG.offset_px[0] + PADP}px ${WG.offset_px[1] + PADP}px`)}`, parent); }
-  function linesSvg(sh, parent, animated) {
-    const L = LINES[sh.id];
-    const svg = sv('svg', { viewBox: `0 0 ${W.w} ${W.h}`, width: W.w, height: W.h, style: `position:absolute;left:0;top:0;overflow:hidden` }); parent.appendChild(svg);
-    const g = sv('g', { fill: 'none', stroke: LA.stroke.color, 'stroke-linecap': 'round', 'stroke-linejoin': 'round' }, svg);
-    const items = [];
-    for (const p of L.paths) {
-      const a = { d: p.d, 'stroke-width': p.w, 'stroke-opacity': p.o };
-      if (animated) Object.assign(a, { pathLength: 1, 'stroke-dasharray': '1 1', 'stroke-dashoffset': 1 });
-      items.push({ el: sv('path', a, g), t0: p.t0, t1: p.t1 });
-    }
-    // gold dimension lines (architectural ticks)
-    const DM = LA.dims, dg = sv('g', { fill: 'none', stroke: DM.color, 'stroke-width': DM.width, 'stroke-linecap': 'round' }, svg);
-    const dimEls = [], dimTexts = [];
-    for (const d of sh.dims || []) {
-      const a = [d.a[0] * W.w, d.a[1] * W.h], b = [d.b[0] * W.w, d.b[1] * W.h];
-      const L2 = Math.hypot(b[0] - a[0], b[1] - a[1]), ux = (b[0] - a[0]) / L2, uy = (b[1] - a[1]) / L2, nx = -uy * d.off, ny = ux * d.off, t = DM.tick;
-      const segs = [[a, b], [[a[0] - nx * DM.ext, a[1] - ny * DM.ext], [a[0] + nx * 4, a[1] + ny * 4]], [[b[0] - nx * DM.ext, b[1] - ny * DM.ext], [b[0] + nx * 4, b[1] + ny * 4]],
-        [[a[0] - t * (ux + nx) * 0.7, a[1] - t * (uy + ny) * 0.7], [a[0] + t * (ux + nx) * 0.7, a[1] + t * (uy + ny) * 0.7]],
-        [[b[0] - t * (ux + nx) * 0.7, b[1] - t * (uy + ny) * 0.7], [b[0] + t * (ux + nx) * 0.7, b[1] + t * (uy + ny) * 0.7]]];
-      for (const [p, q] of segs) { const e = sv('path', { d: `M${p[0].toFixed(1)} ${p[1].toFixed(1)} L${q[0].toFixed(1)} ${q[1].toFixed(1)}` }, dg); if (animated) { e.setAttribute('pathLength', 1); e.setAttribute('stroke-dasharray', '1 1'); e.setAttribute('stroke-dashoffset', 1); } dimEls.push(e); }
-      const at = d.at === undefined ? 0.5 : d.at, mx = a[0] + (b[0] - a[0]) * at + nx * 12, my = a[1] + (b[1] - a[1]) * at + ny * 12, ang = Math.atan2(uy, ux) * 180 / Math.PI;
-      const rot = ang > 90 || ang < -90 ? ang + 180 : ang;
-      const tx = sv('text', { x: mx, y: my, 'text-anchor': 'middle', 'dominant-baseline': d.off < 0 ? 'auto' : 'hanging', transform: `rotate(${rot.toFixed(2)} ${mx.toFixed(1)} ${my.toFixed(1)})`,
-        style: `font-family:${STACK.text};font-weight:500;font-size:15px;letter-spacing:0.12em;fill:${DM.color};stroke:none` }, svg);
-      tx.textContent = d.text; dimTexts.push(tx);
-    }
-    return { svg, items, dimEls, dimTexts };
-  }
-  const SHOTS = IT.shots.map((sh, i) => {
-    const root = div(`left:0;top:0;width:${W.w}px;height:${W.h}px`, win);
+  const BYID = {};
+  const SHOTS = IT.shots.map((sh) => {
+    const root = div(`left:0;top:0;width:${W.w}px;height:${W.h}px;overflow:hidden`, win);
     const camW = div(`left:0;top:0;width:${W.w}px;height:${W.h}px;transform-origin:${W.w / 2}px ${W.h / 2}px`, root);
-    paper(camW);
+    const ext = sh.extent || [0, 0, W.w, W.h];
     const img = document.createElement('img'); img.src = 'file://' + PREP + '/' + sh.id + '.jpg';
-    img.style.cssText = `position:absolute;left:0;top:0;width:${W.w}px;height:${W.h}px`; camW.appendChild(img);
-    const S = { sh, root, camW, img, last: i === IT.shots.length - 1, end: i === IT.shots.length - 1 ? 779 : sh.frames[1] };
-    if (sh.reveal) {
-      S.blooms = sh.reveal.bloom.points.map(([fx, fy, r, pk]) => {
-        const R = r * W.w;
-        const b = div(`left:${fx * W.w - R}px;top:${fy * W.h - R}px;width:${2 * R}px;height:${2 * R}px;mix-blend-mode:screen;background:radial-gradient(closest-side, rgba(255,222,170,0.85), rgba(255,206,140,0.32) 45%, rgba(255,206,140,0) 100%)`, camW);
-        return { b, pk };
-      });
-    }
-    if (sh.sketch) {
-      const lw = div(`left:0;top:0;width:${W.w}px;height:${W.h}px;mix-blend-mode:multiply`, camW);
-      S.lines = linesSvg(sh, lw, true); S.lw = lw;
-    }
-    if (S.last) { // plan copy for the slider (left of the divider): paper + grid + the finished drawing + dims, same camera
-      S.planClip = div(`left:0;top:0;width:${W.w}px;height:${W.h}px;overflow:hidden`, win);
-      S.planCam = div(`left:0;top:0;width:${W.w}px;height:${W.h}px;transform-origin:${W.w / 2}px ${W.h / 2}px`, S.planClip);
-      paper(S.planCam); linesSvg(sh, S.planCam, false);
-    }
+    img.style.cssText = `position:absolute;left:${ext[0]}px;top:${ext[1]}px;width:${ext[2] - ext[0]}px;height:${ext[3] - ext[1]}px`;
+    camW.appendChild(img);
+    const S = { sh, root, camW, img };
+    BYID[sh.id] = S;
     return S;
   });
+  // light veil, particles, level lines (inside the window, above the shots)
+  const veilL = div(`left:0;top:0;width:${W.w}px;height:${W.h}px;background:rgba(255,246,232,1)`, win);
+  const pcv = document.createElement('canvas'); pcv.width = W.w; pcv.height = W.h; pcv.style.cssText = 'position:absolute;left:0;top:0'; win.appendChild(pcv);
+  const pctx = pcv.getContext('2d');
+  const lvl = [0, 1].map(() => div(`left:0;width:${W.w}px;height:1.5px;background:${TH.wipe_edge};box-shadow:0 0 6px rgba(201,169,106,0.7)`, win));
+  // particle systems (deterministic)
+  const PS = {};
+  for (const [name, P] of Object.entries(IT.particles)) {
+    srand(P.seed); const arr = [];
+    for (let i = 0; i < P.n; i++) {
+      const r = rnd();
+      arr.push({ x: rnd() * W.w, y: (rnd() * 1.1 - 0.2) * W.h, s: P.size_px[0] + (P.size_px[1] - P.size_px[0]) * r * r, v: P.v0_px_per_f[0] + (P.v0_px_per_f[1] - P.v0_px_per_f[0]) * rnd(),
+        d: P.drift_px_per_f[0] + (P.drift_px_per_f[1] - P.drift_px_per_f[0]) * rnd(), ph: rnd() * 6.283, born: Math.floor(rnd() * 6), life: 0.75 + 0.25 * rnd() });
+    }
+    PS[name] = { P, arr };
+  }
+  function drawParticles(f) {
+    pctx.clearRect(0, 0, W.w, W.h);
+    if (coverMode) return;
+    for (const S of SHOTS) {
+      const T = S.sh.in; if (!T || T.type !== 'light' || !T.particles) continue;
+      const a = T.frames[0] - 2, b = T.frames[1] + 22;
+      if (f < a || f > b) continue;
+      const { P, arr } = PS[T.particles];
+      const C = cameraOf(S.sh, f);
+      for (const p of arr) {
+        const t = f - a - p.born; if (t < 0) continue;
+        const span = (b - a - p.born) * p.life; if (t > span) continue;
+        const u = t / span, env = Math.min(1, u / 0.18) * Math.pow(1 - u, 1.3);
+        const k = P.drag, yy = p.y + p.v * (1 - Math.exp(-k * t)) / k, xx = p.x + p.d * t + 3 * Math.sin(p.ph + t / 9);
+        // particles live in front of the room: a slight parallax vs the camera
+        const sx = (xx - W.w / 2) * C.s * 1.05 + W.w / 2 + C.tx * 1.1, sy = (yy - W.h / 2) * C.s * 1.05 + W.h / 2 + C.ty * 1.1;
+        const o = P.peak_opacity * env;
+        if (o < 0.01) continue;
+        const [r, g, bl] = P.color;
+        const R = p.s * (P.blur_big && p.s > 3 ? 1.8 : 1);
+        const gr = pctx.createRadialGradient(sx, sy, 0, sx, sy, R);
+        gr.addColorStop(0, `rgba(${r},${g},${bl},${o.toFixed(3)})`);
+        gr.addColorStop(P.blur_big && p.s > 3 ? 0.35 : 0.6, `rgba(${r},${g},${bl},${(o * 0.7).toFixed(3)})`);
+        gr.addColorStop(1, `rgba(${r},${g},${bl},0)`);
+        pctx.fillStyle = gr; pctx.beginPath(); pctx.arc(sx, sy, R, 0, 6.2832); pctx.fill();
+      }
+    }
+  }
+
   // ================================================================ overlays (screen space) — = R2 v2
   const goldFill = div('left:0;top:0;width:1080px;height:1920px;background:linear-gradient(135deg,#d4b57a,#b8955c)');
   const divLine = div(`top:${W.y}px;width:2px;height:${W.h}px;background:${TH.wipe_edge};box-shadow:${TH.divider_shadow}`);
@@ -202,6 +201,8 @@ function setup({ IT, ROOT, PREP, LINES, STACK }) {
     return h;
   }
   const handle = handleEl(72, TH.wipe_edge, TH.gold_on_light, TH.handle_shadow); handle.style.top = HY - 36 + 'px';
+  const wipeLine = div(`top:${W.y}px;width:2px;height:${W.h}px;background:${TH.wipe_edge};box-shadow:${TH.divider_shadow}`);
+  const wipeHandle = handleEl(56, TH.wipe_edge, TH.gold_on_light, TH.handle_shadow); wipeHandle.style.top = HY - 28 + 'px';
   const styleCss = (s) => `font-family:${STACK[s.font]};font-weight:${s.weight};font-size:${s.size}px;line-height:${s.line_height || 1.2};color:${s.color};` +
     (s.letter_spacing ? `letter-spacing:${s.letter_spacing};` : '') + (s.transform ? `text-transform:${s.transform};` : '');
   const SL = IT.styles_local;
@@ -262,37 +263,44 @@ function setup({ IT, ROOT, PREP, LINES, STACK }) {
 
   // ================================================================ per-frame
   let coverMode = false;
-  const smooth01 = (x) => x * x * (3 - 2 * x);
-  function updShot(S, f) {
-    const sh = S.sh, on = f >= sh.frames[0] && f <= S.end;
-    vis(S.root, on ? 1 : 0);
-    if (S.planClip && !on) vis(S.planClip, 0);
-    if (!on) return;
-    const C = sh.camera, sc = kf(C.scale, f), dx = kf(C.tx, f) + 2.0 * Math.sin(f / 41), dy = kf(C.ty, f) + 1.6 * Math.sin(f / 53 + 1);
-    const tf = `translate(${dx.toFixed(2)}px,${dy.toFixed(2)}px) scale(${sc.toFixed(5)})`;
-    S.camW.style.transform = tf; if (S.planCam) S.planCam.style.transform = tf;
-    if (!sh.sketch) { S.img.style.filter = ''; S.img.style.webkitMaskImage = ''; vis(S.img, 1); return; }
-    // drawing
-    const [d0, d1] = sh.sketch.draw, u = (f - d0) / (d1 - d0);
-    for (const it of S.lines.items) { const t = EZ.outCubic(clamp01((u - it.t0) / Math.max(0.001, it.t1 - it.t0))); it.el.setAttribute('stroke-dashoffset', (1 - t).toFixed(4)); }
-    const du = clamp01((u - 0.55) / (10 / (d1 - d0)));
-    for (const e of S.lines.dimEls) e.setAttribute('stroke-dashoffset', (1 - EZ.outCubic(du)).toFixed(4));
-    for (const t of S.lines.dimTexts) svis(t, ramp(f, d0 + 0.55 * (d1 - d0) + 6, d0 + 0.55 * (d1 - d0) + 14, 'outSine'));
-    // reveal
-    const RV = sh.reveal, wp = EZ.inOutSine(clamp01((f - RV.wipe[0]) / (RV.wipe[1] - RV.wipe[0])));
-    const soft = 260, ox = RV.origin_frac[0] * W.w, oy = RV.origin_frac[1] * W.h;
-    if (wp <= 0) vis(S.img, 0);
-    else {
-      vis(S.img, 1);
-      if (wp >= 1) S.img.style.webkitMaskImage = '';
-      else if (RV.type === 'radial') { const R = wp * (1.25 * Math.hypot(W.w, W.h) + soft); S.img.style.webkitMaskImage = `radial-gradient(circle at ${ox}px ${oy}px, #000 ${Math.max(0, R - soft).toFixed(1)}px, transparent ${R.toFixed(1)}px)`; }
-      else { const X = wp * (W.w + soft); S.img.style.webkitMaskImage = `linear-gradient(to right, #000 ${(X - soft).toFixed(1)}px, transparent ${X.toFixed(1)}px)`; }
+  function cameraOf(sh, f) {
+    const C = IT.cameras[sh.camera];
+    return { s: kf(C.scale, f), tx: kf(C.tx, f) + 2.0 * Math.sin(f / 41), ty: kf(C.ty, f) + 1.6 * Math.sin(f / 53 + 1) };
+  }
+  // returns {o: opacity, clip, mask, wipeX (window-local px or null), levels: [y...], veil, lvlO}
+  function transitionState(sh, f) {
+    const T = sh.in;
+    const st = { o: 1, clip: 'none', mask: '', wipeX: null, wipeO: 0, levels: [], lvlO: 0, veil: 0 };
+    if (!T || coverMode) return st;
+    const [a, b] = T.frames;
+    if (f >= b) return st;
+    const u = clamp01((f - a) / (b - a));
+    if (T.type === 'slider') {
+      const e = EZ[T.ease || 'inOutCubic'](u), X = W.w * (1 - e);
+      st.clip = `inset(0px 0px 0px ${X.toFixed(2)}px)`; st.wipeX = X;
+      st.wipeO = Math.min(clamp01((f - a + 1) / 3), clamp01((b - f) / 4));
+    } else if (T.type === 'light') {
+      st.o = EZ.inOutSine(clamp01((u - 0.3) / 0.4));
+      st.veil = 0.58 * Math.pow(Math.sin(Math.PI * u), 1.4);
+    } else if (T.type === 'material') {
+      const e = EZ.inOutCubic(u), L = T.line_frac * W.h, soft = 46;
+      const yb = W.h + soft - (W.h + soft - L) * e; // floor edge, moving up
+      const layers = [`linear-gradient(to bottom, transparent ${(yb - soft).toFixed(1)}px, #000 ${yb.toFixed(1)}px)`];
+      st.levels.push(yb - soft / 2);
+      if (T.walls === 'top') {
+        const yt = -soft + (L + soft) * e;
+        layers.push(`linear-gradient(to bottom, #000 ${yt.toFixed(1)}px, transparent ${(yt + soft).toFixed(1)}px)`);
+        st.levels.push(yt + soft / 2);
+      }
+      st.mask = layers.join(',');
+      st.lvlO = Math.min(clamp01((f - a) / 3), clamp01((b - f) / 5)) * 0.9;
     }
-    const g = 1 - EZ.inOutSine(clamp01((f - RV.colour[0]) / (RV.colour[1] - RV.colour[0])));
-    S.img.style.filter = g > 0.001 ? `grayscale(${g.toFixed(3)}) contrast(${(1 + 0.04 * g).toFixed(3)}) brightness(${(1 + 0.05 * g).toFixed(3)})` : '';
-    vis(S.lw, 1 - EZ.inOutSine(clamp01((f - RV.lines_out[0]) / (RV.lines_out[1] - RV.lines_out[0]))));
-    const bo = kf(RV.bloom.frames, f);
-    for (const { b, pk } of S.blooms) vis(b, bo * pk);
+    return st;
+  }
+  function wallFade(sh, f) { // material with walls:"fade" → after the floor wipe the rest of the frame cross-fades
+    const T = sh.in; if (!T || T.walls !== 'fade' || coverMode) return null;
+    const [a, b] = T.walls_frames; if (f >= b) return null;
+    return EZ.inOutSine(clamp01((f - a) / (b - a)));
   }
   window.setFrame = function (f) {
     const CXk = IN.camera_exit;
@@ -304,18 +312,48 @@ function setup({ IT, ROOT, PREP, LINES, STACK }) {
     if (!coverMode && f < EN.frame + 12) { const cp = clipPoly(goldPts(f), W); clip = cp.length ? poly(cp) : NONE; }
     if (!coverMode && f <= EN.frame + 11) { const go = kf(EN.gold_fill_opacity, f); if (go > 0) { goldFill.style.clipPath = clip; vis(goldFill, go); } }
     win.style.clipPath = clip === 'none' || clip === NONE ? clip : poly(clipPoly(goldPts(f), W).map(([x, y]) => [x - W.x, y - W.y])); vis(win, f >= 180 || coverMode ? 1 : 0);
-    for (const S of SHOTS) updShot(S, f);
-    // slider (final shot)
-    const FS = SHOTS[SHOTS.length - 1];
+    // shots
+    let veilO = 0, wipe = null, lv = [], lvO = 0;
     const p = coverMode ? 0.5 : kf(SL_.p, f);
-    FS.planClip.style.clipPath = `inset(0px ${(W.w * (1 - p)).toFixed(2)}px 0px 0px)`; vis(FS.planClip, p > 0.0005 && f >= FS.sh.frames[0] ? 1 : 0);
+    for (const S of SHOTS) {
+      const sh = S.sh;
+      let on = f >= sh.frames[0] && f <= sh.frames[1];
+      if (sh.slider_side === 'left') on = on && p > 0.0005;
+      vis(S.root, on ? 1 : 0);
+      if (!on) continue;
+      const C = cameraOf(sh, f);
+      S.camW.style.transform = `translate(${C.tx.toFixed(2)}px,${C.ty.toFixed(2)}px) scale(${C.s.toFixed(5)})`;
+      const st = transitionState(sh, f);
+      let o = st.o; const wf = wallFade(sh, f);
+      if (sh.slider_side === 'left') S.root.style.clipPath = `inset(0px ${(W.w * (1 - p)).toFixed(2)}px 0px 0px)`;
+      else S.root.style.clipPath = st.clip;
+      if (wf !== null) { // floor wipe (mask) ∪ walls fade: CSS can't union an opacity with a mask → mask with the walls band at alpha wf
+        const T = sh.in, [a, b] = T.frames, e = EZ.inOutCubic(clamp01((f - a) / (b - a))), L = T.line_frac * W.h, soft = 46;
+        const yb = W.h + soft - (W.h + soft - L) * e, al = wf.toFixed(3);
+        S.root.style.webkitMaskImage = `linear-gradient(to bottom, rgba(0,0,0,${al}) ${(yb - soft).toFixed(1)}px, #000 ${yb.toFixed(1)}px)`;
+        if (st.levels.length) { lv = st.levels; lvO = st.lvlO; }
+      } else {
+        S.root.style.webkitMaskImage = st.mask || '';
+        if (st.levels.length) { lv = st.levels; lvO = st.lvlO; }
+      }
+      vis(S.root, o);
+      if (st.wipeX !== null) wipe = st;
+      veilO = Math.max(veilO, st.veil);
+    }
+    vis(veilL, veilO);
+    lvl.forEach((d, i) => { if (i < lv.length && lvO > 0) { d.style.top = lv[i].toFixed(1) + 'px'; vis(d, lvO); } else vis(d, 0); });
+    drawParticles(f);
+    // transition wipe divider
+    if (wipe) { const xd = W.x + wipe.wipeX; wipeLine.style.left = xd - 1 + 'px'; vis(wipeLine, 1); wipeHandle.style.left = xd - 28 + 'px'; vis(wipeHandle, wipe.wipeO); }
+    else { vis(wipeLine, 0); vis(wipeHandle, 0); }
+    // final slider
     const ho = coverMode ? 1 : kf(SL_.handle_opacity, f);
     const xd = W.x + W.w * p;
-    divLine.style.left = xd - 1 + 'px'; vis(divLine, Math.max(ho, p > 0.001 && p < 0.999 ? 1 : 0));
+    divLine.style.left = xd - 1 + 'px'; vis(divLine, Math.max(ho, p > 0.001 && p < 0.999 ? 1 : 0) * (f >= 540 || coverMode ? 1 : 0));
     handle.style.left = xd - 36 + 'px'; handle.style.transform = `scale(${coverMode ? 1 : kf(SL_.handle_grab, f)})`; vis(handle, ho);
     vis(chipsG, coverMode ? 1 : kf(SL_.chips.opacity, f));
     // indicator
-    const ip = coverMode ? 0.5 : f >= IT.indicator.slider_from ? 1 - p : kf(IT.indicator.steps, f);
+    const ip = coverMode ? 1 / 3 + 2 / 3 * 0.5 : f >= IT.indicator.slider_from && f < 666 ? 1 / 3 + 2 / 3 * (1 - p) : kf(IT.indicator.steps, f);
     indLit.style.transform = `scaleX(${ip})`; indDot.style.left = 874 + 136 * ip - 4 + 'px';
     // leaks
     let lo = 0, lx = 540, ly = 1016;
@@ -328,7 +366,7 @@ function setup({ IT, ROOT, PREP, LINES, STACK }) {
     let secO = 0;
     IT.labels.forEach((l, i) => {
       let o = kf(l.opacity, f);
-      if (coverMode) o = l.kind === 'section' ? (kf(l.opacity, IT.cover.base_frame_index) > 0.5 ? 1 : 0) : l.text === IT.cover.stage_text ? 1 : 0;
+      if (coverMode) o = l.kind === 'section' ? 1 : l.text === IT.cover.stage_text ? 1 : 0;
       vis(labels[i], o); labels[i].style.transform = `translateY(${coverMode ? 0 : kf(l.translate_y, f)}px)`; if (l.kind === 'section') secO = Math.max(secO, o);
     });
     vis(ind, secO);
@@ -345,7 +383,7 @@ function setup({ IT, ROOT, PREP, LINES, STACK }) {
   window.measure = function () {
     coverMode = false;
     const out = [];
-    for (const fr of [200, 250, 310, 340, 390, 420, 455, 470, 500, 540, 590, 625, 660, 760]) {
+    for (const fr of [200, 230, 260, 300, 340, 365, 400, 440, 480, 520, 590, 625, 655, 760]) {
       window.setFrame(fr);
       for (const { t, d } of texts) { if (getComputedStyle(d).visibility === 'hidden' || +d.style.opacity < 0.5) continue; const r = d.querySelector('.in').getBoundingClientRect(); out.push({ f: fr, text: t.text, x0: Math.round(r.left), x1: Math.round(r.right), y0: Math.round(r.top), y1: Math.round(r.bottom), font: getComputedStyle(d).fontFamily }); }
     }
