@@ -21,3 +21,13 @@ Checked visually on 2026-11-10: no people or faces, no readable brand names or l
 **Note (to do before publishing).** The sandbox could reach only the CDN, not unsplash.com or a search engine, so the photo page URL and author could not be confirmed. The author names above are from memory. To fill them in, open each CDN URL in a browser, then use a reverse image search, or search unsplash.com for the content and compare. The photo page has the form `https://unsplash.com/photos/<slug>`. No attribution is required by the licence, so publishing is not blocked. Keep this record anyway.
 
 No video clips are in this folder: without search access no Pexels video IDs could be found. Motion in L02 v3 comes from the slow push and the shaped reveals on these stills.
+
+## Interiors for R3 (renovation visualization) — downloaded 2026-11-12, Unsplash License (free commercial use, no attribution required)
+| File | Source |
+|---|---|
+| interiors/unsplash-1600566753086-00f18fb6b3ea_living-warm.jpg | https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea |
+| interiors/unsplash-1600210492486-724fe5c67fb0_kitchen.jpg | https://images.unsplash.com/photo-1600210492486-724fe5c67fb0 |
+| interiors/unsplash-1620626011761-996317b8d101_bathroom.jpg | https://images.unsplash.com/photo-1620626011761-996317b8d101 |
+| interiors/unsplash-1600121848594-d8644e57abab_bedroom.jpg | https://images.unsplash.com/photo-1600121848594-d8644e57abab |
+| interiors/unsplash-1631679706909-1844bbd07221_living-beige.jpg | https://images.unsplash.com/photo-1631679706909-1844bbd07221 |
+Used only as illustrative visualization; never presented as GARON projects.
