@@ -25,9 +25,9 @@ No video clips are in this folder: without search access no Pexels video IDs cou
 ## Interiors for R3 (renovation visualization) — downloaded 2026-11-12, Unsplash License (free commercial use, no attribution required)
 | File | Source |
 |---|---|
-| interiors/unsplash-1600566753086-00f18fb6b3ea_living-warm.jpg | https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea |
-| interiors/unsplash-1600210492486-724fe5c67fb0_kitchen.jpg | https://images.unsplash.com/photo-1600210492486-724fe5c67fb0 |
+| interiors/unsplash-1618221195710-dd6b41faaea6_living-warm.jpg | https://images.unsplash.com/photo-1618221195710-dd6b41faaea6 |
+| interiors/unsplash-1556911220-bff31c812dba_kitchen.jpg | https://images.unsplash.com/photo-1556911220-bff31c812dba |
 | interiors/unsplash-1620626011761-996317b8d101_bathroom.jpg | https://images.unsplash.com/photo-1620626011761-996317b8d101 |
-| interiors/unsplash-1600121848594-d8644e57abab_bedroom.jpg | https://images.unsplash.com/photo-1600121848594-d8644e57abab |
+| interiors/unsplash-1600607687644-c7171b42498f_bedroom.jpg | https://images.unsplash.com/photo-1600607687644-c7171b42498f |
 | interiors/unsplash-1631679706909-1844bbd07221_living-beige.jpg | https://images.unsplash.com/photo-1631679706909-1844bbd07221 |
 Used only as illustrative visualization; never presented as GARON projects.
