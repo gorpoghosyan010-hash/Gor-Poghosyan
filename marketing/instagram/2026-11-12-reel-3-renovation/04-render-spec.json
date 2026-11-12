@@ -1,11 +1,12 @@
 {
- "spec_version": "r3-1",
+ "spec_version": "r3-2",
  "batch": "2026-11-12-reel-3-renovation",
  "generated": "2026-11-12",
  "source_files": [
   "marketing/instagram/owner-preferences.md",
   "marketing/instagram/owner-decisions.md",
-  "marketing/instagram/2026-11-12-reel-2/04-render-spec.json (items.R2 v2: intro, gold piece, labels, end card, styles)"
+  "marketing/instagram/2026-11-12-reel-2/04-render-spec.json (items.R2 v2: intro, gold piece, labels, end card, styles)",
+  "marketing/instagram/assets/stock/CREDITS.md (5 Unsplash interiors, R3 v2)"
  ],
  "brand": {
   "colors": {
@@ -48,11 +49,11 @@
  "items": {
   "R3": {
    "type": "reel",
-   "title": "«Գծագիր → Իրականություն» — animated renovation (blueprint room → finished room)",
-   "version": "v1",
+   "title": "«Գծագիր → Իրականություն» v2 — architect line drawings of real interiors materialize into the photographs (fast cuts, 5 rooms)",
+   "version": "v2",
    "status": "draft for owner review",
-   "needs_shoot": false,
-   "honesty": "NO photos at all after the intro. The room is drawn procedurally (SVG) inside the renderer: no stock, no AI images, no GARON project is shown or implied. It is a visualization of how a renovation comes together, step by step. Caption says so (03-copy.json R3).",
+   "honesty": "After the intro every photo is a licensed Unsplash ILLUSTRATIVE interior (marketing/instagram/assets/stock/CREDITS.md), NOT a GARON project. The line drawings are generated from those photos (04-R3-prep.py). Nothing says or implies «մեր աշխատանքը/our project»; the caption says it is a visualization with illustrative interiors (03-copy.json R3).",
+   "replaced_v1": "v1 (procedural flat SVG room, built stage by stage) replaced on owner feedback 2026-11-12: «Make it REALISTIC» + «fast, quick cuts, several shots».",
    "method": "html_frame_stepped",
    "duration": 26.0,
    "fps": 30,
@@ -61,9 +62,15 @@
     1080,
     1920
    ],
-   "output": "05-output/R3/R3_reel.mp4",
-   "cover_output": "05-output/R3/R3_cover.jpg",
-   "renderer": "marketing/instagram/2026-11-12-reel-3-renovation/04-R3-renderer.js — usage: NODE_PATH=$(npm root -g) node 04-R3-renderer.js <repo_root> <out_dir> [all|cover|0,30,...] (writes R3_%03d.png, R3_cover.png, measure.json; f0–179 are delegated to tools/render_l02_frames.js). If code and spec disagree, the spec wins.",
+   "output": "R3_reel.mp4",
+   "cover_output": "R3_cover.jpg",
+   "renderer": "marketing/instagram/2026-11-12-reel-3-renovation/04-R3-renderer.js — usage: NODE_PATH=$(npm root -g) node 04-R3-renderer.js <repo_root> <out_dir> [all|cover|0,30,...]. Step 1 (automatic if <out_dir>/_prep/manifest.json is missing): python3 04-R3-prep.py <repo_root> <out_dir>/_prep → crops <id>.jpg + line drawings <id>_lines.json. Writes R3_%03d.png, R3_cover.png, measure.json; f0–179 are delegated to tools/render_l02_frames.js. If code and spec disagree, the spec wins.",
+   "prep": {
+    "script": "marketing/instagram/2026-11-12-reel-3-renovation/04-R3-prep.py",
+    "requires": "python3, numpy, opencv-python-headless ≥ 4.5.1 (LSD)",
+    "usage": "python3 04-R3-prep.py <repo_root> <out_dir> [ids] [--debug]  (--debug also writes <id>_lines.png for review)"
+   },
+   "needs_shoot": false,
    "encode": "python3 marketing/instagram/tools/compose_l02_audio.py intro_r3.wav --intro-only && ffmpeg -framerate 30 -i R3_%03d.png -i intro_r3.wav -map 0:v -map 1:a -c:v libx264 -profile:v high -pix_fmt yuv420p -crf 18 -colorspace bt709 -color_primaries bt709 -color_trc bt709 -c:a aac -b:a 192k -ar 48000 -t 26 -movflags +faststart R3_reel.mp4 ; cover: python3 marketing/instagram/tools/png2jpg.py R3_cover.png R3_cover.jpg 92",
    "timebase": {
     "fps": 30,
@@ -72,7 +79,7 @@
     "bpm": 120,
     "frames_per_beat": 15,
     "frames_per_bar": 60,
-    "note": "intro 0–179 (= L02 v4, 3 bars); every stage change on a beat (multiples of 15 frames); f780 = bar 14.1 (clean loop)"
+    "note": "intro 0–179 (= L02 v4, 3 bars); every cut and every reveal starts on a beat (multiples of 15) — details are 1-beat inserts; f780 = clean loop"
    },
    "acts": [
     {
@@ -81,39 +88,34 @@
      "what": "identical L02 v4 logo build (no text)"
     },
     {
-     "act": "II Նախագիծ",
-     "frames": "180–269",
-     "what": "gold piece of the logo grows into the 3:4 window and opens on the blueprint sheet; the room is drawn in thin dark lines (back wall, corners, window, doorway, LED channels, floor perspective lines), gold dimension lines + figures, dashed furniture outlines"
+     "act": "II Հյուրասենյակ",
+     "frames": "180–299",
+     "what": "gold piece opens the window on paper; the architect drawing of the living room draws itself (182–236); 240 downbeat: the photo materializes from the lamp light (grey structure → colour → warm bloom), lines fade; 270 + 285: two 1-beat angle inserts (lamp/windows, chair/pampas)"
     },
     {
-     "act": "III Պատեր",
-     "frames": "270–329",
-     "what": "warm-white plaster wipes onto back wall (270), left wall (285), right wall (300), ceiling (315) — soft trowel edge"
+     "act": "III Խոհանոց",
+     "frames": "300–374",
+     "what": "cut to the kitchen drawing (300–326), 330 materialize, 360 detail insert (lemons/pot/marble)"
     },
     {
-     "act": "IV Հատակ",
-     "frames": "330–389",
-     "what": "oak boards (running to the vanishing point) are laid from the back wall forward, row by row"
+     "act": "IV Լոգարան",
+     "frames": "375–449",
+     "what": "bathroom drawing (375–401), 405 materialize from the window, 435 detail insert (basin/tap)"
     },
     {
-     "act": "V Լույս",
-     "frames": "390–449",
-     "what": "room 'switches on': linear LED channels light up (390, 405), cove light on the back wall (420), window fills with warm daylight + light patch on the floor (420–440)"
+     "act": "V Ննջասենյակ (montage)",
+     "frames": "450–494",
+     "what": "one beat each: drawing 450, reality 465 (fast wipe), detail 480"
     },
     {
-     "act": "VI Կահավորում",
-     "frames": "450–539",
-     "what": "rug 450, sofa 465, coffee table 480, olive tree 495, art 510, floor lamp 525 — each rises 14 px and fades in on its beat"
+     "act": "VI Հյուրասենյակ + slider",
+     "frames": "495–665",
+     "what": "final room: drawing 495–523, 525 materialize, 552 handle, 570 sweep back to the drawing, 600 split «Գծագիր | Իրականություն», 645 release"
     },
     {
-     "act": "VII Գծագիր | Արդյունք",
-     "frames": "540–665",
-     "what": "finished room; 555 handle appears, 570 sweep back to the drawing, 600 drag to the middle (split), 645 release → finished room"
-    },
-    {
-     "act": "VIII end card",
+     "act": "VII end card",
      "frames": "666–779",
-     "what": "= R2 v2 end card: logo, services line, horizon, garon.am"
+     "what": "= v1/R2 v2 end card: logo, services line, horizon, garon.am"
     }
    ],
    "z_order": [
@@ -121,10 +123,11 @@
     "bg paper",
     "vlines",
     "stage (finished lockup <img>, exit 180–198)",
-    "scene window: [result SVG] + [plan SVG in a clip box (left of the divider)], both inside one camera wrapper",
+    "scene window (clip): per shot one camera wrapper = [paper+grid] [photo grey] [photo colour] [bloom] [line drawing SVG + gold dims]; final shot also a plan copy (paper+grid+lines+dims) in a clip box left of the divider",
     "gold_fill (entry)",
     "divider + handle",
     "chips",
+    "light leak",
     "window frame line",
     "end veil",
     "corner logo",
@@ -226,7 +229,6 @@
     ]
    },
    "keyframes_rule": "Every animated property is a list of keys [frame, value, easing]. Before the first key: first value; after the last key: last value. Between key k and k+1: v = v_k + (v_k+1 − v_k) · E((f − f_k)/(f_k+1 − f_k)), E = easing NAMED IN KEY k (see `easings`). \"hold\" = keep v_k until f_k+1 then jump. Vector values ([x,y] or {x,y,w,h}) interpolate component-wise.",
-   "fonts_check": "Armenian glyphs must come from Noto Serif Armenian / Noto Sans Armenian (check document.fonts / computed font in a test frame). STOP if a fallback system font is used.",
    "window": {
     "rect": {
      "x": 70,
@@ -258,7 +260,7 @@
       ]
      ]
     },
-    "note": "= R2 window. All room geometry below is in WINDOW-LOCAL px (0,0 = window top-left, 940×1253)."
+    "note": "= R2 window. All shot geometry (crops, line drawings, dims, bloom points) is in WINDOW-LOCAL coordinates: fractions of 940×1253 or px."
    },
    "vlines": {
     "xs": [
@@ -421,700 +423,6 @@
      "opacity": "relative keys [[e−4,0,outSine],[e−1,1,hold],[e+3,1,outSine],[e+10,0]] — a small solid gold piece (141 px wide) appears in the window centre on the beat before e, then grows and opens into the next shot"
     }
    },
-   "room": {
-    "projection": "one-point perspective. World metres: x right, y up (floor 0), z depth from the camera. Screen (window-local px): sx = vp.x + f·(x − cam.x)/z ; sy = vp.y − f·(y − cam.y)/z.",
-    "f": 640,
-    "vp": [
-     470,
-     500
-    ],
-    "cam": {
-     "x": -0.2,
-     "y": 1.5
-    },
-    "x": [
-     -2.8,
-     2.8
-    ],
-    "h": 2.9,
-    "z_back": 5.6,
-    "z_near": 0.9,
-    "camera": {
-     "what": "whole scene wrapper (result + plan together): translate(drift) scale(z), transform-origin = vp",
-     "z": [
-      [
-       180,
-       1.0,
-       "linear"
-      ],
-      [
-       666,
-       1.1
-      ]
-     ],
-     "drift": "dx = 2.0·sin(f/41), dy = 1.6·sin(f/53 + 1) px"
-    },
-    "palette": {
-     "wall_back": "#eee8de",
-     "wall_left": "#e3dbcf",
-     "wall_right": "#e9e2d7",
-     "ceiling": "#f2eee8",
-     "plaster_tile": "256 px soft value noise (seed 11), multiply, opacity 0.06",
-     "oak": [
-      "#c7a479",
-      "#bf9a6d",
-      "#cdab81",
-      "#b8916a",
-      "#c3a074",
-      "#d0b089"
-     ],
-     "oak_seam": "rgba(92,62,34,0.42)",
-     "oak_grain": "rgba(110,76,44,0.16)",
-     "charcoal": "#2a2a2b",
-     "charcoal_top": "#3a3937",
-     "stone": "#cbc2b4",
-     "stone_top": "#d9d1c4",
-     "stone_side": "#bcb2a3",
-     "rug": "#e4ddd0",
-     "rug_border": "#c9bba3",
-     "brass": "#b8955c",
-     "brass_light": "#d4b57a",
-     "olive": [
-      "#6b7457",
-      "#5c6549",
-      "#7b8466",
-      "#525a41"
-     ],
-     "glass_off": "#dcdedb",
-     "sky_on": [
-      "#fffaf0",
-      "#f3e2bf"
-     ],
-     "door_inside": [
-      "#7a7167",
-      "#4f4943"
-     ],
-     "line_main": "rgba(23,25,28,0.82)",
-     "line_sub": "rgba(23,25,28,0.30)",
-     "line_furniture": "rgba(23,25,28,0.45)",
-     "dims": "#856727",
-     "led_off": "#c9c2b6",
-     "led_core": "#fffaf0",
-     "led_glow": "rgba(255,212,150,0.95)",
-     "light_warm": "#ffe9c4"
-    },
-    "line_widths": {
-     "main": 1.6,
-     "sub": 1.0,
-     "furniture_dashed": 1.2,
-     "dash": "7 6",
-     "dims": 1.2
-    },
-    "openings": {
-     "window_left_wall": {
-      "z": [
-       3.75,
-       5.05
-      ],
-      "y": [
-       0.3,
-       2.55
-      ],
-      "mullions": 1,
-      "frame": "charcoal 4 px",
-      "sun_dir": [
-       1.0,
-       -0.8,
-       -0.35
-      ]
-     },
-     "door_right_wall": {
-      "z": [
-       4.3,
-       5.1
-      ],
-      "y": [
-       0,
-       2.2
-      ],
-      "frame": "charcoal 3 px"
-     }
-    },
-    "led": {
-     "channels_x": [
-      -1.1,
-      1.1
-     ],
-     "z": [
-      0.9,
-      5.6
-     ],
-     "cove_y": 2.84,
-     "note": "two recessed linear channels in depth + cove line along the top of the back wall"
-    },
-    "floor": {
-     "strip_w": 0.2,
-     "board_len": [
-      1.1,
-      2.1
-     ],
-     "seed": 5,
-     "grain_lines_per_board": 2,
-     "laying": "board appears (opacity 0→1 + 6 px drop, 8 frames, outCubic) at f = 332 + 44·(z_back − z_far)/(z_back − z_near) + 6·rand → row by row, back wall first"
-    },
-    "furniture": [
-     {
-      "id": "rug",
-      "frame": 450,
-      "what": "flat oat rug x −1.75..1.75, z 3.25..5.45, inner border 0.12 m"
-     },
-     {
-      "id": "sofa",
-      "frame": 465,
-      "what": "stone-greige 3-seat sofa against the back wall: base x −1.35..1.35 z 4.75..5.5 y 0.1..0.42, back z 5.3..5.55 y ..0.84, arms 0.23 m (y ..0.6), 2 seat cushions, brass + charcoal pillows, charcoal plinth"
-     },
-     {
-      "id": "table",
-      "frame": 480,
-      "what": "low charcoal coffee table x −0.6..0.6 z 3.75..4.3, slab y 0.31..0.38, recessed base x ±0.36 z 3.92..4.14; books + small brass bowl"
-     },
-     {
-      "id": "tree",
-      "frame": 495,
-      "what": "olive tree in a charcoal pot, back-left corner (x −2.55..−2.1, z 4.95..5.4): trunk + 3 branches + ~90 small muted-olive leaves (seed 3)"
-     },
-     {
-      "id": "art",
-      "frame": 510,
-      "what": "framed art on the back wall above the sofa x −0.7..0.7 y 1.3..2.15: charcoal frame, paper mat, gold arch + thin charcoal horizon"
-     },
-     {
-      "id": "lamp",
-      "frame": 525,
-      "what": "brass floor lamp x 1.85 z 5.0: base, pole to 1.55 m, linen shade, warm glow (radial, screen 0.55)"
-     }
-    ],
-    "furniture_anim": "group opacity [[F,0,outCubic],[F+10,1]] and translateY [[F,14,outCubic],[F+12,0]] (px)"
-   },
-   "plan_lines": {
-    "what": "one line set used twice: (a) drawn-in on the result SVG during Նախագիծ, (b) static full-strength on the plan SVG for the slider. Draw-in = stroke-dasharray with pathLength 1, dashoffset 1 − E((f − s)/(e − s)), E = outCubic.",
-    "groups": [
-     {
-      "id": "back_wall",
-      "draw": [
-       186,
-       206
-      ],
-      "w": "main",
-      "what": "back wall rectangle"
-     },
-     {
-      "id": "corners",
-      "draw": [
-       194,
-       218
-      ],
-      "w": "main",
-      "what": "4 room edges from the back-wall corners to the window edges"
-     },
-     {
-      "id": "window",
-      "draw": [
-       206,
-       228
-      ],
-      "w": "main",
-      "what": "window on the left wall (frame + mullion)"
-     },
-     {
-      "id": "door",
-      "draw": [
-       212,
-       234
-      ],
-      "w": "main",
-      "what": "doorway on the right wall"
-     },
-     {
-      "id": "floor_lines",
-      "draw": [
-       214,
-       246
-      ],
-      "w": "sub",
-      "what": "floor perspective lines every 0.8 m + 3 cross lines"
-     },
-     {
-      "id": "led",
-      "draw": [
-       224,
-       246
-      ],
-      "w": "sub",
-      "what": "LED channels (thin double lines) on the ceiling"
-     },
-     {
-      "id": "dims",
-      "draw": [
-       232,
-       254
-      ],
-      "w": "dims",
-      "what": "dimension lines with 45° ticks: width «5 600» above the back wall, height «2 900» left of it (Montserrat 500 15 px #856727, opacity fades in 244–256)"
-     },
-     {
-      "id": "furniture_outline",
-      "fade": [
-       [
-        238,
-        0,
-        "outSine"
-       ],
-       [
-        258,
-        1,
-        "hold"
-       ],
-       [
-        450,
-        1,
-        "inOutSine"
-       ],
-       [
-        540,
-        0
-       ]
-      ],
-      "w": "furniture_dashed",
-      "what": "dashed outlines of rug, sofa, table, pot, art, lamp (design intent)"
-     }
-    ],
-    "result_opacity": [
-     [
-      180,
-      1,
-      "hold"
-     ],
-     [
-      270,
-      1,
-      "inOutSine"
-     ],
-     [
-      330,
-      0.32,
-      "inOutSine"
-     ],
-     [
-      450,
-      0.14
-     ]
-    ],
-    "dims_result_opacity": [
-     [
-      180,
-      1,
-      "hold"
-     ],
-     [
-      270,
-      1,
-      "inOutSine"
-     ],
-     [
-      300,
-      0
-     ]
-    ],
-    "result_opacity_note": "the drawing stays under the finishes as faint architectural edges (lines are drawn ABOVE the fills)"
-   },
-   "stages": {
-    "walls": {
-     "back": [
-      270,
-      292
-     ],
-     "left": [
-      285,
-      305
-     ],
-     "right": [
-      300,
-      320
-     ],
-     "ceiling": [
-      312,
-      330
-     ],
-     "soft_edge_px": 90,
-     "ease": "inOutSine",
-     "what": "SVG mask, linear gradient wipe: back wall left→right, side walls from the back corner outwards, ceiling from the back wall to the front"
-    },
-    "floor": {
-     "frames": [
-      330,
-      389
-     ]
-    },
-    "light": {
-     "dim_overlay": {
-      "color": "#3a332b",
-      "opacity": [
-       [
-        180,
-        0.16,
-        "hold"
-       ],
-       [
-        390,
-        0.16,
-        "inOutSine"
-       ],
-       [
-        425,
-        0
-       ]
-      ],
-      "impl": "applied ONLY to the finishes (walls, ceiling, floor) as an SVG feComponentTransfer: channel slope = 1 − o·(1 − dim_c/255) (= multiply by the dim colour at opacity o); paper, grid and lines stay clean"
-     },
-     "led_1": [
-      [
-       390,
-       0,
-       "outCubic"
-      ],
-      [
-       398,
-       1
-      ]
-     ],
-     "led_2": [
-      [
-       405,
-       0,
-       "outCubic"
-      ],
-      [
-       413,
-       1
-      ]
-     ],
-     "cove": [
-      [
-       420,
-       0,
-       "outCubic"
-      ],
-      [
-       432,
-       1
-      ]
-     ],
-     "window_sky": [
-      [
-       420,
-       0,
-       "inOutSine"
-      ],
-      [
-       440,
-       1
-      ]
-     ],
-     "floor_light_patch": [
-      [
-       422,
-       0,
-       "inOutSine"
-      ],
-      [
-       446,
-       0.55
-      ]
-     ],
-     "warm_wash": [
-      [
-       390,
-       0,
-       "inOutSine"
-      ],
-      [
-       446,
-       1
-      ]
-     ],
-     "flash": "LED channel pulse: glow opacity overshoots 1.25 at +4 frames, settles to 1 by +14"
-    },
-    "slider": {
-     "p_note": "p ∈ [0,1], divider x (window-local) = 940·p. LEFT of the divider = Գծագիր (plan SVG), right = Արդյունք. p = 0: finished room.",
-     "p": [
-      [
-       540,
-       0,
-       "hold"
-      ],
-      [
-       570,
-       0,
-       "inOutQuart"
-      ],
-      [
-       590,
-       1,
-       "hold"
-      ],
-      [
-       600,
-       1,
-       "outCubic"
-      ],
-      [
-       620,
-       0.5,
-       "inOutSine"
-      ],
-      [
-       636,
-       0.53,
-       "inOutSine"
-      ],
-      [
-       645,
-       0.52,
-       "inOutCubic"
-      ],
-      [
-       660,
-       0
-      ]
-     ],
-     "handle_opacity": [
-      [
-       552,
-       0,
-       "outSine"
-      ],
-      [
-       560,
-       1,
-       "hold"
-      ],
-      [
-       656,
-       1,
-       "inOutSine"
-      ],
-      [
-       664,
-       0
-      ]
-     ],
-     "handle_grab": [
-      [
-       564,
-       1,
-       "outCubic"
-      ],
-      [
-       570,
-       0.88,
-       "hold"
-      ],
-      [
-       590,
-       0.88,
-       "outBack"
-      ],
-      [
-       596,
-       1,
-       "outCubic"
-      ],
-      [
-       602,
-       0.88,
-       "hold"
-      ],
-      [
-       645,
-       0.88,
-       "outBack"
-      ],
-      [
-       653,
-       1
-      ]
-     ],
-     "handle_y": 1016,
-     "chips": {
-      "opacity": [
-       [
-        612,
-        0,
-        "outCubic"
-       ],
-       [
-        622,
-        1,
-        "hold"
-       ],
-       [
-        642,
-        1,
-        "inSine"
-       ],
-       [
-        648,
-        0
-       ]
-      ],
-      "items": [
-       {
-        "text": "Գծագիր",
-        "x": 94,
-        "y": 414,
-        "align": "left"
-       },
-       {
-        "text": "Արդյունք",
-        "x_right": 986,
-        "y": 414,
-        "align": "right"
-       }
-      ]
-     }
-    }
-   },
-   "light_leaks": {
-    "css": "div 900x900, radial-gradient(closest-side, rgba(255,214,150,0.9), rgba(201,169,106,0.35) 45%, rgba(201,169,106,0) 100%), mix-blend-mode screen, centred (cx, cy)",
-    "events": [
-     {
-      "frame": 180,
-      "opacity": [
-       [
-        180,
-        0,
-        "outSine"
-       ],
-       [
-        188,
-        0.1,
-        "inOutSine"
-       ],
-       [
-        210,
-        0
-       ]
-      ],
-      "cx": [
-       [
-        180,
-        300,
-        "linear"
-       ],
-       [
-        210,
-        760
-       ]
-      ],
-      "cy": 1016
-     },
-     {
-      "frame": 420,
-      "opacity": [
-       [
-        414,
-        0,
-        "outSine"
-       ],
-       [
-        426,
-        0.12,
-        "inOutSine"
-       ],
-       [
-        452,
-        0
-       ]
-      ],
-      "cx": [
-       [
-        414,
-        200,
-        "linear"
-       ],
-       [
-        452,
-        640
-       ]
-      ],
-      "cy": 1000
-     },
-     {
-      "frame": 570,
-      "opacity": [
-       [
-        566,
-        0,
-        "outSine"
-       ],
-       [
-        574,
-        0.08,
-        "inOutSine"
-       ],
-       [
-        596,
-        0
-       ]
-      ],
-      "cx": [
-       [
-        566,
-        300,
-        "linear"
-       ],
-       [
-        596,
-        880
-       ]
-      ],
-      "cy": 1016
-     },
-     {
-      "frame": 645,
-      "opacity": [
-       [
-        641,
-        0,
-        "outSine"
-       ],
-       [
-        649,
-        0.1,
-        "inOutSine"
-       ],
-       [
-        668,
-        0
-       ]
-      ],
-      "cx": [
-       [
-        641,
-        600,
-        "linear"
-       ],
-       [
-        668,
-        200
-       ]
-      ],
-      "cy": 1016
-     }
-    ],
-    "note": "peak ≤ 0.12, only on transitions"
-   },
    "grain": {
     "css": "full-frame div, background = 256x256 grayscale noise tile (deterministic PRNG seed 7, values 128±40), mix-blend-mode overlay, opacity 0.05; background-position shifts every 2 frames by ((37·k) mod 256, (91·k) mod 256), k = floor(f/2)",
     "note": "paper texture, invisible on a phone at arm's length but kills the 'flat digital' look; v2: OFF in f0–179 (the borrowed L02 intro has no grain, frames must stay identical), fades in 180–196 (keys `opacity`)",
@@ -1159,564 +467,6 @@
      ]
     ]
    },
-   "labels": [
-    {
-     "kind": "section",
-     "style": "section_label",
-     "text": "Վերանորոգում",
-     "x": 240,
-     "y": 270,
-     "w": 770,
-     "align": "right",
-     "opacity": [
-      [
-       190,
-       0,
-       "outCubic"
-      ],
-      [
-       200,
-       1,
-       "hold"
-      ],
-      [
-       666,
-       1,
-       "inSine"
-      ],
-      [
-       672,
-       0
-      ]
-     ],
-     "translate_y": [
-      [
-       190,
-       8,
-       "outCubic"
-      ],
-      [
-       200,
-       0
-      ]
-     ]
-    },
-    {
-     "kind": "stage",
-     "style": "stage_label",
-     "text": "Նախագիծ",
-     "x": 240,
-     "y": 294,
-     "w": 770,
-     "align": "right",
-     "opacity": [
-      [
-       190,
-       0,
-       "outCubic"
-      ],
-      [
-       200,
-       1,
-       "hold"
-      ],
-      [
-       264,
-       1,
-       "inSine"
-      ],
-      [
-       270,
-       0
-      ]
-     ],
-     "translate_y": [
-      [
-       190,
-       12,
-       "outCubic"
-      ],
-      [
-       200,
-       0,
-       "hold"
-      ],
-      [
-       264,
-       0,
-       "inSine"
-      ],
-      [
-       270,
-       -8
-      ]
-     ]
-    },
-    {
-     "kind": "stage",
-     "style": "stage_label",
-     "text": "Պատեր",
-     "x": 240,
-     "y": 294,
-     "w": 770,
-     "align": "right",
-     "opacity": [
-      [
-       269,
-       0,
-       "outCubic"
-      ],
-      [
-       279,
-       1,
-       "hold"
-      ],
-      [
-       324,
-       1,
-       "inSine"
-      ],
-      [
-       330,
-       0
-      ]
-     ],
-     "translate_y": [
-      [
-       269,
-       12,
-       "outCubic"
-      ],
-      [
-       279,
-       0,
-       "hold"
-      ],
-      [
-       324,
-       0,
-       "inSine"
-      ],
-      [
-       330,
-       -8
-      ]
-     ]
-    },
-    {
-     "kind": "stage",
-     "style": "stage_label",
-     "text": "Հատակ",
-     "x": 240,
-     "y": 294,
-     "w": 770,
-     "align": "right",
-     "opacity": [
-      [
-       329,
-       0,
-       "outCubic"
-      ],
-      [
-       339,
-       1,
-       "hold"
-      ],
-      [
-       384,
-       1,
-       "inSine"
-      ],
-      [
-       390,
-       0
-      ]
-     ],
-     "translate_y": [
-      [
-       329,
-       12,
-       "outCubic"
-      ],
-      [
-       339,
-       0,
-       "hold"
-      ],
-      [
-       384,
-       0,
-       "inSine"
-      ],
-      [
-       390,
-       -8
-      ]
-     ]
-    },
-    {
-     "kind": "stage",
-     "style": "stage_label",
-     "text": "Լույս",
-     "x": 240,
-     "y": 294,
-     "w": 770,
-     "align": "right",
-     "opacity": [
-      [
-       389,
-       0,
-       "outCubic"
-      ],
-      [
-       399,
-       1,
-       "hold"
-      ],
-      [
-       444,
-       1,
-       "inSine"
-      ],
-      [
-       450,
-       0
-      ]
-     ],
-     "translate_y": [
-      [
-       389,
-       12,
-       "outCubic"
-      ],
-      [
-       399,
-       0,
-       "hold"
-      ],
-      [
-       444,
-       0,
-       "inSine"
-      ],
-      [
-       450,
-       -8
-      ]
-     ]
-    },
-    {
-     "kind": "stage",
-     "style": "stage_label",
-     "text": "Կահավորում",
-     "x": 240,
-     "y": 294,
-     "w": 770,
-     "align": "right",
-     "opacity": [
-      [
-       449,
-       0,
-       "outCubic"
-      ],
-      [
-       459,
-       1,
-       "hold"
-      ],
-      [
-       534,
-       1,
-       "inSine"
-      ],
-      [
-       540,
-       0
-      ]
-     ],
-     "translate_y": [
-      [
-       449,
-       12,
-       "outCubic"
-      ],
-      [
-       459,
-       0,
-       "hold"
-      ],
-      [
-       534,
-       0,
-       "inSine"
-      ],
-      [
-       540,
-       -8
-      ]
-     ]
-    },
-    {
-     "kind": "stage",
-     "style": "stage_label",
-     "text": "Արդյունք",
-     "x": 240,
-     "y": 294,
-     "w": 770,
-     "align": "right",
-     "opacity": [
-      [
-       539,
-       0,
-       "outCubic"
-      ],
-      [
-       549,
-       1,
-       "hold"
-      ],
-      [
-       575,
-       1,
-       "inSine"
-      ],
-      [
-       581,
-       0
-      ]
-     ],
-     "translate_y": [
-      [
-       539,
-       12,
-       "outCubic"
-      ],
-      [
-       549,
-       0,
-       "hold"
-      ],
-      [
-       575,
-       0,
-       "inSine"
-      ],
-      [
-       581,
-       -8
-      ]
-     ]
-    },
-    {
-     "kind": "stage",
-     "style": "stage_label",
-     "text": "Գծագիր",
-     "x": 240,
-     "y": 294,
-     "w": 770,
-     "align": "right",
-     "opacity": [
-      [
-       580,
-       0,
-       "outCubic"
-      ],
-      [
-       590,
-       1,
-       "hold"
-      ],
-      [
-       600,
-       1,
-       "inSine"
-      ],
-      [
-       606,
-       0
-      ]
-     ],
-     "translate_y": [
-      [
-       580,
-       12,
-       "outCubic"
-      ],
-      [
-       590,
-       0,
-       "hold"
-      ],
-      [
-       600,
-       0,
-       "inSine"
-      ],
-      [
-       606,
-       -8
-      ]
-     ]
-    },
-    {
-     "kind": "stage",
-     "style": "stage_label",
-     "text": "Գծագիր | Արդյունք",
-     "x": 240,
-     "y": 294,
-     "w": 770,
-     "align": "right",
-     "opacity": [
-      [
-       605,
-       0,
-       "outCubic"
-      ],
-      [
-       615,
-       1,
-       "hold"
-      ],
-      [
-       646,
-       1,
-       "inSine"
-      ],
-      [
-       652,
-       0
-      ]
-     ],
-     "translate_y": [
-      [
-       605,
-       12,
-       "outCubic"
-      ],
-      [
-       615,
-       0,
-       "hold"
-      ],
-      [
-       646,
-       0,
-       "inSine"
-      ],
-      [
-       652,
-       -8
-      ]
-     ]
-    },
-    {
-     "kind": "stage",
-     "style": "stage_label",
-     "text": "Արդյունք",
-     "x": 240,
-     "y": 294,
-     "w": 770,
-     "align": "right",
-     "opacity": [
-      [
-       651,
-       0,
-       "outCubic"
-      ],
-      [
-       661,
-       1,
-       "hold"
-      ],
-      [
-       666,
-       1,
-       "inSine"
-      ],
-      [
-       672,
-       0
-      ]
-     ],
-     "translate_y": [
-      [
-       651,
-       12,
-       "outCubic"
-      ],
-      [
-       661,
-       0,
-       "hold"
-      ],
-      [
-       666,
-       0,
-       "inSine"
-      ],
-      [
-       672,
-       -8
-      ]
-     ]
-    }
-   ],
-   "labels_note": "section «ՎԵՐԱՆՈՐՈԳՈՒՄ» (Montserrat 500 18 px, 0.24em, uppercase) + stage word (Noto Serif Armenian 500 40 px #856727), right-aligned to x 1010, y 270/294 — same slots as R2. Stage word switches when the divider crosses the middle (≈580, ≈651).",
-   "indicator": {
-    "what": "= R2 indicator (x 874–1010, y 352): grey 2 px line, dark-gold fill + 8 px dot. Build stages: fill = stage/5; slider: fill = 1 − p (drawing = 0, result = full).",
-    "steps": [
-     [
-      190,
-      0,
-      "outCubic"
-     ],
-     [
-      200,
-      0.2,
-      "hold"
-     ],
-     [
-      270,
-      0.2,
-      "outCubic"
-     ],
-     [
-      280,
-      0.4,
-      "hold"
-     ],
-     [
-      330,
-      0.4,
-      "outCubic"
-     ],
-     [
-      340,
-      0.6,
-      "hold"
-     ],
-     [
-      390,
-      0.6,
-      "outCubic"
-     ],
-     [
-      400,
-      0.8,
-      "hold"
-     ],
-     [
-      450,
-      0.8,
-      "outCubic"
-     ],
-     [
-      460,
-      1.0
-     ]
-    ],
-    "slider_from": 552
-   },
    "styles_local": {
     "section_label": {
      "font": "text",
@@ -1744,7 +494,7 @@
      "color": "#856727",
      "bg": "rgba(245,245,243,0.94)",
      "padding": "10px 16px 10px 18px",
-     "note": "cover only"
+     "note": "slider split (612–648) + cover"
     },
     "end_display": {
      "font": "display",
@@ -1944,10 +694,2397 @@
     "rules": "NO CTA, NO @handle, NO date. Only: logo, services line, garon.am (owner-preferences.md). v2 (owner feedback): the «Առաջ | Հետո» line with its divider + small handle is REMOVED from the end card (the top-right stage labels during the photo sections stay).",
     "spacing_note": "v2 re-balance in the rhythm of the L02 v4 end card (logo → 49 px → rule → 38 px → line, then air → horizon → garon.am): logo visible 583–833, rule 882, services 920–≈950, horizon 1106 (≈156 px below the services line; L02: 129), garon.am 1146–≈1183. Block 583–1183 sits around the optical centre; below y 1100 only garon.am (x ≈ 470–610, < 900)."
    },
+   "photo_px": [
+    1034,
+    1378
+   ],
+   "max_push": 1.1,
+   "photo_note": "every crop is 3:4 and is resampled to photo_px = window × max_push (1034×1378), shown at 940×1253 × camera scale. Upscale vs source pixels = 940·scale / crop_width_px ≤ 1.35 for every shot (checked: prep manifest max_upscale_vs_source at 1.10; real camera max 1.08 → details 1.35, rooms ≤ 1.02).",
+   "line_art": {
+    "what": "architect sketch generated from the crop itself (04-R3-prep.py): straight structure = LSD segments (merged, overshoot at both ends like a hand-drafted line), objects = cleaned Canny chains; no hatching, no texture",
+    "work_scale": 1.0,
+    "filter": {
+     "bilateral_passes": 4,
+     "bilateral_d": 9,
+     "bilateral_sigma_color": 40,
+     "bilateral_sigma_space": 8,
+     "edge_preserving": [
+      50,
+      0.25
+     ]
+    },
+    "lines": {
+     "min_len": 120,
+     "merge_angle_deg": 1.5,
+     "merge_dist": 3.0,
+     "merge_gap": 12,
+     "mask_px": 5,
+     "overshoot": 10,
+     "overshoot_full_len": 300,
+     "len_for_full_weight": 500
+    },
+    "curves": {
+     "xdog": {
+      "sigma": 1.2,
+      "k": 1.6,
+      "p": 20,
+      "eps": 0.35,
+      "norm_sigma": 25,
+      "norm_gain": 0.12,
+      "norm_floor": 0.03
+     },
+     "min_extent": 30,
+     "min_pixels": 30,
+     "min_chain": 12,
+     "smooth_sigma": 2.2,
+     "simplify": 0.6,
+     "squiggle_len": 45,
+     "squiggle_tortuosity": 1.5,
+     "crumb_len": 28,
+     "fill_px": 3.5,
+     "thick_full": 3.0,
+     "len_for_full_weight": 300
+    },
+    "stroke": {
+     "color": "#2b2d31",
+     "line_w": [
+      1.2,
+      2.2
+     ],
+     "line_o": [
+      0.7,
+      0.95
+     ],
+     "curve_w": [
+      1.05,
+      1.9
+     ],
+     "curve_o": [
+      0.66,
+      0.92
+     ]
+    },
+    "construction": {
+     "min_len": 300,
+     "max": 6,
+     "min_sep": 40,
+     "w": 0.7,
+     "o": 0.16,
+     "t": [
+      0.0,
+      0.12
+     ],
+     "dur": 0.22,
+     "note": "longest straight edges extended edge-to-edge, faint — the drafting guide lines drawn first"
+    },
+    "max_paths": 1100,
+    "draw": {
+     "lines_start": [
+      0.0,
+      0.42
+     ],
+     "line_dur": [
+      0.16,
+      0.34
+     ],
+     "curves_start": [
+      0.18,
+      0.74
+     ],
+     "curve_dur": [
+      0.12,
+      0.26
+     ],
+     "note": "t0/t1 are fractions of the shot sketch.draw window; each path = SVG path with pathLength 1, stroke-dashoffset 1→0 (outCubic) between t0 and t1"
+    },
+    "dims": {
+     "at_note": "optional per-dim `at` (0–1) = position of the figure along the line (default 0.5)",
+     "color": "#856727",
+     "width": 1.3,
+     "tick": 7,
+     "ext": 12,
+     "font": "text 500 15px, letter-spacing 0.12em",
+     "draw": "starts at 55% of the sketch window, 10 frames; text fades in after",
+     "note": "illustrative figures (mm) — this is a drawing language, not a survey"
+    }
+   },
+   "shots": [
+    {
+     "id": "living_wide",
+     "kind": "room",
+     "room": "Հյուրասենյակ",
+     "src": "marketing/instagram/assets/stock/interiors/unsplash-1618221195710-dd6b41faaea6_living-warm.jpg",
+     "crop_frac": [
+      0.36,
+      0,
+      0.7556,
+      1
+     ],
+     "frames": [
+      180,
+      269
+     ],
+     "sketch": {
+      "draw": [
+       182,
+       236
+      ]
+     },
+     "reveal": {
+      "type": "radial",
+      "origin_frac": [
+       0.66,
+       0.43
+      ],
+      "wipe": [
+       240,
+       254
+      ],
+      "colour": [
+       246,
+       262
+      ],
+      "lines_out": [
+       250,
+       266
+      ],
+      "bloom": {
+       "frames": [
+        [
+         248,
+         0,
+         "inOutSine"
+        ],
+        [
+         262,
+         1,
+         "hold"
+        ],
+        [
+         262,
+         1,
+         "inOutSine"
+        ],
+        [
+         269,
+         0.85
+        ]
+       ],
+       "points": [
+        [
+         0.66,
+         0.43,
+         0.3,
+         0.8
+        ],
+        [
+         1.05,
+         0.4,
+         0.65,
+         1.0
+        ]
+       ]
+      }
+     },
+     "camera": {
+      "scale": [
+       [
+        180,
+        1.0,
+        "linear"
+       ],
+       [
+        270,
+        1.07
+       ]
+      ],
+      "tx": [
+       [
+        180,
+        0,
+        "linear"
+       ],
+       [
+        270,
+        0
+       ]
+      ],
+      "ty": [
+       [
+        180,
+        0,
+        "linear"
+       ],
+       [
+        270,
+        6
+       ]
+      ]
+     },
+     "dims": [
+      {
+       "a": [
+        0.06,
+        0.155
+       ],
+       "b": [
+        0.94,
+        0.155
+       ],
+       "text": "4 800",
+       "off": -1
+      }
+     ],
+     "seed": 3,
+     "no_lines_rects_frac": [
+      [
+       0.0,
+       0.915,
+       1.0,
+       0.95
+      ]
+     ]
+    },
+    {
+     "id": "living_lamp",
+     "kind": "detail",
+     "room": "Հյուրասենյակ",
+     "what": "arc lamp, timber windows, palm",
+     "src": "marketing/instagram/assets/stock/interiors/unsplash-1618221195710-dd6b41faaea6_living-warm.jpg",
+     "crop_frac": [
+      0.575,
+      0.2,
+      0.8915,
+      1.0
+     ],
+     "frames": [
+      270,
+      284
+     ],
+     "camera": {
+      "scale": [
+       [
+        270,
+        1.02,
+        "linear"
+       ],
+       [
+        285,
+        1.08
+       ]
+      ],
+      "tx": [
+       [
+        270,
+        0,
+        "linear"
+       ],
+       [
+        285,
+        -10
+       ]
+      ],
+      "ty": [
+       [
+        270,
+        0,
+        "linear"
+       ],
+       [
+        285,
+        0
+       ]
+      ]
+     }
+    },
+    {
+     "id": "living_chair",
+     "kind": "detail",
+     "room": "Հյուրասենյակ",
+     "what": "leather sling chair, pampas, sofa end",
+     "src": "marketing/instagram/assets/stock/interiors/unsplash-1618221195710-dd6b41faaea6_living-warm.jpg",
+     "crop_frac": [
+      0.1,
+      0.2,
+      0.4165,
+      1.0
+     ],
+     "frames": [
+      285,
+      299
+     ],
+     "camera": {
+      "scale": [
+       [
+        285,
+        1.08,
+        "linear"
+       ],
+       [
+        300,
+        1.02
+       ]
+      ],
+      "tx": [
+       [
+        285,
+        0,
+        "linear"
+       ],
+       [
+        300,
+        10
+       ]
+      ],
+      "ty": [
+       [
+        285,
+        0,
+        "linear"
+       ],
+       [
+        300,
+        0
+       ]
+      ]
+     }
+    },
+    {
+     "id": "kitchen_wide",
+     "kind": "room",
+     "room": "Խոհանոց",
+     "src": "marketing/instagram/assets/stock/interiors/unsplash-1556911220-bff31c812dba_kitchen.jpg",
+     "crop_frac": [
+      0.13,
+      0,
+      0.5794,
+      1
+     ],
+     "frames": [
+      300,
+      359
+     ],
+     "sketch": {
+      "draw": [
+       293,
+       326
+      ]
+     },
+     "reveal": {
+      "type": "radial",
+      "origin_frac": [
+       0.5,
+       0.75
+      ],
+      "wipe": [
+       330,
+       340
+      ],
+      "colour": [
+       334,
+       346
+      ],
+      "lines_out": [
+       336,
+       350
+      ],
+      "bloom": {
+       "frames": [
+        [
+         336,
+         0,
+         "inOutSine"
+        ],
+        [
+         348,
+         0.7
+        ]
+       ],
+       "points": [
+        [
+         0.0,
+         0.25,
+         0.6,
+         0.8
+        ]
+       ]
+      }
+     },
+     "camera": {
+      "scale": [
+       [
+        300,
+        1.0,
+        "linear"
+       ],
+       [
+        360,
+        1.06
+       ]
+      ],
+      "tx": [
+       [
+        300,
+        0,
+        "linear"
+       ],
+       [
+        360,
+        0
+       ]
+      ],
+      "ty": [
+       [
+        300,
+        0,
+        "linear"
+       ],
+       [
+        360,
+        -4
+       ]
+      ]
+     },
+     "dims": [
+      {
+       "a": [
+        0.05,
+        0.11
+       ],
+       "b": [
+        0.92,
+        0.11
+       ],
+       "text": "3 600",
+       "off": -1
+      }
+     ],
+     "seed": 5,
+     "blur_rects_frac": [
+      [
+       0.075,
+       0.6,
+       0.212,
+       0.712
+      ]
+     ],
+     "blur_note": "cookbook spines (readable titles) blurred, feathered (reads as depth of field)"
+    },
+    {
+     "id": "kitchen_counter",
+     "kind": "detail",
+     "room": "Խոհանոց",
+     "what": "lemons, steel pot, marble counter",
+     "src": "marketing/instagram/assets/stock/interiors/unsplash-1556911220-bff31c812dba_kitchen.jpg",
+     "crop_frac": [
+      0.17,
+      0.3,
+      0.4846,
+      1.0
+     ],
+     "frames": [
+      360,
+      374
+     ],
+     "camera": {
+      "scale": [
+       [
+        360,
+        1.02,
+        "linear"
+       ],
+       [
+        375,
+        1.08
+       ]
+      ],
+      "tx": [
+       [
+        360,
+        0,
+        "linear"
+       ],
+       [
+        375,
+        0
+       ]
+      ],
+      "ty": [
+       [
+        360,
+        0,
+        "linear"
+       ],
+       [
+        375,
+        -8
+       ]
+      ]
+     },
+     "blur_rects_frac": [
+      [
+       0.0,
+       0.43,
+       0.172,
+       0.585
+      ]
+     ],
+     "blur_note": "cookbook spines blurred"
+    },
+    {
+     "id": "bath_wide",
+     "kind": "room",
+     "room": "Լոգարան",
+     "src": "marketing/instagram/assets/stock/interiors/unsplash-1620626011761-996317b8d101_bathroom.jpg",
+     "crop_frac": [
+      0.16,
+      0,
+      0.6606,
+      1
+     ],
+     "frames": [
+      375,
+      434
+     ],
+     "sketch": {
+      "draw": [
+       368,
+       401
+      ]
+     },
+     "reveal": {
+      "type": "radial",
+      "origin_frac": [
+       0.88,
+       0.35
+      ],
+      "wipe": [
+       405,
+       415
+      ],
+      "colour": [
+       409,
+       421
+      ],
+      "lines_out": [
+       411,
+       425
+      ],
+      "bloom": {
+       "frames": [
+        [
+         411,
+         0,
+         "inOutSine"
+        ],
+        [
+         423,
+         0.9
+        ]
+       ],
+       "points": [
+        [
+         0.88,
+         0.35,
+         0.45,
+         1.0
+        ]
+       ]
+      }
+     },
+     "camera": {
+      "scale": [
+       [
+        375,
+        1.0,
+        "linear"
+       ],
+       [
+        435,
+        1.06
+       ]
+      ],
+      "tx": [
+       [
+        375,
+        0,
+        "linear"
+       ],
+       [
+        435,
+        -6
+       ]
+      ],
+      "ty": [
+       [
+        375,
+        0,
+        "linear"
+       ],
+       [
+        435,
+        0
+       ]
+      ]
+     },
+     "dims": [
+      {
+       "a": [
+        0.07,
+        0.86
+       ],
+       "b": [
+        0.72,
+        0.86
+       ],
+       "text": "1 700",
+       "off": 1
+      }
+     ],
+     "seed": 7,
+     "line_art_override": {
+      "curves": {
+       "xdog": {
+        "sigma": 1.2,
+        "k": 1.6,
+        "p": 20,
+        "eps": 0.4,
+        "norm_sigma": 25,
+        "norm_gain": 0.12,
+        "norm_floor": 0.012
+       }
+      },
+      "note": "white-on-white room: more sensitive XDoG"
+     },
+     "no_lines_rects_frac": [
+      [
+       0.0,
+       0.0,
+       1.0,
+       0.16
+      ],
+      [
+       0.9,
+       0.08,
+       1.0,
+       0.52
+      ]
+     ]
+    },
+    {
+     "id": "bath_sink",
+     "kind": "detail",
+     "room": "Լոգարան",
+     "what": "vessel basin, wall tap, fern",
+     "src": "marketing/instagram/assets/stock/interiors/unsplash-1620626011761-996317b8d101_bathroom.jpg",
+     "crop_frac": [
+      0.5,
+      0.33,
+      0.8154,
+      0.96
+     ],
+     "frames": [
+      435,
+      449
+     ],
+     "camera": {
+      "scale": [
+       [
+        435,
+        1.02,
+        "linear"
+       ],
+       [
+        450,
+        1.08
+       ]
+      ],
+      "tx": [
+       [
+        435,
+        0,
+        "linear"
+       ],
+       [
+        450,
+        6
+       ]
+      ],
+      "ty": [
+       [
+        435,
+        0,
+        "linear"
+       ],
+       [
+        450,
+        0
+       ]
+      ]
+     }
+    },
+    {
+     "id": "bed_wide",
+     "kind": "room",
+     "room": "Ննջասենյակ",
+     "src": "marketing/instagram/assets/stock/interiors/unsplash-1600607687644-c7171b42498f_bedroom.jpg",
+     "crop_frac": [
+      0.1,
+      0,
+      0.6,
+      1
+     ],
+     "frames": [
+      450,
+      479
+     ],
+     "sketch": {
+      "draw": [
+       445,
+       463
+      ]
+     },
+     "reveal": {
+      "type": "linear",
+      "origin_frac": [
+       0.0,
+       0.5
+      ],
+      "wipe": [
+       465,
+       471
+      ],
+      "colour": [
+       467,
+       474
+      ],
+      "lines_out": [
+       467,
+       474
+      ],
+      "bloom": {
+       "frames": [
+        [
+         467,
+         0,
+         "inOutSine"
+        ],
+        [
+         475,
+         0.9
+        ]
+       ],
+       "points": [
+        [
+         0.75,
+         0.38,
+         0.45,
+         1.0
+        ]
+       ]
+      }
+     },
+     "camera": {
+      "scale": [
+       [
+        450,
+        1.0,
+        "linear"
+       ],
+       [
+        480,
+        1.05
+       ]
+      ],
+      "tx": [
+       [
+        450,
+        0,
+        "linear"
+       ],
+       [
+        480,
+        0
+       ]
+      ],
+      "ty": [
+       [
+        450,
+        0,
+        "linear"
+       ],
+       [
+        480,
+        0
+       ]
+      ]
+     },
+     "dims": [],
+     "seed": 9
+    },
+    {
+     "id": "bed_pillows",
+     "kind": "detail",
+     "room": "Ննջասենյակ",
+     "what": "linen pillows, upholstered headboard",
+     "src": "marketing/instagram/assets/stock/interiors/unsplash-1600607687644-c7171b42498f_bedroom.jpg",
+     "crop_frac": [
+      0.09,
+      0.36,
+      0.405,
+      0.99
+     ],
+     "frames": [
+      480,
+      494
+     ],
+     "camera": {
+      "scale": [
+       [
+        480,
+        1.08,
+        "linear"
+       ],
+       [
+        495,
+        1.02
+       ]
+      ],
+      "tx": [
+       [
+        480,
+        0,
+        "linear"
+       ],
+       [
+        495,
+        0
+       ]
+      ],
+      "ty": [
+       [
+        480,
+        0,
+        "linear"
+       ],
+       [
+        495,
+        6
+       ]
+      ]
+     }
+    },
+    {
+     "id": "beige_wide",
+     "kind": "room",
+     "room": "Հյուրասենյակ",
+     "src": "marketing/instagram/assets/stock/interiors/unsplash-1631679706909-1844bbd07221_living-beige.jpg",
+     "crop_frac": [
+      0.2,
+      0,
+      0.7494,
+      1
+     ],
+     "frames": [
+      495,
+      665
+     ],
+     "sketch": {
+      "draw": [
+       488,
+       523
+      ]
+     },
+     "reveal": {
+      "type": "radial",
+      "origin_frac": [
+       0.5,
+       0.4
+      ],
+      "wipe": [
+       525,
+       539
+      ],
+      "colour": [
+       531,
+       545
+      ],
+      "lines_out": [
+       535,
+       549
+      ],
+      "bloom": {
+       "frames": [
+        [
+         533,
+         0,
+         "inOutSine"
+        ],
+        [
+         549,
+         0.75
+        ]
+       ],
+       "points": [
+        [
+         1.0,
+         0.45,
+         0.5,
+         0.9
+        ],
+        [
+         0.0,
+         0.3,
+         0.5,
+         0.9
+        ]
+       ]
+      }
+     },
+     "camera": {
+      "scale": [
+       [
+        495,
+        1.0,
+        "inOutSine"
+       ],
+       [
+        666,
+        1.08
+       ]
+      ],
+      "tx": [
+       [
+        495,
+        0,
+        "inOutSine"
+       ],
+       [
+        666,
+        0
+       ]
+      ],
+      "ty": [
+       [
+        495,
+        0,
+        "inOutSine"
+       ],
+       [
+        666,
+        0
+       ]
+      ]
+     },
+     "dims": [
+      {
+       "a": [
+        0.1,
+        0.11
+       ],
+       "b": [
+        0.9,
+        0.11
+       ],
+       "text": "4 200",
+       "off": -1,
+       "at": 0.3
+      }
+     ],
+     "seed": 11,
+     "line_art_override": {
+      "circles": {
+       "r": [
+        115,
+        160
+       ],
+       "y_frac": [
+        0.2,
+        0.55
+       ],
+       "min_dist": 180,
+       "param1": 60,
+       "param2": 40,
+       "max": 2,
+       "band": 26,
+       "inner_ratio": 0.66,
+       "clear_annulus": [
+        0.5,
+        0.86
+       ],
+       "note": "two round rattan mirrors → clean circles (HoughCircles)"
+      }
+     },
+     "no_lines_rects_frac": [
+      [
+       0.0,
+       0.88,
+       1.0,
+       1.0
+      ]
+     ],
+     "blur_rects_frac": [
+      [
+       0.575,
+       0.75,
+       0.815,
+       0.805
+      ]
+     ],
+     "blur_sigma": 4.5,
+     "blur_note": "coffee-table book title blurred (soft, reads as depth of field)"
+    }
+   ],
+   "shots_rules": {
+    "cut": "hard cut at frames[0] of every shot (on the beat); sketch.draw may start BEFORE frames[0] (rooms 2–5: 5–7 frames) so the first frame after the cut already shows the guide lines (no blank paper flash); the camera wrapper of a shot is visible only inside its frames (inclusive), the final shot to 779 under the end veil",
+    "sketch": "paper #f5f5f3 + window grid (blueprint.window_grid) + line drawing drawn in over sketch.draw; gold dims draw at 55% of the window",
+    "reveal": "wipe: photo layers appear through a mask — radial (soft disc from origin_frac, radius 0 → 1.25·window diagonal, soft edge 260 px) or linear (left → right, soft edge 260 px) — eased inOutSine over reveal.wipe; grey stage: CSS filter grayscale(1) contrast(1.04) brightness(1.05) on the photo; colour: grayscale goes 1 → 0 over reveal.colour; lines: opacity 1 → 0 over reveal.lines_out (mix-blend multiply while on the photo); bloom: warm radial glows at points [fx, fy, r (fraction of window width), peak], screen blend, colour rgba(255,214,160), opacity × bloom.frames",
+    "detail": "photo only (no drawing) in full colour, 1-beat insert with its own fast push (≤ 1.08 → ≤ 1.35× source px)",
+    "drift": "all shots: micro drift dx = 2·sin(f/41), dy = 1.6·sin(f/53 + 1) px (as v1)"
+   },
+   "labels": [
+    {
+     "kind": "section",
+     "style": "section_label",
+     "text": "Վերանորոգում · Հյուրասենյակ",
+     "x": 240,
+     "y": 270,
+     "w": 770,
+     "align": "right",
+     "opacity": [
+      [
+       190,
+       0,
+       "outCubic"
+      ],
+      [
+       200,
+       1,
+       "hold"
+      ],
+      [
+       295,
+       1,
+       "inSine"
+      ],
+      [
+       300,
+       0
+      ]
+     ],
+     "translate_y": [
+      [
+       190,
+       8,
+       "outCubic"
+      ],
+      [
+       200,
+       0,
+       "hold"
+      ],
+      [
+       295,
+       0,
+       "inSine"
+      ],
+      [
+       300,
+       0
+      ]
+     ]
+    },
+    {
+     "kind": "section",
+     "style": "section_label",
+     "text": "Վերանորոգում · Խոհանոց",
+     "x": 240,
+     "y": 270,
+     "w": 770,
+     "align": "right",
+     "opacity": [
+      [
+       300,
+       0,
+       "outCubic"
+      ],
+      [
+       305,
+       1,
+       "hold"
+      ],
+      [
+       370,
+       1,
+       "inSine"
+      ],
+      [
+       375,
+       0
+      ]
+     ],
+     "translate_y": [
+      [
+       300,
+       8,
+       "outCubic"
+      ],
+      [
+       305,
+       0,
+       "hold"
+      ],
+      [
+       370,
+       0,
+       "inSine"
+      ],
+      [
+       375,
+       0
+      ]
+     ]
+    },
+    {
+     "kind": "section",
+     "style": "section_label",
+     "text": "Վերանորոգում · Լոգարան",
+     "x": 240,
+     "y": 270,
+     "w": 770,
+     "align": "right",
+     "opacity": [
+      [
+       375,
+       0,
+       "outCubic"
+      ],
+      [
+       380,
+       1,
+       "hold"
+      ],
+      [
+       445,
+       1,
+       "inSine"
+      ],
+      [
+       450,
+       0
+      ]
+     ],
+     "translate_y": [
+      [
+       375,
+       8,
+       "outCubic"
+      ],
+      [
+       380,
+       0,
+       "hold"
+      ],
+      [
+       445,
+       0,
+       "inSine"
+      ],
+      [
+       450,
+       0
+      ]
+     ]
+    },
+    {
+     "kind": "section",
+     "style": "section_label",
+     "text": "Վերանորոգում · Ննջասենյակ",
+     "x": 240,
+     "y": 270,
+     "w": 770,
+     "align": "right",
+     "opacity": [
+      [
+       450,
+       0,
+       "outCubic"
+      ],
+      [
+       455,
+       1,
+       "hold"
+      ],
+      [
+       490,
+       1,
+       "inSine"
+      ],
+      [
+       495,
+       0
+      ]
+     ],
+     "translate_y": [
+      [
+       450,
+       8,
+       "outCubic"
+      ],
+      [
+       455,
+       0,
+       "hold"
+      ],
+      [
+       490,
+       0,
+       "inSine"
+      ],
+      [
+       495,
+       0
+      ]
+     ]
+    },
+    {
+     "kind": "section",
+     "style": "section_label",
+     "text": "Վերանորոգում · Հյուրասենյակ",
+     "x": 240,
+     "y": 270,
+     "w": 770,
+     "align": "right",
+     "opacity": [
+      [
+       495,
+       0,
+       "outCubic"
+      ],
+      [
+       500,
+       1,
+       "hold"
+      ],
+      [
+       667,
+       1,
+       "inSine"
+      ],
+      [
+       672,
+       0
+      ]
+     ],
+     "translate_y": [
+      [
+       495,
+       8,
+       "outCubic"
+      ],
+      [
+       500,
+       0,
+       "hold"
+      ],
+      [
+       667,
+       0,
+       "inSine"
+      ],
+      [
+       672,
+       0
+      ]
+     ]
+    },
+    {
+     "kind": "stage",
+     "style": "stage_label",
+     "text": "Գծագիր",
+     "x": 240,
+     "y": 294,
+     "w": 770,
+     "align": "right",
+     "opacity": [
+      [
+       190,
+       0,
+       "outCubic"
+      ],
+      [
+       200,
+       1,
+       "hold"
+      ],
+      [
+       235,
+       1,
+       "inSine"
+      ],
+      [
+       240,
+       0
+      ]
+     ],
+     "translate_y": [
+      [
+       190,
+       12,
+       "outCubic"
+      ],
+      [
+       200,
+       0,
+       "hold"
+      ],
+      [
+       235,
+       0,
+       "inSine"
+      ],
+      [
+       240,
+       -8
+      ]
+     ]
+    },
+    {
+     "kind": "stage",
+     "style": "stage_label",
+     "text": "Իրականություն",
+     "x": 240,
+     "y": 294,
+     "w": 770,
+     "align": "right",
+     "opacity": [
+      [
+       240,
+       0,
+       "outCubic"
+      ],
+      [
+       245,
+       1,
+       "hold"
+      ],
+      [
+       295,
+       1,
+       "inSine"
+      ],
+      [
+       300,
+       0
+      ]
+     ],
+     "translate_y": [
+      [
+       240,
+       12,
+       "outCubic"
+      ],
+      [
+       245,
+       0,
+       "hold"
+      ],
+      [
+       295,
+       0,
+       "inSine"
+      ],
+      [
+       300,
+       -8
+      ]
+     ]
+    },
+    {
+     "kind": "stage",
+     "style": "stage_label",
+     "text": "Գծագիր",
+     "x": 240,
+     "y": 294,
+     "w": 770,
+     "align": "right",
+     "opacity": [
+      [
+       300,
+       0,
+       "outCubic"
+      ],
+      [
+       305,
+       1,
+       "hold"
+      ],
+      [
+       325,
+       1,
+       "inSine"
+      ],
+      [
+       330,
+       0
+      ]
+     ],
+     "translate_y": [
+      [
+       300,
+       12,
+       "outCubic"
+      ],
+      [
+       305,
+       0,
+       "hold"
+      ],
+      [
+       325,
+       0,
+       "inSine"
+      ],
+      [
+       330,
+       -8
+      ]
+     ]
+    },
+    {
+     "kind": "stage",
+     "style": "stage_label",
+     "text": "Իրականություն",
+     "x": 240,
+     "y": 294,
+     "w": 770,
+     "align": "right",
+     "opacity": [
+      [
+       330,
+       0,
+       "outCubic"
+      ],
+      [
+       335,
+       1,
+       "hold"
+      ],
+      [
+       370,
+       1,
+       "inSine"
+      ],
+      [
+       375,
+       0
+      ]
+     ],
+     "translate_y": [
+      [
+       330,
+       12,
+       "outCubic"
+      ],
+      [
+       335,
+       0,
+       "hold"
+      ],
+      [
+       370,
+       0,
+       "inSine"
+      ],
+      [
+       375,
+       -8
+      ]
+     ]
+    },
+    {
+     "kind": "stage",
+     "style": "stage_label",
+     "text": "Գծագիր",
+     "x": 240,
+     "y": 294,
+     "w": 770,
+     "align": "right",
+     "opacity": [
+      [
+       375,
+       0,
+       "outCubic"
+      ],
+      [
+       380,
+       1,
+       "hold"
+      ],
+      [
+       400,
+       1,
+       "inSine"
+      ],
+      [
+       405,
+       0
+      ]
+     ],
+     "translate_y": [
+      [
+       375,
+       12,
+       "outCubic"
+      ],
+      [
+       380,
+       0,
+       "hold"
+      ],
+      [
+       400,
+       0,
+       "inSine"
+      ],
+      [
+       405,
+       -8
+      ]
+     ]
+    },
+    {
+     "kind": "stage",
+     "style": "stage_label",
+     "text": "Իրականություն",
+     "x": 240,
+     "y": 294,
+     "w": 770,
+     "align": "right",
+     "opacity": [
+      [
+       405,
+       0,
+       "outCubic"
+      ],
+      [
+       410,
+       1,
+       "hold"
+      ],
+      [
+       445,
+       1,
+       "inSine"
+      ],
+      [
+       450,
+       0
+      ]
+     ],
+     "translate_y": [
+      [
+       405,
+       12,
+       "outCubic"
+      ],
+      [
+       410,
+       0,
+       "hold"
+      ],
+      [
+       445,
+       0,
+       "inSine"
+      ],
+      [
+       450,
+       -8
+      ]
+     ]
+    },
+    {
+     "kind": "stage",
+     "style": "stage_label",
+     "text": "Գծագիր",
+     "x": 240,
+     "y": 294,
+     "w": 770,
+     "align": "right",
+     "opacity": [
+      [
+       450,
+       0,
+       "outCubic"
+      ],
+      [
+       455,
+       1,
+       "hold"
+      ],
+      [
+       460,
+       1,
+       "inSine"
+      ],
+      [
+       465,
+       0
+      ]
+     ],
+     "translate_y": [
+      [
+       450,
+       12,
+       "outCubic"
+      ],
+      [
+       455,
+       0,
+       "hold"
+      ],
+      [
+       460,
+       0,
+       "inSine"
+      ],
+      [
+       465,
+       -8
+      ]
+     ]
+    },
+    {
+     "kind": "stage",
+     "style": "stage_label",
+     "text": "Իրականություն",
+     "x": 240,
+     "y": 294,
+     "w": 770,
+     "align": "right",
+     "opacity": [
+      [
+       465,
+       0,
+       "outCubic"
+      ],
+      [
+       470,
+       1,
+       "hold"
+      ],
+      [
+       490,
+       1,
+       "inSine"
+      ],
+      [
+       495,
+       0
+      ]
+     ],
+     "translate_y": [
+      [
+       465,
+       12,
+       "outCubic"
+      ],
+      [
+       470,
+       0,
+       "hold"
+      ],
+      [
+       490,
+       0,
+       "inSine"
+      ],
+      [
+       495,
+       -8
+      ]
+     ]
+    },
+    {
+     "kind": "stage",
+     "style": "stage_label",
+     "text": "Գծագիր",
+     "x": 240,
+     "y": 294,
+     "w": 770,
+     "align": "right",
+     "opacity": [
+      [
+       495,
+       0,
+       "outCubic"
+      ],
+      [
+       500,
+       1,
+       "hold"
+      ],
+      [
+       520,
+       1,
+       "inSine"
+      ],
+      [
+       525,
+       0
+      ]
+     ],
+     "translate_y": [
+      [
+       495,
+       12,
+       "outCubic"
+      ],
+      [
+       500,
+       0,
+       "hold"
+      ],
+      [
+       520,
+       0,
+       "inSine"
+      ],
+      [
+       525,
+       -8
+      ]
+     ]
+    },
+    {
+     "kind": "stage",
+     "style": "stage_label",
+     "text": "Իրականություն",
+     "x": 240,
+     "y": 294,
+     "w": 770,
+     "align": "right",
+     "opacity": [
+      [
+       525,
+       0,
+       "outCubic"
+      ],
+      [
+       530,
+       1,
+       "hold"
+      ],
+      [
+       576,
+       1,
+       "inSine"
+      ],
+      [
+       581,
+       0
+      ]
+     ],
+     "translate_y": [
+      [
+       525,
+       12,
+       "outCubic"
+      ],
+      [
+       530,
+       0,
+       "hold"
+      ],
+      [
+       576,
+       0,
+       "inSine"
+      ],
+      [
+       581,
+       -8
+      ]
+     ]
+    },
+    {
+     "kind": "stage",
+     "style": "stage_label",
+     "text": "Գծագիր",
+     "x": 240,
+     "y": 294,
+     "w": 770,
+     "align": "right",
+     "opacity": [
+      [
+       580,
+       0,
+       "outCubic"
+      ],
+      [
+       585,
+       1,
+       "hold"
+      ],
+      [
+       601,
+       1,
+       "inSine"
+      ],
+      [
+       606,
+       0
+      ]
+     ],
+     "translate_y": [
+      [
+       580,
+       12,
+       "outCubic"
+      ],
+      [
+       585,
+       0,
+       "hold"
+      ],
+      [
+       601,
+       0,
+       "inSine"
+      ],
+      [
+       606,
+       -8
+      ]
+     ]
+    },
+    {
+     "kind": "stage",
+     "style": "stage_label",
+     "text": "Գծագիր | Իրականություն",
+     "x": 240,
+     "y": 294,
+     "w": 770,
+     "align": "right",
+     "opacity": [
+      [
+       605,
+       0,
+       "outCubic"
+      ],
+      [
+       610,
+       1,
+       "hold"
+      ],
+      [
+       647,
+       1,
+       "inSine"
+      ],
+      [
+       652,
+       0
+      ]
+     ],
+     "translate_y": [
+      [
+       605,
+       12,
+       "outCubic"
+      ],
+      [
+       610,
+       0,
+       "hold"
+      ],
+      [
+       647,
+       0,
+       "inSine"
+      ],
+      [
+       652,
+       -8
+      ]
+     ]
+    },
+    {
+     "kind": "stage",
+     "style": "stage_label",
+     "text": "Իրականություն",
+     "x": 240,
+     "y": 294,
+     "w": 770,
+     "align": "right",
+     "opacity": [
+      [
+       651,
+       0,
+       "outCubic"
+      ],
+      [
+       656,
+       1,
+       "hold"
+      ],
+      [
+       667,
+       1,
+       "inSine"
+      ],
+      [
+       672,
+       0
+      ]
+     ],
+     "translate_y": [
+      [
+       651,
+       12,
+       "outCubic"
+      ],
+      [
+       656,
+       0,
+       "hold"
+      ],
+      [
+       667,
+       0,
+       "inSine"
+      ],
+      [
+       672,
+       -8
+      ]
+     ]
+    }
+   ],
+   "labels_note": "section «ՎԵՐԱՆՈՐՈԳՈՒՄ · <ROOM>» (Montserrat/Noto Sans Armenian 500 18 px, 0.24em, uppercase) + stage word «Գծագիր» / «Իրականություն» (Noto Serif Armenian 500 40 px #856727), right-aligned to x 1010, y 270/294 — same slots as R2/v1. Stage switches on the reveal beat; during the slider when the divider crosses the middle (≈580, ≈651). Labels change at hard cuts with a 5-frame rise.",
+   "indicator": {
+    "what": "= R2 indicator (x 874–1010, y 352): room k of 5 → fill k/5; slider: fill = 1 − p",
+    "steps": [
+     [
+      190,
+      0,
+      "outCubic"
+     ],
+     [
+      200,
+      0.2,
+      "hold"
+     ],
+     [
+      300,
+      0.2,
+      "outCubic"
+     ],
+     [
+      308,
+      0.4,
+      "hold"
+     ],
+     [
+      375,
+      0.4,
+      "outCubic"
+     ],
+     [
+      383,
+      0.6,
+      "hold"
+     ],
+     [
+      450,
+      0.6,
+      "outCubic"
+     ],
+     [
+      458,
+      0.8,
+      "hold"
+     ],
+     [
+      495,
+      0.8,
+      "outCubic"
+     ],
+     [
+      503,
+      1.0
+     ]
+    ],
+    "slider_from": 552
+   },
+   "slider": {
+    "p_note": "p ∈ [0,1], divider x (window-local) = 940·p. LEFT of the divider = Գծագիր (beige_wide drawing on paper + grid + dims, same camera), right = Իրականություն (photo). p = 0: photo.",
+    "p": [
+     [
+      540,
+      0,
+      "hold"
+     ],
+     [
+      570,
+      0,
+      "inOutQuart"
+     ],
+     [
+      590,
+      1,
+      "hold"
+     ],
+     [
+      600,
+      1,
+      "outCubic"
+     ],
+     [
+      620,
+      0.5,
+      "inOutSine"
+     ],
+     [
+      636,
+      0.53,
+      "inOutSine"
+     ],
+     [
+      645,
+      0.52,
+      "inOutCubic"
+     ],
+     [
+      660,
+      0
+     ]
+    ],
+    "handle_opacity": [
+     [
+      552,
+      0,
+      "outSine"
+     ],
+     [
+      560,
+      1,
+      "hold"
+     ],
+     [
+      656,
+      1,
+      "inOutSine"
+     ],
+     [
+      664,
+      0
+     ]
+    ],
+    "handle_grab": [
+     [
+      564,
+      1,
+      "outCubic"
+     ],
+     [
+      570,
+      0.88,
+      "hold"
+     ],
+     [
+      590,
+      0.88,
+      "outBack"
+     ],
+     [
+      596,
+      1,
+      "outCubic"
+     ],
+     [
+      602,
+      0.88,
+      "hold"
+     ],
+     [
+      645,
+      0.88,
+      "outBack"
+     ],
+     [
+      653,
+      1
+     ]
+    ],
+    "handle_y": 1016,
+    "chips": {
+     "opacity": [
+      [
+       612,
+       0,
+       "outCubic"
+      ],
+      [
+       622,
+       1,
+       "hold"
+      ],
+      [
+       642,
+       1,
+       "inSine"
+      ],
+      [
+       648,
+       0
+      ]
+     ],
+     "items": [
+      {
+       "text": "Գծագիր",
+       "x": 94,
+       "y": 414,
+       "align": "left"
+      },
+      {
+       "text": "Իրականություն",
+       "x_right": 986,
+       "y": 414,
+       "align": "right"
+      }
+     ]
+    },
+    "shot": "beige_wide"
+   },
+   "light_leaks": {
+    "css": "div 900x900, radial-gradient(closest-side, rgba(255,214,150,0.9), rgba(201,169,106,0.35) 45%, rgba(201,169,106,0) 100%), mix-blend-mode screen, centred (cx, cy)",
+    "events": [
+     {
+      "frame": 180,
+      "opacity": [
+       [
+        180,
+        0,
+        "outSine"
+       ],
+       [
+        188,
+        0.1,
+        "inOutSine"
+       ],
+       [
+        210,
+        0
+       ]
+      ],
+      "cx": [
+       [
+        180,
+        300,
+        "linear"
+       ],
+       [
+        210,
+        760
+       ]
+      ],
+      "cy": 1016
+     },
+     {
+      "frame": 240,
+      "opacity": [
+       [
+        238,
+        0,
+        "outSine"
+       ],
+       [
+        248,
+        0.12,
+        "inOutSine"
+       ],
+       [
+        270,
+        0
+       ]
+      ],
+      "cx": [
+       [
+        238,
+        760,
+        "linear"
+       ],
+       [
+        270,
+        420
+       ]
+      ],
+      "cy": 930
+     },
+     {
+      "frame": 330,
+      "opacity": [
+       [
+        328,
+        0,
+        "outSine"
+       ],
+       [
+        336,
+        0.09,
+        "inOutSine"
+       ],
+       [
+        356,
+        0
+       ]
+      ],
+      "cx": [
+       [
+        328,
+        200,
+        "linear"
+       ],
+       [
+        356,
+        640
+       ]
+      ],
+      "cy": 980
+     },
+     {
+      "frame": 405,
+      "opacity": [
+       [
+        403,
+        0,
+        "outSine"
+       ],
+       [
+        411,
+        0.1,
+        "inOutSine"
+       ],
+       [
+        430,
+        0
+       ]
+      ],
+      "cx": [
+       [
+        403,
+        900,
+        "linear"
+       ],
+       [
+        430,
+        560
+       ]
+      ],
+      "cy": 860
+     },
+     {
+      "frame": 525,
+      "opacity": [
+       [
+        523,
+        0,
+        "outSine"
+       ],
+       [
+        531,
+        0.1,
+        "inOutSine"
+       ],
+       [
+        552,
+        0
+       ]
+      ],
+      "cx": [
+       [
+        523,
+        300,
+        "linear"
+       ],
+       [
+        552,
+        760
+       ]
+      ],
+      "cy": 1000
+     },
+     {
+      "frame": 570,
+      "opacity": [
+       [
+        566,
+        0,
+        "outSine"
+       ],
+       [
+        574,
+        0.08,
+        "inOutSine"
+       ],
+       [
+        596,
+        0
+       ]
+      ],
+      "cx": [
+       [
+        566,
+        300,
+        "linear"
+       ],
+       [
+        596,
+        880
+       ]
+      ],
+      "cy": 1016
+     },
+     {
+      "frame": 645,
+      "opacity": [
+       [
+        641,
+        0,
+        "outSine"
+       ],
+       [
+        649,
+        0.1,
+        "inOutSine"
+       ],
+       [
+        668,
+        0
+       ]
+      ],
+      "cx": [
+       [
+        641,
+        600,
+        "linear"
+       ],
+       [
+        668,
+        200
+       ]
+      ],
+      "cy": 1016
+     }
+    ],
+    "note": "peak ≤ 0.12, only on reveals / slider"
+   },
    "cover": {
-    "what": "the idea in one still: the room split at p = 0.5 — left the blueprint drawing, right the finished room, gold divider + handle in the middle; chips «ԳԾԱԳԻՐ» / «ԱՐԴՅՈՒՆՔ», section «ՎԵՐԱՆՈՐՈԳՈՒՄ», stage «Գծագիր | Արդյունք», corner logo, blueprint around the window",
+    "what": "the idea in one still: final room split at p = 0.5 — left the architect drawing, right the real photo, gold divider + handle; chips «ԳԾԱԳԻՐ» / «ԻՐԱԿԱՆՈՒԹՅՈՒՆ», section «ՎԵՐԱՆՈՐՈԳՈՒՄ · ՀՅՈՒՐԱՍԵՆՅԱԿ», stage «Գծագիր | Իրականություն», corner logo, blueprint around the window",
     "base_frame_index": 625,
-    "stage_text": "Գծագիր | Արդյունք",
+    "stage_text": "Գծագիր | Իրականություն",
     "output": "R3_cover.png → R3_cover.jpg (q92)",
     "grid_check": "profile grid 3:4 (y 240–1680) contains logo, labels and the whole window"
    },
@@ -1968,32 +3105,82 @@
      {
       "f": 180,
       "s": 6.0,
-      "event": "DOWNBEAT — music starts: the logo's gold piece opens the blueprint, lines draw"
+      "event": "DOWNBEAT — music starts: gold piece opens the paper, living-room drawing draws in"
+     },
+     {
+      "f": 240,
+      "s": 8.0,
+      "event": "reveal 1 — living room materializes from the lamp light"
      },
      {
       "f": 270,
       "s": 9.0,
-      "event": "Պատեր — plaster wipes (270/285/300/315)"
+      "event": "insert (lamp)"
+     },
+     {
+      "f": 285,
+      "s": 9.5,
+      "event": "insert (chair)"
+     },
+     {
+      "f": 300,
+      "s": 10.0,
+      "event": "cut: kitchen drawing"
      },
      {
       "f": 330,
       "s": 11.0,
-      "event": "Հատակ — boards laid row by row"
+      "event": "reveal 2"
      },
      {
-      "f": 390,
-      "s": 13.0,
-      "event": "Լույս — LED 390, 405, cove + window 420 (accent)"
+      "f": 360,
+      "s": 12.0,
+      "event": "insert (counter)"
+     },
+     {
+      "f": 375,
+      "s": 12.5,
+      "event": "cut: bathroom drawing"
+     },
+     {
+      "f": 405,
+      "s": 13.5,
+      "event": "reveal 3"
+     },
+     {
+      "f": 435,
+      "s": 14.5,
+      "event": "insert (basin)"
      },
      {
       "f": 450,
       "s": 15.0,
-      "event": "Կահավորում — one object per beat 450…525"
+      "event": "montage: bedroom drawing"
+     },
+     {
+      "f": 465,
+      "s": 15.5,
+      "event": "bedroom reality"
+     },
+     {
+      "f": 480,
+      "s": 16.0,
+      "event": "insert (pillows)"
+     },
+     {
+      "f": 495,
+      "s": 16.5,
+      "event": "cut: final living-room drawing"
+     },
+     {
+      "f": 525,
+      "s": 17.5,
+      "event": "reveal 5"
      },
      {
       "f": 570,
       "s": 19.0,
-      "event": "sweep back to the drawing"
+      "event": "slider sweeps back to the drawing"
      },
      {
       "f": 600,
@@ -2003,7 +3190,7 @@
      {
       "f": 645,
       "s": 21.5,
-      "event": "release → finished room (biggest accent)"
+      "event": "release → reality (biggest accent)"
      },
      {
       "f": 666,
@@ -2016,19 +3203,21 @@
       "event": "loop point"
      }
     ],
-    "mood": "In-app track by MOOD, not by name: modern minimal / architectural, warm, ~120 BPM, felt piano or soft pluck, no vocals, no EDM drop. Start at 6.0 s.",
+    "mood": "In-app track by MOOD, not by name: modern minimal / architectural, warm, ~120 BPM with a clear pulse (cuts land on beats), felt piano or soft pluck + light percussion, no vocals, no EDM drop. Start at 6.0 s.",
     "music_start_s": 6.0
    },
    "checks": [
     "ffprobe: 1080x1920, 30 fps, 780 frames, 26.000 s, yuv420p, AAC (intro sound 0–6.0 s, then silence)",
     "f0–179 = L02 v4 frames (rendered by render_l02_frames.js)",
     "No text in f0–189; no hook, no CTA, no @handle; end card = logo, services line, garon.am",
-    "Labels inside x 240–1010, y 262–360; nothing important in y > 1500 (only floor boards)",
-    "No photo, no stock, no AI image after f179 — everything is SVG drawn by the renderer",
+    "Labels inside x 240–1010, y 262–360",
+    "Photos: only the 5 licensed Unsplash interiors (CREDITS.md); no people, no readable brands; nothing called «մեր աշխատանքը»",
+    "Every crop ≤ 1.35× source pixels at max camera scale (prep manifest)",
+    "Line drawings: clean lines, no texture noise (review <id>_lines.png with --debug)",
     "Stage label matches the divider side (switch at p = 0.5)",
     "f779 = paper + end card (clean loop)"
    ],
-   "alt_hy": "Կարճ անիմացիա բաց ֆոնի վրա։ Ճարտարապետական ցանցի վրա կառուցվում է GARON նշանը, և նրա ոսկեգույն մասը բացում է գծագրի թերթը։ Բարակ մուգ գծերով գծվում է սենյակ՝ պատեր, պատուհան, դուռ, առաստաղ, չափային գծեր։ Հետո փուլ առ փուլ. պատերը ծեփվում են տաք սպիտակով, հատակին շարք առ շարք դրվում են կաղնու տախտակներ, վառվում են առաստաղի գծային լույսերը և պատուհանից ընկնում է արևի լույսը, հայտնվում են գորգ, բազմոց, սուրճի սեղան, ձիթենի, նկար և հատակի լամպ։ Ոսկեգույն սահիչը ցույց է տալիս գծագիրը և պատրաստի սենյակը կողք կողքի։ Վերջին կադրում՝ լոգոն, «Լողավազաններ · Տներ · Վերանորոգում» և garon.am։"
+   "alt_hy": "Կարճ տեսանյութ բաց ֆոնի վրա։ Ճարտարապետական ցանցի վրա կառուցվում է GARON նշանը, և նրա ոսկեգույն մասը բացում է թղթի թերթը։ Բարակ մատիտային գծերով գծվում է հյուրասենյակի ճարտարապետական գծագիրը, հետո լամպի լույսից «նյութականանում» է իրական սենյակը՝ նախ մոխրագույն, հետո գունավոր։ Արագ կադրեր՝ նույն սկզբունքով խոհանոց, լոգարան, ննջասենյակ և մեկ այլ հյուրասենյակ, դետալներ՝ լամպ, մարմարե սեղան, լվացարան, բարձեր։ Ոսկեգույն սահիչը ցույց է տալիս գծագիրը և իրական սենյակը կողք կողքի։ Ինտերիերները նկարազարդող են (Unsplash), ոչ GARON-ի նախագծեր։ Վերջին կադրում՝ լոգոն, «Լողավազաններ · Տներ · Վերանորոգում» և garon.am։"
   }
  }
 }
