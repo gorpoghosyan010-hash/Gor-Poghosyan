@@ -27,8 +27,9 @@ fi
 (cd "$ROOT" && NODE_PATH=$(npm root -g) node "$HERE/overlays.js" "$ROOT" "$WORK/ov")
 
 # compositing
-"$PY" "$HERE/compose.py" "$R" "$WORK/intro" "$WORK/ov" "$WORK/comp" --step "$STEP"
-if [ "$STEP" != 1 ]; then
+[ "${SKIP_COMPOSE:-0}" = 1 ] || "$PY" "$HERE/compose.py" "$R" "$WORK/intro" "$WORK/ov" "$WORK/comp" --step "$STEP"
+if [ "${SKIP_COMPOSE:-0}" = 1 ]; then :
+elif [ "$STEP" != 1 ]; then
   ffmpeg -y -loglevel error -i "$WORK/comp/room.mp4" -vf "minterpolate=fps=30:mi_mode=mci:mc_mode=aobmc:me_mode=bidir:vsbmc=1" \
     -c:v libx264 -crf 12 -preset medium -pix_fmt yuv420p "$WORK/comp/room30.mp4"
 else cp "$WORK/comp/room.mp4" "$WORK/comp/room30.mp4"; fi
