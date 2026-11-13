@@ -29,7 +29,7 @@ while True:
     k += 1
 fo = int(1.2 * sr)
 out_y[-fo:] *= np.linspace(1, 0, fo)[:, None]
-pcm = (np.clip(out_y, -1, 1) * 32767).astype(np.int16)
+pcm = (np.clip(out_y * 0.89, -1, 1) * 32767).astype(np.int16)
 with wave.open(out, 'wb') as w:
     w.setnchannels(ch); w.setsampwidth(2); w.setframerate(sr); w.writeframes(pcm.tobytes())
 print('beat preview', out, round(dur, 3), 's, bars', k)
