@@ -6,7 +6,7 @@ export const SITE_NAME = 'GARON Construction';
 // Հրապարակված հասցեն՝ NEXT_PUBLIC_SITE_URL փոփոխականով (Vercel-ում՝ ավտոմատ)
 export const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL ||
-  (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : 'http://localhost:3000');
+  (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : 'https://garon.am');
 
 type M = { title: string; description: string };
 

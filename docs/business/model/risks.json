@@ -1,0 +1,511 @@
+[
+ {
+  "id": "R01",
+  "name": "Լիդերի և պայմանագրերի պակաս (նոր բրենդ՝ առանց պորտֆոլիոյի և կարծիքների)",
+  "category": "demand",
+  "segments": [
+   "renovation",
+   "houses",
+   "pools"
+  ],
+  "annual_probability": 0.55,
+  "impact_amd_low": 30000000,
+  "impact_amd_high": 100000000,
+  "impact_type": "revenue",
+  "mitigated_probability": 0.4,
+  "mitigated_impact_factor": 0.6,
+  "mitigation_cost_amd": 1500000
+ },
+ {
+  "id": "R02",
+  "name": "Չստուգվող պնդումներ կայքում («25+ տարի», «50+ լողավազան», «50+ տուն»)",
+  "category": "demand",
+  "segments": [
+   "renovation",
+   "houses",
+   "pools",
+   "public"
+  ],
+  "annual_probability": 0.4,
+  "impact_amd_low": 10000000,
+  "impact_amd_high": 40000000,
+  "impact_type": "revenue",
+  "mitigated_probability": 0.03,
+  "mitigated_impact_factor": 0.3,
+  "mitigation_cost_amd": 100000
+ },
+ {
+  "id": "R03",
+  "name": "Ինքնարժեքի թերագնահատում ֆիքսված տողային նախահաշվում",
+  "category": "pricing_margin",
+  "segments": [
+   "renovation",
+   "houses",
+   "pools"
+  ],
+  "annual_probability": 0.6,
+  "impact_amd_low": 5000000,
+  "impact_amd_high": 25000000,
+  "impact_type": "cost",
+  "mitigated_probability": 0.35,
+  "mitigated_impact_factor": 0.5,
+  "mitigation_cost_amd": 1500000
+ },
+ {
+  "id": "R04",
+  "name": "Շինանյութերի գնաճ ֆիքսված գնով պայմանագրերում",
+  "category": "pricing_margin",
+  "segments": [
+   "renovation",
+   "houses",
+   "pools",
+   "public"
+  ],
+  "annual_probability": 0.3,
+  "impact_amd_low": 2,
+  "impact_amd_high": 5,
+  "impact_type": "margin_pct",
+  "mitigated_probability": 0.2,
+  "mitigated_impact_factor": 0.4,
+  "mitigation_cost_amd": 500000
+ },
+ {
+  "id": "R05",
+  "name": "Աշխատուժի թանկացում",
+  "category": "pricing_margin",
+  "segments": [
+   "renovation",
+   "houses",
+   "pools",
+   "public"
+  ],
+  "annual_probability": 0.5,
+  "impact_amd_low": 1.5,
+  "impact_amd_high": 4,
+  "impact_type": "margin_pct",
+  "mitigated_probability": 0.35,
+  "mitigated_impact_factor": 0.6,
+  "mitigation_cost_amd": 1000000
+ },
+ {
+  "id": "R06",
+  "name": "Գնային պատերազմ վերանորոգումում",
+  "category": "pricing_margin",
+  "segments": [
+   "renovation"
+  ],
+  "annual_probability": 0.5,
+  "impact_amd_low": 3,
+  "impact_amd_high": 8,
+  "impact_type": "margin_pct",
+  "mitigated_probability": 0.35,
+  "mitigated_impact_factor": 0.6,
+  "mitigation_cost_amd": 300000
+ },
+ {
+  "id": "R07",
+  "name": "ԱԱՀ/հարկային ռեժիմը հաշվարկված չէ գնի մեջ",
+  "category": "pricing_margin",
+  "segments": [
+   "renovation",
+   "houses",
+   "pools",
+   "public"
+  ],
+  "annual_probability": 0.25,
+  "impact_amd_low": 5,
+  "impact_amd_high": 16,
+  "impact_type": "margin_pct",
+  "mitigated_probability": 0.02,
+  "mitigated_impact_factor": 0.3,
+  "mitigation_cost_amd": 300000
+ },
+ {
+  "id": "R08",
+  "name": "Երաշխիքային պահանջները գերազանցում են պահուստը",
+  "category": "pricing_margin",
+  "segments": [
+   "renovation",
+   "houses",
+   "pools"
+  ],
+  "annual_probability": 0.15,
+  "impact_amd_low": 1000000,
+  "impact_amd_high": 8000000,
+  "impact_type": "cost",
+  "mitigated_probability": 0.08,
+  "mitigated_impact_factor": 0.6,
+  "mitigation_cost_amd": 400000
+ },
+ {
+  "id": "R09",
+  "name": "Անբավարար սկզբնական կապիտալ (թերկապիտալացում)",
+  "category": "cash_flow",
+  "segments": [
+   "renovation",
+   "houses",
+   "pools",
+   "public"
+  ],
+  "annual_probability": 0.5,
+  "impact_amd_low": 30000000,
+  "impact_amd_high": 120000000,
+  "impact_type": "revenue",
+  "mitigated_probability": 0.2,
+  "mitigated_impact_factor": 0.5,
+  "mitigation_cost_amd": 1500000
+ },
+ {
+  "id": "R10",
+  "name": "Կանխիկի ճեղք փուլային վճարումներից (1–3 ամիս)",
+  "category": "cash_flow",
+  "segments": [
+   "renovation",
+   "houses",
+   "pools"
+  ],
+  "annual_probability": 0.45,
+  "impact_amd_low": 8000000,
+  "impact_amd_high": 25000000,
+  "impact_type": "cash_delay_months",
+  "mitigated_probability": 0.2,
+  "mitigated_impact_factor": 0.5,
+  "mitigation_cost_amd": 1000000
+ },
+ {
+  "id": "R11",
+  "name": "Մասնավոր հաճախորդի չվճարում կամ վեճ",
+  "category": "cash_flow",
+  "segments": [
+   "renovation",
+   "houses",
+   "pools"
+  ],
+  "annual_probability": 0.3,
+  "impact_amd_low": 1000000,
+  "impact_amd_high": 8000000,
+  "impact_type": "cost",
+  "mitigated_probability": 0.15,
+  "mitigated_impact_factor": 0.5,
+  "mitigation_cost_amd": 500000
+ },
+ {
+  "id": "R12",
+  "name": "Հանրային պատվիրատուի վճարման ուշացում (2–6 ամիս)",
+  "category": "cash_flow",
+  "segments": [
+   "public"
+  ],
+  "annual_probability": 0.5,
+  "impact_amd_low": 15000000,
+  "impact_amd_high": 50000000,
+  "impact_type": "cash_delay_months",
+  "mitigated_probability": 0.35,
+  "mitigated_impact_factor": 0.6,
+  "mitigation_cost_amd": 1000000
+ },
+ {
+  "id": "R13",
+  "name": "Կատարման 10% և հայտի ապահովում՝ կանխիկ գրավով (6–12 ամիս)",
+  "category": "cash_flow",
+  "segments": [
+   "public"
+  ],
+  "annual_probability": 0.75,
+  "impact_amd_low": 5000000,
+  "impact_amd_high": 15000000,
+  "impact_type": "cash_delay_months",
+  "mitigated_probability": 0.4,
+  "mitigated_impact_factor": 0.5,
+  "mitigation_cost_amd": 300000
+ },
+ {
+  "id": "R14",
+  "name": "Ժամկետների խախտում (մեր, ենթակապալառուի կամ մատակարարի պատճառով)",
+  "category": "operations",
+  "segments": [
+   "renovation",
+   "houses",
+   "pools",
+   "public"
+  ],
+  "annual_probability": 0.55,
+  "impact_amd_low": 1000000,
+  "impact_amd_high": 6000000,
+  "impact_type": "cost",
+  "mitigated_probability": 0.3,
+  "mitigated_impact_factor": 0.6,
+  "mitigation_cost_amd": 300000
+ },
+ {
+  "id": "R15",
+  "name": "Վերամշակում և ենթակապալառուների անորակ աշխատանք",
+  "category": "operations",
+  "segments": [
+   "renovation",
+   "houses",
+   "pools",
+   "public"
+  ],
+  "annual_probability": 0.5,
+  "impact_amd_low": 1000000,
+  "impact_amd_high": 8000000,
+  "impact_type": "cost",
+  "mitigated_probability": 0.25,
+  "mitigated_impact_factor": 0.6,
+  "mitigation_cost_amd": 1500000
+ },
+ {
+  "id": "R16",
+  "name": "Առաջին բրիգադի հավաքագրում և աշխատուժի պակաս",
+  "category": "operations",
+  "segments": [
+   "renovation",
+   "houses",
+   "pools",
+   "public"
+  ],
+  "annual_probability": 0.5,
+  "impact_amd_low": 20000000,
+  "impact_amd_high": 60000000,
+  "impact_type": "revenue",
+  "mitigated_probability": 0.3,
+  "mitigated_impact_factor": 0.6,
+  "mitigation_cost_amd": 2000000
+ },
+ {
+  "id": "R17",
+  "name": "Հիմնադրից (մեկ անձից) կախվածություն",
+  "category": "operations",
+  "segments": [
+   "renovation",
+   "houses",
+   "pools",
+   "public"
+  ],
+  "annual_probability": 0.2,
+  "impact_amd_low": 20000000,
+  "impact_amd_high": 70000000,
+  "impact_type": "revenue",
+  "mitigated_probability": 0.12,
+  "mitigated_impact_factor": 0.5,
+  "mitigation_cost_amd": 800000
+ },
+ {
+  "id": "R18",
+  "name": "Լիցենզիայի ստացման ուշացում կամ ոչ բավարար դաս/տեսակներ",
+  "category": "legal_licensing",
+  "segments": [
+   "houses",
+   "pools",
+   "public"
+  ],
+  "annual_probability": 0.45,
+  "impact_amd_low": 20000000,
+  "impact_amd_high": 80000000,
+  "impact_type": "revenue",
+  "mitigated_probability": 0.15,
+  "mitigated_impact_factor": 0.5,
+  "mitigation_cost_amd": 2000000
+ },
+ {
+  "id": "R19",
+  "name": "Թույլտվությունների ուշացում (2–4 ամիս)",
+  "category": "legal_licensing",
+  "segments": [
+   "houses",
+   "pools"
+  ],
+  "annual_probability": 0.3,
+  "impact_amd_low": 10000000,
+  "impact_amd_high": 30000000,
+  "impact_type": "cash_delay_months",
+  "mitigated_probability": 0.15,
+  "mitigated_impact_factor": 0.6,
+  "mitigation_cost_amd": 500000
+ },
+ {
+  "id": "R20",
+  "name": "Լիցենզիայի կասեցում և «սև ցուցակ»",
+  "category": "legal_licensing",
+  "segments": [
+   "renovation",
+   "houses",
+   "pools",
+   "public"
+  ],
+  "annual_probability": 0.02,
+  "impact_amd_low": 100000000,
+  "impact_amd_high": 300000000,
+  "impact_type": "revenue",
+  "mitigated_probability": 0.01,
+  "mitigated_impact_factor": 0.7,
+  "mitigation_cost_amd": 1000000
+ },
+ {
+  "id": "R21",
+  "name": "Չի հաջողվում մասնակցել կամ հաղթել հանրային մրցույթներում",
+  "category": "public_tender",
+  "segments": [
+   "public"
+  ],
+  "annual_probability": 0.7,
+  "impact_amd_low": 40000000,
+  "impact_amd_high": 100000000,
+  "impact_type": "revenue",
+  "mitigated_probability": 0.5,
+  "mitigated_impact_factor": 0.6,
+  "mitigation_cost_amd": 800000
+ },
+ {
+  "id": "R22",
+  "name": "Տույժեր և երաշխիքի գանձում հանրային պայմանագրում",
+  "category": "public_tender",
+  "segments": [
+   "public"
+  ],
+  "annual_probability": 0.15,
+  "impact_amd_low": 3000000,
+  "impact_amd_high": 15000000,
+  "impact_type": "cost",
+  "mitigated_probability": 0.08,
+  "mitigated_impact_factor": 0.6,
+  "mitigation_cost_amd": 500000
+ },
+ {
+  "id": "R23",
+  "name": "Դժբախտ պատահար աշխատավայրում",
+  "category": "safety_seismic",
+  "segments": [
+   "renovation",
+   "houses",
+   "pools",
+   "public"
+  ],
+  "annual_probability": 0.07,
+  "impact_amd_low": 3000000,
+  "impact_amd_high": 30000000,
+  "impact_type": "cost",
+  "mitigated_probability": 0.03,
+  "mitigated_impact_factor": 0.5,
+  "mitigation_cost_amd": 1300000
+ },
+ {
+  "id": "R24",
+  "name": "Կոնստրուկտիվ ձախողում / սեյսմիկ անհամապատասխանություն",
+  "category": "safety_seismic",
+  "segments": [
+   "houses",
+   "pools",
+   "public"
+  ],
+  "annual_probability": 0.015,
+  "impact_amd_low": 30000000,
+  "impact_amd_high": 150000000,
+  "impact_type": "cost",
+  "mitigated_probability": 0.005,
+  "mitigated_impact_factor": 0.6,
+  "mitigation_cost_amd": 2000000
+ },
+ {
+  "id": "R25",
+  "name": "Երրորդ անձանց վնաս վերանորոգման ժամանակ (հարևանի հեղեղում, կրող պատ)",
+  "category": "safety_seismic",
+  "segments": [
+   "renovation"
+  ],
+  "annual_probability": 0.2,
+  "impact_amd_low": 500000,
+  "impact_amd_high": 6000000,
+  "impact_type": "cost",
+  "mitigated_probability": 0.1,
+  "mitigated_impact_factor": 0.4,
+  "mitigation_cost_amd": 500000
+ },
+ {
+  "id": "R26",
+  "name": "Փոխարժեք և ներմուծվող նյութեր (USD/EUR/RUB vs AMD)",
+  "category": "supplier_fx",
+  "segments": [
+   "renovation",
+   "houses",
+   "pools"
+  ],
+  "annual_probability": 0.12,
+  "impact_amd_low": 1.5,
+  "impact_amd_high": 5,
+  "impact_type": "margin_pct",
+  "mitigated_probability": 0.12,
+  "mitigated_impact_factor": 0.3,
+  "mitigation_cost_amd": 100000
+ },
+ {
+  "id": "R27",
+  "name": "Բացասական կարծիք կամ հրապարակային բողոք",
+  "category": "reputation",
+  "segments": [
+   "renovation",
+   "houses",
+   "pools"
+  ],
+  "annual_probability": 0.35,
+  "impact_amd_low": 5000000,
+  "impact_amd_high": 35000000,
+  "impact_type": "revenue",
+  "mitigated_probability": 0.2,
+  "mitigated_impact_factor": 0.5,
+  "mitigation_cost_amd": 300000
+ },
+ {
+  "id": "R28",
+  "name": "Պահանջարկի մակրո անկում (տրանսֆերտներ, սփյուռք, ներքին շուկա)",
+  "category": "macro_geopolitics",
+  "segments": [
+   "renovation",
+   "houses",
+   "pools"
+  ],
+  "annual_probability": 0.2,
+  "impact_amd_low": 20000000,
+  "impact_amd_high": 80000000,
+  "impact_type": "revenue",
+  "mitigated_probability": 0.2,
+  "mitigated_impact_factor": 0.7,
+  "mitigation_cost_amd": 200000
+ },
+ {
+  "id": "R29",
+  "name": "Տարածաշրջանային անկայունություն / աշխարհաքաղաքական ցնցում",
+  "category": "macro_geopolitics",
+  "segments": [
+   "renovation",
+   "houses",
+   "pools",
+   "public"
+  ],
+  "annual_probability": 0.1,
+  "impact_amd_low": 30000000,
+  "impact_amd_high": 120000000,
+  "impact_type": "revenue",
+  "mitigated_probability": 0.1,
+  "mitigated_impact_factor": 0.7,
+  "mitigation_cost_amd": 200000
+ },
+ {
+  "id": "R30",
+  "name": "Սեզոնայնություն և եղանակ (ձմեռային բաց, սառնամանիք, անձրևներ)",
+  "category": "seasonality_weather",
+  "segments": [
+   "houses",
+   "pools",
+   "public"
+  ],
+  "annual_probability": 0.8,
+  "impact_amd_low": 3000000,
+  "impact_amd_high": 10000000,
+  "impact_type": "cost",
+  "mitigated_probability": 0.6,
+  "mitigated_impact_factor": 0.5,
+  "mitigation_cost_amd": 1500000
+ }
+]

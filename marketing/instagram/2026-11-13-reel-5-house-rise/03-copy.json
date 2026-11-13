@@ -1,0 +1,22 @@
+{
+  "R5": {
+    "type": "reel",
+    "publish_date": "TBD (owner)",
+    "status": "draft (test) — needs owner approval",
+    "format": "1080×1920, ~23.4 s, 30 fps, H.264; audio track = digital silence (owner adds a 125 BPM song in Instagram). Cuts on a 125.25 BPM grid from t=0.",
+    "scenes": [
+      { "t": "0-1.9", "asset": "Հիմքի իրական նկարը (դատարկ հողամաս, հիմքի կաղապարամած), դանդաղ մոտեցում", "text": "Տուն · Սկիզբ" },
+      { "t": "1.9-3.8", "asset": "Կապույտ լազերային նշագծում՝ կաղապարամածի վրա, անկյուններից վեր, ապագա տան ուրվագիծը", "text": "" },
+      { "t": "3.8-6.7", "asset": "Տունը «բարձրանում է» հարկ առ հարկ (կոնստրուկտիվի իրական նկարը), կադրը սահուն անցնում է կոնստրուկտիվի նկարին", "text": "Տուն · Ընթացք" },
+      { "t": "6.7-9.6", "asset": "Լազերային գծեր սալերի ու բացվածքների վրայով, ճակատը գոտի առ գոտի դառնում է պատրաստի տրավերտինե ճակատ (ցերեկային իրական նկար)", "text": "Տուն · Արդյունք (9.6 վրկ-ից)" },
+      { "t": "10.5-11.5", "asset": "Մթնշաղ. երկինքը մթնում է, լազերները անցնում են LED գծերով", "text": "" },
+      { "t": "11.5-14.4", "asset": "Լույսերը միանում են (kick-ի վրա) — պատրաստի տունը գիշերը, դանդաղ մոտեցում", "text": "" },
+      { "t": "14.4-23.4", "asset": "GARON լոգոյի կառուցում + վերջնական կադր", "text": "Լողավազաններ · Տներ · Վերանորոգում · garon.am" }
+    ],
+    "caption_hy": "Հիմքից՝ պատրաստի տուն։\n\nՍա GARON-ի կառուցած իրական տունն է, և բոլոր նկարները իրական են՝ դատարկ հողամասն ու հիմքի կաղապարամածը, կոնստրուկտիվը, պատրաստի տունը ցերեկը և գիշերը։\n\nԿապույտ գծերը և նկարների միջև «աճելու» անցումը վիզուալ էֆեկտ են, որ ցույց տանք ճանապարհը մեկ կադրում։\n\nՏների կառուցում՝ հիմքից մինչև արդյունք — GARON Construction. garon.am",
+    "caption_ru": "От фундамента — к готовому дому.\n\nЭто реальный дом, построенный GARON, и все фотографии настоящие: пустой участок с опалубкой фундамента, каркас, готовый дом днём и ночью.\n\nСиние линии и «вырастание» дома между снимками — визуальный эффект, чтобы показать весь путь в одном кадре.\n\nСтроительство домов — от фундамента до результата. GARON Construction. garon.am",
+    "caption_en": "From foundation to finished home.\n\nThis is a real house built by GARON, and every photo is real: the empty plot with the foundation formwork, the concrete frame, and the finished house by day and by night.\n\nThe blue lines and the way the house \"grows\" between the photos are a visual effect, to show the whole journey in one shot.\n\nHouse construction from foundation to result by GARON Construction. garon.am",
+    "hashtags": ["#տուն", "#շինարարություն", "#строительстводомов", "#Yerevan", "#GARONConstruction"],
+    "notes": "No hook text, no CTA, no @handle on screen (owner-preferences.md). Keep the caption line that the lines/transition are a visual effect; the photos are GARON's own (house-A). The day photo's sky is continued upward a little (framing) and the ground clutter is kept to the bottom edge."
+  }
+}

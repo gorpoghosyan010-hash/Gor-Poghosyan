@@ -22,12 +22,13 @@ export const footer = {
 
 export const home = {
   hy: {
-    heroEyebrow: 'GARON CONSTRUCTION · 25+ ՏԱՐԻ',
+    heroEyebrow: 'GARON CONSTRUCTION · ԵՐԵՎԱՆ',
     heroTitle1: 'Կառուցում ենք', heroTitle2: 'ամուր հիմքեր, երկար կյանք։',
     heroLead: 'Ժամանակակից, հուսալի և երկարատև շինարարական լուծումներ՝ նախագծումից մինչև ամբողջական իրականացում։',
     viewWork: 'Դիտել աշխատանքները ↗', startProject: 'Սկսել նախագիծը →',
     heroSig1: 'ԳԱՂԱՓԱՐՆԵՐ / ԿԱՌՈՒՅՑՆԵՐ / ԻՐԱԿԱՆ ԱՐԴՅՈՒՆՔ', heroSig2: 'ԵՐԵՎԱՆ · ՀԱՅԱՍՏԱՆ',
-    trust1Label: 'տարի փորձ', trust2Label: 'լողավազանների նախագիծ', trust3Label: 'բնակելի տուն',
+    trust1Value: 'Լողավազաններ', trust2Value: 'Տներ', trust3Value: 'Վերանորոգում',
+    trust1Label: 'նախագծում և կառուցում', trust2Label: 'կառուցում՝ հիմքից մինչև բանալի', trust3Label: 'բնակարաններ և տներ',
     philosophyEyebrow: 'GARON / ՓԻԼԻՍՈՓԱՅՈՒԹՅՈՒՆ',
     philosophyTitle1: 'Շինարարությունը', philosophyTitle2: 'միայն պատեր չէ։',
     philosophyText: 'Մենք կառուցում ենք այնպիսի արդյունք, որը պետք է լավ տեսք ունենա այսօր և ճիշտ ծառայի տարիներ անց։ Այդ պատճառով յուրաքանչյուր նախագիծ դիտարկում ենք որպես ամբողջական համակարգ՝ նյութերից ու կառուցվածքից մինչև մանրուքներ և վերջնական միջավայր։',
@@ -55,12 +56,13 @@ export const home = {
     calcTeaserCta: 'Բացել հաշվիչը ↗'
   },
   en: {
-    heroEyebrow: 'GARON CONSTRUCTION · 25+ YEARS',
+    heroEyebrow: 'GARON CONSTRUCTION · YEREVAN',
     heroTitle1: 'We Build', heroTitle2: 'solid foundations, lasting life.',
     heroLead: 'Modern, reliable and durable construction solutions — from design to full completion.',
     viewWork: 'View Our Work ↗', startProject: 'Start a Project →',
     heroSig1: 'IDEAS / STRUCTURES / REAL IMPACT', heroSig2: 'YEREVAN · ARMENIA',
-    trust1Label: 'years of experience', trust2Label: 'pool projects', trust3Label: 'residential homes',
+    trust1Value: 'Pools', trust2Value: 'Houses', trust3Value: 'Renovation',
+    trust1Label: 'design and construction', trust2Label: 'from foundation to keys', trust3Label: 'apartments and houses',
     philosophyEyebrow: 'GARON / PHILOSOPHY',
     philosophyTitle1: 'Construction is', philosophyTitle2: 'more than just walls.',
     philosophyText: 'We build results that need to look good today and serve their purpose correctly for years to come. That is why we treat every project as a complete system — from materials and structure to the smallest details and the final environment.',
@@ -88,12 +90,13 @@ export const home = {
     calcTeaserCta: 'Open the Calculator ↗'
   },
   ru: {
-    heroEyebrow: 'GARON CONSTRUCTION · 25+ ЛЕТ',
+    heroEyebrow: 'GARON CONSTRUCTION · ЕРЕВАН',
     heroTitle1: 'Мы строим', heroTitle2: 'прочный фундамент, долгую жизнь.',
     heroLead: 'Современные, надёжные и долговечные строительные решения — от проектирования до полной сдачи объекта.',
     viewWork: 'Смотреть работы ↗', startProject: 'Начать проект →',
     heroSig1: 'ИДЕИ / КОНСТРУКЦИИ / РЕАЛЬНЫЙ РЕЗУЛЬТАТ', heroSig2: 'ЕРЕВАН · АРМЕНИЯ',
-    trust1Label: 'лет опыта', trust2Label: 'проектов бассейнов', trust3Label: 'жилых домов',
+    trust1Value: 'Бассейны', trust2Value: 'Дома', trust3Value: 'Ремонт',
+    trust1Label: 'проектирование и строительство', trust2Label: 'от фундамента до ключей', trust3Label: 'квартиры и дома',
     philosophyEyebrow: 'GARON / ФИЛОСОФИЯ',
     philosophyTitle1: 'Строительство —', philosophyTitle2: 'это не только стены.',
     philosophyText: 'Мы создаём результат, который должен хорошо выглядеть сегодня и правильно служить долгие годы. Поэтому каждый проект мы рассматриваем как единую систему — от материалов и конструкции до мелких деталей и итоговой среды.',
@@ -125,7 +128,7 @@ export const home = {
 export const about = {
   hy: {
     eyebrow: 'GARON-Ի ՄԱՍԻՆ',
-    title1: '25+ տարի', title2: 'կառուցում ենք վստահություն։',
+    title1: 'Կառուցում ենք', title2: 'վստահություն։',
     lead: 'GARON Construction-ի ճանապարհը սկսվել է լողավազանների կառուցումից և տարիների ընթացքում վերածվել է բազմաոլորտ շինարարական փորձի։',
     pathEyebrow: 'ՄԵՐ ՃԱՆԱՊԱՐՀԸ',
     pathTitle1: 'Փորձը մեզ համար', pathTitle2: 'գործիք է, ոչ թե թիվ։',
@@ -144,7 +147,7 @@ export const about = {
   },
   en: {
     eyebrow: 'ABOUT GARON',
-    title1: '25+ Years', title2: 'building trust.',
+    title1: 'We build', title2: 'trust.',
     lead: "GARON Construction's journey began with swimming pool construction and has grown over the years into multi-sector construction expertise.",
     pathEyebrow: 'OUR PATH',
     pathTitle1: 'For us, experience', pathTitle2: 'is a tool, not a number.',
@@ -163,7 +166,7 @@ export const about = {
   },
   ru: {
     eyebrow: 'О GARON',
-    title1: '25+ лет', title2: 'мы строим доверие.',
+    title1: 'Мы строим', title2: 'доверие.',
     lead: 'Путь GARON Construction начался со строительства бассейнов и за годы работы превратился в многопрофильный строительный опыт.',
     pathEyebrow: 'НАШ ПУТЬ',
     pathTitle1: 'Опыт для нас', pathTitle2: 'это инструмент, а не цифра.',
@@ -635,9 +638,9 @@ export const projectsArchive = {
 };
 
 export const splash = {
-  hy: { est: 'ՀԻՄՆ. 2000', trade: 'ՇԻՆԱՐԱՐՈՒԹՅՈՒՆ', welcome: 'ԲԱՐԻ ԳԱԼՈՒՍՏ' },
-  en: { est: 'EST. 2000', trade: 'CONSTRUCTION', welcome: 'WELCOME' },
-  ru: { est: 'ОСН. 2000', trade: 'СТРОИТЕЛЬСТВО', welcome: 'ДОБРО ПОЖАЛОВАТЬ' }
+  hy: { est: 'ԵՐԵՎԱՆ', trade: 'ՇԻՆԱՐԱՐՈՒԹՅՈՒՆ', welcome: 'ԲԱՐԻ ԳԱԼՈՒՍՏ' },
+  en: { est: 'YEREVAN', trade: 'CONSTRUCTION', welcome: 'WELCOME' },
+  ru: { est: 'ЕРЕВАН', trade: 'СТРОИТЕЛЬСТВО', welcome: 'ДОБРО ПОЖАЛОВАТЬ' }
 };
 
 export const heroLabel = {

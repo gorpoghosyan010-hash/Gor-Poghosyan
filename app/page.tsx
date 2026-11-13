@@ -16,7 +16,7 @@ export default function Home(){
  const { lang } = useLanguage();
  const t = home[lang];
  return <main>
- <section className="homeHero" style={{ backgroundImage: "url('/services/residential-hero.webp')" }}>
+ <section className="homeHero" style={{ backgroundImage: "url('/projects/house-01/12.webp')" }}>
   <div className="heroGrid" aria-hidden="true" />
   <div className="heroShade" aria-hidden="true" />
   <div className="heroTop">
@@ -31,7 +31,7 @@ export default function Home(){
    <Reveal delay={200}><div className="heroSub"><p className="heroLead">{t.heroLead}</p><div className="actions"><Link className="button gold" href="/projects">{t.viewWork}</Link><Link className="quietLink" href="/contact">{t.startProject}</Link></div></div></Reveal>
   </div>
  </section>
- <section className="trustStrip"><div><strong>25+</strong><span>{t.trust1Label}</span></div><div><strong>50+</strong><span>{t.trust2Label}</span></div><div><strong>50+</strong><span>{t.trust3Label}</span></div></section>
+ <section className="trustStrip"><div><strong>{t.trust1Value}</strong><span>{t.trust1Label}</span></div><div><strong>{t.trust2Value}</strong><span>{t.trust2Label}</span></div><div><strong>{t.trust3Value}</strong><span>{t.trust3Label}</span></div></section>
  <section className="homeIntro sectionLight"><Reveal className="twoCol"><div><p className="eyebrow dark">{t.philosophyEyebrow}</p><h2>{t.philosophyTitle1}<br/><span>{t.philosophyTitle2}</span></h2></div><div className="copy"><p>{t.philosophyText}</p><Link className="lineLink" href="/about">{t.philosophyLink}</Link></div></Reveal></section>
  <section className="homeServices sectionDark"><Reveal className="sectionTop"><div><p className="eyebrow">{t.capabilitiesEyebrow}</p><h2>{t.capabilitiesTitle1}<br/><span>{t.capabilitiesTitle2}</span></h2></div><p>{t.capabilitiesLead}</p></Reveal>
   <div className="serviceList">{serviceMeta.map(([n,href,img],i)=><Reveal key={n} delay={i*70}><Link href={href} className="serviceRow"><div className="serviceThumb" style={{backgroundImage:`url(${img})`}}/><span>{n}</span><div><h3>{t.services[i].t}</h3><p>{t.services[i].d}</p></div><b>↗</b></Link></Reveal>)}</div>
