@@ -37,7 +37,7 @@ export default function Splash() {
         <path pathLength={1} className="draw draw-6" d="M236 86 H430 V112 H236 Z M301 86 V112 M366 86 V112" />
         <path pathLength={1} className="draw draw-6" d="M352 182 H500 V240 H352 Z M401 182 V240 M450 182 V240" />
       </svg>
-      <div className="splashLogo"><Logo light /></div>
+      <div className="splashLogo"><Logo /></div>
       <p className="splashTag">{s.trade}</p>
     </div>
   );

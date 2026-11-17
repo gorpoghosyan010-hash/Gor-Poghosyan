@@ -2,6 +2,7 @@
 import { useEffect } from 'react';
 import Link from 'next/link';
 import Reveal from './Reveal';
+import PageHero from './PageHero';
 import type { NextLink, Project, ProjectImage, Stage } from '../content/projectTypes';
 import { useLanguage } from './LanguageContext';
 import { common, projectUi } from '../content/i18n';
@@ -45,7 +46,7 @@ export default function ProjectDetail({ project, next }: { project: Project; nex
   let index = 0;
 
   return <main className="projectDetail">
-    <section className="projectHero" style={{ backgroundImage: `url(${project.heroImage})` }}><div className="projectHeroShade" /><div className="projectHeroText"><p className="eyebrow">{u.projectEyebrow} · {cat.tag}</p><h1>{title}{subtitle && <><br /><span>{subtitle}</span></>}</h1>{project.summary && <p>{project.summary[lang]}</p>}</div></section>
+    <PageHero image={project.heroImage} eyebrow={`${u.projectEyebrow} · ${cat.tag}`} title1={title} title2={subtitle} lead={project.summary?.[lang]} />
     <section className={`projectFacts facts${Math.min(facts.length, 6)}`}>{facts.map(fa => <div key={fa.label}><span>{fa.label}</span><strong>{fa.value}</strong></div>)}</section>
     {project.story && <section className="sectionLight projectIntro"><Reveal className="twoCol"><div><p className="eyebrow dark">{single ? u.introEyebrowSingle : u.introEyebrow}</p><h2>{project.introTitle?.[lang] ?? u.introTitle}<br /><span>{project.introTitle2?.[lang] ?? (project.introTitle ? '' : u.introTitle2)}</span></h2></div><div className="copy"><p>{project.story[lang]}</p></div></Reveal></section>}
     {project.images.length > 0 && <section className={`gallerySection ${single ? 'singleGallery' : ''}`}>

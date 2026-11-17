@@ -38,7 +38,7 @@ export default function Header() {
 
   return <>
     <header className={`siteHeader ${scrolled ? 'scrolled' : ''} ${open ? 'menuOpen' : ''}`}>
-      <Link href="/" className="brand"><Logo light /></Link>
+      <Link href="/" className="brand"><Logo /></Link>
       <nav className="desktopNav" aria-label="Main">
         {links.map(([href, label]) => <Link key={href} href={href}>{label}</Link>)}
       </nav>

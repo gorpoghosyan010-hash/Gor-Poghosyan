@@ -1,4 +1,5 @@
 'use client';
+import PageHero from '../../components/PageHero';
 import Reveal from '../../components/Reveal';
 import ContactForm from '../../components/ContactForm';
 import { useLanguage } from '../../components/LanguageContext';
@@ -11,14 +12,7 @@ export default function Contact() {
   const c = contactUi[lang];
   return (
     <main className="innerPage">
-      <section className="innerHero contactHero" style={{ backgroundImage: "url('/projects/pool-05/01.webp')" }}>
-        <div className="innerHeroShade" />
-        <div>
-          <p className="eyebrow">{t.eyebrow}</p>
-          <h1>{t.title1}<br /><span>{t.title2}</span></h1>
-          <p>{siteConfig.phone ? t.leadWithPhone : t.lead}</p>
-        </div>
-      </section>
+      <PageHero image="/projects/pool-05/01.webp" eyebrow={t.eyebrow} title1={t.title1} title2={t.title2} lead={siteConfig.phone ? t.leadWithPhone : t.lead} />
       <section className="sectionLight contactPage">
         <Reveal className="contactColumns">
           <div>

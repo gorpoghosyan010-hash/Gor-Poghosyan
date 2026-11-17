@@ -24,6 +24,15 @@ export const home = {
   hy: {
     heroEyebrow: 'GARON CONSTRUCTION · ԵՐԵՎԱՆ',
     heroTitle1: 'Կառուցում ենք', heroTitle2: 'ամուր հիմքեր, երկար կյանք։',
+    heroServices: 'Լողավազաններ · Տներ · Վերանորոգում', heroCalc: 'Հաշվել արժեքը ↗', heroRegion: 'Երևան և մարզեր',
+    wmServices: 'ԾԱՌԱՅՈՒԹՅՈՒՆ', wmProjects: 'ՆԱԽԱԳԾԵՐ', wmProcess: 'ԳՈՐԾԸՆԹԱՑ',
+    processEyebrow: 'ԻՆՉՊԵՍ ԵՆՔ ԱՇԽԱՏՈՒՄ', processTitle1: 'Չորս պարզ քայլ՝', processTitle2: 'հայտից մինչև հանձնում։',
+    processSteps: [
+      { t: 'Հայտ', d: 'Գրում եք մեզ կամ օգտվում հաշվիչից. քննարկում ենք գաղափարը, ծավալը և ցանկալի արդյունքը։' },
+      { t: 'Չափագրում և նախահաշիվ', d: 'Տեղում ուսումնասիրում ենք տարածքը և պատրաստում մանրամասն նախահաշիվ՝ ըստ աշխատանքների։' },
+      { t: 'Պայմանագիր և աշխատանք', d: 'Համաձայնեցնում ենք փուլերը, իսկ աշխատանքի ընթացքում պարբերաբար ցույց ենք տալիս արդյունքը։' },
+      { t: 'Հանձնում', d: 'Ստուգում ենք յուրաքանչյուր մանրուք և հանձնում պատրաստ օբյեկտը։' }
+    ],
     heroLead: 'Ժամանակակից, հուսալի և երկարատև շինարարական լուծումներ՝ նախագծումից մինչև ամբողջական իրականացում։',
     viewWork: 'Դիտել աշխատանքները ↗', startProject: 'Սկսել նախագիծը →',
     heroSig1: 'ԳԱՂԱՓԱՐՆԵՐ / ԿԱՌՈՒՅՑՆԵՐ / ԻՐԱԿԱՆ ԱՐԴՅՈՒՆՔ', heroSig2: 'ԵՐԵՎԱՆ · ՀԱՅԱՍՏԱՆ',
@@ -54,6 +63,15 @@ export const home = {
   en: {
     heroEyebrow: 'GARON CONSTRUCTION · YEREVAN',
     heroTitle1: 'We Build', heroTitle2: 'solid foundations, lasting life.',
+    heroServices: 'Pools · Houses · Renovation', heroCalc: 'Estimate the cost ↗', heroRegion: 'Yerevan and regions',
+    wmServices: 'SERVICES', wmProjects: 'PROJECTS', wmProcess: 'PROCESS',
+    processEyebrow: 'HOW WE WORK', processTitle1: 'Four clear steps', processTitle2: 'from request to handover.',
+    processSteps: [
+      { t: 'Request', d: 'Write to us or use the calculator — we discuss the idea, the scope and the result you want.' },
+      { t: 'Survey and estimate', d: 'We study the site in person and prepare a detailed, item-by-item estimate.' },
+      { t: 'Contract and works', d: 'We agree on the stages and keep showing you the progress while we build.' },
+      { t: 'Handover', d: 'We check every detail and hand over the finished object.' }
+    ],
     heroLead: 'Modern, reliable and durable construction solutions — from design to full completion.',
     viewWork: 'View Our Work ↗', startProject: 'Start a Project →',
     heroSig1: 'IDEAS / STRUCTURES / REAL IMPACT', heroSig2: 'YEREVAN · ARMENIA',
@@ -84,6 +102,15 @@ export const home = {
   ru: {
     heroEyebrow: 'GARON CONSTRUCTION · ЕРЕВАН',
     heroTitle1: 'Мы строим', heroTitle2: 'прочный фундамент, долгую жизнь.',
+    heroServices: 'Бассейны · Дома · Ремонт', heroCalc: 'Рассчитать стоимость ↗', heroRegion: 'Ереван и регионы',
+    wmServices: 'УСЛУГИ', wmProjects: 'ПРОЕКТЫ', wmProcess: 'ПРОЦЕСС',
+    processEyebrow: 'КАК МЫ РАБОТАЕМ', processTitle1: 'Четыре понятных шага —', processTitle2: 'от заявки до сдачи.',
+    processSteps: [
+      { t: 'Заявка', d: 'Напишите нам или воспользуйтесь калькулятором — обсудим идею, объём и желаемый результат.' },
+      { t: 'Замер и смета', d: 'Изучаем объект на месте и готовим подробную смету по видам работ.' },
+      { t: 'Договор и работы', d: 'Согласуем этапы и регулярно показываем ход работ.' },
+      { t: 'Сдача', d: 'Проверяем каждую деталь и сдаём готовый объект.' }
+    ],
     heroLead: 'Современные, надёжные и долговечные строительные решения — от проектирования до полной сдачи объекта.',
     viewWork: 'Смотреть работы ↗', startProject: 'Начать проект →',
     heroSig1: 'ИДЕИ / КОНСТРУКЦИИ / РЕАЛЬНЫЙ РЕЗУЛЬТАТ', heroSig2: 'ЕРЕВАН · АРМЕНИЯ',

@@ -1,4 +1,5 @@
 'use client';
+import PageHero from './PageHero';
 import Link from 'next/link';
 import Reveal from './Reveal';
 import ProjectGrid from './ProjectGrid';
@@ -13,7 +14,7 @@ export default function ProjectsArchive({ projects }: { projects: ProjectCardDat
   const u = projectUi[lang];
   const sections = CATEGORIES.map(c => ({ c, items: projects.filter(p => p.category === c) })).filter(s => s.items.length);
   return <main className="innerPage">
-    <section className="innerHero projectsHero" style={{ backgroundImage: "url('/projects/pool-01/06.webp')" }}><div className="innerHeroShade" /><div><p className="eyebrow">{t.eyebrow}</p><h1>{t.title1}<br /><span>{t.title2}</span></h1><p>{t.lead}</p></div></section>
+    <PageHero image="/projects/pool-01/06.webp" eyebrow={t.eyebrow} title1={t.title1} title2={t.title2} lead={t.lead} />
     {sections.map(({ c, items }, i) => {
       const s = u.categories[c];
       return <div key={c} id={c}>
