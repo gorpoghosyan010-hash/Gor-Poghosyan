@@ -1,0 +1,95 @@
+{
+  "slug": "house-01",
+  "category": "houses",
+  "order": 10,
+  "published": true,
+  "featured": true,
+  "status": "completed",
+  "title": {
+    "hy": "Տուն",
+    "en": "House",
+    "ru": "Дом"
+  },
+  "subtitle": {
+    "hy": "Ամբողջ ճանապարհը",
+    "en": "Full Journey",
+    "ru": "Весь путь"
+  },
+  "summary": {
+    "hy": "Բնակելի տան կառուցում՝ շինհրապարակից մինչև ավարտված արդյունք։",
+    "en": "Residential home construction — from the building site to the finished result.",
+    "ru": "Строительство жилого дома — от стройплощадки до готового результата."
+  },
+  "cardText": {
+    "hy": "Բնակելի առանձնատուն · ավարտված",
+    "en": "Residential Home · Completed",
+    "ru": "Жилой дом · завершён"
+  },
+  "introTitle": {
+    "hy": "Կառուցման ամբողջ",
+    "en": "The Entire",
+    "ru": "Весь путь"
+  },
+  "introTitle2": {
+    "hy": "ճանապարհը։",
+    "en": "Construction Journey.",
+    "ru": "строительства."
+  },
+  "story": {
+    "hy": "Նախնական տարածքից և հիմքից մինչև կառուցված տուն և վերջնական լուսավորությամբ ավարտված տեսք՝ այս պատկերասրահը ներկայացնում է նույն նախագծի իրական ընթացքը՝ փուլ առ փուլ։",
+    "en": "From the initial site and foundation to the built house and its finished look with final lighting — this gallery presents the real progress of the same project, stage by stage.",
+    "ru": "От изначального участка и фундамента до построенного дома с финальным освещением — эта галерея показывает реальный ход одного и того же проекта, этап за этапом."
+  },
+  "facts": {},
+  "heroImage": "/projects/house-01/12.webp",
+  "images": [
+    {
+      "src": "/projects/house-01/01.webp",
+      "stage": null
+    },
+    {
+      "src": "/projects/house-01/02.webp",
+      "stage": null
+    },
+    {
+      "src": "/projects/house-01/03.webp",
+      "stage": null
+    },
+    {
+      "src": "/projects/house-01/04.webp",
+      "stage": null
+    },
+    {
+      "src": "/projects/house-01/05.webp",
+      "stage": null
+    },
+    {
+      "src": "/projects/house-01/06.webp",
+      "stage": null
+    },
+    {
+      "src": "/projects/house-01/07.webp",
+      "stage": null
+    },
+    {
+      "src": "/projects/house-01/08.webp",
+      "stage": null
+    },
+    {
+      "src": "/projects/house-01/09.webp",
+      "stage": null
+    },
+    {
+      "src": "/projects/house-01/10.webp",
+      "stage": null
+    },
+    {
+      "src": "/projects/house-01/11.webp",
+      "stage": null
+    },
+    {
+      "src": "/projects/house-01/12.webp",
+      "stage": null
+    }
+  ]
+}

@@ -1,14 +1,30 @@
 'use client';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 // Հերոսը էջի վերևում «կպչում» է (sticky), և ներքև թերթելիս տեսանյութը նվագում է թերթման հետ համաձայնեցված
 // (թերթում = կադր առաջ, հետ թերթում = կադր հետ)։ Տեսանյութի ավարտից հետո էջը շարունակվում է։
+// Հեռախոսում (≤768px) կամ «Data Saver» ռեժիմում mp4-ը չի բեռնվում՝ ցուցադրվում է միայն poster նկարը։
+const MOBILE = '(max-width: 768px)';
+
 export default function ScrollVideo({ src, poster, wide, children }: { src: string; poster: string; wide?: boolean; children: React.ReactNode }) {
   const wrapRef = useRef<HTMLDivElement>(null);
   const heroRef = useRef<HTMLElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [enabled, setEnabled] = useState(false);
+  const [saveData, setSaveData] = useState(false);
 
   useEffect(() => {
+    const mq = window.matchMedia(MOBILE);
+    const save = Boolean((navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData);
+    setSaveData(save);
+    const update = () => setEnabled(!mq.matches && !save);
+    update();
+    mq.addEventListener('change', update);
+    return () => mq.removeEventListener('change', update);
+  }, []);
+
+  useEffect(() => {
+    if (!enabled) return;
     const wrap = wrapRef.current;
     const hero = heroRef.current;
     const video = videoRef.current;
@@ -63,20 +79,20 @@ export default function ScrollVideo({ src, poster, wide, children }: { src: stri
       window.removeEventListener('resize', onScroll);
       if (raf) cancelAnimationFrame(raf);
     };
-  }, [src]);
+  }, [src, enabled]);
 
   return (
-    <div className="vidWrap" ref={wrapRef}>
+    <div className={`vidWrap${saveData ? ' vidStatic' : ''}`} ref={wrapRef}>
       <section className={`serviceDetailHero vidHero${wide ? ' vidWide' : ''}`} ref={heroRef}>
         <div className="vidBackdrop" style={{ backgroundImage: `url(${poster})` }} aria-hidden="true" />
         <video
           ref={videoRef}
           className="vidEl"
-          src={src}
+          src={enabled ? src : undefined}
           poster={poster}
           muted
           playsInline
-          preload="auto"
+          preload="metadata"
           disablePictureInPicture
           disableRemotePlayback
           tabIndex={-1}

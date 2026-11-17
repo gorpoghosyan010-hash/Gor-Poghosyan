@@ -5,6 +5,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Splash from '../components/Splash';
 import PageTitle from '../components/PageTitle';
+import MobileContactBar from '../components/MobileContactBar';
 import { LanguageProvider } from '../components/LanguageContext';
 import { pageMeta, siteUrl, SITE_NAME } from '../content/seo';
 import { siteConfig } from '../content/siteConfig';
@@ -43,7 +44,8 @@ const jsonLd = {
 };
 
 // Ընտրված (ոչ հայերեն) լեզվի դեպքում էջը թաքցվում է մինչև լեզվի կիրառումը՝ հայերենի կարճ «առկայծումից» խուսափելու համար
-const langBoot = "(function(){var d=document.documentElement;try{var l=localStorage.getItem('garon-lang');if(l==='en'||l==='ru'){d.lang=l;d.classList.add('langPending');setTimeout(function(){d.classList.remove('langPending')},2500)}}catch(e){}})();";
+// Splash՝ միայն սեսիայի առաջին էջում և առանց prefers-reduced-motion-ի (առանց JS-ի՝ երբեք)
+const langBoot = "(function(){var d=document.documentElement;try{var l=localStorage.getItem('garon-lang');if(l==='en'||l==='ru'){d.lang=l;d.classList.add('langPending');setTimeout(function(){d.classList.remove('langPending')},2500)}}catch(e){}try{if(!sessionStorage.getItem('garon-splash-seen')&&!(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches)){d.classList.add('splashOn');setTimeout(function(){d.classList.remove('splashOn')},1500)}}catch(e){}})();";
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -59,6 +61,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Header />
           {children}
           <Footer />
+          <MobileContactBar />
         </LanguageProvider>
       </body>
     </html>

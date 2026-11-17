@@ -73,23 +73,24 @@ export const pageMeta: Record<string, Record<Lang, M>> = {
   }
 };
 
+// Նախագծի էջերի վերնագիրը դնում է ProjectDetail-ը (ամեն նախագծի համար՝ եզակի)
 export function pageKey(pathname: string): string | undefined {
-  if (pathname.startsWith('/projects/pool')) return '/projects/pool';
-  if (pathname.startsWith('/projects/house')) return '/projects/house';
   return pageMeta[pathname] ? pathname : undefined;
 }
 
 const OG_IMAGE = '/opengraph-image.jpg';
 
-export function metaFor(path: string): Metadata {
-  const m = pageMeta[pageKey(path) ?? '/'].hy;
+export function metaFor(path: string, override?: Partial<M> & { image?: string }): Metadata {
+  const base = pageMeta[pageKey(path) ?? '/'].hy;
+  const m = { ...base, ...override };
   const title = `${m.title} | ${SITE_NAME}`;
+  const images = [override?.image ?? OG_IMAGE];
   return {
     // absolute՝ որպեսզի խորը էջերի վերնագրից չկորչի « | GARON Construction» վերջավորությունը
     title: { absolute: title },
     description: m.description,
     alternates: { canonical: path },
-    openGraph: { title, description: m.description, url: path, siteName: SITE_NAME, type: 'website', locale: 'hy_AM', images: [OG_IMAGE] },
-    twitter: { card: 'summary_large_image', title, description: m.description, images: [OG_IMAGE] }
+    openGraph: { title, description: m.description, url: path, siteName: SITE_NAME, type: 'website', locale: 'hy_AM', images },
+    twitter: { card: 'summary_large_image', title, description: m.description, images }
   };
 }
