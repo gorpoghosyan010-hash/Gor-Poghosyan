@@ -27,3 +27,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# marketing tooling caches (not part of the site)
+node_modules/
+__pycache__/
+marketing/instagram/**/.tools/
