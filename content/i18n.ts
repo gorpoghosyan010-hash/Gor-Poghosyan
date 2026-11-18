@@ -429,6 +429,10 @@ export const contact = {
     successText: 'Մենք կկապվենք ձեզ հետ նշված հեռախոսահամարով՝ հաջորդ քայլը քննարկելու համար։',
     errorText: 'Չհաջողվեց ուղարկել։ Փորձեք կրկին կամ գրեք մեզ՝',
     sentNote: 'Եթե նամակը չբացվեց, գրեք ուղղակի՝',
+    formProject: 'Նախագիծ', formBudget: 'Բյուջե', formPlot: 'Հողակտոր ունե՞ք',
+    budgets: ['Նշված չէ', 'մինչև 10 մլն ֏', '10–30 մլն ֏', '30–60 մլն ֏', '60 մլն ֏-ից', 'Դեռ չգիտեմ'],
+    plots: ['Այո', 'Ոչ', 'Դեռ որոշում եմ'],
+    privacy: 'Ձեր տվյալներն օգտագործվում են միայն ձեզ հետ կապվելու համար։',
     estimateLine: 'Հաշվիչի արդյունքը'
   },
   en: {
@@ -453,6 +457,10 @@ export const contact = {
     successText: 'We will contact you at the phone number you provided to discuss the next step.',
     errorText: 'Sending failed. Please try again or write to us:',
     sentNote: 'If nothing opened, write to us directly:',
+    formProject: 'Project', formBudget: 'Budget', formPlot: 'Do you have a plot?',
+    budgets: ['Not specified', 'up to 10M ֏', '10–30M ֏', '30–60M ֏', '60M ֏ and more', "Don't know yet"],
+    plots: ['Yes', 'No', 'Still deciding'],
+    privacy: 'Your details are used only to contact you.',
     estimateLine: 'Calculator estimate'
   },
   ru: {
@@ -477,6 +485,10 @@ export const contact = {
     successText: 'Мы свяжемся с вами по указанному номеру телефона, чтобы обсудить следующий шаг.',
     errorText: 'Не удалось отправить. Попробуйте ещё раз или напишите нам:',
     sentNote: 'Если письмо не открылось, напишите нам напрямую:',
+    formProject: 'Проект', formBudget: 'Бюджет', formPlot: 'Есть ли у вас участок?',
+    budgets: ['Не указан', 'до 10 млн ֏', '10–30 млн ֏', '30–60 млн ֏', 'от 60 млн ֏', 'Пока не знаю'],
+    plots: ['Да', 'Нет', 'Ещё решаю'],
+    privacy: 'Ваши данные используются только для связи с вами.',
     estimateLine: 'Расчёт из калькулятора'
   }
 };
@@ -680,6 +692,7 @@ export const projectUi = {
     introEyebrow: 'ԳՈՐԾԸՆԹԱՑԸ', introEyebrowSingle: 'ՆԱԽԱԳԻԾ',
     introTitle: 'Սկիզբից մինչև', introTitle2: 'վերջնական արդյունք։',
     nextEyebrow: 'ՀԱՋՈՐԴ ՆԱԽԱԳԻԾԸ', startEyebrow: 'ՍԿՍԵՔ ՁԵՐ ՆԱԽԱԳԻԾԸ', startTitle: 'Ձեր գաղափարը', startTitle2: 'հաջորդը կարող է լինել։',
+    leadEyebrow: 'ՀԱՅՏ', leadTitle1: 'Ուզո՞ւմ եք', leadTitle2: 'նման նախագիծ։', leadText: 'Թողեք հայտ․ նախագիծը կնշվի ավտոմատ։ Մենք կկապվենք ձեզ հետ՝ հաշվարկը և հաջորդ քայլը քննարկելու համար։', galleryTitle: 'Պատկերասրահ', photos: 'լուսանկար', close: 'Փակել', prev: 'Նախորդը', next: 'Հաջորդը', viewNext: 'Դիտել նախագիծը →',
     photo: 'լուսանկար'
   },
   en: {
@@ -696,6 +709,7 @@ export const projectUi = {
     introEyebrow: 'THE PROCESS', introEyebrowSingle: 'PROJECT',
     introTitle: 'From Start', introTitle2: 'to Final Result.',
     nextEyebrow: 'NEXT PROJECT', startEyebrow: 'START YOUR PROJECT', startTitle: 'Your Idea', startTitle2: 'could be next.',
+    leadEyebrow: 'REQUEST', leadTitle1: 'Want a project', leadTitle2: 'like this one?', leadText: 'Leave a request — this project is noted automatically. We will contact you to discuss the estimate and the next step.', galleryTitle: 'Gallery', photos: 'photos', close: 'Close', prev: 'Previous', next: 'Next', viewNext: 'View project →',
     photo: 'photo'
   },
   ru: {
@@ -712,6 +726,7 @@ export const projectUi = {
     introEyebrow: 'ПРОЦЕСС', introEyebrowSingle: 'ПРОЕКТ',
     introTitle: 'От начала', introTitle2: 'до финального результата.',
     nextEyebrow: 'СЛЕДУЮЩИЙ ПРОЕКТ', startEyebrow: 'НАЧНИТЕ СВОЙ ПРОЕКТ', startTitle: 'Ваша идея', startTitle2: 'может быть следующей.',
+    leadEyebrow: 'ЗАЯВКА', leadTitle1: 'Хотите', leadTitle2: 'такой же проект?', leadText: 'Оставьте заявку — проект отметится автоматически. Мы свяжемся с вами, чтобы обсудить расчёт и следующий шаг.', galleryTitle: 'Галерея', photos: 'фото', close: 'Закрыть', prev: 'Назад', next: 'Вперёд', viewNext: 'Смотреть проект →',
     photo: 'фото'
   }
 };

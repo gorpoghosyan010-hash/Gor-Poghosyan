@@ -9,13 +9,16 @@ import { siteConfig, contactLinks } from '../content/siteConfig';
 // Անուն/email/հեռախոս դաշտերն ունեն ճիշտ autocomplete տեսակ, որ բրաուզերը կարողանա ինքնաշխատ լրացնել դրանք։
 type State = 'idle' | 'sending' | 'success' | 'error' | 'mailto';
 
-export default function ContactForm() {
+// project / defaultType — նախագծի էջից բացվելու դեպքում՝ նախագիծը նշվում է ավտոմատ։
+export default function ContactForm({ project, defaultType = 0, intro = true }: { project?: string; defaultType?: number; intro?: boolean } = {}) {
   const { lang } = useLanguage();
   const t = contact[lang];
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
-  const [type, setType] = useState(0);
+  const [type, setType] = useState(defaultType);
+  const [budget, setBudget] = useState(0);
+  const [plot, setPlot] = useState(-1);
   const [message, setMessage] = useState('');
   const [website, setWebsite] = useState(''); // honeypot
   const [errors, setErrors] = useState({ name: false, phone: false, email: false });
@@ -27,9 +30,16 @@ export default function ContactForm() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const askPlot = type === 0 || type === 1; // լողավազան կամ տուն
+  const extra = {
+    project: project ?? '',
+    budget: budget > 0 ? t.budgets[budget] : '',
+    plot: askPlot && plot >= 0 ? t.plots[plot] : ''
+  };
+
   const openMailto = () => {
     const subject = `GARON Construction — ${t.types[type]}`;
-    const lines = [`${t.formName}: ${name.trim()}`, `${t.formPhone}: ${phone.trim()}`, email.trim() && `${t.formEmail}: ${email.trim()}`, `${t.formType}: ${t.types[type]}`].filter(Boolean).join('\n');
+    const lines = [`${t.formName}: ${name.trim()}`, `${t.formPhone}: ${phone.trim()}`, email.trim() && `${t.formEmail}: ${email.trim()}`, `${t.formType}: ${t.types[type]}`, extra.project && `${t.formProject}: ${extra.project}`, extra.budget && `${t.formBudget}: ${extra.budget}`, extra.plot && `${t.formPlot} ${extra.plot}`].filter(Boolean).join('\n');
     window.location.href = `mailto:${siteConfig.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`${lines}\n\n${message.trim()}`)}`;
     setState('mailto');
   };
@@ -50,7 +60,7 @@ export default function ContactForm() {
       const res = await fetch('/api/lead', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, phone, email, type: t.types[type], message, website, page: window.location.pathname, lang })
+        body: JSON.stringify({ name, phone, email, type: t.types[type], ...extra, message, website, page: window.location.pathname, lang })
       });
       const data = await res.json().catch(() => ({}));
       if (res.ok && data.ok) { setState('success'); return; }
@@ -79,7 +89,7 @@ export default function ContactForm() {
 
   return (
     <form className="contactForm" onSubmit={submit} noValidate aria-busy={state === 'sending'}>
-      <p>{t.cardText}</p>
+      {intro && <p>{t.cardText}</p>}
       <label className={errors.name ? 'invalid' : ''}>
         <span>{t.formName} *</span>
         <input name="name" value={name} onChange={e => setName(e.target.value)} autoComplete="name" aria-invalid={errors.name} required />
@@ -97,12 +107,28 @@ export default function ContactForm() {
           {errors.email && <em>{t.emailInvalid}</em>}
         </label>
       </div>
-      <label>
-        <span>{t.formType}</span>
-        <select value={type} onChange={e => setType(Number(e.target.value))}>
-          {t.types.map((label, i) => <option key={label} value={i}>{label}</option>)}
-        </select>
-      </label>
+      <div className="contactFormRow">
+        {project
+          ? <label><span>{t.formProject}</span><input value={project} readOnly tabIndex={-1} /></label>
+          : <label>
+            <span>{t.formType}</span>
+            <select value={type} onChange={e => setType(Number(e.target.value))}>
+              {t.types.map((label, i) => <option key={label} value={i}>{label}</option>)}
+            </select>
+          </label>}
+        <label>
+          <span>{t.formBudget} <i>{t.optional}</i></span>
+          <select value={budget} onChange={e => setBudget(Number(e.target.value))}>
+            {t.budgets.map((label, i) => <option key={label} value={i}>{label}</option>)}
+          </select>
+        </label>
+      </div>
+      {askPlot && <fieldset className="choiceRow">
+        <legend>{t.formPlot} <i>{t.optional}</i></legend>
+        {t.plots.map((label, i) => <label key={label} className={plot === i ? 'on' : ''}>
+          <input type="radio" name="plot" checked={plot === i} onChange={() => setPlot(i)} />{label}
+        </label>)}
+      </fieldset>}
       <label>
         <span>{t.formMessage} <i>{t.optional}</i></span>
         <textarea rows={5} value={message} onChange={e => setMessage(e.target.value)} />
@@ -115,7 +141,7 @@ export default function ContactForm() {
       <small role={state === 'error' ? 'alert' : undefined}>
         {state === 'error' ? <>{t.errorText} <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a></>
           : state === 'mailto' ? <>{t.sentNote} <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a></>
-          : t.hint}
+          : <>{t.hint} · {t.privacy}</>}
       </small>
     </form>
   );

@@ -20,7 +20,7 @@ function rateLimited(ip: string) {
 
 const str = (v: unknown, max: number) => (typeof v === 'string' ? v.trim().slice(0, max) : '');
 
-type Lead = { name: string; phone: string; email: string; type: string; message: string; page: string; lang: string };
+type Lead = { name: string; phone: string; email: string; type: string; project: string; budget: string; plot: string; message: string; page: string; lang: string };
 
 function validate(body: Record<string, unknown>): { lead?: Lead; fields?: Record<string, string> } {
   const lead: Lead = {
@@ -28,6 +28,9 @@ function validate(body: Record<string, unknown>): { lead?: Lead; fields?: Record
     phone: str(body.phone, 40),
     email: str(body.email, 200),
     type: str(body.type, 100),
+    project: str(body.project, 150),
+    budget: str(body.budget, 60),
+    plot: str(body.plot, 60),
     message: str(body.message, 3000),
     page: str(body.page, 300),
     lang: str(body.lang, 5)
@@ -48,6 +51,9 @@ function format(l: Lead) {
     `Հեռախոս: ${l.phone}`,
     l.email && `Email: ${l.email}`,
     l.type && `Տեսակ: ${l.type}`,
+    l.project && `Նախագիծ: ${l.project}`,
+    l.budget && `Բյուջե: ${l.budget}`,
+    l.plot && `Հողակտոր: ${l.plot}`,
     l.message && `\n${l.message}`,
     (l.page || l.lang) && `\n— ${[l.page, l.lang].filter(Boolean).join(' · ')}`
   ].filter(Boolean).join('\n');

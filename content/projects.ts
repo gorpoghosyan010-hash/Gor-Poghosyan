@@ -173,7 +173,7 @@ export function getProjectsByCategory(category: Category): Project[] {
 export function getNextLink(slug: string): NextLink {
   const list = getProjects();
   const next = list[list.findIndex(p => p.slug === slug) + 1];
-  return next ? { href: `/projects/${next.slug}`, title: next.title, subtitle: next.subtitle } : { href: '/contact', title: null, subtitle: null };
+  return next ? { href: `/projects/${next.slug}`, title: next.title, subtitle: next.subtitle, image: next.heroImage } : { href: '/contact', title: null, subtitle: null };
 }
 
 export function toCard(p: Project): ProjectCardData {

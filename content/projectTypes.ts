@@ -56,4 +56,4 @@ export type ProjectCardData = {
   meta: Localized;
 };
 
-export type NextLink = { href: string; title: Localized | null; subtitle: Localized | null };
+export type NextLink = { href: string; title: Localized | null; subtitle: Localized | null; image?: string };
