@@ -1,0 +1,54 @@
+{
+ "R3": {
+  "type": "reel",
+  "publish_date": "TBD (owner)",
+  "status": "draft — needs owner approval",
+  "scenes": [
+   {
+    "t": "0-6",
+    "asset": "L02 լոգոյի ինտրո (իր ձայնով)",
+    "text": ""
+   },
+   {
+    "t": "6-9.5",
+    "asset": "S1 «պատուհան»՝ աղյուսե պատ + նոր պատուհան → սվաղված անկյուն, կաղնե հատակ → ննջասենյակ (ոսկեգույն սահիչ, լույսի միջով անցում) + դետալ՝ պատուհան",
+    "text": "Վերանորոգում | Առաջ → Ընթացք → Հետո"
+   },
+   {
+    "t": "9.5-13",
+    "asset": "S2 «բացվածք»՝ աղյուսե բացվածք → սպիտակ սվաղված բացվածք (ծեփի փոշի) → քարե պատ և պորտալ (պատերը վերևից, հատակը ներքևից) + դետալ՝ բույս լույսի մեջ",
+    "text": "Վերանորոգում | Առաջ → Ընթացք → Հետո"
+   },
+   {
+    "t": "13-17",
+    "asset": "S3 «պատ + հատակ»՝ հին պատ խողովակների մնացորդներով → նոր պատ, նոր խողովակներ → կաղնե հատակը բացվում է ներքևից, տեսախցիկը հետ է գնում դեպի պատուհան + դետալ՝ հատակ",
+    "text": "Վերանորոգում | Առաջ → Ընթացք"
+   },
+   {
+    "t": "17-22.2",
+    "asset": "Պատրաստի տաք հյուրասենյակ (pan դեպի ապակեպատը) → R2 ոսկեգույն սահիչ՝ նույն տեղում պատուհանով չվերանորոգված սենյակ | պատրաստի սենյակ",
+    "text": "Վերանորոգում | Հետո · Առաջ | Հետո"
+   },
+   {
+    "t": "22.2-26",
+    "asset": "Վերջնական կադր",
+    "text": "GARON · Լողավազաններ · Տներ · Վերանորոգում · garon.am"
+   }
+  ],
+  "caption_hy": "Առաջ → Ընթացք → Հետո։\n\nՎերանորոգումը մի քանի փուլ է՝ քանդում, պատեր և խողովակներ, սվաղ, հատակ, վերջնական հարդարում։ Այս տեսանյութում նույն տեսանկյունից համադրված լուսանկարներով ցույց ենք տալիս, թե ինչպես է չվերանորոգված տարածքը քայլ առ քայլ դառնում պատրաստի սենյակ։\n\nԼուսանկարները նկարազարդող են (stock՝ Pexels, Unsplash) և տարբեր իրական սենյակներից են. սա վերանորոգման փուլերի օրինակ է, ոչ թե GARON-ի կոնկրետ օբյեկտ։\n\nԲնակարանների և տների վերանորոգում՝ GARON Construction. garon.am",
+  "caption_ru": "До → В процессе → После.\n\nРемонт — это этапы: демонтаж, стены и трубы, штукатурка, пол, чистовая отделка. В этом видео фотографии, совмещённые по ракурсу, показывают, как неотремонтированное пространство шаг за шагом становится готовой комнатой.\n\nФото иллюстративные (стоковые: Pexels, Unsplash) и сняты в разных реальных помещениях: это пример этапов ремонта, а не конкретный объект GARON.\n\nРемонт квартир и домов — GARON Construction. garon.am",
+  "caption_en": "Before → In progress → After.\n\nA renovation happens in stages: strip-out, walls and plumbing, plaster, floor, finishing. In this video, photos matched to the same viewpoint show how an unrenovated space becomes a finished room, step by step.\n\nThe footage is illustrative stock (Pexels, Unsplash) from different real rooms. It shows the stages of a renovation, not a specific GARON project.\n\nApartment and house renovation by GARON Construction. garon.am",
+  "hashtags": [
+   "#GARONconstruction",
+   "#վերանորոգում",
+   "#ремонт",
+   "#renovation",
+   "#Երևան",
+   "#Armenia"
+  ],
+  "honesty_note": "Caption must NOT say «մեր նախագիծը / մեր աշխատանքը / our project / наш объект». v3 uses licensed stock (Pexels + Unsplash, assets/stock/CREDITS.md): each sequence combines DIFFERENT real rooms aligned to the same viewpoint to ILLUSTRATE renovation stages. The caption says so in all three languages (paragraph 3). Do not tag a location, do not reply to comments as if these were GARON sites.",
+  "alt_hy": "Կարճ տեսանյութ բաց ֆոնի վրա։ Ճարտարապետական ցանցի վրա կառուցվում է GARON նշանը, և նրա ոսկեգույն մասը բացում է պատուհանը։ Երեք արագ պատմություն՝ «Առաջ → Ընթացք → Հետո». աղյուսե պատով և նոր պատուհանով քանդված սենյակը դառնում է սվաղված սենյակ՝ կաղնե հատակով, հետո՝ լուսավոր ննջասենյակ. աղյուսե պատերի միջև բացվածքը ծեփի փոշու միջով դառնում է սպիտակ դռան բացվածք, հետո՝ քարե պատ բազմոցով. հին աղյուսե պատը խողովակների մնացորդներով դառնում է նոր պատ նոր խողովակներով, ներքևից բացվում է կաղնե հատակը։ Արագ դետալներ՝ պատուհան, բույս, հատակ։ Վերջում տաք հյուրասենյակ, և ոսկեգույն սահիչը համեմատում է այն չվերանորոգված սենյակի հետ։ Լուսանկարները նկարազարդող stock են (Pexels, Unsplash), ոչ GARON-ի նախագծեր։ Վերջին կադրում՝ լոգոն, «Լողավազաններ · Տներ · Վերանորոգում» և garon.am։",
+  "version": "v3",
+  "credits_note": "Pexels License + Unsplash License: attribution not required; optional first comment: «Լուսանկարներ՝ Pexels, Unsplash (նկարազարդող)»"
+ }
+}

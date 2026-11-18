@@ -1,0 +1,15 @@
+{
+  "_doc": "Face regions to blur (no written consent). Coordinates in SOURCE pixels: cx, cy, rx, ry (ellipse). Blur radius in source px. Used by prep_sources.py. Entries with \"enabled\": false are kept for reference only.",
+  "public/projects/house-01/09.webp": {
+    "enabled": false,
+    "decision": "owner approved faces visible, 2026-11-10 (relayed by coordinator during batch 2026-11-10-batch-1)",
+    "blur_radius": 9,
+    "regions": [
+      {"cx": 551, "cy": 717, "rx": 17, "ry": 21, "who": "worker grey jacket, left of mixer"},
+      {"cx": 689, "cy": 742, "rx": 16, "ry": 19, "who": "worker dark jacket (back/side)"},
+      {"cx": 740, "cy": 730, "rx": 17, "ry": 21, "who": "worker white/black jacket"},
+      {"cx": 786, "cy": 725, "rx": 17, "ry": 21, "who": "worker camo jacket"},
+      {"cx": 1003, "cy": 697, "rx": 19, "ry": 23, "who": "worker striped sweater, right"}
+    ]
+  }
+}

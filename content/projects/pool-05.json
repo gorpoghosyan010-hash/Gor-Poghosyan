@@ -1,0 +1,51 @@
+{
+  "slug": "pool-05",
+  "category": "pools",
+  "order": 30,
+  "published": true,
+  "featured": false,
+  "status": "completed",
+  "title": {
+    "hy": "Լողավազան",
+    "en": "Swimming Pool",
+    "ru": "Бассейн"
+  },
+  "subtitle": {
+    "hy": "Մաքուր գծեր",
+    "en": "Clean Lines",
+    "ru": "Чистые линии"
+  },
+  "summary": {
+    "hy": "Մաքուր գծերով ավարտված նախագիծ՝ իրական արդյունքով։",
+    "en": "A completed project with clean lines and a real result.",
+    "ru": "Завершённый проект с чистыми линиями и реальным результатом."
+  },
+  "cardText": {
+    "hy": "Ավարտված նախագիծ",
+    "en": "Completed Project",
+    "ru": "Завершённый проект"
+  },
+  "introTitle": {
+    "hy": "Մաքուր գծեր,",
+    "en": "Clean Lines,",
+    "ru": "Чистые линии,"
+  },
+  "introTitle2": {
+    "hy": "իրական արդյունք։",
+    "en": "Real Result.",
+    "ru": "реальный результат."
+  },
+  "story": {
+    "hy": "Ավարտված լողավազանի վերջնական արդյունքը։",
+    "en": "The final result of the completed pool.",
+    "ru": "Финальный результат завершённого бассейна."
+  },
+  "facts": {},
+  "heroImage": "/projects/pool-05/01.webp",
+  "images": [
+    {
+      "src": "/projects/pool-05/01.webp",
+      "stage": null
+    }
+  ]
+}

@@ -3,9 +3,9 @@ import type { Lang } from '../components/LanguageContext';
 export const languageNames: Record<Lang, string> = { hy: 'Հայերեն', en: 'English', ru: 'Русский' };
 
 export const common = {
-  hy: { viewProject: 'Դիտել նախագիծը ↗', contactCta: 'Կապվել GARON-ի հետ ↗', nextProjectCta: 'Հաջորդ նախագիծը ↗', poolTag: 'ԼՈՂԱՎԱԶԱՆ', residentialTag: 'ԲՆԱԿԵԼԻ' },
-  en: { viewProject: 'View Project ↗', contactCta: 'Contact GARON ↗', nextProjectCta: 'Next Project ↗', poolTag: 'POOL', residentialTag: 'RESIDENTIAL' },
-  ru: { viewProject: 'Смотреть проект ↗', contactCta: 'Связаться с GARON ↗', nextProjectCta: 'Следующий проект ↗', poolTag: 'БАССЕЙН', residentialTag: 'ЖИЛОЙ ДОМ' }
+  hy: { viewProject: 'Դիտել նախագիծը ↗', contactCta: 'Կապվել GARON-ի հետ ↗', nextProjectCta: 'Հաջորդ նախագիծը ↗' },
+  en: { viewProject: 'View Project ↗', contactCta: 'Contact GARON ↗', nextProjectCta: 'Next Project ↗' },
+  ru: { viewProject: 'Смотреть проект ↗', contactCta: 'Связаться с GARON ↗', nextProjectCta: 'Следующий проект ↗' }
 };
 
 export const nav = {
@@ -22,19 +22,27 @@ export const footer = {
 
 export const home = {
   hy: {
-    heroEyebrow: 'GARON CONSTRUCTION · 25+ ՏԱՐԻ',
+    heroEyebrow: 'GARON CONSTRUCTION · ԵՐԵՎԱՆ',
     heroTitle1: 'Կառուցում ենք', heroTitle2: 'ամուր հիմքեր, երկար կյանք։',
+    heroServices: 'Լողավազաններ · Տներ · Վերանորոգում', heroCalc: 'Հաշվել արժեքը ↗', heroRegion: 'Երևան և մարզեր',
+    wmServices: 'ԾԱՌԱՅՈՒԹՅՈՒՆ', wmProjects: 'ՆԱԽԱԳԾԵՐ', wmProcess: 'ԳՈՐԾԸՆԹԱՑ',
+    processEyebrow: 'ԻՆՉՊԵՍ ԵՆՔ ԱՇԽԱՏՈՒՄ', processTitle1: 'Չորս պարզ քայլ՝', processTitle2: 'հայտից մինչև հանձնում։',
+    processSteps: [
+      { t: 'Հայտ', d: 'Գրում եք մեզ կամ օգտվում հաշվիչից. քննարկում ենք գաղափարը, ծավալը և ցանկալի արդյունքը։' },
+      { t: 'Չափագրում և նախահաշիվ', d: 'Տեղում ուսումնասիրում ենք տարածքը և պատրաստում մանրամասն նախահաշիվ՝ ըստ աշխատանքների։' },
+      { t: 'Պայմանագիր և աշխատանք', d: 'Համաձայնեցնում ենք փուլերը, իսկ աշխատանքի ընթացքում պարբերաբար ցույց ենք տալիս արդյունքը։' },
+      { t: 'Հանձնում', d: 'Ստուգում ենք յուրաքանչյուր մանրուք և հանձնում պատրաստ օբյեկտը։' }
+    ],
     heroLead: 'Ժամանակակից, հուսալի և երկարատև շինարարական լուծումներ՝ նախագծումից մինչև ամբողջական իրականացում։',
     viewWork: 'Դիտել աշխատանքները ↗', startProject: 'Սկսել նախագիծը →',
     heroSig1: 'ԳԱՂԱՓԱՐՆԵՐ / ԿԱՌՈՒՅՑՆԵՐ / ԻՐԱԿԱՆ ԱՐԴՅՈՒՆՔ', heroSig2: 'ԵՐԵՎԱՆ · ՀԱՅԱՍՏԱՆ',
-    trust1Label: 'տարի փորձ', trust2Label: 'լողավազանների նախագիծ', trust3Label: 'բնակելի տուն',
     philosophyEyebrow: 'GARON / ՓԻԼԻՍՈՓԱՅՈՒԹՅՈՒՆ',
     philosophyTitle1: 'Շինարարությունը', philosophyTitle2: 'միայն պատեր չէ։',
     philosophyText: 'Մենք կառուցում ենք այնպիսի արդյունք, որը պետք է լավ տեսք ունենա այսօր և ճիշտ ծառայի տարիներ անց։ Այդ պատճառով յուրաքանչյուր նախագիծ դիտարկում ենք որպես ամբողջական համակարգ՝ նյութերից ու կառուցվածքից մինչև մանրուքներ և վերջնական միջավայր։',
     philosophyLink: 'Բացահայտել GARON-ը →',
     capabilitiesEyebrow: 'ՀՆԱՐԱՎՈՐՈՒԹՅՈՒՆՆԵՐ',
-    capabilitiesTitle1: 'Մեկ թիմ։', capabilitiesTitle2: 'Չորս ուղղություն։',
-    capabilitiesLead: 'Լողավազաններ, բնակելի շինարարություն, վերանորոգում և հասարակական կառույցներ՝ մեկ պատասխանատու թիմի ներքո։',
+    capabilitiesTitle1: 'Մեկ թիմ։', capabilitiesTitle2: 'Երեք ուղղություն։',
+    capabilitiesLead: 'Լողավազաններ, բնակելի շինարարություն և վերանորոգում՝ մեկ պատասխանատու թիմի ներքո։',
     services: [
       { t: 'Լողավազանների կառուցում', d: 'Կառուցվածք, ինժեներական աշխատանքներ, հարդարում և վերջնական արդյունք։' },
       { t: 'Բնակելի տների կառուցում', d: 'Անհատական տուն՝ գաղափարից և հիմքից մինչև ամբողջական հանձնում։' },
@@ -44,8 +52,6 @@ export const home = {
     selectedWorkEyebrow: 'ԸՆՏՐՎԱԾ ԱՇԽԱՏԱՆՔ',
     selectedWorkTitle1: 'Աշխատանքը', selectedWorkTitle2: 'խոսում է ինքն իր մասին։',
     openArchive: 'Բացել ամբողջ արխիվը →',
-    card1Title: 'Լողավազան', card2Title: 'Լողավազան', card3Title: 'Տուն',
-    card1Meta: 'Լողավազան · ավարտված', card2Meta: 'Լողավազան · կառուցման փուլեր', card3Meta: 'Բնակելի տուն · ավարտված',
     statementEyebrow: 'ՄԱՐԴԻԿ · ՆԱԽԱԳԾԵՐ · ԱՌԱՋԸՆԹԱՑ',
     statementTitle1: 'Լավ կառուցված', statementTitle2: 'արդյունքը զգացվում է։',
     statementCta: 'Խոսենք ձեր նախագծի մասին ↗',
@@ -55,19 +61,27 @@ export const home = {
     calcTeaserCta: 'Բացել հաշվիչը ↗'
   },
   en: {
-    heroEyebrow: 'GARON CONSTRUCTION · 25+ YEARS',
+    heroEyebrow: 'GARON CONSTRUCTION · YEREVAN',
     heroTitle1: 'We Build', heroTitle2: 'solid foundations, lasting life.',
+    heroServices: 'Pools · Houses · Renovation', heroCalc: 'Estimate the cost ↗', heroRegion: 'Yerevan and regions',
+    wmServices: 'SERVICES', wmProjects: 'PROJECTS', wmProcess: 'PROCESS',
+    processEyebrow: 'HOW WE WORK', processTitle1: 'Four clear steps', processTitle2: 'from request to handover.',
+    processSteps: [
+      { t: 'Request', d: 'Write to us or use the calculator — we discuss the idea, the scope and the result you want.' },
+      { t: 'Survey and estimate', d: 'We study the site in person and prepare a detailed, item-by-item estimate.' },
+      { t: 'Contract and works', d: 'We agree on the stages and keep showing you the progress while we build.' },
+      { t: 'Handover', d: 'We check every detail and hand over the finished object.' }
+    ],
     heroLead: 'Modern, reliable and durable construction solutions — from design to full completion.',
     viewWork: 'View Our Work ↗', startProject: 'Start a Project →',
     heroSig1: 'IDEAS / STRUCTURES / REAL IMPACT', heroSig2: 'YEREVAN · ARMENIA',
-    trust1Label: 'years of experience', trust2Label: 'pool projects', trust3Label: 'residential homes',
     philosophyEyebrow: 'GARON / PHILOSOPHY',
     philosophyTitle1: 'Construction is', philosophyTitle2: 'more than just walls.',
     philosophyText: 'We build results that need to look good today and serve their purpose correctly for years to come. That is why we treat every project as a complete system — from materials and structure to the smallest details and the final environment.',
     philosophyLink: 'Discover GARON →',
     capabilitiesEyebrow: 'CAPABILITIES',
-    capabilitiesTitle1: 'One Team.', capabilitiesTitle2: 'Four Directions.',
-    capabilitiesLead: 'Pools, residential construction, renovation and public buildings — all under one accountable team.',
+    capabilitiesTitle1: 'One Team.', capabilitiesTitle2: 'Three Directions.',
+    capabilitiesLead: 'Pools, residential construction and renovation — all under one accountable team.',
     services: [
       { t: 'Swimming Pool Construction', d: 'Structure, engineering works, finishing and the final result.' },
       { t: 'Residential Construction', d: 'A custom home — from concept and foundation to full handover.' },
@@ -77,8 +91,6 @@ export const home = {
     selectedWorkEyebrow: 'SELECTED WORK',
     selectedWorkTitle1: 'The Work', selectedWorkTitle2: 'speaks for itself.',
     openArchive: 'View Full Archive →',
-    card1Title: 'Swimming Pool', card2Title: 'Swimming Pool', card3Title: 'House',
-    card1Meta: 'Swimming Pool · Completed', card2Meta: 'Swimming Pool · Under Construction', card3Meta: 'Residential Home · Completed',
     statementEyebrow: 'PEOPLE · PROJECTS · PROGRESS',
     statementTitle1: 'Good construction', statementTitle2: 'can be felt in the result.',
     statementCta: "Let's Talk About Your Project ↗",
@@ -88,19 +100,27 @@ export const home = {
     calcTeaserCta: 'Open the Calculator ↗'
   },
   ru: {
-    heroEyebrow: 'GARON CONSTRUCTION · 25+ ЛЕТ',
+    heroEyebrow: 'GARON CONSTRUCTION · ЕРЕВАН',
     heroTitle1: 'Мы строим', heroTitle2: 'прочный фундамент, долгую жизнь.',
+    heroServices: 'Бассейны · Дома · Ремонт', heroCalc: 'Рассчитать стоимость ↗', heroRegion: 'Ереван и регионы',
+    wmServices: 'УСЛУГИ', wmProjects: 'ПРОЕКТЫ', wmProcess: 'ПРОЦЕСС',
+    processEyebrow: 'КАК МЫ РАБОТАЕМ', processTitle1: 'Четыре понятных шага —', processTitle2: 'от заявки до сдачи.',
+    processSteps: [
+      { t: 'Заявка', d: 'Напишите нам или воспользуйтесь калькулятором — обсудим идею, объём и желаемый результат.' },
+      { t: 'Замер и смета', d: 'Изучаем объект на месте и готовим подробную смету по видам работ.' },
+      { t: 'Договор и работы', d: 'Согласуем этапы и регулярно показываем ход работ.' },
+      { t: 'Сдача', d: 'Проверяем каждую деталь и сдаём готовый объект.' }
+    ],
     heroLead: 'Современные, надёжные и долговечные строительные решения — от проектирования до полной сдачи объекта.',
     viewWork: 'Смотреть работы ↗', startProject: 'Начать проект →',
     heroSig1: 'ИДЕИ / КОНСТРУКЦИИ / РЕАЛЬНЫЙ РЕЗУЛЬТАТ', heroSig2: 'ЕРЕВАН · АРМЕНИЯ',
-    trust1Label: 'лет опыта', trust2Label: 'проектов бассейнов', trust3Label: 'жилых домов',
     philosophyEyebrow: 'GARON / ФИЛОСОФИЯ',
     philosophyTitle1: 'Строительство —', philosophyTitle2: 'это не только стены.',
     philosophyText: 'Мы создаём результат, который должен хорошо выглядеть сегодня и правильно служить долгие годы. Поэтому каждый проект мы рассматриваем как единую систему — от материалов и конструкции до мелких деталей и итоговой среды.',
     philosophyLink: 'Узнать больше о GARON →',
     capabilitiesEyebrow: 'ВОЗМОЖНОСТИ',
-    capabilitiesTitle1: 'Одна команда.', capabilitiesTitle2: 'Четыре направления.',
-    capabilitiesLead: 'Бассейны, жилищное строительство, ремонт и общественные здания — под руководством одной ответственной команды.',
+    capabilitiesTitle1: 'Одна команда.', capabilitiesTitle2: 'Три направления.',
+    capabilitiesLead: 'Бассейны, жилищное строительство и ремонт — под руководством одной ответственной команды.',
     services: [
       { t: 'Строительство бассейнов', d: 'Конструкция, инженерные работы, отделка и готовый результат.' },
       { t: 'Строительство жилых домов', d: 'Индивидуальный дом — от идеи и фундамента до полной сдачи.' },
@@ -110,8 +130,6 @@ export const home = {
     selectedWorkEyebrow: 'ИЗБРАННЫЕ РАБОТЫ',
     selectedWorkTitle1: 'Работа', selectedWorkTitle2: 'говорит сама за себя.',
     openArchive: 'Открыть весь архив →',
-    card1Title: 'Бассейн', card2Title: 'Бассейн', card3Title: 'Дом',
-    card1Meta: 'Бассейн · завершён', card2Meta: 'Бассейн · в процессе строительства', card3Meta: 'Жилой дом · завершён',
     statementEyebrow: 'ЛЮДИ · ПРОЕКТЫ · ПРОГРЕСС',
     statementTitle1: 'Хорошо построенный', statementTitle2: 'результат — это то, что чувствуется.',
     statementCta: 'Обсудим ваш проект ↗',
@@ -125,7 +143,7 @@ export const home = {
 export const about = {
   hy: {
     eyebrow: 'GARON-Ի ՄԱՍԻՆ',
-    title1: '25+ տարի', title2: 'կառուցում ենք վստահություն։',
+    title1: 'Կառուցում ենք', title2: 'վստահություն։',
     lead: 'GARON Construction-ի ճանապարհը սկսվել է լողավազանների կառուցումից և տարիների ընթացքում վերածվել է բազմաոլորտ շինարարական փորձի։',
     pathEyebrow: 'ՄԵՐ ՃԱՆԱՊԱՐՀԸ',
     pathTitle1: 'Փորձը մեզ համար', pathTitle2: 'գործիք է, ոչ թե թիվ։',
@@ -144,7 +162,7 @@ export const about = {
   },
   en: {
     eyebrow: 'ABOUT GARON',
-    title1: '25+ Years', title2: 'building trust.',
+    title1: 'We build', title2: 'trust.',
     lead: "GARON Construction's journey began with swimming pool construction and has grown over the years into multi-sector construction expertise.",
     pathEyebrow: 'OUR PATH',
     pathTitle1: 'For us, experience', pathTitle2: 'is a tool, not a number.',
@@ -163,7 +181,7 @@ export const about = {
   },
   ru: {
     eyebrow: 'О GARON',
-    title1: '25+ лет', title2: 'мы строим доверие.',
+    title1: 'Мы строим', title2: 'доверие.',
     lead: 'Путь GARON Construction начался со строительства бассейнов и за годы работы превратился в многопрофильный строительный опыт.',
     pathEyebrow: 'НАШ ПУТЬ',
     pathTitle1: 'Опыт для нас', pathTitle2: 'это инструмент, а не цифра.',
@@ -402,9 +420,19 @@ export const contact = {
     formName: 'Անուն', formEmail: 'Email', formPhone: 'Հեռախոս', formType: 'Նախագծի տեսակը', formMessage: 'Հաղորդագրություն',
     types: ['Լողավազան', 'Բնակելի տուն', 'Վերանորոգում', 'Հասարակական կառույց', 'Այլ'],
     required: 'Լրացրեք այս դաշտը',
-    contactRequired: 'Նշեք առնվազն մեկը՝ email կամ հեռախոս',
-    hint: 'Կբացվի ձեր էլ. փոստի ծրագիրը՝ պատրաստի նամակով։',
+    phoneRequired: 'Նշեք հեռախոսահամարը (օր.՝ +374 91 123 456)',
+    emailInvalid: 'Email-ը սխալ է',
+    optional: '(ոչ պարտադիր)',
+    hint: '* — պարտադիր դաշտեր',
+    sending: 'Ուղարկվում է…',
+    successTitle: 'Շնորհակալություն, հայտը ստացվել է։',
+    successText: 'Մենք կկապվենք ձեզ հետ նշված հեռախոսահամարով՝ հաջորդ քայլը քննարկելու համար։',
+    errorText: 'Չհաջողվեց ուղարկել։ Փորձեք կրկին կամ գրեք մեզ՝',
     sentNote: 'Եթե նամակը չբացվեց, գրեք ուղղակի՝',
+    formProject: 'Նախագիծ', formBudget: 'Բյուջե', formPlot: 'Հողակտոր ունե՞ք',
+    budgets: ['Նշված չէ', 'մինչև 10 մլն ֏', '10–30 մլն ֏', '30–60 մլն ֏', '60 մլն ֏-ից', 'Դեռ չգիտեմ'],
+    plots: ['Այո', 'Ոչ', 'Դեռ որոշում եմ'],
+    privacy: 'Ձեր տվյալներն օգտագործվում են միայն ձեզ հետ կապվելու համար։',
     estimateLine: 'Հաշվիչի արդյունքը'
   },
   en: {
@@ -420,9 +448,19 @@ export const contact = {
     formName: 'Name', formEmail: 'Email', formPhone: 'Phone', formType: 'Project type', formMessage: 'Message',
     types: ['Swimming pool', 'Residential house', 'Renovation', 'Public building', 'Other'],
     required: 'Please fill in this field',
-    contactRequired: 'Enter at least one: email or phone',
-    hint: 'Your email app will open with a ready-to-send message.',
+    phoneRequired: 'Enter your phone number (e.g. +374 91 123 456)',
+    emailInvalid: 'Email is not valid',
+    optional: '(optional)',
+    hint: '* — required fields',
+    sending: 'Sending…',
+    successTitle: 'Thank you, your request has been received.',
+    successText: 'We will contact you at the phone number you provided to discuss the next step.',
+    errorText: 'Sending failed. Please try again or write to us:',
     sentNote: 'If nothing opened, write to us directly:',
+    formProject: 'Project', formBudget: 'Budget', formPlot: 'Do you have a plot?',
+    budgets: ['Not specified', 'up to 10M ֏', '10–30M ֏', '30–60M ֏', '60M ֏ and more', "Don't know yet"],
+    plots: ['Yes', 'No', 'Still deciding'],
+    privacy: 'Your details are used only to contact you.',
     estimateLine: 'Calculator estimate'
   },
   ru: {
@@ -438,9 +476,19 @@ export const contact = {
     formName: 'Имя', formEmail: 'Email', formPhone: 'Телефон', formType: 'Тип проекта', formMessage: 'Сообщение',
     types: ['Бассейн', 'Жилой дом', 'Ремонт', 'Общественное здание', 'Другое'],
     required: 'Заполните это поле',
-    contactRequired: 'Укажите хотя бы одно: email или телефон',
-    hint: 'Откроется ваша почтовая программа с готовым письмом.',
+    phoneRequired: 'Укажите номер телефона (например, +374 91 123 456)',
+    emailInvalid: 'Неверный email',
+    optional: '(необязательно)',
+    hint: '* — обязательные поля',
+    sending: 'Отправка…',
+    successTitle: 'Спасибо, заявка получена.',
+    successText: 'Мы свяжемся с вами по указанному номеру телефона, чтобы обсудить следующий шаг.',
+    errorText: 'Не удалось отправить. Попробуйте ещё раз или напишите нам:',
     sentNote: 'Если письмо не открылось, напишите нам напрямую:',
+    formProject: 'Проект', formBudget: 'Бюджет', formPlot: 'Есть ли у вас участок?',
+    budgets: ['Не указан', 'до 10 млн ֏', '10–30 млн ֏', '30–60 млн ֏', 'от 60 млн ֏', 'Пока не знаю'],
+    plots: ['Да', 'Нет', 'Ещё решаю'],
+    privacy: 'Ваши данные используются только для связи с вами.',
     estimateLine: 'Расчёт из калькулятора'
   }
 };
@@ -488,6 +536,7 @@ export const calculator = {
     resultLabel: 'Մոտավոր արժեքը',
     perSqm: '/ մ²',
     startingFrom: 'սկսած',
+    estimateNote: 'Մոտավոր գնահատական․ վերջնական գինը՝ չափագրումից հետո։',
     disclaimer: 'Սա միայն կողմնորոշիչ հաշվարկ է։ Վերջնական գինը կախված է հողատարածքից, նախագծից, նյութերից և այլ գործոններից։ Ճշգրիտ նախահաշվի համար կապվեք մեզ հետ։',
     cta: 'Ստանալ ճշգրիտ նախահաշիվ ↗',
     enterArea: 'Մուտքագրեք մակերեսը՝ հաշվարկը տեսնելու համար'
@@ -534,6 +583,7 @@ export const calculator = {
     resultLabel: 'Approximate Cost',
     perSqm: '/ m²',
     startingFrom: 'starting from',
+    estimateNote: 'Approximate estimate. The final price is set after on-site measurement.',
     disclaimer: 'This is only an indicative estimate. The final price depends on the site, design, materials and other factors. Contact us for an accurate quote.',
     cta: 'Get an Accurate Quote ↗',
     enterArea: 'Enter the area to see the calculation'
@@ -580,6 +630,7 @@ export const calculator = {
     resultLabel: 'Примерная стоимость',
     perSqm: '/ м²',
     startingFrom: 'от',
+    estimateNote: 'Примерная оценка. Окончательная цена — после замеров на объекте.',
     disclaimer: 'Это только ориентировочный расчёт. Итоговая цена зависит от участка, проекта, материалов и других факторов. Свяжитесь с нами для точной сметы.',
     cta: 'Получить точную смету ↗',
     enterArea: 'Введите площадь, чтобы увидеть расчёт'
@@ -589,15 +640,21 @@ export const calculator = {
 export const serviceProjects = {
   hy: {
     pool: { title1: 'Մեր կառուցած', title2: 'լողավազանները։' },
-    residential: { title1: 'Մեր կառուցած', title2: 'տները։' }
+    residential: { title1: 'Մեր կառուցած', title2: 'տները։' },
+    renovation: { title1: 'Մեր', title2: 'վերանորոգումները։' },
+    public: { title1: 'Մեր կառուցած', title2: 'օբյեկտները։' }
   },
   en: {
     pool: { title1: 'Pools', title2: 'We Have Built.' },
-    residential: { title1: 'Homes', title2: 'We Have Built.' }
+    residential: { title1: 'Homes', title2: 'We Have Built.' },
+    renovation: { title1: 'Spaces', title2: 'We Have Renovated.' },
+    public: { title1: 'Facilities', title2: 'We Have Built.' }
   },
   ru: {
     pool: { title1: 'Бассейны,', title2: 'которые мы построили.' },
-    residential: { title1: 'Дома,', title2: 'которые мы построили.' }
+    residential: { title1: 'Дома,', title2: 'которые мы построили.' },
+    renovation: { title1: 'Помещения,', title2: 'которые мы отремонтировали.' },
+    public: { title1: 'Объекты,', title2: 'которые мы построили.' }
   }
 };
 
@@ -605,45 +662,86 @@ export const projectsArchive = {
   hy: {
     eyebrow: 'GARON / ԱՐԽԻՎ', title1: 'Իրական աշխատանքներ։', title2: 'Իրական արդյունքներ։',
     lead: 'Մեր նախագծերը ներկայացված են ոչ միայն վերջնական լուսանկարով, այլ այնտեղ, որտեղ հնարավոր է՝ ամբողջ շինարարական պատմությամբ։',
-    poolsEyebrow: '01 / ԼՈՂԱՎԱԶԱՆՆԵՐ', poolsTitle1: 'Լողավազաններ', poolsTitle2: 'Իրական օրինակներ',
-    poolsText: 'Յուրաքանչյուր լողավազան առանձին նախագիծ է։ Բացիր այն և տես իրական փուլերը՝ կառուցվածքից մինչև վերջնական տեսքը։',
-    residentialEyebrow: '02 / ԲՆԱԿԵԼԻ', residentialTitle1: 'Բնակելի', residentialTitle2: 'առանձնատներ',
-    residentialText: 'Տունը ներկայացնում է զրոյական վիճակից մինչև պատրաստ տուն ամբողջ ճանապարհը՝ մեկ նախագծի էջում։',
-    openHouse: 'Բացել Տունը →', houseCardTitle: 'Տուն', houseCardMeta: 'Բնակելի առանձնատուն · ավարտված',
     nextEyebrow: 'ՀԱՋՈՐԴԸ', nextTitle1: 'Ձեր նախագիծը', nextTitle2: 'կարող է լինել այստեղ։', nextCta: 'Սկսել նախագիծը ↗'
   },
   en: {
     eyebrow: 'GARON / PROJECT ARCHIVE', title1: 'Real Work.', title2: 'Real Results.',
     lead: 'Our projects are presented not only with a final photo, but — wherever possible — with the full construction story.',
-    poolsEyebrow: '01 / SWIMMING POOLS', poolsTitle1: 'Swimming Pools', poolsTitle2: 'Real Examples',
-    poolsText: 'Each pool is a separate project. Open it and see the real stages — from structure to final look.',
-    residentialEyebrow: '02 / RESIDENTIAL', residentialTitle1: 'Residential', residentialTitle2: 'Homes',
-    residentialText: 'The house shows the entire journey from ground zero to a finished home, on a single project page.',
-    openHouse: 'Open the House →', houseCardTitle: 'House', houseCardMeta: 'Residential Home · Completed',
     nextEyebrow: 'NEXT', nextTitle1: 'Your project', nextTitle2: 'could be here.', nextCta: 'Start a Project ↗'
   },
   ru: {
     eyebrow: 'GARON / АРХИВ ПРОЕКТОВ', title1: 'Реальная работа.', title2: 'Реальные результаты.',
     lead: 'Наши проекты представлены не только итоговым фото, но, где это возможно, — всей историей строительства.',
-    poolsEyebrow: '01 / БАССЕЙНЫ', poolsTitle1: 'Бассейны', poolsTitle2: 'Реальные примеры',
-    poolsText: 'Каждый бассейн — отдельный проект. Откройте его и посмотрите реальные этапы — от конструкции до финального вида.',
-    residentialEyebrow: '02 / ЖИЛЫЕ ДОМА', residentialTitle1: 'Жилые', residentialTitle2: 'дома',
-    residentialText: 'Дом показывает весь путь от нуля до готового дома на одной странице проекта.',
-    openHouse: 'Открыть дом →', houseCardTitle: 'Дом', houseCardMeta: 'Жилой дом · завершён',
     nextEyebrow: 'ДАЛЕЕ', nextTitle1: 'Ваш проект', nextTitle2: 'может быть здесь.', nextCta: 'Начать проект ↗'
   }
 };
 
-export const splash = {
-  hy: { est: 'ՀԻՄՆ. 2000', trade: 'ՇԻՆԱՐԱՐՈՒԹՅՈՒՆ', welcome: 'ԲԱՐԻ ԳԱԼՈՒՍՏ' },
-  en: { est: 'EST. 2000', trade: 'CONSTRUCTION', welcome: 'WELCOME' },
-  ru: { est: 'ОСН. 2000', trade: 'СТРОИТЕЛЬСТВО', welcome: 'ДОБРО ПОЖАЛОВАТЬ' }
+// Նախագծերի բաժիններ, փաստեր և փուլեր (նախագծերի էջեր, քարտեր, արխիվ)
+export const projectUi = {
+  hy: {
+    categories: {
+      pools: { tag: 'ԼՈՂԱՎԱԶԱՆ', type: 'Լողավազան', eyebrow: 'ԼՈՂԱՎԱԶԱՆՆԵՐ', title1: 'Լողավազաններ', title2: 'Իրական օրինակներ', text: 'Յուրաքանչյուր լողավազան առանձին նախագիծ է։ Բացիր այն և տես իրական փուլերը՝ կառուցվածքից մինչև վերջնական տեսքը։' },
+      houses: { tag: 'ԲՆԱԿԵԼԻ', type: 'Բնակելի', eyebrow: 'ԲՆԱԿԵԼԻ', title1: 'Բնակելի', title2: 'առանձնատներ', text: 'Յուրաքանչյուր տուն ներկայացված է ամբողջ ճանապարհով՝ զրոյական վիճակից մինչև պատրաստ տուն։' },
+      renovation: { tag: 'ՎԵՐԱՆՈՐՈԳՈՒՄ', type: 'Վերանորոգում', eyebrow: 'ՎԵՐԱՆՈՐՈԳՈՒՄ', title1: 'Վերանորոգում', title2: 'և վերակառուցում', text: 'Տարածքի վերափոխումը՝ սկզբնական վիճակից մինչև վերջնական արդյունք։' },
+      public: { tag: 'ՀԱՍԱՐԱԿԱԿԱՆ', type: 'Հասարակական կառույց', eyebrow: 'ՀԱՍԱՐԱԿԱԿԱՆ', title1: 'Հասարակական', title2: 'կառույցներ', text: 'Հասարակական և կոմերցիոն օբյեկտներ՝ փուլ առ փուլ։' }
+    },
+    projectEyebrow: 'ՆԱԽԱԳԻԾ',
+    facts: { type: 'ՏԵՍԱԿ', status: 'ԿԱՐԳԱՎԻՃԱԿ', location: 'ՎԱՅՐ', area: 'ՄԱԿԵՐԵՍ', duration: 'ՏԵՎՈՂՈՒԹՅՈՒՆ', year: 'ՏԱՐԻ', areaUnit: 'մ²' },
+    status: { completed: 'Ավարտված', 'in-progress': 'Ընթացքի մեջ' },
+    stages: { start: 'Սկիզբ', progress: 'Ընթացք', result: 'Արդյունք' },
+    introEyebrow: 'ԳՈՐԾԸՆԹԱՑԸ', introEyebrowSingle: 'ՆԱԽԱԳԻԾ',
+    introTitle: 'Սկիզբից մինչև', introTitle2: 'վերջնական արդյունք։',
+    nextEyebrow: 'ՀԱՋՈՐԴ ՆԱԽԱԳԻԾԸ', startEyebrow: 'ՍԿՍԵՔ ՁԵՐ ՆԱԽԱԳԻԾԸ', startTitle: 'Ձեր գաղափարը', startTitle2: 'հաջորդը կարող է լինել։',
+    leadEyebrow: 'ՀԱՅՏ', leadTitle1: 'Ուզո՞ւմ եք', leadTitle2: 'նման նախագիծ։', leadText: 'Թողեք հայտ․ նախագիծը կնշվի ավտոմատ։ Մենք կկապվենք ձեզ հետ՝ հաշվարկը և հաջորդ քայլը քննարկելու համար։', galleryTitle: 'Պատկերասրահ', photos: 'լուսանկար', close: 'Փակել', prev: 'Նախորդը', next: 'Հաջորդը', viewNext: 'Դիտել նախագիծը →',
+    photo: 'լուսանկար'
+  },
+  en: {
+    categories: {
+      pools: { tag: 'POOL', type: 'Swimming Pool', eyebrow: 'SWIMMING POOLS', title1: 'Swimming Pools', title2: 'Real Examples', text: 'Each pool is a separate project. Open it and see the real stages — from structure to final look.' },
+      houses: { tag: 'RESIDENTIAL', type: 'Residential', eyebrow: 'RESIDENTIAL', title1: 'Residential', title2: 'Homes', text: 'Each house is shown with its entire journey — from ground zero to a finished home.' },
+      renovation: { tag: 'RENOVATION', type: 'Renovation', eyebrow: 'RENOVATION', title1: 'Renovation', title2: '& Reconstruction', text: 'Transforming a space — from its original state to the final result.' },
+      public: { tag: 'PUBLIC', type: 'Public building', eyebrow: 'PUBLIC BUILDINGS', title1: 'Public', title2: 'Buildings', text: 'Public and commercial facilities, stage by stage.' }
+    },
+    projectEyebrow: 'PROJECT',
+    facts: { type: 'TYPE', status: 'STATUS', location: 'LOCATION', area: 'AREA', duration: 'DURATION', year: 'YEAR', areaUnit: 'm²' },
+    status: { completed: 'Completed', 'in-progress': 'In progress' },
+    stages: { start: 'Start', progress: 'In progress', result: 'Result' },
+    introEyebrow: 'THE PROCESS', introEyebrowSingle: 'PROJECT',
+    introTitle: 'From Start', introTitle2: 'to Final Result.',
+    nextEyebrow: 'NEXT PROJECT', startEyebrow: 'START YOUR PROJECT', startTitle: 'Your Idea', startTitle2: 'could be next.',
+    leadEyebrow: 'REQUEST', leadTitle1: 'Want a project', leadTitle2: 'like this one?', leadText: 'Leave a request — this project is noted automatically. We will contact you to discuss the estimate and the next step.', galleryTitle: 'Gallery', photos: 'photos', close: 'Close', prev: 'Previous', next: 'Next', viewNext: 'View project →',
+    photo: 'photo'
+  },
+  ru: {
+    categories: {
+      pools: { tag: 'БАССЕЙН', type: 'Бассейн', eyebrow: 'БАССЕЙНЫ', title1: 'Бассейны', title2: 'Реальные примеры', text: 'Каждый бассейн — отдельный проект. Откройте его и посмотрите реальные этапы — от конструкции до финального вида.' },
+      houses: { tag: 'ЖИЛОЙ ДОМ', type: 'Жилой', eyebrow: 'ЖИЛЫЕ ДОМА', title1: 'Жилые', title2: 'дома', text: 'Каждый дом показан со всем путём — от нуля до готового дома.' },
+      renovation: { tag: 'РЕМОНТ', type: 'Ремонт', eyebrow: 'РЕМОНТ', title1: 'Ремонт', title2: 'и реконструкция', text: 'Преображение помещения — от исходного состояния до финального результата.' },
+      public: { tag: 'ОБЩЕСТВЕННОЕ', type: 'Общественное здание', eyebrow: 'ОБЩЕСТВЕННЫЕ ЗДАНИЯ', title1: 'Общественные', title2: 'здания', text: 'Общественные и коммерческие объекты — этап за этапом.' }
+    },
+    projectEyebrow: 'ПРОЕКТ',
+    facts: { type: 'ТИП', status: 'СТАТУС', location: 'МЕСТО', area: 'ПЛОЩАДЬ', duration: 'СРОК', year: 'ГОД', areaUnit: 'м²' },
+    status: { completed: 'Завершён', 'in-progress': 'В процессе' },
+    stages: { start: 'Начало', progress: 'Процесс', result: 'Результат' },
+    introEyebrow: 'ПРОЦЕСС', introEyebrowSingle: 'ПРОЕКТ',
+    introTitle: 'От начала', introTitle2: 'до финального результата.',
+    nextEyebrow: 'СЛЕДУЮЩИЙ ПРОЕКТ', startEyebrow: 'НАЧНИТЕ СВОЙ ПРОЕКТ', startTitle: 'Ваша идея', startTitle2: 'может быть следующей.',
+    leadEyebrow: 'ЗАЯВКА', leadTitle1: 'Хотите', leadTitle2: 'такой же проект?', leadText: 'Оставьте заявку — проект отметится автоматически. Мы свяжемся с вами, чтобы обсудить расчёт и следующий шаг.', galleryTitle: 'Галерея', photos: 'фото', close: 'Закрыть', prev: 'Назад', next: 'Вперёд', viewNext: 'Смотреть проект →',
+    photo: 'фото'
+  }
 };
 
-export const heroLabel = {
-  hy: 'GARON / 3D ՆԱԽԱԳԻԾ',
-  en: 'GARON / 3D STUDY',
-  ru: 'GARON / 3D-ЭТЮД'
+// Կապի կոճակներ (header, footer, կապի էջ, մոբայլ sticky գոտի)
+export const contactUi = {
+  hy: { call: 'Զանգել', whatsapp: 'WhatsApp', viber: 'Viber', telegram: 'Telegram', estimate: 'Հաշվարկ', write: 'Գրել մեզ', region: 'Երևան և մարզեր', areaLabel: 'ԱՇԽԱՏԱՆՔԻ ՏԱՐԱԾՔ', addressLabel: 'ՀԱՍՑԵ', openMap: 'Բացել քարտեզում ↗', messengersLabel: 'ՄԵՍԵՆՋԵՐՆԵՐ', contactsLabel: 'ԿԱՊ', quick: 'Արագ կապ' },
+  en: { call: 'Call', whatsapp: 'WhatsApp', viber: 'Viber', telegram: 'Telegram', estimate: 'Estimate', write: 'Write to us', region: 'Yerevan and regions', areaLabel: 'SERVICE AREA', addressLabel: 'ADDRESS', openMap: 'Open in Maps ↗', messengersLabel: 'MESSENGERS', contactsLabel: 'CONTACT', quick: 'Quick contact' },
+  ru: { call: 'Позвонить', whatsapp: 'WhatsApp', viber: 'Viber', telegram: 'Telegram', estimate: 'Расчёт', write: 'Написать', region: 'Ереван и регионы', areaLabel: 'ГЕОГРАФИЯ РАБОТ', addressLabel: 'АДРЕС', openMap: 'Открыть на карте ↗', messengersLabel: 'МЕССЕНДЖЕРЫ', contactsLabel: 'КОНТАКТЫ', quick: 'Быстрая связь' }
+};
+
+export const splash = {
+  hy: { est: 'ԵՐԵՎԱՆ', trade: 'ՇԻՆԱՐԱՐՈՒԹՅՈՒՆ', welcome: 'ԲԱՐԻ ԳԱԼՈՒՍՏ' },
+  en: { est: 'YEREVAN', trade: 'CONSTRUCTION', welcome: 'WELCOME' },
+  ru: { est: 'ЕРЕВАН', trade: 'СТРОИТЕЛЬСТВО', welcome: 'ДОБРО ПОЖАЛОВАТЬ' }
 };
 
 export const notFound = {

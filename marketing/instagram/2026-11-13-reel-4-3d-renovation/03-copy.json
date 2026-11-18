@@ -1,0 +1,23 @@
+{
+  "R4": {
+    "type": "reel",
+    "publish_date": "TBD (owner)",
+    "status": "draft — needs owner approval",
+    "format": "1080×1920, 22 s, 30 fps; sound 0–6 s (logo intro), silence after — owner adds music in Instagram",
+    "scenes": [
+      { "t": "0-6", "asset": "L02 լոգոյի ինտրո (իր ձայնով)", "text": "" },
+      { "t": "6-7", "asset": "Լուսավոր կադրից՝ չվերանորոգված բնակարան (բետոնե առաստաղ, գազոբլոկ պատեր, սկրիդ)", "text": "" },
+      { "t": "7-9", "asset": "Կապույտ լազերային գծեր հատակին → ալիք հայելու վրա → լոգարանային գոտի (մուգ պանելներ, կլոր հայելի, լվացարան, կախովի զուգարան)", "text": "" },
+      { "t": "9-11.5", "asset": "Լազերային գծեր → ներկառուցված զգեստապահարան՝ տաք LED դարակներով, բարձրանում է ներքևից վերև", "text": "" },
+      { "t": "11.5-13.5", "asset": "Լազերային ցանց → կաղնե հատակը տարածվում է ամբողջ սենյակով", "text": "" },
+      { "t": "13.5-16", "asset": "Տեսախցիկը թեքվում է աջ → բազմոց, սեղան, գորգ, ծառ, փայտե շերտավոր պատ", "text": "" },
+      { "t": "16-19", "asset": "Առաստաղ, լուսատուներ, մնացած պատեր → պատրաստի ինտերիեր", "text": "" },
+      { "t": "19-22", "asset": "Վերջնական կադր", "text": "GARON · Լողավազաններ · Տներ · Վերանորոգում · garon.am" }
+    ],
+    "caption_hy": "Մոխրագույն բետոնից՝ պատրաստի տուն։\n\nԱյս տեսանյութը 3D վիզուալիզացիա է. ցույց ենք տալիս, թե ինչպես է չվերանորոգված բնակարանը՝ բետոնե առաստաղով, գազոբլոկ պատերով և սկրիդով, գոտի առ գոտի դառնում պատրաստի ինտերիեր՝ լոգարանային գոտի, ներկառուցված զգեստապահարան, կաղնե հատակ, հյուրասենյակ և լուսավորություն։\n\nՍա վերանորոգման օրինակ է, ոչ թե GARON-ի կոնկրետ օբյեկտ։\n\nԲնակարանների և տների վերանորոգում՝ GARON Construction. garon.am",
+    "caption_ru": "Из серого бетона — в готовый дом.\n\nЭто видео — 3D-визуализация: показываем, как квартира без ремонта (бетонный потолок, стены из газоблока, стяжка) зона за зоной превращается в готовый интерьер — санузел, встроенный гардероб, дубовый пол, гостиная и свет.\n\nЭто пример ремонта, а не конкретный объект GARON.\n\nРемонт квартир и домов — GARON Construction. garon.am",
+    "caption_en": "From bare concrete to a finished home.\n\nThis video is a 3D visualization: it shows how an unrenovated apartment (raw concrete ceiling, gas-block walls, screed floor) turns, zone by zone, into a finished interior: bathroom area, built-in wardrobe, oak floor, living area and lighting.\n\nIt is an example of a renovation, not a specific GARON project.\n\nApartment and house renovation by GARON Construction. garon.am",
+    "hashtags": ["#վերանորոգում", "#ремонтквартир", "#Yerevan", "#interiordesign", "#GARONConstruction"],
+    "notes": "No hook text, no CTA, no @handle on screen (owner-preferences.md). The caption must keep the line that this is a 3D visualization and not a GARON project."
+  }
+}

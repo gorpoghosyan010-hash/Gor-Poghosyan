@@ -1,20 +1,19 @@
 import type { Metadata, Viewport } from 'next';
-import { Montserrat, Noto_Sans_Armenian, Cormorant_Garamond, Noto_Serif_Armenian } from 'next/font/google';
+import { Noto_Sans, Noto_Sans_Armenian } from 'next/font/google';
 import './globals.css';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Splash from '../components/Splash';
 import PageTitle from '../components/PageTitle';
+import MobileContactBar from '../components/MobileContactBar';
+import ScrollFx from '../components/ScrollFx';
 import { LanguageProvider } from '../components/LanguageContext';
 import { pageMeta, siteUrl, SITE_NAME } from '../content/seo';
 import { siteConfig } from '../content/siteConfig';
 
-// Montserrat-ը հայկական տառեր չունի, ուստի հայերենի համար առանձին (ինքնուրույն հյուրընկալվող) տառատեսակ
-const montserrat = Montserrat({ subsets: ['latin', 'cyrillic'], display: 'swap', variable: '--font-montserrat' });
+// Մեկ ընտանիք երեք լեզվի համար՝ Noto Sans (լատինական + կիրիլիցա) և Noto Sans Armenian (նույն մետրիկա)
+const latin = Noto_Sans({ subsets: ['latin', 'cyrillic'], display: 'swap', variable: '--font-latin' });
 const armenian = Noto_Sans_Armenian({ subsets: ['armenian'], display: 'swap', variable: '--font-armenian' });
-// Խոշոր վերնագրերի համար՝ նուրբ, լայն տառաշարով սերիֆ
-const cormorant = Cormorant_Garamond({ subsets: ['latin', 'cyrillic'], weight: ['300', '400', '500'], display: 'swap', variable: '--font-cormorant' });
-const serifArmenian = Noto_Serif_Armenian({ subsets: ['armenian'], weight: ['300', '400', '500'], display: 'swap', variable: '--font-serif-armenian' });
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -27,7 +26,7 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true }
 };
 
-export const viewport: Viewport = { themeColor: '#0c0d0e' };
+export const viewport: Viewport = { themeColor: '#f5f5f3' };
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -43,11 +42,12 @@ const jsonLd = {
 };
 
 // Ընտրված (ոչ հայերեն) լեզվի դեպքում էջը թաքցվում է մինչև լեզվի կիրառումը՝ հայերենի կարճ «առկայծումից» խուսափելու համար
-const langBoot = "(function(){var d=document.documentElement;try{var l=localStorage.getItem('garon-lang');if(l==='en'||l==='ru'){d.lang=l;d.classList.add('langPending');setTimeout(function(){d.classList.remove('langPending')},2500)}}catch(e){}})();";
+// Splash՝ միայն սեսիայի առաջին էջում և առանց prefers-reduced-motion-ի (առանց JS-ի՝ երբեք)
+const langBoot = "(function(){var d=document.documentElement;try{var l=localStorage.getItem('garon-lang');if(l==='en'||l==='ru'){d.lang=l;d.classList.add('langPending');setTimeout(function(){d.classList.remove('langPending')},2500)}}catch(e){}try{if(!sessionStorage.getItem('garon-splash-seen')&&!(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches)){d.classList.add('splashOn');setTimeout(function(){d.classList.remove('splashOn')},1500)}}catch(e){}})();";
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="hy" className={`${montserrat.variable} ${armenian.variable} ${cormorant.variable} ${serifArmenian.variable}`} suppressHydrationWarning>
+    <html lang="hy" className={`${latin.variable} ${armenian.variable}`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: langBoot }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
@@ -56,9 +56,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <LanguageProvider>
           <PageTitle />
           <Splash />
+          <ScrollFx />
           <Header />
           {children}
           <Footer />
+          <MobileContactBar />
         </LanguageProvider>
       </body>
     </html>

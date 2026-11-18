@@ -1,0 +1,2794 @@
+{
+ "spec_version": "r3-2",
+ "batch": "2026-11-12-reel-3-renovation",
+ "generated": "2026-11-12",
+ "source_files": [
+  "marketing/instagram/owner-preferences.md",
+  "marketing/instagram/owner-decisions.md",
+  "marketing/instagram/2026-11-12-reel-2/04-render-spec.json (items.R2 v2: intro, gold piece, labels, end card, styles)",
+  "marketing/instagram/assets/stock/CREDITS.md (5 Unsplash interiors, R3 v2)"
+ ],
+ "brand": {
+  "colors": {
+   "gold": "#c9a96a",
+   "gold_dark_on_light": "#856727",
+   "ink": "#17191c",
+   "dark": "#0c0d0e",
+   "dark2": "#151719",
+   "paper": "#f5f5f3",
+   "gray": "#70757b",
+   "rule_gold": "rgba(201,169,106,0.55)",
+   "rule_light": "rgba(255,255,255,0.15)"
+  },
+  "fonts": {
+   "display": {
+    "stack": "'Cormorant Garamond','Noto Serif Armenian',Georgia,serif",
+    "note": "Cormorant has no Armenian glyphs: Armenian falls back to Noto Serif Armenian (intended). Latin/digits render in Cormorant.",
+    "weights": [
+     300,
+     400,
+     500
+    ],
+    "source": "Google Fonts"
+   },
+   "text": {
+    "stack": "'Montserrat','Noto Sans Armenian',Arial,sans-serif",
+    "weights": [
+     400,
+     500,
+     600
+    ],
+    "source": "Google Fonts"
+   }
+  },
+  "logo": {
+   "on_light": "public/brand/garon-logo-light.svg",
+   "note": "File names are inverted vs. intuition: garon-logo-dark.* is the WHITE/gold logo (for dark backgrounds), as used by components/Logo.tsx with light=true. Round 1: vector logo, viewBox 0 0 425 310 (same box as the old 425x310 PNG, so all x/y/w/h below are unchanged). The mark was REDRAWN (commit 5958932), visible content bbox in viewBox units x 32.5..388.5, y 24..290 (old raster: 29..392, 21..291). garon-mark-*.svg = mark only, viewBox 70 16 288 168 (not used in this batch)."
+  }
+ },
+ "items": {
+  "R3": {
+   "type": "reel",
+   "title": "«Վերանորոգում · Առաջ → Հետո» v3 — unrenovated spaces BECOME renovated: geometry-matched RAW → PROGRESS → FINISHED photo sequences (no line art)",
+   "version": "v3",
+   "status": "draft for owner review",
+   "honesty": "After the intro every photo is licensed stock (Pexels / Unsplash, marketing/instagram/assets/stock/CREDITS.md), NOT a GARON project. Each sequence is built from DIFFERENT real rooms whose geometry was matched (04-R3-prep.py) to illustrate the stages of a renovation; only s3_prog → s3_fin is one real room photographed at two stages (same Pexels series). Nothing says or implies «մեր աշխատանքը / our project»; the caption (03-copy.json R3, hy/ru/en) says the footage is illustrative stock showing renovation stages.",
+   "replaced_v2": "v2 («Գծագիր → Իրականություն»: line drawings generated from finished interiors) replaced on owner feedback 2026-11-12: «You didn't pick good photos. Work longer, but make it NOT line drawings — an UNRENOVATED part of a house that BECOMES renovated.»",
+   "replaced_v1": "v1 (procedural flat SVG room, built stage by stage) replaced on owner feedback 2026-11-12: «Make it REALISTIC» + «fast, quick cuts, several shots».",
+   "method": "html_frame_stepped",
+   "duration": 26.0,
+   "fps": 30,
+   "frames": 780,
+   "size": [
+    1080,
+    1920
+   ],
+   "output": "R3_reel.mp4",
+   "cover_output": "R3_cover.jpg",
+   "renderer": "marketing/instagram/2026-11-12-reel-3-renovation/04-R3-renderer.js — usage: NODE_PATH=$(npm root -g) node 04-R3-renderer.js <repo_root> <out_dir> [all|cover|0,30,...]. Step 1 (automatic if <out_dir>/_prep/manifest.json is missing): python3 04-R3-prep.py <repo_root> <out_dir>/_prep → one aligned, graded image per shot <id>.jpg in window-local coordinates. Writes R3_%03d.png, R3_cover.png, measure.json; f0–179 are delegated to tools/render_l02_frames.js. If code and spec disagree, the spec wins.",
+   "prep": {
+    "script": "marketing/instagram/2026-11-12-reel-3-renovation/04-R3-prep.py",
+    "requires": "python3, numpy, opencv-python-headless",
+    "usage": "python3 04-R3-prep.py <repo_root> <out_dir> [ids] [--debug]  (--debug: <out_dir>/_dbg/<a>__<b>.jpg = A | 50 % blend | edge overlay (red A, blue B, black = coincident) | B, for checking the alignment of consecutive stages)",
+    "px_per_unit": 1.1,
+    "note": "every shot image covers its `extent` (window units; window = 940×1253) at 1.1 px per unit; the renderer places it at extent[0..1] and scales it to the extent size. Mapping = similarity (uniform scale + translation) from landmark pairs to the sequence anchor (a 3:4 crop). Prep refuses nothing silently: it prints coverage (must be 1.0) and max on-screen upscale (must be ≤ 1.35) per shot."
+   },
+   "needs_shoot": false,
+   "needs_shoot_note": "v3 needs no shoot (illustrative stock). Recommended for a later honest «GARON Առաջ → Հետո» reel: see shoot_list_future.",
+   "shoot_list_future": {
+    "what": "the same format with GARON's OWN renovation: film every room from ONE fixed tripod mark at each stage (before demolition, after demolition, rough plaster/plumbing, floor laid, finished + furnished)",
+    "phone": "4K 30 fps, vertical 9:16, 1× lens (24–26 mm equiv.), locked exposure/white balance (AE/AF lock), HDR off, grid on",
+    "per_room": [
+     "mark the tripod position on the floor (tape + photo of the mark), height 1.45 m, level, same heading — note it in the site log",
+     "10 s static clip + 1 still at each stage from the mark",
+     "3 detail clips 5 s each: window, floor at the skirting, a light source / socket",
+     "one slow 6 s push-in from the mark (no gimbal swings)"
+    ],
+    "duration": "≈ 2 min per room per stage",
+    "privacy": "no people/faces, no client documents, no street numbers through windows"
+   },
+   "encode": "python3 marketing/instagram/tools/compose_l02_audio.py intro_r3.wav --intro-only && ffmpeg -framerate 30 -i R3_%03d.png -i intro_r3.wav -map 0:v -map 1:a -c:v libx264 -profile:v high -pix_fmt yuv420p -crf 18 -colorspace bt709 -color_primaries bt709 -color_trc bt709 -c:a aac -b:a 192k -ar 48000 -t 26 -movflags +faststart R3_reel.mp4 ; cover: python3 marketing/instagram/tools/png2jpg.py R3_cover.png R3_cover.jpg 92",
+   "timebase": {
+    "fps": 30,
+    "frames": 780,
+    "duration_s": 26.0,
+    "bpm": 120,
+    "frames_per_beat": 15,
+    "frames_per_bar": 60,
+    "note": "intro 0–179 (= L02 v4, 3 bars); every cut and every transition starts on a beat (multiple of 15) — details are 1-beat inserts; f780 = clean loop"
+   },
+   "acts": [
+    {
+     "act": "I intro (= L02 v4)",
+     "frames": "0–179",
+     "what": "identical L02 v4 logo build (no text), own sound"
+    },
+    {
+     "act": "II S1 «window»",
+     "frames": "180–284",
+     "what": "180 the gold piece opens the window on s1_raw (hollow-brick wall, new window, ladder); 210 gold slider wipe → s1_prog (same corner plastered, oak floor); 240 dissolve through light with golden motes → s1_fin (bedroom with black-framed glazing where the window was); 270 1-beat detail: restored window"
+    },
+    {
+     "act": "III S2 «opening»",
+     "frames": "285–389",
+     "what": "285 cut to s2_raw (raw opening between brick walls); 315 dissolve through light with plaster dust settling → s2_prog (white plastered opening); 345 material wipe: walls from the top, floor from the bottom, two thin gold level lines → s2_fin (limestone wall, portal, sofa); 375 detail: palm against the stone"
+    },
+    {
+     "act": "IV S3 «wall + floor»",
+     "frames": "390–509",
+     "what": "390 s3_raw (old brick kitchen wall, capped pipe stubs, windows above); 420 gold slider wipe → s3_prog (new panel wall, new plumbing, screed); 450 FLOOR reveal from the bottom → s3_fin (same room, oak floor laid), 466–492 camera pulls back and pans to the window; 495 detail: oak floor at the skirting"
+    },
+    {
+     "act": "V hero + final slider",
+     "frames": "510–665",
+     "what": "510 cut to the hero (finished warm living room), camera pans right to the glazing (510–566); 560 handle appears; 570 slider sweeps left→right revealing the matched RAW room (balcony door in the same place); 600 drag to the middle, chips «Առաջ» | «Հետո»; 645 release → finished (biggest accent)"
+    },
+    {
+     "act": "VI end card (= R2 v2)",
+     "frames": "666–779",
+     "what": "veil, logo, rule, «Լողավազաններ · Տներ · Վերանորոգում», horizon y 1106, garon.am"
+    }
+   ],
+   "z_order": [
+    "f0–179: L02 v4 renderer output (unchanged)",
+    "bg paper",
+    "vlines",
+    "stage (finished lockup <img>, exit 180–198)",
+    "scene window (clip, 70,390 940×1253): shots in list order (later = above); each shot = root (transition mask/clip/opacity) > camera wrapper (scale/translate about the window centre) > image placed at its extent",
+    "inside the window above the shots: light bloom (light transitions), particle canvas (dust/motes), gold level lines (material wipes)",
+    "gold_fill (entry)",
+    "wipe divider + handle (slider transitions and the final slider)",
+    "chips",
+    "light leak",
+    "window frame line",
+    "end veil",
+    "corner logo",
+    "labels + indicator",
+    "end card",
+    "grain"
+   ],
+   "theme": {
+    "bg": "#f5f5f3",
+    "note": "= R2 v2 theme (paper #f5f5f3, dark gold #856727 for thin lines/small text on paper, light gold #c9a96a for the divider/handle ring and the gold piece). The room uses its own muted warm palette (room.palette).",
+    "ink": "#17191c",
+    "gold_on_light": "#856727",
+    "gold_on_photo": "#c9a96a",
+    "logo_file": "public/brand/garon-logo-light.svg",
+    "logo_note": "garon-logo-light.svg = DARK logo for LIGHT backgrounds (fills #1e1e1e, gradients gmlight #a3a3a3→#4f4f4f and gglight #d4b57a→#b8955c). Path data and the <rect> are byte-identical to garon-logo-dark.svg, so every geometry number of v2 (clips, pieces, wordmark glyph bounds, box) is unchanged.",
+    "mark_fills": {
+     "BIG": "#1e1e1e",
+     "MID": "url(#gmlight)",
+     "GOLD": "url(#gglight)"
+    },
+    "wordmark_fill": "#1e1e1e",
+    "dims_stroke": "rgba(133,103,39,0.8)",
+    "ground_line": "#856727",
+    "impact_glow": "radial-gradient(closest-side, rgba(201,169,106,.42), rgba(201,169,106,0))",
+    "wipe_edge": "#c9a96a",
+    "frame_line": "1px solid rgba(133,103,39,0.55)",
+    "end_overlay": "#f5f5f3",
+    "handle_fill": "rgba(245,245,243,0.94)",
+    "handle_shadow": "0 6px 18px rgba(12,13,14,0.22)",
+    "divider_shadow": "0 0 6px rgba(12,13,14,0.28)"
+   },
+   "easings": {
+    "linear": [
+     0,
+     0,
+     1,
+     1
+    ],
+    "inSine": [
+     0.12,
+     0,
+     0.39,
+     0
+    ],
+    "outSine": [
+     0.61,
+     1,
+     0.88,
+     1
+    ],
+    "inOutSine": [
+     0.37,
+     0,
+     0.63,
+     1
+    ],
+    "inCubic": [
+     0.32,
+     0,
+     0.67,
+     0
+    ],
+    "outCubic": [
+     0.33,
+     1,
+     0.68,
+     1
+    ],
+    "inOutCubic": [
+     0.65,
+     0,
+     0.35,
+     1
+    ],
+    "outQuart": [
+     0.25,
+     1,
+     0.5,
+     1
+    ],
+    "inOutQuart": [
+     0.76,
+     0,
+     0.24,
+     1
+    ],
+    "outQuint": [
+     0.22,
+     1,
+     0.36,
+     1
+    ],
+    "note": "CSS cubic-bezier(x1,y1,x2,y2) control points; evaluate exactly like CSS (solve x(t)=p by Newton/bisection, return y(t)).",
+    "outBack": [
+     0.34,
+     1.56,
+     0.64,
+     1
+    ]
+   },
+   "keyframes_rule": "Every animated property is a list of keys [frame, value, easing]. Before the first key: first value; after the last key: last value. Between key k and k+1: v = v_k + (v_k+1 − v_k) · E((f − f_k)/(f_k+1 − f_k)), E = easing NAMED IN KEY k (see `easings`). \"hold\" = keep v_k until f_k+1 then jump. Vector values ([x,y] or {x,y,w,h}) interpolate component-wise.",
+   "window": {
+    "rect": {
+     "x": 70,
+     "y": 390,
+     "w": 940,
+     "h": 1253
+    },
+    "frame_line": {
+     "css": "1px solid rgba(133,103,39,0.55)",
+     "opacity": [
+      [
+       196,
+       0,
+       "outSine"
+      ],
+      [
+       206,
+       1,
+       "hold"
+      ],
+      [
+       666,
+       1,
+       "inOutSine"
+      ],
+      [
+       684,
+       0
+      ]
+     ]
+    },
+    "note": "= R2 window. All shot geometry (crops, line drawings, dims, bloom points) is in WINDOW-LOCAL coordinates: fractions of 940×1253 or px."
+   },
+   "vlines": {
+    "xs": [
+     90,
+     270,
+     450,
+     630,
+     810,
+     990
+    ],
+    "w": 2,
+    "color": "rgba(23,25,28,0.06)",
+    "opacity": [
+     [
+      176,
+      0,
+      "outSine"
+     ],
+     [
+      196,
+      1
+     ]
+    ],
+    "note": "v2: = L02 v4 keys (fade-in 176–196 starts inside the borrowed intro; continuous across f179→f180)"
+   },
+   "blueprint": {
+    "css": "background-image: linear-gradient(to right, rgba(23,25,28,.11) 1px, transparent 1px), linear-gradient(to bottom, rgba(23,25,28,.11) 1px, transparent 1px), linear-gradient(to right, rgba(23,25,28,.045) 1px, transparent 1px), linear-gradient(to bottom, rgba(23,25,28,.045) 1px, transparent 1px); background-size: 180px 180px, 180px 180px, 36px 36px, 36px 36px; background-position: 0 27px, 0 27px, 0 27px, 0 27px; -webkit-mask-image: radial-gradient(620px 760px at 540px 980px, #000 35%, transparent 100%)",
+    "used_by": "cover only (soft grid around the window)"
+   },
+   "intro": {
+    "frames": [
+     0,
+     179
+    ],
+    "source": "IDENTICAL to L02 v4 frames 0–179: items.L02 of marketing/instagram/2026-11-11-launch/04-render-spec.json (stage, build, blueprint, ground_line, dimensions, glint, wordmark, vlines, theme, easings), rendered by marketing/instagram/tools/render_l02_frames.js. Do NOT copy or edit those keys here — the R2 renderer runs the L02 renderer for f0–179 and renames L02_%03d.png → R2_%03d.png (pixel-identical by construction; verified by pixel diff).",
+    "what": "L02 v4 logo build-up: blueprint grid, ground line draws from the centre (6–36), stems rise (45/50/55), roof bands slide (60–), gold piece lands with shake + impact glow at f105 (3.5 s), camera pull-back 120–148, glint 124–150 + wordmark tracks in, finished lockup = garon-logo-light.svg at 200,700 680×496 from f148; real logo <img> from f167. No text, no grain, no corner logo, no labels in f0–179.",
+    "camera_exit": {
+     "what": "f180+: the finished lockup (logo <img> 680×496 at 200,700, transform-origin 342.4px 158px) continues exactly as in L02: scale = exit_scale_mul, opacity = exit_opacity; hidden after f198",
+     "exit_scale_mul": [
+      [
+       180,
+       1.0,
+       "inCubic"
+      ],
+      [
+       198,
+       1.15
+      ]
+     ],
+     "exit_opacity": [
+      [
+       186,
+       1.0,
+       "linear"
+      ],
+      [
+       198,
+       0.0
+      ]
+     ]
+    },
+    "replaced_v1": "v1 outline → pour intro (f0–135, horizon shutter at f120) removed on owner feedback 2026-11-12 (L02 intro was better).",
+    "l02_batch": "marketing/instagram/2026-11-11-launch",
+    "l02_renderer": "marketing/instagram/tools/render_l02_frames.js",
+    "l02_command": "node marketing/instagram/tools/render_l02_frames.js <repo_root> <tmp_dir> 0,1,…,179 marketing/instagram/2026-11-11-launch  → rename L02_%03d.png → R2_%03d.png",
+    "stage_box_px": {
+     "x": 200,
+     "y": 700,
+     "w": 680,
+     "h": 496
+    },
+    "logo_file": "public/brand/garon-logo-light.svg",
+    "transform_origin_px": [
+     342.4,
+     158
+    ]
+   },
+   "entry": {
+    "type": "gold_piece_from_logo",
+    "frame": 180,
+    "frames": [
+     180,
+     192
+    ],
+    "anchor_from_px": [
+     728,
+     926.8
+    ],
+    "anchor_to_px": [
+     540,
+     1016.5
+    ],
+    "anchor_ease": "inOutCubic",
+    "gold_fill_opacity": [
+     [
+      180,
+      1,
+      "hold"
+     ],
+     [
+      183,
+      1,
+      "outSine"
+     ],
+     [
+      190,
+      0
+     ]
+    ],
+    "note": "= R2 v2 / R3 v2 entry: the gold piece of the finished L02 lockup grows into the window (g = 1.6·32^inOutCubic((f−180)/12)) and opens on s1_raw; the lockup pushes in and fades under it (intro.camera_exit). The scene window div sits at (70,390): its clip polygon = (gold polygon ∩ window) − (70,390)."
+   },
+   "gold_piece": {
+    "frames": "e … e+12",
+    "shape_units": [
+     [
+      -66,
+      -66.5
+     ],
+     [
+      22,
+      -22.5
+     ],
+     [
+      22,
+      22.5
+     ],
+     [
+      -22,
+      22.5
+     ],
+     [
+      -22,
+      -14.5
+     ],
+     [
+      -66,
+      -36.5
+     ]
+    ],
+    "shape_note": "the GOLD path of the logo relative to its anchor (330, 132.5) in mark units",
+    "anchor_px": [
+     540,
+     1016.5
+    ],
+    "g": "px per unit: g = 1.6 for f ≤ e; g = 1.6·32^E((f−e)/12) for e < f ≤ e+12, E = inOutCubic (→ 51.2: the polygon covers the window from e+12)",
+    "formula": "incoming shot layer clipped to (anchor + g·shape_unit) ∩ window",
+    "gold_fill": {
+     "css": "same clip polygon filled with linear-gradient(135deg,#d4b57a,#b8955c), layer above the shots",
+     "opacity": "relative keys [[e−4,0,outSine],[e−1,1,hold],[e+3,1,outSine],[e+10,0]] — a small solid gold piece (141 px wide) appears in the window centre on the beat before e, then grows and opens into the next shot"
+    }
+   },
+   "grain": {
+    "css": "full-frame div, background = 256x256 grayscale noise tile (deterministic PRNG seed 7, values 128±40), mix-blend-mode overlay, opacity 0.05; background-position shifts every 2 frames by ((37·k) mod 256, (91·k) mod 256), k = floor(f/2)",
+    "note": "paper texture, invisible on a phone at arm's length but kills the 'flat digital' look; v2: OFF in f0–179 (the borrowed L02 intro has no grain, frames must stay identical), fades in 180–196 (keys `opacity`)",
+    "active_from": 180,
+    "opacity": [
+     [
+      180,
+      0,
+      "linear"
+     ],
+     [
+      196,
+      0.05
+     ]
+    ]
+   },
+   "corner_logo": {
+    "file": "public/brand/garon-logo-light.svg",
+    "x": 70,
+    "y": 262,
+    "w": 132,
+    "h": 96,
+    "opacity": [
+     [
+      192,
+      0,
+      "outSine"
+     ],
+     [
+      204,
+      0.92,
+      "hold"
+     ],
+     [
+      668,
+      0.92,
+      "inOutSine"
+     ],
+     [
+      678,
+      0
+     ]
+    ]
+   },
+   "styles_local": {
+    "section_label": {
+     "font": "text",
+     "weight": 500,
+     "size": 18,
+     "letter_spacing": "0.24em",
+     "transform": "uppercase",
+     "color": "rgba(23,25,28,0.62)",
+     "note": "right-aligned to x 1010 (margin-right −letter-spacing)"
+    },
+    "stage_label": {
+     "font": "display",
+     "weight": 500,
+     "size": 40,
+     "line_height": 1.1,
+     "color": "#856727",
+     "note": "right-aligned to x 1010; box y 294–338"
+    },
+    "chip": {
+     "font": "text",
+     "weight": 500,
+     "size": 20,
+     "letter_spacing": "0.2em",
+     "transform": "uppercase",
+     "color": "#856727",
+     "bg": "rgba(245,245,243,0.94)",
+     "padding": "10px 16px 10px 18px",
+     "note": "slider split (612–648) + cover"
+    },
+    "end_display": {
+     "font": "display",
+     "weight": 300,
+     "size": 120,
+     "line_height": 1.05,
+     "color": "#17191c",
+     "max_lines": 1
+    },
+    "end_cats": {
+     "font": "text",
+     "weight": 500,
+     "size": 24,
+     "letter_spacing": "0.22em",
+     "transform": "uppercase",
+     "color": "#856727",
+     "max_lines": 1,
+     "min_size": 20,
+     "note": "centre with padding-left = letter-spacing (conventions.letter_spacing_centering)"
+    },
+    "end_url": {
+     "font": "text",
+     "weight": 500,
+     "size": 30,
+     "letter_spacing": "0.08em",
+     "color": "#17191c",
+     "max_lines": 1
+    }
+   },
+   "end_card": {
+    "frames": [
+     666,
+     779
+    ],
+    "composed_from": 712,
+    "hold_s": 2.23,
+    "veil": {
+     "color": "#f5f5f3",
+     "opacity": [
+      [
+       666,
+       0,
+       "inOutSine"
+      ],
+      [
+       690,
+       0.9,
+       "linear"
+      ],
+      [
+       764,
+       0.94,
+       "inOutSine"
+      ],
+      [
+       779,
+       1.0
+      ]
+     ],
+     "blur_px_on_triptych": [
+      [
+       666,
+       0,
+       "inOutSine"
+      ],
+      [
+       692,
+       8
+      ]
+     ]
+    },
+    "layers": [
+     {
+      "layer": "logo",
+      "file": "public/brand/garon-logo-light.svg",
+      "x": 340,
+      "y": 560,
+      "w": 400,
+      "h": 291.76,
+      "opacity": [
+       [
+        676,
+        0,
+        "outCubic"
+       ],
+       [
+        694,
+        1
+       ]
+      ],
+      "translate_y": [
+       [
+        676,
+        14,
+        "outCubic"
+       ],
+       [
+        694,
+        0
+       ]
+      ],
+      "note": "visible logo y ≈ 583–833"
+     },
+     {
+      "layer": "rule",
+      "x": 508,
+      "y": 882,
+      "w": 64,
+      "h": 2,
+      "color": "#856727",
+      "scale_x": [
+       [
+        686,
+        0,
+        "outCubic"
+       ],
+       [
+        698,
+        1
+       ]
+      ],
+      "origin": "center"
+     },
+     {
+      "layer": "text",
+      "style": "end_cats",
+      "text": "Լողավազաններ · Տներ · Վերանորոգում",
+      "x": 70,
+      "y": 920,
+      "w": 940,
+      "align": "center",
+      "opacity": [
+       [
+        692,
+        0,
+        "outSine"
+       ],
+       [
+        704,
+        1
+       ]
+      ],
+      "translate_y": [
+       [
+        692,
+        10,
+        "outCubic"
+       ],
+       [
+        704,
+        0
+       ]
+      ]
+     },
+     {
+      "layer": "horizon",
+      "x": 0,
+      "y": 1106,
+      "w": 1080,
+      "h": 2,
+      "color": "#856727",
+      "scale_x": [
+       [
+        672,
+        0,
+        "inOutSine"
+       ],
+       [
+        694,
+        1
+       ]
+      ],
+      "origin": "left",
+      "note": "same y as the L02 intro ground line (1107 ± 1) → the line that closes the reel opens it again on loop"
+     },
+     {
+      "layer": "text",
+      "style": "end_url",
+      "text": "garon.am",
+      "x": 70,
+      "y": 1146,
+      "w": 940,
+      "align": "center",
+      "opacity": [
+       [
+        702,
+        0,
+        "outSine"
+       ],
+       [
+        712,
+        1
+       ]
+      ]
+     }
+    ],
+    "rules": "NO CTA, NO @handle, NO date. Only: logo, services line, garon.am (owner-preferences.md). v2 (owner feedback): the «Առաջ | Հետո» line with its divider + small handle is REMOVED from the end card (the top-right stage labels during the photo sections stay).",
+    "spacing_note": "v2 re-balance in the rhythm of the L02 v4 end card (logo → 49 px → rule → 38 px → line, then air → horizon → garon.am): logo visible 583–833, rule 882, services 920–≈950, horizon 1106 (≈156 px below the services line; L02: 129), garon.am 1146–≈1183. Block 583–1183 sits around the optical centre; below y 1100 only garon.am (x ≈ 470–610, < 900)."
+   },
+   "photo_rules": {
+    "selection": "checked one by one (2026-11-12): no people, no faces, no logos/watermarks, no readable brand names in the used crops. Rejected/unused: 15798780 (RAW, but the only matching finished frames need >1.35× upscale), 3615721 (paint-can and bucket labels, blue branded bag), 9908376 (branded AC unit + printed boxes), 7031403 (commercial lobby, purple LED, off-style), kitchen / bathroom / living-beige (no geometry match for the RAW frames — kept for later).",
+    "grade": "per stage (prep grade): RAW = lifted shadows, slightly desaturated dust; PROGRESS = clean neutral white; FINISHED = warm (+2.5 b*), +12 % saturation — the colour itself tells the stage. Owner preference: bright, colourful processed images.",
+    "upscale": "max on-screen upscale vs source pixels ≤ 1.35 for every shot incl. camera (prep manifest `max_screen_upscale`); actual max 1.32 (s3_fin at f450).",
+    "blur": "s3_raw: the paper notice taped inside the middle window is blurred (blur_rects_frac).",
+    "mirror": "s2_prog (8469938) is mirrored so its doorway sits where the raw opening of s2_raw is; it shows no text."
+   },
+   "shots": [
+    {
+     "id": "s1_raw",
+     "stage": "raw",
+     "seq": "s1",
+     "camera": "s1",
+     "src": "marketing/instagram/assets/stock/renovation/pexels-15798786.jpg",
+     "content": "gutted room: hollow-brick wall left, new white window right with ripped reveal, aluminium ladder, cement bags, rough screed",
+     "align": {
+      "ref": "s1_prog",
+      "model": "similarity",
+      "pairs": [
+       [
+        0.605,
+        0.25,
+        0.76,
+        0.265,
+        1
+       ],
+       [
+        0.605,
+        0.565,
+        0.76,
+        0.605,
+        1
+       ],
+       [
+        0.56,
+        0.225,
+        0.63,
+        0.25,
+        0.25
+       ],
+       [
+        0.57,
+        0.68,
+        0.63,
+        0.73,
+        0.25
+       ]
+      ]
+     },
+     "grade": {
+      "wb_gray": 0.25,
+      "gamma": 0.82,
+      "highlights": 0.12,
+      "contrast": 1.04,
+      "saturation": 0.92,
+      "sharpen": 0.25
+     },
+     "debug_pair_with": "s1_prog",
+     "frames": [
+      180,
+      224
+     ]
+    },
+    {
+     "id": "s1_prog",
+     "stage": "progress",
+     "seq": "s1",
+     "camera": "s1",
+     "src": "marketing/instagram/assets/stock/renovation/pexels-5691493.jpg",
+     "content": "same corner plastered: grooved panel wall left, white PVC window + sill + radiator right, oak floor laid, cables",
+     "align": {
+      "crop_frac": [
+       0.3745,
+       0.179,
+       0.999,
+       0.7353
+      ]
+     },
+     "grade": {
+      "wb_gray": 0.35,
+      "gamma": 0.94,
+      "highlights": 0.1,
+      "contrast": 1.05,
+      "saturation": 1.0,
+      "warmth": 1.5,
+      "sharpen": 0.25
+     },
+     "debug_pair_with": "s1_fin",
+     "frames": [
+      210,
+      254
+     ],
+     "in": {
+      "type": "slider",
+      "frames": [
+       210,
+       224
+      ],
+      "ease": "inOutCubic"
+     }
+    },
+    {
+     "id": "s1_fin",
+     "stage": "finished",
+     "seq": "s1",
+     "camera": "s1",
+     "src": "marketing/instagram/assets/stock/interiors/unsplash-1600607687644-c7171b42498f_bedroom.jpg",
+     "content": "finished bedroom: upholstered bed, linen, pendant, black-framed floor-to-ceiling glazing right",
+     "align": {
+      "ref": "s1_prog",
+      "model": "similarity",
+      "max_scale": 1.12,
+      "pairs": [
+       [
+        0.35,
+        0.21,
+        0.76,
+        0.265,
+        1
+       ],
+       [
+        0.35,
+        0.6,
+        0.76,
+        0.605,
+        0.6
+       ]
+      ]
+     },
+     "grade": {
+      "wb_gray": 0.15,
+      "gamma": 0.95,
+      "contrast": 1.05,
+      "saturation": 1.12,
+      "warmth": 2.5,
+      "sharpen": 0.3
+     },
+     "frames": [
+      240,
+      269
+     ],
+     "in": {
+      "type": "light",
+      "frames": [
+       240,
+       256
+      ],
+      "particles": "motes"
+     }
+    },
+    {
+     "id": "d1_window",
+     "stage": "finished",
+     "seq": "d1",
+     "camera": "d1",
+     "src": "marketing/instagram/assets/stock/renovation/pexels-5691504.jpg",
+     "content": "detail: restored white timber window, brass espagnolette",
+     "align": {
+      "crop_frac": [
+       0.1,
+       0.22,
+       0.62,
+       0.6829
+      ]
+     },
+     "grade": {
+      "wb_gray": 0.45,
+      "gamma": 1.06,
+      "contrast": 1.16,
+      "saturation": 0.95,
+      "warmth": 1.0,
+      "sharpen": 0.3
+     },
+     "frames": [
+      270,
+      284
+     ]
+    },
+    {
+     "id": "s2_raw",
+     "stage": "raw",
+     "seq": "s2",
+     "camera": "s2",
+     "src": "marketing/instagram/assets/stock/renovation/pexels-15798785.jpg",
+     "content": "raw opening between hollow-brick walls, ripped lintel, ladder, screed",
+     "align": {
+      "ref": "s2_prog",
+      "model": "similarity",
+      "pairs": [
+       [
+        0.425,
+        0.12,
+        0.435,
+        0.1,
+        1
+       ],
+       [
+        0.78,
+        0.12,
+        0.9,
+        0.1,
+        1
+       ],
+       [
+        0.425,
+        0.5,
+        0.435,
+        0.5,
+        0.5
+       ]
+      ]
+     },
+     "grade": {
+      "wb_gray": 0.25,
+      "gamma": 0.82,
+      "highlights": 0.12,
+      "contrast": 1.04,
+      "saturation": 0.92,
+      "sharpen": 0.25
+     },
+     "debug_pair_with": "s2_prog",
+     "frames": [
+      285,
+      329
+     ]
+    },
+    {
+     "id": "s2_prog",
+     "stage": "progress",
+     "seq": "s2",
+     "camera": "s2",
+     "src": "marketing/instagram/assets/stock/renovation/pexels-8469938.jpg",
+     "mirror": true,
+     "content": "the opening plastered white, sockets roughed in, screed floor (mirrored)",
+     "align": {
+      "crop_frac": [
+       0.0,
+       0.05,
+       1.0,
+       0.9389
+      ]
+     },
+     "grade": {
+      "wb_gray": 0.35,
+      "gamma": 0.94,
+      "highlights": 0.1,
+      "contrast": 1.05,
+      "saturation": 1.0,
+      "warmth": 1.5,
+      "sharpen": 0.25
+     },
+     "debug_pair_with": "s2_fin",
+     "frames": [
+      315,
+      359
+     ],
+     "in": {
+      "type": "light",
+      "frames": [
+       315,
+       331
+      ],
+      "particles": "plaster"
+     }
+    },
+    {
+     "id": "s2_fin",
+     "stage": "finished",
+     "seq": "s2",
+     "camera": "s2",
+     "src": "marketing/instagram/assets/stock/renovation/pexels-6908500.jpg",
+     "content": "finished: limestone-clad wall with a deep portal, cream sofa, palm, oak floor",
+     "align": {
+      "ref": "s2_prog",
+      "model": "similarity",
+      "pairs": [
+       [
+        0.485,
+        0.245,
+        0.435,
+        0.1,
+        1
+       ],
+       [
+        0.65,
+        0.245,
+        0.9,
+        0.1,
+        1
+       ],
+       [
+        0.485,
+        0.62,
+        0.435,
+        0.8,
+        0.2
+       ]
+      ]
+     },
+     "grade": {
+      "wb_gray": 0.15,
+      "gamma": 0.95,
+      "contrast": 1.05,
+      "saturation": 1.12,
+      "warmth": 2.5,
+      "sharpen": 0.3
+     },
+     "frames": [
+      345,
+      374
+     ],
+     "in": {
+      "type": "material",
+      "frames": [
+       345,
+       358
+      ],
+      "line_frac": 0.84,
+      "walls": "top",
+      "floor": "bottom"
+     }
+    },
+    {
+     "id": "d2_light",
+     "stage": "finished",
+     "seq": "d2",
+     "camera": "d2",
+     "src": "marketing/instagram/assets/stock/renovation/pexels-6908500.jpg",
+     "content": "detail: palm against the limestone wall, daylight from the glazing",
+     "align": {
+      "crop_frac": [
+       0.0,
+       0.3,
+       0.45,
+       0.7341
+      ]
+     },
+     "grade": {
+      "wb_gray": 0.15,
+      "gamma": 0.95,
+      "contrast": 1.05,
+      "saturation": 1.12,
+      "warmth": 2.5,
+      "sharpen": 0.3
+     },
+     "frames": [
+      375,
+      389
+     ]
+    },
+    {
+     "id": "s3_raw",
+     "stage": "raw",
+     "seq": "s3",
+     "camera": "s3",
+     "src": "marketing/instagram/assets/stock/renovation/pexels-804392.jpg",
+     "content": "old painted-brick wall under timber windows, capped pipe stubs where the old kitchen was, broom, chipboard floor",
+     "align": {
+      "ref": "s3_prog",
+      "model": "similarity",
+      "fixed_scale": 0.93,
+      "offset_units": [
+       0,
+       30
+      ],
+      "pairs": [
+       [
+        0.44,
+        0.567,
+        0.59,
+        0.505,
+        1
+       ],
+       [
+        0.44,
+        0.7,
+        0.59,
+        0.56,
+        0.5
+       ],
+       [
+        0.44,
+        0.875,
+        0.59,
+        0.8,
+        0.7
+       ]
+      ]
+     },
+     "blur_rects_frac": [
+      [
+       0.48,
+       0.21,
+       0.54,
+       0.31
+      ]
+     ],
+     "grade": {
+      "wb_gray": 0.25,
+      "gamma": 0.82,
+      "highlights": 0.12,
+      "contrast": 1.04,
+      "saturation": 0.92,
+      "sharpen": 0.25
+     },
+     "debug_pair_with": "s3_prog",
+     "frames": [
+      390,
+      434
+     ]
+    },
+    {
+     "id": "s3_prog",
+     "stage": "progress",
+     "seq": "s3",
+     "camera": "s3",
+     "src": "marketing/instagram/assets/stock/renovation/pexels-5691486.jpg",
+     "content": "new wall: grooved panel above, plastered below, new supply + drain pipes, bare screed, rubble sacks",
+     "align": {
+      "crop_frac": [
+       0.0,
+       0.054,
+       1.0,
+       0.9441
+      ]
+     },
+     "grade": {
+      "wb_gray": 0.35,
+      "gamma": 0.94,
+      "highlights": 0.1,
+      "contrast": 1.05,
+      "saturation": 1.0,
+      "warmth": 1.5,
+      "sharpen": 0.25
+     },
+     "debug_pair_with": "s3_fin",
+     "frames": [
+      420,
+      464
+     ],
+     "in": {
+      "type": "slider",
+      "frames": [
+       420,
+       434
+      ],
+      "ease": "inOutCubic"
+     }
+    },
+    {
+     "id": "s3_fin",
+     "stage": "finished",
+     "seq": "s3",
+     "camera": "s3",
+     "src": "marketing/instagram/assets/stock/renovation/pexels-5691495.jpg",
+     "content": "SAME room (same photographer/series): oak floor laid, walls finished; camera pulls back to the window",
+     "align": {
+      "ref": "s3_prog",
+      "model": "similarity",
+      "pairs": [
+       [
+        0.105,
+        0.9,
+        0.155,
+        0.8,
+        1
+       ],
+       [
+        0.105,
+        0.695,
+        0.155,
+        0.505,
+        1
+       ],
+       [
+        0.235,
+        0.73,
+        0.59,
+        0.56,
+        1
+       ]
+      ]
+     },
+     "extent": [
+      -40,
+      -775,
+      2740,
+      1253
+     ],
+     "grade": {
+      "wb_gray": 0.15,
+      "gamma": 0.95,
+      "contrast": 1.05,
+      "saturation": 1.12,
+      "warmth": 2.5,
+      "sharpen": 0.3
+     },
+     "frames": [
+      450,
+      494
+     ],
+     "in": {
+      "type": "material",
+      "frames": [
+       450,
+       461
+      ],
+      "line_frac": 0.835,
+      "walls": "fade",
+      "walls_frames": [
+       455,
+       465
+      ],
+      "floor": "bottom"
+     }
+    },
+    {
+     "id": "d3_floor",
+     "stage": "finished",
+     "seq": "d3",
+     "camera": "d3",
+     "src": "marketing/instagram/assets/stock/renovation/pexels-5691493.jpg",
+     "content": "detail: oiled oak floor meeting the white skirting, low sun",
+     "align": {
+      "crop_frac": [
+       0.52,
+       0.68,
+       0.8742,
+       0.9974
+      ]
+     },
+     "grade": {
+      "wb_gray": 0.15,
+      "gamma": 0.95,
+      "contrast": 1.05,
+      "saturation": 1.12,
+      "warmth": 2.5,
+      "sharpen": 0.3
+     },
+     "frames": [
+      495,
+      509
+     ]
+    },
+    {
+     "id": "hero",
+     "stage": "finished",
+     "seq": "s4",
+     "camera": "s4",
+     "src": "marketing/instagram/assets/stock/interiors/unsplash-1618221195710-dd6b41faaea6_living-warm.jpg",
+     "content": "hero: finished warm living room — sofa, arc lamp, timber-framed glazing right",
+     "align": {
+      "crop_frac": [
+       0.6045,
+       0.0,
+       1.0,
+       1.0
+      ]
+     },
+     "extent": [
+      -1430,
+      0,
+      940,
+      1253
+     ],
+     "grade": {
+      "wb_gray": 0.15,
+      "gamma": 0.95,
+      "contrast": 1.05,
+      "saturation": 1.12,
+      "warmth": 2.5,
+      "sharpen": 0.3
+     },
+     "frames": [
+      510,
+      779
+     ]
+    },
+    {
+     "id": "pair_raw",
+     "stage": "raw",
+     "seq": "s4",
+     "camera": "s4",
+     "src": "marketing/instagram/assets/stock/renovation/pexels-15798784.jpg",
+     "content": "the RAW side of the final slider: gutted room, old balcony door right, radiator, buckets, screed",
+     "align": {
+      "ref": "hero",
+      "model": "similarity",
+      "pairs": [
+       [
+        0.74,
+        0.33,
+        0.822,
+        0.3,
+        1
+       ],
+       [
+        0.74,
+        0.716,
+        0.822,
+        0.75,
+        1
+       ],
+       [
+        0.965,
+        0.266,
+        1.0,
+        0.21,
+        0.6
+       ],
+       [
+        0.6,
+        0.62,
+        0.7,
+        0.75,
+        0.6
+       ]
+      ]
+     },
+     "grade": {
+      "wb_gray": 0.25,
+      "gamma": 0.82,
+      "highlights": 0.12,
+      "contrast": 1.04,
+      "saturation": 0.92,
+      "sharpen": 0.25
+     },
+     "debug_pair_with": "hero",
+     "frames": [
+      560,
+      665
+     ],
+     "slider_side": "left"
+    }
+   ],
+   "cameras": {
+    "s1": {
+     "scale": [
+      [
+       180,
+       1.0,
+       "linear"
+      ],
+      [
+       270,
+       1.06
+      ]
+     ],
+     "tx": 0,
+     "ty": 0
+    },
+    "d1": {
+     "scale": [
+      [
+       270,
+       1.02,
+       "linear"
+      ],
+      [
+       285,
+       1.08
+      ]
+     ],
+     "tx": 0,
+     "ty": 0
+    },
+    "s2": {
+     "scale": [
+      [
+       285,
+       1.0,
+       "linear"
+      ],
+      [
+       375,
+       1.06
+      ]
+     ],
+     "tx": 0,
+     "ty": 0
+    },
+    "d2": {
+     "scale": [
+      [
+       375,
+       1.08,
+       "linear"
+      ],
+      [
+       390,
+       1.02
+      ]
+     ],
+     "tx": [
+      [
+       375,
+       10,
+       "linear"
+      ],
+      [
+       390,
+       -10
+      ]
+     ],
+     "ty": 0
+    },
+    "s3": {
+     "scale": [
+      [
+       390,
+       1.0,
+       "linear"
+      ],
+      [
+       466,
+       1.03,
+       "inOutCubic"
+      ],
+      [
+       492,
+       0.62
+      ]
+     ],
+     "tx": [
+      [
+       466,
+       0,
+       "inOutCubic"
+      ],
+      [
+       492,
+       -916
+      ]
+     ],
+     "ty": [
+      [
+       466,
+       0,
+       "inOutCubic"
+      ],
+      [
+       492,
+       238
+      ]
+     ]
+    },
+    "d3": {
+     "scale": [
+      [
+       495,
+       1.02,
+       "linear"
+      ],
+      [
+       510,
+       1.08
+      ]
+     ],
+     "tx": 0,
+     "ty": 0
+    },
+    "s4": {
+     "scale": [
+      [
+       510,
+       1.0,
+       "linear"
+      ],
+      [
+       666,
+       1.04
+      ]
+     ],
+     "tx": [
+      [
+       510,
+       820,
+       "inOutSine"
+      ],
+      [
+       566,
+       0
+      ]
+     ],
+     "ty": 0
+    }
+   },
+   "cameras_note": "camera wrapper transform = translate(tx + 2.0·sin(f/41), ty + 1.6·sin(f/53+1)) scale(s), transform-origin = window centre (470, 626.5). Shots of one sequence share one camera → stages stay aligned during transitions. Visible window units: u = (x_screen − 470 − tx)/s + 470.",
+   "transitions": {
+    "cut": "hard cut at frames[0] (on the beat)",
+    "slider": "R2 gold slider language: the incoming shot is clipped to the right of a vertical divider that travels from the right window edge to the left (x = 940·(1 − E(t)), E = `ease`); 2 px #c9a96a divider with shadow + the R2 handle (56 px, ring #c9a96a, chevrons #856727) riding at y 1016; handle opacity 0→1 in the first 3 frames, 1→0 in the last 4; a small light leak follows the divider",
+    "light": "dissolve through light: u = (f − frames[0])/(frames[1] − frames[0]); a warm-white veil rgba(255,246,232) inside the window = 0.58·sin(π·u)^1.4; the incoming shot fades in UNDER the veil peak only: opacity = inOutSine(clamp((u − 0.3)/0.4)) (no long double exposure); particles (see `particles`) are born at frames[0]−2 and settle until frames[1]+22 (they read as dust in the light while the room changes)",
+    "material": "masked material wipe in window coordinates: the FLOOR reveals from the bottom (edge y from 1253 → line_frac·1253, soft 46 px) and the WALLS from the top (edge y from 0 → line_frac·1253) at the same time (\"walls\":\"top\"), or the walls cross-fade over walls_frames (\"walls\":\"fade\"); a 1.5 px gold level line (#c9a96a, 0.9) rides on each moving edge and fades at the end; ease inOutCubic"
+   },
+   "particles": {
+    "plaster": {
+     "n": 420,
+     "seed": 31,
+     "color": [
+      252,
+      249,
+      243
+     ],
+     "size_px": [
+      1.4,
+      7.5
+     ],
+     "v0_px_per_f": [
+      1.5,
+      6.5
+     ],
+     "drag": 0.06,
+     "drift_px_per_f": [
+      -0.7,
+      0.7
+     ],
+     "peak_opacity": 0.85,
+     "blur_big": true,
+     "note": "falling plaster dust that slows and settles (y = y0 + v0·(1−e^(−drag·t))/drag), larger flakes soft (blurred disc)"
+    },
+    "motes": {
+     "n": 170,
+     "seed": 17,
+     "color": [
+      255,
+      222,
+      160
+     ],
+     "size_px": [
+      1.2,
+      5.0
+     ],
+     "v0_px_per_f": [
+      -1.6,
+      0.6
+     ],
+     "drag": 0.04,
+     "drift_px_per_f": [
+      -0.5,
+      0.9
+     ],
+     "peak_opacity": 0.75,
+     "blur_big": true,
+     "note": "golden light motes floating in the window light"
+    }
+   },
+   "shots_rules": "Each shot is visible inside frames (inclusive). An incoming transition (shot.in) runs over in.frames while the previous shot stays visible below. Detail inserts (d*) are 1 beat. The hero stays to 779 under the end veil. pair_raw is shown only left of the final slider divider.",
+   "labels": [
+    {
+     "kind": "section",
+     "style": "section_label",
+     "text": "Վերանորոգում",
+     "x": 240,
+     "y": 270,
+     "w": 770,
+     "align": "right",
+     "opacity": [
+      [
+       190,
+       0,
+       "outCubic"
+      ],
+      [
+       200,
+       1,
+       "hold"
+      ],
+      [
+       664,
+       1,
+       "inSine"
+      ],
+      [
+       670,
+       0
+      ]
+     ],
+     "translate_y": [
+      [
+       190,
+       8,
+       "outCubic"
+      ],
+      [
+       200,
+       0
+      ]
+     ]
+    },
+    {
+     "kind": "stage",
+     "style": "stage_label",
+     "text": "Առաջ",
+     "x": 240,
+     "y": 294,
+     "w": 770,
+     "align": "right",
+     "opacity": [
+      [
+       190,
+       0,
+       "outCubic"
+      ],
+      [
+       200,
+       1,
+       "hold"
+      ],
+      [
+       212,
+       1,
+       "inSine"
+      ],
+      [
+       217,
+       0
+      ]
+     ],
+     "translate_y": [
+      [
+       190,
+       12,
+       "outCubic"
+      ],
+      [
+       200,
+       0,
+       "hold"
+      ],
+      [
+       212,
+       0,
+       "inSine"
+      ],
+      [
+       217,
+       -8
+      ]
+     ]
+    },
+    {
+     "kind": "stage",
+     "style": "stage_label",
+     "text": "Ընթացք",
+     "x": 240,
+     "y": 294,
+     "w": 770,
+     "align": "right",
+     "opacity": [
+      [
+       217,
+       0,
+       "outCubic"
+      ],
+      [
+       222,
+       1,
+       "hold"
+      ],
+      [
+       242,
+       1,
+       "inSine"
+      ],
+      [
+       247,
+       0
+      ]
+     ],
+     "translate_y": [
+      [
+       217,
+       12,
+       "outCubic"
+      ],
+      [
+       222,
+       0,
+       "hold"
+      ],
+      [
+       242,
+       0,
+       "inSine"
+      ],
+      [
+       247,
+       -8
+      ]
+     ]
+    },
+    {
+     "kind": "stage",
+     "style": "stage_label",
+     "text": "Հետո",
+     "x": 240,
+     "y": 294,
+     "w": 770,
+     "align": "right",
+     "opacity": [
+      [
+       247,
+       0,
+       "outCubic"
+      ],
+      [
+       252,
+       1,
+       "hold"
+      ],
+      [
+       280,
+       1,
+       "inSine"
+      ],
+      [
+       285,
+       0
+      ]
+     ],
+     "translate_y": [
+      [
+       247,
+       12,
+       "outCubic"
+      ],
+      [
+       252,
+       0,
+       "hold"
+      ],
+      [
+       280,
+       0,
+       "inSine"
+      ],
+      [
+       285,
+       -8
+      ]
+     ]
+    },
+    {
+     "kind": "stage",
+     "style": "stage_label",
+     "text": "Առաջ",
+     "x": 240,
+     "y": 294,
+     "w": 770,
+     "align": "right",
+     "opacity": [
+      [
+       285,
+       0,
+       "outCubic"
+      ],
+      [
+       290,
+       1,
+       "hold"
+      ],
+      [
+       317,
+       1,
+       "inSine"
+      ],
+      [
+       322,
+       0
+      ]
+     ],
+     "translate_y": [
+      [
+       285,
+       12,
+       "outCubic"
+      ],
+      [
+       290,
+       0,
+       "hold"
+      ],
+      [
+       317,
+       0,
+       "inSine"
+      ],
+      [
+       322,
+       -8
+      ]
+     ]
+    },
+    {
+     "kind": "stage",
+     "style": "stage_label",
+     "text": "Ընթացք",
+     "x": 240,
+     "y": 294,
+     "w": 770,
+     "align": "right",
+     "opacity": [
+      [
+       322,
+       0,
+       "outCubic"
+      ],
+      [
+       327,
+       1,
+       "hold"
+      ],
+      [
+       346,
+       1,
+       "inSine"
+      ],
+      [
+       351,
+       0
+      ]
+     ],
+     "translate_y": [
+      [
+       322,
+       12,
+       "outCubic"
+      ],
+      [
+       327,
+       0,
+       "hold"
+      ],
+      [
+       346,
+       0,
+       "inSine"
+      ],
+      [
+       351,
+       -8
+      ]
+     ]
+    },
+    {
+     "kind": "stage",
+     "style": "stage_label",
+     "text": "Հետո",
+     "x": 240,
+     "y": 294,
+     "w": 770,
+     "align": "right",
+     "opacity": [
+      [
+       351,
+       0,
+       "outCubic"
+      ],
+      [
+       356,
+       1,
+       "hold"
+      ],
+      [
+       385,
+       1,
+       "inSine"
+      ],
+      [
+       390,
+       0
+      ]
+     ],
+     "translate_y": [
+      [
+       351,
+       12,
+       "outCubic"
+      ],
+      [
+       356,
+       0,
+       "hold"
+      ],
+      [
+       385,
+       0,
+       "inSine"
+      ],
+      [
+       390,
+       -8
+      ]
+     ]
+    },
+    {
+     "kind": "stage",
+     "style": "stage_label",
+     "text": "Առաջ",
+     "x": 240,
+     "y": 294,
+     "w": 770,
+     "align": "right",
+     "opacity": [
+      [
+       390,
+       0,
+       "outCubic"
+      ],
+      [
+       395,
+       1,
+       "hold"
+      ],
+      [
+       422,
+       1,
+       "inSine"
+      ],
+      [
+       427,
+       0
+      ]
+     ],
+     "translate_y": [
+      [
+       390,
+       12,
+       "outCubic"
+      ],
+      [
+       395,
+       0,
+       "hold"
+      ],
+      [
+       422,
+       0,
+       "inSine"
+      ],
+      [
+       427,
+       -8
+      ]
+     ]
+    },
+    {
+     "kind": "stage",
+     "style": "stage_label",
+     "text": "Ընթացք",
+     "x": 240,
+     "y": 294,
+     "w": 770,
+     "align": "right",
+     "opacity": [
+      [
+       427,
+       0,
+       "outCubic"
+      ],
+      [
+       432,
+       1,
+       "hold"
+      ],
+      [
+       505,
+       1,
+       "inSine"
+      ],
+      [
+       510,
+       0
+      ]
+     ],
+     "translate_y": [
+      [
+       427,
+       12,
+       "outCubic"
+      ],
+      [
+       432,
+       0,
+       "hold"
+      ],
+      [
+       505,
+       0,
+       "inSine"
+      ],
+      [
+       510,
+       -8
+      ]
+     ]
+    },
+    {
+     "kind": "stage",
+     "style": "stage_label",
+     "text": "Հետո",
+     "x": 240,
+     "y": 294,
+     "w": 770,
+     "align": "right",
+     "opacity": [
+      [
+       510,
+       0,
+       "outCubic"
+      ],
+      [
+       515,
+       1,
+       "hold"
+      ],
+      [
+       574,
+       1,
+       "inSine"
+      ],
+      [
+       579,
+       0
+      ]
+     ],
+     "translate_y": [
+      [
+       510,
+       12,
+       "outCubic"
+      ],
+      [
+       515,
+       0,
+       "hold"
+      ],
+      [
+       574,
+       0,
+       "inSine"
+      ],
+      [
+       579,
+       -8
+      ]
+     ]
+    },
+    {
+     "kind": "stage",
+     "style": "stage_label",
+     "text": "Առաջ",
+     "x": 240,
+     "y": 294,
+     "w": 770,
+     "align": "right",
+     "opacity": [
+      [
+       579,
+       0,
+       "outCubic"
+      ],
+      [
+       584,
+       1,
+       "hold"
+      ],
+      [
+       601,
+       1,
+       "inSine"
+      ],
+      [
+       606,
+       0
+      ]
+     ],
+     "translate_y": [
+      [
+       579,
+       12,
+       "outCubic"
+      ],
+      [
+       584,
+       0,
+       "hold"
+      ],
+      [
+       601,
+       0,
+       "inSine"
+      ],
+      [
+       606,
+       -8
+      ]
+     ]
+    },
+    {
+     "kind": "stage",
+     "style": "stage_label",
+     "text": "Առաջ | Հետո",
+     "x": 240,
+     "y": 294,
+     "w": 770,
+     "align": "right",
+     "opacity": [
+      [
+       606,
+       0,
+       "outCubic"
+      ],
+      [
+       611,
+       1,
+       "hold"
+      ],
+      [
+       641,
+       1,
+       "inSine"
+      ],
+      [
+       646,
+       0
+      ]
+     ],
+     "translate_y": [
+      [
+       606,
+       12,
+       "outCubic"
+      ],
+      [
+       611,
+       0,
+       "hold"
+      ],
+      [
+       641,
+       0,
+       "inSine"
+      ],
+      [
+       646,
+       -8
+      ]
+     ]
+    },
+    {
+     "kind": "stage",
+     "style": "stage_label",
+     "text": "Հետո",
+     "x": 240,
+     "y": 294,
+     "w": 770,
+     "align": "right",
+     "opacity": [
+      [
+       646,
+       0,
+       "outCubic"
+      ],
+      [
+       651,
+       1,
+       "hold"
+      ],
+      [
+       664,
+       1,
+       "inSine"
+      ],
+      [
+       670,
+       0
+      ]
+     ],
+     "translate_y": [
+      [
+       646,
+       12,
+       "outCubic"
+      ],
+      [
+       651,
+       0,
+       "hold"
+      ],
+      [
+       665,
+       0,
+       "inSine"
+      ],
+      [
+       670,
+       -8
+      ]
+     ]
+    }
+   ],
+   "labels_note": "section «ՎԵՐԱՆՈՐՈԳՈՒՄ» (Montserrat/Noto Sans Armenian 500 18 px, 0.24em, uppercase, rgba(23,25,28,.62)) + stage word «Առաջ» / «Ընթացք» / «Հետո» (Noto Serif Armenian 500 40 px #856727), right-aligned to x 1010, y 270/294 — same slots as R2/v2. The stage word changes half-way through each transition (5-frame rise); during the final slider it follows the divider (Առաջ when p > 0.5) and reads «Առաջ | Հետո» during the split hold.",
+   "indicator": {
+    "what": "= R2 indicator (x 874–1010, y 352): stage fill Առաջ 1/3, Ընթացք 2/3, Հետո 1; final slider: fill = 1/3 + 2/3·(1 − p)",
+    "steps": [
+     [
+      190,
+      0,
+      "outCubic"
+     ],
+     [
+      200,
+      0.3333,
+      "hold"
+     ],
+     [
+      217,
+      0.3333,
+      "outCubic"
+     ],
+     [
+      225,
+      0.6667,
+      "hold"
+     ],
+     [
+      247,
+      0.6667,
+      "outCubic"
+     ],
+     [
+      255,
+      1,
+      "hold"
+     ],
+     [
+      285,
+      1,
+      "outCubic"
+     ],
+     [
+      291,
+      0.3333,
+      "hold"
+     ],
+     [
+      322,
+      0.3333,
+      "outCubic"
+     ],
+     [
+      330,
+      0.6667,
+      "hold"
+     ],
+     [
+      351,
+      0.6667,
+      "outCubic"
+     ],
+     [
+      359,
+      1,
+      "hold"
+     ],
+     [
+      390,
+      1,
+      "outCubic"
+     ],
+     [
+      396,
+      0.3333,
+      "hold"
+     ],
+     [
+      427,
+      0.3333,
+      "outCubic"
+     ],
+     [
+      435,
+      0.6667,
+      "hold"
+     ],
+     [
+      510,
+      0.6667,
+      "outCubic"
+     ],
+     [
+      518,
+      1
+     ]
+    ],
+    "slider_from": 562
+   },
+   "slider": {
+    "p_note": "p ∈ [0,1], divider x (window-local) = 940·p. LEFT of the divider = Առաջ (pair_raw, same camera), right = Հետո (hero). p = 0: finished.",
+    "p": [
+     [
+      566,
+      0,
+      "hold"
+     ],
+     [
+      570,
+      0,
+      "inOutQuart"
+     ],
+     [
+      588,
+      1,
+      "hold"
+     ],
+     [
+      598,
+      1,
+      "outCubic"
+     ],
+     [
+      616,
+      0.5,
+      "inOutSine"
+     ],
+     [
+      630,
+      0.53,
+      "inOutSine"
+     ],
+     [
+      642,
+      0.52,
+      "inOutCubic"
+     ],
+     [
+      656,
+      0
+     ]
+    ],
+    "handle_opacity": [
+     [
+      556,
+      0,
+      "outSine"
+     ],
+     [
+      564,
+      1,
+      "hold"
+     ],
+     [
+      654,
+      1,
+      "inOutSine"
+     ],
+     [
+      662,
+      0
+     ]
+    ],
+    "handle_grab": [
+     [
+      564,
+      1,
+      "outCubic"
+     ],
+     [
+      570,
+      0.88,
+      "hold"
+     ],
+     [
+      588,
+      0.88,
+      "outBack"
+     ],
+     [
+      594,
+      1,
+      "outCubic"
+     ],
+     [
+      599,
+      0.88,
+      "hold"
+     ],
+     [
+      642,
+      0.88,
+      "outBack"
+     ],
+     [
+      650,
+      1
+     ]
+    ],
+    "handle_y": 1016,
+    "chips": {
+     "opacity": [
+      [
+       606,
+       0,
+       "outCubic"
+      ],
+      [
+       616,
+       1,
+       "hold"
+      ],
+      [
+       638,
+       1,
+       "inSine"
+      ],
+      [
+       644,
+       0
+      ]
+     ],
+     "items": [
+      {
+       "text": "Առաջ",
+       "x": 94,
+       "y": 414,
+       "align": "left"
+      },
+      {
+       "text": "Հետո",
+       "x_right": 986,
+       "y": 414,
+       "align": "right"
+      }
+     ]
+    },
+    "shot_left": "pair_raw",
+    "shot_right": "hero"
+   },
+   "light_leaks": {
+    "css": "div 900x900, radial-gradient(closest-side, rgba(255,214,150,0.9), rgba(201,169,106,0.35) 45%, rgba(201,169,106,0) 100%), mix-blend-mode screen, centred (cx, cy)",
+    "note": "peak ≤ 0.12, only on transitions / slider",
+    "events": [
+     {
+      "frame": 180,
+      "opacity": [
+       [
+        180,
+        0,
+        "outSine"
+       ],
+       [
+        188,
+        0.1,
+        "inOutSine"
+       ],
+       [
+        210,
+        0
+       ]
+      ],
+      "cx": [
+       [
+        180,
+        300,
+        "linear"
+       ],
+       [
+        210,
+        760
+       ]
+      ],
+      "cy": 1016
+     },
+     {
+      "frame": 210,
+      "opacity": [
+       [
+        210,
+        0,
+        "outSine"
+       ],
+       [
+        216,
+        0.08,
+        "inOutSine"
+       ],
+       [
+        230,
+        0
+       ]
+      ],
+      "cx": [
+       [
+        210,
+        980,
+        "inOutCubic"
+       ],
+       [
+        224,
+        120
+       ]
+      ],
+      "cy": 900
+     },
+     {
+      "frame": 315,
+      "opacity": [
+       [
+        313,
+        0,
+        "outSine"
+       ],
+       [
+        321,
+        0.07,
+        "inOutSine"
+       ],
+       [
+        340,
+        0
+       ]
+      ],
+      "cx": [
+       [
+        313,
+        500,
+        "linear"
+       ],
+       [
+        340,
+        620
+       ]
+      ],
+      "cy": 700
+     },
+     {
+      "frame": 420,
+      "opacity": [
+       [
+        420,
+        0,
+        "outSine"
+       ],
+       [
+        426,
+        0.08,
+        "inOutSine"
+       ],
+       [
+        440,
+        0
+       ]
+      ],
+      "cx": [
+       [
+        420,
+        980,
+        "inOutCubic"
+       ],
+       [
+        434,
+        120
+       ]
+      ],
+      "cy": 900
+     },
+     {
+      "frame": 510,
+      "opacity": [
+       [
+        508,
+        0,
+        "outSine"
+       ],
+       [
+        514,
+        0.1,
+        "inOutSine"
+       ],
+       [
+        532,
+        0
+       ]
+      ],
+      "cx": [
+       [
+        508,
+        900,
+        "linear"
+       ],
+       [
+        532,
+        640
+       ]
+      ],
+      "cy": 820
+     },
+     {
+      "frame": 570,
+      "opacity": [
+       [
+        566,
+        0,
+        "outSine"
+       ],
+       [
+        574,
+        0.08,
+        "inOutSine"
+       ],
+       [
+        596,
+        0
+       ]
+      ],
+      "cx": [
+       [
+        566,
+        300,
+        "linear"
+       ],
+       [
+        596,
+        880
+       ]
+      ],
+      "cy": 1016
+     },
+     {
+      "frame": 645,
+      "opacity": [
+       [
+        641,
+        0,
+        "outSine"
+       ],
+       [
+        649,
+        0.1,
+        "inOutSine"
+       ],
+       [
+        668,
+        0
+       ]
+      ],
+      "cx": [
+       [
+        641,
+        600,
+        "linear"
+       ],
+       [
+        668,
+        200
+       ]
+      ],
+      "cy": 1016
+     }
+    ]
+   },
+   "cover": {
+    "what": "the idea in one still: the final matched pair split at p = 0.5 — left the RAW room (balcony door, screed, buckets), right the finished living room (glazing in the same place), gold divider + handle; chips «ԱՌԱՋ» / «ՀԵՏՈ», section «ՎԵՐԱՆՈՐՈԳՈՒՄ», stage «Առաջ | Հետո», corner logo, soft grid around the window",
+    "base_frame_index": 625,
+    "stage_text": "Առաջ | Հետո",
+    "output": "R3_cover.png → R3_cover.jpg (q92)",
+    "grid_check": "profile grid 3:4 (y 240–1680) contains logo, labels and the whole window"
+   },
+   "audio": {
+    "tempo": "120 BPM, 4/4; 1 beat = 15 frames, 1 bar = 60 frames",
+    "file_rule": "Owner preference: ONLY the intro has sound, then silence. `python3 marketing/instagram/tools/compose_l02_audio.py intro_r3.wav --intro-only` (26.0 s WAV = reel length; sound 0–6.0 s, digital silence after).",
+    "beat_map": [
+     {
+      "f": 0,
+      "s": 0.0,
+      "event": "L02 intro"
+     },
+     {
+      "f": 105,
+      "s": 3.5,
+      "event": "IMPACT: gold piece lands"
+     },
+     {
+      "f": 180,
+      "s": 6.0,
+      "event": "DOWNBEAT — music starts: gold piece opens on S1 RAW"
+     },
+     {
+      "f": 210,
+      "s": 7.0,
+      "event": "gold slider wipe → S1 progress"
+     },
+     {
+      "f": 240,
+      "s": 8.0,
+      "event": "dissolve through light → S1 finished"
+     },
+     {
+      "f": 270,
+      "s": 9.0,
+      "event": "detail: window"
+     },
+     {
+      "f": 285,
+      "s": 9.5,
+      "event": "cut: S2 RAW"
+     },
+     {
+      "f": 315,
+      "s": 10.5,
+      "event": "plaster dust dissolve → S2 progress"
+     },
+     {
+      "f": 345,
+      "s": 11.5,
+      "event": "material wipe → S2 finished"
+     },
+     {
+      "f": 375,
+      "s": 12.5,
+      "event": "detail: light / palm"
+     },
+     {
+      "f": 390,
+      "s": 13.0,
+      "event": "cut: S3 RAW"
+     },
+     {
+      "f": 420,
+      "s": 14.0,
+      "event": "gold slider wipe → S3 progress"
+     },
+     {
+      "f": 450,
+      "s": 15.0,
+      "event": "floor reveal"
+     },
+     {
+      "f": 466,
+      "s": 15.5,
+      "event": "camera pull-back to the window"
+     },
+     {
+      "f": 495,
+      "s": 16.5,
+      "event": "detail: floor"
+     },
+     {
+      "f": 510,
+      "s": 17.0,
+      "event": "HERO cut + pan"
+     },
+     {
+      "f": 570,
+      "s": 19.0,
+      "event": "slider sweeps to RAW"
+     },
+     {
+      "f": 600,
+      "s": 20.0,
+      "event": "drag to the middle (split)"
+     },
+     {
+      "f": 645,
+      "s": 21.5,
+      "event": "release → finished (biggest accent)"
+     },
+     {
+      "f": 666,
+      "s": 22.2,
+      "event": "end card"
+     },
+     {
+      "f": 780,
+      "s": 26.0,
+      "event": "loop point"
+     }
+    ],
+    "mood": "In-app track by MOOD, not by name: modern minimal / architectural, warm, ~120 BPM with a clear pulse (cuts land on beats), felt piano or soft pluck + light percussion (a soft riser into 19.0 s), no vocals, no EDM drop. Start at 6.0 s.",
+    "music_start_s": 6.0
+   },
+   "checks": [
+    "ffprobe: 1080x1920, 30 fps, 780 frames, 26.000 s, yuv420p, AAC (intro sound 0–6.0 s, then silence)",
+    "f0–179 = L02 v4 frames (rendered by render_l02_frames.js)",
+    "No text in f0–189; no hook, no CTA, no @handle; end card = logo, services line, garon.am",
+    "Labels inside x 240–1010, y 262–360 (reels safe zone: nothing but image below y 1500 except the window bottom)",
+    "Photos: only licensed stock (CREDITS.md), no people, no readable brands; nothing called «մեր աշխատանքը»; caption says illustrative stock",
+    "prep manifest: coverage 1.0 and max_screen_upscale ≤ 1.35 for every shot",
+    "Alignment: prep --debug overlays (_dbg/*.jpg) — window/opening/floor/sill lines of consecutive stages coincide within ≈ 40 units (s3_prog→s3_fin < 10)",
+    "Stage label matches the divider side (switch at p = 0.5)",
+    "f779 = paper + end card (clean loop)"
+   ],
+   "alt_hy": "Կարճ տեսանյութ բաց ֆոնի վրա։ Ճարտարապետական ցանցի վրա կառուցվում է GARON նշանը, և նրա ոսկեգույն մասը բացում է պատուհանը։ Երեք արագ պատմություն՝ «Առաջ → Ընթացք → Հետո». աղյուսե պատով և նոր պատուհանով քանդված սենյակը դառնում է սվաղված սենյակ՝ կաղնե հատակով, հետո՝ լուսավոր ննջասենյակ. աղյուսե պատերի միջև բացվածքը ծեփի փոշու միջով դառնում է սպիտակ դռան բացվածք, հետո՝ քարե պատ բազմոցով. հին աղյուսե պատը խողովակների մնացորդներով դառնում է նոր պատ նոր խողովակներով, ներքևից բացվում է կաղնե հատակը։ Արագ դետալներ՝ պատուհան, բույս, հատակ։ Վերջում տաք հյուրասենյակ, և ոսկեգույն սահիչը համեմատում է այն չվերանորոգված սենյակի հետ։ Լուսանկարները նկարազարդող stock են (Pexels, Unsplash), ոչ GARON-ի նախագծեր։ Վերջին կադրում՝ լոգոն, «Լողավազաններ · Տներ · Վերանորոգում» և garon.am։"
+  }
+ }
+}

@@ -1,22 +1,209 @@
-# GARON — Content Guide
+# GARON — բովանդակության ուղեցույց (նախագծեր, նկարներ, կապի տվյալներ)
 
-## Where to edit text and project images
+> Կարճ English version — ֆայլի վերջում։
 
-- Page texts (Armenian / English / Russian): `content/i18n.ts`
-- Projects: `content/siteContent.ts` (title, description, facts, intro, hero image, gallery, next-project link)
-- Contact details: `content/siteConfig.ts` (leave a value empty to hide it)
-- Search-engine titles/descriptions: `content/seo.ts`
+Կայքի նախագծերն այլևս կոդի մեջ չեն. **ամեն նախագիծ առանձին ֆայլ է**՝ `content/projects/<slug>.json`,
+իսկ նրա նկարները՝ `public/projects/<slug>/` պանակում։ Այս ֆայլերը կարելի է փոխել երեք եղանակով.
 
-## How to replace a photo
+1. **Ադմին վահանակով** `garon.am/admin` (հեռախոսից կամ համակարգչից, առանց ծրագրավորման) — հիմնական եղանակը։
+2. **Ուղարկել նկարները Claude-ին չատում** — նույն արդյունքը, առանց վահանակի (տես «Այլընտրանք»)։
+3. Ձեռքով՝ GitHub-ում ֆայլը խմբագրելով (ծրագրավորողի համար)։
 
-1. Open `public/projects/<project-folder>/`.
-2. Put your new photo there as **.webp** (max ~1920px wide, quality ~80) with the same filename to update the site without changing code.
-3. If you use a new filename, change the path in `content/siteContent.ts`.
+Նոր նախագիծը **ինքնաբերաբար** հայտնվում է՝ «Նախագծեր» էջում իր բաժնում, համապատասխան ծառայության էջում
+(Տներ → «Բնակելի տների կառուցում», Լողավազաններ → «Լողավազանների կառուցում» …), sitemap-ում, և ունի իր էջը
+`garon.am/projects/<slug>`։ Կոդ փոխել պետք չէ։
 
-Example: `public/projects/pool-01/06.webp`
+---
 
-## Important
+## 1. Մեկանգամյա կարգավորում (մոտ 10 րոպե)
 
-- Do not change the GARON logo files in `public/brand/` unless intentionally replacing the approved logo.
-- Keep Pool 01–05 and House 01 as separate projects.
-- Image paths start with `/projects/...` because they are served from the `public` folder.
+> Ադմին վահանակը աշխատում է այն բանից հետո, երբ այս փոփոխությունները միացված (merged) են GitHub-ի `main` ճյուղին
+> (Vercel-ը հրապարակում է `main`-ը, և վահանակը գրում է հենց այնտեղ)։
+
+### 1.1 GitHub հաշիվ
+- Պետք է GitHub հաշիվ, որը մուտք ունի `gorpoghosyan010-hash/gor-poghosyan` repo-ին
+  (repo-ի տերը կամ ավելացված «collaborator» — repo → **Settings → Collaborators → Add people**)։
+
+### 1.2 Մուտքի token (բանալի) ստեղծել
+1. Մտեք github.com, սեղմեք վերևի աջ անկյունի ձեր նկարին → **Settings**։
+2. Ձախ ցանկի ամենաներքևում՝ **Developer settings** → **Personal access tokens** → **Fine-grained tokens** →
+   **Generate new token**։
+3. Լրացրեք.
+   - **Token name**՝ `GARON admin`
+   - **Expiration**՝ օր.՝ 1 տարի (ժամկետի ավարտից հետո կրկնել այս քայլերը)
+   - **Resource owner**՝ `gorpoghosyan010-hash`
+   - **Repository access** → **Only select repositories** → ընտրել `gor-poghosyan`
+   - **Permissions → Repository permissions → Contents** → **Read and write**
+     (Metadata: Read-only-ն ավելանում է ինքնաբերաբար)։ Ուրիշ ոչինչ պետք չէ։
+4. Սեղմեք **Generate token** և **պատճենեք** `github_pat_…` տողը (այն ցուցադրվում է միայն մեկ անգամ)։
+   Պահեք այն գաղտնաբառերի պես. **չուղարկել ոչ մեկին, չտեղադրել չատում կամ կայքում**։
+
+### 1.3 Առաջին մուտքը վահանակ
+1. Բացեք **garon.am/admin**։
+2. Սեղմեք **Sign In Using Access Token**, տեղադրեք token-ը, **Sign In**։
+3. Բրաուզերը կհիշի մուտքը. հաջորդ անգամ պարզապես բացեք garon.am/admin։
+4. **Հեռախոսով մուտք** (հարմար է). համակարգչում մուտք գործելուց հետո վերևի աջ անկյունի պատկերակ →
+   **Sign In with Mobile** → հեռախոսով սկանավորեք QR կոդը։
+   Դուրս գալու համար՝ վերևի աջ անկյունի պատկերակ → **Sign Out**։
+
+> Վահանակի ինտերֆեյսը անգլերեն է (Sveltia CMS), իսկ դաշտերի անունները՝ հայերեն։
+> (Ցանկության դեպքում կարելի է միացնել նաև «Sign in with GitHub» կոճակը. դրա համար պետք է անվճար
+> OAuth ծառայություն՝ sveltia-cms-auth. Claude-ը կարող է օգնել կարգավորել։)
+
+---
+
+## 2. Նոր նախագիծ ավելացնել (օր.՝ նոր տուն «Տներ» բաժնում)
+
+1. Բացեք **garon.am/admin** → ձախում **Նախագծեր** → վերևում **+** (Create a new entry)։
+2. Լրացրեք.
+   - **Անվանում → Հայերեն**՝ օր.՝ «Տուն Աբովյանում» (en/ru՝ ցանկության դեպքում. դատարկ → կցուցադրվի հայերենը)։
+   - **Հասցե կայքում (slug)**՝ լատինատառ, օր.՝ `house-02` (կայքում՝ garon.am/projects/house-02)։
+     Միայն փոքրատառ, թվեր, գծիկ։ **Ստեղծելուց հետո չփոխել**։
+   - **Բաժին**՝ **Տներ** (կամ Լողավազաններ / Վերանորոգում / Հասարակական)։
+   - **Հրապարակված**՝ միացված։
+   - **Հերթականություն բաժնում**՝ փոքր թիվը՝ առաջինը (տես «4»)։
+   - **Կարգավիճակ**՝ Ավարտված կամ Ընթացքի մեջ։
+3. **Նկարներ** → **Add Նկար** → **Նկար** դաշտում **Upload** (կամ քաշեք ֆայլը) → ընտրեք լուսանկարը։
+   Կրկնեք ամեն նկարի համար։ Կարելի է բեռնել հեռախոսի սովորական JPG/HEIC/PNG — վահանակը ինքը
+   **փոքրացնում է (առավելագույնը 2000px) և դարձնում WebP**։
+4. (Ցանկության դեպքում) **Գլխավոր նկար**՝ ընտրեք այն նկարը, որը կլինի էջի վերևում և քարտի վրա։
+   Դատարկ թողնելու դեպքում կօգտագործվի ցուցակի առաջին նկարը։
+5. (Ցանկության դեպքում) **Ենթավերնագիր**, **Կարճ նկարագրություն**, **Քարտի տող**, **Նախագծի պատմությունը**,
+   **Փաստեր** (Վայր, Մակերես մ², Տևողություն, Տարի)։ Դատարկ դաշտը կայքում **չի ցուցադրվում**։
+   Գրեք միայն ճշգրիտ, ստուգելի տվյալներ (առանց «մոտավոր» թվերի և խոստումների)։
+6. Սեղմեք **Save**։ Վահանակը պահում է ֆայլը GitHub-ում → Vercel-ը ինքնաբերաբար վերահավաքում է կայքը։
+
+### Քանի՞ րոպեում կերևա կայքում
+Սովորաբար **1–3 րոպե** «Save»-ից հետո։ Եթե 5 րոպեից հետո չի երևում՝ թարմացրեք էջը (կամ բացեք
+incognito պատուհանում). եթե դեռ չկա՝ տես «7. Եթե ինչ-որ բան սխալ է»։
+
+---
+
+## 3. Նկարների հերթականությունը փոխել
+
+1. Բացեք նախագիծը → **Նկարներ** ցուցակ։
+2. Ամեն նկարի տողի ձախում կա քաշելու նշան (⠿)։ **Քաշեք** նկարը վեր կամ վար
+   (կամ տողի մենյուից ընտրեք **Move Up** / **Move Down**)։
+3. **Save**։ Կայքում նկարները ցուցադրվում են **ճիշտ այս հերթականությամբ**։
+
+## 4. Նախագծերի հերթականությունը բաժնում
+- **Հերթականություն բաժնում** դաշտ՝ փոքր թիվը առաջինն է (10, 20, 30 …)։
+- Նոր նախագիծը ստանում է 10. եթե թվերը հավասար են, **ավելի նորը** (ըստ «Ավելացման ամսաթվի») ցուցադրվում է առաջինը։
+- Նախագիծը ամենավերևում դնելու համար՝ տվեք ավելի փոքր թիվ (օր.՝ 5)։
+- **Ցույց տալ գլխավոր էջում**՝ միացրեք, որ նախագիծը երևա գլխավոր էջի «Ընտրված աշխատանք» բաժնում
+  (առավելագույնը 3 նախագիծ)։
+
+## 5. Փուլեր՝ Սկիզբ / Ընթացք / Արդյունք
+- Ամեն նկարի համար **Փուլ** դաշտում ընտրեք **Սկիզբ**, **Ընթացք** կամ **Արդյունք** (կամ թողեք դատարկ)։
+- Կայքում իրար հաջորդող նույն փուլի նկարները հավաքվում են վերնագրի տակ («01 Սկիզբ», «02 Ընթացք», «03 Արդյունք»)։
+  Ուստի դասավորեք նկարները. նախ բոլոր «Սկիզբ»-ները, հետո «Ընթացք», հետո «Արդյունք»։
+- Եթե ոչ մի նկարի փուլ նշված չէ՝ պատկերասրահը ցուցադրվում է առանց վերնագրերի (ինչպես հիմա)։
+- **Նկարագրություն** (ոչ պարտադիր)՝ կարճ տող նկարի տակ, օր.՝ «Հիմքի ամրանավորում»։
+
+## 6. Նախագիծը թաքցնել կամ ջնջել
+- **Թաքցնել** (խորհուրդ է տրվում). բացեք նախագիծը → անջատեք **Հրապարակված** → **Save**։
+  Նախագիծը կվերանա կայքից (էջը, քարտերը, sitemap-ը), բայց ֆայլն ու նկարները կմնան. նորից միացնելով՝ կվերադառնա։
+- **Ջնջել ընդմիշտ**. նախագծի էջում վերևի մենյու (⋮) → **Delete**։ Նկարները մնում են «Media / Assets» բաժնում և
+  կարող են ջնջվել այնտեղից։
+
+## Որտեղ է երևում նախագիծը
+
+| Բաժին (վահանակում) | Կայքում |
+|---|---|
+| Տներ | Նախագծեր → «Բնակելի», «Բնակելի տների կառուցում» էջի ներքևում |
+| Լողավազաններ | Նախագծեր → «Լողավազաններ», «Լողավազանների կառուցում» էջի ներքևում |
+| Վերանորոգում | Նախագծեր → «Վերանորոգում», «Վերանորոգում և վերակառուցում» էջի ներքևում |
+| Հասարակական | Նախագծեր → «Հասարակական», «Հասարակական կառույցներ» էջի ներքևում |
+
+Բաժինը, որը նախագիծ չունի, կայքում ինքնաբերաբար թաքնված է։ «Ցույց տալ գլխավոր էջում» նշվածները՝ նաև գլխավոր էջում։
+
+---
+
+## 7. Ինչ ՉԱՆԵԼ / եթե ինչ-որ բան սխալ է
+
+- **Չփոխել slug-ը** արդեն հրապարակված նախագծի համար (կփոխվի հասցեն, հին հղումները կտան 404)։
+- **Չտեղադրել ուրիշի նկարներ** (stock, ինտերնետից, մրցակիցների)՝ միայն GARON-ի իրական աշխատանք։
+- **Չգրել չհաստատված թվեր** (տարիներ, երաշխիք, գներ, «50+ տուն»). փաստերի դատարկ դաշտը ավելի լավ է, քան սխալը։
+- Չտեղադրել հաճախորդի ճշգրիտ հասցե կամ դեմքեր առանց նրա համաձայնության (վայրը՝ համայնքի մակարդակով)։
+- Չբեռնել տեսանյութեր կամ 25 ՄԲ-ից մեծ ֆայլեր։
+- **Token-ը ոչ մեկին չտալ**. եթե կասկածում եք, որ այն տեսել են՝ GitHub → Developer settings → token → **Delete**,
+  և ստեղծեք նորը։
+- Եթե «Save»-ից հետո նախագիծը չի հայտնվում. ամենայն հավանականությամբ build-ը կանգնել է սխալ տվյալի պատճառով
+  (օր.՝ ջնջված նկար, որը դեռ նշված է նախագծում)։ **Կայքում այդ ընթացքում մնում է նախորդ, աշխատող տարբերակը**։
+  Vercel → Deployments → վերջին կարմիր deployment → Build Logs-ում գրված է՝ որ ֆայլում և որ դաշտում է խնդիրը
+  (հայերեն)։ Ուղղեք վահանակում և նորից **Save**, կամ ուղարկեք սխալի նկարը Claude-ին։
+
+## 8. Այլընտրանք. ուղարկել Claude-ին
+Ուղարկեք չատում.
+1. նկարները (ցանկալի է՝ ճիշտ հերթականությամբ կամ համարակալված),
+2. բաժինը (Տներ / Լողավազաններ / Վերանորոգում / Հասարակական),
+3. անվանումը և (եթե ուզում եք) փաստերը, ո՞ր նկարներն են «Սկիզբ», «Ընթացք», «Արդյունք», ո՞րն է գլխավորը։
+
+Claude-ը կստեղծի `content/projects/<slug>.json` ֆայլը, կմշակի նկարները (WebP), կթարգմանի en/ru և
+կհրապարակի նույն ձևով։
+
+---
+
+## Այլ բովանդակություն (ծրագրավորողի համար)
+
+| Ինչ | Որտեղ |
+|---|---|
+| Հեռախոս, WhatsApp, Viber, Telegram, հասցե, email, Instagram, Facebook | `content/siteConfig.ts` (դատարկ → թաքնված ամբողջ կայքում. հեռախոս կամ WhatsApp լրացնելիս մոբայլում հայտնվում են «Զանգել» / «WhatsApp» կոճակները, հասցե լրացնելիս՝ «Բացել քարտեզում») |
+| Էջերի տեքստերը hy / en / ru | `content/i18n.ts` |
+| Որոնողների համար վերնագրեր/նկարագրություններ | `content/seo.ts` (նախագծերինը՝ ինքնաբերաբար նախագծի անվանումից) |
+| Հաշվիչի գները | `components/CostCalculator.tsx`-ի սկզբում |
+| Կապի ձևի Telegram/email կարգավորում | `README.md` → «Contact form» |
+
+**Լոգոյի ֆայլերը** (`public/brand/`) չփոխել, եթե միտումնավոր չեք փոխարինում հաստատված լոգոն։
+
+### Նախագծի ֆայլի կառուցվածքը (`content/projects/<slug>.json`)
+```json
+{
+  "slug": "house-02",
+  "category": "houses",
+  "order": 10,
+  "published": true,
+  "featured": false,
+  "created": "2026-11-17",
+  "status": "completed",
+  "title": { "hy": "Տուն", "en": "House", "ru": "Дом" },
+  "subtitle": { "hy": "Ամբողջ ճանապարհը" },
+  "summary": { "hy": "Մեկ նախադասություն..." },
+  "cardText": { "hy": "Բնակելի առանձնատուն · ավարտված" },
+  "story": { "hy": "Պատմությունը..." },
+  "introTitle": { "hy": "Սկիզբից մինչև" },
+  "introTitle2": { "hy": "վերջնական արդյունք։" },
+  "facts": { "location": { "hy": "Աբովյան" }, "area_m2": 180, "duration": { "hy": "8 ամիս" }, "year": 2026 },
+  "heroImage": "/projects/house-02/12.webp",
+  "images": [
+    { "src": "/projects/house-02/01.webp", "stage": "start", "caption": { "hy": "Հողամասը" } },
+    { "src": "/projects/house-02/05.webp", "stage": "progress" },
+    { "src": "/projects/house-02/12.webp", "stage": "result" }
+  ]
+}
+```
+- Պարտադիր են միայն `slug` (= ֆայլի անունը), `category`, `title.hy` և գոնե մեկ նկար։ Մնացածը՝ ոչ պարտադիր։
+- `category`՝ `houses` | `pools` | `renovation` | `public`։ `stage`՝ `start` | `progress` | `result` | `null`։
+- `images`-ի հերթականությունը = կայքում ցուցադրման հերթականությունը։ en/ru դատարկ → հայերեն։
+- Build-ի ժամանակ ամեն ֆայլ ստուգվում է (`content/projects.ts`). սխալի դեպքում build-ը կանգնում է հստակ հաղորդագրությամբ։
+
+---
+
+## English (short)
+
+- **Projects** live in `content/projects/<slug>.json` (one file per project) with photos in `public/projects/<slug>/`.
+  New files appear automatically in the right section of `/projects`, on the matching service page, in the sitemap and
+  at `/projects/<slug>`, ordered by `order` (ascending), then newest `created` first.
+- **Admin panel**: `garon.am/admin` (Sveltia CMS, commits to `main`; works once this code is merged to `main`).
+  One-time setup: GitHub → Settings → Developer settings → Personal access tokens → Fine-grained → *Generate new token* →
+  Resource owner `gorpoghosyan010-hash`, *Only select repositories* → `gor-poghosyan`, *Contents: Read and write* →
+  copy the token → `/admin` → *Sign In Using Access Token*.
+- **Add a project**: Նախագծեր → *+ (Create a new entry)* → title (Armenian required), slug (`house-02`), section (Տներ/Լողավազաններ/
+  Վերանորոգում/Հասարակական) → *Add Նկար* for each photo (auto-resized to WebP ≤ 2000px) → optional stage
+  (Սկիզբ/Ընթացք/Արդյունք), caption, facts → *Save*. Live in ~1–3 minutes.
+- **Reorder photos**: drag the ⠿ handle in the images list → *Save*. **Unpublish**: switch off «Հրապարակված» → *Save*.
+- **Don’t**: change the slug of a published project, upload stock/other people’s photos, enter unconfirmed numbers,
+  share the token. A broken project file fails the build with a clear message; the previous version stays online.
+- **Alternative**: send the photos + section + title to Claude in chat; Claude creates the JSON and processes the images.
+- Contact details: `content/siteConfig.ts` (empty = hidden). Texts: `content/i18n.ts`. SEO: `content/seo.ts`.
+  Calculator prices: `components/CostCalculator.tsx`. Lead form env vars: `README.md`.

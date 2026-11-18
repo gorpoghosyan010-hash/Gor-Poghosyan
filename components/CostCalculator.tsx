@@ -225,7 +225,7 @@ export default function CostCalculator({ modes = ALL_MODES }: { modes?: Mode[] }
             <div className="calcField">
               <label>{t.optionsLabel}</label>
               <div className="calcOptions">
-                <label className="calcOption"><input type="checkbox" checked={basement} onChange={e => setBasement(e.target.checked)} /><span>{t.basement}</span></label>
+                <label className="calcOption"><input type="checkbox" className="calcCheck" checked={basement} onChange={e => setBasement(e.target.checked)} /><span>{t.basement}</span></label>
                 {basement && (
                   <div className="calcSubField">
                     <label>{t.fullBasementAreaLabel}</label>
@@ -242,8 +242,8 @@ export default function CostCalculator({ modes = ALL_MODES }: { modes?: Mode[] }
                     </div>
                   </div>
                 )}
-                <label className="calcOption"><input type="checkbox" checked={mansard} onChange={e => { setMansard(e.target.checked); if (e.target.checked) setFlatRoof(false); }} /><span>{t.mansard}</span></label>
-                <label className="calcOption"><input type="checkbox" checked={flatRoof} onChange={e => { setFlatRoof(e.target.checked); if (e.target.checked) setMansard(false); }} /><span>{t.flatRoof}</span></label>
+                <label className="calcOption"><input type="checkbox" className="calcCheck" checked={mansard} onChange={e => { setMansard(e.target.checked); if (e.target.checked) setFlatRoof(false); }} /><span>{t.mansard}</span></label>
+                <label className="calcOption"><input type="checkbox" className="calcCheck" checked={flatRoof} onChange={e => { setFlatRoof(e.target.checked); if (e.target.checked) setMansard(false); }} /><span>{t.flatRoof}</span></label>
               </div>
             </div>
           )}
@@ -254,11 +254,15 @@ export default function CostCalculator({ modes = ALL_MODES }: { modes?: Mode[] }
             <>
               <span className="calcResultLabel">{t.resultLabel}</span>
               <strong className="calcResultValue">{(mode === 'renovation' || mode === 'pool') && <em>{t.startingFrom} </em>}{total.toLocaleString('en-US')} ֏</strong>
+              <p className="calcEstimateNote">{t.estimateNote}</p>
               <p>{t.disclaimer}</p>
               <Link className="button gold" href={`/contact?estimate=${encodeURIComponent(summary)}`}>{t.cta}</Link>
             </>
           ) : (
-            <p className="calcEmpty">{mode === 'pool' ? t.enterPoolDims : t.enterArea}</p>
+            <>
+              <p className="calcEmpty">{mode === 'pool' ? t.enterPoolDims : t.enterArea}</p>
+              <p className="calcEstimateNote">{t.estimateNote}</p>
+            </>
           )}
         </div>
       </div>

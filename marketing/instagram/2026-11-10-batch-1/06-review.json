@@ -1,0 +1,236 @@
+{
+ "_round": 3,
+ "_date": "2026-11-10",
+ "_gates": {
+  "Բ2": "resolved (GARON team built house-01, pool-01, pool-02, pool-05)",
+  "faces_house-01/09": "approved by owner",
+  "site": "garon.am",
+  "instagram": "@garon__construction",
+  "Բ3": "open",
+  "Բ4": "open",
+  "calculator_prices": "open (demo)",
+  "Բ5": "open",
+  "phone": "open (non-blocking, DM CTAs only)",
+  "Բ6": "operational pre-post hashtag check"
+ },
+ "P01": {
+  "verdict": "approved",
+  "owner": "",
+  "scores": {
+   "truth": 9,
+   "language": 9,
+   "brief": 9,
+   "visual": 9,
+   "specs": 10
+  },
+  "fixes": [],
+  "notes": [
+   "Music in app, 15 s"
+  ]
+ },
+ "P02": {
+  "verdict": "approved",
+  "owner": "",
+  "scores": {
+   "truth": 9,
+   "language": 9,
+   "brief": 9,
+   "visual": 8,
+   "specs": 10
+  },
+  "fixes": [],
+  "notes": [
+   "Pin"
+  ]
+ },
+ "P03": {
+  "verdict": "approved",
+  "owner": "",
+  "scores": {
+   "truth": 9,
+   "language": 9,
+   "brief": 9,
+   "visual": 9,
+   "specs": 10
+  },
+  "fixes": []
+ },
+ "P04": {
+  "verdict": "approved",
+  "owner": "",
+  "scores": {
+   "truth": 9,
+   "language": 9,
+   "brief": 8,
+   "visual": 8,
+   "specs": 9
+  },
+  "fixes": [],
+  "notes": [
+   "Reel is 13.5 s (brief 12 s) — accepted per round-1 option",
+   "Music must cover 13.5 s"
+  ]
+ },
+ "P05": {
+  "verdict": "approved",
+  "owner": "",
+  "scores": {
+   "truth": 9,
+   "language": 9,
+   "brief": 9,
+   "visual": 8,
+   "specs": 10
+  },
+  "fixes": [],
+  "notes": [
+   "Publish with P05_09.jpg only, never P05_09_A"
+  ]
+ },
+ "P05_09_A": {
+  "verdict": "not_ready",
+  "owner": "owner-decision",
+  "gate": [
+   "Բ5"
+  ],
+  "fixes": [
+   "Weekly-report promise not approved (Բ5); do not publish"
+  ]
+ },
+ "P06": {
+  "verdict": "not_ready",
+  "owner": "owner-decision",
+  "then": [
+   "ig-3-copywriter",
+   "ig-5-producer"
+  ],
+  "gate": [
+   "calculator prices (demo)",
+   "Բ3",
+   "Բ4",
+   "validity date"
+  ],
+  "fixes": [
+   "Demo prices and red VAT/date placeholders; P06B replaces it on 11-27"
+  ]
+ },
+ "P06B": {
+  "verdict": "approved",
+  "owner": "",
+  "scores": {
+   "truth": 9,
+   "language": 9,
+   "brief": 9,
+   "visual": 8,
+   "specs": 10
+  },
+  "fixes": []
+ },
+ "P07": {
+  "verdict": "not_ready",
+  "owner": "ig-5-producer",
+  "gate": [
+   "founder shoot",
+   "DM responder for «ՍՏՈՒԳԵԼ»"
+  ],
+  "fixes": [
+   "No footage; P07B replaces it on 11-30; templates remain approved as templates"
+  ]
+ },
+ "P07B": {
+  "verdict": "approved",
+  "owner": "",
+  "scores": {
+   "truth": 9,
+   "language": 9,
+   "brief": 8,
+   "visual": 8,
+   "specs": 9
+  },
+  "fixes": []
+ },
+ "P08": {
+  "verdict": "not_ready",
+  "owner": "owner-decision",
+  "gate": [
+   "Բ5"
+  ],
+  "fixes": [
+   "Headline «…ամեն շաբաթ» and caption «ամեն ուրբաթ… հաշվետվություն» are unapproved promises (Բ5). Archive only; P08B replaces it on 12-02. Logo/RU fixes verified"
+  ]
+ },
+ "P08B": {
+  "verdict": "approved",
+  "owner": "",
+  "scores": {
+   "truth": 9,
+   "language": 9,
+   "brief": 9,
+   "visual": 8,
+   "specs": 10
+  },
+  "fixes": []
+ },
+ "P09": {
+  "verdict": "not_ready",
+  "owner": "owner-decision",
+  "then": [
+   "ig-3-copywriter",
+   "ig-5-producer"
+  ],
+  "gate": [
+   "calculator prices (demo)",
+   "Բ3",
+   "validity date"
+  ],
+  "fixes": [
+   "Demo 90,000 ֏/m² and red placeholders; when unblocked write «սկսած ≈ 6.1 մլն ֏». P09B replaces it on 12-04"
+  ]
+ },
+ "P09B": {
+  "verdict": "approved",
+  "owner": "",
+  "scores": {
+   "truth": 9,
+   "language": 9,
+   "brief": 8,
+   "visual": 8,
+   "specs": 10
+  },
+  "fixes": []
+ },
+ "_schedule": {
+  "2026-11-16": "P01",
+  "2026-11-18": "P02",
+  "2026-11-20": "P03",
+  "2026-11-23": "P04",
+  "2026-11-25": "P05",
+  "2026-11-27": "P06B",
+  "2026-11-30": "P07B",
+  "2026-12-02": "P08B",
+  "2026-12-04": "P09B",
+  "_time": "20:00 Asia/Yerevan",
+  "_before": "2026-11-11-launch runs 2026-11-12…2026-11-15"
+ },
+ "_out_of_scope": [
+  "2026-11-11-launch/00-profile-setup.md: bio link 2 points to /calculator (demo prices) and links still use [կայքի հասցե՝ ճշտել] — replace with https://garon.am and hold the calculator link until prices are approved"
+ ],
+ "_round3_logo_check": {
+  "date": "2026-11-10",
+  "logo": "public/brand/garon-logo-*.svg (final, owner-approved)",
+  "result": "all 9 approved items pass; no regressions vs d9a68e0 outside logo area; captions/alt unchanged",
+  "per_item": {
+   "P01": "pass",
+   "P02": "pass",
+   "P03": "pass",
+   "P04": "pass",
+   "P05": "pass",
+   "P06B": "pass",
+   "P07B": "pass",
+   "P08B": "pass",
+   "P09B": "pass"
+  },
+  "non_blocking": [
+   "Low logo contrast on light backgrounds: P01 ~8-10.5 s (overcast sky), P03_03, P05_06; pre-existing in R2. Optional: 20% dark scrim/soft shadow under the logo in future batches (ig-5-producer)"
+  ]
+ }
+}
