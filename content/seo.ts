@@ -47,9 +47,9 @@ export const pageMeta: Record<string, Record<Lang, M>> = {
     ru: { title: 'Общественные здания', description: 'Строительство общественных и коммерческих объектов с контролем сроков и качества.' }
   },
   '/projects': {
-    hy: { title: 'Նախագծեր', description: 'GARON-ի իրականացրած լողավազանները և բնակելի տունը՝ շինարարական ամբողջ պատմությամբ։' },
-    en: { title: 'Projects', description: 'Swimming pools and a residential house built by GARON, with the full construction story.' },
-    ru: { title: 'Проекты', description: 'Бассейны и жилой дом, построенные GARON, — с полной историей строительства.' }
+    hy: { title: 'Նախագծեր', description: 'GARON-ի իրականացրած լողավազանները, բնակելի տունը և հասարակական շենքը՝ շինարարական ամբողջ պատմությամբ։' },
+    en: { title: 'Projects', description: 'Swimming pools, a residential house and a public building by GARON, with the full construction story.' },
+    ru: { title: 'Проекты', description: 'Бассейны, жилой дом и общественное здание от GARON — с полной историей строительства.' }
   },
   '/projects/pool': {
     hy: { title: 'Լողավազանի նախագիծ', description: 'Լողավազանի շինարարության նախագիծ GARON-ից՝ փուլ առ փուլ։' },
@@ -60,6 +60,11 @@ export const pageMeta: Record<string, Record<Lang, M>> = {
     hy: { title: 'Բնակելի տան նախագիծ', description: 'Բնակելի տան շինարարության նախագիծ GARON-ից՝ հիմքից մինչև հանձնում։' },
     en: { title: 'Residential House Project', description: 'A residential house construction project by GARON, from foundation to handover.' },
     ru: { title: 'Проект жилого дома', description: 'Проект строительства жилого дома от GARON — от фундамента до сдачи.' }
+  },
+  '/projects/public': {
+    hy: { title: 'Հասարակական շենքի նախագիծ', description: 'Հասարակական շենքի նախագիծ GARON-ից՝ քարե ճակատով, ապակեպատ ծավալներով և բարեկարգված շրջակա տարածքով։' },
+    en: { title: 'Public Building Project', description: 'A public building project by GARON — stone facade, glazed volumes and a landscaped plaza.' },
+    ru: { title: 'Проект общественного здания', description: 'Проект общественного здания от GARON — каменный фасад, остеклённые объёмы и благоустроенная площадь.' }
   },
   '/calculator': {
     hy: { title: 'Շինարարության հաշվիչ', description: 'Հաշվեք լողավազանի, բնակելի տան կամ վերանորոգման մոտավոր արժեքը րոպեների ընթացքում։' },
@@ -76,6 +81,7 @@ export const pageMeta: Record<string, Record<Lang, M>> = {
 export function pageKey(pathname: string): string | undefined {
   if (pathname.startsWith('/projects/pool')) return '/projects/pool';
   if (pathname.startsWith('/projects/house')) return '/projects/house';
+  if (pathname.startsWith('/projects/public')) return '/projects/public';
   return pageMeta[pathname] ? pathname : undefined;
 }
 

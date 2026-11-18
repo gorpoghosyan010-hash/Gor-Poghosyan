@@ -220,6 +220,38 @@ export const projects: Record<string, Project> = {
         nextTitle:'Ваша идея', nextTitleSecond:'может быть следующей.', nextEyebrow:'НАЧНИТЕ СВОЙ ПРОЕКТ'
       }
     }
+  },
+  'public-01': {
+    slug:'public-01', number:'04', category:'PUBLIC',
+    heroImage:'/projects/public-01/01.webp',
+    images: ['01'].map(n=>`/projects/public-01/${n}.webp`),
+    nextHref:'/contact',
+    content: {
+      hy: {
+        eyebrow:'ՆԱԽԱԳԻԾ · ՀԱՍԱՐԱԿԱԿԱՆ', title:'Հասարակական շենք', titleSecond:'Քար և ապակի',
+        description:'Քարե ճակատով և ապակեպատ ծավալներով հասարակական շենք՝ բարեկարգված հրապարակով։',
+        facts:[{label:'ՏԵՍԱԿ',value:'Հասարակական շենք'},{label:'ԾԱՎԱԼ',value:'Շինարարություն'},{label:'ՄԵԴԻԱ',value:'Օդային տեսք'}],
+        introEyebrow:'ՆԱԽԱԳԻԾ', introTitle:'Քաղաքի համար', introTitleSecond:'կառուցված։',
+        introText:'Բաց քարե ճակատ, ապակեպատ ծավալներ՝ կանաչապատ պատշգամբներով, լայն աստիճաններ և բարեկարգված հրապարակ։ Երեկոյան ճարտարապետական լուսավորությունը շեշտում է շենքի գծերը։',
+        nextTitle:'Ձեր գաղափարը', nextTitleSecond:'հաջորդը կարող է լինել։', nextEyebrow:'ՍԿՍԵՔ ՁԵՐ ՆԱԽԱԳԻԾԸ'
+      },
+      en: {
+        eyebrow:'PROJECT · PUBLIC', title:'Public Building', titleSecond:'Stone & Glass',
+        description:'A public building with a stone facade and glazed volumes, set in a landscaped plaza.',
+        facts:[{label:'TYPE',value:'Public Building'},{label:'SCOPE',value:'Construction'},{label:'MEDIA',value:'Aerial view'}],
+        introEyebrow:'PROJECT', introTitle:'Built for', introTitleSecond:'the City.',
+        introText:'A light stone facade, glazed volumes with planted terraces, wide entrance stairs and a landscaped plaza. Architectural lighting traces the lines of the building at dusk.',
+        nextTitle:'Your Idea', nextTitleSecond:'could be next.', nextEyebrow:'START YOUR PROJECT'
+      },
+      ru: {
+        eyebrow:'ПРОЕКТ · ОБЩЕСТВЕННОЕ', title:'Общественное здание', titleSecond:'Камень и стекло',
+        description:'Общественное здание с каменным фасадом и остеклёнными объёмами на благоустроенной площади.',
+        facts:[{label:'ТИП',value:'Общественное здание'},{label:'ОБЪЁМ',value:'Строительство'},{label:'МЕДИА',value:'Вид с воздуха'}],
+        introEyebrow:'ПРОЕКТ', introTitle:'Построено', introTitleSecond:'для города.',
+        introText:'Светлый каменный фасад, остеклённые объёмы с озеленёнными террасами, широкие входные лестницы и благоустроенная площадь. Архитектурная подсветка подчёркивает линии здания в вечернее время.',
+        nextTitle:'Ваша идея', nextTitleSecond:'может быть следующей.', nextEyebrow:'НАЧНИТЕ СВОЙ ПРОЕКТ'
+      }
+    }
   }
 };
 

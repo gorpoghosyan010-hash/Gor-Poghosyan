@@ -143,5 +143,9 @@ export const imageSizes: Record<string, [number, number]> = {
   "/services/residential.webp": [
     1200,
     1387
+  ],
+  "/projects/public-01/01.webp": [
+    1672,
+    941
   ]
 };

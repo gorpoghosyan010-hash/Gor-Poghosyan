@@ -3,9 +3,9 @@ import type { Lang } from '../components/LanguageContext';
 export const languageNames: Record<Lang, string> = { hy: 'Հայերեն', en: 'English', ru: 'Русский' };
 
 export const common = {
-  hy: { viewProject: 'Դիտել նախագիծը ↗', contactCta: 'Կապվել GARON-ի հետ ↗', nextProjectCta: 'Հաջորդ նախագիծը ↗', poolTag: 'ԼՈՂԱՎԱԶԱՆ', residentialTag: 'ԲՆԱԿԵԼԻ' },
-  en: { viewProject: 'View Project ↗', contactCta: 'Contact GARON ↗', nextProjectCta: 'Next Project ↗', poolTag: 'POOL', residentialTag: 'RESIDENTIAL' },
-  ru: { viewProject: 'Смотреть проект ↗', contactCta: 'Связаться с GARON ↗', nextProjectCta: 'Следующий проект ↗', poolTag: 'БАССЕЙН', residentialTag: 'ЖИЛОЙ ДОМ' }
+  hy: { viewProject: 'Դիտել նախագիծը ↗', contactCta: 'Կապվել GARON-ի հետ ↗', nextProjectCta: 'Հաջորդ նախագիծը ↗', poolTag: 'ԼՈՂԱՎԱԶԱՆ', residentialTag: 'ԲՆԱԿԵԼԻ', publicTag: 'ՀԱՍԱՐԱԿԱԿԱՆ' },
+  en: { viewProject: 'View Project ↗', contactCta: 'Contact GARON ↗', nextProjectCta: 'Next Project ↗', poolTag: 'POOL', residentialTag: 'RESIDENTIAL', publicTag: 'PUBLIC' },
+  ru: { viewProject: 'Смотреть проект ↗', contactCta: 'Связаться с GARON ↗', nextProjectCta: 'Следующий проект ↗', poolTag: 'БАССЕЙН', residentialTag: 'ЖИЛОЙ ДОМ', publicTag: 'ОБЩЕСТВЕННОЕ' }
 };
 
 export const nav = {
@@ -589,15 +589,18 @@ export const calculator = {
 export const serviceProjects = {
   hy: {
     pool: { title1: 'Մեր կառուցած', title2: 'լողավազանները։' },
-    residential: { title1: 'Մեր կառուցած', title2: 'տները։' }
+    residential: { title1: 'Մեր կառուցած', title2: 'տները։' },
+    public: { title1: 'Հասարակական', title2: 'կառույցներ։' }
   },
   en: {
     pool: { title1: 'Pools', title2: 'We Have Built.' },
-    residential: { title1: 'Homes', title2: 'We Have Built.' }
+    residential: { title1: 'Homes', title2: 'We Have Built.' },
+    public: { title1: 'Public', title2: 'Buildings.' }
   },
   ru: {
     pool: { title1: 'Бассейны,', title2: 'которые мы построили.' },
-    residential: { title1: 'Дома,', title2: 'которые мы построили.' }
+    residential: { title1: 'Дома,', title2: 'которые мы построили.' },
+    public: { title1: 'Общественные', title2: 'здания.' }
   }
 };
 
@@ -610,6 +613,9 @@ export const projectsArchive = {
     residentialEyebrow: '02 / ԲՆԱԿԵԼԻ', residentialTitle1: 'Բնակելի', residentialTitle2: 'առանձնատներ',
     residentialText: 'Տունը ներկայացնում է զրոյական վիճակից մինչև պատրաստ տուն ամբողջ ճանապարհը՝ մեկ նախագծի էջում։',
     openHouse: 'Բացել Տունը →', houseCardTitle: 'Տուն', houseCardMeta: 'Բնակելի առանձնատուն · ավարտված',
+    publicEyebrow: '03 / ՀԱՍԱՐԱԿԱԿԱՆ', publicTitle1: 'Հասարակական', publicTitle2: 'շենքեր',
+    publicText: 'Քարե ճակատով և ապակեպատ ծավալներով հասարակական շենք՝ բարեկարգված հրապարակով և երեկոյան լուսավորությամբ։',
+    openPublic: 'Բացել շենքը →', publicCardTitle: 'Հասարակական շենք', publicCardMeta: 'Քարե ճակատ · ապակեպատ ծավալներ',
     nextEyebrow: 'ՀԱՋՈՐԴԸ', nextTitle1: 'Ձեր նախագիծը', nextTitle2: 'կարող է լինել այստեղ։', nextCta: 'Սկսել նախագիծը ↗'
   },
   en: {
@@ -620,6 +626,9 @@ export const projectsArchive = {
     residentialEyebrow: '02 / RESIDENTIAL', residentialTitle1: 'Residential', residentialTitle2: 'Homes',
     residentialText: 'The house shows the entire journey from ground zero to a finished home, on a single project page.',
     openHouse: 'Open the House →', houseCardTitle: 'House', houseCardMeta: 'Residential Home · Completed',
+    publicEyebrow: '03 / PUBLIC', publicTitle1: 'Public', publicTitle2: 'Buildings',
+    publicText: 'A public building with a stone facade and glazed volumes, set in a landscaped plaza with evening lighting.',
+    openPublic: 'Open the Building →', publicCardTitle: 'Public Building', publicCardMeta: 'Stone Facade · Glazed Volumes',
     nextEyebrow: 'NEXT', nextTitle1: 'Your project', nextTitle2: 'could be here.', nextCta: 'Start a Project ↗'
   },
   ru: {
@@ -630,6 +639,9 @@ export const projectsArchive = {
     residentialEyebrow: '02 / ЖИЛЫЕ ДОМА', residentialTitle1: 'Жилые', residentialTitle2: 'дома',
     residentialText: 'Дом показывает весь путь от нуля до готового дома на одной странице проекта.',
     openHouse: 'Открыть дом →', houseCardTitle: 'Дом', houseCardMeta: 'Жилой дом · завершён',
+    publicEyebrow: '03 / ОБЩЕСТВЕННЫЕ', publicTitle1: 'Общественные', publicTitle2: 'здания',
+    publicText: 'Общественное здание с каменным фасадом и остеклёнными объёмами, благоустроенной площадью и вечерней подсветкой.',
+    openPublic: 'Открыть здание →', publicCardTitle: 'Общественное здание', publicCardMeta: 'Каменный фасад · остеклённые объёмы',
     nextEyebrow: 'ДАЛЕЕ', nextTitle1: 'Ваш проект', nextTitle2: 'может быть здесь.', nextCta: 'Начать проект ↗'
   }
 };

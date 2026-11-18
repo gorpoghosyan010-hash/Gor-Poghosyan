@@ -6,7 +6,7 @@ import { useLanguage } from './LanguageContext';
 import { poolCardsByLang } from '../content/siteContent';
 import { common, home, projectsArchive, serviceProjects } from '../content/i18n';
 
-export default function ServiceProjects({ kind }: { kind: 'pool' | 'residential' }) {
+export default function ServiceProjects({ kind }: { kind: 'pool' | 'residential' | 'public' }) {
   const { lang } = useLanguage();
   const s = serviceProjects[lang][kind];
   const a = projectsArchive[lang];
@@ -26,6 +26,12 @@ export default function ServiceProjects({ kind }: { kind: 'pool' | 'residential'
             </Reveal>
           ))}
         </div>
+      ) : kind === 'public' ? (
+        <Reveal>
+          <div className="singleFeature">
+            <ProjectCard href="/projects/public-01" image="/projects/public-01/01.webp" number={common[lang].publicTag} title={a.publicCardTitle} meta={a.publicCardMeta} large />
+          </div>
+        </Reveal>
       ) : (
         <Reveal>
           <div className="singleFeature">
