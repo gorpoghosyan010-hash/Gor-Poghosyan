@@ -5,8 +5,7 @@ import { usePathname } from 'next/navigation';
 import Logo from './Logo';
 import LanguageSwitcher from './LanguageSwitcher';
 import { useLanguage } from './LanguageContext';
-import { nav, contactUi } from '../content/i18n';
-import { siteConfig, contactLinks } from '../content/siteConfig';
+import { nav } from '../content/i18n';
 
 export default function Header() {
   const { lang } = useLanguage();
@@ -38,12 +37,11 @@ export default function Header() {
 
   return <>
     <header className={`siteHeader ${scrolled ? 'scrolled' : ''} ${open ? 'menuOpen' : ''}`}>
-      <Link href="/" className="brand"><Logo /></Link>
+      <Link href="/" className="brand"><Logo light /></Link>
       <nav className="desktopNav" aria-label="Main">
         {links.map(([href, label]) => <Link key={href} href={href}>{label}</Link>)}
       </nav>
       <div className="headerRight">
-        {siteConfig.phone && <a className="headerPhone" href={contactLinks.tel} data-event="click_tel">{siteConfig.phone}</a>}
         <Link className="headerCta" href="/contact">{t.cta} <span>↗</span></Link>
         <LanguageSwitcher />
         <button type="button" className="menuToggle" onClick={() => setOpen(o => !o)} aria-expanded={open} aria-controls="mobileMenu" aria-label={open ? t.close : t.menu}>
@@ -56,12 +54,7 @@ export default function Header() {
         <Link href="/" tabIndex={open ? 0 : -1}>{t.home}</Link>
         {links.map(([href, label]) => <Link key={href} href={href} tabIndex={open ? 0 : -1}>{label}</Link>)}
       </nav>
-      <div className="mobileMenuFoot">
-        <Link className="button gold" href="/contact" tabIndex={open ? 0 : -1}>{t.cta} ↗</Link>
-        {siteConfig.phone && <a className="mobileMenuPhone" href={contactLinks.tel} tabIndex={open ? 0 : -1} data-event="click_tel">{contactUi[lang].call}: {siteConfig.phone}</a>}
-        {contactLinks.whatsapp && <a className="mobileMenuPhone" href={contactLinks.whatsapp} target="_blank" rel="noopener noreferrer" tabIndex={open ? 0 : -1} data-event="click_whatsapp">WhatsApp ↗</a>}
-        {contactLinks.viber && <a className="mobileMenuPhone" href={contactLinks.viber} tabIndex={open ? 0 : -1}>Viber ↗</a>}
-      </div>
+      <Link className="button gold" href="/contact" tabIndex={open ? 0 : -1}>{t.cta} ↗</Link>
     </div>
   </>;
 }

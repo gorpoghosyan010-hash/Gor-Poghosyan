@@ -1,5 +1,4 @@
 'use client';
-import PageHero from '../../components/PageHero';
 import { useLanguage } from '../../components/LanguageContext';
 import { calculator } from '../../content/i18n';
 import CostCalculator from '../../components/CostCalculator';
@@ -9,7 +8,14 @@ export default function CalculatorPage() {
   const t = calculator[lang];
   return (
     <main className="innerPage">
-      <PageHero image="/projects/house-01/06.webp" eyebrow={t.eyebrow} title1={t.title1} title2={t.title2} lead={t.lead} />
+      <section className="innerHero calculatorHero" style={{ backgroundImage: "url('/stock/calculator.webp')" }}>
+        <div className="innerHeroShade" />
+        <div>
+          <p className="eyebrow">{t.eyebrow}</p>
+          <h1>{t.title1}<br/><span>{t.title2}</span></h1>
+          <p>{t.lead}</p>
+        </div>
+      </section>
       <section className="sectionLight contactPage">
         <CostCalculator />
       </section>
