@@ -479,3 +479,32 @@ html.splashOn .splash{display:flex}
   .siteHeader.hidden{transform:none}
 }
 @media(min-width:851px){.pageHero.hasVideo:not(:has(.portrait)){grid-template-columns:minmax(0,.8fr) minmax(0,1.3fr)}}
+
+/* =====================================================================
+   Old-site service videos, restored as they were: full-screen hero, sticky,
+   the video plays with the scroll; text over a dark gradient.
+   ===================================================================== */
+.serviceDetailHero{position:relative;min-height:760px;display:flex;align-items:flex-end;color:#fff;background:var(--dark);overflow:hidden}
+.serviceDetailOverlay{position:absolute;inset:0;z-index:2;background:linear-gradient(90deg,rgba(0,0,0,.72),rgba(0,0,0,.15) 70%),linear-gradient(0deg,rgba(0,0,0,.7),transparent 55%);pointer-events:none}
+.serviceDetailContent{position:relative;z-index:3;padding:0 var(--pad-x) 100px;max-width:900px}
+.serviceDetailContent .eyebrow{color:#e2d3b2}
+.serviceDetailContent h1{font-size:clamp(2.6rem,6vw,5.2rem);line-height:1.04;margin:18px 0}
+.serviceDetailContent h1:after{content:"";display:block;width:56px;height:3px;background:var(--gold);margin-top:22px;transform-origin:left;animation:ruleGrow .8s .8s cubic-bezier(.2,.7,.2,1) both}
+.serviceDetailContent p:last-child{max-width:620px;color:#e3e4e5;font-size:17px;line-height:1.75}
+.vidWrap{position:relative}
+.vidHero.serviceDetailHero{position:sticky;top:0;min-height:100vh;min-height:100svh}
+.vidBackdrop{position:absolute;inset:0;background-size:cover;background-position:center;filter:blur(22px) brightness(.5) saturate(1.1);transform:scale(1.12)}
+.vidEl{position:absolute;z-index:1;right:4vw;top:50%;transform:translateY(-50%);width:min(36vw,540px);aspect-ratio:560/752;object-fit:cover;background:var(--dark);border:1px solid rgba(255,255,255,.2)}
+.vidSpacer{height:90vh}
+.vidWide .vidEl{inset:0;right:auto;top:0;transform:none;width:100%;height:100%;aspect-ratio:auto;border:0}
+.vidWide .vidBackdrop{display:none}
+@media(min-width:851px){.vidHero:not(.vidWide) .serviceDetailContent{max-width:min(900px,52vw)}.vidHero:not(.vidWide) .serviceDetailContent h1{font-size:clamp(2.4rem,4.6vw,4.2rem)}}
+@media(max-width:850px){
+  .serviceDetailHero{min-height:650px}
+  .serviceDetailContent{padding:0 var(--pad-x) 80px}
+  .serviceDetailContent h1{font-size:clamp(1.9rem,8.2vw,2.9rem)}
+  .vidEl{inset:0;right:auto;top:0;transform:none;width:100%;height:100%;aspect-ratio:auto;border:0}
+  .vidWide .vidEl{object-fit:contain;background:transparent}
+  .vidWide .vidBackdrop{display:block}
+  .vidHero:not(.vidWide) .vidBackdrop{display:none}
+}
