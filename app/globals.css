@@ -374,3 +374,108 @@ html.splashOn .splash{display:flex}
 }
 @media(max-width:560px){.valueGrid,.processGrid{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}html.splashOn .splash{display:none}.reveal{opacity:1;transform:none}}
+
+/* =====================================================================
+   v6.1 — videos back in the heroes + motion layer
+   ===================================================================== */
+/* hero frame: portrait videos are sized by height, wide ones by width */
+.pageHeroMedia{display:flex;flex-direction:column;align-items:flex-end}
+.pageHeroMedia .frame{width:100%}
+.pageHeroMedia .frame.portrait{width:auto;height:min(calc(100svh - var(--header) - 150px),720px);max-height:none;aspect-ratio:4/5}
+.homeHero .pageHeroMedia .frame.portrait{height:min(calc(100svh - var(--header) - 130px),760px)}
+.heroFrame{background:var(--stone)}
+.heroVideo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.heroProgress{position:absolute;z-index:3;left:0;right:0;bottom:-6px;height:3px;background:var(--line)}
+.heroProgress:after{content:"";position:absolute;inset:0;background:var(--gold-dark);transform-origin:left;transform:scaleX(var(--p,0))}
+.heroScrollWrap{position:relative}
+.heroScrollWrap.scrubOn .pageHero{position:sticky;top:0;min-height:100svh}
+.heroScrollWrap .heroSpacer{display:none}
+.heroScrollWrap.scrubOn .heroSpacer{display:block;height:110vh}
+.scrollHint{display:none}
+.scrubOn .scrollHint{display:block;position:absolute;left:50%;bottom:-60px;width:1px;height:44px;background:var(--line);overflow:hidden}
+.scrubOn .scrollHint i{position:absolute;left:0;top:-50%;width:1px;height:50%;background:var(--gold-dark);animation:hintDrop 1.6s ease-in-out infinite}
+@keyframes hintDrop{to{top:100%}}
+@media(max-width:850px){.pageHeroMedia{align-items:stretch}.pageHeroMedia .frame.portrait,.homeHero .pageHeroMedia .frame.portrait{width:100%;height:auto;max-height:none}}
+
+/* page scroll progress */
+.scrollProgress{position:fixed;z-index:60;top:0;left:0;right:0;height:2px;background:var(--gold-dark);transform-origin:left;transform:scaleX(var(--scroll,0));pointer-events:none}
+
+/* header hides while scrolling down */
+.siteHeader{transition:transform .35s ease,border-color .3s,background .3s}
+.siteHeader.hidden{transform:translateY(-100%)}
+
+/* hero entrance: text lines rise out of a mask, photo/video wipes in, offset frame slides out */
+.heroIn{animation:heroRise .9s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(var(--i,0) * 110ms + 150ms)}
+@keyframes heroRise{from{opacity:0;transform:translateY(28px);clip-path:inset(0 0 100% 0)}to{opacity:1;transform:none;clip-path:inset(0 0 -20% 0)}}
+.pageHero h1:after{transform-origin:left;animation:ruleGrow .8s .8s cubic-bezier(.2,.7,.2,1) both}
+@keyframes ruleGrow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.heroFrame{animation:wipeIn 1.2s .2s cubic-bezier(.77,0,.18,1) both}
+@keyframes wipeIn{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(-30px -30px -30px -30px)}}
+.heroFrame>img,.heroFrame>.heroVideo{animation:kenBurns 2.4s .2s cubic-bezier(.2,.7,.2,1) both}
+@keyframes kenBurns{from{transform:scale(1.12)}to{transform:scale(1)}}
+.heroFrame:before{animation:frameOut 1s 1.1s cubic-bezier(.2,.7,.2,1) both}
+@keyframes frameOut{from{transform:translate(-16px,-16px);opacity:0}to{transform:none;opacity:1}}
+.photoTag{animation:fadeUp .6s 1.4s both}
+
+/* section headings: the gold rule grows when the block appears */
+.ruled:after{transform-origin:left;transform:scaleX(0);transition:transform .8s .25s cubic-bezier(.2,.7,.2,1)}
+.reveal.visible .ruled:after{transform:scaleX(1)}
+
+/* watermark words move with scroll (ScrollFx) */
+.watermark{will-change:transform;transition:none}
+
+/* images uncover from the bottom when their card appears */
+.serviceCardImg,.projectCard,.galleryItem{clip-path:inset(100% 0 0 0);transition:clip-path 1.1s cubic-bezier(.77,0,.18,1) var(--delay,0ms)}
+.reveal.visible .serviceCardImg,.reveal.visible .projectCard,.reveal.visible .galleryItem{clip-path:inset(0 0 0 0)}
+.serviceCardImg img{transition:filter .5s}
+.serviceCard:hover .serviceCardImg img{transform:none;filter:brightness(1.06) saturate(1.08)}
+.galleryItem{overflow:hidden}
+.galleryItem img{transition:transform .9s cubic-bezier(.2,.7,.2,1)}
+.galleryItem:hover img{transform:scale(1.04)}
+.cardTag{opacity:0;transform:translateY(-8px);transition:opacity .5s .7s,transform .5s .7s}
+.reveal.visible .cardTag{opacity:1;transform:none}
+
+/* timeline: the line draws itself, dots pop in one after another */
+.timeline li{border-top:0}
+.timeline li:after{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:var(--ink);transform-origin:left;transform:scaleX(0);transition:transform .9s cubic-bezier(.65,0,.35,1) var(--delay,0ms)}
+.timeline li:before{z-index:1;transform:scale(0) rotate(45deg);transition:transform .45s cubic-bezier(.34,1.56,.64,1) calc(var(--delay,0ms) + 450ms)}
+.reveal.visible li:after{transform:scaleX(1)}
+.reveal.visible li:before{transform:scale(1) rotate(45deg)}
+.valueGrid article,.processGrid article{border-top:0;position:relative}
+.valueGrid article:before,.processGrid article:before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:var(--ink);transform-origin:left;transform:scaleX(0);transition:transform .9s cubic-bezier(.65,0,.35,1)}
+.reveal.visible .valueGrid article:before,.reveal.visible .processGrid article:before{transform:scaleX(1)}
+.valueGrid article:nth-child(2):before,.processGrid article:nth-child(2):before{transition-delay:.12s}
+.valueGrid article:nth-child(3):before,.processGrid article:nth-child(3):before{transition-delay:.24s}
+.valueGrid article:nth-child(4):before,.processGrid article:nth-child(4):before{transition-delay:.36s}
+.stageTitle{border-top:0;position:relative}
+.stageTitle:before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:var(--ink);transform-origin:left;transform:scaleX(0);transition:transform 1s cubic-bezier(.65,0,.35,1)}
+.reveal.visible .stageTitle:before,.galleryGroup:has(.reveal.visible) .stageTitle:before{transform:scaleX(1)}
+
+/* buttons: colour fills in from the left */
+.button.gold,.button.ghost,.darkButton,.headerCta{position:relative;overflow:hidden;isolation:isolate}
+.button.gold:before,.button.ghost:before,.darkButton:before,.headerCta:before{content:"";position:absolute;inset:0;z-index:-1;transform:scaleX(0);transform-origin:right;transition:transform .45s cubic-bezier(.65,0,.35,1)}
+.button.gold:before,.headerCta:before{background:var(--ink)}
+.button.ghost:before{background:var(--ink)}
+.darkButton:before{background:var(--gold-dark)}
+.button.gold:hover,.headerCta:hover,.darkButton:hover{background:var(--gold-dark)}
+.darkButton:hover{background:var(--ink)}
+.button.ghost:hover{background:transparent;color:#fff}
+.button:hover:before,.headerCta:hover:before{transform:scaleX(1);transform-origin:left}
+
+/* calculator result number pulses when it changes */
+.calcResultValue{animation:valuePop .45s cubic-bezier(.34,1.56,.64,1)}
+@keyframes valuePop{from{transform:scale(.96);opacity:.4}to{transform:none;opacity:1}}
+
+/* the statement title rises word-block by word-block */
+.statement h2 span{display:inline-block;transform:translateY(24px);opacity:0;transition:transform .9s .25s cubic-bezier(.2,.7,.2,1),opacity .9s .25s}
+.reveal.visible.statementBox h2 span,.statement .reveal.visible h2 span{transform:none;opacity:1}
+
+@media(prefers-reduced-motion:reduce){
+  .heroIn,.heroFrame,.heroFrame>img,.heroFrame>.heroVideo,.heroFrame:before,.photoTag{animation:none!important}
+  .serviceCardImg,.projectCard,.galleryItem{clip-path:none!important}
+  .ruled:after,.timeline li:after,.timeline li:before,.valueGrid article:before,.processGrid article:before,.stageTitle:before{transform:none!important}
+  .timeline li:before{transform:rotate(45deg)!important}
+  .statement h2 span,.cardTag{transform:none!important;opacity:1!important}
+  .siteHeader.hidden{transform:none}
+}
+@media(min-width:851px){.pageHero.hasVideo:not(:has(.portrait)){grid-template-columns:minmax(0,.8fr) minmax(0,1.3fr)}}

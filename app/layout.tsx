@@ -6,6 +6,7 @@ import Footer from '../components/Footer';
 import Splash from '../components/Splash';
 import PageTitle from '../components/PageTitle';
 import MobileContactBar from '../components/MobileContactBar';
+import ScrollFx from '../components/ScrollFx';
 import { LanguageProvider } from '../components/LanguageContext';
 import { pageMeta, siteUrl, SITE_NAME } from '../content/seo';
 import { siteConfig } from '../content/siteConfig';
@@ -55,6 +56,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <LanguageProvider>
           <PageTitle />
           <Splash />
+          <ScrollFx />
           <Header />
           {children}
           <Footer />

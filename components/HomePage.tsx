@@ -1,6 +1,7 @@
 'use client';
 import Link from 'next/link';
 import Reveal from './Reveal';
+import PageHero from './PageHero';
 import ProjectCard from './ProjectCard';
 import { useLanguage } from './LanguageContext';
 import { home, projectUi } from '../content/i18n';
@@ -17,27 +18,13 @@ export default function HomePage({ featured }: { featured: ProjectCardData[] }) 
   const { lang } = useLanguage();
   const t = home[lang];
   return <main>
-    <section className="homeHero">
-      <div className="blueprint" aria-hidden="true" />
-      <div className="homeHeroText">
-        <Reveal>
-          <p className="eyebrow">{t.heroServices}</p>
-          <h1>{t.heroTitle1}<br /><span>{t.heroTitle2}</span></h1>
-          <p className="pageHeroLead">{t.heroLead}</p>
-          <div className="actions">
-            <Link className="button gold" href="/calculator">{t.heroCalc}</Link>
-            <Link className="button ghost" href="/projects">{t.viewWork}</Link>
-          </div>
-          <p className="heroRegion">{t.heroRegion}</p>
-        </Reveal>
+    <PageHero home image="/projects/house-01/12.webp" media={{ video: '/services/house-rise-play.mp4', poster: '/services/house-rise-poster.webp', mode: 'once', ratio: '4/5' }} eyebrow={t.heroServices} title1={t.heroTitle1} title2={t.heroTitle2} lead={t.heroLead}>
+      <div className="actions">
+        <Link className="button gold" href="/calculator">{t.heroCalc}</Link>
+        <Link className="button ghost" href="/projects">{t.viewWork}</Link>
       </div>
-      <div className="homeHeroMedia">
-        <figure className="frame">
-          <img src="/projects/house-01/12.webp" alt="GARON — house" fetchPriority="high" />
-          <figcaption className="photoTag">{projectUi[lang].categories.houses.tag} · GARON</figcaption>
-        </figure>
-      </div>
-    </section>
+      <p className="heroRegion">{t.heroRegion}</p>
+    </PageHero>
 
     <section className="section paper homeIntro">
       <span className="watermark" aria-hidden="true">GARON</span>
@@ -49,7 +36,7 @@ export default function HomePage({ featured }: { featured: ProjectCardData[] }) 
       <Reveal className="sectionTop"><div><p className="eyebrow">{t.capabilitiesEyebrow}</p><h2 className="ruled">{t.capabilitiesTitle1}<br /><span>{t.capabilitiesTitle2}</span></h2></div><p>{t.capabilitiesLead}</p></Reveal>
       <div className="serviceCards">{serviceMeta.map(([n, href, img], i) => <Reveal key={n} delay={i * 80}>
         <Link href={href} className="serviceCard">
-          <div className="serviceCardImg"><img src={img} alt="" loading="lazy" /></div>
+          <div className="serviceCardImg"><img src={img} alt="" loading="lazy" data-parallax /></div>
           <div className="serviceCardBody"><span>{n}</span><h3>{t.services[i].t}</h3><p>{t.services[i].d}</p><b>→</b></div>
         </Link>
       </Reveal>)}</div>
