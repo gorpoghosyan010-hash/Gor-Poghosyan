@@ -1,7 +1,6 @@
 'use client';
 import Reveal from '../../components/Reveal';
 import ContactForm from '../../components/ContactForm';
-import ModelVideo from '../../components/ModelVideo';
 import { useLanguage } from '../../components/LanguageContext';
 import { contact } from '../../content/i18n';
 import { siteConfig, hasSocials } from '../../content/siteConfig';
@@ -11,9 +10,7 @@ export default function Contact() {
   const t = contact[lang];
   return (
     <main className="innerPage">
-      <section className="innerHero contactHero">
-        {/* Բնակարանի հատակագիծը գծերով դառնում է կահավորված եռաչափ նախագիծ (ծրագրով նկարված անիմացիա) */}
-        <ModelVideo base="/contact/apartment-studio" className="contactVid" />
+      <section className="innerHero contactHero" style={{ backgroundImage: "url('/stock/contact.webp')" }}>
         <div className="innerHeroShade" />
         <div>
           <p className="eyebrow">{t.eyebrow}</p>
@@ -33,8 +30,8 @@ export default function Contact() {
                 <div>
                   <small>{t.socialLabel}</small>
                   <p>
-                    {siteConfig.instagram && <a href={siteConfig.instagram} target="_blank" rel="noopener noreferrer" className="arwLink">Instagram</a>}
-                    {siteConfig.facebook && <a href={siteConfig.facebook} target="_blank" rel="noopener noreferrer" className="arwLink">Facebook</a>}
+                    {siteConfig.instagram && <a href={siteConfig.instagram} target="_blank" rel="noopener noreferrer">Instagram ↗</a>}
+                    {siteConfig.facebook && <a href={siteConfig.facebook} target="_blank" rel="noopener noreferrer">Facebook ↗</a>}
                   </p>
                 </div>
               )}
