@@ -14,6 +14,10 @@ export default function Contact() {
   useEffect(() => {
     const v = vidRef.current;
     if (!v) return;
+    // Հեռախոսի և համակարգչի համար առանձին վիդեո (տարբեր կադրավորում)
+    const kind = window.matchMedia('(max-width: 850px)').matches ? 'mobile' : 'desktop';
+    v.poster = `/contact/plan-to-project-${kind}.webp`;
+    v.src = `/contact/plan-to-project-${kind}.mp4`;
     const start = () => { v.currentTime = 0; v.play().catch(() => {}); };
     if ((window as unknown as { __garonSplashDone?: boolean }).__garonSplashDone || !document.querySelector('.splash')) { start(); return; }
     window.addEventListener('garon:splash-done', start, { once: true });
@@ -22,8 +26,8 @@ export default function Contact() {
   return (
     <main className="innerPage">
       <section className="innerHero contactHero">
-        {/* Գաղափար → գծագիր → շինարարություն → պատրաստ տուն (իրական GARON տան լուսանկարներից) */}
-        <video ref={vidRef} className="contactVid" src="/contact/idea-to-house.mp4" poster="/contact/idea-to-house-poster.webp" muted playsInline preload="auto" aria-hidden="true" tabIndex={-1} />
+        {/* Հատակագիծը գծերով դառնում է եռաչափ նախագիծ (ծրագրով նկարված անիմացիա) */}
+        <video ref={vidRef} className="contactVid" muted playsInline preload="auto" aria-hidden="true" tabIndex={-1} />
         <div className="innerHeroShade" />
         <div>
           <p className="eyebrow">{t.eyebrow}</p>
