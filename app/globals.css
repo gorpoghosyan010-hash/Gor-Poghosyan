@@ -177,3 +177,5 @@
 /* Գլխավոր էջ. համակարգչում՝ սեփականատիրոջ հորիզոնական նկարը, հեռախոսում՝ սեփականատիրոջ ընտրած ուղղահայաց նկարը (վիլլա լողավազանով մթնշաղին) */
 .homeHero{background-image:url('/home/hero-desktop.webp');background-position:60% 55%}
 @media(max-width:850px){.homeHero{background-image:url('/home/hero-mobile.webp');background-position:50% 40%}}
+/* Բջջային մենյու. ավելի փոքր, նուրբ տառեր */
+.mobileMenu nav a{font-size:clamp(19px,5.4vw,26px);font-weight:400;letter-spacing:0;padding:16px 0}
