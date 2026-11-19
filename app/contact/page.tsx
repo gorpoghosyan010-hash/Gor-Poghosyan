@@ -33,8 +33,8 @@ export default function Contact() {
                 <div>
                   <small>{t.socialLabel}</small>
                   <p>
-                    {siteConfig.instagram && <a href={siteConfig.instagram} target="_blank" rel="noopener noreferrer">Instagram ↗</a>}
-                    {siteConfig.facebook && <a href={siteConfig.facebook} target="_blank" rel="noopener noreferrer">Facebook ↗</a>}
+                    {siteConfig.instagram && <a href={siteConfig.instagram} target="_blank" rel="noopener noreferrer" className="arwLink">Instagram</a>}
+                    {siteConfig.facebook && <a href={siteConfig.facebook} target="_blank" rel="noopener noreferrer" className="arwLink">Facebook</a>}
                   </p>
                 </div>
               )}
