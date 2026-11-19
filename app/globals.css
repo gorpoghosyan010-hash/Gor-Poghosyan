@@ -123,3 +123,6 @@
 .vidHero:not(.vidWide) .serviceDetailOverlay{background:linear-gradient(0deg,rgba(0,0,0,.55),transparent 40%)}
 .vidHero:not(.vidWide) .serviceDetailContent{max-width:min(760px,50vw)}
 }
+
+/* Մեր մասին. իրական տան ուղղահայաց լուսանկար։ Համակարգչում այն զբաղեցնում է աջ կեսը և սահուն անցնում ձախի մուգ ֆոնին */
+@media(min-width:851px){.aboutHero{background-color:#0b0c0d;background-repeat:no-repeat;background-size:56% auto;background-position:right 58%}.aboutHero .innerHeroShade{background:linear-gradient(90deg,#0b0c0d 44%,rgba(11,12,13,.55) 60%,rgba(11,12,13,.15) 85%)}}
