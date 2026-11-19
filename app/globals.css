@@ -163,3 +163,13 @@
 @keyframes garonArrow{0%{transform:translate(0,0);opacity:1}45%{transform:translate(.9em,-.9em);opacity:0}46%{transform:translate(-.9em,.9em);opacity:0}100%{transform:translate(0,0);opacity:1}}
 .button:hover::after,.headerCta:hover::after,.lineLink:hover::after,.quietLink:hover::after,.projectCard:hover .projectCardInfo b::after,.arwLink:hover::after,.serviceRow:hover .arw::after{animation:garonArrow .6s cubic-bezier(.65,0,.35,1)}
 @media(prefers-reduced-motion:reduce){.button:hover::after,.headerCta:hover::after,.lineLink:hover::after,.quietLink:hover::after,.projectCard:hover .projectCardInfo b::after,.arwLink:hover::after,.serviceRow:hover .arw::after{animation:none}}
+
+/* Մենյուի կոճակ. 3 գիծ (բացելիս դառնում է X՝ միջին գիծը անհետանում է) */
+.menuToggle span,.menuToggle span:nth-child(1),.menuToggle span:nth-child(2),.menuToggle span:nth-child(3){top:calc(50% - 1px);transform-origin:center}
+.menuToggle span:nth-child(1){transform:translateY(-7px)}
+.menuToggle span:nth-child(3){transform:translateY(7px)}
+.menuOpen .menuToggle span:nth-child(1),.menuOpen .menuToggle span:nth-child(2),.menuOpen .menuToggle span:nth-child(3){top:calc(50% - 1px)}
+.menuOpen .menuToggle span:nth-child(1){transform:rotate(45deg)}
+.menuOpen .menuToggle span:nth-child(2){opacity:0;transform:scaleX(.2)}
+.menuOpen .menuToggle span:nth-child(3){transform:rotate(-45deg)}
+@media(max-width:420px){.menuToggle span:nth-child(1){transform:translateY(-5px)}.menuToggle span:nth-child(3){transform:translateY(5px)}}
