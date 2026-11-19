@@ -179,3 +179,6 @@
 @media(max-width:850px){.homeHero{background-image:url('/home/hero-mobile.webp');background-position:50% 40%}}
 /* Բջջային մենյու. ավելի փոքր, նուրբ տառեր */
 .mobileMenu nav a{font-size:clamp(19px,5.4vw,26px);font-weight:400;letter-spacing:0;padding:16px 0}
+/* Հաշվիչ էջ. սեփականատիրոջ նկարը (գծագրերի վրա աշխատող թիմ). հեռախոսում կենտրոնում են մարդիկ և գծագիրը */
+.calculatorHero{background-position:50% 45%}
+@media(max-width:850px){.calculatorHero{background-position:42% 50%}}

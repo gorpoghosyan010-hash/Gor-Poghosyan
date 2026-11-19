@@ -8,7 +8,7 @@ export default function CalculatorPage() {
   const t = calculator[lang];
   return (
     <main className="innerPage">
-      <section className="innerHero calculatorHero" style={{ backgroundImage: "url('/stock/calculator.webp')" }}>
+      <section className="innerHero calculatorHero" style={{ backgroundImage: "url('/home/calculator-hero.webp')" }}>
         <div className="innerHeroShade" />
         <div>
           <p className="eyebrow">{t.eyebrow}</p>
