@@ -115,3 +115,11 @@
 
 /* 404 էջը լցնում է ամբողջ էկրանը, առանց դատարկ բաց հատվածի */
 .notFoundHero{min-height:100vh;min-height:100svh}
+
+/* Լողավազանների էջ (ուղղահայաց վիդեո), համակարգիչ. վիդեոն զբաղեցնում է էկրանի աջ կեսը վերևից ներքև, ձախում մուգ ֆոն և գրություն */
+@media(min-width:851px){
+.vidHero:not(.vidWide){background:#0b0c0d}
+.vidHero:not(.vidWide) .vidEl{left:auto;right:0;width:54%;object-position:center 40%;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 22%);mask-image:linear-gradient(90deg,transparent 0,#000 22%)}
+.vidHero:not(.vidWide) .serviceDetailOverlay{background:linear-gradient(0deg,rgba(0,0,0,.55),transparent 40%)}
+.vidHero:not(.vidWide) .serviceDetailContent{max-width:min(760px,50vw)}
+}
