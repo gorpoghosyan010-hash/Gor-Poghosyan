@@ -174,16 +174,6 @@
 .menuOpen .menuToggle span:nth-child(3){transform:rotate(-45deg)}
 @media(max-width:420px){.menuToggle span:nth-child(1){transform:translateY(-5px)}.menuToggle span:nth-child(3){transform:translateY(5px)}}
 
-/* Գլխավոր էջ. իրական նախագծերի լուսանկարներ, 4 հատ, ամեն մեկը ~6 վ, սահուն անցում և թեթև մոտեցում */
-.homeHero{background:#0b0c0d}
-.heroSlides{position:absolute;inset:0;overflow:hidden}
-.heroSlide{position:absolute;inset:-2%;background-size:cover;opacity:0;animation:heroSlide 24s linear infinite;will-change:opacity,transform}
-.heroSlide.s0{background-position:50% 62%;animation-delay:0s;opacity:1}
-.heroSlide.s1{background-position:50% 55%;animation-delay:6s}
-.heroSlide.s2{background-position:50% 60%;animation-delay:12s}
-.heroSlide.s3{background-position:50% 48%;animation-delay:18s}
-@keyframes heroSlide{0%{opacity:0;transform:scale(1.02)}5%{opacity:1}25%{opacity:1}31%{opacity:0;transform:scale(1.1)}100%{opacity:0;transform:scale(1.1)}}
-.heroSlide.s0{animation-name:heroSlideFirst}
-@keyframes heroSlideFirst{0%{opacity:1;transform:scale(1.02)}25%{opacity:1}31%{opacity:0;transform:scale(1.1)}95%{opacity:0;transform:scale(1.02)}100%{opacity:1;transform:scale(1.02)}}
-@media(prefers-reduced-motion:reduce){.heroSlide{animation:none}.heroSlide.s0{opacity:1}}
-.heroSlides::after{content:'';position:absolute;inset:0;background:linear-gradient(0deg,rgba(6,7,8,.82) 0%,rgba(6,7,8,.5) 45%,rgba(6,7,8,.25) 100%)}
+/* Գլխավոր էջ. համակարգչում՝ նախկին նկարը, հեռախոսում՝ սեփականատիրոջ ընտրած ուղղահայաց նկարը (վիլլա լողավազանով մթնշաղին) */
+.homeHero{background-image:url('/services/residential-hero.webp')}
+@media(max-width:850px){.homeHero{background-image:url('/home/hero-mobile.webp');background-position:50% 40%}}
