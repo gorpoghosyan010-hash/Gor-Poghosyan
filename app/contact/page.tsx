@@ -1,7 +1,7 @@
 'use client';
-import { useEffect, useRef } from 'react';
 import Reveal from '../../components/Reveal';
 import ContactForm from '../../components/ContactForm';
+import ModelVideo from '../../components/ModelVideo';
 import { useLanguage } from '../../components/LanguageContext';
 import { contact } from '../../content/i18n';
 import { siteConfig, hasSocials } from '../../content/siteConfig';
@@ -9,25 +9,11 @@ import { siteConfig, hasSocials } from '../../content/siteConfig';
 export default function Contact() {
   const { lang } = useLanguage();
   const t = contact[lang];
-  const vidRef = useRef<HTMLVideoElement>(null);
-  // Վիդեոն սկսվում է միայն ներածական էկրանը փակվելուց հետո, որ գծագիրը նկարվելը տեսանելի լինի սկզբից
-  useEffect(() => {
-    const v = vidRef.current;
-    if (!v) return;
-    // Հեռախոսի և համակարգչի համար առանձին վիդեո (տարբեր կադրավորում)
-    const kind = window.matchMedia('(max-width: 850px)').matches ? 'mobile' : 'desktop';
-    v.poster = `/contact/apartment-model-${kind}.webp`;
-    v.src = `/contact/apartment-model-${kind}.mp4`;
-    const start = () => { v.currentTime = 0; v.play().catch(() => {}); };
-    if ((window as unknown as { __garonSplashDone?: boolean }).__garonSplashDone || !document.querySelector('.splash')) { start(); return; }
-    window.addEventListener('garon:splash-done', start, { once: true });
-    return () => window.removeEventListener('garon:splash-done', start);
-  }, []);
   return (
     <main className="innerPage">
       <section className="innerHero contactHero">
         {/* Բնակարանի հատակագիծը գծերով դառնում է կահավորված եռաչափ նախագիծ (ծրագրով նկարված անիմացիա) */}
-        <video ref={vidRef} className="contactVid" muted playsInline preload="auto" aria-hidden="true" tabIndex={-1} />
+        <ModelVideo base="/contact/apartment-model" className="contactVid" />
         <div className="innerHeroShade" />
         <div>
           <p className="eyebrow">{t.eyebrow}</p>

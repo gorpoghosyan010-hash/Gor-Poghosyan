@@ -146,3 +146,8 @@
 .completedTile figcaption span{display:block;font-size:10px;letter-spacing:.2em;color:var(--gold)}
 .completedTile figcaption b{display:block;margin-top:8px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:500;color:#d1d3d4}
 @media(max-width:850px){.poolArchive.processPools{grid-template-columns:1fr}.completedGrid{grid-template-columns:1fr}.completedTile{min-height:340px}.completedPools{margin-top:48px}}
+
+/* Բնակելի տներ. վերևում «հատակագիծ → վիլլայի մակետ» անիմացիան (նույն դասավորությունը, ինչ Կապ էջում) */
+.modelHero{background:#0b0c0d;overflow:hidden}
+@media(min-width:851px){.modelHero .contactVid{left:auto;right:0;width:56%;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 22%);mask-image:linear-gradient(90deg,transparent 0,#000 22%)}.modelHero .serviceDetailOverlay{background:linear-gradient(0deg,rgba(0,0,0,.55),transparent 45%)}}
+@media(max-width:850px){.modelHero{min-height:100svh}.modelHero .serviceDetailOverlay{background:linear-gradient(0deg,rgba(6,7,8,.92) 10%,rgba(6,7,8,.55) 42%,rgba(6,7,8,.05) 72%)}}
