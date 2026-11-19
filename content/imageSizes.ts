@@ -40,9 +40,9 @@ export const imageSizes: Record<string, [number, number]> = {
     1536,
     1152
   ],
-  "/projects/house-01/11.webp": [
-    1152,
-    1536
+  "/projects/house-01/13.webp": [
+    960,
+    1280
   ],
   "/projects/house-01/12.webp": [
     1152,
@@ -124,7 +124,7 @@ export const imageSizes: Record<string, [number, number]> = {
     960,
     1280
   ],
-  "/projects/pool-04/01.webp": [
+  "/projects/pool-04/02.webp": [
     719,
     505
   ],
