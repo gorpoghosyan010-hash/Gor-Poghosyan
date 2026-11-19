@@ -223,26 +223,21 @@ export const projects: Record<string, Project> = {
   }
 };
 
+// Լողավազաններ, որոնց համար կան կառուցման փուլերի լուսանկարներ (առանձին էջով)
 export const poolCardsByLang: Record<Lang, readonly (readonly [string,string,string,string,string])[]> = {
   hy: [
     ['pool-01','ԼՈՂԱՎԱԶԱՆ','Լողավազան','Կառուցման ամբողջ ընթացք','/projects/pool-01/06.webp'],
-    ['pool-02','ԼՈՂԱՎԱԶԱՆ','Լողավազան','Կառուցման ամբողջ ընթացք','/projects/pool-02/08.webp'],
-    ['pool-03','ԼՈՂԱՎԱԶԱՆ','Լողավազան','Կառուցվածք → հարդարում → արդյունք','/projects/pool-03/03.webp'],
-    ['pool-04','ԼՈՂԱՎԱԶԱՆ','Լողավազան','Ավարտված նախագիծ','/projects/pool-04/02.webp'],
-    ['pool-05','ԼՈՂԱՎԱԶԱՆ','Լողավազան','Ավարտված նախագիծ','/projects/pool-05/01.webp']
+    ['pool-02','ԼՈՂԱՎԱԶԱՆ','Լողավազան','Կառուցման ամբողջ ընթացք','/projects/pool-02/08.webp']
   ],
   en: [
     ['pool-01','POOL','Swimming Pool','Full Construction Process','/projects/pool-01/06.webp'],
-    ['pool-02','POOL','Swimming Pool','Full Construction Process','/projects/pool-02/08.webp'],
-    ['pool-03','POOL','Swimming Pool','Structure → Finishing → Result','/projects/pool-03/03.webp'],
-    ['pool-04','POOL','Swimming Pool','Completed Project','/projects/pool-04/02.webp'],
-    ['pool-05','POOL','Swimming Pool','Completed Project','/projects/pool-05/01.webp']
+    ['pool-02','POOL','Swimming Pool','Full Construction Process','/projects/pool-02/08.webp']
   ],
   ru: [
     ['pool-01','БАССЕЙН','Бассейн','Полный процесс строительства','/projects/pool-01/06.webp'],
-    ['pool-02','БАССЕЙН','Бассейн','Полный процесс строительства','/projects/pool-02/08.webp'],
-    ['pool-03','БАССЕЙН','Бассейн','Конструкция → отделка → результат','/projects/pool-03/03.webp'],
-    ['pool-04','БАССЕЙН','Бассейн','Завершённый проект','/projects/pool-04/02.webp'],
-    ['pool-05','БАССЕЙН','Бассейн','Завершённый проект','/projects/pool-05/01.webp']
+    ['pool-02','БАССЕЙН','Бассейн','Полный процесс строительства','/projects/pool-02/08.webp']
   ]
 };
+
+// Ավարտված լողավազաններ առանց կառուցման փուլերի լուսանկարների. ցույց են տրվում միայն որպես նկար, առանց առանձին էջի
+export const completedPools: readonly string[] = ['/projects/pool-03/03.webp','/projects/pool-04/02.webp','/projects/pool-05/01.webp'];

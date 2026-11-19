@@ -2,6 +2,7 @@
 import Link from 'next/link';
 import Reveal from './Reveal';
 import ProjectCard from './ProjectCard';
+import CompletedPools from './CompletedPools';
 import { useLanguage } from './LanguageContext';
 import { poolCardsByLang } from '../content/siteContent';
 import { common, home, projectsArchive, serviceProjects } from '../content/i18n';
@@ -19,13 +20,16 @@ export default function ServiceProjects({ kind }: { kind: 'pool' | 'residential'
         <Link className="lineLink light" href="/projects">{h.openArchive}</Link>
       </Reveal>
       {kind === 'pool' ? (
-        <div className="archiveGrid poolArchive">
-          {poolCards.map((p, i) => (
-            <Reveal key={p[0]} delay={i * 50}>
-              <ProjectCard href={`/projects/${p[0]}`} number={p[1]} title={p[2]} meta={p[3]} image={p[4]} large={i === 0} />
-            </Reveal>
-          ))}
-        </div>
+        <>
+          <div className="archiveGrid poolArchive processPools">
+            {poolCards.map((p, i) => (
+              <Reveal key={p[0]} delay={i * 50}>
+                <ProjectCard href={`/projects/${p[0]}`} number={p[1]} title={p[2]} meta={p[3]} image={p[4]} />
+              </Reveal>
+            ))}
+          </div>
+          <CompletedPools />
+        </>
       ) : (
         <Reveal>
           <div className="singleFeature">

@@ -3,9 +3,9 @@ import type { Lang } from '../components/LanguageContext';
 export const languageNames: Record<Lang, string> = { hy: 'Հայերեն', en: 'English', ru: 'Русский' };
 
 export const common = {
-  hy: { viewProject: 'Դիտել նախագիծը ↗', contactCta: 'Կապվել GARON-ի հետ ↗', nextProjectCta: 'Հաջորդ նախագիծը ↗', poolTag: 'ԼՈՂԱՎԱԶԱՆ', residentialTag: 'ԲՆԱԿԵԼԻ' },
-  en: { viewProject: 'View Project ↗', contactCta: 'Contact GARON ↗', nextProjectCta: 'Next Project ↗', poolTag: 'POOL', residentialTag: 'RESIDENTIAL' },
-  ru: { viewProject: 'Смотреть проект ↗', contactCta: 'Связаться с GARON ↗', nextProjectCta: 'Следующий проект ↗', poolTag: 'БАССЕЙН', residentialTag: 'ЖИЛОЙ ДОМ' }
+  hy: { viewProject: 'Դիտել նախագիծը ↗', contactCta: 'Կապվել GARON-ի հետ ↗', nextProjectCta: 'Հաջորդ նախագիծը ↗', poolTag: 'ԼՈՂԱՎԱԶԱՆ', residentialTag: 'ԲՆԱԿԵԼԻ', completedTitle: 'Ավարտված նախագծեր', completedMeta: 'Ավարտված նախագիծ' },
+  en: { viewProject: 'View Project ↗', contactCta: 'Contact GARON ↗', nextProjectCta: 'Next Project ↗', poolTag: 'POOL', residentialTag: 'RESIDENTIAL', completedTitle: 'Completed projects', completedMeta: 'Completed project' },
+  ru: { viewProject: 'Смотреть проект ↗', contactCta: 'Связаться с GARON ↗', nextProjectCta: 'Следующий проект ↗', poolTag: 'БАССЕЙН', residentialTag: 'ЖИЛОЙ ДОМ', completedTitle: 'Завершённые проекты', completedMeta: 'Завершённый проект' }
 };
 
 export const nav = {

@@ -1,7 +1,9 @@
 import { NextResponse, type NextRequest } from 'next/server';
 
 // Սխալ կամ կարճ հասցեները ինքնաշխատ տանում ենք ճիշտ էջ, որ «Էջը չի գտնվել» չբացվի։
-const PROJECTS = ['pool-01', 'pool-02', 'pool-03', 'pool-04', 'pool-05', 'house-01'];
+const PROJECTS = ['pool-01', 'pool-02', 'house-01'];
+// Նախկին առանձին էջեր (ավարտված լողավազաններ). այժմ ցույց են տրվում «Նախագծեր» էջում
+const RETIRED = ['pool-03', 'pool-04', 'pool-05'];
 const SERVICES = ['pools', 'residential', 'renovation', 'public-works'];
 const PAGES = ['about', 'calculator', 'contact', 'projects', 'services'];
 
@@ -28,6 +30,7 @@ function resolve(path: string): string | null {
   // /hy/..., /en/..., /ru/... — լեզուն ընտրվում է կայքում, ոչ թե հասցեում
   if (parts.length && ['hy', 'en', 'ru', 'am'].includes(parts[0])) parts = parts.slice(1);
   if (parts.length === 0) return '/';
+  if (RETIRED.includes(parts[parts.length - 1])) return '/projects';
   const last = parts[parts.length - 1];
   if (parts.length === 1) {
     if (PAGES.includes(last)) return `/${last}`;
@@ -37,6 +40,7 @@ function resolve(path: string): string | null {
     // pool1, pool-1, house1 → pool-01, house-01
     const m = last.match(/^(pool|house)-?0?(\d)$/);
     if (m && PROJECTS.includes(`${m[1]}-0${m[2]}`)) return `/projects/${m[1]}-0${m[2]}`;
+    if (m && RETIRED.includes(`${m[1]}-0${m[2]}`)) return '/projects';
     return null;
   }
   if (parts.length === 2) {
