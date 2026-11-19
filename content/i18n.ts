@@ -632,9 +632,9 @@ export const projectsArchive = {
 };
 
 export const splash = {
-  hy: { est: 'ՀԻՄՆ. 2000', trade: 'ՇԻՆԱՐԱՐՈՒԹՅՈՒՆ', welcome: 'ԲԱՐԻ ԳԱԼՈՒՍՏ' },
-  en: { est: 'EST. 2000', trade: 'CONSTRUCTION', welcome: 'WELCOME' },
-  ru: { est: 'ОСН. 2000', trade: 'СТРОИТЕЛЬСТВО', welcome: 'ДОБРО ПОЖАЛОВАТЬ' }
+  hy: { trade: 'ՇԻՆԱՐԱՐՈՒԹՅՈՒՆ', welcome: 'ԲԱՐԻ ԳԱԼՈՒՍՏ' },
+  en: { trade: 'CONSTRUCTION', welcome: 'WELCOME' },
+  ru: { trade: 'СТРОИТЕЛЬСТВО', welcome: 'ДОБРО ПОЖАЛОВАТЬ' }
 };
 
 export const heroLabel = {

@@ -1,4 +1,5 @@
 'use client';
+import { useEffect, useRef } from 'react';
 import Reveal from '../../components/Reveal';
 import ContactForm from '../../components/ContactForm';
 import { useLanguage } from '../../components/LanguageContext';
@@ -8,9 +9,21 @@ import { siteConfig, hasSocials } from '../../content/siteConfig';
 export default function Contact() {
   const { lang } = useLanguage();
   const t = contact[lang];
+  const vidRef = useRef<HTMLVideoElement>(null);
+  // Վիդեոն սկսվում է միայն ներածական էկրանը փակվելուց հետո, որ գծագիրը նկարվելը տեսանելի լինի սկզբից
+  useEffect(() => {
+    const v = vidRef.current;
+    if (!v) return;
+    const start = () => { v.currentTime = 0; v.play().catch(() => {}); };
+    if ((window as unknown as { __garonSplashDone?: boolean }).__garonSplashDone || !document.querySelector('.splash')) { start(); return; }
+    window.addEventListener('garon:splash-done', start, { once: true });
+    return () => window.removeEventListener('garon:splash-done', start);
+  }, []);
   return (
     <main className="innerPage">
-      <section className="innerHero contactHero" style={{ backgroundImage: "url('/stock/contact.webp')" }}>
+      <section className="innerHero contactHero">
+        {/* Գաղափար → գծագիր → շինարարություն → պատրաստ տուն (իրական GARON տան լուսանկարներից) */}
+        <video ref={vidRef} className="contactVid" src="/contact/idea-to-house.mp4" poster="/contact/idea-to-house-poster.webp" muted playsInline preload="auto" aria-hidden="true" tabIndex={-1} />
         <div className="innerHeroShade" />
         <div>
           <p className="eyebrow">{t.eyebrow}</p>
