@@ -112,3 +112,6 @@
 }
 @media(min-width:1151px){.mobileMenu{display:none!important}}
 @media(max-width:560px){.headerCta{display:none}}
+
+/* 404 էջը լցնում է ամբողջ էկրանը, առանց դատարկ բաց հատվածի */
+.notFoundHero{min-height:100vh;min-height:100svh}
