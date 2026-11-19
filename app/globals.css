@@ -174,6 +174,6 @@
 .menuOpen .menuToggle span:nth-child(3){transform:rotate(-45deg)}
 @media(max-width:420px){.menuToggle span:nth-child(1){transform:translateY(-5px)}.menuToggle span:nth-child(3){transform:translateY(5px)}}
 
-/* Գլխավոր էջ. համակարգչում՝ նախկին նկարը, հեռախոսում՝ սեփականատիրոջ ընտրած ուղղահայաց նկարը (վիլլա լողավազանով մթնշաղին) */
-.homeHero{background-image:url('/services/residential-hero.webp')}
+/* Գլխավոր էջ. համակարգչում՝ սեփականատիրոջ հորիզոնական նկարը, հեռախոսում՝ սեփականատիրոջ ընտրած ուղղահայաց նկարը (վիլլա լողավազանով մթնշաղին) */
+.homeHero{background-image:url('/home/hero-desktop.webp');background-position:60% 55%}
 @media(max-width:850px){.homeHero{background-image:url('/home/hero-mobile.webp');background-position:50% 40%}}
