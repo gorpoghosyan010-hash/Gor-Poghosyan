@@ -3,9 +3,9 @@ import type { Lang } from '../components/LanguageContext';
 export const languageNames: Record<Lang, string> = { hy: 'Հայերեն', en: 'English', ru: 'Русский' };
 
 export const common = {
-  hy: { viewProject: 'Դիտել նախագիծը ↗', contactCta: 'Կապվել GARON-ի հետ ↗', nextProjectCta: 'Հաջորդ նախագիծը ↗', poolTag: 'ԼՈՂԱՎԱԶԱՆ', residentialTag: 'ԲՆԱԿԵԼԻ' },
-  en: { viewProject: 'View Project ↗', contactCta: 'Contact GARON ↗', nextProjectCta: 'Next Project ↗', poolTag: 'POOL', residentialTag: 'RESIDENTIAL' },
-  ru: { viewProject: 'Смотреть проект ↗', contactCta: 'Связаться с GARON ↗', nextProjectCta: 'Следующий проект ↗', poolTag: 'БАССЕЙН', residentialTag: 'ЖИЛОЙ ДОМ' }
+  hy: { viewProject: 'Դիտել նախագիծը', contactCta: 'Կապվել GARON-ի հետ', nextProjectCta: 'Հաջորդ նախագիծը', poolTag: 'ԼՈՂԱՎԱԶԱՆ', residentialTag: 'ԲՆԱԿԵԼԻ', completedTitle: 'Ավարտված նախագծեր', completedMeta: 'Ավարտված նախագիծ' },
+  en: { viewProject: 'View Project', contactCta: 'Contact GARON', nextProjectCta: 'Next Project', poolTag: 'POOL', residentialTag: 'RESIDENTIAL', completedTitle: 'Completed projects', completedMeta: 'Completed project' },
+  ru: { viewProject: 'Смотреть проект', contactCta: 'Связаться с GARON', nextProjectCta: 'Следующий проект', poolTag: 'БАССЕЙН', residentialTag: 'ЖИЛОЙ ДОМ', completedTitle: 'Завершённые проекты', completedMeta: 'Завершённый проект' }
 };
 
 export const nav = {
@@ -22,16 +22,15 @@ export const footer = {
 
 export const home = {
   hy: {
-    heroEyebrow: 'GARON CONSTRUCTION · 25+ ՏԱՐԻ',
+    heroEyebrow: 'GARON CONSTRUCTION',
     heroTitle1: 'Կառուցում ենք', heroTitle2: 'ամուր հիմքեր, երկար կյանք։',
     heroLead: 'Ժամանակակից, հուսալի և երկարատև շինարարական լուծումներ՝ նախագծումից մինչև ամբողջական իրականացում։',
-    viewWork: 'Դիտել աշխատանքները ↗', startProject: 'Սկսել նախագիծը →',
+    viewWork: 'Դիտել աշխատանքները', startProject: 'Սկսել նախագիծը',
     heroSig1: 'ԳԱՂԱՓԱՐՆԵՐ / ԿԱՌՈՒՅՑՆԵՐ / ԻՐԱԿԱՆ ԱՐԴՅՈՒՆՔ', heroSig2: 'ԵՐԵՎԱՆ · ՀԱՅԱՍՏԱՆ',
-    trust1Label: 'տարի փորձ', trust2Label: 'լողավազանների նախագիծ', trust3Label: 'բնակելի տուն',
     philosophyEyebrow: 'GARON / ՓԻԼԻՍՈՓԱՅՈՒԹՅՈՒՆ',
     philosophyTitle1: 'Շինարարությունը', philosophyTitle2: 'միայն պատեր չէ։',
     philosophyText: 'Մենք կառուցում ենք այնպիսի արդյունք, որը պետք է լավ տեսք ունենա այսօր և ճիշտ ծառայի տարիներ անց։ Այդ պատճառով յուրաքանչյուր նախագիծ դիտարկում ենք որպես ամբողջական համակարգ՝ նյութերից ու կառուցվածքից մինչև մանրուքներ և վերջնական միջավայր։',
-    philosophyLink: 'Բացահայտել GARON-ը →',
+    philosophyLink: 'Բացահայտել GARON-ը',
     capabilitiesEyebrow: 'ՀՆԱՐԱՎՈՐՈՒԹՅՈՒՆՆԵՐ',
     capabilitiesTitle1: 'Մեկ թիմ։', capabilitiesTitle2: 'Չորս ուղղություն։',
     capabilitiesLead: 'Լողավազաններ, բնակելի շինարարություն, վերանորոգում և հասարակական կառույցներ՝ մեկ պատասխանատու թիմի ներքո։',
@@ -43,28 +42,27 @@ export const home = {
     ],
     selectedWorkEyebrow: 'ԸՆՏՐՎԱԾ ԱՇԽԱՏԱՆՔ',
     selectedWorkTitle1: 'Աշխատանքը', selectedWorkTitle2: 'խոսում է ինքն իր մասին։',
-    openArchive: 'Բացել ամբողջ արխիվը →',
+    openArchive: 'Բացել ամբողջ արխիվը',
     card1Title: 'Լողավազան', card2Title: 'Լողավազան', card3Title: 'Տուն',
     card1Meta: 'Լողավազան · ավարտված', card2Meta: 'Լողավազան · կառուցման փուլեր', card3Meta: 'Բնակելի տուն · ավարտված',
     statementEyebrow: 'ՄԱՐԴԻԿ · ՆԱԽԱԳԾԵՐ · ԱՌԱՋԸՆԹԱՑ',
     statementTitle1: 'Լավ կառուցված', statementTitle2: 'արդյունքը զգացվում է։',
-    statementCta: 'Խոսենք ձեր նախագծի մասին ↗',
+    statementCta: 'Խոսենք ձեր նախագծի մասին',
     calcTeaserEyebrow: 'GARON / ՀԱՇՎԻՉ',
     calcTeaserTitle1: 'Ցանկանու՞մ եք իմանալ', calcTeaserTitle2: 'մոտավոր գինը։',
     calcTeaserLead: 'Ընտրեք նախագծի տեսակը, նշեք մակերեսը և րոպեների ընթացքում տեսեք մոտավոր արժեքը։',
-    calcTeaserCta: 'Բացել հաշվիչը ↗'
+    calcTeaserCta: 'Բացել հաշվիչը'
   },
   en: {
-    heroEyebrow: 'GARON CONSTRUCTION · 25+ YEARS',
+    heroEyebrow: 'GARON CONSTRUCTION',
     heroTitle1: 'We Build', heroTitle2: 'solid foundations, lasting life.',
     heroLead: 'Modern, reliable and durable construction solutions — from design to full completion.',
-    viewWork: 'View Our Work ↗', startProject: 'Start a Project →',
+    viewWork: 'View Our Work', startProject: 'Start a Project',
     heroSig1: 'IDEAS / STRUCTURES / REAL IMPACT', heroSig2: 'YEREVAN · ARMENIA',
-    trust1Label: 'years of experience', trust2Label: 'pool projects', trust3Label: 'residential homes',
     philosophyEyebrow: 'GARON / PHILOSOPHY',
     philosophyTitle1: 'Construction is', philosophyTitle2: 'more than just walls.',
     philosophyText: 'We build results that need to look good today and serve their purpose correctly for years to come. That is why we treat every project as a complete system — from materials and structure to the smallest details and the final environment.',
-    philosophyLink: 'Discover GARON →',
+    philosophyLink: 'Discover GARON',
     capabilitiesEyebrow: 'CAPABILITIES',
     capabilitiesTitle1: 'One Team.', capabilitiesTitle2: 'Four Directions.',
     capabilitiesLead: 'Pools, residential construction, renovation and public buildings — all under one accountable team.',
@@ -76,28 +74,27 @@ export const home = {
     ],
     selectedWorkEyebrow: 'SELECTED WORK',
     selectedWorkTitle1: 'The Work', selectedWorkTitle2: 'speaks for itself.',
-    openArchive: 'View Full Archive →',
+    openArchive: 'View Full Archive',
     card1Title: 'Swimming Pool', card2Title: 'Swimming Pool', card3Title: 'House',
     card1Meta: 'Swimming Pool · Completed', card2Meta: 'Swimming Pool · Under Construction', card3Meta: 'Residential Home · Completed',
     statementEyebrow: 'PEOPLE · PROJECTS · PROGRESS',
     statementTitle1: 'Good construction', statementTitle2: 'can be felt in the result.',
-    statementCta: "Let's Talk About Your Project ↗",
+    statementCta: "Let's Talk About Your Project",
     calcTeaserEyebrow: 'GARON / CALCULATOR',
     calcTeaserTitle1: 'Want to know the', calcTeaserTitle2: 'approximate price?',
     calcTeaserLead: 'Choose the project type, enter the area, and see the approximate cost in minutes.',
-    calcTeaserCta: 'Open the Calculator ↗'
+    calcTeaserCta: 'Open the Calculator'
   },
   ru: {
-    heroEyebrow: 'GARON CONSTRUCTION · 25+ ЛЕТ',
+    heroEyebrow: 'GARON CONSTRUCTION',
     heroTitle1: 'Мы строим', heroTitle2: 'прочный фундамент, долгую жизнь.',
     heroLead: 'Современные, надёжные и долговечные строительные решения — от проектирования до полной сдачи объекта.',
-    viewWork: 'Смотреть работы ↗', startProject: 'Начать проект →',
+    viewWork: 'Смотреть работы', startProject: 'Начать проект',
     heroSig1: 'ИДЕИ / КОНСТРУКЦИИ / РЕАЛЬНЫЙ РЕЗУЛЬТАТ', heroSig2: 'ЕРЕВАН · АРМЕНИЯ',
-    trust1Label: 'лет опыта', trust2Label: 'проектов бассейнов', trust3Label: 'жилых домов',
     philosophyEyebrow: 'GARON / ФИЛОСОФИЯ',
     philosophyTitle1: 'Строительство —', philosophyTitle2: 'это не только стены.',
     philosophyText: 'Мы создаём результат, который должен хорошо выглядеть сегодня и правильно служить долгие годы. Поэтому каждый проект мы рассматриваем как единую систему — от материалов и конструкции до мелких деталей и итоговой среды.',
-    philosophyLink: 'Узнать больше о GARON →',
+    philosophyLink: 'Узнать больше о GARON',
     capabilitiesEyebrow: 'ВОЗМОЖНОСТИ',
     capabilitiesTitle1: 'Одна команда.', capabilitiesTitle2: 'Четыре направления.',
     capabilitiesLead: 'Бассейны, жилищное строительство, ремонт и общественные здания — под руководством одной ответственной команды.',
@@ -109,23 +106,23 @@ export const home = {
     ],
     selectedWorkEyebrow: 'ИЗБРАННЫЕ РАБОТЫ',
     selectedWorkTitle1: 'Работа', selectedWorkTitle2: 'говорит сама за себя.',
-    openArchive: 'Открыть весь архив →',
+    openArchive: 'Открыть весь архив',
     card1Title: 'Бассейн', card2Title: 'Бассейн', card3Title: 'Дом',
     card1Meta: 'Бассейн · завершён', card2Meta: 'Бассейн · в процессе строительства', card3Meta: 'Жилой дом · завершён',
     statementEyebrow: 'ЛЮДИ · ПРОЕКТЫ · ПРОГРЕСС',
     statementTitle1: 'Хорошо построенный', statementTitle2: 'результат — это то, что чувствуется.',
-    statementCta: 'Обсудим ваш проект ↗',
+    statementCta: 'Обсудим ваш проект',
     calcTeaserEyebrow: 'GARON / КАЛЬКУЛЯТОР',
     calcTeaserTitle1: 'Хотите узнать', calcTeaserTitle2: 'примерную цену?',
     calcTeaserLead: 'Выберите тип проекта, укажите площадь и за пару минут узнайте примерную стоимость.',
-    calcTeaserCta: 'Открыть калькулятор ↗'
+    calcTeaserCta: 'Открыть калькулятор'
   }
 };
 
 export const about = {
   hy: {
     eyebrow: 'GARON-Ի ՄԱՍԻՆ',
-    title1: '25+ տարի', title2: 'կառուցում ենք վստահություն։',
+    title1: 'Կառուցում ենք', title2: 'վստահություն։',
     lead: 'GARON Construction-ի ճանապարհը սկսվել է լողավազանների կառուցումից և տարիների ընթացքում վերածվել է բազմաոլորտ շինարարական փորձի։',
     pathEyebrow: 'ՄԵՐ ՃԱՆԱՊԱՐՀԸ',
     pathTitle1: 'Փորձը մեզ համար', pathTitle2: 'գործիք է, ոչ թե թիվ։',
@@ -140,11 +137,11 @@ export const about = {
     ],
     nextEyebrow: 'ՀԱՋՈՐԴԸ',
     nextTitle1: 'Տեսեք մեր', nextTitle2: 'նախագծերը։',
-    nextCta: 'Դիտել աշխատանքները ↗'
+    nextCta: 'Դիտել աշխատանքները'
   },
   en: {
     eyebrow: 'ABOUT GARON',
-    title1: '25+ Years', title2: 'building trust.',
+    title1: 'We build', title2: 'trust.',
     lead: "GARON Construction's journey began with swimming pool construction and has grown over the years into multi-sector construction expertise.",
     pathEyebrow: 'OUR PATH',
     pathTitle1: 'For us, experience', pathTitle2: 'is a tool, not a number.',
@@ -159,11 +156,11 @@ export const about = {
     ],
     nextEyebrow: 'NEXT',
     nextTitle1: 'See Our', nextTitle2: 'Projects.',
-    nextCta: 'View Our Work ↗'
+    nextCta: 'View Our Work'
   },
   ru: {
     eyebrow: 'О GARON',
-    title1: '25+ лет', title2: 'мы строим доверие.',
+    title1: 'Мы строим', title2: 'доверие.',
     lead: 'Путь GARON Construction начался со строительства бассейнов и за годы работы превратился в многопрофильный строительный опыт.',
     pathEyebrow: 'НАШ ПУТЬ',
     pathTitle1: 'Опыт для нас', pathTitle2: 'это инструмент, а не цифра.',
@@ -178,14 +175,14 @@ export const about = {
     ],
     nextEyebrow: 'ДАЛЕЕ',
     nextTitle1: 'Смотрите наши', nextTitle2: 'проекты.',
-    nextCta: 'Смотреть работы ↗'
+    nextCta: 'Смотреть работы'
   }
 };
 
 export const servicesIndex = {
-  hy: { eyebrow: 'ԾԱՌԱՅՈՒԹՅՈՒՆՆԵՐ', title1: 'Կառուցման', title2: 'մասնագիտություն։', lead: 'Ընտրեք ուղղությունը և տեսեք՝ ինչ ենք առաջարկում տվյալ ոլորտում։', whatWeDo: 'ԻՆՉ ԵՆՔ ԱՆՈՒՄ', open: 'Բացել ↗' },
-  en: { eyebrow: 'SERVICES', title1: 'Construction', title2: 'expertise.', lead: 'Choose a direction and see what we offer in that field.', whatWeDo: 'WHAT WE DO', open: 'Open ↗' },
-  ru: { eyebrow: 'УСЛУГИ', title1: 'Строительная', title2: 'экспертиза.', lead: 'Выберите направление и узнайте, что мы предлагаем в этой сфере.', whatWeDo: 'ЧЕМ МЫ ЗАНИМАЕМСЯ', open: 'Открыть ↗' }
+  hy: { eyebrow: 'ԾԱՌԱՅՈՒԹՅՈՒՆՆԵՐ', title1: 'Կառուցման', title2: 'մասնագիտություն։', lead: 'Ընտրեք ուղղությունը և տեսեք՝ ինչ ենք առաջարկում տվյալ ոլորտում։', whatWeDo: 'ԻՆՉ ԵՆՔ ԱՆՈՒՄ', open: 'Բացել' },
+  en: { eyebrow: 'SERVICES', title1: 'Construction', title2: 'expertise.', lead: 'Choose a direction and see what we offer in that field.', whatWeDo: 'WHAT WE DO', open: 'Open' },
+  ru: { eyebrow: 'УСЛУГИ', title1: 'Строительная', title2: 'экспертиза.', lead: 'Выберите направление и узнайте, что мы предлагаем в этой сфере.', whatWeDo: 'ЧЕМ МЫ ЗАНИМАЕМСЯ', open: 'Открыть' }
 };
 
 export const serviceDetailShared = {
@@ -195,7 +192,7 @@ export const serviceDetailShared = {
     processEyebrow: 'ԳՈՐԾԸՆԹԱՑ',
     ctaEyebrow: 'ՏԵՍԵՔ ԱՇԽԱՏԱՆՔԸ',
     ctaTitle1: 'Իրական նախագծերը', ctaTitle2: 'ավելի լավ են պատմում։',
-    ctaButton: 'Դիտել նախագծերը ↗'
+    ctaButton: 'Դիտել նախագծերը'
   },
   en: {
     eyebrow: 'GARON / SERVICES',
@@ -203,7 +200,7 @@ export const serviceDetailShared = {
     processEyebrow: 'PROCESS',
     ctaEyebrow: 'SEE THE WORK',
     ctaTitle1: 'Real projects', ctaTitle2: 'tell a better story.',
-    ctaButton: 'View Projects ↗'
+    ctaButton: 'View Projects'
   },
   ru: {
     eyebrow: 'GARON / УСЛУГИ',
@@ -211,7 +208,7 @@ export const serviceDetailShared = {
     processEyebrow: 'ПРОЦЕСС',
     ctaEyebrow: 'СМОТРЕТЬ РАБОТЫ',
     ctaTitle1: 'Реальные проекты', ctaTitle2: 'рассказывают лучше.',
-    ctaButton: 'Смотреть проекты ↗'
+    ctaButton: 'Смотреть проекты'
   }
 };
 
@@ -398,7 +395,7 @@ export const contact = {
     title3: 'Սկսենք', title4: 'զրույցից։',
     phoneLabel: 'ՀԵՌԱԽՈՍ', emailLabel: 'EMAIL', socialLabel: 'ՍՈՑՑԱՆՑԵՐ',
     cardText: 'Պատմեք՝ ինչ եք ուզում կառուցել, ինչ փուլում է նախագիծը և ինչ ժամկետ եք պատկերացնում։',
-    send: 'Ուղարկել հարցում ↗',
+    send: 'Ուղարկել հարցում',
     formName: 'Անուն', formEmail: 'Email', formPhone: 'Հեռախոս', formType: 'Նախագծի տեսակը', formMessage: 'Հաղորդագրություն',
     types: ['Լողավազան', 'Բնակելի տուն', 'Վերանորոգում', 'Հասարակական կառույց', 'Այլ'],
     required: 'Լրացրեք այս դաշտը',
@@ -416,7 +413,7 @@ export const contact = {
     title3: "Let's Start", title4: 'the Conversation.',
     phoneLabel: 'PHONE', emailLabel: 'EMAIL', socialLabel: 'SOCIAL',
     cardText: 'Tell us what you want to build, what stage the project is at, and what timeline you have in mind.',
-    send: 'Send Inquiry ↗',
+    send: 'Send Inquiry',
     formName: 'Name', formEmail: 'Email', formPhone: 'Phone', formType: 'Project type', formMessage: 'Message',
     types: ['Swimming pool', 'Residential house', 'Renovation', 'Public building', 'Other'],
     required: 'Please fill in this field',
@@ -434,7 +431,7 @@ export const contact = {
     title3: 'Начнём', title4: 'разговор.',
     phoneLabel: 'ТЕЛЕФОН', emailLabel: 'EMAIL', socialLabel: 'СОЦСЕТИ',
     cardText: 'Расскажите, что вы хотите построить, на каком этапе находится проект и какие сроки вы предполагаете.',
-    send: 'Отправить запрос ↗',
+    send: 'Отправить запрос',
     formName: 'Имя', formEmail: 'Email', formPhone: 'Телефон', formType: 'Тип проекта', formMessage: 'Сообщение',
     types: ['Бассейн', 'Жилой дом', 'Ремонт', 'Общественное здание', 'Другое'],
     required: 'Заполните это поле',
@@ -489,7 +486,7 @@ export const calculator = {
     perSqm: '/ մ²',
     startingFrom: 'սկսած',
     disclaimer: 'Սա միայն կողմնորոշիչ հաշվարկ է։ Վերջնական գինը կախված է հողատարածքից, նախագծից, նյութերից և այլ գործոններից։ Ճշգրիտ նախահաշվի համար կապվեք մեզ հետ։',
-    cta: 'Ստանալ ճշգրիտ նախահաշիվ ↗',
+    cta: 'Ստանալ ճշգրիտ նախահաշիվ',
     enterArea: 'Մուտքագրեք մակերեսը՝ հաշվարկը տեսնելու համար'
   },
   en: {
@@ -535,7 +532,7 @@ export const calculator = {
     perSqm: '/ m²',
     startingFrom: 'starting from',
     disclaimer: 'This is only an indicative estimate. The final price depends on the site, design, materials and other factors. Contact us for an accurate quote.',
-    cta: 'Get an Accurate Quote ↗',
+    cta: 'Get an Accurate Quote',
     enterArea: 'Enter the area to see the calculation'
   },
   ru: {
@@ -581,7 +578,7 @@ export const calculator = {
     perSqm: '/ м²',
     startingFrom: 'от',
     disclaimer: 'Это только ориентировочный расчёт. Итоговая цена зависит от участка, проекта, материалов и других факторов. Свяжитесь с нами для точной сметы.',
-    cta: 'Получить точную смету ↗',
+    cta: 'Получить точную смету',
     enterArea: 'Введите площадь, чтобы увидеть расчёт'
   }
 };
@@ -609,8 +606,8 @@ export const projectsArchive = {
     poolsText: 'Յուրաքանչյուր լողավազան առանձին նախագիծ է։ Բացիր այն և տես իրական փուլերը՝ կառուցվածքից մինչև վերջնական տեսքը։',
     residentialEyebrow: '02 / ԲՆԱԿԵԼԻ', residentialTitle1: 'Բնակելի', residentialTitle2: 'առանձնատներ',
     residentialText: 'Տունը ներկայացնում է զրոյական վիճակից մինչև պատրաստ տուն ամբողջ ճանապարհը՝ մեկ նախագծի էջում։',
-    openHouse: 'Բացել Տունը →', houseCardTitle: 'Տուն', houseCardMeta: 'Բնակելի առանձնատուն · ավարտված',
-    nextEyebrow: 'ՀԱՋՈՐԴԸ', nextTitle1: 'Ձեր նախագիծը', nextTitle2: 'կարող է լինել այստեղ։', nextCta: 'Սկսել նախագիծը ↗'
+    openHouse: 'Բացել Տունը', houseCardTitle: 'Տուն', houseCardMeta: 'Բնակելի առանձնատուն · ավարտված',
+    nextEyebrow: 'ՀԱՋՈՐԴԸ', nextTitle1: 'Ձեր նախագիծը', nextTitle2: 'կարող է լինել այստեղ։', nextCta: 'Սկսել նախագիծը'
   },
   en: {
     eyebrow: 'GARON / PROJECT ARCHIVE', title1: 'Real Work.', title2: 'Real Results.',
@@ -619,8 +616,8 @@ export const projectsArchive = {
     poolsText: 'Each pool is a separate project. Open it and see the real stages — from structure to final look.',
     residentialEyebrow: '02 / RESIDENTIAL', residentialTitle1: 'Residential', residentialTitle2: 'Homes',
     residentialText: 'The house shows the entire journey from ground zero to a finished home, on a single project page.',
-    openHouse: 'Open the House →', houseCardTitle: 'House', houseCardMeta: 'Residential Home · Completed',
-    nextEyebrow: 'NEXT', nextTitle1: 'Your project', nextTitle2: 'could be here.', nextCta: 'Start a Project ↗'
+    openHouse: 'Open the House', houseCardTitle: 'House', houseCardMeta: 'Residential Home · Completed',
+    nextEyebrow: 'NEXT', nextTitle1: 'Your project', nextTitle2: 'could be here.', nextCta: 'Start a Project'
   },
   ru: {
     eyebrow: 'GARON / АРХИВ ПРОЕКТОВ', title1: 'Реальная работа.', title2: 'Реальные результаты.',
@@ -629,15 +626,15 @@ export const projectsArchive = {
     poolsText: 'Каждый бассейн — отдельный проект. Откройте его и посмотрите реальные этапы — от конструкции до финального вида.',
     residentialEyebrow: '02 / ЖИЛЫЕ ДОМА', residentialTitle1: 'Жилые', residentialTitle2: 'дома',
     residentialText: 'Дом показывает весь путь от нуля до готового дома на одной странице проекта.',
-    openHouse: 'Открыть дом →', houseCardTitle: 'Дом', houseCardMeta: 'Жилой дом · завершён',
-    nextEyebrow: 'ДАЛЕЕ', nextTitle1: 'Ваш проект', nextTitle2: 'может быть здесь.', nextCta: 'Начать проект ↗'
+    openHouse: 'Открыть дом', houseCardTitle: 'Дом', houseCardMeta: 'Жилой дом · завершён',
+    nextEyebrow: 'ДАЛЕЕ', nextTitle1: 'Ваш проект', nextTitle2: 'может быть здесь.', nextCta: 'Начать проект'
   }
 };
 
 export const splash = {
-  hy: { est: 'ՀԻՄՆ. 2000', trade: 'ՇԻՆԱՐԱՐՈՒԹՅՈՒՆ', welcome: 'ԲԱՐԻ ԳԱԼՈՒՍՏ' },
-  en: { est: 'EST. 2000', trade: 'CONSTRUCTION', welcome: 'WELCOME' },
-  ru: { est: 'ОСН. 2000', trade: 'СТРОИТЕЛЬСТВО', welcome: 'ДОБРО ПОЖАЛОВАТЬ' }
+  hy: { trade: 'ՇԻՆԱՐԱՐՈՒԹՅՈՒՆ', welcome: 'ԲԱՐԻ ԳԱԼՈՒՍՏ' },
+  en: { trade: 'CONSTRUCTION', welcome: 'WELCOME' },
+  ru: { trade: 'СТРОИТЕЛЬСТВО', welcome: 'ДОБРО ПОЖАЛОВАТЬ' }
 };
 
 export const heroLabel = {
@@ -647,7 +644,7 @@ export const heroLabel = {
 };
 
 export const notFound = {
-  hy: { eyebrow: '404', title: 'Էջը չի գտնվել', text: 'Հնարավոր է՝ հղումը հնացել է կամ էջը տեղափոխվել է։', home: 'Վերադառնալ գլխավոր էջ ↗', projects: 'Դիտել նախագծերը ↗' },
-  en: { eyebrow: '404', title: 'Page not found', text: 'The link may be outdated or the page may have moved.', home: 'Back to Home ↗', projects: 'View Projects ↗' },
-  ru: { eyebrow: '404', title: 'Страница не найдена', text: 'Возможно, ссылка устарела или страница была перемещена.', home: 'На главную ↗', projects: 'Смотреть проекты ↗' }
+  hy: { eyebrow: '404', title: 'Էջը չի գտնվել', text: 'Հնարավոր է՝ հղումը հնացել է կամ էջը տեղափոխվել է։', home: 'Վերադառնալ գլխավոր էջ', projects: 'Դիտել նախագծերը' },
+  en: { eyebrow: '404', title: 'Page not found', text: 'The link may be outdated or the page may have moved.', home: 'Back to Home', projects: 'View Projects' },
+  ru: { eyebrow: '404', title: 'Страница не найдена', text: 'Возможно, ссылка устарела или страница была перемещена.', home: 'На главную', projects: 'Смотреть проекты' }
 };

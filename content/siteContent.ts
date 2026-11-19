@@ -32,7 +32,7 @@ export const projects: Record<string, Project> = {
   'pool-01': {
     slug: 'pool-01', number: '01', category: 'POOL',
     heroImage: '/projects/pool-01/06.webp',
-    images: ['07','08','01','02','03','04','05','06'].map(n=>`/projects/pool-01/${n}.webp`),
+    images: ['07','01','02','03','04','05','06'].map(n=>`/projects/pool-01/${n}.webp`),
     nextHref: '/projects/pool-02',
     content: {
       hy: {
@@ -63,8 +63,8 @@ export const projects: Record<string, Project> = {
   },
   'pool-02': {
     slug:'pool-02', number:'02', category:'POOL',
-    heroImage:'/projects/pool-02/04.webp',
-    images: ['03','01','02','06','05','04'].map(n=>`/projects/pool-02/${n}.webp`),
+    heroImage:'/projects/pool-02/08.webp',
+    images: ['01','02','09','08'].map(n=>`/projects/pool-02/${n}.webp`),
     nextHref:'/projects/house-01',
     content: {
       hy: {
@@ -93,106 +93,10 @@ export const projects: Record<string, Project> = {
       }
     }
   },
-  'pool-03': {
-    slug:'pool-03', number:'03', category:'POOL',
-    heroImage:'/projects/pool-03/03.webp',
-    images: ['01','02','03'].map(n=>`/projects/pool-03/${n}.webp`),
-    nextHref:'/projects/pool-04',
-    content: {
-      hy: {
-        eyebrow:'ՆԱԽԱԳԻԾ · ԼՈՂԱՎԱԶԱՆ', title:'Լողավազան', titleSecond:'Իրական գործընթաց',
-        description:'Իրական շինարարական ընթացք՝ կառուցվածքից մինչև ավարտված ջրային տարածք։',
-        facts:[{label:'ՏԵՍԱԿ',value:'Լողավազան'},{label:'ԿԱՐԳԱՎԻՃԱԿ',value:'Ավարտված'},{label:'ՄԵԴԻԱ',value:'3 փուլ'}],
-        introEyebrow:'ՊԱՏՄՈՒԹՅՈՒՆԸ', introTitle:'Կառուցվածք,', introTitleSecond:'մանրուք, արդյունք։',
-        introText:'Նախագիծը ներկայացված է երեք առանցքային պահով՝ կառուցվածքային փուլ, հարդարման դետալ և վերջնական արդյունք։',
-        nextTitle:'Լողավազան', nextTitleSecond:'Վերջնական արդյունք', nextEyebrow:'ՀԱՋՈՐԴ ՆԱԽԱԳԻԾԸ'
-      },
-      en: {
-        eyebrow:'PROJECT · POOL', title:'Swimming Pool', titleSecond:'Real Process',
-        description:'A real construction process — from structure to a finished water feature.',
-        facts:[{label:'TYPE',value:'Swimming Pool'},{label:'STATUS',value:'Completed'},{label:'MEDIA',value:'3 stages'}],
-        introEyebrow:'THE STORY', introTitle:'Structure,', introTitleSecond:'Detail, Result.',
-        introText:'The project is presented through three key moments — the structural stage, a finishing detail, and the final result.',
-        nextTitle:'Swimming Pool', nextTitleSecond:'Final Result', nextEyebrow:'NEXT PROJECT'
-      },
-      ru: {
-        eyebrow:'ПРОЕКТ · БАССЕЙН', title:'Бассейн', titleSecond:'Реальный процесс',
-        description:'Реальный процесс строительства — от конструкции до готового водного пространства.',
-        facts:[{label:'ТИП',value:'Бассейн'},{label:'СТАТУС',value:'Завершён'},{label:'МЕДИА',value:'3 этапа'}],
-        introEyebrow:'ИСТОРИЯ', introTitle:'Конструкция,', introTitleSecond:'деталь, результат.',
-        introText:'Проект представлен тремя ключевыми моментами — этапом конструкции, деталью отделки и финальным результатом.',
-        nextTitle:'Бассейн', nextTitleSecond:'Финальный результат', nextEyebrow:'СЛЕДУЮЩИЙ ПРОЕКТ'
-      }
-    }
-  },
-  'pool-04': {
-    slug:'pool-04', number:'04', category:'POOL',
-    heroImage:'/projects/pool-04/01.webp',
-    images: ['01'].map(n=>`/projects/pool-04/${n}.webp`),
-    nextHref:'/projects/pool-05',
-    content: {
-      hy: {
-        eyebrow:'ՆԱԽԱԳԻԾ · ԼՈՂԱՎԱԶԱՆ', title:'Լողավազան', titleSecond:'Վերջնական արդյունք',
-        description:'Ավարտված լողավազան՝ որպես ամբողջական արդյունք։',
-        facts:[{label:'ՏԵՍԱԿ',value:'Լողավազան'},{label:'ԿԱՐԳԱՎԻՃԱԿ',value:'Ավարտված'},{label:'ՄԵԴԻԱ',value:'Վերջնական արդյունք'}],
-        introEyebrow:'ՆԱԽԱԳԻԾ', introTitle:'Ավարտված', introTitleSecond:'արդյունք։',
-        introText:'Իրականացված նախագծի վերջնական տեսքը՝ առանց ավելորդությունների։',
-        nextTitle:'Լողավազան', nextTitleSecond:'Մաքուր գծեր', nextEyebrow:'ՀԱՋՈՐԴ ՆԱԽԱԳԻԾԸ'
-      },
-      en: {
-        eyebrow:'PROJECT · POOL', title:'Swimming Pool', titleSecond:'Final Result',
-        description:'A completed pool as a finished result.',
-        facts:[{label:'TYPE',value:'Swimming Pool'},{label:'STATUS',value:'Completed'},{label:'MEDIA',value:'Final result'}],
-        introEyebrow:'PROJECT', introTitle:'Finished', introTitleSecond:'Result.',
-        introText:'The final look of the completed project — without excess.',
-        nextTitle:'Swimming Pool', nextTitleSecond:'Clean Lines', nextEyebrow:'NEXT PROJECT'
-      },
-      ru: {
-        eyebrow:'ПРОЕКТ · БАССЕЙН', title:'Бассейн', titleSecond:'Финальный результат',
-        description:'Завершённый бассейн как целостный результат.',
-        facts:[{label:'ТИП',value:'Бассейн'},{label:'СТАТУС',value:'Завершён'},{label:'МЕДИА',value:'Финальный результат'}],
-        introEyebrow:'ПРОЕКТ', introTitle:'Готовый', introTitleSecond:'результат.',
-        introText:'Финальный вид реализованного проекта — без излишеств.',
-        nextTitle:'Бассейн', nextTitleSecond:'Чистые линии', nextEyebrow:'СЛЕДУЮЩИЙ ПРОЕКТ'
-      }
-    }
-  },
-  'pool-05': {
-    slug:'pool-05', number:'05', category:'POOL',
-    heroImage:'/projects/pool-05/01.webp',
-    images: ['01'].map(n=>`/projects/pool-05/${n}.webp`),
-    nextHref:'/contact',
-    content: {
-      hy: {
-        eyebrow:'ՆԱԽԱԳԻԾ · ԼՈՂԱՎԱԶԱՆ', title:'Լողավազան', titleSecond:'Մաքուր գծեր',
-        description:'Մաքուր գծերով ավարտված նախագիծ՝ իրական արդյունքով։',
-        facts:[{label:'ՏԵՍԱԿ',value:'Լողավազան'},{label:'ԿԱՐԳԱՎԻՃԱԿ',value:'Ավարտված'},{label:'ՄԵԴԻԱ',value:'Վերջնական արդյունք'}],
-        introEyebrow:'ՆԱԽԱԳԻԾ', introTitle:'Մաքուր գծեր,', introTitleSecond:'իրական արդյունք։',
-        introText:'Ավարտված լողավազանի վերջնական արդյունքը։',
-        nextTitle:'Ձեր գաղափարը', nextTitleSecond:'հաջորդը կարող է լինել։', nextEyebrow:'ՍԿՍԵՔ ՁԵՐ ՆԱԽԱԳԻԾԸ'
-      },
-      en: {
-        eyebrow:'PROJECT · POOL', title:'Swimming Pool', titleSecond:'Clean Lines',
-        description:'A completed project with clean lines and a real result.',
-        facts:[{label:'TYPE',value:'Swimming Pool'},{label:'STATUS',value:'Completed'},{label:'MEDIA',value:'Final result'}],
-        introEyebrow:'PROJECT', introTitle:'Clean Lines,', introTitleSecond:'Real Result.',
-        introText:'The final result of the completed pool.',
-        nextTitle:'Your Idea', nextTitleSecond:'could be next.', nextEyebrow:'START YOUR PROJECT'
-      },
-      ru: {
-        eyebrow:'ПРОЕКТ · БАССЕЙН', title:'Бассейн', titleSecond:'Чистые линии',
-        description:'Завершённый проект с чистыми линиями и реальным результатом.',
-        facts:[{label:'ТИП',value:'Бассейн'},{label:'СТАТУС',value:'Завершён'},{label:'МЕДИА',value:'Финальный результат'}],
-        introEyebrow:'ПРОЕКТ', introTitle:'Чистые линии,', introTitleSecond:'реальный результат.',
-        introText:'Финальный результат завершённого бассейна.',
-        nextTitle:'Ваша идея', nextTitleSecond:'может быть следующей.', nextEyebrow:'НАЧНИТЕ СВОЙ ПРОЕКТ'
-      }
-    }
-  },
   'house-01': {
     slug:'house-01', number:'03', category:'RESIDENTIAL',
     heroImage:'/projects/house-01/12.webp',
-    images: Array.from({length:12},(_,i)=>String(i+1).padStart(2,'0')).map(n=>`/projects/house-01/${n}.webp`),
+    images: ['01','02','03','04','05','06','07','08','09','10','13','12'].map(n=>`/projects/house-01/${n}.webp`),
     nextHref:'/contact',
     content: {
       hy: {
@@ -223,26 +127,21 @@ export const projects: Record<string, Project> = {
   }
 };
 
+// Լողավազաններ, որոնց համար կան կառուցման փուլերի լուսանկարներ (առանձին էջով)
 export const poolCardsByLang: Record<Lang, readonly (readonly [string,string,string,string,string])[]> = {
   hy: [
     ['pool-01','ԼՈՂԱՎԱԶԱՆ','Լողավազան','Կառուցման ամբողջ ընթացք','/projects/pool-01/06.webp'],
-    ['pool-02','ԼՈՂԱՎԱԶԱՆ','Լողավազան','Կառուցման ամբողջ ընթացք','/projects/pool-02/07.webp'],
-    ['pool-03','ԼՈՂԱՎԱԶԱՆ','Լողավազան','Կառուցվածք → հարդարում → արդյունք','/projects/pool-03/03.webp'],
-    ['pool-04','ԼՈՂԱՎԱԶԱՆ','Լողավազան','Ավարտված նախագիծ','/projects/pool-04/01.webp'],
-    ['pool-05','ԼՈՂԱՎԱԶԱՆ','Լողավազան','Ավարտված նախագիծ','/projects/pool-05/01.webp']
+    ['pool-02','ԼՈՂԱՎԱԶԱՆ','Լողավազան','Կառուցման ամբողջ ընթացք','/projects/pool-02/08.webp']
   ],
   en: [
     ['pool-01','POOL','Swimming Pool','Full Construction Process','/projects/pool-01/06.webp'],
-    ['pool-02','POOL','Swimming Pool','Full Construction Process','/projects/pool-02/07.webp'],
-    ['pool-03','POOL','Swimming Pool','Structure → Finishing → Result','/projects/pool-03/03.webp'],
-    ['pool-04','POOL','Swimming Pool','Completed Project','/projects/pool-04/01.webp'],
-    ['pool-05','POOL','Swimming Pool','Completed Project','/projects/pool-05/01.webp']
+    ['pool-02','POOL','Swimming Pool','Full Construction Process','/projects/pool-02/08.webp']
   ],
   ru: [
     ['pool-01','БАССЕЙН','Бассейн','Полный процесс строительства','/projects/pool-01/06.webp'],
-    ['pool-02','БАССЕЙН','Бассейн','Полный процесс строительства','/projects/pool-02/07.webp'],
-    ['pool-03','БАССЕЙН','Бассейн','Конструкция → отделка → результат','/projects/pool-03/03.webp'],
-    ['pool-04','БАССЕЙН','Бассейн','Завершённый проект','/projects/pool-04/01.webp'],
-    ['pool-05','БАССЕЙН','Бассейн','Завершённый проект','/projects/pool-05/01.webp']
+    ['pool-02','БАССЕЙН','Бассейн','Полный процесс строительства','/projects/pool-02/08.webp']
   ]
 };
+
+// Ավարտված լողավազաններ առանց կառուցման փուլերի լուսանկարների. ցույց են տրվում միայն որպես նկար, առանց առանձին էջի
+export const completedPools: readonly string[] = ['/projects/pool-03/03.webp','/projects/pool-04/02.webp','/projects/pool-05/01.webp'];

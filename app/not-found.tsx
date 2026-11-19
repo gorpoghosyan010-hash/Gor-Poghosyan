@@ -8,7 +8,7 @@ export default function NotFound() {
   const t = notFound[lang];
   return (
     <main className="innerPage">
-      <section className="innerHero">
+      <section className="innerHero notFoundHero">
         <div>
           <p className="eyebrow">{t.eyebrow}</p>
           <h1>{t.title}</h1>
