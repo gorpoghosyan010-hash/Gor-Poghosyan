@@ -63,8 +63,8 @@ export const projects: Record<string, Project> = {
   },
   'pool-02': {
     slug:'pool-02', number:'02', category:'POOL',
-    heroImage:'/projects/pool-02/07.webp',
-    images: ['01','02','07'].map(n=>`/projects/pool-02/${n}.webp`),
+    heroImage:'/projects/pool-02/08.webp',
+    images: ['01','02','08'].map(n=>`/projects/pool-02/${n}.webp`),
     nextHref:'/projects/house-01',
     content: {
       hy: {
@@ -226,21 +226,21 @@ export const projects: Record<string, Project> = {
 export const poolCardsByLang: Record<Lang, readonly (readonly [string,string,string,string,string])[]> = {
   hy: [
     ['pool-01','ԼՈՂԱՎԱԶԱՆ','Լողավազան','Կառուցման ամբողջ ընթացք','/projects/pool-01/06.webp'],
-    ['pool-02','ԼՈՂԱՎԱԶԱՆ','Լողավազան','Կառուցման ամբողջ ընթացք','/projects/pool-02/07.webp'],
+    ['pool-02','ԼՈՂԱՎԱԶԱՆ','Լողավազան','Կառուցման ամբողջ ընթացք','/projects/pool-02/08.webp'],
     ['pool-03','ԼՈՂԱՎԱԶԱՆ','Լողավազան','Կառուցվածք → հարդարում → արդյունք','/projects/pool-03/03.webp'],
     ['pool-04','ԼՈՂԱՎԱԶԱՆ','Լողավազան','Ավարտված նախագիծ','/projects/pool-04/01.webp'],
     ['pool-05','ԼՈՂԱՎԱԶԱՆ','Լողավազան','Ավարտված նախագիծ','/projects/pool-05/01.webp']
   ],
   en: [
     ['pool-01','POOL','Swimming Pool','Full Construction Process','/projects/pool-01/06.webp'],
-    ['pool-02','POOL','Swimming Pool','Full Construction Process','/projects/pool-02/07.webp'],
+    ['pool-02','POOL','Swimming Pool','Full Construction Process','/projects/pool-02/08.webp'],
     ['pool-03','POOL','Swimming Pool','Structure → Finishing → Result','/projects/pool-03/03.webp'],
     ['pool-04','POOL','Swimming Pool','Completed Project','/projects/pool-04/01.webp'],
     ['pool-05','POOL','Swimming Pool','Completed Project','/projects/pool-05/01.webp']
   ],
   ru: [
     ['pool-01','БАССЕЙН','Бассейн','Полный процесс строительства','/projects/pool-01/06.webp'],
-    ['pool-02','БАССЕЙН','Бассейн','Полный процесс строительства','/projects/pool-02/07.webp'],
+    ['pool-02','БАССЕЙН','Бассейн','Полный процесс строительства','/projects/pool-02/08.webp'],
     ['pool-03','БАССЕЙН','Бассейн','Конструкция → отделка → результат','/projects/pool-03/03.webp'],
     ['pool-04','БАССЕЙН','Бассейн','Завершённый проект','/projects/pool-04/01.webp'],
     ['pool-05','БАССЕЙН','Бассейн','Завершённый проект','/projects/pool-05/01.webp']

@@ -108,6 +108,10 @@ export const imageSizes: Record<string, [number, number]> = {
     960,
     1280
   ],
+  "/projects/pool-02/08.webp": [
+    800,
+    1280
+  ],
   "/projects/pool-03/01.webp": [
     1152,
     1536
