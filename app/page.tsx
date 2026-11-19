@@ -16,7 +16,11 @@ export default function Home(){
  const { lang } = useLanguage();
  const t = home[lang];
  return <main>
- <section className="homeHero" style={{ backgroundImage: "url('/services/residential-hero.webp')" }}>
+ <section className="homeHero">
+  {/* Իրական GARON նախագծերի լուսանկարներ՝ դանդաղ փոխվող շարքով */}
+  <div className="heroSlides" aria-hidden="true">
+   {['/projects/pool-02/08.webp','/projects/pool-01/06.webp','/projects/pool-05/01.webp','/projects/house-01/12.webp'].map((src,i)=><div key={src} className={`heroSlide s${i}`} style={{backgroundImage:`url(${src})`}}/>)}
+  </div>
   <div className="heroGrid" aria-hidden="true" />
   <div className="heroShade" aria-hidden="true" />
   <div className="heroTop">
