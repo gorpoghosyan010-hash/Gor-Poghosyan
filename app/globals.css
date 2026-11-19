@@ -47,7 +47,7 @@
 .vidSpacer{height:90vh}
 .vidWide .vidEl{z-index:auto;inset:0;right:auto;top:0;transform:none;width:100%;height:100%;aspect-ratio:auto;border:0;box-shadow:none}
 @media(min-width:851px){.vidHero .vidBackdrop{display:none}}
-@media(max-width:850px){.vidWide .vidEl{object-fit:contain;background:transparent}}
+@media(max-width:850px){.vidWide .vidEl{object-fit:cover;object-position:center center}.vidWide .vidBackdrop{display:none}}
 
 @media(max-width:850px){.vidEl{z-index:auto;inset:0;right:auto;top:0;transform:none;width:100%;height:100%;aspect-ratio:auto;border:0;box-shadow:none}.vidHero:not(.vidWide) .vidBackdrop{display:none}}
 
