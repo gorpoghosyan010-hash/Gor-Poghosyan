@@ -64,7 +64,7 @@ export const projects: Record<string, Project> = {
   'pool-02': {
     slug:'pool-02', number:'02', category:'POOL',
     heroImage:'/projects/pool-02/08.webp',
-    images: ['01','02','08'].map(n=>`/projects/pool-02/${n}.webp`),
+    images: ['01','02','09','08'].map(n=>`/projects/pool-02/${n}.webp`),
     nextHref:'/projects/house-01',
     content: {
       hy: {
