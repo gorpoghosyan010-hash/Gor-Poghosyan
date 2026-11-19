@@ -10,12 +10,7 @@ export default function Splash() {
   useEffect(() => {
     // Ներածական էկրանը ցուցադրվում է ամեն էջ թարմացնելիս (ոչ թե սեսիայի ընթացքում մեկ անգամ)
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const timer = window.setTimeout(() => {
-      setVisible(false);
-      // Էջերը (օր.՝ Կապ էջի վիդեոն) կարող են սպասել, մինչև ներածական էկրանը փակվի
-      (window as unknown as { __garonSplashDone?: boolean }).__garonSplashDone = true;
-      window.dispatchEvent(new Event('garon:splash-done'));
-    }, reduce ? 250 : 3200);
+    const timer = window.setTimeout(() => setVisible(false), reduce ? 250 : 3200);
     return () => window.clearTimeout(timer);
   }, []);
   if (!visible) return null;
@@ -45,6 +40,7 @@ export default function Splash() {
       </svg>
       <div className="splashLogo"><Logo light /></div>
       <p className="splashTag">{s.trade}</p>
+      <span className="splashCorner">{s.est}</span>
       <span className="splashCounter" aria-hidden="true" />
     </div>
   );

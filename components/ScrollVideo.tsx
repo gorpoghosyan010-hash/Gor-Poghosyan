@@ -7,7 +7,6 @@ export default function ScrollVideo({ src, poster, wide, children }: { src: stri
   const wrapRef = useRef<HTMLDivElement>(null);
   const heroRef = useRef<HTMLElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const backRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     const wrap = wrapRef.current;
@@ -26,9 +25,6 @@ export default function ScrollVideo({ src, poster, wide, children }: { src: stri
       const t = shown * (video.duration - 0.04);
       if (Math.abs(video.currentTime - t) < 0.004) return;
       video.currentTime = t;
-      // Հեռախոսում ետևի մշուշոտ պատճենը նույն կադրին է բերվում, որ վիդեոյի սահմանները «տարածվեն» էկրանով մեկ
-      const back = backRef.current;
-      if (back && back.offsetParent !== null && back.readyState >= 1 && !back.seeking) back.currentTime = t;
     };
     const seek = pump;
     const tick = () => {
@@ -73,7 +69,6 @@ export default function ScrollVideo({ src, poster, wide, children }: { src: stri
     <div className="vidWrap" ref={wrapRef}>
       <section className={`serviceDetailHero vidHero${wide ? ' vidWide' : ''}`} ref={heroRef}>
         <div className="vidBackdrop" style={{ backgroundImage: `url(${poster})` }} aria-hidden="true" />
-        {wide && <video ref={backRef} className="vidBackVid" src={src} poster={poster} muted playsInline preload="auto" tabIndex={-1} aria-hidden="true" />}
         <video
           ref={videoRef}
           className="vidEl"
