@@ -16,8 +16,8 @@ export default function Contact() {
     if (!v) return;
     // Հեռախոսի և համակարգչի համար առանձին վիդեո (տարբեր կադրավորում)
     const kind = window.matchMedia('(max-width: 850px)').matches ? 'mobile' : 'desktop';
-    v.poster = `/contact/apartment-plan-${kind}.webp`;
-    v.src = `/contact/apartment-plan-${kind}.mp4`;
+    v.poster = `/contact/apartment-model-${kind}.webp`;
+    v.src = `/contact/apartment-model-${kind}.mp4`;
     const start = () => { v.currentTime = 0; v.play().catch(() => {}); };
     if ((window as unknown as { __garonSplashDone?: boolean }).__garonSplashDone || !document.querySelector('.splash')) { start(); return; }
     window.addEventListener('garon:splash-done', start, { once: true });
