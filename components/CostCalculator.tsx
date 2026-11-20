@@ -218,7 +218,6 @@ export default function CostCalculator({ modes = ALL_MODES }: { modes?: Mode[] }
                   </div>
                 ))}
               </div>
-              {mode === 'renovation' && tier === RENOVATION_RATES.length - 1 && <p className="calcRateNote">{t.renovationPremiumNote}</p>}
             </div>
           )}
 
