@@ -180,9 +180,9 @@ export const about = {
 };
 
 export const servicesIndex = {
-  hy: { eyebrow: 'ԾԱՌԱՅՈՒԹՅՈՒՆՆԵՐ', title1: 'Կառուցման', title2: 'մասնագիտություն։', lead: 'Ընտրեք ուղղությունը և տեսեք՝ ինչ ենք առաջարկում տվյալ ոլորտում։', whatWeDo: 'ԻՆՉ ԵՆՔ ԱՆՈՒՄ', open: 'Բացել' },
-  en: { eyebrow: 'SERVICES', title1: 'Construction', title2: 'expertise.', lead: 'Choose a direction and see what we offer in that field.', whatWeDo: 'WHAT WE DO', open: 'Open' },
-  ru: { eyebrow: 'УСЛУГИ', title1: 'Строительная', title2: 'экспертиза.', lead: 'Выберите направление и узнайте, что мы предлагаем в этой сфере.', whatWeDo: 'ЧЕМ МЫ ЗАНИМАЕМСЯ', open: 'Открыть' }
+  hy: { eyebrow: 'ԾԱՌԱՅՈՒԹՅՈՒՆՆԵՐ', title1: 'Մեկ թիմ՝', title2: 'չորս ուղղություն։', lead: 'Լողավազաններ, բնակելի տներ, վերանորոգում և հասարակական կառույցներ՝ գաղափարից մինչև պատրաստ արդյունք։', whatWeDo: 'ԻՆՉ ԵՆՔ ԱՆՈՒՄ', open: 'Բացել' },
+  en: { eyebrow: 'SERVICES', title1: 'One team,', title2: 'four directions.', lead: 'Pools, homes, renovation and public buildings — from idea to finished result.', whatWeDo: 'WHAT WE DO', open: 'Open' },
+  ru: { eyebrow: 'УСЛУГИ', title1: 'Одна команда —', title2: 'четыре направления.', lead: 'Бассейны, жилые дома, ремонт и общественные здания — от идеи до готового результата.', whatWeDo: 'ЧЕМ МЫ ЗАНИМАЕМСЯ', open: 'Открыть' }
 };
 
 export const serviceDetailShared = {
