@@ -246,3 +246,4 @@
 /* Ծառայություններ. լողավազանի նկարը քառակուսի է՝ տունը և լողավազանը պահում ենք կենտրոնում */
 .svcBg:first-child{background-position:62% 78%}
 .svcBg:nth-child(2){background-position:center 62%}
+.svcBg:nth-child(3){background-position:center 78%}
