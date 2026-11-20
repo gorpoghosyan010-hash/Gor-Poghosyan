@@ -27,7 +27,7 @@ function cumulativeRateFor(baseRate: number, floors: number) {
   for (let f = 1; f <= floors; f++) sum += baseRate * (perFloorRate(f) / perFloorRate(1));
   return sum;
 }
-const RENOVATION_RATES = [50000, 80000, 120000, 180000];
+const RENOVATION_RATES = [50000, 70000, 120000, 180000];
 // Նկուղի գինը մեկ մ²-ի համար (Մոնոլիտ և Ամբողջական կառուցում). հաշվարկվում է առանձին մակերեսով, գինը դիտավորյալ չի ցուցադրվում UI-ում։
 const BASEMENT_RATE = 100000;
 // Լողավազանի «սկսած» գինը (դրամ / մ²)։ Հաշվարկվող մակերես = պարագիծ × խորություն + հատակի մակերես։
