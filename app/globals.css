@@ -193,3 +193,5 @@
 .projectCard.portrait::before{content:'';position:absolute;inset:0;background:inherit;background-size:cover;filter:blur(24px) brightness(.55);transform:scale(1.15)}
 .projectCardFit{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;z-index:0}
 .projectCard.portrait .projectCardShade,.projectCard.portrait .projectCardInfo{z-index:1}
+/* Կապ էջ, համակարգիչ. վերևի հատվածը էկրանի բարձրությամբ, որ անիմացիայի մոդելը ամբողջությամբ երևա (ներքևից չկտրվի) */
+@media(min-width:851px){.contactHero{min-height:100vh;min-height:100svh}.contactVid{object-fit:contain;object-position:right center}}
