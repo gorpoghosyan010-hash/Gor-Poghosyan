@@ -182,3 +182,14 @@
 /* Հաշվիչ էջ. սեփականատիրոջ նկարը (գծագրերի վրա աշխատող թիմ). հեռախոսում կենտրոնում են մարդիկ և գծագիրը */
 .calculatorHero{background-position:50% 45%}
 @media(max-width:850px){.calculatorHero{background-position:42% 50%}}
+
+/* Նախագծի պատկերասրահ. լուսանկարները ցույց են տրվում ամբողջությամբ, առանց կտրելու (մասոնրի դասավորություն) */
+.gallerySection:not(.singleGallery) .gallery{display:block;columns:2;column-gap:10px;max-width:1500px;margin:0 auto}
+.gallerySection:not(.singleGallery) .gallery>div{break-inside:avoid;margin-bottom:10px;display:block}
+.gallerySection:not(.singleGallery) .gallery img{height:auto;object-fit:initial}
+@media(max-width:850px){.gallerySection:not(.singleGallery) .gallery{columns:1}}
+/* Ուղղահայաց նկարով քարտ. նկարն ամբողջությամբ, ետևում՝ նույն նկարը մշուշոտ */
+.projectCard.portrait{background-size:cover}
+.projectCard.portrait::before{content:'';position:absolute;inset:0;background:inherit;background-size:cover;filter:blur(24px) brightness(.55);transform:scale(1.15)}
+.projectCardFit{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;z-index:0}
+.projectCard.portrait .projectCardShade,.projectCard.portrait .projectCardInfo{z-index:1}
