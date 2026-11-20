@@ -3,7 +3,7 @@
 export const siteConfig = {
   email: 'info@garon.am',
   phone: '',      // օր.՝ '+374 91 123 456'
-  instagram: '',  // օր.՝ 'https://www.instagram.com/garon...'
+  instagram: 'https://www.instagram.com/garon__construction/',
   facebook: ''    // օր.՝ 'https://www.facebook.com/garon...'
 };
 
