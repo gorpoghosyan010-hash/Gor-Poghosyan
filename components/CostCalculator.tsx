@@ -201,7 +201,7 @@ export default function CostCalculator({ modes = ALL_MODES }: { modes?: Mode[] }
                   <div className="calcTierWrap" key={tr.name + i}>
                     <button type="button" className={`calcTier ${i === tier ? 'active' : ''}`} onClick={() => setTier(i)}>
                       <strong>{tr.name}</strong>
-                      <span>{tr.desc}</span>
+                      {tr.desc && <span>{tr.desc}</span>}
                       <b>{ratesToShow[i].toLocaleString('en-US')} ֏ {t.perSqm}</b>
                     </button>
                     {tr.detail && (

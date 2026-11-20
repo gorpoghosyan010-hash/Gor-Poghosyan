@@ -471,7 +471,7 @@ export const calculator = {
     ],
     renovationTiers: [
       { name: 'ԱՇԽԱՏԱՆՔ', desc: 'Միայն աշխատանքի արժեքը, նյութերը՝ պատվիրատուի կողմից', detail: 'Մանրամասն ցանկը (ինչ աշխատանքներ են մտնում այս գնի մեջ) կավելացվի այստեղ։' },
-      { name: 'ՍՏԱՆԴԱՐՏ', desc: 'Կոսմետիկ վերանորոգում', detail: 'Գինը ներառում է վերանորոգման բոլոր աշխատանքները և սևային (նախապատրաստական) նյութերը, որոնք ապահովում է GARON-ը՝ սվաղ, շպատլյովկա, այբբեխտ (գրունտ), սոսինձներ և այլն։ Գնի մեջ չեն մտնում վերջնական հարդարման նյութերը (սալիկ, հատակածածկ, պաստառ, ներկ, սանտեխնիկա, լուսատուներ և այլն), որոնք ընտրում և ձեռք է բերում պատվիրատուն։' },
+      { name: 'ՍՏԱՆԴԱՐՏ', desc: '', detail: 'Արժեքը ներառում է բոլոր շինարարական և նախապատրաստական նյութերը, իսկ վերջնական հարդարման նյութերն ընտրվում և ձեռք են բերվում պատվիրատուի կողմից։' },
       { name: 'ԿՈՄՖՈՐՏ', desc: 'Միջին կարգի վերանորոգում', detail: 'Մանրամասն ցանկը (ինչ աշխատանք և նյութեր են մտնում այս գնի մեջ) կավելացվի այստեղ։' },
       { name: 'ՊՐԵՄԻՈՒՄ', desc: 'Կապիտալ վերանորոգում', detail: 'Մանրամասն ցանկը (ինչ աշխատանք և նյութեր են մտնում այս գնի մեջ) կավելացվի այստեղ։' }
     ],
@@ -517,7 +517,7 @@ export const calculator = {
     ],
     renovationTiers: [
       { name: 'LABOR ONLY', desc: 'Labor cost only — materials provided by the client', detail: 'A detailed list of what this price includes will be added here.' },
-      { name: 'STANDARD', desc: 'Cosmetic renovation', detail: 'The price covers all renovation work plus the base (preparatory) materials supplied by GARON — plaster, putty, primer, adhesives and so on. It does not include final finishing materials (tiles, flooring, wallpaper, paint, plumbing fixtures, light fittings, etc.), which the client chooses and purchases.' },
+      { name: 'STANDARD', desc: '', detail: 'The price includes all construction and preparatory materials; final finishing materials are chosen and purchased by the client.' },
       { name: 'COMFORT', desc: 'Mid-range renovation', detail: 'A detailed list of what this price includes will be added here.' },
       { name: 'PREMIUM', desc: 'Capital renovation', detail: 'A detailed list of what this price includes will be added here.' }
     ],
@@ -563,7 +563,7 @@ export const calculator = {
     ],
     renovationTiers: [
       { name: 'ТОЛЬКО РАБОТА', desc: 'Только стоимость работ — материалы предоставляет заказчик', detail: 'Подробный список того, что входит в эту цену, будет добавлен здесь.' },
-      { name: 'СТАНДАРТ', desc: 'Косметический ремонт', detail: 'Цена включает все ремонтные работы и черновые (подготовительные) материалы, которые предоставляет GARON: штукатурку, шпаклёвку, грунтовку, клеевые составы и т. д. В цену не входят чистовые отделочные материалы (плитка, напольное покрытие, обои, краска, сантехника, светильники и т. д.) — их выбирает и приобретает заказчик.' },
+      { name: 'СТАНДАРТ', desc: '', detail: 'Стоимость включает все строительные и подготовительные материалы, а чистовые отделочные материалы выбирает и приобретает заказчик.' },
       { name: 'КОМФОРТ', desc: 'Ремонт среднего уровня', detail: 'Подробный список того, что входит в эту цену, будет добавлен здесь.' },
       { name: 'ПРЕМИУМ', desc: 'Капитальный ремонт', detail: 'Подробный список того, что входит в эту цену, будет добавлен здесь.' }
     ],
