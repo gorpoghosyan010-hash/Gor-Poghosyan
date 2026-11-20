@@ -104,9 +104,9 @@ export const imageSizes: Record<string, [number, number]> = {
     1280,
     960
   ],
-  "/services/pools.webp": [
-    1200,
-    843
+  "/services/svc-pools.webp": [
+    736,
+    736
   ],
   "/services/public-works.webp": [
     1200,

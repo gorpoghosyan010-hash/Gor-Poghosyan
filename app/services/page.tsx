@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useLanguage } from '../../components/LanguageContext';
 import { servicesIndex, home } from '../../content/i18n';
 const hrefs=['/services/pools','/services/residential','/services/renovation','/services/public-works'];
-const imgs=['/services/pools.webp','/services/residential.webp','/services/renovation.webp','/services/public-works.webp'];
+const imgs=['/services/svc-pools.webp','/services/residential.webp','/services/renovation.webp','/services/public-works.webp'];
 
 // Մեկ էկրան. մեծ ցանկ չորս ուղղություններով։ Որ ուղղության վրա կանգնում ես (կամ ինքնաշխատ, հերթով), ֆոնը դառնում է այդ ուղղության նկարը։
 export default function Services(){

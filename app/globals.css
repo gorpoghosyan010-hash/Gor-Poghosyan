@@ -243,3 +243,5 @@
  .svcItem.on{padding-left:6px}
  .svcItem.on .svcDesc{max-height:80px}
 }
+/* Ծառայություններ. լողավազանի նկարը քառակուսի է՝ տունը և լողավազանը պահում ենք կենտրոնում */
+.svcBg:first-child{background-position:62% 78%}
