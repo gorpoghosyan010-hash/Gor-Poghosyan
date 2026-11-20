@@ -197,3 +197,15 @@
 @media(min-width:851px){.contactHero{min-height:100vh;min-height:100svh}.contactVid{object-fit:contain;object-position:right center}}
 /* Կապ էջ, համակարգիչ. անիմացիան մի փոքր ձախ, որ աջ եզրից չկտրվի */
 @media(min-width:851px){.contactVid{right:5vw;width:50%;object-position:center center}}
+/* Կապ էջ. ֆոնը ավելի կենդանի. տաք ոսկեգույն լույս մակետի ետևում, նուրբ գծագրական ցանց և թեթև վինետ */
+.contactHero{background:
+  radial-gradient(ellipse 55% 60% at 74% 52%,rgba(214,170,96,.22),rgba(214,170,96,.06) 45%,transparent 70%),
+  radial-gradient(ellipse 45% 50% at 18% 30%,rgba(120,130,150,.10),transparent 70%),
+  linear-gradient(rgba(200,169,106,.07) 1px,transparent 1px) 0 0/64px 64px,
+  linear-gradient(90deg,rgba(200,169,106,.07) 1px,transparent 1px) 0 0/64px 64px,
+  linear-gradient(135deg,#1a1c20 0%,#111215 55%,#0c0d0f 100%)}
+.contactHero::before{content:'';position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(rgba(200,169,106,.10) 1px,transparent 1px) 0 0/320px 320px,linear-gradient(90deg,rgba(200,169,106,.10) 1px,transparent 1px) 0 0/320px 320px;
+  -webkit-mask-image:radial-gradient(ellipse at 60% 50%,#000 20%,transparent 75%);mask-image:radial-gradient(ellipse at 60% 50%,#000 20%,transparent 75%)}
+.contactHero .contactVid{mix-blend-mode:lighten}
+@media(min-width:851px){.contactHero .innerHeroShade{background:linear-gradient(90deg,rgba(8,9,10,.55) 0%,rgba(8,9,10,.15) 45%,transparent 70%),linear-gradient(0deg,rgba(8,9,10,.45),transparent 40%)}}
