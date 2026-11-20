@@ -27,7 +27,8 @@ function cumulativeRateFor(baseRate: number, floors: number) {
   for (let f = 1; f <= floors; f++) sum += baseRate * (perFloorRate(f) / perFloorRate(1));
   return sum;
 }
-const RENOVATION_RATES = [50000, 70000, 120000, 180000];
+// Ստանդարտ (միայն աշխատանք), Կոմֆորտ, Պրեմիում (սկսած)
+const RENOVATION_RATES = [60000, 80000, 100000];
 // Նկուղի գինը մեկ մ²-ի համար (Մոնոլիտ և Ամբողջական կառուցում). հաշվարկվում է առանձին մակերեսով, գինը դիտավորյալ չի ցուցադրվում UI-ում։
 const BASEMENT_RATE = 100000;
 // Լողավազանի «սկսած» գինը (դրամ / մ²)։ Հաշվարկվող մակերես = պարագիծ × խորություն + հատակի մակերես։
@@ -201,8 +202,8 @@ export default function CostCalculator({ modes = ALL_MODES }: { modes?: Mode[] }
                   <div className="calcTierWrap" key={tr.name + i}>
                     <button type="button" className={`calcTier ${i === tier ? 'active' : ''}`} onClick={() => setTier(i)}>
                       <strong>{tr.name}</strong>
-                      <span>{tr.desc}</span>
-                      <b>{ratesToShow[i].toLocaleString('en-US')} ֏ {t.perSqm}</b>
+                      {tr.desc && <span>{tr.desc}</span>}
+                      <b>{ratesToShow[i].toLocaleString('en-US')}{mode === 'renovation' && i === ratesToShow.length - 1 ? '+' : ''} ֏ {t.perSqm}</b>
                     </button>
                     {tr.detail && (
                       <button
@@ -217,7 +218,7 @@ export default function CostCalculator({ modes = ALL_MODES }: { modes?: Mode[] }
                   </div>
                 ))}
               </div>
-              {mode === 'renovation' && tier === 3 && <p className="calcRateNote">{t.renovationPremiumNote}</p>}
+              {mode === 'renovation' && tier === RENOVATION_RATES.length - 1 && <p className="calcRateNote">{t.renovationPremiumNote}</p>}
             </div>
           )}
 
