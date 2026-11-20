@@ -9,7 +9,7 @@ const serviceMeta = [
  ['01','/services/pools','/services/svc-pools.webp'],
  ['02','/services/residential','/services/svc-residential.webp'],
  ['03','/services/renovation','/services/svc-renovation.webp'],
- ['04','/services/public-works','/services/public-works.webp']
+ ['04','/services/public-works','/services/svc-public-works.webp']
 ];
 
 export default function Home(){
