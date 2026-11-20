@@ -470,10 +470,9 @@ export const calculator = {
       { name: 'ՊՐԵՄԻՈՒՄ', desc: 'Բարձրորակ նյութեր և ամբողջական հարդարում' }
     ],
     renovationTiers: [
-      { name: 'ԱՇԽԱՏԱՆՔ', desc: 'Միայն աշխատանքի արժեքը, նյութերը՝ պատվիրատուի կողմից', detail: 'Մանրամասն ցանկը (ինչ աշխատանքներ են մտնում այս գնի մեջ) կավելացվի այստեղ։' },
-      { name: 'ՍՏԱՆԴԱՐՏ', desc: '', detail: 'Արժեքը ներառում է բոլոր շինարարական և նախապատրաստական նյութերը, իսկ վերջնական հարդարման նյութերն ընտրվում և ձեռք են բերվում պատվիրատուի կողմից։' },
-      { name: 'ԿՈՄՖՈՐՏ', desc: 'Միջին կարգի վերանորոգում', detail: 'Մանրամասն ցանկը (ինչ աշխատանք և նյութեր են մտնում այս գնի մեջ) կավելացվի այստեղ։' },
-      { name: 'ՊՐԵՄԻՈՒՄ', desc: 'Կապիտալ վերանորոգում', detail: 'Մանրամասն ցանկը (ինչ աշխատանք և նյութեր են մտնում այս գնի մեջ) կավելացվի այստեղ։' }
+      { name: 'ՍՏԱՆԴԱՐՏ', desc: 'Միայն աշխատանքի արժեքը, նյութերը՝ պատվիրատուի կողմից', detail: 'GARON ընկերությունը կապահովի վերանորոգման որակյալ իրականացումը՝ ներգրավելով փորձառու մասնագետների, որոնք ձեր տունը կդարձնեն ավելի հարմարավետ, գեղեցիկ և ֆունկցիոնալ։' },
+      { name: 'ԿՈՄՖՈՐՏ', desc: '', detail: 'Գինը ներառում է վերանորոգման բոլոր աշխատանքները և նախապատրաստական աշխատանքների համար որակյալ նյութերը, որոնք ապահովում է GARON ընկերությունը, իսկ վերջնական հարդարման նյութերն ընտրվում և ձեռք են բերվում պատվիրատուի կողմից։' },
+      { name: 'ՊՐԵՄԻՈՒՄ', desc: '', detail: 'Հաշվարկված արժեքը ներառում է վերանորոգման աշխատանքների ամբողջ ծավալը և նախապատրաստական փուլերի համար անհրաժեշտ որակյալ նյութերը՝ GARON ընկերության ապահովմամբ։ Վերջնական հարդարման նյութերի ընտրության և ձեռքբերման հարցում GARON-ը կտրամադրի մասնագիտական աջակցություն՝ օգնելով գտնել լավագույն լուծումները՝ ըստ ձեր նախասիրությունների, նախագծի առանձնահատկությունների և նախատեսված բյուջեի։' }
     ],
     infoLabel: 'Ինչ է մտնում այս գնի մեջ',
     optionsLabel: 'Հավելյալ առանձնահատկություններ',
@@ -516,10 +515,9 @@ export const calculator = {
       { name: 'PREMIUM', desc: 'High-end materials and full finishing' }
     ],
     renovationTiers: [
-      { name: 'LABOR ONLY', desc: 'Labor cost only — materials provided by the client', detail: 'A detailed list of what this price includes will be added here.' },
-      { name: 'STANDARD', desc: '', detail: 'The price includes all construction and preparatory materials; final finishing materials are chosen and purchased by the client.' },
-      { name: 'COMFORT', desc: 'Mid-range renovation', detail: 'A detailed list of what this price includes will be added here.' },
-      { name: 'PREMIUM', desc: 'Capital renovation', detail: 'A detailed list of what this price includes will be added here.' }
+      { name: 'STANDARD', desc: 'Labor only — materials provided by the client', detail: 'GARON ensures high-quality renovation work, bringing in experienced specialists who will make your home more comfortable, beautiful and functional.' },
+      { name: 'COMFORT', desc: '', detail: 'The price includes all renovation work and quality materials for the preparatory work, supplied by GARON; final finishing materials are chosen and purchased by the client.' },
+      { name: 'PREMIUM', desc: '', detail: 'The estimate covers the full scope of renovation work and the quality materials needed for the preparatory stages, supplied by GARON. For final finishing materials, GARON provides professional guidance, helping you find the best solutions for your taste, the specifics of the project and your planned budget.' }
     ],
     infoLabel: "What's included in this price",
     optionsLabel: 'Additional Features',
@@ -562,10 +560,9 @@ export const calculator = {
       { name: 'ПРЕМИУМ', desc: 'Материалы высокого класса и полная отделка' }
     ],
     renovationTiers: [
-      { name: 'ТОЛЬКО РАБОТА', desc: 'Только стоимость работ — материалы предоставляет заказчик', detail: 'Подробный список того, что входит в эту цену, будет добавлен здесь.' },
-      { name: 'СТАНДАРТ', desc: '', detail: 'Стоимость включает все строительные и подготовительные материалы, а чистовые отделочные материалы выбирает и приобретает заказчик.' },
-      { name: 'КОМФОРТ', desc: 'Ремонт среднего уровня', detail: 'Подробный список того, что входит в эту цену, будет добавлен здесь.' },
-      { name: 'ПРЕМИУМ', desc: 'Капитальный ремонт', detail: 'Подробный список того, что входит в эту цену, будет добавлен здесь.' }
+      { name: 'СТАНДАРТ', desc: 'Только стоимость работ — материалы предоставляет заказчик', detail: 'GARON обеспечит качественное выполнение ремонта, привлекая опытных специалистов, которые сделают ваш дом более удобным, красивым и функциональным.' },
+      { name: 'КОМФОРТ', desc: '', detail: 'Цена включает все ремонтные работы и качественные материалы для подготовительных работ, которые предоставляет GARON, а чистовые отделочные материалы выбирает и приобретает заказчик.' },
+      { name: 'ПРЕМИУМ', desc: '', detail: 'Расчётная стоимость включает весь объём ремонтных работ и качественные материалы, необходимые для подготовительных этапов, которые предоставляет GARON. При выборе и покупке чистовых отделочных материалов GARON окажет профессиональную помощь и поможет найти лучшие решения с учётом ваших предпочтений, особенностей проекта и запланированного бюджета.' }
     ],
     infoLabel: 'Что входит в эту цену',
     optionsLabel: 'Дополнительные особенности',
