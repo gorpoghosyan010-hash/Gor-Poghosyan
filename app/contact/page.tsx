@@ -13,7 +13,7 @@ export default function Contact() {
     <main className="innerPage">
       <section className="innerHero contactHero">
         {/* Բնակարանի հատակագիծը գծերով դառնում է կահավորված եռաչափ նախագիծ (ծրագրով նկարված անիմացիա) */}
-        <ModelVideo base="/contact/apartment-studio" className="contactVid" />
+        <ModelVideo base="/contact/apartment-studio2" className="contactVid" />
         <div className="innerHeroShade" />
         <div>
           <p className="eyebrow">{t.eyebrow}</p>
