@@ -1,15 +1,31 @@
 'use client';
-import Link from 'next/link'; import Reveal from '../../components/Reveal';
+import { useEffect, useState } from 'react';
+import Link from 'next/link';
 import { useLanguage } from '../../components/LanguageContext';
 import { servicesIndex, home } from '../../content/i18n';
 const hrefs=['/services/pools','/services/residential','/services/renovation','/services/public-works'];
 const imgs=['/services/pools.webp','/services/residential.webp','/services/renovation.webp','/services/public-works.webp'];
+
+// Մեկ էկրան. մեծ ցանկ չորս ուղղություններով։ Որ ուղղության վրա կանգնում ես (կամ ինքնաշխատ, հերթով), ֆոնը դառնում է այդ ուղղության նկարը։
 export default function Services(){
  const { lang } = useLanguage();
  const t = servicesIndex[lang];
- const items = home[lang].services.map((s,i)=>[String(i+1).padStart(2,'0'), s.t, hrefs[i]] as const);
- return <main className="innerPage"><section className="servicesHero2">
-  <div className="svcPanels">{items.map(([n,name,href],i)=><Link key={href} href={href} className="svcPanel" style={{backgroundImage:`url(${imgs[i]})`}}><span className="svcPanelShade"/><span className="svcPanelText"><b>{n}</b><strong>{name}</strong></span></Link>)}</div>
-  <div className="svcHeroText"><p className="eyebrow">{t.eyebrow}</p><h1>{t.title1}<br/><span>{t.title2}</span></h1><p>{t.lead}</p></div>
- </section><section className="sectionLight serviceDirectory"><Reveal><p className="eyebrow dark">{t.whatWeDo}</p><div className="directoryList">{items.map(([n,title,h])=><Link href={h} key={n}><span>{n}</span><h2>{title}</h2><b>{t.open}</b></Link>)}</div></Reveal></section></main>;
+ const list = home[lang].services;
+ const [active,setActive] = useState(0);
+ const [hold,setHold] = useState(false);
+ useEffect(()=>{ if(hold) return; const id=window.setInterval(()=>setActive(a=>(a+1)%imgs.length),4200); return ()=>window.clearInterval(id); },[hold]);
+ return <main className="innerPage"><section className="svcStage" onMouseLeave={()=>setHold(false)}>
+  <div className="svcBgs" aria-hidden="true">{imgs.map((src,i)=><div key={src} className={`svcBg ${i===active?'on':''}`} style={{backgroundImage:`url(${src})`}}/>)}</div>
+  <div className="svcVeil" aria-hidden="true"/>
+  <div className="svcInner">
+   <div className="svcHead"><p className="eyebrow">{t.eyebrow}</p><h1>{t.title1} <span>{t.title2}</span></h1><p>{t.lead}</p></div>
+   <nav className="svcList">{list.map((s,i)=><Link key={hrefs[i]} href={hrefs[i]} className={`svcItem ${i===active?'on':''}`} onMouseEnter={()=>{setActive(i);setHold(true);}} onFocus={()=>{setActive(i);setHold(true);}}>
+     <span className="svcNum">{String(i+1).padStart(2,'0')}</span>
+     <span className="svcName">{s.t}</span>
+     <span className="svcDesc">{s.d}</span>
+     <span className="svcGo" aria-hidden="true"/>
+   </Link>)}</nav>
+   <div className="svcProgress" aria-hidden="true">{imgs.map((_,i)=><i key={i} className={i===active?'on':''}/>)}</div>
+  </div>
+ </section></main>;
 }
