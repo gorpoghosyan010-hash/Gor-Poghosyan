@@ -124,58 +124,112 @@ export const about = {
     eyebrow: 'GARON-Ի ՄԱՍԻՆ',
     title1: 'Կառուցում ենք', title2: 'վստահություն։',
     lead: 'Նախագծից մինչև բանալիների հանձնում՝ մեկ թիմ, մեկ պատասխանատու և հստակ պայմանավորվածություններ։',
-    pathEyebrow: 'ԻՆՉՊԵՍ ԵՆՔ ԱՇԽԱՏՈՒՄ',
+    sub: 'Կառուցում ենք լողավազաններ, մասնավոր տներ և հասարակական շենքեր, իրականացնում ենք բնակարանների և տների վերանորոգում։',
+    pathEyebrow: 'ՄԵՐ ՄՈՏԵՑՈՒՄԸ',
     pathTitle1: 'Ամբողջ գործընթացը', pathTitle2: 'մեկ ձեռքում։',
-    pathText1: 'Աշխատանքը սկսվում է տեղազննությունից և մանրամասն նախահաշվից, որպեսզի դուք նախապես իմանաք, թե ինչ է արվելու, ինչ ժամկետում և ինչ արժեքով։ Համաձայնեցնելուց հետո պայմանագրում ամրագրում ենք աշխատանքների ծավալը, փուլերը և ժամկետները։',
-    pathText2: 'Շինարարության ընթացքում ձեր նախագիծը վարում է մեկ պատասխանատու, որը կազմակերպում է բոլոր մասնագետներին և նյութերի մատակարարումը, իսկ դուք պարբերաբար ստանում եք տեղեկություն աշխատանքների ընթացքի մասին։ Ավարտին ստուգում ենք յուրաքանչյուր մանրուք և հանձնում պատրաստ արդյունքը։ Ձեր ցանկությամբ կարող ենք նախագիծն իրականացնել «բանալին ձեռքին» սկզբունքով՝ ամբողջությամբ համաձայն դիզայն-նախագծի, առանց ձեր անմիջական մասնակցության անհրաժեշտության։',
+    pathText1: 'Աշխատանքը սկսում ենք անվճար տեղազննությունից։ Ուսումնասիրում ենք տարածքը, քննարկում ձեր պահանջներն ու սպասելիքները, ապա կազմում մանրամասն նախահաշիվ՝ ըստ առանձին աշխատանքների և նյութերի։ Պայմանագրում ամրագրում ենք աշխատանքների ծավալը, փուլերը և ժամկետները, որպեսզի յուրաքանչյուր քայլ նախապես հստակ լինի երկու կողմերի համար։',
+    pathText2: 'Շինարարության ընթացքում ամբողջ գործընթացի համար պատասխանատու է մեկ մարդ, որը համակարգում է բոլոր մասնագետների աշխատանքը և նյութերի մատակարարումը։ Ավարտին կատարում ենք մանրամասն ստուգում և միայն դրանից հետո հանձնում օբյեկտը։ Ձեր ցանկությամբ կարող ենք նախագիծն իրականացնել «բանալին ձեռքին» սկզբունքով՝ ամբողջությամբ համաձայն դիզայն-նախագծի, առանց ձեր անմիջական մասնակցության անհրաժեշտության։',
+    stepsEyebrow: 'ԻՆՉՊԵՍ ԵՆՔ ԱՇԽԱՏՈՒՄ',
+    stepsTitle1: 'Հինգ քայլ՝', stepsTitle2: 'գաղափարից մինչև բանալի։',
+    steps: [
+      { t: 'Խորհրդատվություն և այց', d: 'Լսում ենք ձեր խնդիրը, անվճար այցելում ենք օբյեկտ և գնահատում տարածքի վիճակը, հաղորդակցուղիները և աշխատանքների իրական ծավալը։' },
+      { t: 'Նախագիծ և նախահաշիվ', d: 'Աշխատում ենք ձեր դիզայն-նախագծով, իսկ եթե այն դեռ չունեք՝ ուղղորդում ենք և օգնում ընտրել լուծումները։ Կազմում ենք անվճար նախահաշիվ, որտեղ աշխատանքներն ու նյութերը ներկայացված են առանձին տողերով։' },
+      { t: 'Պայմանագիր', d: 'Ամրագրում ենք աշխատանքների ծավալը, փուլերը, ժամկետները և ձեզ հետ համաձայնեցված վճարման կարգը։ Համաձայնեցված ծավալի գինը չի փոխվում, իսկ լրացուցիչ աշխատանքը կատարվում է միայն ձեր գրավոր համաձայնությամբ։' },
+      { t: 'Շինարարություն և վերահսկում', d: 'Ամբողջ ընթացքում ունեք մեկ պատասխանատու ղեկավար։ Պարբերաբար ուղարկում ենք լուսանկարներ և տեսանյութեր՝ ձեզ հարմար ցանկացած ծրագրով, ինչը հարմար է նաև արտերկրում բնակվող պատվիրատուների համար։' },
+      { t: 'Ստուգում և հանձնում', d: 'Ձեզ հետ միասին մանրամասն ստուգում ենք կատարված աշխատանքները և օբյեկտը հանձնում միայն բոլոր դիտողությունները վերացնելուց հետո։' }
+    ],
+    getEyebrow: 'ԻՆՉ ԵՔ ՍՏԱՆՈՒՄ',
+    getTitle1: 'Հստակություն', getTitle2: 'յուրաքանչյուր փուլում։',
+    gets: [
+      { t: 'Մեկ պատասխանատու', d: 'Բոլոր հարցերով դիմում եք մեկ մարդու, որը տիրապետում է նախագծի բոլոր մանրամասներին։' },
+      { t: 'Թափանցիկ բյուջե', d: 'Նախահաշիվը կազմված է ըստ առանձին աշխատանքների և նյութերի, իսկ ցանկացած փոփոխություն նախապես համաձայնեցվում է ձեզ հետ։' },
+      { t: 'Թաքնված աշխատանքների ստուգում', d: 'Էլեկտրական, ջրամատակարարման և հիդրոմեկուսացման աշխատանքները ստուգում և լուսանկարում ենք, նախքան դրանք կփակվեն երեսպատմամբ։' },
+      { t: '«Բանալին ձեռքին»', d: 'Կարող եք ամբողջությամբ վստահել աշխատանքը մեզ՝ արդյունքը կհամապատասխանի դիզայն-նախագծին առանց ձեր ամենօրյա մասնակցության։' }
+    ],
     valuesEyebrow: 'ՄԵՐ ԱՐԺԵՔՆԵՐԸ',
     values: [
-      { t: 'ՃՇԳՐՏՈՒԹՅՈՒՆ', d: 'Պլանավորումից մինչև վերջնական հանձնում՝ յուրաքանչյուր փուլ վերահսկելի է։' },
-      { t: 'ՈՐԱԿ', d: 'Նյութերը, աշխատանքը և վերջնական արդյունքը գնահատում ենք երկարաժամկետ տեսանկյունից։' },
-      { t: 'ՎՍՏԱՀՈՒԹՅՈՒՆ', d: 'Պատվիրատուի հետ բաց և պատասխանատու հաղորդակցությունը գործընթացի հիմքում է։' },
-      { t: 'ԱՐԴՅՈՒՆՔ', d: 'Մեր լավագույն ներկայացումը ավարտված աշխատանքն է։' }
+      { t: 'ՃՇԳՐՏՈՒԹՅՈՒՆ', d: 'Յուրաքանչյուր հանգույց կատարում ենք ըստ նախագծի և տեխնոլոգիայի՝ առանց մոտավոր լուծումների։' },
+      { t: 'ՈՐԱԿ', d: 'Ընտրում ենք ստուգված նյութեր և վերահսկում յուրաքանչյուր փուլ, այդ թվում՝ այն, ինչը հետո տեսանելի չի լինի։' },
+      { t: 'ՎՍՏԱՀՈՒԹՅՈՒՆ', d: 'Կատարում ենք պայմանագրով ստանձնած պարտավորությունները և ցանկացած հարց քննարկում ենք բաց ու ժամանակին։' },
+      { t: 'ԱՐԴՅՈՒՆՔ', d: 'Հանձնում ենք ավարտուն օբյեկտ, որը համապատասխանում է համաձայնեցված նախագծին և պատրաստ է օգտագործման։' }
     ],
     nextEyebrow: 'ՀԱՋՈՐԴԸ',
-    nextTitle1: 'Տեսեք մեր', nextTitle2: 'նախագծերը։',
-    nextCta: 'Դիտել աշխատանքները'
+    nextTitle1: 'Պատրա՞ստ եք', nextTitle2: 'սկսել։',
+    nextCta: 'Դիտել նախագծերը', nextCta2: 'Պատվիրել տեղազննություն'
   },
   en: {
     eyebrow: 'ABOUT GARON',
     title1: 'We build', title2: 'trust.',
     lead: 'From design to handing over the keys — one team, one person in charge and clear agreements.',
-    pathEyebrow: 'HOW WE WORK',
+    sub: 'We build pools, private houses and public buildings, and renovate apartments and homes.',
+    pathEyebrow: 'OUR APPROACH',
     pathTitle1: 'The whole process', pathTitle2: 'in one pair of hands.',
-    pathText1: 'Work starts with a site visit and a detailed estimate, so you know in advance what will be done, when and at what cost. Once agreed, the scope, stages and deadlines are fixed in the contract.',
-    pathText2: 'During construction your project is run by one person in charge who coordinates every specialist and all material deliveries, and you receive regular updates on progress. At the end we check every detail and hand over a finished result. If you wish, we can deliver the project turnkey — fully in line with the design project, without the need for your day-to-day involvement.',
+    pathText1: 'We start with a free site visit. We assess the property, discuss your requirements and prepare a detailed estimate, itemised by works and materials. The contract fixes the scope, stages and deadlines, so every step is clear to both sides from the start.',
+    pathText2: 'During construction one person is responsible for the entire process, coordinating all specialists and material supply. At the end we carry out a detailed inspection and only then hand over the property. If you wish, we deliver the project turnkey — fully in line with the design project, without the need for your day-to-day involvement.',
+    stepsEyebrow: 'HOW WE WORK',
+    stepsTitle1: 'Five steps', stepsTitle2: 'from idea to keys.',
+    steps: [
+      { t: 'Consultation and site visit', d: 'We listen to your brief, visit the site free of charge and assess its condition, utilities and the real scope of work.' },
+      { t: 'Design and estimate', d: 'We work to your design project — and if you don’t have one yet, we guide you and help choose the solutions. We prepare a free estimate with works and materials listed line by line.' },
+      { t: 'Contract', d: 'The contract fixes scope, stages, timeline and the payment schedule agreed with you. The price for the agreed scope does not change, and any extra work is done only with your written approval.' },
+      { t: 'Construction and oversight', d: 'One responsible manager throughout. We send regular photo and video updates through whichever app suits you — convenient for clients living abroad as well.' },
+      { t: 'Inspection and handover', d: 'We inspect the completed work with you in detail and hand over only after every remark has been resolved.' }
+    ],
+    getEyebrow: 'WHAT YOU GET',
+    getTitle1: 'Clarity', getTitle2: 'at every stage.',
+    gets: [
+      { t: 'One point of responsibility', d: 'One person handles all your questions and knows every detail of the project.' },
+      { t: 'Transparent budget', d: 'The estimate is itemised by works and materials, and any change is agreed with you in advance.' },
+      { t: 'Hidden works checked', d: 'Electrical, plumbing and waterproofing works are inspected and photographed before they are closed up.' },
+      { t: 'Turnkey option', d: 'Hand the project over to us entirely and get a result that matches the design, without daily involvement.' }
+    ],
     valuesEyebrow: 'OUR VALUES',
     values: [
-      { t: 'PRECISION', d: 'From planning to final handover, every stage is under control.' },
-      { t: 'QUALITY', d: 'We evaluate materials, workmanship and the final result from a long-term perspective.' },
-      { t: 'TRUST', d: 'Open and responsible communication with the client is at the foundation of the process.' },
-      { t: 'RESULT', d: 'Our best presentation is the finished work itself.' }
+      { t: 'PRECISION', d: 'Every detail is executed to the drawings and the technology, with no approximations.' },
+      { t: 'QUALITY', d: 'We use proven materials and control every stage, including what will later be out of sight.' },
+      { t: 'TRUST', d: 'We honour our contractual commitments and raise any issue openly and on time.' },
+      { t: 'RESULT', d: 'We hand over a finished property that matches the agreed design and is ready to use.' }
     ],
     nextEyebrow: 'NEXT',
-    nextTitle1: 'See Our', nextTitle2: 'Projects.',
-    nextCta: 'View Our Work'
+    nextTitle1: 'Ready to', nextTitle2: 'start?',
+    nextCta: 'View Projects', nextCta2: 'Book a Site Visit'
   },
   ru: {
     eyebrow: 'О GARON',
     title1: 'Мы строим', title2: 'доверие.',
     lead: 'От проекта до передачи ключей — одна команда, один ответственный и чёткие договорённости.',
-    pathEyebrow: 'КАК МЫ РАБОТАЕМ',
+    sub: 'Строим бассейны, частные дома и общественные здания, выполняем ремонт квартир и домов.',
+    pathEyebrow: 'НАШ ПОДХОД',
     pathTitle1: 'Весь процесс', pathTitle2: 'в одних руках.',
-    pathText1: 'Работа начинается с выезда на объект и подробной сметы, чтобы вы заранее знали, что будет сделано, в какие сроки и за какую стоимость. После согласования объём работ, этапы и сроки фиксируются в договоре.',
-    pathText2: 'Во время строительства вашим проектом руководит один ответственный: он координирует всех специалистов и поставки материалов, а вы регулярно получаете информацию о ходе работ. В конце мы проверяем каждую деталь и передаём готовый результат. По вашему желанию мы реализуем проект «под ключ» — полностью в соответствии с дизайн-проектом, без необходимости вашего постоянного участия.',
+    pathText1: 'Работа начинается с бесплатного выезда на объект. Мы изучаем участок или помещение, обсуждаем ваши требования и составляем подробную смету с разбивкой по работам и материалам. В договоре фиксируются объём, этапы и сроки, чтобы каждый шаг был заранее понятен обеим сторонам.',
+    pathText2: 'На время строительства за весь процесс отвечает один человек: он координирует всех специалистов и поставку материалов. В конце мы проводим детальную проверку и только после этого сдаём объект. По вашему желанию реализуем проект «под ключ» — полностью по дизайн-проекту, без необходимости вашего постоянного участия.',
+    stepsEyebrow: 'КАК МЫ РАБОТАЕМ',
+    stepsTitle1: 'Пять шагов', stepsTitle2: 'от идеи до ключей.',
+    steps: [
+      { t: 'Консультация и выезд', d: 'Выслушиваем задачу, бесплатно выезжаем на объект и оцениваем его состояние, коммуникации и реальный объём работ.' },
+      { t: 'Проект и смета', d: 'Работаем по вашему дизайн-проекту, а если его пока нет — направляем и помогаем выбрать решения. Составляем бесплатную смету, где работы и материалы указаны отдельными строками.' },
+      { t: 'Договор', d: 'Фиксируем объём, этапы, сроки и согласованный с вами порядок оплаты. Цена согласованного объёма не меняется, дополнительные работы выполняются только с вашего письменного согласия.' },
+      { t: 'Строительство и контроль', d: 'Весь срок у вас один ответственный руководитель. Регулярно присылаем фото- и видеоотчёты в любом удобном вам приложении — это удобно и для заказчиков, живущих за рубежом.' },
+      { t: 'Проверка и сдача', d: 'Вместе с вами детально проверяем выполненные работы и сдаём объект только после устранения всех замечаний.' }
+    ],
+    getEyebrow: 'ЧТО ВЫ ПОЛУЧАЕТЕ',
+    getTitle1: 'Ясность', getTitle2: 'на каждом этапе.',
+    gets: [
+      { t: 'Один ответственный', d: 'По всем вопросам вы обращаетесь к одному человеку, который знает проект до деталей.' },
+      { t: 'Прозрачный бюджет', d: 'Смета разбита по работам и материалам, любые изменения заранее согласуются с вами.' },
+      { t: 'Контроль скрытых работ', d: 'Электрика, водопровод и гидроизоляция проверяются и фотографируются до того, как их закроют отделкой.' },
+      { t: 'Вариант «под ключ»', d: 'Доверьте нам объект полностью и получите результат в точности по дизайн-проекту, без ежедневного участия.' }
+    ],
     valuesEyebrow: 'НАШИ ЦЕННОСТИ',
     values: [
-      { t: 'ТОЧНОСТЬ', d: 'От планирования до финальной сдачи — каждый этап под контролем.' },
-      { t: 'КАЧЕСТВО', d: 'Материалы, работу и итоговый результат мы оцениваем с точки зрения долгосрочной перспективы.' },
-      { t: 'ДОВЕРИЕ', d: 'Открытое и ответственное общение с заказчиком лежит в основе процесса.' },
-      { t: 'РЕЗУЛЬТАТ', d: 'Наша лучшая презентация — это завершённая работа.' }
+      { t: 'ТОЧНОСТЬ', d: 'Каждый узел выполняем строго по проекту и технологии, без приблизительных решений.' },
+      { t: 'КАЧЕСТВО', d: 'Используем проверенные материалы и контролируем каждый этап, включая то, что потом не будет видно.' },
+      { t: 'ДОВЕРИЕ', d: 'Выполняем договорные обязательства и открыто, своевременно обсуждаем любые вопросы.' },
+      { t: 'РЕЗУЛЬТАТ', d: 'Сдаём завершённый объект, который соответствует согласованному проекту и готов к использованию.' }
     ],
     nextEyebrow: 'ДАЛЕЕ',
-    nextTitle1: 'Смотрите наши', nextTitle2: 'проекты.',
-    nextCta: 'Смотреть работы'
+    nextTitle1: 'Готовы', nextTitle2: 'начать?',
+    nextCta: 'Смотреть проекты', nextCta2: 'Заказать выезд на объект'
   }
 };
 
