@@ -9,9 +9,9 @@ export const common = {
 };
 
 export const nav = {
-  hy: { about: 'Մեր մասին', services: 'Ծառայություններ', projects: 'Նախագծեր', calculator: 'Հաշվիչ', contact: 'Կապ', cta: 'Սկսել նախագիծը', menu: 'Բացել մենյուն', close: 'Փակել մենյուն', home: 'Գլխավոր' },
-  en: { about: 'About', services: 'Services', projects: 'Projects', calculator: 'Calculator', contact: 'Contact', cta: 'Start a Project', menu: 'Open menu', close: 'Close menu', home: 'Home' },
-  ru: { about: 'О нас', services: 'Услуги', projects: 'Проекты', calculator: 'Калькулятор', contact: 'Контакты', cta: 'Начать проект', menu: 'Открыть меню', close: 'Закрыть меню', home: 'Главная' }
+  hy: { about: 'Մեր մասին', services: 'Ծառայություններ', projects: 'Նախագծեր', calculator: 'Հաշվիչ', contact: 'Կապ', booking: 'Գրանցում', cta: 'Սկսել նախագիծը', menu: 'Բացել մենյուն', close: 'Փակել մենյուն', home: 'Գլխավոր' },
+  en: { about: 'About', services: 'Services', projects: 'Projects', calculator: 'Calculator', contact: 'Contact', booking: 'Book a visit', cta: 'Start a Project', menu: 'Open menu', close: 'Close menu', home: 'Home' },
+  ru: { about: 'О нас', services: 'Услуги', projects: 'Проекты', calculator: 'Калькулятор', contact: 'Контакты', booking: 'Запись', cta: 'Начать проект', menu: 'Открыть меню', close: 'Закрыть меню', home: 'Главная' }
 };
 
 export const footer = {
@@ -446,6 +446,7 @@ export const contact = {
     lead: 'Ուղարկեք ձեր հարցը, և մենք կկապվենք ձեզ հետ՝ հաջորդ քայլը քննարկելու համար։',
     leadWithPhone: 'Ուղարկեք ձեր հարցը կամ զանգահարեք մեզ՝ հաջորդ քայլը քննարկելու համար։',
     getInTouch: 'ԿԱՊՎԵՔ ՄԵԶ ՀԵՏ',
+    bookingLabel: 'ԱՆՎՃԱՐ ՏԵՂԱԶՆՆՈՒԹՅՈՒՆ', bookingCta: 'Ընտրել օրը և ժամը',
     title3: 'Սկսենք', title4: 'զրույցից։',
     phoneLabel: 'ՀԵՌԱԽՈՍ', emailLabel: 'EMAIL', socialLabel: 'ՍՈՑՑԱՆՑԵՐ',
     cardText: 'Պատմեք՝ ինչ եք ուզում կառուցել, ինչ փուլում է նախագիծը և ինչ ժամկետ եք պատկերացնում։',
@@ -464,6 +465,7 @@ export const contact = {
     lead: 'Send us your inquiry and we will get back to you to discuss the next step.',
     leadWithPhone: 'Send us your inquiry or call us to discuss the next step.',
     getInTouch: 'GET IN TOUCH',
+    bookingLabel: 'FREE SITE VISIT', bookingCta: 'Choose a day and time',
     title3: "Let's Start", title4: 'the Conversation.',
     phoneLabel: 'PHONE', emailLabel: 'EMAIL', socialLabel: 'SOCIAL',
     cardText: 'Tell us what you want to build, what stage the project is at, and what timeline you have in mind.',
@@ -482,6 +484,7 @@ export const contact = {
     lead: 'Отправьте нам запрос, и мы свяжемся с вами, чтобы обсудить следующий шаг.',
     leadWithPhone: 'Отправьте нам запрос или позвоните нам, чтобы обсудить следующий шаг.',
     getInTouch: 'СВЯЖИТЕСЬ С НАМИ',
+    bookingLabel: 'БЕСПЛАТНЫЙ ВЫЕЗД', bookingCta: 'Выбрать день и время',
     title3: 'Начнём', title4: 'разговор.',
     phoneLabel: 'ТЕЛЕФОН', emailLabel: 'EMAIL', socialLabel: 'СОЦСЕТИ',
     cardText: 'Расскажите, что вы хотите построить, на каком этапе находится проект и какие сроки вы предполагаете.',
@@ -695,4 +698,54 @@ export const notFound = {
   hy: { eyebrow: '404', title: 'Էջը չի գտնվել', text: 'Հնարավոր է՝ հղումը հնացել է կամ էջը տեղափոխվել է։', home: 'Վերադառնալ գլխավոր էջ', projects: 'Դիտել նախագծերը' },
   en: { eyebrow: '404', title: 'Page not found', text: 'The link may be outdated or the page may have moved.', home: 'Back to Home', projects: 'View Projects' },
   ru: { eyebrow: '404', title: 'Страница не найдена', text: 'Возможно, ссылка устарела или страница была перемещена.', home: 'На главную', projects: 'Смотреть проекты' }
+};
+export const booking = {
+  hy: {
+    eyebrow: 'ԳՐԱՆՑՈՒՄ',
+    title1: 'Պատվիրեք', title2: 'տեղազննություն։',
+    lead: 'Ընտրեք ձեզ հարմար օրը և ժամը։ Մենք կկապվենք ձեզ հետ՝ հաստատելու այցը։ Տեղազննությունն անվճար է։',
+    stepDate: 'Ընտրեք օրը', stepTime: 'Ընտրեք ժամը', stepInfo: 'Ձեր տվյալները',
+    name: 'Անուն', phone: 'Հեռախոս', email: 'Էլ. փոստ (ըստ ցանկության)', address: 'Օբյեկտի հասցեն', note: 'Կարճ նկարագրեք աշխատանքը (ըստ ցանկության)',
+    required: 'Պարտադիր դաշտ', pickDate: 'Ընտրեք օրը', pickTime: 'Ընտրեք ժամը',
+    submit: 'Գրանցվել', sending: 'Ուղարկվում է…',
+    summary: 'Ձեր ընտրությունը',
+    doneTitle: 'Շնորհակալություն։', doneText: 'Ձեր հայտը ստացվել է։ Շուտով կկապվենք ձեզ հետ՝ հաստատելու այցի օրը և ժամը։', again: 'Նոր գրանցում',
+    failText: 'Չհաջողվեց ուղարկել։ Խնդրում ենք փորձել կրկին կամ գրել մեզ',
+    note2: 'Ժամը նախնական է. վերջնականը համաձայնեցնում ենք զանգով։',
+    weekdays: ['Կիր', 'Երկ', 'Երք', 'Չրք', 'Հնգ', 'Ուրբ', 'Շբթ'],
+    months: ['հունվարի', 'փետրվարի', 'մարտի', 'ապրիլի', 'մայիսի', 'հունիսի', 'հուլիսի', 'օգոստոսի', 'սեպտեմբերի', 'հոկտեմբերի', 'նոյեմբերի', 'դեկտեմբերի'],
+    monthsShort: ['հնվ', 'փտվ', 'մրտ', 'ապր', 'մյս', 'հնս', 'հլս', 'օգս', 'սպտ', 'հկտ', 'նյմ', 'դկտ']
+  },
+  en: {
+    eyebrow: 'BOOKING',
+    title1: 'Book a', title2: 'site visit.',
+    lead: 'Choose a day and time that suit you. We will contact you to confirm the visit. The site visit is free.',
+    stepDate: 'Choose a day', stepTime: 'Choose a time', stepInfo: 'Your details',
+    name: 'Name', phone: 'Phone', email: 'Email (optional)', address: 'Property address', note: 'Briefly describe the work (optional)',
+    required: 'Required field', pickDate: 'Please choose a day', pickTime: 'Please choose a time',
+    submit: 'Book', sending: 'Sending…',
+    summary: 'Your choice',
+    doneTitle: 'Thank you!', doneText: 'Your request has been received. We will contact you shortly to confirm the day and time of the visit.', again: 'New booking',
+    failText: 'Sending failed. Please try again or write to us at',
+    note2: 'The time is provisional; we confirm the final time by phone.',
+    weekdays: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+    months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+    monthsShort: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+  },
+  ru: {
+    eyebrow: 'ЗАПИСЬ',
+    title1: 'Запишитесь на', title2: 'выезд на объект.',
+    lead: 'Выберите удобный день и время. Мы свяжемся с вами, чтобы подтвердить визит. Выезд на объект бесплатный.',
+    stepDate: 'Выберите день', stepTime: 'Выберите время', stepInfo: 'Ваши данные',
+    name: 'Имя', phone: 'Телефон', email: 'Email (по желанию)', address: 'Адрес объекта', note: 'Кратко опишите работу (по желанию)',
+    required: 'Обязательное поле', pickDate: 'Выберите день', pickTime: 'Выберите время',
+    submit: 'Записаться', sending: 'Отправка…',
+    summary: 'Ваш выбор',
+    doneTitle: 'Спасибо!', doneText: 'Ваша заявка получена. Мы скоро свяжемся с вами, чтобы подтвердить день и время визита.', again: 'Новая запись',
+    failText: 'Не удалось отправить. Попробуйте ещё раз или напишите нам на',
+    note2: 'Время предварительное, окончательное согласуем по телефону.',
+    weekdays: ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'],
+    months: ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'],
+    monthsShort: ['янв', 'фев', 'мар', 'апр', 'мая', 'июн', 'июл', 'авг', 'сен', 'окт', 'ноя', 'дек']
+  }
 };
