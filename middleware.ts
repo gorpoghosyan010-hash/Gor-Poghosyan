@@ -5,7 +5,7 @@ const PROJECTS = ['pool-01', 'pool-02', 'house-01'];
 // Նախկին առանձին էջեր (ավարտված լողավազաններ). այժմ ցույց են տրվում «Նախագծեր» էջում
 const RETIRED = ['pool-03', 'pool-04', 'pool-05'];
 const SERVICES = ['pools', 'residential', 'renovation', 'public-works'];
-const PAGES = ['about', 'calculator', 'contact', 'projects', 'services'];
+const PAGES = ['about', 'booking', 'calculator', 'contact', 'projects', 'services'];
 
 const ALIASES: Record<string, string> = {
   'about-us': '/about',
@@ -16,6 +16,12 @@ const ALIASES: Record<string, string> = {
   'works': '/projects',
   'service': '/services',
   'calc': '/calculator',
+  'book': '/booking',
+  'booking-visit': '/booking',
+  'register': '/booking',
+  'zapis': '/booking',
+  'granchum': '/booking',
+  'grancum': '/booking',
   'pool': '/services/pools',
   'house': '/services/residential',
   'houses': '/services/residential',

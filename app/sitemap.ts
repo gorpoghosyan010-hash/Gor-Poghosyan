@@ -4,7 +4,7 @@ import { siteUrl } from '../content/seo';
 const paths = [
   '/', '/about', '/services', '/services/pools', '/services/residential', '/services/renovation', '/services/public-works',
   '/projects', '/projects/pool-01', '/projects/pool-02', '/projects/house-01',
-  '/calculator', '/contact'
+  '/calculator', '/contact', '/booking'
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {

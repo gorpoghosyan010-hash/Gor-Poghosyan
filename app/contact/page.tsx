@@ -1,4 +1,5 @@
 'use client';
+import Link from 'next/link';
 import Reveal from '../../components/Reveal';
 import ContactForm from '../../components/ContactForm';
 import ModelVideo from '../../components/ModelVideo';
@@ -26,6 +27,7 @@ export default function Contact() {
           <div>
             <p className="eyebrow dark">{t.getInTouch}</p>
             <h2>{t.title3}<br /><span>{t.title4}</span></h2>
+            <Link className="bookingLink" href="/booking"><small>{t.bookingLabel}</small><strong>{t.bookingCta}</strong></Link>
             <div className="contactList">
               {siteConfig.phone && <a href={`tel:${siteConfig.phone.replace(/\s/g, '')}`}><small>{t.phoneLabel}</small><strong>{siteConfig.phone}</strong></a>}
               {siteConfig.email && <a href={`mailto:${siteConfig.email}`}><small>{t.emailLabel}</small><strong>{siteConfig.email}</strong></a>}

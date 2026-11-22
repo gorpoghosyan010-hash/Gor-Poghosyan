@@ -11,7 +11,7 @@ export default function Footer() {
   const f = footerText[lang];
   return <footer className={`siteFooter ${hasSocials ? '' : 'noSocials'}`}>
     <div><Logo light /></div>
-    <div className="footerLinks"><Link href="/about">{t.about}</Link><Link href="/services">{t.services}</Link><Link href="/projects">{t.projects}</Link><Link href="/calculator">{t.calculator}</Link><Link href="/contact">{t.contact}</Link></div>
+    <div className="footerLinks"><Link href="/about">{t.about}</Link><Link href="/services">{t.services}</Link><Link href="/projects">{t.projects}</Link><Link href="/calculator">{t.calculator}</Link><Link href="/booking">{t.booking}</Link><Link href="/contact">{t.contact}</Link></div>
     {hasSocials && <div className="socials"><span>{f.followUs}</span>
       {siteConfig.instagram && <a href={siteConfig.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="arwLink">Instagram</a>}
       {siteConfig.facebook && <a href={siteConfig.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="arwLink">Facebook</a>}
