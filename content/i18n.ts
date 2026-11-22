@@ -127,7 +127,7 @@ export const about = {
     pathEyebrow: 'ԻՆՉՊԵՍ ԵՆՔ ԱՇԽԱՏՈՒՄ',
     pathTitle1: 'Ամբողջ գործընթացը', pathTitle2: 'մեկ ձեռքում։',
     pathText1: 'Աշխատանքը սկսվում է տեղազննությունից և մանրամասն նախահաշվից, որպեսզի դուք նախապես իմանաք, թե ինչ է արվելու, ինչ ժամկետում և ինչ արժեքով։ Համաձայնեցնելուց հետո պայմանագրում ամրագրում ենք աշխատանքների ծավալը, փուլերը և ժամկետները։',
-    pathText2: 'Շինարարության ընթացքում ձեր նախագիծը վարում է մեկ պատասխանատու, որը կազմակերպում է բոլոր մասնագետներին և նյութերի մատակարարումը, իսկ դուք պարբերաբար ստանում եք տեղեկություն աշխատանքների ընթացքի մասին։ Ավարտին ստուգում ենք յուրաքանչյուր մանրուք և հանձնում պատրաստ արդյունքը։',
+    pathText2: 'Շինարարության ընթացքում ձեր նախագիծը վարում է մեկ պատասխանատու, որը կազմակերպում է բոլոր մասնագետներին և նյութերի մատակարարումը, իսկ դուք պարբերաբար ստանում եք տեղեկություն աշխատանքների ընթացքի մասին։ Ավարտին ստուգում ենք յուրաքանչյուր մանրուք և հանձնում պատրաստ արդյունքը։ Ձեր ցանկությամբ կարող ենք նախագիծն իրականացնել «բանալին ձեռքին» սկզբունքով՝ ամբողջությամբ համաձայն դիզայն-նախագծի, առանց ձեր անմիջական մասնակցության անհրաժեշտության։',
     valuesEyebrow: 'ՄԵՐ ԱՐԺԵՔՆԵՐԸ',
     values: [
       { t: 'ՃՇԳՐՏՈՒԹՅՈՒՆ', d: 'Պլանավորումից մինչև վերջնական հանձնում՝ յուրաքանչյուր փուլ վերահսկելի է։' },
@@ -146,7 +146,7 @@ export const about = {
     pathEyebrow: 'HOW WE WORK',
     pathTitle1: 'The whole process', pathTitle2: 'in one pair of hands.',
     pathText1: 'Work starts with a site visit and a detailed estimate, so you know in advance what will be done, when and at what cost. Once agreed, the scope, stages and deadlines are fixed in the contract.',
-    pathText2: 'During construction your project is run by one person in charge who coordinates every specialist and all material deliveries, and you receive regular updates on progress. At the end we check every detail and hand over a finished result.',
+    pathText2: 'During construction your project is run by one person in charge who coordinates every specialist and all material deliveries, and you receive regular updates on progress. At the end we check every detail and hand over a finished result. If you wish, we can deliver the project turnkey — fully in line with the design project, without the need for your day-to-day involvement.',
     valuesEyebrow: 'OUR VALUES',
     values: [
       { t: 'PRECISION', d: 'From planning to final handover, every stage is under control.' },
@@ -165,7 +165,7 @@ export const about = {
     pathEyebrow: 'КАК МЫ РАБОТАЕМ',
     pathTitle1: 'Весь процесс', pathTitle2: 'в одних руках.',
     pathText1: 'Работа начинается с выезда на объект и подробной сметы, чтобы вы заранее знали, что будет сделано, в какие сроки и за какую стоимость. После согласования объём работ, этапы и сроки фиксируются в договоре.',
-    pathText2: 'Во время строительства вашим проектом руководит один ответственный: он координирует всех специалистов и поставки материалов, а вы регулярно получаете информацию о ходе работ. В конце мы проверяем каждую деталь и передаём готовый результат.',
+    pathText2: 'Во время строительства вашим проектом руководит один ответственный: он координирует всех специалистов и поставки материалов, а вы регулярно получаете информацию о ходе работ. В конце мы проверяем каждую деталь и передаём готовый результат. По вашему желанию мы реализуем проект «под ключ» — полностью в соответствии с дизайн-проектом, без необходимости вашего постоянного участия.',
     valuesEyebrow: 'НАШИ ЦЕННОСТИ',
     values: [
       { t: 'ТОЧНОСТЬ', d: 'От планирования до финальной сдачи — каждый этап под контролем.' },
