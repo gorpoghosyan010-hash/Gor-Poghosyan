@@ -711,7 +711,8 @@ export const booking = {
     summary: 'Ձեր ընտրությունը',
     doneTitle: 'Շնորհակալություն։', doneText: 'Ձեր հայտը ստացվել է։ Շուտով կկապվենք ձեզ հետ՝ հաստատելու այցի օրը և ժամը։', again: 'Նոր գրանցում',
     failText: 'Չհաջողվեց ուղարկել։ Խնդրում ենք փորձել կրկին կամ գրել մեզ',
-    note2: 'Ժամը նախնական է. վերջնականը համաձայնեցնում ենք զանգով։',
+    note2: 'Մոխրագույն ժամերն արդեն զբաղված են։ Ժամը նախնական է. վերջնականը համաձայնեցնում ենք զանգով։',
+    busy: 'Զբաղված է', takenText: 'Այս ժամն արդեն զբաղված է։ Խնդրում ենք ընտրել մեկ այլ ժամ։',
     weekdays: ['Կիր', 'Երկ', 'Երք', 'Չրք', 'Հնգ', 'Ուրբ', 'Շբթ'],
     months: ['հունվարի', 'փետրվարի', 'մարտի', 'ապրիլի', 'մայիսի', 'հունիսի', 'հուլիսի', 'օգոստոսի', 'սեպտեմբերի', 'հոկտեմբերի', 'նոյեմբերի', 'դեկտեմբերի'],
     monthsShort: ['հնվ', 'փտվ', 'մրտ', 'ապր', 'մյս', 'հնս', 'հլս', 'օգս', 'սպտ', 'հկտ', 'նյմ', 'դկտ']
@@ -727,7 +728,8 @@ export const booking = {
     summary: 'Your choice',
     doneTitle: 'Thank you!', doneText: 'Your request has been received. We will contact you shortly to confirm the day and time of the visit.', again: 'New booking',
     failText: 'Sending failed. Please try again or write to us at',
-    note2: 'The time is provisional; we confirm the final time by phone.',
+    note2: 'Greyed-out times are already taken. The time is provisional; we confirm the final time by phone.',
+    busy: 'Taken', takenText: 'This time has just been taken. Please choose another time.',
     weekdays: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
     months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
     monthsShort: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
@@ -743,7 +745,8 @@ export const booking = {
     summary: 'Ваш выбор',
     doneTitle: 'Спасибо!', doneText: 'Ваша заявка получена. Мы скоро свяжемся с вами, чтобы подтвердить день и время визита.', again: 'Новая запись',
     failText: 'Не удалось отправить. Попробуйте ещё раз или напишите нам на',
-    note2: 'Время предварительное, окончательное согласуем по телефону.',
+    note2: 'Серые часы уже заняты. Время предварительное, окончательное согласуем по телефону.',
+    busy: 'Занято', takenText: 'Это время уже занято. Пожалуйста, выберите другое.',
     weekdays: ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'],
     months: ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'],
     monthsShort: ['янв', 'фев', 'мар', 'апр', 'мая', 'июн', 'июл', 'авг', 'сен', 'окт', 'ноя', 'дек']

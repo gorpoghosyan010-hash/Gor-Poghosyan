@@ -1,14 +1,29 @@
 import { NextResponse } from 'next/server';
+import { addBooking, bookedHours, isFree, HOURS, storeConfigured } from '../../../lib/bookingStore';
 
 // Տեղազննության գրանցում. ծանուցումը գնում է Telegram-ով և/կամ էլ. փոստով (Resend)։
 // Կարգավորումը՝ Vercel → Settings → Environment Variables.
 //   TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID       — Telegram
 //   RESEND_API_KEY, BOOKING_EMAIL_TO (ըստ ցանկ.) — էլ. փոստ
+//   KV_REST_API_URL, KV_REST_API_TOKEN            — ամրագրված ժամերի պահոց (Upstash Redis)
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
 
 const clip = (v: unknown, n: number) => (typeof v === 'string' ? v.trim().slice(0, n) : '');
 const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
+
+// Զբաղված ժամերը՝ ?dates=2026-11-24,2026-11-25,...
+export async function GET(req: Request) {
+  const dates = (new URL(req.url).searchParams.get('dates') || '').split(',').filter(d => DATE_RE.test(d)).slice(0, 40);
+  try {
+    return NextResponse.json({ configured: storeConfigured, booked: await bookedHours(dates) }, { headers: { 'Cache-Control': 'no-store' } });
+  } catch (e) {
+    console.error('store', e);
+    return NextResponse.json({ configured: storeConfigured, booked: {}, error: 'store' }, { headers: { 'Cache-Control': 'no-store' } });
+  }
+}
 
 export async function POST(req: Request) {
   let body: Record<string, unknown>;
@@ -20,6 +35,17 @@ export async function POST(req: Request) {
   const date = clip(body.date, 10), time = clip(body.time, 5), dateLabel = clip(body.dateLabel, 60);
   if (!name || !phone || !/^\d{4}-\d{2}-\d{2}$/.test(date) || !/^\d{2}:\d{2}$/.test(time)) {
     return NextResponse.json({ ok: false, error: 'invalid' }, { status: 400 });
+  }
+  const hour = Number(time.slice(0, 2));
+  const day = new Date(`${date}T12:00:00Z`).getUTCDay();
+  if (!HOURS.includes(hour) || time.slice(3) !== '00' || day === 0) {
+    return NextResponse.json({ ok: false, error: 'invalid' }, { status: 400 });
+  }
+  if (storeConfigured) {
+    try {
+      const booked = (await bookedHours([date]))[date] || [];
+      if (!isFree(hour, booked)) return NextResponse.json({ ok: false, error: 'taken' }, { status: 409 });
+    } catch (e) { console.error('store', e); }
   }
 
   const lines = [
@@ -66,5 +92,6 @@ export async function POST(req: Request) {
   }
 
   if (!sent.length) return NextResponse.json({ ok: false, error: 'not_delivered' }, { status: 503 });
+  try { await addBooking(date, hour); } catch (e) { console.error('store', e); }
   return NextResponse.json({ ok: true, sent });
 }

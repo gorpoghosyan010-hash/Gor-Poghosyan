@@ -307,3 +307,5 @@
 .bookingLink{display:flex;flex-direction:column;gap:8px;margin-top:40px;padding:22px 26px;border:1px solid var(--gold);max-width:420px;transition:.25s}
 .bookingLink small{font-size:9px;letter-spacing:.2em;color:#8a6d3b}.bookingLink strong{font-family:var(--font-display);font-weight:500;font-size:26px}.bookingLink strong:after{content:"  →";color:var(--gold)}
 .bookingLink:hover{background:var(--gold);color:#111}.bookingLink:hover small{color:#3a2f1c}.bookingLink:hover strong:after{color:#111}
+.dayGrid button:disabled,.timeGrid button:disabled{opacity:.28;cursor:not-allowed;text-decoration:line-through;border-color:rgba(255,255,255,.08)}
+.dayGrid button:disabled:hover,.timeGrid button:disabled:hover{border-color:rgba(255,255,255,.08)}
