@@ -72,9 +72,9 @@ export const pageMeta: Record<string, Record<Lang, M>> = {
     ru: { title: 'Контакты', description: 'Свяжитесь с GARON Construction, чтобы обсудить ваш проект.' }
   },
   '/booking': {
-    hy: { title: 'Գրանցում տեղազննության', description: 'Ընտրեք ձեզ հարմար օրը և ժամը՝ անվճար տեղազննության համար։ GARON Construction, Երևան։' },
-    en: { title: 'Book a Site Visit', description: 'Choose a convenient day and time for a free site visit. GARON Construction, Yerevan.' },
-    ru: { title: 'Запись на выезд', description: 'Выберите удобный день и время для бесплатного выезда на объект. GARON Construction, Ереван.' }
+    hy: { title: 'Այցելություն և չափագրում', description: 'Ընտրեք ձեզ հարմար օրը և ժամը՝ անվճար այցելության և չափագրման համար։ GARON Construction, Երևան։' },
+    en: { title: 'Book a Visit & Measurement', description: 'Choose a convenient day and time for a free visit and measurement. GARON Construction, Yerevan.' },
+    ru: { title: 'Запись на выезд и замер', description: 'Выберите удобный день и время для бесплатного выезда и замера. GARON Construction, Ереван.' }
   }
 };
 
