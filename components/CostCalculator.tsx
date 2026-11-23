@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useLanguage } from './LanguageContext';
 import { calculator } from '../content/i18n';
 
-// Ամբողջական կառուցում = վերանորոգման համապատասխան մակարդակ + 140,000 ֏/մ² (սեփականատիրոջ որոշմամբ)
+// Ամբողջական կառուցում = կառուցվածք 140,000 ֏/մ² + տան հարդարման մակարդակ (սեփականատիրոջ որոշմամբ)
 const FULL_SHELL_RATE = 140000;
 const FULL_MODIFIERS = { mansard: 0.10, flatRoof: 0.08 };
 // Ամեն հարկի իր գինն է մեկ մ²-ի համար, և հարկերի գները գումարվում են իրար.
@@ -29,7 +29,9 @@ function cumulativeRateFor(baseRate: number, floors: number) {
 }
 // Ստանդարտ (միայն աշխատանք), Կոմֆորտ, Պրեմիում (սկսած)
 const RENOVATION_RATES = [60000, 80000, 100000];
-const FULL_RATES = RENOVATION_RATES.map(r => r + FULL_SHELL_RATE); // 200,000 / 220,000 / 240,000+
+// Մասնավոր տան ներսի հարդարման մասը՝ բարձր, քան բնակարանի վերանորոգումը (80 / 100 / 120 հազ.)
+const HOUSE_FINISH_RATES = [80000, 100000, 120000];
+const FULL_RATES = HOUSE_FINISH_RATES.map(r => r + FULL_SHELL_RATE); // 220,000 / 240,000 / 260,000+
 // Նկուղի գինը մեկ մ²-ի համար (Մոնոլիտ և Ամբողջական կառուցում). հաշվարկվում է առանձին մակերեսով, գինը դիտավորյալ չի ցուցադրվում UI-ում։
 const BASEMENT_RATE = 120000;
 // Լողավազանի «սկսած» գինը (դրամ / մ²)։ Հաշվարկվող մակերես = պարագիծ × խորություն + հատակի մակերես։
