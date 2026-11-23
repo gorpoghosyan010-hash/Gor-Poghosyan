@@ -516,7 +516,7 @@ export const calculator = {
     poolIncludesNote: 'Ներառում է կառուցվածքը, հարդարումը և ֆիլտրման համակարգը',
     enterPoolDims: 'Մուտքագրեք լողավազանի չափերը՝ հաշվարկը տեսնելու համար',
     service: {
-      pool: { title1: 'Հաշվեք լողավազանի', title2: 'մոտավոր արժեքը։', lead: 'Նշեք լողավազանի երկարությունը, լայնությունը և խորությունը, ընտրեք հարդարման տեսակը և տեսեք մոտավոր արժեքը։' },
+      pool: { title1: 'Հաշվեք լողավազանի', title2: 'մոտավոր արժեքը։', lead: 'Նշեք լողավազանի երկարությունը, լայնությունը և խորությունը՝ մոտավոր արժեքը տեսնելու համար։' },
       residential: { title1: 'Հաշվեք տան', title2: 'մոտավոր արժեքը։', lead: 'Ընտրեք՝ ամբողջական կառուցում է, թե միայն մոնոլիտ, նշեք մակերեսը և հարկերի քանակը։' },
       renovation: { title1: 'Հաշվեք վերանորոգման', title2: 'մոտավոր արժեքը։', lead: 'Նշեք մակերեսը, ընտրեք վերանորոգման մակարդակը և տեսեք մոտավոր արժեքը։' }
     },
@@ -560,7 +560,7 @@ export const calculator = {
     poolIncludesNote: 'Includes the structure, finishing and filtration system',
     enterPoolDims: 'Enter the pool dimensions to see the calculation',
     service: {
-      pool: { title1: "Estimate Your Pool's", title2: 'Approximate Cost.', lead: 'Enter the pool length, width and depth, choose the finish type and see the approximate cost.' },
+      pool: { title1: "Estimate Your Pool's", title2: 'Approximate Cost.', lead: 'Enter the pool length, width and depth and see the approximate cost.' },
       residential: { title1: "Estimate Your Home's", title2: 'Approximate Cost.', lead: 'Choose full construction or monolith only, then enter the area and number of floors.' },
       renovation: { title1: "Estimate Your Renovation's", title2: 'Approximate Cost.', lead: 'Enter the area, choose the renovation level and see the approximate cost.' }
     },
@@ -604,7 +604,7 @@ export const calculator = {
     poolIncludesNote: 'Включает конструкцию, отделку и систему фильтрации',
     enterPoolDims: 'Введите размеры бассейна, чтобы увидеть расчёт',
     service: {
-      pool: { title1: 'Рассчитайте примерную', title2: 'стоимость бассейна.', lead: 'Укажите длину, ширину и глубину бассейна, выберите тип отделки и узнайте примерную стоимость.' },
+      pool: { title1: 'Рассчитайте примерную', title2: 'стоимость бассейна.', lead: 'Укажите длину, ширину и глубину бассейна и узнайте примерную стоимость.' },
       residential: { title1: 'Рассчитайте примерную', title2: 'стоимость дома.', lead: 'Выберите полное строительство или только монолит, укажите площадь и количество этажей.' },
       renovation: { title1: 'Рассчитайте примерную', title2: 'стоимость ремонта.', lead: 'Укажите площадь, выберите уровень ремонта и узнайте примерную стоимость.' }
     },
