@@ -701,6 +701,8 @@ export const notFound = {
 };
 export const booking = {
   hy: {
+    cancelSave: 'Եթե պետք լինի չեղարկել գրանցումը, պահեք այս հղումը կամ զանգահարեք մեզ։', cancelLinkText: 'Չեղարկման հղում', copy: 'Պատճենել', copied: 'Պատճենված է',
+    cEyebrow: 'ԳՐԱՆՑՄԱՆ ՉԵՂԱՐԿՈՒՄ', cTitle1: 'Չեղարկե՞լ', cTitle2: 'գրանցումը։', cLoading: 'Բեռնվում է…', cNotFound: 'Գրանցումը չի գտնվել։ Հնարավոր է՝ հղումը սխալ է։', cAsk: 'Ձեր գրանցումը', cButton: 'Չեղարկել գրանցումը', cKeep: 'Ոչ, թողնել', cDone: 'Գրանցումը չեղարկված է։ Ժամն ազատվել է։', cAlready: 'Այս գրանցումն արդեն չեղարկված է։', cError: 'Չհաջողվեց չեղարկել։ Խնդրում ենք փորձել կրկին կամ գրել մեզ', cNew: 'Գրանցվել նոր ժամի',
     eyebrow: 'ԳՐԱՆՑՈՒՄ',
     title1: 'Պատվիրեք այցելություն', title2: 'և չափագրում։',
     lead: 'Ընտրեք ձեզ հարմար օրը և ժամը։ Մենք կկապվենք ձեզ հետ՝ հաստատելու այցը։ Այցելությունն ու չափագրումն անվճար են։',
@@ -718,6 +720,8 @@ export const booking = {
     monthsShort: ['հնվ', 'փտվ', 'մրտ', 'ապր', 'մյս', 'հնս', 'հլս', 'օգս', 'սպտ', 'հկտ', 'նյմ', 'դկտ']
   },
   en: {
+    cancelSave: 'If you need to cancel, keep this link or call us.', cancelLinkText: 'Cancellation link', copy: 'Copy', copied: 'Copied',
+    cEyebrow: 'CANCEL BOOKING', cTitle1: 'Cancel your', cTitle2: 'booking?', cLoading: 'Loading…', cNotFound: 'Booking not found. The link may be incorrect.', cAsk: 'Your booking', cButton: 'Cancel booking', cKeep: 'No, keep it', cDone: 'Your booking has been cancelled. The time slot is free again.', cAlready: 'This booking has already been cancelled.', cError: 'Cancellation failed. Please try again or write to us at', cNew: 'Book another time',
     eyebrow: 'BOOKING',
     title1: 'Book a visit', title2: 'and measurement.',
     lead: 'Choose a day and time that suit you. We will contact you to confirm the visit. The visit and measurement are free.',
@@ -735,6 +739,8 @@ export const booking = {
     monthsShort: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
   },
   ru: {
+    cancelSave: 'Если понадобится отменить запись, сохраните эту ссылку или позвоните нам.', cancelLinkText: 'Ссылка для отмены', copy: 'Копировать', copied: 'Скопировано',
+    cEyebrow: 'ОТМЕНА ЗАПИСИ', cTitle1: 'Отменить', cTitle2: 'запись?', cLoading: 'Загрузка…', cNotFound: 'Запись не найдена. Возможно, ссылка неверна.', cAsk: 'Ваша запись', cButton: 'Отменить запись', cKeep: 'Нет, оставить', cDone: 'Запись отменена. Время снова свободно.', cAlready: 'Эта запись уже отменена.', cError: 'Не удалось отменить. Попробуйте ещё раз или напишите нам на', cNew: 'Записаться на другое время',
     eyebrow: 'ЗАПИСЬ',
     title1: 'Запишитесь на выезд', title2: 'и замер.',
     lead: 'Выберите удобный день и время. Мы свяжемся с вами, чтобы подтвердить визит. Выезд и замер бесплатные.',

@@ -310,3 +310,33 @@
 .dayGrid button:disabled,.timeGrid button:disabled{opacity:.28;cursor:not-allowed;text-decoration:line-through;border-color:rgba(255,255,255,.08)}
 .dayGrid button:disabled:hover,.timeGrid button:disabled:hover{border-color:rgba(255,255,255,.08)}
 @media(max-width:850px){.bookingHero{background-image:url('/home/hero-hall-mobile.webp')!important}}
+/* Booking: cancel link, cancel page, admin */
+.bookingCancelBox{margin:6px 0 26px;padding:18px 22px;border:1px dashed rgba(201,169,106,.5);max-width:520px;display:grid;gap:10px}
+.bookingCancelBox p{margin:0!important;font-size:13px;color:#a7aaad!important}
+.bookingCancelBox div{display:flex;gap:14px;justify-content:center;align-items:center;flex-wrap:wrap}
+.bookingCancelBox a{color:var(--gold);text-decoration:underline;font-size:14px}
+.bookingCancelBox button{background:transparent;border:1px solid rgba(255,255,255,.25);color:#fff;padding:6px 12px;font-size:11px;letter-spacing:.1em;cursor:pointer}
+.cancelPage{min-height:100vh;display:flex;align-items:center;padding-top:150px!important}
+.cancelPage h2 span{color:var(--gold)}.cancelPage .ctaPair .button{border:0;cursor:pointer}
+.outlineLight{background:transparent!important;border:1px solid rgba(255,255,255,.3)!important;color:#fff!important}
+.cancelErr{color:#f08a80!important;font-size:13px}.cancelErr a{color:var(--gold)}
+.adminPage{background:var(--dark);color:#fff;padding:140px 8vw 100px;min-height:100vh}
+.adminLogin{max-width:380px;margin:0 auto;display:grid;gap:22px}
+.adminLogin h1{font-size:44px;margin:0}
+.adminLogin label{display:grid;gap:8px}.adminLogin label span{font-size:10px;letter-spacing:.15em;color:#a7aaad}
+.adminLogin input{background:transparent;border:0;border-bottom:1px solid rgba(255,255,255,.3);color:#fff;font-size:18px;padding:10px 0;outline:none}
+.adminLogin .button{border:0;cursor:pointer;justify-self:start}.adminLogin em,.adminErr{font-style:normal;color:#f08a80;font-size:13px}
+.adminHead{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:24px}
+.adminHead h1{font-size:clamp(32px,4vw,50px);margin:10px 0 0}.adminHead h1 span{color:var(--gold)}
+.adminTools{display:flex;gap:16px;align-items:center;flex-wrap:wrap}.adminTools .button{cursor:pointer;padding:12px 18px}
+.adminToggle{font-size:13px;color:#b8bbbe;display:flex;gap:8px;align-items:center;cursor:pointer}
+.adminLogout{background:none;border:0;color:#8d9195;cursor:pointer;font-size:13px;text-decoration:underline}
+.adminEmpty{color:#8d9195;margin-top:40px}
+.adminDay{margin-top:44px}.adminDay h2{font-size:24px;margin:0 0 14px;color:var(--gold)}
+.adminDay article{display:grid;grid-template-columns:90px 1fr auto;gap:22px;align-items:start;padding:20px 22px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.1);margin-bottom:10px}
+.adminDay article.off{opacity:.45}.adminDay article.off .adminTime{text-decoration:line-through}
+.adminTime{font-family:var(--font-display);font-size:30px;font-weight:500;line-height:1}
+.adminInfo{display:grid;gap:5px;font-size:14px}.adminInfo strong{font-size:17px}.adminInfo a{color:var(--gold)}.adminInfo span,.adminInfo p{color:#b8bbbe;margin:0}.adminInfo small{color:#f08a80}
+.adminCancel{background:transparent;border:1px solid #e5736a;color:#f08a80;padding:10px 16px;cursor:pointer;font-size:12px;letter-spacing:.08em}
+.adminCancel:hover{background:#e5736a;color:#111}
+@media(max-width:600px){.adminPage{padding:110px 6vw 80px}.adminDay article{grid-template-columns:1fr;gap:10px}.adminCancel{justify-self:start}}
