@@ -27,6 +27,8 @@ export default function BookingForm() {
   const [f, setF] = useState({ name: '', phone: '', email: '', address: '', note: '', website: '' });
   const [err, setErr] = useState<Record<string, boolean>>({});
   const [state, setState] = useState<'idle' | 'sending' | 'done' | 'fail' | 'taken'>('idle');
+  const [cancelUrl, setCancelUrl] = useState('');
+  const [copied, setCopied] = useState(false);
   const [booked, setBooked] = useState<Record<string, number[]>>({});
 
   const load = useCallback(async () => {
@@ -50,7 +52,7 @@ export default function BookingForm() {
     setState('sending');
     try {
       const r = await fetch('/api/booking', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ...f, date, time, dateLabel: day ? label(day) : '', lang }) });
-      if (r.ok) { setState('done'); load(); return; }
+      if (r.ok) { const j = await r.json().catch(() => ({})); setCancelUrl(j.cancelUrl || ''); setCopied(false); setState('done'); load(); return; }
       if (r.status === 409) { setState('taken'); setTime(''); load(); return; }
     } catch { /* fall through */ }
     // Եթե ծանուցումը դեռ կարգավորված չէ կամ չհաջողվեց՝ բացում ենք նամակ նույն տվյալներով, որ հայտը չկորի
@@ -65,6 +67,10 @@ export default function BookingForm() {
       <h2>{t.doneTitle}</h2>
       <p>{t.doneText}</p>
       {day && <p className="bookingPicked">{label(day)} · {time}</p>}
+      {cancelUrl && <div className="bookingCancelBox">
+        <p>{t.cancelSave}</p>
+        <div><a href={cancelUrl}>{t.cancelLinkText}</a><button type="button" onClick={() => { navigator.clipboard?.writeText(cancelUrl).then(() => setCopied(true)).catch(() => {}); }}>{copied ? t.copied : t.copy}</button></div>
+      </div>}
       <button className="button gold" onClick={() => { setState('idle'); setDate(''); setTime(''); setF({ name: '', phone: '', email: '', address: '', note: '', website: '' }); }}>{t.again}</button>
     </div>
   );
