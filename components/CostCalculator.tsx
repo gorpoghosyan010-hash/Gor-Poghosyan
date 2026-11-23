@@ -8,16 +8,17 @@ import { calculator } from '../content/i18n';
 const FULL_SHELL_RATE = 140000;
 const FULL_MODIFIERS = { mansard: 0.10, flatRoof: 0.08 };
 // Ամեն հարկի իր գինն է մեկ մ²-ի համար, և հարկերի գները գումարվում են իրար.
-// 1-ին հարկ → 90,000 ֏, 2-4-րդ հարկեր → 85,000 ֏ (յուրաքանչյուրը), 5-րդ+ հարկ → 95,000 ֏
+// Հարկերի հարաբերակցությունը (օգտագործվում է Ամբողջական կառուցման և Վերանորոգման համար)՝
+// 1-ին հարկ → 90,000, 2-4-րդ → 85,000, 5-րդ+ → 95,000
 function perFloorRate(floorNumber: number) {
   if (floorNumber <= 1) return 90000;
   if (floorNumber <= 4) return 85000;
   return 95000;
 }
+// «Միայն մոնոլիտ»՝ 95,000 ֏/մ² յուրաքանչյուր հարկի համար (սեփականատիրոջ որոշմամբ)
+const MONOLITH_RATE = 95000;
 function cumulativeMonolithRate(floors: number) {
-  let sum = 0;
-  for (let f = 1; f <= floors; f++) sum += perFloorRate(f);
-  return sum;
+  return MONOLITH_RATE * floors;
 }
 // Ամբողջական կառուցման և Վերանորոգման համար հարկերի ազդեցությունը հաշվում ենք
 // նույն հարաբերակցությամբ, ինչ Մոնոլիտում (հարկ 1 = 100%, հարկ 2-4 = ~94%, հարկ 5+ = ~106%)։
@@ -30,7 +31,7 @@ function cumulativeRateFor(baseRate: number, floors: number) {
 const RENOVATION_RATES = [60000, 80000, 100000];
 const FULL_RATES = RENOVATION_RATES.map(r => r + FULL_SHELL_RATE); // 200,000 / 220,000 / 240,000+
 // Նկուղի գինը մեկ մ²-ի համար (Մոնոլիտ և Ամբողջական կառուցում). հաշվարկվում է առանձին մակերեսով, գինը դիտավորյալ չի ցուցադրվում UI-ում։
-const BASEMENT_RATE = 100000;
+const BASEMENT_RATE = 120000;
 // Լողավազանի «սկսած» գինը (դրամ / մ²)։ Հաշվարկվող մակերես = պարագիծ × խորություն + հատակի մակերես։
 const POOL_RATE = 100000;
 
