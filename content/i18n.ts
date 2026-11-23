@@ -522,9 +522,9 @@ export const calculator = {
     },
     tierLabel: 'Հարդարման մակարդակ',
     tiers: [
-      { name: 'ՍՏԱՆԴԱՐՏ', desc: 'Կառուցվածք 140,000 + վերանորոգում «Ստանդարտ» 60,000', detail: 'Գինը ներառում է տան կառուցվածքը՝ մոնոլիտ աշխատանքները, երկշերտ պատերը և տանիքը (140,000 ֏/մ²), ինչպես նաև վերանորոգման «Ստանդարտ» փաթեթը (60,000 ֏/մ²)՝ վերանորոգման աշխատանքների արժեքը։ Վերանորոգման նյութերը՝ պատվիրատուի կողմից։' },
-      { name: 'ԿՈՄՖՈՐՏ', desc: 'Կառուցվածք 140,000 + վերանորոգում «Կոմֆորտ» 80,000', detail: 'Գինը ներառում է տան կառուցվածքը՝ մոնոլիտ աշխատանքները, երկշերտ պատերը և տանիքը (140,000 ֏/մ²), ինչպես նաև վերանորոգման «Կոմֆորտ» փաթեթը (80,000 ֏/մ²)՝ վերանորոգման բոլոր աշխատանքները և նախապատրաստական աշխատանքների համար որակյալ նյութերը, որոնք ապահովում է GARON ընկերությունը։ Վերջնական հարդարման նյութերն ընտրվում և ձեռք են բերվում պատվիրատուի կողմից։' },
-      { name: 'ՊՐԵՄԻՈՒՄ', desc: 'Կառուցվածք 140,000 + վերանորոգում «Պրեմիում» 100,000+', detail: 'Գինը ներառում է տան կառուցվածքը՝ մոնոլիտ աշխատանքները, երկշերտ պատերը և տանիքը (140,000 ֏/մ²), ինչպես նաև վերանորոգման «Պրեմիում» փաթեթը (100,000 ֏/մ²-ից)՝ վերանորոգման աշխատանքների ամբողջ ծավալը և նախապատրաստական փուլերի համար անհրաժեշտ որակյալ նյութերը՝ GARON ընկերության ապահովմամբ։ Վերջնական հարդարման նյութերի ընտրության և ձեռքբերման հարցում GARON-ը կտրամադրի մասնագիտական աջակցություն։' }
+      { name: 'ՍՏԱՆԴԱՐՏ', desc: '', detail: 'Գինը ներառում է տան կառուցվածքը՝ մոնոլիտ աշխատանքները, երկշերտ պատերը և տանիքը, ինչպես նաև վերանորոգման «Ստանդարտ» փաթեթը՝ վերանորոգման աշխատանքների արժեքը։ Վերանորոգման նյութերը՝ պատվիրատուի կողմից։' },
+      { name: 'ԿՈՄՖՈՐՏ', desc: '', detail: 'Գինը ներառում է տան կառուցվածքը՝ մոնոլիտ աշխատանքները, երկշերտ պատերը և տանիքը, ինչպես նաև վերանորոգման «Կոմֆորտ» փաթեթը՝ վերանորոգման բոլոր աշխատանքները և նախապատրաստական աշխատանքների համար որակյալ նյութերը, որոնք ապահովում է GARON ընկերությունը։ Վերջնական հարդարման նյութերն ընտրվում և ձեռք են բերվում պատվիրատուի կողմից։' },
+      { name: 'ՊՐԵՄԻՈՒՄ', desc: '', detail: 'Գինը ներառում է տան կառուցվածքը՝ մոնոլիտ աշխատանքները, երկշերտ պատերը և տանիքը, ինչպես նաև վերանորոգման «Պրեմիում» փաթեթը՝ վերանորոգման աշխատանքների ամբողջ ծավալը և նախապատրաստական փուլերի համար անհրաժեշտ որակյալ նյութերը՝ GARON ընկերության ապահովմամբ։ Վերջնական հարդարման նյութերի ընտրության և ձեռքբերման հարցում GARON-ը կտրամադրի մասնագիտական աջակցություն։' }
     ],
     renovationTiers: [
       { name: 'ՍՏԱՆԴԱՐՏ', desc: 'Միայն աշխատանքի արժեքը, նյութերը՝ պատվիրատուի կողմից', detail: 'GARON ընկերությունը կապահովի վերանորոգման որակյալ իրականացումը՝ ներգրավելով փորձառու մասնագետների, որոնք ձեր տունը կդարձնեն ավելի հարմարավետ, գեղեցիկ և ֆունկցիոնալ։' },
@@ -566,9 +566,9 @@ export const calculator = {
     },
     tierLabel: 'Finish Level',
     tiers: [
-      { name: 'STANDARD', desc: 'Structure 140,000 + Standard renovation 60,000', detail: 'The price covers the structure of the house — monolith works, double-layer walls and roof (140,000 AMD/m²) — plus the Standard renovation package (60,000 AMD/m²), i.e. the cost of renovation labour. Renovation materials are supplied by the client.' },
-      { name: 'COMFORT', desc: 'Structure 140,000 + Comfort renovation 80,000', detail: 'The price covers the structure of the house — monolith works, double-layer walls and roof (140,000 AMD/m²) — plus the Comfort renovation package (80,000 AMD/m²): all renovation work and quality materials for the preparatory stages, supplied by GARON. Final finishing materials are chosen and purchased by the client.' },
-      { name: 'PREMIUM', desc: 'Structure 140,000 + Premium renovation 100,000+', detail: 'The price covers the structure of the house — monolith works, double-layer walls and roof (140,000 AMD/m²) — plus the Premium renovation package (from 100,000 AMD/m²): the full scope of renovation work and quality preparatory materials supplied by GARON, with professional guidance on choosing and buying final finishing materials.' }
+      { name: 'STANDARD', desc: '', detail: 'The price covers the structure of the house — monolith works, double-layer walls and roof — plus the Standard renovation package, i.e. the cost of renovation labour. Renovation materials are supplied by the client.' },
+      { name: 'COMFORT', desc: '', detail: 'The price covers the structure of the house — monolith works, double-layer walls and roof — plus the Comfort renovation package: all renovation work and quality materials for the preparatory stages, supplied by GARON. Final finishing materials are chosen and purchased by the client.' },
+      { name: 'PREMIUM', desc: '', detail: 'The price covers the structure of the house — monolith works, double-layer walls and roof — plus the Premium renovation package: the full scope of renovation work and quality preparatory materials supplied by GARON, with professional guidance on choosing and buying final finishing materials.' }
     ],
     renovationTiers: [
       { name: 'STANDARD', desc: 'Labor only — materials provided by the client', detail: 'GARON ensures high-quality renovation work, bringing in experienced specialists who will make your home more comfortable, beautiful and functional.' },
@@ -610,9 +610,9 @@ export const calculator = {
     },
     tierLabel: 'Уровень отделки',
     tiers: [
-      { name: 'СТАНДАРТ', desc: 'Конструкция 140 000 + ремонт «Стандарт» 60 000', detail: 'Цена включает конструкцию дома — монолитные работы, двухслойные стены и кровлю (140 000 ֏/м²), а также пакет ремонта «Стандарт» (60 000 ֏/м²) — стоимость ремонтных работ. Материалы для ремонта предоставляет заказчик.' },
-      { name: 'КОМФОРТ', desc: 'Конструкция 140 000 + ремонт «Комфорт» 80 000', detail: 'Цена включает конструкцию дома — монолитные работы, двухслойные стены и кровлю (140 000 ֏/м²), а также пакет ремонта «Комфорт» (80 000 ֏/м²): все ремонтные работы и качественные материалы для подготовительных этапов, которые предоставляет GARON. Чистовые отделочные материалы выбирает и покупает заказчик.' },
-      { name: 'ПРЕМИУМ', desc: 'Конструкция 140 000 + ремонт «Премиум» от 100 000', detail: 'Цена включает конструкцию дома — монолитные работы, двухслойные стены и кровлю (140 000 ֏/м²), а также пакет ремонта «Премиум» (от 100 000 ֏/м²): весь объём ремонтных работ и качественные подготовительные материалы от GARON, с профессиональной помощью в выборе и покупке чистовых материалов.' }
+      { name: 'СТАНДАРТ', desc: '', detail: 'Цена включает конструкцию дома — монолитные работы, двухслойные стены и кровлю, а также пакет ремонта «Стандарт» — стоимость ремонтных работ. Материалы для ремонта предоставляет заказчик.' },
+      { name: 'КОМФОРТ', desc: '', detail: 'Цена включает конструкцию дома — монолитные работы, двухслойные стены и кровлю, а также пакет ремонта «Комфорт»: все ремонтные работы и качественные материалы для подготовительных этапов, которые предоставляет GARON. Чистовые отделочные материалы выбирает и покупает заказчик.' },
+      { name: 'ПРЕМИУМ', desc: '', detail: 'Цена включает конструкцию дома — монолитные работы, двухслойные стены и кровлю, а также пакет ремонта «Премиум»: весь объём ремонтных работ и качественные подготовительные материалы от GARON, с профессиональной помощью в выборе и покупке чистовых материалов.' }
     ],
     renovationTiers: [
       { name: 'СТАНДАРТ', desc: 'Только стоимость работ — материалы предоставляет заказчик', detail: 'GARON обеспечит качественное выполнение ремонта, привлекая опытных специалистов, которые сделают ваш дом более удобным, красивым и функциональным.' },
