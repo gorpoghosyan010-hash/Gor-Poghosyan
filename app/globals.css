@@ -309,3 +309,4 @@
 .bookingLink:hover{background:var(--gold);color:#111}.bookingLink:hover small{color:#3a2f1c}.bookingLink:hover strong:after{color:#111}
 .dayGrid button:disabled,.timeGrid button:disabled{opacity:.28;cursor:not-allowed;text-decoration:line-through;border-color:rgba(255,255,255,.08)}
 .dayGrid button:disabled:hover,.timeGrid button:disabled:hover{border-color:rgba(255,255,255,.08)}
+@media(max-width:850px){.bookingHero{background-image:url('/home/hero-hall-mobile.webp')!important}}

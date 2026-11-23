@@ -127,7 +127,7 @@ export const about = {
     sub: 'Կառուցում ենք լողավազաններ, մասնավոր տներ և հասարակական շենքեր, իրականացնում ենք բնակարանների և տների վերանորոգում։',
     pathEyebrow: 'ՄԵՐ ՄՈՏԵՑՈՒՄԸ',
     pathTitle1: 'Ամբողջ գործընթացը', pathTitle2: 'մեկ ձեռքում։',
-    pathText1: 'Աշխատանքը սկսում ենք անվճար տեղազննությունից։ Ուսումնասիրում ենք տարածքը, քննարկում ձեր պահանջներն ու սպասելիքները, ապա կազմում մանրամասն նախահաշիվ՝ ըստ առանձին աշխատանքների և նյութերի։ Պայմանագրում ամրագրում ենք աշխատանքների ծավալը, փուլերը և ժամկետները, որպեսզի յուրաքանչյուր քայլ նախապես հստակ լինի երկու կողմերի համար։',
+    pathText1: 'Աշխատանքը սկսում ենք անվճար այցելությունից և չափագրումից։ Ուսումնասիրում ենք տարածքը, քննարկում ձեր պահանջներն ու սպասելիքները, ապա կազմում մանրամասն նախահաշիվ՝ ըստ առանձին աշխատանքների և նյութերի։ Պայմանագրում ամրագրում ենք աշխատանքների ծավալը, փուլերը և ժամկետները, որպեսզի յուրաքանչյուր քայլ նախապես հստակ լինի երկու կողմերի համար։',
     pathText2: 'Շինարարության ընթացքում ամբողջ գործընթացի համար պատասխանատու է մեկ մարդ, որը համակարգում է բոլոր մասնագետների աշխատանքը և նյութերի մատակարարումը։ Ավարտին կատարում ենք մանրամասն ստուգում և միայն դրանից հետո հանձնում օբյեկտը։ Ձեր ցանկությամբ կարող ենք նախագիծն իրականացնել «բանալին ձեռքին» սկզբունքով՝ ամբողջությամբ համաձայն դիզայն-նախագծի, առանց ձեր անմիջական մասնակցության անհրաժեշտության։',
     stepsEyebrow: 'ԻՆՉՊԵՍ ԵՆՔ ԱՇԽԱՏՈՒՄ',
     stepsTitle1: 'Հինգ քայլ՝', stepsTitle2: 'գաղափարից մինչև բանալի։',
@@ -155,7 +155,7 @@ export const about = {
     ],
     nextEyebrow: 'ՀԱՋՈՐԴԸ',
     nextTitle1: 'Պատրա՞ստ եք', nextTitle2: 'սկսել։',
-    nextCta: 'Դիտել նախագծերը', nextCta2: 'Պատվիրել տեղազննություն'
+    nextCta: 'Դիտել նախագծերը', nextCta2: 'Պատվիրել այցելություն և չափագրում'
   },
   en: {
     eyebrow: 'ABOUT GARON',
@@ -164,7 +164,7 @@ export const about = {
     sub: 'We build pools, private houses and public buildings, and renovate apartments and homes.',
     pathEyebrow: 'OUR APPROACH',
     pathTitle1: 'The whole process', pathTitle2: 'in one pair of hands.',
-    pathText1: 'We start with a free site visit. We assess the property, discuss your requirements and prepare a detailed estimate, itemised by works and materials. The contract fixes the scope, stages and deadlines, so every step is clear to both sides from the start.',
+    pathText1: 'We start with a free visit and measurement. We assess the property, discuss your requirements and prepare a detailed estimate, itemised by works and materials. The contract fixes the scope, stages and deadlines, so every step is clear to both sides from the start.',
     pathText2: 'During construction one person is responsible for the entire process, coordinating all specialists and material supply. At the end we carry out a detailed inspection and only then hand over the property. If you wish, we deliver the project turnkey — fully in line with the design project, without the need for your day-to-day involvement.',
     stepsEyebrow: 'HOW WE WORK',
     stepsTitle1: 'Five steps', stepsTitle2: 'from idea to keys.',
@@ -192,7 +192,7 @@ export const about = {
     ],
     nextEyebrow: 'NEXT',
     nextTitle1: 'Ready to', nextTitle2: 'start?',
-    nextCta: 'View Projects', nextCta2: 'Book a Site Visit'
+    nextCta: 'View Projects', nextCta2: 'Book a Visit & Measurement'
   },
   ru: {
     eyebrow: 'О GARON',
@@ -201,7 +201,7 @@ export const about = {
     sub: 'Строим бассейны, частные дома и общественные здания, выполняем ремонт квартир и домов.',
     pathEyebrow: 'НАШ ПОДХОД',
     pathTitle1: 'Весь процесс', pathTitle2: 'в одних руках.',
-    pathText1: 'Работа начинается с бесплатного выезда на объект. Мы изучаем участок или помещение, обсуждаем ваши требования и составляем подробную смету с разбивкой по работам и материалам. В договоре фиксируются объём, этапы и сроки, чтобы каждый шаг был заранее понятен обеим сторонам.',
+    pathText1: 'Работа начинается с бесплатного выезда и замера. Мы изучаем участок или помещение, обсуждаем ваши требования и составляем подробную смету с разбивкой по работам и материалам. В договоре фиксируются объём, этапы и сроки, чтобы каждый шаг был заранее понятен обеим сторонам.',
     pathText2: 'На время строительства за весь процесс отвечает один человек: он координирует всех специалистов и поставку материалов. В конце мы проводим детальную проверку и только после этого сдаём объект. По вашему желанию реализуем проект «под ключ» — полностью по дизайн-проекту, без необходимости вашего постоянного участия.',
     stepsEyebrow: 'КАК МЫ РАБОТАЕМ',
     stepsTitle1: 'Пять шагов', stepsTitle2: 'от идеи до ключей.',
@@ -229,7 +229,7 @@ export const about = {
     ],
     nextEyebrow: 'ДАЛЕЕ',
     nextTitle1: 'Готовы', nextTitle2: 'начать?',
-    nextCta: 'Смотреть проекты', nextCta2: 'Заказать выезд на объект'
+    nextCta: 'Смотреть проекты', nextCta2: 'Заказать выезд и замер'
   }
 };
 
@@ -446,7 +446,7 @@ export const contact = {
     lead: 'Ուղարկեք ձեր հարցը, և մենք կկապվենք ձեզ հետ՝ հաջորդ քայլը քննարկելու համար։',
     leadWithPhone: 'Ուղարկեք ձեր հարցը կամ զանգահարեք մեզ՝ հաջորդ քայլը քննարկելու համար։',
     getInTouch: 'ԿԱՊՎԵՔ ՄԵԶ ՀԵՏ',
-    bookingLabel: 'ԱՆՎՃԱՐ ՏԵՂԱԶՆՆՈՒԹՅՈՒՆ', bookingCta: 'Ընտրել օրը և ժամը',
+    bookingLabel: 'ԱՆՎՃԱՐ ԱՅՑԵԼՈՒԹՅՈՒՆ ԵՎ ՉԱՓԱԳՐՈՒՄ', bookingCta: 'Ընտրել օրը և ժամը',
     title3: 'Սկսենք', title4: 'զրույցից։',
     phoneLabel: 'ՀԵՌԱԽՈՍ', emailLabel: 'EMAIL', socialLabel: 'ՍՈՑՑԱՆՑԵՐ',
     cardText: 'Պատմեք՝ ինչ եք ուզում կառուցել, ինչ փուլում է նախագիծը և ինչ ժամկետ եք պատկերացնում։',
@@ -465,7 +465,7 @@ export const contact = {
     lead: 'Send us your inquiry and we will get back to you to discuss the next step.',
     leadWithPhone: 'Send us your inquiry or call us to discuss the next step.',
     getInTouch: 'GET IN TOUCH',
-    bookingLabel: 'FREE SITE VISIT', bookingCta: 'Choose a day and time',
+    bookingLabel: 'FREE VISIT & MEASUREMENT', bookingCta: 'Choose a day and time',
     title3: "Let's Start", title4: 'the Conversation.',
     phoneLabel: 'PHONE', emailLabel: 'EMAIL', socialLabel: 'SOCIAL',
     cardText: 'Tell us what you want to build, what stage the project is at, and what timeline you have in mind.',
@@ -484,7 +484,7 @@ export const contact = {
     lead: 'Отправьте нам запрос, и мы свяжемся с вами, чтобы обсудить следующий шаг.',
     leadWithPhone: 'Отправьте нам запрос или позвоните нам, чтобы обсудить следующий шаг.',
     getInTouch: 'СВЯЖИТЕСЬ С НАМИ',
-    bookingLabel: 'БЕСПЛАТНЫЙ ВЫЕЗД', bookingCta: 'Выбрать день и время',
+    bookingLabel: 'БЕСПЛАТНЫЙ ВЫЕЗД И ЗАМЕР', bookingCta: 'Выбрать день и время',
     title3: 'Начнём', title4: 'разговор.',
     phoneLabel: 'ТЕЛЕФОН', emailLabel: 'EMAIL', socialLabel: 'СОЦСЕТИ',
     cardText: 'Расскажите, что вы хотите построить, на каком этапе находится проект и какие сроки вы предполагаете.',
@@ -702,8 +702,8 @@ export const notFound = {
 export const booking = {
   hy: {
     eyebrow: 'ԳՐԱՆՑՈՒՄ',
-    title1: 'Պատվիրեք', title2: 'տեղազննություն։',
-    lead: 'Ընտրեք ձեզ հարմար օրը և ժամը։ Մենք կկապվենք ձեզ հետ՝ հաստատելու այցը։ Տեղազննությունն անվճար է։',
+    title1: 'Պատվիրեք այցելություն', title2: 'և չափագրում։',
+    lead: 'Ընտրեք ձեզ հարմար օրը և ժամը։ Մենք կկապվենք ձեզ հետ՝ հաստատելու այցը։ Այցելությունն ու չափագրումն անվճար են։',
     stepDate: 'Ընտրեք օրը', stepTime: 'Ընտրեք ժամը', stepInfo: 'Ձեր տվյալները',
     name: 'Անուն', phone: 'Հեռախոս', email: 'Էլ. փոստ (ըստ ցանկության)', address: 'Օբյեկտի հասցեն', note: 'Կարճ նկարագրեք աշխատանքը (ըստ ցանկության)',
     required: 'Պարտադիր դաշտ', pickDate: 'Ընտրեք օրը', pickTime: 'Ընտրեք ժամը',
@@ -719,8 +719,8 @@ export const booking = {
   },
   en: {
     eyebrow: 'BOOKING',
-    title1: 'Book a', title2: 'site visit.',
-    lead: 'Choose a day and time that suit you. We will contact you to confirm the visit. The site visit is free.',
+    title1: 'Book a visit', title2: 'and measurement.',
+    lead: 'Choose a day and time that suit you. We will contact you to confirm the visit. The visit and measurement are free.',
     stepDate: 'Choose a day', stepTime: 'Choose a time', stepInfo: 'Your details',
     name: 'Name', phone: 'Phone', email: 'Email (optional)', address: 'Property address', note: 'Briefly describe the work (optional)',
     required: 'Required field', pickDate: 'Please choose a day', pickTime: 'Please choose a time',
@@ -736,8 +736,8 @@ export const booking = {
   },
   ru: {
     eyebrow: 'ЗАПИСЬ',
-    title1: 'Запишитесь на', title2: 'выезд на объект.',
-    lead: 'Выберите удобный день и время. Мы свяжемся с вами, чтобы подтвердить визит. Выезд на объект бесплатный.',
+    title1: 'Запишитесь на выезд', title2: 'и замер.',
+    lead: 'Выберите удобный день и время. Мы свяжемся с вами, чтобы подтвердить визит. Выезд и замер бесплатные.',
     stepDate: 'Выберите день', stepTime: 'Выберите время', stepInfo: 'Ваши данные',
     name: 'Имя', phone: 'Телефон', email: 'Email (по желанию)', address: 'Адрес объекта', note: 'Кратко опишите работу (по желанию)',
     required: 'Обязательное поле', pickDate: 'Выберите день', pickTime: 'Выберите время',

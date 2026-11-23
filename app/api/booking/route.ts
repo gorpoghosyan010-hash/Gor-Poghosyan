@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { addBooking, bookedHours, isFree, HOURS, storeConfigured } from '../../../lib/bookingStore';
 
-// Տեղազննության գրանցում. ծանուցումը գնում է Telegram-ով և/կամ էլ. փոստով (Resend)։
+// Այցելության և չափագրման գրանցում. ծանուցումը գնում է Telegram-ով և/կամ էլ. փոստով (Resend)։
 // Կարգավորումը՝ Vercel → Settings → Environment Variables.
 //   TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID       — Telegram
 //   RESEND_API_KEY, BOOKING_EMAIL_TO (ըստ ցանկ.) — էլ. փոստ
@@ -49,7 +49,7 @@ export async function POST(req: Request) {
   }
 
   const lines = [
-    `Նոր գրանցում՝ տեղազննություն`,
+    `Նոր գրանցում՝ այցելություն և չափագրում`,
     `Օր՝ ${dateLabel || date} (${date})`,
     `Ժամ՝ ${time}`,
     `Անուն՝ ${name}`,
@@ -83,7 +83,7 @@ export async function POST(req: Request) {
           from: process.env.BOOKING_EMAIL_FROM || 'GARON <onboarding@resend.dev>',
           to: (process.env.BOOKING_EMAIL_TO || 'info@garon.am').split(',').map(s => s.trim()),
           ...(email ? { reply_to: email } : {}),
-          subject: `Տեղազննություն — ${dateLabel || date}, ${time} — ${name}`,
+          subject: `Այցելություն և չափագրում — ${dateLabel || date}, ${time} — ${name}`,
           text: lines.join('\n')
         })
       });
