@@ -32,7 +32,7 @@ const RENOVATION_RATES = [60000, 80000, 100000];
 // Նկուղի գինը մեկ մ²-ի համար (Մոնոլիտ և Ամբողջական կառուցում). հաշվարկվում է առանձին մակերեսով, գինը դիտավորյալ չի ցուցադրվում UI-ում։
 const BASEMENT_RATE = 100000;
 // Լողավազանի «սկսած» գինը (դրամ / մ²)։ Հաշվարկվող մակերես = պարագիծ × խորություն + հատակի մակերես։
-const POOL_RATE = 90000;
+const POOL_RATE = 100000;
 
 export type Mode = 'full' | 'monolith' | 'renovation' | 'pool';
 const ALL_MODES: Mode[] = ['full', 'monolith', 'renovation'];
