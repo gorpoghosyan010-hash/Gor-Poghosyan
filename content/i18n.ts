@@ -503,7 +503,7 @@ export const calculator = {
   hy: {
     eyebrow: 'GARON / ՀԱՇՎԻՉ',
     title1: 'Հաշվեք ձեր', title2: 'նախագծի մոտավոր արժեքը։',
-    lead: 'Ընտրեք նախագծի տեսակը, նշեք մակերեսը և տեսեք մոտավոր արժեքը։',
+    lead: 'Ընտրեք նախագծի տեսակը, նշեք մակերեսը կամ չափերը և տեսեք մոտավոր արժեքը։',
     modeLabel: 'Նախագծի տեսակը',
     modes: { full: 'Ամբողջական կառուցում', monolith: 'Միայն մոնոլիտ', renovation: 'Վերանորոգում', pool: 'Լողավազան' },
     areaLabel: 'Մակերեսը', areaUnit: 'մ²', areaPlaceholder: 'օր.՝ 150',
@@ -547,7 +547,7 @@ export const calculator = {
   en: {
     eyebrow: 'GARON / CALCULATOR',
     title1: 'Estimate Your', title2: "Project's Approximate Cost.",
-    lead: 'Choose the project type, enter the area, and see the approximate cost.',
+    lead: 'Choose the project type, enter the area or dimensions, and see the approximate cost.',
     modeLabel: 'Project Type',
     modes: { full: 'Full Construction', monolith: 'Monolith Only', renovation: 'Renovation', pool: 'Swimming Pool' },
     areaLabel: 'Area', areaUnit: 'm²', areaPlaceholder: 'e.g. 150',
@@ -591,7 +591,7 @@ export const calculator = {
   ru: {
     eyebrow: 'GARON / КАЛЬКУЛЯТОР',
     title1: 'Рассчитайте примерную', title2: 'стоимость вашего проекта.',
-    lead: 'Выберите тип проекта, укажите площадь и узнайте примерную стоимость.',
+    lead: 'Выберите тип проекта, укажите площадь или размеры и узнайте примерную стоимость.',
     modeLabel: 'Тип проекта',
     modes: { full: 'Полное строительство', monolith: 'Только монолит', renovation: 'Ремонт', pool: 'Бассейн' },
     areaLabel: 'Площадь', areaUnit: 'м²', areaPlaceholder: 'напр. 150',

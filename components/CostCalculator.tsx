@@ -38,7 +38,7 @@ const BASEMENT_RATE = 120000;
 const POOL_RATE = 100000;
 
 export type Mode = 'full' | 'monolith' | 'renovation' | 'pool';
-const ALL_MODES: Mode[] = ['full', 'monolith', 'renovation'];
+const ALL_MODES: Mode[] = ['full', 'monolith', 'renovation', 'pool'];
 
 export default function CostCalculator({ modes = ALL_MODES }: { modes?: Mode[] }) {
   const { lang } = useLanguage();
