@@ -4,9 +4,8 @@ import Link from 'next/link';
 import { useLanguage } from './LanguageContext';
 import { calculator } from '../content/i18n';
 
-// ԿԱՐԵՎՈՐ. սրանք բոլորը մոտավոր, ցուցադրական գներ են (դրամ)։
-// Փոխարինիր այս թվերը GARON-ի իրական միջին գներով։
-const FULL_RATES = [250000, 350000, 480000];
+// Ամբողջական կառուցում = վերանորոգման համապատասխան մակարդակ + 140,000 ֏/մ² (սեփականատիրոջ որոշմամբ)
+const FULL_SHELL_RATE = 140000;
 const FULL_MODIFIERS = { mansard: 0.10, flatRoof: 0.08 };
 // Ամեն հարկի իր գինն է մեկ մ²-ի համար, և հարկերի գները գումարվում են իրար.
 // 1-ին հարկ → 90,000 ֏, 2-4-րդ հարկեր → 85,000 ֏ (յուրաքանչյուրը), 5-րդ+ հարկ → 95,000 ֏
@@ -29,6 +28,7 @@ function cumulativeRateFor(baseRate: number, floors: number) {
 }
 // Ստանդարտ (միայն աշխատանք), Կոմֆորտ, Պրեմիում (սկսած)
 const RENOVATION_RATES = [60000, 80000, 100000];
+const FULL_RATES = RENOVATION_RATES.map(r => r + FULL_SHELL_RATE); // 200,000 / 220,000 / 240,000+
 // Նկուղի գինը մեկ մ²-ի համար (Մոնոլիտ և Ամբողջական կառուցում). հաշվարկվում է առանձին մակերեսով, գինը դիտավորյալ չի ցուցադրվում UI-ում։
 const BASEMENT_RATE = 100000;
 // Լողավազանի «սկսած» գինը (դրամ / մ²)։ Հաշվարկվող մակերես = պարագիծ × խորություն + հատակի մակերես։
@@ -103,7 +103,7 @@ export default function CostCalculator({ modes = ALL_MODES }: { modes?: Mode[] }
       }
       if (mode === 'monolith' && validBasementArea) parts.push(`${t.fullBasementAreaLabel}: ${numericBasementArea} ${t.areaUnit}`);
     }
-    parts.push(`${mode === 'renovation' || mode === 'pool' ? t.startingFrom + ' ' : ''}${total.toLocaleString('en-US')} ֏`);
+    parts.push(`${mode === 'renovation' || mode === 'pool' || mode === 'full' ? t.startingFrom + ' ' : ''}${total.toLocaleString('en-US')} ֏`);
     return parts.join(' · ');
   })();
 
@@ -203,7 +203,7 @@ export default function CostCalculator({ modes = ALL_MODES }: { modes?: Mode[] }
                     <button type="button" className={`calcTier ${i === tier ? 'active' : ''}`} onClick={() => setTier(i)}>
                       <strong>{tr.name}</strong>
                       {tr.desc && <span>{tr.desc}</span>}
-                      <b>{ratesToShow[i].toLocaleString('en-US')}{mode === 'renovation' && i === ratesToShow.length - 1 ? '+' : ''} ֏ {t.perSqm}</b>
+                      <b>{ratesToShow[i].toLocaleString('en-US')}{(mode === 'renovation' || mode === 'full') && i === ratesToShow.length - 1 ? '+' : ''} ֏ {t.perSqm}</b>
                     </button>
                     {tr.detail && (
                       <button
@@ -253,7 +253,7 @@ export default function CostCalculator({ modes = ALL_MODES }: { modes?: Mode[] }
           {ready ? (
             <>
               <span className="calcResultLabel">{t.resultLabel}</span>
-              <strong className="calcResultValue">{(mode === 'renovation' || mode === 'pool') && <em>{t.startingFrom} </em>}{total.toLocaleString('en-US')} ֏</strong>
+              <strong className="calcResultValue">{(mode === 'renovation' || mode === 'pool' || mode === 'full') && <em>{t.startingFrom} </em>}{total.toLocaleString('en-US')} ֏</strong>
               <p>{t.disclaimer}</p>
               <Link className="button gold" href={`/contact?estimate=${encodeURIComponent(summary)}`}>{t.cta}</Link>
             </>
