@@ -346,3 +346,11 @@
 /* Scroll-video: dedicated portrait video on phones fills the screen */
 @media(max-width:850px){.vidMobileFull .vidBackdrop,.vidMobileFull .vidBackVid{display:none!important}.vidMobileFull .vidEl,.vidWide.vidMobileFull .vidEl{inset:0!important;left:0!important;top:0!important;width:100%!important;height:100%!important;aspect-ratio:auto!important;object-fit:cover;object-position:center top;transform:none!important;-webkit-mask-image:none!important;mask-image:none!important}.vidMobileFull .serviceDetailOverlay{background:linear-gradient(0deg,rgba(0,0,0,.85) 0%,rgba(0,0,0,.55) 30%,transparent 55%)}}
 @media(min-width:851px){.vidWide .serviceDetailContent{max-width:min(1200px,72vw)}}
+/* Renovation (wide) video on desktop: show the whole frame below the header, right-aligned; blurred copy fills the rest */
+@media(min-width:851px){
+.vidWide{background:#0b0c0d}
+.vidWide .vidBackdrop{display:none}
+.vidWide .vidBackVid{display:block;position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:blur(26px) brightness(.45) saturate(1.05);transform:scale(1.12)}
+.vidWide .vidEl{inset:auto;top:94px;right:0;left:auto;height:auto;width:min(100%,calc((100vh - 94px) * 16 / 9));aspect-ratio:16/9;object-fit:cover;background:transparent;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 18%),linear-gradient(0deg,transparent 0,#000 10%);mask-image:linear-gradient(90deg,transparent 0,#000 18%);}
+.vidWide .serviceDetailOverlay{background:linear-gradient(90deg,rgba(0,0,0,.6) 0%,rgba(0,0,0,.25) 40%,transparent 60%),linear-gradient(0deg,rgba(0,0,0,.5),transparent 45%)}
+}
