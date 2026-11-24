@@ -7,7 +7,7 @@ export default function About(){
  const { lang } = useLanguage();
  const t = about[lang];
  return <main className="innerPage">
-  <section className="innerHero aboutHero" style={{backgroundImage:"url('/projects/house-01/12.webp')"}}><div className="innerHeroShade"/><div><p className="eyebrow">{t.eyebrow}</p><h1>{t.title1}<br/><span>{t.title2}</span></h1><p className="aboutLead">{t.lead}</p><p>{t.sub}</p></div></section>
+  <section className="innerHero aboutHero"><div className="innerHeroShade"/><div><p className="eyebrow">{t.eyebrow}</p><h1>{t.title1}<br/><span>{t.title2}</span></h1><p className="aboutLead">{t.lead}</p><p>{t.sub}</p></div></section>
   <section className="sectionLight story"><Reveal className="twoCol"><div><p className="eyebrow dark">{t.pathEyebrow}</p><h2>{t.pathTitle1}<br/><span>{t.pathTitle2}</span></h2></div><div className="copy"><p>{t.pathText1}</p><p>{t.pathText2}</p></div></Reveal></section>
   <section className="sectionDark aboutSteps"><Reveal><p className="eyebrow">{t.stepsEyebrow}</p><h2>{t.stepsTitle1}<br/><span>{t.stepsTitle2}</span></h2></Reveal><ol className="stepLine">{t.steps.map((s,i)=><li key={s.t}><Reveal delay={i*80}><b>{n(i)}</b><div><h3>{s.t}</h3><p>{s.d}</p></div></Reveal></li>)}</ol></section>
   <section className="sectionLight aboutGets"><Reveal><p className="eyebrow dark">{t.getEyebrow}</p><h2>{t.getTitle1}<br/><span>{t.getTitle2}</span></h2></Reveal><div className="getGrid">{t.gets.map((g,i)=><Reveal key={g.t} delay={i*80}><article><b>{n(i)}</b><h3>{g.t}</h3><p>{g.d}</p></article></Reveal>)}</div></section>

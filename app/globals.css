@@ -127,7 +127,10 @@
 }
 
 /* Մեր մասին. իրական տան ուղղահայաց լուսանկար։ Համակարգչում այն զբաղեցնում է աջ կեսը և սահուն անցնում ձախի մուգ ֆոնին */
-@media(min-width:851px){.aboutHero{background-color:#0b0c0d;background-repeat:no-repeat;background-size:56% auto;background-position:right 58%}.aboutHero .innerHeroShade{background:linear-gradient(90deg,#0b0c0d 44%,rgba(11,12,13,.55) 60%,rgba(11,12,13,.15) 85%)}}
+/* About hero: wide photo for desktop, tall photo for phones */
+.aboutHero{background-color:#020406;background-image:url('/about/about-hero-mobile.webp');background-size:cover;background-position:center top}
+@media(max-width:850px){.aboutHero{min-height:calc(78px + 95vw + 440px);background-size:100% auto;background-repeat:no-repeat;background-position:center 78px}.aboutHero .innerHeroShade{background:linear-gradient(0deg,rgba(2,4,6,.96) 0%,rgba(2,4,6,.9) 42%,rgba(2,4,6,.25) 52%,rgba(2,4,6,0) 62%)}}
+@media(min-width:851px){.aboutHero{background-image:url('/about/about-hero-desktop.webp');background-position:right center;min-height:max(650px,min(41.7vw,92vh))}.aboutHero .innerHeroShade{background:linear-gradient(90deg,rgba(2,4,6,.85) 0%,rgba(2,4,6,.55) 40%,rgba(2,4,6,0) 62%)}}
 
 /* Կապ էջ. վիդեո «գաղափար → գծագիր → իրականություն»։ Հեռախոսում ամբողջ էկրանով, համակարգչում աջ կեսում՝ սահուն անցումով դեպի մուգ ձախ կողմ */
 .contactHero{background:#0b0c0d}
