@@ -1,9 +1,21 @@
 'use client';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 // Հերոսը էջի վերևում «կպչում» է (sticky), և ներքև թերթելիս տեսանյութը նվագում է թերթման հետ համաձայնեցված
 // (թերթում = կադր առաջ, հետ թերթում = կադր հետ)։ Տեսանյութի ավարտից հետո էջը շարունակվում է։
-export default function ScrollVideo({ src, poster, wide, children }: { src: string; poster: string; wide?: boolean; children: React.ReactNode }) {
+// mobileSrc/mobilePoster՝ հեռախոսի համար առանձին ուղղահայաց տեսանյութ (եթե կա), որը լցնում է ամբողջ էկրանը
+export default function ScrollVideo({ src, poster, wide, mobileSrc, mobilePoster, children }: { src: string; poster: string; wide?: boolean; mobileSrc?: string; mobilePoster?: string; children: React.ReactNode }) {
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    if (!mobileSrc) return;
+    const mq = window.matchMedia('(max-width: 850px)');
+    const on = () => setIsMobile(mq.matches);
+    on(); mq.addEventListener('change', on);
+    return () => mq.removeEventListener('change', on);
+  }, [mobileSrc]);
+  const useMobile = Boolean(mobileSrc && isMobile);
+  const vSrc = useMobile ? mobileSrc! : src;
+  const vPoster = useMobile ? (mobilePoster || poster) : poster;
   const wrapRef = useRef<HTMLDivElement>(null);
   const heroRef = useRef<HTMLElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -67,18 +79,19 @@ export default function ScrollVideo({ src, poster, wide, children }: { src: stri
       window.removeEventListener('resize', onScroll);
       if (raf) cancelAnimationFrame(raf);
     };
-  }, [src]);
+  }, [vSrc]);
 
   return (
     <div className="vidWrap" ref={wrapRef}>
-      <section className={`serviceDetailHero vidHero${wide ? ' vidWide' : ''}`} ref={heroRef}>
-        <div className="vidBackdrop" style={{ backgroundImage: `url(${poster})` }} aria-hidden="true" />
-        {wide && <video ref={backRef} className="vidBackVid" src={src} poster={poster} muted playsInline preload="auto" tabIndex={-1} aria-hidden="true" />}
+      <section className={`serviceDetailHero vidHero${wide ? ' vidWide' : ''}${useMobile ? ' vidMobileFull' : ''}`} ref={heroRef}>
+        <div className="vidBackdrop" style={{ backgroundImage: `url(${vPoster})` }} aria-hidden="true" />
+        {wide && !useMobile && <video ref={backRef} className="vidBackVid" src={vSrc} poster={vPoster} muted playsInline preload="auto" tabIndex={-1} aria-hidden="true" />}
         <video
+          key={vSrc}
           ref={videoRef}
           className="vidEl"
-          src={src}
-          poster={poster}
+          src={vSrc}
+          poster={vPoster}
           muted
           playsInline
           preload="auto"

@@ -343,3 +343,6 @@
 .adminCancel{background:transparent;border:1px solid #e5736a;color:#f08a80;padding:10px 16px;cursor:pointer;font-size:12px;letter-spacing:.08em}
 .adminCancel:hover{background:#e5736a;color:#111}
 @media(max-width:600px){.adminPage{padding:110px 6vw 80px}.adminDay article{grid-template-columns:1fr;gap:10px}.adminCancel{justify-self:start}}
+/* Scroll-video: dedicated portrait video on phones fills the screen */
+@media(max-width:850px){.vidMobileFull .vidBackdrop,.vidMobileFull .vidBackVid{display:none!important}.vidMobileFull .vidEl,.vidWide.vidMobileFull .vidEl{inset:0!important;left:0!important;top:0!important;width:100%!important;height:100%!important;aspect-ratio:auto!important;object-fit:cover;object-position:center top;transform:none!important;-webkit-mask-image:none!important;mask-image:none!important}.vidMobileFull .serviceDetailOverlay{background:linear-gradient(0deg,rgba(0,0,0,.85) 0%,rgba(0,0,0,.55) 30%,transparent 55%)}}
+@media(min-width:851px){.vidWide .serviceDetailContent{max-width:min(1200px,72vw)}}
