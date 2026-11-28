@@ -1,17 +1,9 @@
 import { NextResponse } from 'next/server';
-import { createHash, timingSafeEqual } from 'crypto';
+import { isAdmin as authorized, denyAdmin as deny } from '../../../../lib/adminAuth';
 import { listBookings, getBooking, cancelBooking, storeConfigured } from '../../../../lib/bookingStore';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
-
-const h = (s: string) => createHash('sha256').update(s).digest();
-function authorized(req: Request) {
-  const pw = process.env.BOOKING_ADMIN_PASSWORD || '';
-  const given = req.headers.get('x-admin-password') || '';
-  return Boolean(pw) && timingSafeEqual(h(pw), h(given));
-}
-const deny = () => NextResponse.json({ ok: false, error: process.env.BOOKING_ADMIN_PASSWORD ? 'unauthorized' : 'no_password' }, { status: 401 });
 
 export async function GET(req: Request) {
   if (!authorized(req)) return deny();

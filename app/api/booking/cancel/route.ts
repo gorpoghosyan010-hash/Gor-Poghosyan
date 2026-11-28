@@ -33,7 +33,7 @@ export async function POST(req: Request) {
     await cancelBooking(b, 'client');
     await notifyOwner('Գրանցումը չեղարկվել է (պատվիրատուի կողմից)', [
       `Օր՝ ${hyDate(b.date)} (${b.date})`, `Ժամ՝ ${String(b.hour).padStart(2, '0')}:00`, `Անուն՝ ${b.name}`, `Հեռախոս՝ ${b.phone}`, 'Ժամն այժմ ազատ է։'
-    ], { subject: `Չեղարկում — ${hyDate(b.date)}, ${b.hour}:00 — ${b.name}`, link: { text: 'Բոլոր գրանցումները', url: `${originOf(req)}/booking/admin` } });
+    ], { subject: `Չեղարկում — ${hyDate(b.date)}, ${b.hour}:00 — ${b.name}`, link: { text: 'Բոլոր գրանցումները', url: `${originOf(req)}/admin` } });
     return NextResponse.json({ ok: true });
   } catch (e) { console.error(e); return NextResponse.json({ ok: false, error: 'store' }, { status: 503 }); }
 }

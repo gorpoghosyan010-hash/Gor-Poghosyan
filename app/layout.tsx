@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import { Montserrat, Noto_Sans_Armenian, Cormorant_Garamond, Noto_Serif_Armenian } from 'next/font/google';
 import './globals.css';
 import Header from '../components/Header';
+import Tracker from '../components/Tracker';
 import Footer from '../components/Footer';
 import Splash from '../components/Splash';
 import PageTitle from '../components/PageTitle';
@@ -55,6 +56,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <LanguageProvider>
           <PageTitle />
+          <Tracker />
           <Splash />
           <Header />
           {children}

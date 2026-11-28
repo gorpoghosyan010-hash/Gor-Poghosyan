@@ -2,10 +2,8 @@
 // Vercel → Storage → Upstash Redis միացնելիս փոփոխականներն ավելանում են ինքնաշխատ։
 import { randomBytes } from 'crypto';
 
-const URL_ = process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL || '';
-const TOKEN = process.env.KV_REST_API_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN || '';
-
-export const storeConfigured = Boolean(URL_ && TOKEN);
+import { kv, storeConfigured } from './kv';
+export { storeConfigured };
 
 // Այցերի միջև նվազագույն տարբերությունը (ժամ)
 export const MIN_GAP_HOURS = 4;
@@ -24,15 +22,7 @@ const INDEX = 'bk:index';
 // Երևան՝ UTC+4
 const slotTime = (date: string, hour: number) => Date.parse(`${date}T${String(hour).padStart(2, '0')}:00:00+04:00`);
 
-async function pipeline(cmds: (string | number)[][]): Promise<{ result?: unknown; error?: string }[]> {
-  const r = await fetch(`${URL_}/pipeline`, {
-    method: 'POST', cache: 'no-store',
-    headers: { Authorization: `Bearer ${TOKEN}`, 'Content-Type': 'application/json' },
-    body: JSON.stringify(cmds)
-  });
-  if (!r.ok) throw new Error(`store ${r.status}`);
-  return r.json();
-}
+const pipeline = kv;
 
 export async function bookedHours(dates: string[]): Promise<Record<string, number[]>> {
   const out: Record<string, number[]> = {};

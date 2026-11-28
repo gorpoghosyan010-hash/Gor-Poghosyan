@@ -3,42 +3,23 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import Link from 'next/link';
 import { useLanguage } from './LanguageContext';
 import { calculator } from '../content/i18n';
+import { DEFAULT_PRICING, MODES, type Mode, type Pricing } from '../lib/pricing';
 
-// Ամբողջական կառուցում = կառուցվածք 140,000 ֏/մ² + տան հարդարման մակարդակ (սեփականատիրոջ որոշմամբ)
-const FULL_SHELL_RATE = 140000;
-const FULL_MODIFIERS = { mansard: 0.10, flatRoof: 0.08 };
-// Ամեն հարկի իր գինն է մեկ մ²-ի համար, և հարկերի գները գումարվում են իրար.
-// Հարկերի հարաբերակցությունը (օգտագործվում է Ամբողջական կառուցման և Վերանորոգման համար)՝
-// 1-ին հարկ → 90,000, 2-4-րդ → 85,000, 5-րդ+ → 95,000
-function perFloorRate(floorNumber: number) {
-  if (floorNumber <= 1) return 90000;
-  if (floorNumber <= 4) return 85000;
-  return 95000;
+// Գները գալիս են ադմին էջից (/api/prices)։ Լռելյայն արժեքները՝ lib/pricing.ts-ում։
+// Հարկերի հարաբերակցությունը (Ամբողջական կառուցում և Վերանորոգում)՝ հարկ 1 = 100%, հարկ 2-4 ≈ 94%, հարկ 5+ ≈ 106%
+function floorFactor(floorNumber: number) {
+  if (floorNumber <= 1) return 1;
+  if (floorNumber <= 4) return 85 / 90;
+  return 95 / 90;
 }
-// «Միայն մոնոլիտ»՝ 95,000 ֏/մ² յուրաքանչյուր հարկի համար (սեփականատիրոջ որոշմամբ)
-const MONOLITH_RATE = 95000;
-function cumulativeMonolithRate(floors: number) {
-  return MONOLITH_RATE * floors;
-}
-// Ամբողջական կառուցման և Վերանորոգման համար հարկերի ազդեցությունը հաշվում ենք
-// նույն հարաբերակցությամբ, ինչ Մոնոլիտում (հարկ 1 = 100%, հարկ 2-4 = ~94%, հարկ 5+ = ~106%)։
 function cumulativeRateFor(baseRate: number, floors: number) {
   let sum = 0;
-  for (let f = 1; f <= floors; f++) sum += baseRate * (perFloorRate(f) / perFloorRate(1));
+  for (let f = 1; f <= floors; f++) sum += baseRate * floorFactor(f);
   return sum;
 }
-// Ստանդարտ (միայն աշխատանք), Կոմֆորտ, Պրեմիում (սկսած)
-const RENOVATION_RATES = [60000, 80000, 100000];
-// Մասնավոր տան ներսի հարդարման մասը՝ բարձր, քան բնակարանի վերանորոգումը (80 / 100 / 120 հազ.)
-const HOUSE_FINISH_RATES = [80000, 100000, 120000];
-const FULL_RATES = HOUSE_FINISH_RATES.map(r => r + FULL_SHELL_RATE); // 220,000 / 240,000 / 260,000+
-// Նկուղի գինը մեկ մ²-ի համար (Մոնոլիտ և Ամբողջական կառուցում). հաշվարկվում է առանձին մակերեսով, գինը դիտավորյալ չի ցուցադրվում UI-ում։
-const BASEMENT_RATE = 120000;
-// Լողավազանի «սկսած» գինը (դրամ / մ²)։ Հաշվարկվող մակերես = պարագիծ × խորություն + հատակի մակերես։
-const POOL_RATE = 100000;
 
-export type Mode = 'full' | 'monolith' | 'renovation' | 'pool';
-const ALL_MODES: Mode[] = ['full', 'monolith', 'renovation', 'pool'];
+export type { Mode };
+const ALL_MODES: Mode[] = MODES;
 
 export default function CostCalculator({ modes = ALL_MODES }: { modes?: Mode[] }) {
   const { lang } = useLanguage();
@@ -55,6 +36,18 @@ export default function CostCalculator({ modes = ALL_MODES }: { modes?: Mode[] }
   const [poolWidth, setPoolWidth] = useState('');
   const [poolDepth, setPoolDepth] = useState('');
   const [openInfo, setOpenInfo] = useState<number | null>(null);
+  const [pricing, setPricing] = useState<Pricing>(DEFAULT_PRICING);
+  const [picked, setPicked] = useState<string[]>([]);
+
+  useEffect(() => {
+    let alive = true;
+    fetch('/api/prices').then(r => (r.ok ? r.json() : null)).then(p => { if (alive && p && Array.isArray(p.renovation)) setPricing(p); }).catch(() => {});
+    return () => { alive = false; };
+  }, []);
+
+  const RENOVATION_RATES = pricing.renovation;
+  const FULL_RATES = pricing.houseFinish.map(r => r + pricing.shell);
+  const extras = pricing.extras.filter(x => x.modes.includes(mode));
   const tiersRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -73,19 +66,29 @@ export default function CostCalculator({ modes = ALL_MODES }: { modes?: Mode[] }
   const ready = mode === 'pool' ? validPool : validArea;
 
   const total = useMemo(() => {
-    if (mode === 'pool') return Math.round(poolSurface * POOL_RATE);
-    if (!validArea) return 0;
-    if (mode === 'full') {
-      const modifier = 1 + (mansard ? FULL_MODIFIERS.mansard : 0) + (flatRoof ? FULL_MODIFIERS.flatRoof : 0);
-      const basementCost = basement && validBasementArea ? numericBasementArea * BASEMENT_RATE : 0;
-      return Math.round(numericArea * cumulativeRateFor(FULL_RATES[tier], floors) * modifier + basementCost);
+    let base = 0;
+    if (mode === 'pool') base = poolSurface * pricing.pool;
+    else if (!validArea) return 0;
+    else if (mode === 'full') {
+      const modifier = 1 + (mansard ? pricing.mansardPct / 100 : 0) + (flatRoof ? pricing.flatRoofPct / 100 : 0);
+      const basementCost = basement && validBasementArea ? numericBasementArea * pricing.basement : 0;
+      base = numericArea * cumulativeRateFor(pricing.houseFinish[tier] + pricing.shell, floors) * modifier + basementCost;
+    } else if (mode === 'monolith') {
+      const basementCost = validBasementArea ? numericBasementArea * pricing.basement : 0;
+      base = numericArea * pricing.monolith * floors + basementCost;
+    } else base = numericArea * cumulativeRateFor(pricing.renovation[tier], floors);
+    if (!base) return 0;
+    // Ադմինից ավելացված հավելյալ տողերը
+    const sqm = mode === 'pool' ? poolSurface : numericArea * floors;
+    let add = 0;
+    for (const x of extras) {
+      if (!picked.includes(x.id)) continue;
+      if (x.kind === 'perSqm') add += x.value * sqm;
+      else if (x.kind === 'fixed') add += x.value;
+      else add += base * x.value / 100;
     }
-    if (mode === 'monolith') {
-      const basementCost = validBasementArea ? numericBasementArea * BASEMENT_RATE : 0;
-      return Math.round(numericArea * cumulativeMonolithRate(floors) + basementCost);
-    }
-    return Math.round(numericArea * cumulativeRateFor(RENOVATION_RATES[tier], floors));
-  }, [validArea, numericArea, mode, tier, basement, mansard, flatRoof, floors, validBasementArea, numericBasementArea, poolSurface]);
+    return Math.round(base + add);
+  }, [validArea, numericArea, mode, tier, basement, mansard, flatRoof, floors, validBasementArea, numericBasementArea, poolSurface, pricing, picked, extras]);
 
   const tiersToShow = (mode === 'renovation' ? t.renovationTiers : t.tiers) as { name: string; desc: string; detail?: string }[];
   const ratesToShow = mode === 'renovation' ? RENOVATION_RATES : FULL_RATES;
@@ -104,11 +107,20 @@ export default function CostCalculator({ modes = ALL_MODES }: { modes?: Mode[] }
         if (mansard) parts.push(t.mansard);
         if (flatRoof) parts.push(t.flatRoof);
       }
+      for (const x of extras) if (picked.includes(x.id)) parts.push(x.label[lang]);
       if (mode === 'monolith' && validBasementArea) parts.push(`${t.fullBasementAreaLabel}: ${numericBasementArea} ${t.areaUnit}`);
     }
+    if (mode === 'pool') for (const x of extras) if (picked.includes(x.id)) parts.push(x.label[lang]);
     parts.push(`${mode === 'renovation' || mode === 'pool' || mode === 'full' ? t.startingFrom + ' ' : ''}${total.toLocaleString('en-US')} ֏`);
     return parts.join(' · ');
   })();
+
+  const extraBoxes = extras.map(x => (
+    <label className="calcOption" key={x.id}>
+      <input type="checkbox" checked={picked.includes(x.id)} onChange={e => setPicked(p => e.target.checked ? [...p, x.id] : p.filter(id => id !== x.id))} />
+      <span>{x.label[lang]}</span>
+    </label>
+  ));
 
   return (
     <div>
@@ -247,7 +259,14 @@ export default function CostCalculator({ modes = ALL_MODES }: { modes?: Mode[] }
                 )}
                 <label className="calcOption"><input type="checkbox" checked={mansard} onChange={e => { setMansard(e.target.checked); if (e.target.checked) setFlatRoof(false); }} /><span>{t.mansard}</span></label>
                 <label className="calcOption"><input type="checkbox" checked={flatRoof} onChange={e => { setFlatRoof(e.target.checked); if (e.target.checked) setMansard(false); }} /><span>{t.flatRoof}</span></label>
+                {extraBoxes}
               </div>
+            </div>
+          )}
+          {mode !== 'full' && extras.length > 0 && (
+            <div className="calcField">
+              <label>{t.optionsLabel}</label>
+              <div className="calcOptions">{extraBoxes}</div>
             </div>
           )}
         </div>
