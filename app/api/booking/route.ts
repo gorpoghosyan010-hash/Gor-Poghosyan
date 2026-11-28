@@ -7,7 +7,7 @@ import { notifyOwner, sendEmail, canEmailClients, originOf, hyDate } from '../..
 //   TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID          — Telegram
 //   RESEND_API_KEY, BOOKING_EMAIL_TO (ըստ ցանկ.)   — էլ. փոստ
 //   KV_REST_API_URL, KV_REST_API_TOKEN             — գրանցումների պահոց (Upstash Redis)
-//   BOOKING_ADMIN_PASSWORD                         — /booking/admin էջի գաղտնաբառը
+//   ADMIN_PASSWORD (կամ BOOKING_ADMIN_PASSWORD)    — /admin էջի գաղտնաբառը
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
 
@@ -63,7 +63,7 @@ export async function POST(req: Request) {
   const sent = await notifyOwner('Նոր գրանցում՝ այցելություն և չափագրում', lines, {
     replyTo: email || undefined,
     subject: `Այցելություն և չափագրում — ${hyDate(date)}, ${time} — ${name}`,
-    link: storeConfigured ? { text: 'Բոլոր գրանցումները', url: `${origin}/booking/admin` } : undefined
+    link: storeConfigured ? { text: 'Բոլոր գրանցումները', url: `${origin}/admin` } : undefined
   });
   if (!sent.length) return NextResponse.json({ ok: false, error: 'not_delivered' }, { status: 503 });
 

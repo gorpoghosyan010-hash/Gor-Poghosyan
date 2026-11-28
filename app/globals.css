@@ -354,3 +354,48 @@
 .vidWide .vidEl{inset:auto;top:94px;right:0;left:auto;height:auto;width:min(100%,calc((100vh - 94px) * 16 / 9));aspect-ratio:16/9;object-fit:cover;background:transparent;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 18%),linear-gradient(0deg,transparent 0,#000 10%);mask-image:linear-gradient(90deg,transparent 0,#000 18%);}
 .vidWide .serviceDetailOverlay{background:linear-gradient(90deg,rgba(0,0,0,.6) 0%,rgba(0,0,0,.25) 40%,transparent 60%),linear-gradient(0deg,rgba(0,0,0,.5),transparent 45%)}
 }
+/* Admin: tabs, prices editor, stats */
+.adminTabs{display:flex;gap:6px;margin:28px 0 34px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.adminTabs button{background:none;border:0;border-bottom:2px solid transparent;color:#a7aaad;padding:12px 18px;font-size:14px;letter-spacing:.06em;cursor:pointer}
+.adminTabs button.on{color:#fff;border-bottom-color:var(--gold)}
+.adminBar{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:10px}
+.adminBar h2{font-size:28px;margin:0}.adminBar h2 span{color:var(--gold)}
+.adminDay h3{font-size:22px;margin:0 0 14px;color:var(--gold)}
+.admCard{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.1);padding:24px 26px;margin-bottom:18px}
+.admCard h3{font-family:var(--font-montserrat),var(--font-armenian),Arial,sans-serif;font-weight:600;font-size:16px;letter-spacing:.04em;margin:0 0 18px}
+.admGrid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px 22px;margin-bottom:14px}
+.admGrid2{display:grid;grid-template-columns:1fr 1fr;gap:0 18px}
+.admField{display:grid;gap:7px}.admField>span{font-size:11px;letter-spacing:.08em;color:#a7aaad}
+.admField>div{display:flex;align-items:center;gap:8px;border-bottom:1px solid rgba(255,255,255,.25)}
+.admField input,.admField select{flex:1;min-width:0;background:transparent;border:0;color:#fff;font-size:17px;padding:8px 0;outline:none}
+.admField select{flex:0 0 auto;font-size:13px;color:#d5d6d7}.admField select option{color:#111}
+.admField>div:focus-within{border-bottom-color:var(--gold)}
+.admField i{font-style:normal;font-size:12px;color:#8d9195;white-space:nowrap}
+.admField small{font-size:12px;color:var(--gold)}
+.admNote{font-size:13px;color:#8d9195;line-height:1.6;margin:4px 0 14px}
+.admWarn{background:rgba(229,115,106,.12);border:1px solid rgba(229,115,106,.4);color:#f2b0a9;padding:14px 18px;font-size:14px;margin-bottom:18px}
+.admExtra{border-top:1px dashed rgba(255,255,255,.15);padding-top:16px;margin-top:12px}
+.admExtraRow{display:flex;gap:22px;align-items:flex-end;flex-wrap:wrap}
+.admModes{display:flex;gap:14px;flex-wrap:wrap;font-size:13px;color:#d5d6d7;flex:1;min-width:260px}.admModes label{display:flex;gap:6px;align-items:center;cursor:pointer}
+.admSmall{min-width:240px}
+.admAdd{margin-top:18px;background:transparent;border:1px dashed var(--gold);color:var(--gold);padding:12px 18px;cursor:pointer;font-size:14px}
+.admAdd:hover{background:rgba(201,169,106,.1)}
+.admSave{position:sticky;bottom:0;background:var(--dark);border-top:1px solid var(--line);padding:18px 0;display:flex;gap:18px;align-items:center;flex-wrap:wrap;z-index:3}
+.admSave .button{border:0;cursor:pointer}.admSave .button:disabled{opacity:.45;cursor:default}
+.admSave small{font-size:13px;color:#a7aaad}.admSave small.ok{color:#8fd19e}.admSave small.bad{color:#f08a80}
+.admPeriods button{background:transparent;border:1px solid rgba(255,255,255,.2);color:#d5d6d7;padding:9px 14px;cursor:pointer;font-size:13px}
+.admPeriods button.on{background:var(--gold);border-color:var(--gold);color:#111}
+.admTiles{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:22px 0 18px}
+.admTiles div{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.1);padding:22px 24px;display:grid;gap:6px}
+.admTiles b{font-family:var(--font-display);font-weight:500;font-size:42px;color:var(--gold);line-height:1}.admTiles span{font-size:13px;color:#a7aaad}
+.admChart{display:flex;align-items:flex-end;gap:4px;height:180px}
+.admChart>div{flex:1;height:100%;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:6px;min-width:0}
+.admChart i{width:100%;max-width:38px;background:rgba(201,169,106,.35);display:flex;align-items:flex-end;min-height:2px}
+.admChart em{display:block;width:100%;background:var(--gold)}
+.admChart small{font-size:10px;color:#8d9195}
+.admLegend{font-size:12px;color:#8d9195;display:flex;gap:8px;align-items:center;margin:12px 0 0}.admLegend span{display:inline-block;width:12px;height:12px}.admLegend .pv{background:rgba(201,169,106,.35)}.admLegend .uv{background:var(--gold);margin-left:10px}
+.admTop{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.admTop li{position:relative;display:flex;justify-content:space-between;gap:12px;padding:8px 10px;font-size:14px;z-index:0}
+.admTop li i{position:absolute;left:0;top:0;bottom:0;background:rgba(201,169,106,.12);z-index:-1}
+.admTop li b{color:var(--gold);font-weight:600}
+@media(max-width:760px){.admGrid3,.admGrid2,.admTiles{grid-template-columns:1fr}.admTiles b{font-size:34px}.admCard{padding:20px 16px}}
